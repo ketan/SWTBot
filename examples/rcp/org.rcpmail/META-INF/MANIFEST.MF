@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Rcpmail Plug-in (incubation)
+Bundle-SymbolicName: org.rcpmail; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: org.rcpmail.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

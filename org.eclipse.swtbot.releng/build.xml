@@ -1,0 +1,321 @@
+<project name="org.eclipse.swtbot.releng" default="all" basedir=".">
+
+	<import file="check-prerequisites.xml" />
+
+	<property name="plugin.version.primary" value="2.0.0" />
+
+	<!-- automagically generate build numbers from svn -->
+	<property name="svn.version" value="1" />
+	<property name="plugin.suffix" value="${svn.version}-dev" />
+	<property name="buildId" value="${plugin.suffix}" />
+
+	<property name="all.buildId" value="${plugin.version.primary}.${plugin.suffix}" />
+
+	<property name="plugin.prefix" value="org.eclipse.swtbot" />
+	<property name="feature.id" value="${plugin.prefix}" />
+	<property name="feature.id.test" value="${feature.id}.test" />
+
+	<property file="build.developer.properties" />
+	<property file="build.properties" />
+
+	<property name="test-sandbox" value="${basedir}/test-sandbox" />
+
+	<property name="eclipse-platform-properties" value="-Dosgi.ws=${ws} -Dosgi.os=${os} -Dosgi.arch=${arch} -Dws=${ws} -Dos=${os} -Darch=${arch}" />
+
+	<target name="clean" description="cleans the output folders">
+		<echo>Cleaning all in ${buildDirectory}</echo>
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${buildDirectory}">
+				<exclude name="plugins/**/**.*" />
+				<exclude name="features/**/**.*" />
+			</fileset>
+		</delete>
+		<delete failonerror="false">
+			<fileset dir="test-sandbox" includes="${plugin.prefix}*.zip" />
+		</delete>
+		<delete dir="artifacts" />
+		<delete dir="test-sandbox/results" />
+		<delete dir="test-sandbox/test-eclipse" />
+		<delete dir="test-sandbox/screenshots" />
+	</target>
+
+	<target name="copy-sources" depends="copy-features, copy-plugins" description="copies sources" />
+
+	<target name="copy-eclipse" description="copies an eclispse instance to a temporary location">
+		<echo>Sync eclipse from ${base} to ${eclipseLocation}</echo>
+		<sync todir="${eclipseLocation}" includeemptydirs="true">
+			<fileset dir="${base}" />
+			<!-- any other locations/plugins that you want to copy from, in addition to the eclipse "base install"
+				<fileset dir="${mylyn.base}" />
+			-->
+		</sync>
+	</target>
+
+	<target name="copy-features" description="copies the feature sources into the features folder">
+		<sync todir="${buildDirectory}/features" includeemptydirs="true" overwrite="true">
+			<fileset dir="../">
+				<!-- list all your features here -->
+				<include name="${feature.id}/**" />
+				<include name="${feature.id.test}/**" />
+				<include name="org.eclipse.swtbot.eclipse/**" />
+				<include name="org.eclipse.swtbot.recording/**" />
+			</fileset>
+		</sync>
+	</target>
+
+	<target name="copy-plugins" description="copies plugin sources into the plugins folder">
+		<sync todir="${buildDirectory}/plugins" includeemptydirs="true" overwrite="true">
+			<fileset dir="../">
+				<!-- include plugins here -->
+				<include name="${plugin.prefix}*/**" />
+				<include name="org.eclipse.swt.examples/**" />
+				<include name="org.apache.*/**" />
+				<!-- remember to exclude features in case you are using wildcards -->
+				<exclude name="org.eclipse.swtbot.releng/**" />
+				<exclude name="${feature.id}/**" />
+				<exclude name="${feature.id.test}/**" />
+				<exclude name="org.eclipse.swtbot.eclipse/**" />
+				<exclude name="org.eclipse.swtbot.recording/**" />
+				<!-- the update site -->
+				<exclude name="org.eclipse.swtbot.updatesite/**" />
+				<!-- also exclude the generated class files -->
+				<exclude name="*/bin/**" />
+			</fileset>
+		</sync>
+	</target>
+
+	<target name="extract-eclipse">
+		<condition property="setupTarget" value="setup-zip">
+			<contains string="${eclipse.sdk.archive}" substring=".zip" />
+		</condition>
+		<condition property="setupTarget" value="setup-tar.gz">
+			<contains string="${eclipse.sdk.archive}" substring=".tar.gz" />
+		</condition>
+		<antcall target="${setupTarget}" />
+	</target>
+
+	<!--setup for zip archives-->
+	<target name="setup-zip" description="Reinstall the test Eclipse installation if specified by user">
+		<unzip dest="${eclipse-target}" src="test-sandbox/${eclipse.sdk.archive}">
+			<mapper type="glob" from="eclipse/*" to="${eclipse-target}/*" />
+		</unzip>
+	</target>
+
+	<!--setup for tar.gz archives-->
+	<target name="setup-tar.gz" description="Reinstall the test Eclipse installation if specified by user">
+		<exec command="tar">
+			<arg line="-zxf ${basedir}/test-sandbox/${eclipse.sdk.archive} -C ${eclipse-target}/.." />
+		</exec>
+	</target>
+
+	<target name="materialize-workspace" description="Materializes a workspace for eclipse">
+		<property name="eclipse-target" value="../eclipse" />
+
+		<delete dir="${eclipse-target}" />
+
+		<mkdir dir="${eclipse-target}" />
+
+		<copy todir="${eclipse-target}/plugins">
+			<fileset dir="externals/plugins" />
+		</copy>
+
+		<antcall target="extract-eclipse" />
+
+		<antcall target="initialize-environment" />
+	</target>
+
+	<target name="printjvm">
+		<exec command="java -version" />
+		<echoproperties prefix="java." />
+	</target>
+
+	<target name="init" depends="check-conditions, initialize-environment, printjvm, clean" description="initializes the build directory structure">
+		<mkdir dir="${buildDirectory}" />
+		<mkdir dir="artifacts" />
+		<mkdir dir="${buildDirectory}/plugins" />
+		<mkdir dir="${buildDirectory}/features" />
+	</target>
+
+	<target name="pde-build" depends="copy-all" description="runs the pde build">
+		<java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true" dir="${basedir}">
+			<arg value="-application" />
+			<arg value="org.eclipse.ant.core.antRunner" />
+			<arg value="-buildfile" />
+			<arg value="${eclipseLocation}/plugins/org.eclipse.pde.build_${pdeBuildPluginVersion}/scripts/build.xml" />
+			<arg value="-Dtimestamp=${timestamp}" />
+			<arg value="-DbuildId=${all.buildId}" />
+			<arg value="-DforceContextQualifier=${plugin.suffix}" />
+
+			<arg value="-Dbaseos=${os}" />
+			<arg value="-Dbasews=${ws}" />
+			<arg value="-Dbasearch=${arch}" />
+
+			<arg value="-Dbuilder=${basedir}" />
+			<arg value="-Dbasedir=${basedir}" />
+			<arg value="-Dbuild_directory=${buildDirectory}" />
+			<classpath>
+				<fileset dir="${eclipseLocation}/plugins">
+					<include name="org.eclipse.equinox.launcher_*.jar" />
+				</fileset>
+			</classpath>
+		</java>
+
+		<copy todir="artifacts" overwrite="true" verbose="true">
+			<!-- this is the generated artifact -->
+			<fileset dir="${buildDirectory}/${buildType}.${all.buildId}">
+				<!-- one zip file for each of the feature that you have built -->
+				<include name="${feature.id}-${all.buildId}*.zip" />
+				<include name="org.eclipse.swtbot.eclipse-${all.buildId}*.zip" />
+			</fileset>
+		</copy>
+	</target>
+
+
+	<target name="-run-core-tests-init" description="initialize the tests -- extract the generated artifacts">
+		<copy todir="${test-sandbox}" overwrite="true" verbose="true">
+			<!-- this is the generated artifact -->
+			<fileset dir="${buildDirectory}/${buildType}.${all.buildId}">
+				<!-- one zip file for each of the feature that you have built -->
+				<include name="${feature.id}-${all.buildId}*.zip" />
+				<include name="${feature.id.test}-${all.buildId}*.zip" />
+				<include name="org.eclipse.swtbot.eclipse-${all.buildId}*.zip" />
+			</fileset>
+		</copy>
+
+		<echo>Sync eclipse from ${base} to test-sandbox/test-eclipse/eclipse</echo>
+		<sync todir="test-sandbox/test-eclipse/eclipse" includeemptydirs="true">
+			<fileset dir="${base}" />
+			<!-- any other locations/plugins that you want to copy from, in addition to the eclipse "base install"
+				<fileset dir="${mylyn.base}" />
+			-->
+		</sync>
+	</target>
+
+	<target name="run-core-tests" depends="-run-core-tests-init" description="runs the core tests for the connector">
+		<property name="test-target" value="all" />
+		<java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true" dir="${test-sandbox}">
+
+			<arg value="-Dos=${os}" />
+			<arg value="-Dws=${ws}" />
+			<arg value="-Darch=${arch}" />
+
+			<!-- one each for each feature that is built -->
+			<arg value="-Dfeature.id=${feature.id}" />
+			<arg value="-Dfeature.id.test=${feature.id.test}" />
+
+			<arg value="-Dall.buildId=${all.buildId}" />
+
+			<arg value="-Dbuild.base=${basedir}/target" />
+			<arg value="-Dresults.dir=${basedir}/artifacts/tests" />
+
+
+			<!-- properties containing the plugin directory name including version number -->
+			<arg value="-Dorg.eclipse.swtbot.swt.finder.test=org.eclipse.swtbot.swt.finder.test_${all.buildId}" />
+			<arg value="-Dorg.eclipse.swtbot.swt.recorder.test=org.eclipse.swtbot.swt.recorder.test_${all.buildId}" />
+			<arg value="-Dorg.eclipse.swtbot.swt.recorder.ui.test=org.eclipse.swtbot.swt.recorder.ui.test_${all.buildId}" />
+			<arg value="-Dorg.eclipse.swtbot.eclipse.finder.test=org.eclipse.swtbot.eclipse.finder.test_${all.buildId}" />
+			<!-- <arg value="-Danother.plugin.test=another.plugin.test_1.0.0" /> -->
+
+			<arg value="-DbuildId=${eclipse.buildId}" />
+
+			<!-- pass in locations of any other plugins that may be needed for tests, see the "copy-eclipse" target above
+				<arg value="-Dmylyn.base=${mylyn.base}" />
+			-->
+
+			<arg value="-application" />
+			<arg value="org.eclipse.ant.core.antRunner" />
+			<arg value="-file" />
+			<arg value="${test-sandbox}/test.xml" />
+			<arg value="${test-target}" />
+
+			<jvmarg value="-Xmx512M" />
+			<classpath>
+				<fileset dir="${eclipseLocation}/plugins">
+					<include name="org.eclipse.equinox.launcher_*.jar" />
+				</fileset>
+			</classpath>
+		</java>
+	</target>
+
+	<target name="javadoc" description="generate javadocs">
+		<ant antfile="javadoc.xml" />
+	</target>
+
+	<target name="copy-all" depends="init, copy-sources" description="copies eclipse and minglyn sources" />
+
+	<target name="all" depends="init, copy-all, pde-build, run-core-tests, javadoc" description="the default target" />
+
+	<target name="create-update-site">
+		<property name="update.site.features.url" value="features" />
+		<property name="update.site.plugins.url" value="plugins" />
+		<property name="has.archives" value="false" />
+		<ant dir="../${plugin.prefix}.updatesite" inheritall="false">
+			<property name="buildId" value="${all.buildId}" />
+			<property name="plugin.prefix" value="${plugin.prefix}" />
+			<property name="feature.id" value="${feature.id}" />
+			<property name="feature.id.test" value="${feature.id.test}" />
+			<property name="update-site-location" value="${update-site-location}" />
+			<property name="has.archives" value="${has.archives}" />
+			<property name="update.site.features.url" value="${update.site.features.url}" />
+			<property name="update.site.plugins.url" value="${update.site.plugins.url}" />
+			<property name="eclipse3.4.home" value="${eclipse3.4.home}" />
+		</ant>
+	</target>
+
+	<macrodef name="copy-test-reports">
+		<attribute name="plugin.id" default="default" />
+		<sequential>
+			<echo>Copying @{plugin.id}</echo>
+			<copy todir="artifacts/to-upload/coverage/@{plugin.id}">
+				<fileset dir="artifacts/tests/@{plugin.id}/coverage/html" />
+			</copy>
+			<copy todir="artifacts/to-upload/junit/@{plugin.id}">
+				<fileset dir="artifacts/tests/@{plugin.id}/junit/html" />
+			</copy>
+		</sequential>
+	</macrodef>
+
+	<target name="create-upload-site">
+		<delete dir="artifacts/to-upload" />
+		<mkdir dir="artifacts/to-upload" />
+		<copy todir="artifacts/to-upload" includeemptydirs="false">
+			<fileset dir="artifacts">
+				<include name="org.eclipse.swtbot*${all.buildId}.zip" />
+			</fileset>
+		</copy>
+
+		<copy todir="artifacts/to-upload/update-site">
+			<fileset dir="artifacts/update-site" />
+		</copy>
+
+		<copy todir="artifacts/to-upload/apidocs">
+			<fileset dir="artifacts/apidocs" />
+		</copy>
+
+		<zip destfile="artifacts/to-upload/swtbot-apidocs-${all.buildId}.zip">
+			<fileset dir="artifacts/to-upload/apidocs" />
+		</zip>
+
+		<zip destfile="artifacts/to-upload/swtbot-update-site-${all.buildId}.zip">
+			<fileset dir="artifacts/to-upload/update-site" />
+		</zip>
+
+		<!--
+		<copy-test-reports plugin.id="org.eclipse.swtbot.recorder.test" />
+		<copy-test-reports plugin.id="org.eclipse.swtbot.recorder.ui.test" />
+		-->
+		<copy-test-reports plugin.id="org.eclipse.swtbot.finder.test" />
+	</target>
+
+	<target name="upload-to-server" depends="create-upload-site" if="remote.path">
+		<property name="rsync.opts" value="" />
+		<property name="remote.path" value="" />
+		<exec executable="rsync" failifexecutionfails="true" failonerror="true">
+			<arg line="--partial --verbose --archive --compress ${rsync.opts} artifacts/to-upload/ ${remote.path}" />
+		</exec>
+	</target>
+
+	<target name="cruise" depends="materialize-workspace, all, create-update-site" description="used by cruise, creates update site in addition to the regular build" />
+
+	<target name="cruise-upload" depends="cruise, upload-to-server" description="run a cruise build and upload to server" />
+</project>

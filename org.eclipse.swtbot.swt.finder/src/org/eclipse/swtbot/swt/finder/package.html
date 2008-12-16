@@ -1,0 +1,135 @@
+<body>
+Provides convenience API that most users would like to start with.<p>
+
+<h1>Most common usage of SWTBot API</h1>
+
+Most users would start off as follows:
+
+<pre>
+    SWTBot bot = new SWTBot();
+
+    bot.button("hello world").click();
+
+    // in case you have two edit buttons in two different groups
+    // say an edit button in the "Address" section,
+    // and another in "Bank Account" section, you can do the following
+    // to click on the "Edit" button on the "Bank Account" section.
+    // This is the recommended way to use SWTBot, instead of finding widgets based on its index.
+    bot.buttonInGroup("Edit", "Bank Account").click();
+</pre>
+
+
+For finding widgets using custom matchers:
+
+<pre>
+    SWTBot bot = new SWTBot();
+    //
+    // find a button within the currently active shell:
+    //
+    SWTBotButton button = new SWTBotButton((Button) bot.widget(aMatcher)); // or
+    SWTBotButton button = new SWTBotButton((Button)bot.widget(aMatcher, 3)); // for the 4th widget
+    //
+    // to find a button within a particular parent composite:
+    //
+    SWTBotButton button = new SWTBotButton((Button) bot.widget(aMatcher, parentComposite)); //or
+    SWTBotButton button = new SWTBotButton((Button) bot.widget(aMatcher, parentComposite, 3)); //for the 4th widget
+</pre>
+
+
+<h1>Using matchers to find widgets using SWTBot</h1>
+
+In case the convenience API provided by the SWTBot class does not suit your needs,
+you can create a matcher using a combination of matchers provided by SWTBot, or write your own matcher.
+SWTBot provides the following matchers for use. Matchers can be instantiated using the factory provided
+in <a href="matchers/WidgetMatcherFactory.html">WidgetMatcherFactory</a>:
+
+<li/><code><a href="matchers/WidgetMatcherFactory.html#withText(java.lang.String)">withText</a></code> --
+     Finds widgets with the exact text.
+<li/><code><a href="matchers/WidgetMatcherFactory.html#withMnemonic(java.lang.String)">withMnemonic</a></code> --
+    Finds widgets ignoring all mnemonics (&), accessors etc.
+    Finding a button <code>Edit</code> will match buttons with text <code>&Edit</code>, or <code>E&dit</code>.
+<li/><code><a href="matchers/WidgetMatcherFactory.html#withLabel(java.lang.String)">withLabel</a></code> --
+    Finds widgets with a label before it.
+<li/><code><a href="matchers/WidgetMatcherFactory.html#withRegex(java.lang.String)">withRegex</a></code> --
+    Finds widgets using a regex.
+<li/><code><a href="matchers/WidgetMatcherFactory.html#inGroup(java.lang.String)">inGroup</a></code> --
+    Finds widgets in a particular SWT Group with the specified text.
+<li/><code><a href="matchers/WidgetMatcherFactory.html#widgetOfType(java.lang.Class)">widgetOfType</a></code> --
+    Finds widgets of a particular type(class).
+<li/><code><a href="matchers/WidgetMatcherFactory.html#withStyle(int, java.lang.String)">withStyle</a></code> --
+    Finds widgets with a particular style bit. Useful, for e.g. to distinguish between RadioButtons, CheckBoxes, and PushButtons
+<li/><code><a href="matchers/WidgetMatcherFactory.html#withId(java.lang.String)">withId</a></code> --
+    In case nothing else works! Set the id on the widget using Widget#setData(key, value) and find the widget using that id.
+
+<p>
+In addition you can use the hamcrest matchers provided by org.hamcrest.Matchers.
+</p>
+
+<p>
+To make a combination of matchers, you'll need to static import:
+</p>
+<pre>
+import static org.hamcrest.Matchers.*;
+import static org.eclipse.swtbot.swt.finder.matcher.WidgetMatcherFactory.*;
+</pre>
+
+The following will match all buttons that start with <code>foo</code> or belong to group <code>bar</code>:
+<pre>
+Matcher matcher = allOf(widgetOfType(Button.class), anyOf(withRegex("^foo.*"), inGroup("bar")));
+</pre>
+
+Some matchers even consume other matchers, the following will match the <code>Edit</code> button in the <code>Bank Account</code> section of the <code>Employer</code>:
+<pre>
+Matcher matcher = allOf(widgetOfType(Button.class), withText("Edit"), inGroup(allOf(withText("Bank Account"), inGroup("Employer"))));
+</pre>
+
+<pre>
++-- Personal Details -------------+
+| ...                             |
+|  +-- Employee ---------------+  |
+|  |  ...                      |  |
+|  |  +- Bank Account ------+  |  |
+|  |  | ...                 |  |  |
+|  |  | #Edit#              |  |  |
+|  |  | ...                 |  |  |
+|  |  +---------------------+  |  |
+|  |                           |  |
+|  |  +-- Employer ---------+  |  |
+|  |  |...                  |  |  |
+|  |  |  +- Bank Account +  |  |  |
+|  |  |  | ...           |  |  |  |
+|  |  |  | #Edit#        |  |  |  |
+|  |  |  | ...           |  |  |  |
+|  |  |  +---------------+  |  |  |
+|  |  +---------------------+  |  |
+|  +---------------------------+  |
++---------------------------------+
+</pre>
+
+<h1>Writing your own matchers</h1>
+Writing your own matchers is simple, you create a subclass of org.hamcrest.BaseMatcher. The following is an example of the WithId matcher:
+
+<pre>
+    public class WithId<T extends Widget> extends BaseMatcher<T> {
+        private final String    key;
+        private final String    value;
+
+        public WithId(String key, String value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public boolean matches(Object obj) {
+            if (obj instanceof Widget)
+                return value.equals(((Widget) obj).getData(key));
+            return false;
+        }
+
+        public void describeTo(Description description) {
+            description.appendText("with key: ").appendText(key).appendText(" having value: ").appendText(value);
+        }
+    }
+</pre>
+
+
+</body>

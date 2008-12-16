@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SWTBot Recorder UI Plug-in (incubation)
+Bundle-SymbolicName: org.eclipse.swtbot.swt.recorder.ui;singleton:=true
+Bundle-Version: 2.0.0.qualifier
+Bundle-Activator: org.eclipse.swtbot.swt.recorder.ui.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.swtbot.swt.recorder,
+ org.eclipse.swtbot.swt.finder
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Vendor: Eclipse.org
+Export-Package: org.eclipse.swtbot.swt.recorder.ui

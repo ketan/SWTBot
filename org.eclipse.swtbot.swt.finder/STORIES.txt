@@ -1,0 +1,49 @@
+
+Outstanding Stories
+===================
+
+
+=== regular widgets ===
+
+As a user I want to be able to
+ - find a button with specified text (and index)
+so that
+ - I can click on it
+
+As a user I want to be able to
+ - find a button with a label next to it (and index)
+so that
+ - I can click on it
+
+As a user I want to be able to
+ - find a button with a tooltip (and index)
+so that
+ - I can click on it
+
+As a user I want to be able to
+ - find a button by ID (and index)
+so that
+ - I can click on it
+
+Now given that buttons can have the following styles:
+ - arrow
+ - checkbox
+ - push buttons
+ - radio
+ - toggle
+
+Ensure that the user is able to specify the types of buttons as well
+
+Special cases:
+==============
+As a user I want to be able to
+ - find a tabItem with the specified text (and index)
+so that
+ - I can activate it
+
+As a user I want to be able to
+ - find a toolbar button by text (and index)
+so that
+ - I can click on it
+
+

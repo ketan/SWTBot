@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="SWTBot Category"
+            id="org.eclipse.swtbot.eclipse.spy">
+      </category>
+      <view
+            name="EclipseSpy View"
+            icon="icons/sample.gif"
+            category="org.eclipse.swtbot.eclipse.spy"
+            class="org.eclipse.swtbot.eclipse.spy.views.EclipseSpyView"
+            id="org.eclipse.swtbot.eclipse.spy.views.EclipseSpyView">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.jdt.ui.JavaPerspective">
+         <view
+               id="org.eclipse.swtbot.eclipse.spy.views.EclipseSpyView"
+               minimized="false"
+               relationship="stack"
+               relative="org.eclipse.ui.views.TaskList">
+         </view>
+      </perspectiveExtension>
+   </extension>
+</plugin>

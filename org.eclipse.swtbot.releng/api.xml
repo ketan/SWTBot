@@ -1,0 +1,44 @@
+<project name="API comparator" default="all">
+
+	<property name="swtbot-2.0" value="/Volumes/data/workspaces/swtbot-2/org.eclipse.swtbot.eclipse-2.0.0.1026-dev.zip" />
+	<property name="swtbot-1.2" value="/Volumes/data/workspaces/swtbot-2/org.eclipse.swtbot.eclipse-1.2.0.921.zip" />
+	<property name="swtbot-1.3" value="/Volumes/data/workspaces/swtbot-2/org.eclipse.swtbot.eclipse-1.3.0.959-dev.zip" />
+	<property name="report.dir" value="report" />
+	<property name="report.xmlfile" value="${report.dir}/report.xml" />
+	<property name="report.htmlfile" value="${report.dir}/report.html" />
+
+	<target name="filter">
+		<xslt style="style.xsl" basedir="${report.dir}" out="${report.xmlfile}.xml" in="${report.xmlfile}" />
+	</target>
+
+	<target name="report">
+		<apitooling.deltareportconversion xmlfile="${report.xmlfile}" />
+	</target>
+
+	<target name="init">
+		<delete dir="${report.dir}" />
+		<delete dir="/tmp/reference" />
+		<delete dir="/tmp/currentProfile" />
+		<mkdir dir="${report.dir}" />
+	</target>
+	<target name="apifreeze">
+		<apitooling.apifreeze profile="${swtbot-1.3}" reference="${swtbot-1.2}" report="${report.xmlfile}" debug="true" />
+	</target>
+
+	<target name="generate" depends="apifreeze, report" />
+
+	<target name="all" depends="init">
+		<java classname="org.eclipse.equinox.launcher.Main" fork="true">
+			<arg line="-consoleLog -debug" />
+			<arg value="-application" />
+			<arg value="org.eclipse.ant.core.antRunner" />
+			<arg line="-buildfile api.xml generate" />
+
+			<classpath>
+				<fileset dir="/Volumes/data/eclipse-installs/eclipse-3.5M2/plugins">
+					<include name="org.eclipse.equinox.launcher_*.jar" />
+				</fileset>
+			</classpath>
+		</java>
+	</target>
+</project>

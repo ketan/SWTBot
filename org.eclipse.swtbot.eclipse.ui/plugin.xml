@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         id="swtbottestapplication"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="org.eclipse.swtbot.eclipse.ui.TestApplication">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="org.eclipse.swtbot.eclipse.ui.JUnitLaunchConfigurationDelegate"
+            delegateDescription="This test launcher is used to run and debug SWTBot tests"
+            delegateName="SWTBot Test Launcher"
+            id="org.eclipse.swtbot.eclipse.ui.launcher.JunitLaunchConfig"
+            migrationDelegate="org.eclipse.pde.internal.ui.launcher.PDEMigrationDelegate"
+            modes="run, debug"
+            name="SWTBot Test"
+            sourceLocatorId="org.eclipse.pde.ui.launcher.PDESourceLookupDirector"
+            sourcePathComputerId="org.eclipse.jdt.launching.sourceLookup.javaSourcePathComputer">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            type="org.eclipse.swtbot.eclipse.ui.launcher.JunitLaunchConfig"
+            class="org.eclipse.pde.ui.launcher.JUnitTabGroup"
+            id="org.eclipse.swtbot.eclipse.ui.launcher.JUnitTabGroup">
+         <launchMode
+               description="Create a configuration that will launch a SWTBot test in debug mode."
+               perspective="org.eclipse.debug.ui.DebugPerspective"
+               mode="debug">
+         </launchMode>
+         <launchMode
+               description="Create a configuration that will launch a SWTBot test."
+               mode="run">
+         </launchMode>
+      </launchConfigurationTabGroup>
+   </extension>
+   <extension
+         point="org.eclipse.jdt.junit.junitLaunchConfigs">
+      <launchConfigType
+            configTypeID="org.eclipse.swtbot.eclipse.ui.launcher.JunitLaunchConfig">
+      </launchConfigType>
+   </extension>
+ 
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            name="SWTBot Test"
+            description="SWTBot Test"
+            categoryId="org.eclipse.debug.ui.category.run"
+            id="org.eclipse.swtbot.eclipse.ui.junitShortcut.run">
+      </command>
+      <command
+            name="SWTBot Test"
+            description="SWTBot Test"
+            categoryId="org.eclipse.debug.ui.category.run"
+            id="org.eclipse.swtbot.eclipse.ui.junitShortcut.debug">
+      </command>
+   </extension>   
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            sequence="M3+M2+X S"
+            commandId="org.eclipse.swtbot.eclipse.ui.junitShortcut.run"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key
+            sequence="M3+M2+D S"
+            commandId="org.eclipse.swtbot.eclipse.ui.junitShortcut.debug"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchShortcuts">
+      <shortcut
+            class="org.eclipse.swtbot.eclipse.ui.SWTBotLaunchShortcut"
+            id="org.eclipse.swtbot.eclipse.ui.junitShortcut"
+            label="SWTBot Test"
+            modes="run, debug">
+            <contextualLaunch>
+            <enablement>
+               <with variable="selection">
+                  <count value="1"/>
+               	  <iterate>
+                      <adapt type="org.eclipse.jdt.core.IJavaElement">
+		                <test property="org.eclipse.jdt.core.isInJavaProjectWithNature" value="org.eclipse.pde.PluginNature"/>
+		                <test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="junit.framework.Test"/>
+		                <test property="org.eclipse.jdt.junit.canLaunchAsJUnit" forcePluginActivation="true"/>
+		             </adapt>
+		          </iterate>
+               </with>
+            </enablement>
+         </contextualLaunch>
+            <configurationType
+                  id="org.eclipse.swtbot.eclipse.ui.launcher.JunitLaunchConfig"></configurationType>
+      </shortcut>
+   </extension>
+</plugin>

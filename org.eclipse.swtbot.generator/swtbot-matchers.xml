@@ -1,0 +1,15 @@
+<matchers>
+
+	<!-- text based -->
+	<factory class="org.eclipse.swtbot.swt.finder.matcher.WithLabel" />
+	<factory class="org.eclipse.swtbot.swt.finder.matcher.WithMnemonic" />
+	<factory class="org.eclipse.swtbot.swt.finder.matcher.WithRegex" />
+	<factory class="org.eclipse.swtbot.swt.finder.matcher.WithText" />
+	<factory class="org.eclipse.swtbot.swt.finder.matcher.WithStyle" />
+	<factory class="org.eclipse.swtbot.swt.finder.matcher.WithTooltip" />
+	<factory class="org.eclipse.swtbot.swt.finder.matcher.WithId" />
+	<factory class="org.eclipse.swtbot.swt.finder.matcher.InGroup" />
+	<factory class="org.eclipse.swtbot.swt.finder.matcher.WidgetOfType" />
+	<factory class="org.eclipse.swtbot.swt.finder.matcher.InUIThread" />
+	<factory class="org.eclipse.swtbot.swt.finder.matcher.AllOf" />
+</matchers>

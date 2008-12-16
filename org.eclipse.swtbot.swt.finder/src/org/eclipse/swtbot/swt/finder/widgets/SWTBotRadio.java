@@ -1,0 +1,102 @@
+/*******************************************************************************
+ * Copyright (c) 2008 Ketan Padegaonkar and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Ketan Padegaonkar - initial API and implementation
+ *******************************************************************************/
+package org.eclipse.swtbot.swt.finder.widgets;
+
+
+import org.eclipse.core.runtime.Assert;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Widget;
+import org.eclipse.swtbot.swt.finder.ReferenceBy;
+import org.eclipse.swtbot.swt.finder.SWTBotWidget;
+import org.eclipse.swtbot.swt.finder.Style;
+import org.eclipse.swtbot.swt.finder.results.BoolResult;
+import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
+import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
+
+/**
+ * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
+ * @version $Id: SWTBotRadio.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ */
+@SWTBotWidget(clasz = Button.class, style = @Style(name = "SWT.RADIO", value = SWT.RADIO), preferredName = "radio", referenceBy = { ReferenceBy.LABEL, ReferenceBy.MNEMONIC,
+		ReferenceBy.TOOLTIP })
+public class SWTBotRadio extends AbstractSWTBot<Button> {
+
+	/**
+	 * Constructs an instance of this with the given widget.
+	 *
+	 * @param w the widget.
+	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
+	 */
+	public SWTBotRadio(Button w) throws WidgetNotFoundException {
+		super(w);
+		Assert.isTrue(SWTUtils.hasStyle(w, SWT.RADIO), "Expecting a radio.");
+	}
+
+	/**
+	 * Selects the radio button.
+	 */
+	public void click() {
+		if (isSelected()) {
+			log.debug(MessageFormat.format("Widget {0} is already selected, not clicking again.", this));
+			return;
+		}
+		assertEnabled();
+		log.debug(MessageFormat.format("Clicking on {0}", this));
+		asyncExec(new VoidResult() {
+			public void run() {
+				deselectOtherRadioButtons();
+				log.debug(MessageFormat.format("Clicking on {0}", this));
+				widget.setSelection(true);
+			}
+
+			/**
+			 * @see "http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.swt.snippets/src/org/eclipse/swt/snippets/Snippet224.java?view=co"
+			 */
+			private void deselectOtherRadioButtons() {
+				if (hasStyle(widget.getParent(), SWT.NO_RADIO_GROUP))
+					return;
+				Widget[] siblings = SWTUtils.siblings(widget);
+				for (Widget widget : siblings) {
+					if ((widget instanceof Button) && hasStyle(widget, SWT.RADIO))
+						((Button) widget).setSelection(false);
+				}
+			}
+		});
+		notify(SWT.MouseEnter);
+		notify(SWT.MouseMove);
+		notify(SWT.Activate);
+		notify(SWT.FocusIn);
+		notify(SWT.MouseDown);
+		notify(SWT.MouseUp);
+		notify(SWT.Selection);
+		notify(SWT.MouseHover);
+		notify(SWT.MouseMove);
+		notify(SWT.MouseExit);
+		notify(SWT.Deactivate);
+		notify(SWT.FocusOut);
+		log.debug(MessageFormat.format("Clicked on {0}", this));
+	}
+
+	/**
+	 * Checks if the item is selected.
+	 *
+	 * @return <code>true</code> if the radio button is selected. Otherwise <code>false</code>.
+	 */
+	public boolean isSelected() {
+		return syncExec(new BoolResult() {
+			public Boolean run() {
+				return widget.getSelection();
+			}
+		});
+	}
+}

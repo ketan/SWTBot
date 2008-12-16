@@ -1,0 +1,16 @@
+
+	<!-- begin the categories -->
+	<category-def name="SWTBot SWT Features (incubation)" label="SWTBot SWT Features (incubation)">
+		<description>
+			This feature contains the basic SWTBot with drivers for SWT. This is useful for testing plain SWT applications.
+		</description>
+	</category-def>
+	
+	<category-def name="SWTBot Eclipse Features (incubation)" label="SWTBot Eclipse Features (incubation)">
+		<description>
+			This feature contains the SWTBot drivers for Eclipse, and some tooling for launching SWTBot tests for eclipse plugins. This is useful for testing Eclipse plugins and applications.
+		</description>
+	</category-def>
+	
+	<!-- end the categories -->
+

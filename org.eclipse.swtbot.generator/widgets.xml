@@ -1,0 +1,26 @@
+<widgets>
+	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotButton" />
+	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotCheckBox" />
+	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotRadio" />
+	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotTree" />
+	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotText" />
+	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotCombo" />
+	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotCCombo" />
+	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotCLabel" />
+	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotLabel" />
+	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotList" />
+	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotTable" />
+	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotTabItem" />
+	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotStyledText" />
+	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotDateTime" />
+	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarButton" />
+	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarDropDownButton" />
+	<!--
+		<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotExpandBar" />
+		<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotShell" />
+		<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotExpandItem" />
+		<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu" />
+		<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotTableColumn" />
+		<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem" />
+	-->
+</widgets>

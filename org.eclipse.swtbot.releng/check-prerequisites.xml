@@ -1,0 +1,85 @@
+<project>
+
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+		<classpath>
+			<pathelement location="libs/ant-contrib-1.0b3.jar" />
+		</classpath>
+	</taskdef>
+
+	<property environment="env" />
+	<condition property="path" value="${env.PATH}">
+		<isset property="env.PATH" />
+	</condition>
+	<condition property="path" value="${env.Path}">
+		<isset property="env.Path" />
+	</condition>
+
+	<macrodef name="check.executable">
+		<attribute name="executable" />
+		<sequential>
+			<echo>Checking for @{executable} on path.</echo>
+			<available file="@{executable}" filepath="${path}" property="@{executable}.executable.available" />
+			<available file="@{executable}.exe" filepath="${path}" property="@{executable}.executable.available" />
+			<fail unless="@{executable}.executable.available" message="@{executable} not available on path. Please ensure that @{executable} is on path." />
+			<echo>Found @{executable} on path.</echo>
+		</sequential>
+	</macrodef>
+
+	<condition property="isWin">
+		<contains casesensitive="false" substring="win" string="${os.name}" />
+	</condition>
+
+	<target name="check-windows-preconditions" if="isWin">
+		<check.executable executable="unzip" />
+	</target>
+
+	<target name="check-other-preconditions" unless="isWin">
+		<check.executable executable="tar" />
+	</target>
+
+	<target name="guess-pde-build-version" unless="pde-build-version">
+		<echo>Guessing plugin version of org.eclipse.pde.build.</echo>
+		<for param="pde-build-file">
+			<dirset dir="../eclipse/plugins/" includes="org.eclipse.pde.build_*" />
+			<sequential>
+				<propertyregex property="pde-build-version" input="@{pde-build-file}" regexp="org.eclipse.pde.build_(.*)" select="\1" />
+			</sequential>
+		</for>
+		<fail unless="pde-build-version" message="Could not find org.eclipse.pde.build in target eclipse" />
+		<echo>Plugin version of org.eclipse.pde.build is "${pde-build-version}"</echo>
+	</target>
+
+	<target name="create-build-properties-from-template">
+		<copy file="build.properties.template" tofile="build.properties" overwrite="true">
+			<filterset>
+				<filter token="PDE_BUILD_PLUGIN_VERSION" value="${pde-build-version}" />
+			</filterset>
+		</copy>
+	</target>
+
+	<target name="check-conditions" depends="check-windows-preconditions, check-other-preconditions">
+		<check.executable executable="svn" />
+		<available file="build.developer.properties" property="build.developer.properties.available" />
+		<fail unless="build.developer.properties.available">Could not find the file "build.developer.properties". Please create the file using "build.developer.properties.sample" as the starting point.</fail>
+	</target>
+
+	<target name="initialize-environment" depends="guess-pde-build-version, create-build-properties-from-template" />
+
+	<!-- guess svn revision -->
+	<exec executable="svn" output="${java.io.tmpdir}/svn.properties" dir="..">
+		<arg value="info" />
+	</exec>
+
+	<!-- prefix all properties with "svn." and replace spaces to make the keys unique -->
+	<loadproperties srcfile="${java.io.tmpdir}/svn.properties">
+		<filterchain>
+			<prefixlines prefix="svn." />
+			<deletecharacters chars="\ " />
+		</filterchain>
+	</loadproperties>
+
+	<property name="svn.version" value="${svn.LastChangedRev}" />
+
+	<echo>Sandbox Revision: ${svn.version}</echo>
+
+</project>

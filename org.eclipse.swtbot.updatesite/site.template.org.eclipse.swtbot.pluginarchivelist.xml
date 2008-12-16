@@ -1,0 +1,3 @@
+
+	<archive path="${file.basedir}/${file}" 
+		url="${update.site.plugins.url}/${file}"/>

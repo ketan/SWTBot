@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="org.eclipse.swtbot.eclipse.finder.test.ui.category"
+            name="SWTBot Test Category">
+      </category>
+      <view
+            category="org.eclipse.swtbot.eclipse.finder.test.ui.category"
+            class="org.eclipse.swtbot.eclipse.finder.test.ui.views.SWTBotTestView"
+            icon="icons/sample.gif"
+            id="org.eclipse.swtbot.eclipse.finder.test.ui.views.SWTBotTestView"
+            name="SWTBot Test View">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.eclipse.swtbot.eclipse.finder.test.ui.handler.SampleHandler"
+            commandId="org.eclipse.swtbot.eclipse.finder.test.ui.commands.ContributionItemCommand">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="org.eclipse.swtbot.eclipse.finder.test.ui.commands.ContributionItemCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+6">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.swtbot.eclipse.finder.test.ui.views.SWTBotTestView?after=additions">
+         <command
+               commandId="org.eclipse.swtbot.eclipse.finder.test.ui.commands.ContributionItemCommand"
+               icon="icons/sample.gif"
+               id="org.eclipse.swtbot.eclipse.finder.test.ui.view.menu.ContributionItemCommand"
+               mnemonic="C"
+               style="toggle">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            id="org.eclipse.swtbot.eclipse.finder.test.ui.commands.category"
+            name="SWTBot Test Category">
+      </category>
+      <command
+            categoryId="org.eclipse.swtbot.eclipse.finder.test.ui.commands.category"
+            id="org.eclipse.swtbot.eclipse.finder.test.ui.commands.ContributionItemCommand"
+            name="Contribution Item Command">
+      </command>
+   </extension>
+
+</plugin>

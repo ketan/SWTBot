@@ -1,0 +1,5 @@
+<matchers>
+	<!-- text based -->
+	<factory class="org.eclipse.swtbot.eclipse.finder.matcher.WithPartName" />
+</matchers>
+

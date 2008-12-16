@@ -1,0 +1,42 @@
+The following widgets are supported by SWTBot for playback and recording:
+
+Widget            | Playback | Recording
+----------------------------------------
+ArrowButton       |          |
+CheckBoxButton    | Yes      | Yes
+PushButton        | Yes      | Yes
+RadioButton       | Yes      | Yes
+ToggleButton      |          |
+----------------------------------------
+Combo             | Yes      | Yes
+List              | Yes      | Yes
+Text              | Yes      |
+TabItem           | Yes      | Yes
+Shell             | Yes      | Yes
+----------------------------------------
+Menu              | Yes      | Yes
+CheckMenu         |          |
+CascadeMenu       |          |
+PushMenu          |          |
+RadioMenu         |          |
+----------------------------------------
+ToolBarButton     | Yes      |
+DateTime          | Yes      |
+Table             | Yes      |
+TableColumn       | Yes      |
+Tree              | Yes      |
+TreeItem          | Yes      |
+----------------------------------------
+StyledText        | Yes      |
+Canvas            |          |
+Dialog            | Yes      |
+ExpandBar         | Yes      |
+Link              |          |
+ProgressBar       |          |
+Scale             |          |
+Slider            |          |
+Spinner           |          |
+CCombo            | Yes      |
+CLabel            | Yes      |
+CTabItem          | Yes      |
+

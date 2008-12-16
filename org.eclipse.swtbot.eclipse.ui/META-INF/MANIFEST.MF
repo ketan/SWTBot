@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SWTBot Eclipse UI Plug-in (incubation)
+Bundle-SymbolicName: org.eclipse.swtbot.eclipse.ui;singleton:=true
+Bundle-Version: 2.0.0.qualifier
+Bundle-Activator: org.eclipse.swtbot.eclipse.ui.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.pde.junit.runtime,
+ org.eclipse.jdt.junit,
+ org.eclipse.pde.ui,
+ org.eclipse.jdt.core,
+ org.eclipse.jdt.launching,
+ org.eclipse.debug.ui,
+ org.eclipse.jdt.junit.runtime;bundle-version="3.3.0"
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: Eclipse.org
+Export-Package: org.eclipse.swtbot.eclipse.ui
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ClassPath: .

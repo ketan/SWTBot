@@ -1,0 +1,226 @@
+<project name="org.eclipse.swtbot.updatesite" default="all" basedir=".">
+
+	<taskdef name="purge" classname="com.dallaway.ant.Purge" classpath="../org.eclipse.swtbot.releng/libs/purge.jar" />
+
+	<taskdef resource="net/sf/antcontrib/antlib.xml" />
+	<property name="num.previous.revisions" value="1" />
+	<property name="target" value="${basedir}/target" />
+	<taskdef resource="net/sf/antcontrib/antlib.xml" classpath="../org.eclipse.swtbot.releng/libs/ant-contrib-1.0b3.jar" />
+
+	<condition property="should.generate.archives">
+		<equals arg1="${has.archives}" arg2="true" />
+	</condition>
+
+	<echo>${should.generate.archives}: ${has.archives}</echo>
+
+	<target name="purge_old_files">
+		<echo>Purging feaures</echo>
+		<purge keep="${num.previous.revisions}">
+			<fileset dir="${target}/features">
+				<include name="${feature.id}_*.jar" />
+			</fileset>
+			<fileset dir="${target}/features">
+				<include name="org.eclipse.swtbot.eclipse_*.jar" />
+			</fileset>
+		</purge>
+
+		<echo>Purging plugins</echo>
+		<purge keep="${num.previous.revisions}">
+
+			<!-- demo -->
+			<fileset dir="${target}/plugins">
+				<include name="org.eclipse.swtbot.swt.demo_*.jar" />
+			</fileset>
+
+			<!-- eclipse finder -->
+			<fileset dir="${target}/plugins">
+				<include name="org.eclipse.swtbot.eclipse.finder_*.jar" />
+			</fileset>
+
+			<!-- finder -->
+			<fileset dir="${target}/plugins">
+				<include name="org.eclipse.swtbot.swt.finder_*.jar" />
+			</fileset>
+
+			<!-- eclipse ui -->
+			<fileset dir="${target}/plugins">
+				<include name="org.eclipse.swtbot.eclipse.ui_*.jar" />
+			</fileset>
+
+			<!-- spy -->
+			<fileset dir="${target}/plugins">
+				<include name="org.eclipse.swtbot.swt.spy_*.jar" />
+			</fileset>
+			<fileset dir="${target}/plugins">
+				<include name="org.eclipse.swtbot.eclipse.spy_*.jar" />
+			</fileset>
+
+			<!-- recorder -->
+			<fileset dir="${target}/plugins">
+				<include name="org.eclipse.swtbot.swt.recorder_*.jar" />
+			</fileset>
+
+			<!-- recorder ui -->
+			<fileset dir="${target}/plugins">
+				<include name="org.eclipse.swtbot.swt.recorder.ui_*.jar" />
+			</fileset>
+
+			<!-- apache jars -->
+			<fileset dir="${target}/plugins">
+				<include name="org.apache.commons.collections_*.jar" />
+			</fileset>
+			<fileset dir="${target}/plugins">
+				<include name="org.apache.log4j_*.jar" />
+			</fileset>
+
+			<!-- swt examples -->
+			<fileset dir="${target}/plugins">
+				<include name="org.eclipse.swt.examples_*.jar" />
+			</fileset>
+		</purge>
+	</target>
+
+	<target name="-create.features.template">
+		<basename file="${file}" property="file.name" />
+		<propertyregex property="all.buildId" input="${file.name}" regexp="${featureId}_(.*).jar" select="\1" />
+		<echo message="Adding ${featureId} version: ${all.buildId}" />
+		<concat destfile="build/${destFile}" append="true">
+			<path path="${srcFile}" />
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</concat>
+	</target>
+
+	<target name="create_features_list" depends="purge_old_files">
+		<for param="file">
+			<path>
+				<fileset dir="${target}/features" includes="${plugin.prefix}_*.jar" />
+			</path>
+			<sequential>
+				<ant target="-create.features.template" inheritall="false">
+					<property name="file" value="@{file}" />
+					<property name="featureId" value="${plugin.prefix}" />
+					<property name="destFile" value="${plugin.prefix}.featurelist.xml" />
+					<property name="srcFile" value="site.template.${plugin.prefix}.featurelist.xml" />
+				</ant>
+			</sequential>
+		</for>
+	</target>
+
+	<target name="-create.plugins.template">
+		<basename file="${plugin.file.name}" property="file" />
+		<dirname file="${plugin.file.name}" property="file.dirname" />
+		<basename file="${file.dirname}" property="file.basedir" />
+		<echo>Adding plugin: ${file} in ${file.basedir}</echo>
+		<concat destfile="build/${destFile}" append="true">
+			<path path="${srcFile}" />
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</concat>
+	</target>
+
+
+	<target name="create_plugins_archive_list" if="should.generate.archives">
+		<for param="plugin">
+			<path>
+				<fileset dir="${target}/plugins" includes="*.jar" />
+				<fileset dir="${target}/features" includes="*.jar" />
+			</path>
+			<sequential>
+				<ant target="-create.plugins.template" inheritall="false">
+					<property name="plugin.file.name" value="@{plugin}" />
+					<property name="featureId" value="${plugin.prefix}" />
+					<property name="destFile" value="${plugin.prefix}.pluginarchivelist.xml" />
+					<property name="srcFile" value="site.template.${plugin.prefix}.pluginarchivelist.xml" />
+				</ant>
+			</sequential>
+		</for>
+	</target>
+
+	<target name="create_site_xml" depends="create_features_list">
+		<concat destfile="${target}/site.xml" fixlastline="true" eol="unix">
+			<header file="site.template.header.xml" />
+			<fileset file="build/${plugin.prefix}.featurelist.xml" />
+			<fileset file="build/${plugin.prefix}.pluginarchivelist.xml" />
+			<fileset file="site.template.categories.xml" />
+			<footer file="site.template.footer.xml" />
+		</concat>
+	</target>
+
+	<target name="clean">
+		<delete dir="build" />
+		<delete dir="eclipse" />
+		<mkdir dir="build" />
+		<delete dir="${target}" includes="artifacts*.*, content*.*" />
+	</target>
+
+	<target name="-create.jars">
+		<for param="file">
+			<path>
+				<dirset dir="${target}/eclipse/features" includes="*" excludes="*.jar" />
+				<dirset dir="${target}/eclipse/plugins" includes="*" excludes="*.jar" />
+			</path>
+			<sequential>
+				<echo>Packaging feature @{file} as a jar</echo>
+				<zip destfile="@{file}.jar" basedir="@{file}" />
+				<delete dir="@{file}" />
+			</sequential>
+		</for>
+	</target>
+
+	<target name="init">
+		<mkdir dir="${target}" />
+
+		<unzip dest="${target}">
+			<fileset dir="../${plugin.prefix}.releng/artifacts" includes="org.eclipse.swtbot.eclipse*" />
+		</unzip>
+
+		<antcall target="-create.jars" inheritall="false" />
+
+		<move todir="${target}">
+			<fileset dir="${target}/eclipse" />
+		</move>
+	</target>
+
+	<target name="copy-to-update-site">
+		<property name="update-site-location" value="update-site" />
+		<copy todir="${update-site-location}">
+			<fileset dir=".">
+				<include name="features/**.*" />
+				<include name="plugins/**.*" />
+				<include name="index.html" />
+				<include name="site.xml" />
+				<include name="web/**.*" />
+			</fileset>
+			<fileset dir="target">
+			</fileset>
+		</copy>
+	</target>
+
+	<available file="${eclipse3.4.home}" property="is.eclipse.3.4" />
+
+	<target name="create-p2-site" if="is.eclipse.3.4">
+
+		<java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true">
+			<classpath>
+				<fileset dir="${eclipse3.4.home}/plugins">
+					<include name="org.eclipse.equinox.launcher_*.jar"/>
+					<include name="org.eclipse.equinox.p2.metadata.generator_*.jar"/>
+				</fileset>
+			</classpath>
+
+			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator"/>
+			<arg line="-updateSite ${target}"/>
+			<arg line="-site file:${target}/site.xml"/>
+			<arg line="-metadataRepository file:${target}"/>
+			<arg line="-metadataRepositoryName 'SWTBot Update Site'"/>
+			<arg line="-artifactRepository file:${target}"/>
+			<arg line="-artifactRepositoryName 'SWTBot Artifacts'"/>
+			<arg line="-compress -reusePack200Files -vmargs -Xmx128M"/>
+		</java>
+	</target>
+
+	<target name="all" depends="clean, init, purge_old_files, create_features_list, create_plugins_archive_list, create_site_xml, create-p2-site, copy-to-update-site" />
+</project>
