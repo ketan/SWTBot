@@ -12,7 +12,7 @@ package org.eclipse.swtbot.swt.recorder.methodargs;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: AbstractSWTBotEventArguments.java 1103 2008-11-04 17:50:59Z kpadegaonkar $
+ * @version $Id$
  */
 public abstract class AbstractSWTBotEventArguments implements SWTBotEventArguments {
 

@@ -13,10 +13,11 @@ package org.eclipse.swtbot.swt.finder.collections;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: OrderedSet.java 1188 2008-12-02 06:55:23Z kpadegaonkar $
+ * @version $Id$
  * @since 2.0
  */
 public class OrderedSet<T> extends ArrayList<T> {
@@ -26,6 +27,11 @@ public class OrderedSet<T> extends ArrayList<T> {
 
 	public OrderedSet() {
 		this.set = new HashSet<T>();
+	}
+
+	public OrderedSet(List<T> initial) {
+		this();
+		addAll(initial);
 	}
 
 	public boolean add(T o) {

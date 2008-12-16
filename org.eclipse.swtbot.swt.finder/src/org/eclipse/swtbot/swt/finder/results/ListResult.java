@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: ListResult.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 2.0
  */
 public interface ListResult<E> extends Result<List<E>> {

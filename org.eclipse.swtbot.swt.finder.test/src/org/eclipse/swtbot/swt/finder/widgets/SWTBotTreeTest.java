@@ -14,7 +14,6 @@ package org.eclipse.swtbot.swt.finder.widgets;
 
 import java.util.ArrayList;
 
-
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.SWTBot;
@@ -24,7 +23,7 @@ import org.eclipse.swtbot.swt.finder.utils.TableRow;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotTreeTest.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class SWTBotTreeTest extends AbstractSWTTestCase {
 
@@ -157,16 +156,6 @@ public class SWTBotTreeTest extends AbstractSWTTestCase {
 				.textInGroup("Listeners").widget);
 		assertTextContains("data=null item=TreeItem {Node 2.2} detail=0 x=0 y=0 width=0 height=0 stateMask=0 text=null doit=true}", bot
 				.textInGroup("Listeners").widget);
-	}
-
-	public void testThrowExceptionIfTreeNotFound() throws Exception {
-		bot.tabItem("Button").activate();
-		try {
-			bot.tree();
-			fail("Expected a WidgetNotFoundException");
-		} catch (WidgetNotFoundException expected) {
-			pass();
-		}
 	}
 
 	public void testGetsAllTreeItems() throws Exception {

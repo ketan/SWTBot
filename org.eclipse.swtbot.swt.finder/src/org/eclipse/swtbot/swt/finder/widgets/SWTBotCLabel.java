@@ -21,7 +21,7 @@ import org.eclipse.swtbot.swt.finder.results.IntResult;
  * This represents a {@link CLabel} widget.
  *
  * @author Cedric Chabanois &lt;cchabanois [at] no-log [dot] org&gt;
- * @version $Id: SWTBotCLabel.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 1.0
  */
 @SWTBotWidget(clasz = CLabel.class, preferredName = "clabel", referenceBy = { ReferenceBy.MNEMONIC})

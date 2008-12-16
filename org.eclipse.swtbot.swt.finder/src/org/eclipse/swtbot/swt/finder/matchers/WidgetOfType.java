@@ -20,7 +20,7 @@ import org.hamcrest.Factory;
  * Tells if a particular widget is of a specified type.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: WidgetOfType.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 2.0
  */
 public class WidgetOfType<T extends Widget> extends AbstractMatcher<T> {

@@ -99,4 +99,23 @@
                   id="org.eclipse.swtbot.eclipse.ui.launcher.JunitLaunchConfig"></configurationType>
       </shortcut>
    </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.eclipse.swtbot.eclipse.ui.preferences.SWTBotPreferencePage"
+            id="org.eclipse.swtbot.eclipse.ui.preferences.SWTBotPreferencePage"
+            name="SWTBot Preferences">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.eclipse.swtbot.eclipse.ui.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="org.eclipse.swtbot.eclipse.ui.preferences.PreferenceInitializer"></startup>
+   </extension>
 </plugin>

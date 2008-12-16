@@ -26,7 +26,7 @@ import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotTabItemTest.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class SWTBotTabItemTest extends AbstractSWTTestCase {
 	final SWTBot	bot	= new  SWTBot();

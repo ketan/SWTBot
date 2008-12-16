@@ -49,7 +49,7 @@ import org.hamcrest.Matcher;
  * Helper to find SWT {@link Widget}s and perform operations on them.
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: AbstractSWTBot.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public abstract class AbstractSWTBot<T extends Widget> {
 

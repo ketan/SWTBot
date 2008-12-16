@@ -30,7 +30,7 @@ import org.hamcrest.Matcher;
  * Waits until a part that matches the specified matcher appears.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: WaitForPart.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class WaitForPart extends DefaultCondition {
 	public final Matcher					matcher;

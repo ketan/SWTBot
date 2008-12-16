@@ -12,7 +12,7 @@ package org.eclipse.swtbot.swt.finder.results;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: VoidResult.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 2.0
  */
 public interface VoidResult {

@@ -14,7 +14,7 @@ import junit.framework.TestCase;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: MainTest.java 1195 2008-12-02 07:48:40Z kpadegaonkar $
+ * @version $Id$
  */
 public class MainTest extends TestCase {
 

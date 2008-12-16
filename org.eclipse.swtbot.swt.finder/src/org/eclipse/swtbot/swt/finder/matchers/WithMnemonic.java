@@ -23,7 +23,7 @@ import org.hamcrest.Factory;
  * items with text "&amp;Username" and "User&amp;name"
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: WithMnemonic.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 2.0
  */
 public class WithMnemonic<T extends Widget> extends AbstractMatcher<T> {

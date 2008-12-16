@@ -14,7 +14,7 @@ import org.eclipse.core.runtime.Assert;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotAccessor.java 1103 2008-11-04 17:50:59Z kpadegaonkar $
+ * @version $Id$
  */
 public class SWTBotAccessor {
 

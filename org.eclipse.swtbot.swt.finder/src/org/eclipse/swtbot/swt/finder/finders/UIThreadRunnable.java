@@ -26,7 +26,7 @@ import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
  * the UI thread. All operations are blocking operations.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: UIThreadRunnable.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public abstract class UIThreadRunnable implements Runnable {
 

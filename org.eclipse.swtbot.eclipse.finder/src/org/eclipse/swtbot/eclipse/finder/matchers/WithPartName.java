@@ -19,7 +19,7 @@ import org.hamcrest.Factory;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: WithPartName.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 2.0
  */
 public class WithPartName<T extends IWorkbenchPartReference> extends AbstractMatcher<T> {

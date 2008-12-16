@@ -23,7 +23,7 @@ import org.eclipse.swtbot.swt.finder.results.WidgetResult;
  *
  * @see UIThreadRunnable
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: ContextMenuFinder.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class ContextMenuFinder extends MenuFinder {
 

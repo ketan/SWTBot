@@ -46,7 +46,7 @@ import org.hamcrest.Matcher;
  * for various {@link IWorkbenchPartReference}s.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotWorkbenchPart.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 2.0
  */
 public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {

@@ -31,7 +31,7 @@ import org.hamcrest.Matcher;
  * Finds the menu items within a view.
  *
  * @author @author Stephen Paulin &lt;paulin [at] spextreme [dot] com&gt;
- * @version $Id: ViewMenuFinder.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 1.2
  */
 public class ViewMenuFinder {

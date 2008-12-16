@@ -29,7 +29,7 @@ import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
  * This represents a {@link CCombo} widget.
  * 
  * @author Cedric Chabanois &lt;cchabanois [at] no-log [dot] org&gt;
- * @version $Id: SWTBotCCombo.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 1.0
  */
 @SWTBotWidget(clasz = CCombo.class, preferredName = "ccomboBox", referenceBy = { ReferenceBy.TEXT, ReferenceBy.LABEL })

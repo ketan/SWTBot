@@ -23,7 +23,7 @@ import org.eclipse.swtbot.swt.finder.results.VoidResult;
 
 /**
  * @author Cedric Chabanois &lt;cchabanois [at] no-log [dot] org&gt;
- * @version $Id: SWTBotTableDoubleClickTest.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 1.2
  */
 public class SWTBotTableDoubleClickTest extends AbstractSWTTestCase {

@@ -12,9 +12,12 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jdt.core,
  org.eclipse.jdt.launching,
  org.eclipse.debug.ui,
- org.eclipse.jdt.junit.runtime;bundle-version="3.3.0"
+ org.eclipse.jdt.junit.runtime,
+ org.eclipse.jdt.ui,
+ org.eclipse.swtbot.swt.finder
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: Eclipse.org
-Export-Package: org.eclipse.swtbot.eclipse.ui
+Export-Package: org.eclipse.swtbot.eclipse.ui,
+ org.eclipse.swtbot.eclipse.ui.preferences
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: .

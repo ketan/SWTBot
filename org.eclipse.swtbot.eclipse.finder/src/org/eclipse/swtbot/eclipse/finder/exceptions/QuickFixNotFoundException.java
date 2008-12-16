@@ -12,7 +12,7 @@ package org.eclipse.swtbot.eclipse.finder.exceptions;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: QuickFixNotFoundException.java 1190 2008-12-02 07:06:28Z kpadegaonkar $
+ * @version $Id$
  */
 public class QuickFixNotFoundException extends Exception {
 	/**

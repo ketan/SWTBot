@@ -17,7 +17,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 /**
  * Screen object to create a new java class.
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: NewJavaClass.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class NewJavaClass {
 	

@@ -26,7 +26,7 @@ import org.hamcrest.StringDescription;
  * A matcher that logs the result of matches. The match is done by subclasses.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: AbstractMatcher.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public abstract class AbstractMatcher<T> extends BaseMatcher<T> {
 
@@ -46,9 +46,9 @@ public abstract class AbstractMatcher<T> extends BaseMatcher<T> {
 					// do nothing
 				}
 				if (result) {
-					log.debug(MessageFormat.format("matched {0} {1}, using matcher: {2}", ClassUtils.simpleClassName(item), text, StringDescription.toString(this)));
+					log.debug(MessageFormat.format("matched {0} with text \"{1}\", using matcher: {2}", ClassUtils.simpleClassName(item), text, StringDescription.toString(this)));
 				} else
-					log.trace(MessageFormat.format("did not match {0} {1}, using matcher: {2}", ClassUtils.simpleClassName(item), text, StringDescription.toString(this)));
+					log.trace(MessageFormat.format("did not match {0} with text \"{1}\", using matcher: {2}", ClassUtils.simpleClassName(item), text, StringDescription.toString(this)));
 			}
 
 			if (log.isTraceEnabled() && (item instanceof Widget)) {

@@ -18,7 +18,7 @@ import org.eclipse.swtbot.swt.recorder.generators.SWTBotAction;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: ActionList.java 1103 2008-11-04 17:50:59Z kpadegaonkar $
+ * @version $Id$
  */
 public class ActionList {
 

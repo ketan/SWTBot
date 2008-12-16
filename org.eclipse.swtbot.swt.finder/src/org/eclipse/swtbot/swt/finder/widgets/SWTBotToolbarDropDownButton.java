@@ -33,7 +33,7 @@ import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
  * This represents a toolbar item that is a drop down button.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotToolbarDropDownButton.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 1.2
  */
 @SWTBotWidget(clasz = ToolItem.class, preferredName = "toolbarDropDownButton", style = @Style(name = "SWT.DROP_DOWN", value = SWT.DROP_DOWN), referenceBy = {

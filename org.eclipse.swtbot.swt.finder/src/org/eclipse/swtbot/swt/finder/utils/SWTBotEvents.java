@@ -36,7 +36,7 @@ import org.eclipse.swt.widgets.Menu;
  * This maps SWT events to the Strings.
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotEvents.java 1188 2008-12-02 06:55:23Z kpadegaonkar $
+ * @version $Id$
  */
 public abstract class SWTBotEvents {
 	private static final BidiMap	EVENTS	= new DualTreeBidiMap();

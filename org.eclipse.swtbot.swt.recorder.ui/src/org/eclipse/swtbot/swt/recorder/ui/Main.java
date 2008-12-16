@@ -12,7 +12,7 @@ package org.eclipse.swtbot.swt.recorder.ui;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: Main.java 1192 2008-12-02 07:15:31Z kpadegaonkar $
+ * @version $Id$
  */
 public class Main {
 

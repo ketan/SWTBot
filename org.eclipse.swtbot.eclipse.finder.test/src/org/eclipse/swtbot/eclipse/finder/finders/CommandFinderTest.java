@@ -23,7 +23,7 @@ import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotCommand;
  * Tests the command finder.
  * 
  * @author @author Stephen Paulin &lt;paulin [at] spextreme [dot] com&gt;
- * @version $Id: CommandFinderTest.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class CommandFinderTest extends SWTBotEclipseTestCase {
 

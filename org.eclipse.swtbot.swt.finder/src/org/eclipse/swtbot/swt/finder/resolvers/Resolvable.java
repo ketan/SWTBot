@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Widget;
  * Finds a resolver that can resolve the parent anc children of a widget.
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: Resolvable.java 1188 2008-12-02 06:55:23Z kpadegaonkar $
+ * @version $Id$
  */
 public class Resolvable implements IResolvable {
 

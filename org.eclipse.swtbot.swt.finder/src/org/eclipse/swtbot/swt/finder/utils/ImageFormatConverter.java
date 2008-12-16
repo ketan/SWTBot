@@ -21,7 +21,7 @@ import org.eclipse.swt.SWT;
  * Translates from strings to one of the constants in SWT#IMAGE_*
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: ImageFormatConverter.java 1188 2008-12-02 06:55:23Z kpadegaonkar $
+ * @version $Id$
  * @since 1.3
  */
 public class ImageFormatConverter {
@@ -63,7 +63,7 @@ public class ImageFormatConverter {
 	 * Mapping from strings to constants in SWT#IMAGE_*
 	 *
 	 * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
-	 * @version $Id: ImageFormatConverter.java 1188 2008-12-02 06:55:23Z kpadegaonkar $
+	 * @version $Id$
 	 */
 	protected class ImageType {
 		/** The name of the image type */

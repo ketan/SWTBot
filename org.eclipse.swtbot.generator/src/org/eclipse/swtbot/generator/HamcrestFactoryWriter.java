@@ -17,7 +17,7 @@ import java.util.TreeSet;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: HamcrestFactoryWriter.java 1194 2008-12-02 07:36:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class HamcrestFactoryWriter implements HamcrestWriter {
 
@@ -78,7 +78,7 @@ public class HamcrestFactoryWriter implements HamcrestWriter {
 				" *    SWTBotButton button = new SWTBotButton((Button) bot.widget(aMatcher, parentComposite, 3)); //for the 4th widget\n" +
 				" * </pre>\n" +
 				" *\n" +
-				" * @version $Id: HamcrestFactoryWriter.java 1194 2008-12-02 07:36:32Z kpadegaonkar $\n" +
+				" * @version $Id$\n" +
 				" */\n");
 		output.append("public class ").append(shortClassName).append(" extends SWTBotFactory {").append(newLine).append(newLine);
 	}

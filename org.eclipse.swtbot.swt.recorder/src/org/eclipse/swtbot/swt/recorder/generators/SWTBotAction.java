@@ -17,7 +17,7 @@ import org.eclipse.swtbot.swt.recorder.listeners.ActionList;
 /**
  * Represents an SWTBot action.
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotAction.java 1103 2008-11-04 17:50:59Z kpadegaonkar $
+ * @version $Id$
  */
 public class SWTBotAction {
 

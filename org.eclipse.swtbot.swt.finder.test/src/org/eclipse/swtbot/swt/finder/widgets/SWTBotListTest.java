@@ -18,49 +18,14 @@ import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotListTest.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class SWTBotListTest extends AbstractSWTTestCase {
-
-	private SWTBot	bot;
-
-	public void testNotFindingListByNameThrowsException() throws Exception {
-		try {
-			bot.listInGroup("some list");
-			fail("Was expecting a WidgetNotFoundException");
-		} catch (WidgetNotFoundException expected) {
-			pass();
-		}
-	}
-
-	public void testNotFindingListThrowsException() throws Exception {
-		bot.tabItem("Button").activate();
-		try {
-			bot.list();
-			fail("Was expecting a WidgetNotFoundException");
-		} catch (WidgetNotFoundException expected) {
-			pass();
-		}
-	}
 
 	public void testFindsAListWithoutLabel() throws Exception {
 		SWTBotList list = bot.list();
 		assertNotNull(list.widget);
 		assertEquals(List.class, list.widget.getClass());
-	}
-
-	public void testFindsAListWithALabel() throws Exception {
-		SWTBotList list = bot.listInGroup("List");
-		assertNotNull(list.widget);
-		assertEquals(List.class, list.widget.getClass());
-
-		bot.tabItem("Button").activate();
-		try {
-			bot.listInGroup("List");
-			fail("Expecting a WidgetNotFoundException");
-		} catch (WidgetNotFoundException expected) {
-			pass();
-		}
 	}
 
 	public void testSetsAndGetsSingleSelectionByText() throws Exception {

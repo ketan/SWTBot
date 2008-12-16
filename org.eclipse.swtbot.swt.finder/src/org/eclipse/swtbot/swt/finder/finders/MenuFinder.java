@@ -33,7 +33,7 @@ import org.hamcrest.Matcher;
  *
  * @see UIThreadRunnable
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: MenuFinder.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class MenuFinder {
 

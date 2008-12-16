@@ -164,34 +164,12 @@
 			<!-- this is the generated artifact -->
 			<fileset dir="${buildDirectory}/${buildType}.${all.buildId}">
 				<!-- one zip file for each of the feature that you have built -->
-				<include name="${feature.id}-${all.buildId}*.zip" />
-				<include name="org.eclipse.swtbot.eclipse-${all.buildId}*.zip" />
+				<include name="*.zip" />
 			</fileset>
 		</copy>
 	</target>
 
-
-	<target name="-run-core-tests-init" description="initialize the tests -- extract the generated artifacts">
-		<copy todir="${test-sandbox}" overwrite="true" verbose="true">
-			<!-- this is the generated artifact -->
-			<fileset dir="${buildDirectory}/${buildType}.${all.buildId}">
-				<!-- one zip file for each of the feature that you have built -->
-				<include name="${feature.id}-${all.buildId}*.zip" />
-				<include name="${feature.id.test}-${all.buildId}*.zip" />
-				<include name="org.eclipse.swtbot.eclipse-${all.buildId}*.zip" />
-			</fileset>
-		</copy>
-
-		<echo>Sync eclipse from ${base} to test-sandbox/test-eclipse/eclipse</echo>
-		<sync todir="test-sandbox/test-eclipse/eclipse" includeemptydirs="true">
-			<fileset dir="${base}" />
-			<!-- any other locations/plugins that you want to copy from, in addition to the eclipse "base install"
-				<fileset dir="${mylyn.base}" />
-			-->
-		</sync>
-	</target>
-
-	<target name="run-core-tests" depends="-run-core-tests-init" description="runs the core tests for the connector">
+	<target name="run-core-tests" description="runs the core tests for the connector">
 		<property name="test-target" value="all" />
 		<java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true" dir="${test-sandbox}">
 

@@ -14,7 +14,7 @@ package org.eclipse.swtbot.swt.finder.widgets;
  * An exception that is thrown when a widget can not be found on the given display/shell.
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: WidgetNotFoundException.java 1188 2008-12-02 06:55:23Z kpadegaonkar $
+ * @version $Id$
  */
 public class WidgetNotFoundException extends RuntimeException {
 

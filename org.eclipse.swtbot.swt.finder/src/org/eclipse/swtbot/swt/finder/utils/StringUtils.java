@@ -10,20 +10,22 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.utils;
 
+import java.util.Collection;
+
 import org.eclipse.core.runtime.Assert;
 
 /**
  * A set of utilities for string manipulation.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: StringUtils.java 1188 2008-12-02 06:55:23Z kpadegaonkar $
+ * @version $Id$
  * @since 1.0
  */
 public class StringUtils {
 
 	/**
 	 * Joins an array of objects using the given delimiter as spacing.
-	 *
+	 * 
 	 * @param toJoin the objects to join into a string.
 	 * @param delimiter the delimiter used to join the objects.
 	 * @return the result of joining the <code>toJoin</code> with <code>delimiter</code>.
@@ -45,8 +47,19 @@ public class StringUtils {
 	}
 
 	/**
+	 * Joins a collection of objects using the given delimiter as spacing.
+	 * 
+	 * @param toJoin the objects to join into a string.
+	 * @param delimiter the delimiter used to join the objects.
+	 * @return the result of joining the <code>toJoin</code> with <code>delimiter</code>.
+	 */
+	public static String join(Collection<?> toJoin, String delimiter) {
+		return join(toJoin.toArray(), delimiter);
+	}
+
+	/**
 	 * Checks if the given string is <code>null</code> or empty.
-	 *
+	 * 
 	 * @param string the string.
 	 * @return <code>true</code> if string is null, blank or whitespaces. <code>false</code> otherwise.
 	 */
@@ -56,7 +69,7 @@ public class StringUtils {
 
 	/**
 	 * Joins the given integer array with the given delimiter.
-	 *
+	 * 
 	 * @param toJoin the integers to join into a string.
 	 * @param delimiter the delimiter.
 	 * @return the result of joining the <code>toJoin</code> with <code>delimiter</code>.
@@ -89,7 +102,7 @@ public class StringUtils {
 	/**
 	 * Converts the string to camelcase. Strings are of the format: THIS_IS_A_STRING, and the result of camel casing
 	 * would be thisIsAString.
-	 *
+	 * 
 	 * @param string the string to be camelcased.
 	 * @return the camel cased string.
 	 * @since 2.0
@@ -106,7 +119,7 @@ public class StringUtils {
 	/**
 	 * Converts the string to capitalized. Strings are of the format: THIS_IS_A_STRING, and the result of capitalization
 	 * would be ThisIsAString.
-	 *
+	 * 
 	 * @param string the string to capitalize.
 	 * @return the capitalized string.
 	 * @since 2.0
@@ -116,4 +129,5 @@ public class StringUtils {
 		result.replace(0, 1, "" + Character.toUpperCase(result.charAt(0)));
 		return result.toString();
 	}
+
 }

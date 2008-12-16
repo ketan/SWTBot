@@ -30,7 +30,7 @@ import org.eclipse.swtbot.swt.recorder.widgets.text.TabSelectionListener;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotRecorder.java 1103 2008-11-04 17:50:59Z kpadegaonkar $
+ * @version $Id$
  */
 public class SWTBotRecorder {
 
@@ -38,7 +38,7 @@ public class SWTBotRecorder {
 	 * Maps event types to listeners that listen to the specified event.
 	 * 
 	 * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
-	 * @version $Id: SWTBotRecorder.java 1103 2008-11-04 17:50:59Z kpadegaonkar $
+	 * @version $Id$
 	 */
 	public static class ListenerSet {
 

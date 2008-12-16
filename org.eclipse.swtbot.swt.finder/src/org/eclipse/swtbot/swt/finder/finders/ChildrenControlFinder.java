@@ -24,7 +24,7 @@ import org.hamcrest.Matcher;
  * Finds controls matching a particular matcher in the given parent widget.
  *
  * @author Cedric Chabanois &lt;cchabanois [at] no-log [dot] org&gt;
- * @version $Id: ChildrenControlFinder.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 1.0
  */
 public class ChildrenControlFinder extends ControlFinder {

@@ -20,7 +20,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
  * A condition that waits until the specified shell is disposed/visible.
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: ShellCloses.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 1.2
  */
 class ShellCloses extends DefaultCondition {

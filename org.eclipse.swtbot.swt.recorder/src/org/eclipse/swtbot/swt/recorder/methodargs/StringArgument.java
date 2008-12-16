@@ -16,7 +16,7 @@ import org.eclipse.core.runtime.Assert;
  * Represents an argument of type {@link String}.
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: StringArgument.java 1103 2008-11-04 17:50:59Z kpadegaonkar $
+ * @version $Id$
  */
 public class StringArgument extends AbstractSWTBotEventArguments {
 

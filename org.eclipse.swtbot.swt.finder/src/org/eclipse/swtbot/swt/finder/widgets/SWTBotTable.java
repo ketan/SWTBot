@@ -42,7 +42,7 @@ import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotTable.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 @SWTBotWidget(clasz = Table.class, preferredName = "table", referenceBy = { ReferenceBy.LABEL })
 public class SWTBotTable extends AbstractSWTBot<Table> {

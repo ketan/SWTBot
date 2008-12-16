@@ -16,7 +16,7 @@ import junit.framework.TestCase;
  * Tests the quick fix not found exception.
  * 
  * @author @author Stephen Paulin &lt;paulin [at] spextreme [dot] com&gt;
- * @version $Id: QuickFixNotFoundExceptionTest.java 1194 2008-12-02 07:36:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class QuickFixNotFoundExceptionTest extends TestCase {
 

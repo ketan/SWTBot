@@ -29,7 +29,7 @@ import org.eclipse.ui.testing.TestableObject;
  * Just a copy of {@link org.eclipse.pde.internal.junit.runtime.UITestApplication} with
  * {@link #runTests()} overridden so that the tests run in a non-UI thread.
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: TestApplication.java 1193 2008-12-02 07:22:51Z kpadegaonkar $
+ * @version $Id$
  */
 public class TestApplication implements IApplication, ITestHarness {
 

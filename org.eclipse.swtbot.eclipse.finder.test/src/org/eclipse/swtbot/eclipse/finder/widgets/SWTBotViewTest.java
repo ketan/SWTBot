@@ -21,7 +21,7 @@ import org.eclipse.swtbot.swt.finder.widgets.WidgetNotFoundException;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotViewTest.java 1190 2008-12-02 07:06:28Z kpadegaonkar $
+ * @version $Id$
  */
 public class SWTBotViewTest extends SWTBotEclipseTestCase {
 

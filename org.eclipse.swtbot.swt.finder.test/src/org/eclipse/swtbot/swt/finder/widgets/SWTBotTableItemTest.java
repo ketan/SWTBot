@@ -14,7 +14,7 @@ import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 
 /**
  * @author Vincent MAHE &lt;vmahe [at] free [dot]fr&gt;
- * @version $Id: SWTBotTableItemTest.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class SWTBotTableItemTest extends AbstractSWTTestCase {
 

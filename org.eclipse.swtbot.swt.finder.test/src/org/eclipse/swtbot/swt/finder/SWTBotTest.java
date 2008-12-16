@@ -21,7 +21,7 @@ import org.eclipse.swtbot.swt.finder.widgets.TimeoutException;
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @author Vincent Mahe &lt;vmahe [at] irisa [dot] fr&gt;
- * @version $Id: SWTBotTest.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class SWTBotTest extends AbstractMenuExampleTest {
 

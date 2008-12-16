@@ -19,7 +19,7 @@ import org.hamcrest.Matcher;
  * Condiion that waits for a shell with the specified text to appear.
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: WaitForShell.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 2.0
  */
 public class WaitForShell extends DefaultCondition {

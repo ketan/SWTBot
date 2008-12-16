@@ -21,7 +21,7 @@ import org.eclipse.jface.viewers.Viewer;
  * This is the content provider for getting the data for the SWTBotTest Tree Viewer.
  * 
  * @author Stephen Paulin &lt;paulin [at] spextreme [dot] com&gt;
- * @version $Id: SWTBotTestContentProvider.java 1190 2008-12-02 07:06:28Z kpadegaonkar $
+ * @version $Id$
  */
 public class SWTBotTestContentProvider implements IStructuredContentProvider {
 

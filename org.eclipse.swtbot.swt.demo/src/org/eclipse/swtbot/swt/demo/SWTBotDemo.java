@@ -18,7 +18,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotDemo.java 1193 2008-12-02 07:22:51Z kpadegaonkar $
+ * @version $Id$
  */
 public class SWTBotDemo {
 

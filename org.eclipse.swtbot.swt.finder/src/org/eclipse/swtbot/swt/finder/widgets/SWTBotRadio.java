@@ -25,7 +25,7 @@ import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotRadio.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 @SWTBotWidget(clasz = Button.class, style = @Style(name = "SWT.RADIO", value = SWT.RADIO), preferredName = "radio", referenceBy = { ReferenceBy.LABEL, ReferenceBy.MNEMONIC,
 		ReferenceBy.TOOLTIP })

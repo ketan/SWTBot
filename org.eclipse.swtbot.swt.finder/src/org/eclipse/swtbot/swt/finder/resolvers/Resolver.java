@@ -24,7 +24,7 @@ import org.eclipse.swtbot.swt.finder.collections.OrderedSet;
  *
  * @see IChildrenResolver#getResolvableClasses()
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: Resolver.java 1188 2008-12-02 06:55:23Z kpadegaonkar $
+ * @version $Id$
  */
 public class Resolver {
 

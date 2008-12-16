@@ -18,7 +18,7 @@ import org.hamcrest.Matcher;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: MenuMnemonicTextMatcherTest.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class MenuMnemonicTextMatcherTest extends TestCase {
 

@@ -47,7 +47,7 @@ import org.eclipse.ui.part.ViewPart;
  * </p>
  * 
  * @author Stephen Paulin &lt;paulin [at] spextreme [dot] com&gt;
- * @version $Id: SWTBotTestView.java 1194 2008-12-02 07:36:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class SWTBotTestView extends ViewPart {
 	/**

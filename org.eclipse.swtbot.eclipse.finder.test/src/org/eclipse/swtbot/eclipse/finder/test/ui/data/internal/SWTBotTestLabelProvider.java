@@ -18,7 +18,7 @@ import org.eclipse.swt.graphics.Image;
  * A simple label provider to display the name of the SWT Bot Test Data.
  * 
  * @author Stephen Paulin &lt;paulin [at] spextreme [dot] com&gt;
- * @version $Id: SWTBotTestLabelProvider.java 1190 2008-12-02 07:06:28Z kpadegaonkar $
+ * @version $Id$
  */
 public class SWTBotTestLabelProvider extends LabelProvider implements ITableLabelProvider {
 

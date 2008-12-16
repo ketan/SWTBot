@@ -24,7 +24,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: MethodGeneratorTest.java 1195 2008-12-02 07:48:40Z kpadegaonkar $
+ * @version $Id$
  */
 public class MethodGeneratorTest extends TestCase {
 

@@ -3,7 +3,7 @@
 	<echo>${eclipse-home}</echo>
 	<property name="plugin-name" value="${ant.project.name}" />
 
-	<property name="cobertura.data.file" value="covertura.ser" />
+	<property name="cobertura.data.file" value="cobertura.ser" />
 	<property name="junit.reports.xml.dir" value="${results.dir}/${plugin-name}/junit/xml" />
 	<property name="junit.reports.html.dir" value="${results.dir}/${plugin-name}/junit/html" />
 	<property name="build.instrumentation.reports.dir" value="${results.dir}/${plugin-name}/coverage/html" />

@@ -12,7 +12,7 @@ package org.eclipse.swtbot.generator;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotGeneratorMain.java 1194 2008-12-02 07:36:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class SWTBotGeneratorMain {
 

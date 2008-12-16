@@ -25,7 +25,7 @@ import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
  * This represents a {@link Text} widget.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotText.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 @SWTBotWidget(clasz = Text.class, preferredName = "text", referenceBy = { ReferenceBy.LABEL, ReferenceBy.TEXT, ReferenceBy.TOOLTIP })
 public class SWTBotText extends AbstractSWTBot<Text> {

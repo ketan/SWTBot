@@ -23,7 +23,7 @@ import org.eclipse.ui.handlers.IHandlerService;
  * A SWTBotViewMenu represents a menu item within a view's menu.
  *
  * @author @author Stephen Paulin &lt;paulin [at] spextreme [dot] com&gt;
- * @version $Id: SWTBotCommand.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 1.2
  */
 public class SWTBotCommand extends SWTBotViewMenu {

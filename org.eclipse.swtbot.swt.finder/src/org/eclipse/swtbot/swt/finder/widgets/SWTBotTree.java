@@ -38,7 +38,7 @@ import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotTree.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 @SWTBotWidget(clasz = Tree.class, preferredName = "tree", referenceBy = { ReferenceBy.LABEL })
 public class SWTBotTree extends AbstractSWTBot<Tree> {

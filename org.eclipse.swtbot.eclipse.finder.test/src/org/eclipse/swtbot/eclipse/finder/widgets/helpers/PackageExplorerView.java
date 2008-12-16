@@ -28,7 +28,7 @@ import org.eclipse.swtbot.swt.finder.widgets.WidgetNotFoundException;
  * Screen object that represents the operations that can be performed on the package explorer view.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: PackageExplorerView.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class PackageExplorerView {
 

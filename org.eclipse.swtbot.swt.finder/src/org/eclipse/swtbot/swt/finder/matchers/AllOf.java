@@ -21,7 +21,7 @@ import org.hamcrest.Matcher;
  * A matcher that evaluates to <code>true</code> if and only if all the matchers evaluate to <code>true</code>.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: AllOf.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class AllOf<T> extends AbstractMatcher<T> {
 	private final Matcher<? extends T>[]	matchers;

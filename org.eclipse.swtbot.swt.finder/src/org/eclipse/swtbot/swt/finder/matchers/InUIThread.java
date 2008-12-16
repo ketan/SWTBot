@@ -24,7 +24,7 @@ import org.hamcrest.Matcher;
  * Matches another matcher in the context of the UI thread. Useful if you want to make a matcher UI thread safe.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: InUIThread.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 2.0
  */
 public class InUIThread<T extends Widget> extends AbstractMatcher<T> {

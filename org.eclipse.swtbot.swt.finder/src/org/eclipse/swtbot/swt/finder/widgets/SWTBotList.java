@@ -25,7 +25,7 @@ import org.eclipse.swtbot.swt.finder.utils.StringUtils;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotList.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 @SWTBotWidget(clasz = List.class, preferredName = "list", referenceBy = { ReferenceBy.LABEL })
 public class SWTBotList extends AbstractSWTBot<List> {

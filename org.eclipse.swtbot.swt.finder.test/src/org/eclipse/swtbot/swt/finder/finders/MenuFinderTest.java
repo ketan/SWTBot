@@ -24,7 +24,7 @@ import org.eclipse.swtbot.swt.finder.AbstractMenuExampleTest;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: MenuFinderTest.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class MenuFinderTest extends AbstractMenuExampleTest {
 

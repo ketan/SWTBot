@@ -16,7 +16,7 @@ import org.eclipse.core.runtime.Assert;
  * A simple data item used in testing.
  * 
  * @author Stephen Paulin &lt;paulin [at] spextreme [dot] com&gt;
- * @version $Id: SWTBotTestData.java 1190 2008-12-02 07:06:28Z kpadegaonkar $
+ * @version $Id$
  */
 public class SWTBotTestData {
 	/**

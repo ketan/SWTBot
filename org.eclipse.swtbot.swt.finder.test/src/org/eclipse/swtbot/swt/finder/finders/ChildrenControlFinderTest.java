@@ -29,7 +29,7 @@ import org.eclipse.swtbot.swt.finder.results.Result;
 
 /**
  * @author Cedric Chabanois &lt;cchabanois [at] no-log [dot] org&gt;
- * @version $Id: ChildrenControlFinderTest.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class ChildrenControlFinderTest extends AbstractSWTTestCase {
 

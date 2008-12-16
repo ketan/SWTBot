@@ -20,7 +20,7 @@ import org.hamcrest.Factory;
  * Matches widgets if the getText() method of the widget matches the specified regex.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: WithRegex.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 2.0
  */
 public class WithRegex<T extends Widget> extends AbstractMatcher<T> {

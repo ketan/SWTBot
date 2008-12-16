@@ -14,7 +14,7 @@ package org.eclipse.swtbot.swt.finder.widgets;
  * This is an exception that is thrown when a timeout occurs waiting for something (e.g. a condition) to complete.
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: TimeoutException.java 1188 2008-12-02 06:55:23Z kpadegaonkar $
+ * @version $Id$
  */
 public class TimeoutException extends RuntimeException {
 

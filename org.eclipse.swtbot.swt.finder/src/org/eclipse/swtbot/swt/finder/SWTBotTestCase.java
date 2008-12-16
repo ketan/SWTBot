@@ -32,7 +32,7 @@ import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBot;
  * The SWTBotTestCase extends the JUnit TestCase to provide extra capabilities for comparing widgets and other UI items.
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotTestCase.java 1188 2008-12-02 06:55:23Z kpadegaonkar $
+ * @version $Id$
  * @since 1.0
  */
 public abstract class SWTBotTestCase extends TestCase {

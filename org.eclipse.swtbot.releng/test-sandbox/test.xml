@@ -35,7 +35,7 @@
 	<target name="setup-zip" description="Reinstall the test Eclipse installation if specified by user">
 		<delete dir="${install}" />
 		<mkdir dir="${install}" />
-		<unzip dest="${install}" src="${runtimeArchive}"/>
+		<unzip dest="${install}" src="${runtimeArchive}" />
 		<antcall target="installTestPlugins" />
 	</target>
 
@@ -49,10 +49,10 @@
 
 	<target name="installTestPlugins">
 		<!-- one each for each feature that is tested -->
-		<unzip src="${basedir}/${feature.id}-${all.buildId}.zip" dest="${install}"></unzip>
-		<unzip src="${basedir}/${feature.id.test}-${all.buildId}.zip" dest="${install}"></unzip>
-		<unzip src="${basedir}/org.eclipse.swtbot.eclipse-${all.buildId}.zip" dest="${install}"></unzip>
-		<unzip src="eclipse-test-framework-3.3.zip" dest="${install}"></unzip>
+		<unzip src="${basedir}/../artifacts/${feature.id}-${all.buildId}.zip" dest="${install}" />
+		<unzip src="${basedir}/../artifacts/${feature.id.test}-${all.buildId}.zip" dest="${install}" />
+		<unzip src="${basedir}/../artifacts/org.eclipse.swtbot.eclipse-${all.buildId}.zip" dest="${install}" />
+		<unzip src="eclipse-test-framework-3.3.zip" dest="${install}" />
 
 		<!-- copy over any other dependencies
 			<copy todir="${eclipse-home}" includeemptydirs="true">
@@ -228,6 +228,9 @@
 		<attribute name="testPlugin" />
 		<attribute name="testPluginsRequired" default="" />
 		<sequential>
+			<echo>=========================================================================</echo>
+			<echo>Executing tests for @{testPlugin}</echo>
+			<echo>=========================================================================</echo>
 			<!--always use eclipse executable to launch tests with the exception of performance tests-->
 			<!--condition property="useEclipseExe" value="true">
 				<not>
@@ -239,7 +242,7 @@
 			<property name="report" value="@{testPlugin}" />
 
 			<antcall target="${test.target}">
-				<param name="testPlugin" value="${@{testPlugin}}" />
+				<param name="testPlugin" value="@{testPlugin}" />
 				<param name="testPluginsRequired" value="@{testPluginsRequired}" />
 				<param name="output-file" value="@{testPlugin}.xml" />
 				<param name="consolelog" value="-consolelog" />
@@ -249,7 +252,7 @@
 
 	<target name="junit" unless="skip.test">
 		<antcall target="setup" />
-		<ant antfile="${eclipse-home}/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" />
+		<ant antfile="${testPlugin}.xml" />
 		<antcall target="genResults" />
 	</target>
 
@@ -260,8 +263,14 @@
 	</target>
 
 	<target name="genResults">
-		<copy file="${eclipse-home}/${report}.xml" tofile="${results}/xml/${report}_${platform}.xml" failonerror="false" />
-		<style style="${eclipse-home}/plugins/${org.eclipse.test}/JUNIT.XSL" basedir="${results}/xml" destdir="${results}/html" />
+		<property name="junit.reports.xml.dir" value="${results.dir}/${report}/junit/xml" />
+		<property name="junit.reports.html.dir" value="${results.dir}/${report}/junit/html" />
+
+		<mkdir dir="${junit.reports.xml.dir}" />
+		<mkdir dir="${junit.reports.html.dir}" />
+
+		<move file="${eclipse-home}/${report}.xml" todir="${junit.reports.xml.dir}" failonerror="false" />
+		<style style="${eclipse-home}/plugins/${org.eclipse.test}/JUNIT.XSL" basedir="${junit.reports.xml.dir}" destdir="${junit.reports.html.dir}" />
 	</target>
 
 	<target name="core-tests">
@@ -276,7 +285,7 @@
 		<antcall target="setup" />
 		<echo>eclipse-home is ${eclipse-home}</echo>
 		<echo>testPlugin is ${testPlugin}</echo>
-		<ant antfile="test.xml" dir="${eclipse-home}/plugins/${testPlugin}">
+		<ant antfile="${basedir}/${testPlugin}.xml" dir="${eclipse-home}/plugins/${testPlugin}_${all.buildId}">
 			<property name="all.buildId" value="${all.buildId}" />
 			<property name="build.base" value="${build.base}" />
 			<property name="results.dir" value="${results.dir}/${testPlugin}" />
@@ -290,19 +299,19 @@
 
 	<target name="test-finder">
 		<antcall target="core-tests">
-			<param name="testPlugin" value="${org.eclipse.swtbot.swt.finder.test}"/>
+			<param name="testPlugin" value="org.eclipse.swtbot.swt.finder.test" />
 		</antcall>
 	</target>
 
 	<target name="test-recorder">
 		<antcall target="core-tests">
-			<param name="testPlugin" value="${org.eclipse.swtbot.swt.recorder.test}"/>
+			<param name="testPlugin" value="${org.eclipse.swtbot.swt.recorder.test}" />
 		</antcall>
 	</target>
 
 	<target name="test-recorder-ui">
 		<antcall target="core-tests">
-			<param name="testPlugin" value="${org.eclipse.swtbot.swt.recorder.ui.test}"/>
+			<param name="testPlugin" value="${org.eclipse.swtbot.swt.recorder.ui.test}" />
 		</antcall>
 	</target>
 

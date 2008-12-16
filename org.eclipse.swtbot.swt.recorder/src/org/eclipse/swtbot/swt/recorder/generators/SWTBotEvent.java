@@ -22,7 +22,7 @@ import org.eclipse.swtbot.swt.recorder.methodargs.StringArrayArgument;
  * Represents an {@link Event} object as a method call that SWTBot can execute.
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotEvent.java 1103 2008-11-04 17:50:59Z kpadegaonkar $
+ * @version $Id$
  */
 public class SWTBotEvent {
 

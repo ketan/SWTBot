@@ -17,7 +17,7 @@ import org.eclipse.swtbot.swt.finder.SWTBot;
  * This is an abstract implementation of the condition interface to simplify the implementing classes.
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: DefaultCondition.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public abstract class DefaultCondition implements ICondition {
 

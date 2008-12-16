@@ -23,7 +23,7 @@ import org.hamcrest.Matcher;
  * A wrapper around {@link ControlFinder} and {@link MenuFinder} that delegates to either of them.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: Finder.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class Finder {
 

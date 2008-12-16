@@ -26,7 +26,7 @@ import org.hamcrest.Matcher;
  * Tells if a particular widget is within a {@link Group} with the specified text.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: InGroup.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 2.0
  */
 public class InGroup<T extends Widget> extends AbstractMatcher<T> {

@@ -21,7 +21,7 @@ import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotToolbarButton.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 @SWTBotWidget(clasz = ToolItem.class, preferredName = "toolbarButton", referenceBy = { ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })
 public class SWTBotToolbarButton extends AbstractSWTBot<ToolItem> {

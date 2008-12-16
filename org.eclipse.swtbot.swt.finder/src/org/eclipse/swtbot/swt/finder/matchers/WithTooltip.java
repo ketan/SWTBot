@@ -26,7 +26,7 @@ import org.hamcrest.Factory;
  * Matches widgets if the getToolTipText() method of the widget matches the specified text.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: WithTooltip.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 2.0
  */
 public class WithTooltip<T extends Widget> extends AbstractMatcher<T> {

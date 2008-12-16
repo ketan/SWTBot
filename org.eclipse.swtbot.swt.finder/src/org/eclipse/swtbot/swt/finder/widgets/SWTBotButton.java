@@ -22,7 +22,7 @@ import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
  * This represents a {@link Button} widget.
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotButton.java 1188 2008-12-02 06:55:23Z kpadegaonkar $
+ * @version $Id$
  */
 @SWTBotWidget(clasz = Button.class, style = @Style(name = "SWT.PUSH", value = SWT.PUSH), preferredName = "button", referenceBy = { ReferenceBy.LABEL, ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })
 public class SWTBotButton extends AbstractSWTBot<Button> {

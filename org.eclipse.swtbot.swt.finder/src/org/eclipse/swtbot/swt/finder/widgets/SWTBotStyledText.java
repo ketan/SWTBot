@@ -30,7 +30,7 @@ import org.eclipse.swtbot.swt.finder.utils.Position;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotStyledText.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 @SWTBotWidget(clasz = StyledText.class, preferredName = "styledText", referenceBy = { ReferenceBy.LABEL, ReferenceBy.TEXT })
 public class SWTBotStyledText extends AbstractSWTBot<StyledText> {

@@ -16,7 +16,7 @@ import junit.framework.TestSuite;
 /**
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: AllTests.java 1202 2008-12-02 09:01:13Z kpadegaonkar $
+ * @version $Id$
  */
 public class AllTests {
 

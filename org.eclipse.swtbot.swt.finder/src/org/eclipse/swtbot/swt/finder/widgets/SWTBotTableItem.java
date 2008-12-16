@@ -27,7 +27,7 @@ import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 
 /**
  * @author Vincent MAHE &lt;vmahe [at] free [dot]fr&gt;
- * @version $Id: SWTBotTableItem.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 1.3
  */
 public class SWTBotTableItem extends AbstractSWTBot<TableItem> {

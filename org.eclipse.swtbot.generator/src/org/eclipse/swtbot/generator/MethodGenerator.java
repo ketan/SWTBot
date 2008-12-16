@@ -20,7 +20,7 @@ import org.eclipse.swtbot.swt.finder.utils.ClassUtils;
  * Generate a method given the way a widget can be referenced.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: MethodGenerator.java 1193 2008-12-02 07:22:51Z kpadegaonkar $
+ * @version $Id$
  */
 public class MethodGenerator {
 

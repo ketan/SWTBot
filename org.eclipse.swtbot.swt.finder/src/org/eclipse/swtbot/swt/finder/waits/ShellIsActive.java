@@ -24,7 +24,7 @@ import org.eclipse.swtbot.swt.finder.widgets.WidgetNotFoundException;
  *
  * @since 1.3
  * @author Vincent MAHE &lt;vmahe [at] free[dot]fr&gt;
- * @version $Id: ShellIsActive.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 class ShellIsActive extends DefaultCondition {
 

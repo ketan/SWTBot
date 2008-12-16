@@ -14,7 +14,7 @@ package org.eclipse.swtbot.swt.recorder.methodargs;
  * Represents an array of string arguments.
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: StringArrayArgument.java 1103 2008-11-04 17:50:59Z kpadegaonkar $
+ * @version $Id$
  */
 public class StringArrayArgument extends AbstractSWTBotEventArguments {
 

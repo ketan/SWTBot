@@ -14,7 +14,7 @@ package org.eclipse.swtbot.swt.recorder.methodargs;
  * Represents a 'no arg' argument.
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: NullArgument.java 1103 2008-11-04 17:50:59Z kpadegaonkar $
+ * @version $Id$
  */
 public class NullArgument extends AbstractSWTBotEventArguments {
 

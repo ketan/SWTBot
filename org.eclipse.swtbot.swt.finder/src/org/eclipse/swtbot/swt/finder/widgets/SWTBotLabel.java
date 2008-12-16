@@ -22,7 +22,7 @@ import org.eclipse.swtbot.swt.finder.results.Result;
  * This represents a {@link Label} widget.
  *
  * @author Stephen Paulin &lt;paulin [at] developerskingdom [dot] com&gt;
- * @version $Id: SWTBotLabel.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 1.2
  */
 @SWTBotWidget(clasz = Label.class, preferredName = "label", referenceBy = { ReferenceBy.MNEMONIC })

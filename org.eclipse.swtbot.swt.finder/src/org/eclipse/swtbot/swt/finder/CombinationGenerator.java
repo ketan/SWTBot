@@ -19,7 +19,7 @@ import java.util.List;
  * Generates a combination of the specified elements.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: CombinationGenerator.java 1188 2008-12-02 06:55:23Z kpadegaonkar $
+ * @version $Id$
  */
 class CombinationGenerator<T> implements Iterable<List<T>> {
 

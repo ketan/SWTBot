@@ -17,7 +17,7 @@ import org.eclipse.swtbot.swt.finder.SWTBotTestCase;
  * instead of the standard bot.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotEclipseTestCase.java 1190 2008-12-02 07:06:28Z kpadegaonkar $
+ * @version $Id$
  * @since 1.2
  */
 public abstract class SWTBotEclipseTestCase extends SWTBotTestCase {

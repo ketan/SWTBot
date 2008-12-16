@@ -37,7 +37,7 @@ import org.hamcrest.Matcher;
  * This extends the {@link SWTBot} and adds specific capabilities for testsing eclipse based items (Views, Editors).
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTEclipseBot.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class SWTEclipseBot extends SWTBot {
 

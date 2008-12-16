@@ -13,7 +13,6 @@ package org.eclipse.swtbot.swt.finder.widgets;
 
 import java.util.ArrayList;
 
-
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
@@ -22,7 +21,7 @@ import org.eclipse.swtbot.swt.finder.utils.TableRow;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotTableTest.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class SWTBotTableTest extends AbstractSWTTestCase {
 
@@ -114,20 +113,6 @@ public class SWTBotTableTest extends AbstractSWTTestCase {
 		assertEquals(4, selection.columnCount());
 		assertEquals(new TableCollection().add(new TableRow(
 				new String[] { "Index:10", "databases", "2556", "tomorrow" })), selection);
-	}
-
-	public void testThrowExceptionIfTableNotFound() throws Exception {
-		bot.tabItem("Shell").activate();
-		bot.button("Create Shell").click();
-		try {
-			bot.table();
-			fail("Expected a WidgetNotFoundException");
-		} catch (final WidgetNotFoundException expected) {
-			pass();
-		} finally {
-			bot.button("Close").click();
-			bot.button("Close All Shells").click();
-		}
 	}
 
 	public void testFindsAnyTable() throws Exception {

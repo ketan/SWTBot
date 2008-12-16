@@ -44,7 +44,7 @@ import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
  * implementation or usage please add a comment to <a href="http://swtbot.org/bugzilla/show_bug.cgi?id=19">this bug</a>.
  *
  * @author Cedric Chabanois &lt;cchabanois [at] no-log [dot] org&gt;
- * @version $Id: EventContextMenuFinder.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 1.0
  */
 public class EventContextMenuFinder extends MenuFinder {

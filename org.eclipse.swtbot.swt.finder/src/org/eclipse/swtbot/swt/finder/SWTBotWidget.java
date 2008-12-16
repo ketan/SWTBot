@@ -31,7 +31,7 @@ import org.eclipse.swt.widgets.Widget;
  * Marks a SWTBot widget so tools recognise them.
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotWidget.java 1188 2008-12-02 06:55:23Z kpadegaonkar $
+ * @version $Id$
  * @since 2.0
  */
 @Retention(RetentionPolicy.RUNTIME)

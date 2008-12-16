@@ -27,7 +27,7 @@ import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotCombo.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 @SWTBotWidget(clasz = Combo.class, preferredName = "comboBox", referenceBy = { ReferenceBy.LABEL, ReferenceBy.TEXT })
 public class SWTBotCombo extends AbstractSWTBot<Combo> {

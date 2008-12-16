@@ -45,7 +45,7 @@ import org.eclipse.ui.IEditorReference;
  * This represents an eclipse editor item.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotEclipseEditor.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 

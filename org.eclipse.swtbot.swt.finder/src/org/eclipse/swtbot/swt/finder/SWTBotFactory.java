@@ -51,7 +51,7 @@ import org.hamcrest.Matcher;
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @author Vincent Mahe &lt;vmahe [at] irisa [dot] fr&gt;
- * @version $Id: SWTBotFactory.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  * @since 2.0
  */
 abstract class SWTBotFactory {

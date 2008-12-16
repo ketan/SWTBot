@@ -23,7 +23,7 @@ import org.hamcrest.Matcher;
  * Condition that waits for a shell with the specified text to appear.
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: WaitForMenu.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class WaitForMenu extends DefaultCondition {
 

@@ -78,7 +78,7 @@ import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withTo
  *    SWTBotButton button = new SWTBotButton((Button) bot.widget(aMatcher, parentComposite, 3)); //for the 4th widget
  * </pre>
  *
- * @version $Id: SWTBot.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class SWTBot extends SWTBotFactory {
 

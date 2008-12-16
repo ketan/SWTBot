@@ -18,7 +18,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
  * A condition that returns <code>false</code> until the table has the specified number of rows.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: TableHasRows.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 class TableHasRows extends DefaultCondition {
 

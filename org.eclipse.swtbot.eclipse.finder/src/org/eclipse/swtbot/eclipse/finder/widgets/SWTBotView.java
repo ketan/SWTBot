@@ -26,7 +26,7 @@ import org.eclipse.ui.IViewReference;
  * This represents the eclipse {@link View} item.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @version $Id: SWTBotView.java 1219 2008-12-03 16:57:32Z kpadegaonkar $
+ * @version $Id$
  */
 public class SWTBotView extends SWTBotWorkbenchPart<IViewReference> {
 
