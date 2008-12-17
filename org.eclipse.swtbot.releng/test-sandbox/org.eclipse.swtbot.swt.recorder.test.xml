@@ -1,4 +1,4 @@
-<project name="org.eclipse.swtbot.swt.finder.test" default="all" basedir=".">
+<project name="org.eclipse.swtbot.swt.recorder.test" default="all" basedir=".">
 	<property name="eclipse-home" value="${basedir}/../.." />
 	<echo>${eclipse-home}</echo>
 	<property name="plugin-name" value="${ant.project.name}" />
@@ -37,6 +37,7 @@
 			<include name="org.apache.log4j_1.2.*.jar" />
 			<include name="org.hamcrest_*.jar" />
 		</fileset>
+		<pathelement location="${eclipse-home}/plugins/org.eclipse.swtbot.swt.finder.test_${all.buildId}" />
 	</path>
 
 	<target name="init">
@@ -49,14 +50,10 @@
 		<mkdir dir="build/instrumented" />
 		<mkdir dir="build/classes" />
 
-		<unzip dest="build/classes" src="${eclipse-home}/plugins/org.eclipse.swtbot.swt.finder_${all.buildId}.jar" />
+		<unzip dest="build/classes" src="${eclipse-home}/plugins/org.eclipse.swtbot.swt.recorder_${all.buildId}.jar" />
 
 		<cobertura-instrument todir="build/instrumented" datafile="${cobertura.data.file}">
-			<ignore regex="org.eclipse.swtbot.swt.finder.SWTBot" />
-			<ignore regex="org.eclipse.swtbot.swt.finder.wait.Conditions" />
-			<ignore regex="org.eclipse.swtbot.swt.finder.matcher.WidgetMatcherFactory" />
-			<ignore regex="org.eclipse.swtbot.swt.finder.SWTBotTestCase" />
-			<fileset dir="build/classes" excludes="**/SWTBot.class, **/Conditions.class, **/WidgetMatcherFactory.class, **/SWTBotTestCase.class" />
+			<fileset dir="build/classes" />
 		</cobertura-instrument>
 	</target>
 
@@ -104,9 +101,20 @@
 	</target>
 
 	<target name="test-coverage" depends="instrument, test">
-		<cobertura-report format="html" destdir="${build.instrumentation.reports.dir}" srcdir="${build.base}/plugins/org.eclipse.swtbot.swt.finder/src" datafile="${cobertura.data.file}" />
-		<cobertura-report format="xml" destdir="${build.instrumentation.reports.xml.dir}" srcdir="${build.base}/plugins/org.eclipse.swtbot.swt.finder/src" datafile="${cobertura.data.file}" />
+		<cobertura-report format="html" destdir="${build.instrumentation.reports.dir}" srcdir="${build.base}/plugins/org.eclipse.swtbot.swt.recorder/src" datafile="${cobertura.data.file}" />
+		<cobertura-report format="xml" destdir="${build.instrumentation.reports.xml.dir}" srcdir="${build.base}/plugins/org.eclipse.swtbot.swt.recorder/src" datafile="${cobertura.data.file}" />
 	</target>
 
 	<target name="all" depends="init, test-coverage" />
+
+	<macrodef name="echo-fileset">
+		<attribute name="filesetref" />
+		<sequential>
+			<pathconvert pathsep="${line.separator}|   |-- " property="@{filesetref}.echopath" refid="@{filesetref}" />
+
+			<echo message="|-- @{filesetref} classpath" />
+			<echo message="|   |" />
+			<echo message="|   |-- ${@{filesetref}.echopath}" />
+		</sequential>
+	</macrodef>
 </project>

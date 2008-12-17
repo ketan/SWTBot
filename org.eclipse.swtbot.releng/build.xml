@@ -30,9 +30,6 @@
 				<exclude name="features/**/**.*" />
 			</fileset>
 		</delete>
-		<delete failonerror="false">
-			<fileset dir="test-sandbox" includes="${plugin.prefix}*.zip" />
-		</delete>
 		<delete dir="artifacts" />
 		<delete dir="test-sandbox/results" />
 		<delete dir="test-sandbox/test-eclipse" />
@@ -96,15 +93,15 @@
 
 	<!--setup for zip archives-->
 	<target name="setup-zip" description="Reinstall the test Eclipse installation if specified by user">
-		<unzip dest="${eclipse-target}" src="test-sandbox/${eclipse.sdk.archive}">
+		<unzip dest="${eclipse-target}" src="externals/${eclipse.sdk.archive}" failifexecutionfails="true" failonerror="true">
 			<mapper type="glob" from="eclipse/*" to="${eclipse-target}/*" />
 		</unzip>
 	</target>
 
 	<!--setup for tar.gz archives-->
 	<target name="setup-tar.gz" description="Reinstall the test Eclipse installation if specified by user">
-		<exec command="tar">
-			<arg line="-zxf ${basedir}/test-sandbox/${eclipse.sdk.archive} -C ${eclipse-target}/.." />
+		<exec command="tar" failifexecutionfails="true" failonerror="true">
+			<arg line="-zxf externals/${eclipse.sdk.archive} -C ${eclipse-target}/.." />
 		</exec>
 	</target>
 
@@ -167,6 +164,42 @@
 				<include name="*.zip" />
 			</fileset>
 		</copy>
+
+		<antcall target="verify-generated-artifacts" />
+	</target>
+
+	<target name="verify-generated-artifacts" description="check if the artifacts are compliant with the legal docs http://www.eclipse.org/legal/guidetolegaldoc.php and http://www.eclipse.org/legal/guidetolegaldoc2.php">
+		<delete dir="target/check-licenses" />
+		<unzip dest="target/check-licenses" src="artifacts/org.eclipse.swtbot.test-${all.buildId}.zip" />
+
+		<for param="feature-jar">
+			<fileset dir="target/check-licenses/eclipse/features" />
+			<sequential>
+				<echo>Verifying feature @{feature-jar}</echo>
+
+				<available classpath="@{feature-jar}" resource="feature.xml" ignoresystemclasses="false" property="feature.xml.available" />
+				<fail unless="feature.xml.available" message="feature.xml for feature @{feature-jar} is not available" />
+
+				<available classpath="@{feature-jar}" resource="license.html" ignoresystemclasses="false" property="license.html.availble" />
+				<fail unless="license.html.availble" message="license.html for feature @{feature-jar} is not available" />
+
+				<available classpath="@{feature-jar}" resource="epl-v10.html" ignoresystemclasses="false" property="epl-v10.html.available" />
+				<fail unless="epl-v10.html.available" message="epl-v10.html for feature @{feature-jar} is not available" />
+			</sequential>
+		</for>
+
+		<for param="plugin-jar">
+			<fileset dir="target/check-licenses/eclipse/plugins" includes="org.eclipse.*" />
+			<sequential>
+				<echo>Verifying plugin @{plugin-jar}</echo>
+
+				<available classpath="@{plugin-jar}" resource="about.html" ignoresystemclasses="false" property="about.html.available" />
+				<fail unless="about.html.available" message="about.html for plugin @{plugin-jar} is not available" />
+
+				<available classpath="@{plugin-jar}" resource="LICENSE.EPL" ignoresystemclasses="false" property="LICENSE.EPL.available" />
+				<fail unless="LICENSE.EPL.available" message="LICENSE.EPL for plugin @{plugin-jar} is not available" />
+			</sequential>
+		</for>
 	</target>
 
 	<target name="run-core-tests" description="runs the core tests for the connector">

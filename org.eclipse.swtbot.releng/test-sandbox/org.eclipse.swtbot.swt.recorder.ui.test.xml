@@ -10,7 +10,7 @@
 	<property name="build.instrumentation.reports.xml.dir" value="${results.dir}/${plugin-name}/coverage/xml" />
 
 	<path id="cobertura.classpath">
-		<fileset dir="${build.base}/../libs/cobertura-1.9">
+		<fileset dir="${build.base}/../externals/libs/cobertura-1.9">
 			<include name="cobertura.jar" />
 			<include name="lib/**/*.jar" />
 		</fileset>
@@ -60,10 +60,10 @@
 		<mkdir dir="${junit.reports.xml.dir}" />
 
 		<condition property="jvmOption" value="-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts">
-			<os family="mac"/>
+			<os family="mac" />
 		</condition>
 
-		<property name="jvmOption" value=""></property>
+		<property name="jvmOption" value="" />
 
 		<junit fork="true" forkmode="once" timeout="1200000" printsummary="yes" haltonfailure="no" haltonerror="no" failureproperty="junit.failure" errorproperty="junit.failure">
 			<sysproperty key="net.sourceforge.cobertura.datafile" file="${cobertura.data.file}" />
@@ -100,8 +100,8 @@
 	</target>
 
 	<target name="test-coverage" depends="instrument, test">
-		<cobertura-report format="html" destdir="${build.instrumentation.reports.dir}" srcdir="${build.base}/plugins/org.eclipse.swtbot.swt.recorder.ui.test/src" datafile="${cobertura.data.file}" />
-		<cobertura-report format="xml" destdir="${build.instrumentation.reports.xml.dir}" srcdir="${build.base}/plugins/org.eclipse.swtbot.swt.recorder.ui.test/src" datafile="${cobertura.data.file}" />
+		<cobertura-report format="html" destdir="${build.instrumentation.reports.dir}" srcdir="${build.base}/plugins/org.eclipse.swtbot.swt.recorder.ui/src" datafile="${cobertura.data.file}" />
+		<cobertura-report format="xml" destdir="${build.instrumentation.reports.xml.dir}" srcdir="${build.base}/plugins/org.eclipse.swtbot.swt.recorder.ui/src" datafile="${cobertura.data.file}" />
 	</target>
 
 	<target name="all" depends="init, test-coverage" />

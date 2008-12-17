@@ -35,7 +35,7 @@
 	<target name="setup-zip" description="Reinstall the test Eclipse installation if specified by user">
 		<delete dir="${install}" />
 		<mkdir dir="${install}" />
-		<unzip dest="${install}" src="${runtimeArchive}" />
+		<unzip dest="${install}" src="../externals/${runtimeArchive}" />
 		<antcall target="installTestPlugins" />
 	</target>
 
@@ -43,7 +43,7 @@
 	<target name="setup-tar.gz" description="Reinstall the test Eclipse installation if specified by user">
 		<delete dir="${install}" />
 		<mkdir dir="${install}" />
-		<untar compression="gzip" dest="${install}" src="${basedir}/${runtimeArchive}" />
+		<untar compression="gzip" dest="${install}" src="../externals/${runtimeArchive}" />
 		<antcall target="installTestPlugins" />
 	</target>
 
@@ -52,7 +52,7 @@
 		<unzip src="${basedir}/../artifacts/${feature.id}-${all.buildId}.zip" dest="${install}" />
 		<unzip src="${basedir}/../artifacts/${feature.id.test}-${all.buildId}.zip" dest="${install}" />
 		<unzip src="${basedir}/../artifacts/org.eclipse.swtbot.eclipse-${all.buildId}.zip" dest="${install}" />
-		<unzip src="eclipse-test-framework-3.3.zip" dest="${install}" />
+		<unzip src="../externals/eclipse-test-framework-3.3.zip" dest="${install}" />
 
 		<!-- copy over any other dependencies
 			<copy todir="${eclipse-home}" includeemptydirs="true">
@@ -305,13 +305,13 @@
 
 	<target name="test-recorder">
 		<antcall target="core-tests">
-			<param name="testPlugin" value="${org.eclipse.swtbot.swt.recorder.test}" />
+			<param name="testPlugin" value="org.eclipse.swtbot.swt.recorder.test" />
 		</antcall>
 	</target>
 
 	<target name="test-recorder-ui">
 		<antcall target="core-tests">
-			<param name="testPlugin" value="${org.eclipse.swtbot.swt.recorder.ui.test}" />
+			<param name="testPlugin" value="org.eclipse.swtbot.swt.recorder.ui.test" />
 		</antcall>
 	</target>
 
@@ -319,6 +319,6 @@
 		<runTests testPlugin="org.eclipse.swtbot.eclipse.finder.test" />
 	</target>
 
-	<target name="all" depends="test-finder, test-recorder-ui, test-eclipse-finder" />
+	<target name="all" depends="test-finder, test-recorder-ui, test-recorder, test-eclipse-finder" />
 </project>
 
