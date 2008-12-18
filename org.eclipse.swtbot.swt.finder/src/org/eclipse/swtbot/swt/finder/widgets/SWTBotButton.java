@@ -17,6 +17,7 @@ import org.eclipse.swtbot.swt.finder.ReferenceBy;
 import org.eclipse.swtbot.swt.finder.SWTBotWidget;
 import org.eclipse.swtbot.swt.finder.Style;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
+import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 
 /**
  * This represents a {@link Button} widget.
@@ -42,7 +43,7 @@ public class SWTBotButton extends AbstractSWTBot<Button> {
 	 * Click on the button.
 	 */
 	public void click() {
-		log.debug(MessageFormat.format("Clicking on {0}", widget));
+		log.debug(MessageFormat.format("Clicking on {0}", SWTUtils.getText(widget)));
 		assertEnabled();
 		notify(SWT.MouseEnter);
 		notify(SWT.MouseMove);
@@ -56,7 +57,7 @@ public class SWTBotButton extends AbstractSWTBot<Button> {
 		notify(SWT.MouseExit);
 		notify(SWT.Deactivate);
 		notify(SWT.FocusOut);
-		log.debug(MessageFormat.format("Clicked on {0}", widget));
+		log.debug(MessageFormat.format("Clicked on {0}", SWTUtils.getText(widget)));
 	}
 
 }
