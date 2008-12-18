@@ -59,7 +59,7 @@ including, but not limited to the following locations:
 * Inside Plug-ins and Fragments packaged as JARs
 * Sub-directories of the directory named &quot;src&quot; of certain Plug-ins
 * Feature directories
-		
+  
 Note: if a Feature made available by the Eclipse Foundation is installed using the Eclipse Update Manager, you must agree to a license (&quot;Feature Update License&quot;) during the
 installation process.  If the Feature contains Included Features, the Feature Update License should either provide you with the terms and conditions governing the Included Features or
 inform you where you can locate them.  Feature Update Licenses may be found in the &quot;license&quot; property of files named &quot;feature.properties&quot; found within a Feature.
@@ -72,7 +72,7 @@ OTHER LICENSE AGREEMENTS MAY INCLUDE (BUT ARE NOT LIMITED TO):
 * Common Public License Version 1.0 (available at http://www.eclipse.org/legal/cpl-v10.html)
 * Apache Software License 1.1 (available at http://www.apache.org/licenses/LICENSE)
 * Apache Software License 2.0 (available at http://www.apache.org/licenses/LICENSE-2.0)
-* IBM Public License 1.0 (available at http://oss.software.ibm.com/developerworks/opensource/license10.html)	
+* IBM Public License 1.0 (available at http://oss.software.ibm.com/developerworks/opensource/license10.html) 
 * Metro Link Public License 1.00 (available at http://www.opengroup.org/openmotif/supporters/metrolink/license.html)
 * Mozilla Public License Version 1.1 (available at http://www.mozilla.org/MPL/MPL-1.1.html)
 
@@ -109,7 +109,6 @@ Java and all Java-based trademarks are trademarks of Sun Microsystems, Inc. in t
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.junit"/>
       <import plugin="org.apache.ant"/>
-      <import plugin="org.eclipse.ui.ide.application"/>
       <import plugin="org.eclipse.equinox.app"/>
       <import plugin="org.eclipse.pde.junit.runtime"/>
       <import plugin="org.eclipse.jdt.junit"/>
@@ -117,6 +116,14 @@ Java and all Java-based trademarks are trademarks of Sun Microsystems, Inc. in t
       <import plugin="org.eclipse.jdt.core"/>
       <import plugin="org.eclipse.jdt.launching"/>
       <import plugin="org.eclipse.debug.ui"/>
+      <import plugin="org.junit4"/>
+      <import plugin="org.hamcrest"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.jdt.junit.runtime"/>
+      <import plugin="org.eclipse.jdt.ui"/>
    </requires>
 
    <plugin
