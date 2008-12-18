@@ -15,7 +15,6 @@ import static org.hamcrest.Matchers.anything;
 
 import javax.swing.text.View;
 
-
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.eclipse.finder.SWTEclipseBot;
@@ -24,7 +23,7 @@ import org.eclipse.ui.IViewReference;
 
 /**
  * This represents the eclipse {@link View} item.
- *
+ * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
@@ -33,6 +32,7 @@ public class SWTBotView extends SWTBotWorkbenchPart<IViewReference> {
 	/**
 	 * The parent widget inside the partReference, that is the container for all controls within the view. If you want
 	 * to look for a particular widget within the part, this is a good place to start searching for the widget.
+	 * 
 	 * @since 2.0
 	 */
 	public final Widget	widget;
@@ -46,11 +46,18 @@ public class SWTBotView extends SWTBotWorkbenchPart<IViewReference> {
 	}
 
 	public void setFocus() {
-		syncExec(new VoidResult(){
+		syncExec(new VoidResult() {
 			public void run() {
-				((Control)widget).setFocus();
+				((Control) widget).setFocus();
 			}
 		});
+	}
+
+	/**
+	 * @return the view reference for this view.
+	 */
+	public IViewReference getViewReference() {
+		return partReference;
 	}
 
 }
