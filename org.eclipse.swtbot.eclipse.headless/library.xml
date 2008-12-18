@@ -2,9 +2,9 @@
 <!-- 
 
 
-=================================================================================
-this has been copied from o.e.test plugin with some additional targets for SWTBot 
-=================================================================================
+======================================================================
+this has been copied from o.e.test plugin with some targets for SWTBot 
+======================================================================
 
 
 -->
@@ -56,18 +56,6 @@ this has been copied from o.e.test plugin with some additional targets for SWTBo
 		<mkdir dir="${junit-report-output}"/>
 	</target>
 	
-	<target name="core-test" description="Eclipse application used to launch HEADLESS plugin tests." depends="init">
-		<antcall target="${launchTarget}">
-			<param name="application" value="org.eclipse.test.coretestapplication"/>
-		</antcall>
-	</target>
-	
-	<target name="ui-test" description="Eclipse application used to launch UI plugin tests." depends="init">
-		<antcall target="${launchTarget}">
-			<param name="application" value="org.eclipse.test.uitestapplication"/>
-		</antcall>
-	</target>
-	
 	<target name="swtbot-test" description="Eclipse application used to launch UI plugin tests." depends="init">
 		<antcall target="${launchTarget}">
 			<!--param name="application" value="org.eclipse.test.uitestapplication"/-->
@@ -80,10 +68,11 @@ this has been copied from o.e.test plugin with some additional targets for SWTBo
 		<property name="vmargs" value=" -Xms40m -Xmx256m"/>
 	  	
 		<!-- this argument is needed for macosx -->
-		<condition property="jvmOption" value="-XstartOnFirstThread">
+		<condition property="jvmOption" value="-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts">
 			<os family="mac"/>
 		</condition>
-		<property name="jvmOption" value=""></property>
+		
+		<property name="jvmOption" value="" />
 	
 	  	<!--set default jvm to use for testing-->
 	   	<property name="jvm" value="${java.home}/bin/java" />
@@ -105,50 +94,11 @@ this has been copied from o.e.test plugin with some additional targets for SWTBo
 		    <arg line="-os ${os}"/>
 		    <arg line="-ws ${ws}"/>
 		    <arg line="-arch ${arch}"/>
-		    <arg line="-consolelog"/>
+		    <arg line="-consoleLog"/>
 		    <arg line="-debug"/>
 		    <jvmarg line="${vmargs} ${extraVMargs} ${jvmOption}"/>
 		    <sysproperty key="PLUGIN_PATH" value="${plugin-path}"/> 
 		</java>
-		<antcall target="collect-results" />
-	</target>
-	
-	<target name="eclipse-test" description="Runs the specified classname as a plug-in test.">		
-		<property name="vmargs" value="-Xms256m -Xmx512m"/>
-		
-		<!--use -consolelog if launching a headless test-->
-		<condition property="consolelog" value="-consolelog">
-			<equals arg1="${application}" arg2="org.eclipse.test.coretestapplication"/>
-		</condition>
-		<property name="consolelog" value="" />
-
-		<!--
-			vm selection priority:
-			1.  user-specified java executable via outer Ant property setting of "jvm".
-			2.  java executable on path.
-		-->
-		<condition property="test-vm" value="-vm ${jvm}">
-			<isset property="jvm" />
-		</condition>
-		<property name="test-vm" value="" />
-		
-		<!--ensure executable has execute permission-->
-		<chmod file="${eclipse-home}/eclipse" perm="ugo+rx"/>
-		
-		<echo message="Running ${classname}. Result file: ${junit-report-output}/${classname}.xml."/>
-
-		<exec executable="${eclipse-home}/eclipse" dir="${eclipse-home}" timeout="${timeout}" logError="true" failonerror="false" output="${junit-report-output}/${classname}.txt">
-			<arg line="-data ${data-dir}"/>
-			<arg line="${test-vm}"/>
-			<arg line="-application ${application}"/>
-			<arg line="formatter=${formatter},${test-output}"/>
-			<arg line="-testPluginName ${plugin-name}"/>
-			<arg line="-className ${classname}"/>
-			<arg line="-nosplash"/>
-			<arg line="-suppressErrors"/>
-			<arg line="${consolelog}"/>
-			<arg line="-vmargs ${vmargs} ${extraVMargs} -DPLUGIN_PATH=${plugin-path}"/>
-		</exec>
 		<antcall target="collect-results" />
 	</target>
 	
