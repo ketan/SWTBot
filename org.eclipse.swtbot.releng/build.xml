@@ -55,6 +55,7 @@
 				<include name="${feature.id}/**" />
 				<include name="${feature.id.test}/**" />
 				<include name="org.eclipse.swtbot.eclipse/**" />
+				<include name="org.eclipse.swtbot.eclipse.test/**" />
 				<include name="org.eclipse.swtbot.recording/**" />
 			</fileset>
 		</sync>
@@ -72,6 +73,7 @@
 				<exclude name="${feature.id}/**" />
 				<exclude name="${feature.id.test}/**" />
 				<exclude name="org.eclipse.swtbot.eclipse/**" />
+				<include name="org.eclipse.swtbot.eclipse.test/**" />
 				<exclude name="org.eclipse.swtbot.recording/**" />
 				<!-- the update site -->
 				<exclude name="org.eclipse.swtbot.updatesite/**" />
@@ -173,17 +175,17 @@
 		<unzip dest="target/check-licenses" src="artifacts/org.eclipse.swtbot.test-${all.buildId}.zip" />
 
 		<for param="feature-jar">
-			<fileset dir="target/check-licenses/eclipse/features" />
+			<dirset dir="target/check-licenses/eclipse/features" includes="*" />
 			<sequential>
 				<echo>Verifying feature @{feature-jar}</echo>
 
-				<available classpath="@{feature-jar}" resource="feature.xml" ignoresystemclasses="false" property="feature.xml.available" />
+				<available file="@{feature-jar}/feature.xml" property="feature.xml.available" />
 				<fail unless="feature.xml.available" message="feature.xml for feature @{feature-jar} is not available" />
 
-				<available classpath="@{feature-jar}" resource="license.html" ignoresystemclasses="false" property="license.html.availble" />
+				<available file="@{feature-jar}/license.html" property="license.html.availble" />
 				<fail unless="license.html.availble" message="license.html for feature @{feature-jar} is not available" />
 
-				<available classpath="@{feature-jar}" resource="epl-v10.html" ignoresystemclasses="false" property="epl-v10.html.available" />
+				<available file="@{feature-jar}/epl-v10.html" property="epl-v10.html.available" />
 				<fail unless="epl-v10.html.available" message="epl-v10.html for feature @{feature-jar} is not available" />
 			</sequential>
 		</for>
