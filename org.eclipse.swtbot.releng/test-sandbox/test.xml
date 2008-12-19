@@ -274,17 +274,12 @@
 	</target>
 
 	<target name="core-tests">
-		<!--
-			not using the eclipse style junit runner;
-			plain ol' junit runner WORKSFORME.,
-			Keeping this here for reference
-			<runTests testPlugin="org.eclipse.swtbot.finder.test" />
-		-->
 
-		<!-- see the "junit" target -->
-		<antcall target="setup" />
+		<echo>==============================================================</echo>
 		<echo>eclipse-home is ${eclipse-home}</echo>
-		<echo>testPlugin is ${testPlugin}</echo>
+		<echo>Executing tests under ${testPlugin}</echo>
+		<echo>==============================================================</echo>
+
 		<ant antfile="${basedir}/${testPlugin}.xml" dir="${eclipse-home}/plugins/${testPlugin}_${all.buildId}">
 			<property name="all.buildId" value="${all.buildId}" />
 			<property name="build.base" value="${build.base}" />
@@ -297,28 +292,35 @@
 		<delete dir="${results}" />
 	</target>
 
-	<target name="test-finder">
+	<target name="test-finder" depends="setup">
 		<antcall target="core-tests">
 			<param name="testPlugin" value="org.eclipse.swtbot.swt.finder.test" />
 		</antcall>
 	</target>
 
-	<target name="test-recorder">
+	<target name="test-recorder" depends="setup">
 		<antcall target="core-tests">
 			<param name="testPlugin" value="org.eclipse.swtbot.swt.recorder.test" />
 		</antcall>
 	</target>
 
-	<target name="test-recorder-ui">
+	<target name="test-recorder-ui" depends="setup">
 		<antcall target="core-tests">
 			<param name="testPlugin" value="org.eclipse.swtbot.swt.recorder.ui.test" />
 		</antcall>
 	</target>
 
-	<target name="test-eclipse-finder">
+	<target name="test-generator" depends="setup">
+		<antcall target="core-tests">
+			<param name="testPlugin" value="org.eclipse.swtbot.generator.test" />
+		</antcall>
+	</target>
+
+	<target name="test-eclipse-finder" depends="setup">
 		<runTests testPlugin="org.eclipse.swtbot.eclipse.finder.test" />
 	</target>
 
-	<target name="all" depends="test-finder, test-recorder-ui, test-recorder, test-eclipse-finder" />
+	<target name="all" depends="test-finder, test-recorder-ui, test-recorder, test-generator, test-eclipse-finder" />
+
 </project>
 

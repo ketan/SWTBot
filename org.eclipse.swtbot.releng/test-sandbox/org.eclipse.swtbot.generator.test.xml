@@ -1,0 +1,108 @@
+<project name="org.eclipse.swtbot.generator.test" default="all" basedir=".">
+	<property name="eclipse-home" value="${basedir}/../.." />
+	<echo>${eclipse-home}</echo>
+	<property name="plugin-name" value="${ant.project.name}" />
+
+	<property name="cobertura.data.file" value="cobertura.ser" />
+	<property name="junit.reports.xml.dir" value="${results.dir}/${plugin-name}/junit/xml" />
+	<property name="junit.reports.html.dir" value="${results.dir}/${plugin-name}/junit/html" />
+	<property name="build.instrumentation.reports.dir" value="${results.dir}/${plugin-name}/coverage/html" />
+	<property name="build.instrumentation.reports.xml.dir" value="${results.dir}/${plugin-name}/coverage/xml" />
+
+	<path id="cobertura.classpath">
+		<fileset dir="${build.base}/../externals/libs/cobertura-1.9">
+			<include name="cobertura.jar" />
+			<include name="lib/**/*.jar" />
+		</fileset>
+	</path>
+	<taskdef classpathref="cobertura.classpath" resource="tasks.properties" />
+
+	<path id="test.classpath">
+		<pathelement location="build/instrumented" />
+		<pathelement location="build/classes" />
+		<pathelement location="." />
+	</path>
+
+	<path id="plugin.dependencies.classpath">
+		<fileset dir="${eclipse-home}/plugins">
+			<include name="org.eclipse.swt.examples_${all.buildId}.jar" />
+			<include name="org.eclipse.swt.*.jar" />
+			<include name="org.eclipse.equinox.common_*.jar" />
+			<include name="org.eclipse.jface_*.jar" />
+			<include name="org.eclipse.core.runtime_*.jar" />
+			<include name="org.eclipse.core.commands_*.jar" />
+			<include name="org.junit_*/junit*.jar" />
+			<include name="org.eclipse.swtbot*" />
+			<include name="org.apache.commons.collections_3.2.0*.jar" />
+			<include name="org.apache.log4j_1.2.*.jar" />
+			<include name="org.hamcrest_*.jar" />
+		</fileset>
+	</path>
+
+	<target name="init">
+		<tstamp />
+		<delete dir="build/instrumented" />
+	</target>
+
+	<target name="instrument">
+		<delete file="${cobertura.data.file}" />
+		<mkdir dir="build/instrumented" />
+		<mkdir dir="build/classes" />
+
+		<unzip dest="build/classes" src="${eclipse-home}/plugins/org.eclipse.swtbot.generator_${all.buildId}.jar" />
+
+		<cobertura-instrument todir="build/instrumented" datafile="${cobertura.data.file}">
+			<fileset dir="build/classes" />
+		</cobertura-instrument>
+	</target>
+
+	<target name="test">
+		<mkdir dir="${junit.reports.xml.dir}" />
+
+		<condition property="jvmOption" value="-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts">
+			<os family="mac" />
+		</condition>
+
+		<property name="jvmOption" value="" />
+
+		<junit fork="true" forkmode="once" timeout="1200000" printsummary="yes" haltonfailure="no" haltonerror="no" failureproperty="junit.failure" errorproperty="junit.failure">
+			<sysproperty key="net.sourceforge.cobertura.datafile" file="${cobertura.data.file}" />
+
+			<classpath refid="test.classpath" />
+			<classpath refid="plugin.dependencies.classpath" />
+			<classpath refid="cobertura.classpath" />
+
+			<formatter type="xml" />
+			<formatter type="plain" usefile="false" />
+
+			<batchtest fork="yes" todir="${junit.reports.xml.dir}">
+				<fileset dir="${basedir}">
+					<include name="**/*Test.class" />
+					<exclude name="**/AllTests.class" />
+					<exclude name="**/*Abstract*.class" />
+				</fileset>
+			</batchtest>
+
+			<jvmarg line="${jvmOption}" />
+			<!-- -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000 -->
+
+		</junit>
+
+		<mkdir dir="${junit.reports.html.dir}" />
+		<junitreport todir="${junit.reports.xml.dir}">
+			<fileset dir="${junit.reports.xml.dir}">
+				<include name="TEST-*.xml" />
+			</fileset>
+			<report format="frames" todir="${junit.reports.html.dir}" />
+		</junitreport>
+		<echo>Test reports available at: ${junit.reports.html.dir}/index.html</echo>
+		<fail message="Tests failed: check test reports." if="junit.failure" />
+	</target>
+
+	<target name="test-coverage" depends="instrument, test">
+		<cobertura-report format="html" destdir="${build.instrumentation.reports.dir}" srcdir="${build.base}/plugins/org.eclipse.swtbot.generator/src" datafile="${cobertura.data.file}" />
+		<cobertura-report format="xml" destdir="${build.instrumentation.reports.xml.dir}" srcdir="${build.base}/plugins/org.eclipse.swtbot.generator/src" datafile="${cobertura.data.file}" />
+	</target>
+
+	<target name="all" depends="init, test-coverage" />
+</project>
