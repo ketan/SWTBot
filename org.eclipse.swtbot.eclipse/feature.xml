@@ -6,7 +6,7 @@
       provider-name="Eclipse.org">
 
    <description url="http://eclipse.org/">
-      [Enter Feature Description here.]
+      SWTBot for testing eclipse based plugins and applications (incubation)
    </description>
 
    <copyright url="http://eclipse.org/">
