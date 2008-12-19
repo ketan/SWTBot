@@ -18,7 +18,7 @@ import org.eclipse.swtbot.swt.finder.ReferenceBy;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class CombinationGeneratorTest {
+class CombinationGeneratorMain {
 	public static void main(String[] args) {
 		ReferenceBy[] values = ReferenceBy.values();
 		List<List<ReferenceBy>> combinations = ReferenceBy.getCombinations(values);
