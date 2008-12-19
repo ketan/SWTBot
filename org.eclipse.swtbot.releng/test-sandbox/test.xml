@@ -231,12 +231,6 @@
 			<echo>=========================================================================</echo>
 			<echo>Executing tests for @{testPlugin}</echo>
 			<echo>=========================================================================</echo>
-			<!--always use eclipse executable to launch tests with the exception of performance tests-->
-			<!--condition property="useEclipseExe" value="true">
-				<not>
-					<equals arg1="${test.target}" arg2="performance" />
-				</not>
-			</condition-->
 
 			<property name="test.target" value="junit" />
 			<property name="report" value="@{testPlugin}" />
@@ -253,12 +247,6 @@
 	<target name="junit" unless="skip.test">
 		<antcall target="setup" />
 		<ant antfile="${testPlugin}.xml" />
-		<antcall target="genResults" />
-	</target>
-
-	<target name="performance" if="performance.target.present" unless="skip.test">
-		<antcall target="setup" />
-		<ant antfile="${eclipse-home}/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" target="performance" />
 		<antcall target="genResults" />
 	</target>
 
@@ -316,11 +304,15 @@
 		</antcall>
 	</target>
 
-	<target name="test-eclipse-finder" depends="setup">
+	<target name="test-eclipse-finder">
 		<runTests testPlugin="org.eclipse.swtbot.eclipse.finder.test" />
 	</target>
 
-	<target name="all" depends="test-finder, test-recorder-ui, test-recorder, test-generator, test-eclipse-finder" />
+	<target name="test-eclipse-ui">
+		<runTests testPlugin="org.eclipse.swtbot.eclipse.ui.test" />
+	</target>
+
+	<target name="all" depends="test-finder, test-recorder-ui, test-recorder, test-generator, test-eclipse-finder, test-eclipse-ui" />
 
 </project>
 
