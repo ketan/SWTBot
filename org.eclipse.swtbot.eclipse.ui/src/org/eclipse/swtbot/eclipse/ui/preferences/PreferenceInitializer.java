@@ -48,7 +48,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer impleme
 	 * @param swtbotPreferenceStore used by swtbot.
 	 * @param jdtPreferenceStore used by JDT.
 	 */
-	PreferenceInitializer(IPreferenceStore swtbotPreferenceStore, IPreferenceStore jdtPreferenceStore) {
+	public PreferenceInitializer(IPreferenceStore swtbotPreferenceStore, IPreferenceStore jdtPreferenceStore) {
 		this.swtbotPreferenceStore = swtbotPreferenceStore;
 		this.jdtPreferenceStore = jdtPreferenceStore;
 		swtbotPreferenceStore.addPropertyChangeListener(this);
@@ -78,7 +78,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer impleme
 		jdtPreferenceStore.setValue(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, join);
 	}
 
-	List<String> getJDTImports() {
+	public List<String> getJDTImports() {
 		String preference = jdtPreferenceStore.getString(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS);
 		if (preference.trim().equals("")) {
 			return new ArrayList<String>();
