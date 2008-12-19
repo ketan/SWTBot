@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipse.swtbot.eclipse"
-      label="SWTBot Eclipse Feature (incubation)"
+      label="SWTBot for Eclipse Testing (incubation)"
       version="2.0.0.qualifier"
       provider-name="Eclipse.org">
 
@@ -94,10 +94,6 @@ Java and all Java-based trademarks are trademarks of Sun Microsystems, Inc. in t
 
    <includes
          id="org.eclipse.swtbot"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.swtbot.eclipse.test"
          version="0.0.0"/>
 
    <requires>

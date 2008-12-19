@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipse.swtbot.recording"
-      label="SWTBot Recording Feature (incubation)"
+      label="SWTBot Recording Feature - Experimental (incubation)"
       version="2.0.0.qualifier"
       provider-name="Eclipse.org">
 
    <description url="http://eclipse.org/">
-      SWTBot Recorder Feature (incubation)
+      Recording of SWTBot Tests - Experimental (incubation)
    </description>
 
    <copyright url="http://eclipse.org/">
