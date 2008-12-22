@@ -15,7 +15,6 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Iterator;
 
-
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
@@ -157,7 +156,7 @@ public class SWTBotRecorderUI {
 			public boolean test() throws Exception {
 				return UIThreadRunnable.syncExec(new BoolResult() {
 					public Boolean run() {
-						return display.getSynchronizer() != null;
+						return display.getSyncThread() != null;
 					}
 				});
 			}
