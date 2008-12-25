@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Rectangle;
@@ -60,7 +59,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	public SWTBotTreeItem expand() {
 		assertEnabled();
 		preExpandNotify();
-		syncExec(new VoidResult() {
+		asyncExec(new VoidResult() {
 			public void run() {
 				widget.setExpanded(true);
 			}
