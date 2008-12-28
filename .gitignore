@@ -1,0 +1,16 @@
+/eclipse/
+/.metadata/
+.svn/
+/swtbot/
+.DS_Store
+/*/bin
+/*/screenshots
+
+org.eclipse.swtbot.releng/target/
+org.eclipse.swtbot.releng/build.developer.properties
+org.eclipse.swtbot.releng/build.properties
+org.eclipse.swtbot.releng/artifacts/
+
+org.eclipse.swtbot.releng/test-sandbox/results/
+org.eclipse.swtbot.releng/test-sandbox/screenshots/
+org.eclipse.swtbot.releng/test-sandbox/test-eclipse/
