@@ -18,7 +18,9 @@ import javax.swing.text.View;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.eclipse.finder.SWTEclipseBot;
+import org.eclipse.swtbot.eclipse.finder.exceptions.WorkbenchPartNotActiveException;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.eclipse.swtbot.swt.finder.widgets.WidgetNotFoundException;
 import org.eclipse.ui.IViewReference;
 
 /**
@@ -29,20 +31,15 @@ import org.eclipse.ui.IViewReference;
  */
 public class SWTBotView extends SWTBotWorkbenchPart<IViewReference> {
 
-	/**
-	 * The parent widget inside the partReference, that is the container for all controls within the view. If you want
-	 * to look for a particular widget within the part, this is a good place to start searching for the widget.
-	 * 
-	 * @since 2.0
-	 */
-	public final Widget	widget;
+	private Widget	widget;
 
 	/**
+	 * @param partReference the view reference representing this view.
+	 * @param bot the bot that's used to find controls within this view.
 	 * @since 2.0
 	 */
 	public SWTBotView(IViewReference partReference, SWTEclipseBot bot) {
 		super(partReference, bot);
-		this.widget = findWidget(anything());
 	}
 
 	public void setFocus() {
@@ -58,6 +55,31 @@ public class SWTBotView extends SWTBotWorkbenchPart<IViewReference> {
 	 */
 	public IViewReference getViewReference() {
 		return partReference;
+	}
+
+	/**
+	 * The parent widget inside the partReference, that is the container for all controls within the view. If you want
+	 * to look for a particular widget within the part, this is a good place to start searching for the widget.
+	 * <p>
+	 * <b>NOTE:</b> Clients must ensure that the view is active at the time of making this call. If the view is not
+	 * active, then this method will throw a {@link WidgetNotFoundException}.
+	 * </p>
+	 * 
+	 * @return the parent widget in the view.
+	 * @throws WorkbenchPartNotActiveException if the view was not active.
+	 * @see #findWidget(org.hamcrest.Matcher)
+	 * @see #assertActive()
+	 * @see #show()
+	 */
+	public Widget getWidget() {
+		assertActive();
+		if (widget == null)
+			widget = findWidget(anything());
+		return widget;
+	}
+
+	public boolean isActive() {
+		return partReference.getPage().getActivePartReference() == partReference;
 	}
 
 }

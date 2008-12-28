@@ -41,7 +41,7 @@ public class SWTBotEclipseEditorTest extends SWTBotEclipseTestCase {
 		assertEquals(2, autoCompleteProposals.size());
 		assertEquals("JFrame - javax.swing", autoCompleteProposals.get(0));
 		String string = (String) autoCompleteProposals.get(1);
-		assertTrue(string.equals("JFr()  void - Method stub")  || string.equals("JFr() : void - Method stub"));
+		assertTrue(string.equals("JFr()  void - Method stub") || string.equals("JFr() : void - Method stub"));
 	}
 
 	public void testCanAutoCompleteProposals() throws Exception {
@@ -87,5 +87,16 @@ public class SWTBotEclipseEditorTest extends SWTBotEclipseTestCase {
 			SWTBotEclipseEditor editor = (SWTBotEclipseEditor) iterator.next();
 			editor.saveAndClose();
 		}
+	}
+
+	public void testIsActiveIsTrueForActiveEditor() throws Exception {
+		javaClass.createClass("com.foo.example", "FooClass");
+		javaClass.createClass("com.foo.example", "BarClass");
+		javaClass.createClass("com.foo.example", "BazClass");
+
+		assertTrue(bot.activeEditor().isActive());
+		assertFalse(bot.editor("FooClass.java").isActive());
+		assertFalse(bot.editor("BarClass.java").isActive());
+		assertTrue(bot.editor("BazClass.java").isActive());
 	}
 }

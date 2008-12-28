@@ -53,7 +53,7 @@ public class MessageCreateTest extends SWTBotEclipseTestCase {
 	}
 
 	private SWTBotTree mailBox() throws WidgetNotFoundException {
-		Widget widget = bot.view("Mailboxes").widget;
+		Widget widget = bot.view("Mailboxes").getWidget();
 		// find the tree
 		ChildrenControlFinder finder = new ChildrenControlFinder(widget);
 		List findControls = finder.findControls(treeMatcher());

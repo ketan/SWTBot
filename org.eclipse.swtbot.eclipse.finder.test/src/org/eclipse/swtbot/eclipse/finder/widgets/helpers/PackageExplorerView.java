@@ -64,7 +64,7 @@ public class PackageExplorerView {
 	 */
 	private SWTBotTree tree() throws WidgetNotFoundException {
 		SWTBotView view = view();
-		SWTBotTree tree = new SWTBotTree((Tree) bot.widget(widgetOfType(Tree.class), view.widget));
+		SWTBotTree tree = new SWTBotTree((Tree) bot.widget(widgetOfType(Tree.class), view.getWidget()));
 		return tree;
 	}
 
