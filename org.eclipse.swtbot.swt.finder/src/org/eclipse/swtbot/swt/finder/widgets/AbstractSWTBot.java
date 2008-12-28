@@ -16,7 +16,6 @@ import static org.hamcrest.Matchers.instanceOf;
 
 import java.util.List;
 
-
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.swt.SWT;
@@ -42,6 +41,7 @@ import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.SWTBotEvents;
 import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
+import org.eclipse.swtbot.swt.finder.utils.Traverse;
 import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 import org.hamcrest.Matcher;
 
@@ -560,4 +560,34 @@ public abstract class AbstractSWTBot<T extends Widget> {
 		Assert.isTrue(focusSet, "Could not set focus");
 	}
 
+	/**
+	 * @param traverse the kind of traversal to perform.
+	 * @return <code>true</code> if the traversal succeeded.
+	 * @see Control#traverse(int)
+	 */
+	public boolean traverse(final Traverse traverse) {
+		assertEnabled();
+		setFocus();
+
+		if (!(widget instanceof Control))
+			throw new UnsupportedOperationException("Can only traverse widgets of type Control. You're traversing a widget of type: " + widget.getClass().getName());
+
+		return syncExec(new BoolResult() {
+			public Boolean run() {
+				return ((Control) widget).traverse(traverse.type);
+			}
+		});
+	}
+
+	/**
+	 * @return <code>true</code> if this widget has focus.
+	 * @see Display#getFocusControl()
+	 */
+	public boolean isActive() {
+		return syncExec(new BoolResult() {
+			public Boolean run() {
+				return display.getFocusControl() == widget;
+			}
+		});
+	}
 }

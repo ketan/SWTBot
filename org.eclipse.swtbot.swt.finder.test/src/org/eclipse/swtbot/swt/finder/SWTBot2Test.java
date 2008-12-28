@@ -11,7 +11,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder;
 
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Label;
@@ -20,6 +19,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.eclipse.swtbot.swt.finder.utils.Traverse;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotText;
 import org.eclipse.swtbot.swt.finder.widgets.WidgetNotFoundException;
 
@@ -72,9 +72,39 @@ public class SWTBot2Test extends AbstractSWTTestCase {
 		assertNotEnabled(bot.radio("Down"));
 	}
 
+	public void testGetsActiveControl() throws Exception {
+		bot.button("Two").setFocus();
+		assertFalse(bot.button("One").isActive());
+		assertTrue(bot.button("Two").isActive());
+
+		assertSameWidget(bot.button("Two").widget, bot.getFocusedWidget());
+	}
+
+	public void testTabKeyTraversalSetsFocusOnTheNextControlAndSendsTraverseEvents() throws Exception {
+		bot.checkBox("Listen").select();
+		bot.button("Clear").click();
+		bot.button("One").setFocus();
+		assertTrue(bot.button("One").isActive());
+		bot.button("One").traverse(Traverse.TAB_NEXT);
+
+		SWTBotText textInGroup = bot.textInGroup("Listeners");
+
+		assertTextContains("Traverse [31]: TraverseEvent{Button {One} ", textInGroup);
+		assertTextContains("data=null character='\\0' keyCode=0 stateMask=0 doit=true detail=16}", textInGroup);
+		assertTextContains("FocusOut [16]: FocusEvent{Button {One} time=", textInGroup);
+		assertTextContains("FocusIn [15]: FocusEvent{Button {Two} time=", textInGroup);
+		assertTrue(bot.button("Two").isActive());
+	}
+
 	protected void setUp() throws Exception {
 		super.setUp();
-		bot = new  SWTBot();
+		bot = new SWTBot();
+	}
+
+	protected void tearDown() throws Exception {
+		super.tearDown();
+		bot.checkBox("Listen").deselect();
+		bot.button("Clear").click();
 	}
 
 }
