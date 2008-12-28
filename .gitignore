@@ -4,6 +4,9 @@
 /swtbot/
 .DS_Store
 /*/bin
+
+examples/rcp/*/bin/
+
 /*/screenshots
 
 org.eclipse.swtbot.releng/target/
