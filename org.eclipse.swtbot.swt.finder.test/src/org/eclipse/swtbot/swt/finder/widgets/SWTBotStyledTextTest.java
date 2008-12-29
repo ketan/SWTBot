@@ -19,6 +19,7 @@ import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.GlyphMetrics;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.SWTBot;
+import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.utils.Position;
 

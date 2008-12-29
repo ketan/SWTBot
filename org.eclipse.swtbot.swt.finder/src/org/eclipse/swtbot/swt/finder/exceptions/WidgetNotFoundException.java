@@ -8,7 +8,7 @@
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
-package org.eclipse.swtbot.swt.finder.widgets;
+package org.eclipse.swtbot.swt.finder.exceptions;
 
 /**
  * An exception that is thrown when a widget can not be found on the given display/shell.

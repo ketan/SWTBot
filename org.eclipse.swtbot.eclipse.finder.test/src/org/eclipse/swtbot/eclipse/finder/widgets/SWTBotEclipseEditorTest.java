@@ -17,7 +17,7 @@ import org.eclipse.swtbot.eclipse.finder.SWTBotEclipseTestCase;
 import org.eclipse.swtbot.eclipse.finder.widgets.helpers.NewJavaClass;
 import org.eclipse.swtbot.eclipse.finder.widgets.helpers.NewJavaProject;
 import org.eclipse.swtbot.eclipse.finder.widgets.helpers.PackageExplorerView;
-import org.eclipse.swtbot.swt.finder.widgets.WidgetNotFoundException;
+import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;

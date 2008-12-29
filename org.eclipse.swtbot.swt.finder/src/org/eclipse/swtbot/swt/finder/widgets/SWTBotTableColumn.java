@@ -13,6 +13,7 @@ package org.eclipse.swtbot.swt.finder.widgets;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;

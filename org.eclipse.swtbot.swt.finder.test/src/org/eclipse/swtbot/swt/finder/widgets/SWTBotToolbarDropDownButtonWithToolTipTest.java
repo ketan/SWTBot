@@ -13,6 +13,7 @@
 package org.eclipse.swtbot.swt.finder.widgets;
 
 import org.eclipse.swtbot.swt.finder.SWTBot;
+import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 
 /**
