@@ -29,7 +29,6 @@
 			<include name="org.eclipse.swt.*.jar" />
 			<include name="org.eclipse.equinox.common_*.jar" />
 			<include name="org.eclipse.jface_*.jar" />
-			<include name="org.eclipse.core.runtime_*.jar" />
 			<include name="org.eclipse.core.commands_*.jar" />
 			<include name="org.junit_*/junit*.jar" />
 			<include name="org.eclipse.swtbot*" />
