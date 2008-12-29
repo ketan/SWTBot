@@ -13,12 +13,12 @@ package org.eclipse.swtbot.swt.finder.matchers;
 
 
 import org.apache.log4j.Logger;
-import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.finders.PathGenerator;
 import org.eclipse.swtbot.swt.finder.utils.ClassUtils;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
+import org.eclipse.swtbot.swt.finder.utils.TreePath;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.StringDescription;
 

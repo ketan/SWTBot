@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: SWTBot SWT Control Finder plugin (incubation)
 Bundle-SymbolicName: org.eclipse.swtbot.swt.finder;singleton:=true
 Bundle-Version: 2.0.0.qualifier
-Require-Bundle: org.eclipse.ui,
+Require-Bundle: org.eclipse.swt,
  org.junit,
  org.apache.commons.collections,
  org.apache.log4j,

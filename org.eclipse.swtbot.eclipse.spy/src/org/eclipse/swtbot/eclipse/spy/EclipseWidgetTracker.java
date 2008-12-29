@@ -13,7 +13,6 @@ package org.eclipse.swtbot.eclipse.spy;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
@@ -44,6 +43,7 @@ import org.eclipse.swtbot.swt.finder.finders.PathGenerator;
 import org.eclipse.swtbot.swt.finder.resolvers.IChildrenResolver;
 import org.eclipse.swtbot.swt.finder.resolvers.IParentResolver;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
+import org.eclipse.swtbot.swt.finder.utils.TreePath;
 
 class EclipseWidgetTracker implements Runnable {
 	protected IChildrenResolver	childrenResolver;

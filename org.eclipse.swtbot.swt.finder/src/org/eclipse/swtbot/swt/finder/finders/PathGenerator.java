@@ -11,7 +11,6 @@
 package org.eclipse.swtbot.swt.finder.finders;
 
 
-import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Widget;
@@ -19,6 +18,7 @@ import org.eclipse.swtbot.swt.finder.resolvers.DefaultChildrenResolver;
 import org.eclipse.swtbot.swt.finder.resolvers.IChildrenResolver;
 import org.eclipse.swtbot.swt.finder.results.WidgetResult;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
+import org.eclipse.swtbot.swt.finder.utils.TreePath;
 
 /**
  * This is a path generate used to resolve paths to a component. This is intended for use only internally by the

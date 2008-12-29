@@ -15,9 +15,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-
 import org.apache.log4j.Logger;
-import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
@@ -33,6 +31,7 @@ import org.eclipse.swtbot.swt.finder.results.ListResult;
 import org.eclipse.swtbot.swt.finder.results.WidgetResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
+import org.eclipse.swtbot.swt.finder.utils.TreePath;
 import org.hamcrest.Matcher;
 
 /**
