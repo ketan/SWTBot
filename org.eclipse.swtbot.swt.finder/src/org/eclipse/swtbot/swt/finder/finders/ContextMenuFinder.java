@@ -12,11 +12,11 @@ package org.eclipse.swtbot.swt.finder.finders;
 
 
 
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.results.WidgetResult;
+import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 
 /**
  * Finds context menus for a given control.

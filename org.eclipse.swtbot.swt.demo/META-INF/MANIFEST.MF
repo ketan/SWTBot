@@ -6,7 +6,6 @@ Bundle-Version: 2.0.0.qualifier
 Bundle-Activator: org.eclipse.swtbot.swt.demo.Activator
 Bundle-Vendor: Eclipse.org
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
  org.eclipse.swt.examples,
  org.eclipse.swtbot.swt.finder
 Bundle-ActivationPolicy: lazy

@@ -12,7 +12,7 @@ package org.eclipse.swtbot.swt.finder.utils;
 
 import java.util.Collection;
 
-import org.eclipse.core.runtime.Assert;
+import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 
 /**
  * A set of utilities for string manipulation.

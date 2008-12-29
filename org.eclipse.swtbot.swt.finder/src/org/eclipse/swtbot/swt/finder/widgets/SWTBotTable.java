@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Event;
@@ -38,6 +37,7 @@ import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.StringUtils;
 import org.eclipse.swtbot.swt.finder.utils.TableCollection;
 import org.eclipse.swtbot.swt.finder.utils.TableRow;
+import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 
 /**

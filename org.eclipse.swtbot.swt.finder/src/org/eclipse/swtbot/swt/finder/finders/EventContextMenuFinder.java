@@ -11,7 +11,6 @@
 package org.eclipse.swtbot.swt.finder.finders;
 
 
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
@@ -20,6 +19,7 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
+import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 
 /**
  * Context menu finder that uses events to get the current context menu. It must be used instead of ContextMenuFinder

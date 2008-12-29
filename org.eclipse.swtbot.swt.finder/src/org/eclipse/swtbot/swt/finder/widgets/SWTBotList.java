@@ -11,7 +11,6 @@
 package org.eclipse.swtbot.swt.finder.widgets;
 
 
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swtbot.swt.finder.ReferenceBy;
@@ -22,6 +21,7 @@ import org.eclipse.swtbot.swt.finder.results.StringResult;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.StringUtils;
+import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;

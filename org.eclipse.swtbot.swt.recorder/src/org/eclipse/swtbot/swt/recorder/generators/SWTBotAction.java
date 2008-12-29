@@ -11,7 +11,7 @@
 package org.eclipse.swtbot.swt.recorder.generators;
 
 
-import org.eclipse.core.runtime.Assert;
+import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 import org.eclipse.swtbot.swt.recorder.listeners.ActionList;
 
 /**

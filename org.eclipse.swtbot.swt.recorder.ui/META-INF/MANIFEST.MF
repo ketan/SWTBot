@@ -5,7 +5,6 @@ Bundle-SymbolicName: org.eclipse.swtbot.swt.recorder.ui;singleton:=true
 Bundle-Version: 2.0.0.qualifier
 Bundle-Activator: org.eclipse.swtbot.swt.recorder.ui.Activator
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
  org.eclipse.swtbot.swt.recorder,
  org.eclipse.swtbot.swt.finder
 Bundle-ActivationPolicy: lazy

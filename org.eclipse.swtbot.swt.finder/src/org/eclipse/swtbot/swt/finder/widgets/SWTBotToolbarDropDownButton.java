@@ -16,7 +16,6 @@ import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMn
 import java.util.List;
 
 
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.MenuItem;
@@ -28,6 +27,7 @@ import org.eclipse.swtbot.swt.finder.Style;
 import org.eclipse.swtbot.swt.finder.finders.EventContextMenuFinder;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
+import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 
 /**
  * This represents a toolbar item that is a drop down button.

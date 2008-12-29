@@ -17,7 +17,6 @@ import static org.hamcrest.Matchers.instanceOf;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Control;
@@ -42,6 +41,7 @@ import org.eclipse.swtbot.swt.finder.utils.SWTBotEvents;
 import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.utils.Traverse;
+import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 import org.hamcrest.Matcher;
 

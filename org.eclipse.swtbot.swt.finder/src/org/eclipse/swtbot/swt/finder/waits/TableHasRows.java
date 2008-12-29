@@ -11,7 +11,7 @@
 package org.eclipse.swtbot.swt.finder.waits;
 
 
-import org.eclipse.core.runtime.Assert;
+import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
 
 /**

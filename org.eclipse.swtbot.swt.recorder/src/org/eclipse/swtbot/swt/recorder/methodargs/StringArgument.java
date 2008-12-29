@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.recorder.methodargs;
 
-import org.eclipse.core.runtime.Assert;
+import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 
 /**
  * Represents an argument of type {@link String}.

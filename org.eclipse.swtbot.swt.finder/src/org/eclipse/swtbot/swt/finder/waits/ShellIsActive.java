@@ -12,10 +12,10 @@
 package org.eclipse.swtbot.swt.finder.waits;
 
 
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.BoolResult;
 import org.eclipse.swtbot.swt.finder.utils.StringUtils;
+import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.swtbot.swt.finder.widgets.WidgetNotFoundException;
 

@@ -4,7 +4,6 @@ Bundle-Name: SWTBot SWT Spy Plug-in (Based on Eclipse's SWT Spy) (incubation)
 Bundle-SymbolicName: org.eclipse.swtbot.swt.spy;singleton:=true
 Bundle-Version: 2.0.0.qualifier
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
  org.eclipse.swtbot.swt.finder,
  org.eclipse.swt.examples,
  org.junit

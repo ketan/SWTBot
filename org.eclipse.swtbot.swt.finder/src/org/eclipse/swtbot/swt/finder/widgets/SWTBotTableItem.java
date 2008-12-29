@@ -12,7 +12,6 @@ package org.eclipse.swtbot.swt.finder.widgets;
 
 
 
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Event;
@@ -24,6 +23,7 @@ import org.eclipse.swtbot.swt.finder.results.StringResult;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.results.WidgetResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
+import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 
 /**
  * @author Vincent MAHE &lt;vmahe [at] free [dot]fr&gt;

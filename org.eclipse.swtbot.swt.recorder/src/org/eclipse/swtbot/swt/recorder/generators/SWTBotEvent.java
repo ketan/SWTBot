@@ -11,8 +11,8 @@
 package org.eclipse.swtbot.swt.recorder.generators;
 
 
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 import org.eclipse.swtbot.swt.recorder.methodargs.NullArgument;
 import org.eclipse.swtbot.swt.recorder.methodargs.SWTBotEventArguments;
 import org.eclipse.swtbot.swt.recorder.methodargs.StringArgument;
