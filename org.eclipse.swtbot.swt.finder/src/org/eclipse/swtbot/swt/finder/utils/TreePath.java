@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.utils;
 
+import java.util.Arrays;
+
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 
 public final class TreePath {
@@ -77,6 +79,29 @@ public final class TreePath {
 			return null;
 		}
 		return segments[segments.length - 1];
+	}
+
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + hash;
+		result = prime * result + Arrays.hashCode(segments);
+		return result;
+	}
+
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TreePath other = (TreePath) obj;
+		if (hash != other.hash)
+			return false;
+		if (!Arrays.equals(segments, other.segments))
+			return false;
+		return true;
 	}
 
 	/**
