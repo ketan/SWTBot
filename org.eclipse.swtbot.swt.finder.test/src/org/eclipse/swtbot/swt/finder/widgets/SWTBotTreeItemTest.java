@@ -11,7 +11,6 @@
 package org.eclipse.swtbot.swt.finder.widgets;
 
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
-import org.eclipse.swtbot.swt.finder.utils.TableRow;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -84,71 +83,6 @@ public class SWTBotTreeItemTest extends AbstractSWTTestCase {
 		assertTrue(item.isChecked());
 		item.toggleCheck();
 		assertFalse(item.isChecked());
-	}
-	
-	public void testGetsRowCount() throws Exception {
-		assertEquals(2, tree.getTreeItem("Node 2").rowCount());
-		assertEquals(1, tree.getTreeItem("Node 3").rowCount());
-		assertEquals(0, tree.getTreeItem("Node 4").rowCount());
-		assertTrue(tree.hasItems());
-	}
-	
-	public void testGetsColumnTextBasedOnColumnNumbers() throws Exception {
-		bot.checkBox("Multiple Columns").select();
-		tree = bot.treeInGroup("Tree");
-		SWTBotTreeItem item = tree.getTreeItem("Node 1");
-
-		assertEquals("0", item.cell(2));
-		assertEquals("Node 1", item.cell(0));
-		assertEquals("today", item.cell(3));
-		assertEquals("classes", item.cell(1));
-	}
-	
-	public void testGetsColumnTextBasedOnRowColumnNumbers() throws Exception {
-		bot.checkBox("Multiple Columns").select();
-		tree = bot.treeInGroup("Tree");
-		SWTBotTreeItem item = tree.getTreeItem("Node 2");
-
-		assertEquals("2556", item.cell(0, 2));
-		assertEquals("Node 2.1", item.cell(0, 0));
-		assertEquals("tomorrow", item.cell(1, 3));
-	}
-	
-	public void testGetsRow() throws Exception {
-		bot.checkBox("Multiple Columns").select();
-		tree = bot.treeInGroup("Tree");
-		SWTBotTreeItem item = tree.getTreeItem("Node 3");
-		TableRow row = item.row();
-		assertEquals(4, row.columnCount());
-		assertEquals("Node 3", row.get(0));
-		assertEquals("images", row.get(1));
-		assertEquals("yesterday", row.get(3));
-	}
-	
-	public void testGetNodeBasedOnIndex() throws Exception {
-		bot.checkBox("Multiple Columns").select();
-		tree = bot.treeInGroup("Tree");
-		SWTBotTreeItem item = tree.getTreeItem("Node 2");
-		SWTBotTreeItem testNode = item.getNode(0);
-		assertEquals("Node 2.1", testNode.getText());
-		
-		testNode = item.getNode(1);
-		assertEquals("Node 2.2", testNode.getText());
-		
-		testNode = testNode.getNode(0);
-		assertEquals("Node 2.2.1", testNode.getText());
-		
-		int row = 1;
-		try {
-			assertEquals(0, testNode.rowCount());
-			testNode.getNode(row);
-			fail("Expected IllegalArgumentException since 'Node 2.2.1' does not have row at index ("+row+")");
-		} catch (IllegalArgumentException e) {
-			String expected = "The row number (" + row
-			+ ") is more than the number of rows(" + testNode.rowCount()
-			+ ") in the tree.";
-			assertEquals(expected, e.getMessage());
-		}
 	}
 
 	protected void setUp() throws Exception {
