@@ -17,7 +17,7 @@ import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.ListResult;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
-import org.eclipse.ui.IViewReference;
+import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -25,16 +25,16 @@ import org.eclipse.ui.PlatformUI;
 import org.hamcrest.Matcher;
 
 /**
- * Waits until a part that matches the specified matcher appears.
+ * Waits until an editor that matches the specified matcher appears.
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class WaitForPart extends DefaultCondition {
+public class WaitForEditor extends DefaultCondition {
 	public final Matcher			matcher;
-	private List<IViewReference>	workbenchParts;
+	private List<IEditorReference>	workbenchParts;
 
-	public WaitForPart(Matcher<?> matcher) {
+	public WaitForEditor(Matcher<?> matcher) {
 		this.matcher = matcher;
 	}
 
@@ -43,33 +43,33 @@ public class WaitForPart extends DefaultCondition {
 	}
 
 	public boolean test() throws Exception {
-		workbenchParts = new ArrayList<IViewReference>();
+		workbenchParts = new ArrayList<IEditorReference>();
 		findMatchingParts();
 		return !workbenchParts.isEmpty();
 	}
 
 	private void findMatchingParts() {
-		for (IViewReference workbenchPartReference : findViews()) {
+		for (IEditorReference workbenchPartReference : findEditors()) {
 			if (matcher.matches(workbenchPartReference))
 				workbenchParts.add(workbenchPartReference);
 		}
 	}
 
-	public IViewReference get(int index) {
+	public IEditorReference get(int index) {
 		return workbenchParts.get(index);
 	}
 
-	private List<IViewReference> findViews() {
-		return UIThreadRunnable.syncExec(SWTUtils.display(), new ListResult<IViewReference>() {
-			public List<IViewReference> run() {
-				ArrayList<IViewReference> result = new ArrayList<IViewReference>();
+	private List<IEditorReference> findEditors() {
+		return UIThreadRunnable.syncExec(SWTUtils.display(), new ListResult<IEditorReference>() {
+			public List<IEditorReference> run() {
+				ArrayList<IEditorReference> result = new ArrayList<IEditorReference>();
 				IWorkbenchPage[] pages = getWorkbenchPages();
 				for (int i = 0; i < pages.length; i++) {
 					IWorkbenchPage page = pages[i];
-					IViewReference[] viewReferences = page.getViewReferences();
-					for (int j = 0; j < viewReferences.length; j++) {
-						IViewReference viewReference = viewReferences[j];
-						result.add(viewReference);
+					IEditorReference[] editorReferences = page.getEditorReferences();
+					for (int j = 0; j < editorReferences.length; j++) {
+						IEditorReference editorReference = editorReferences[j];
+						result.add(editorReference);
 					}
 				}
 				return result;
@@ -84,7 +84,7 @@ public class WaitForPart extends DefaultCondition {
 		return pages;
 	}
 
-	public List<IViewReference> all() {
+	public List<IEditorReference> all() {
 		return workbenchParts;
 	}
 }

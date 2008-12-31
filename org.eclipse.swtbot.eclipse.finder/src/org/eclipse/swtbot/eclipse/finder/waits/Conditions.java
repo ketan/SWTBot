@@ -24,4 +24,12 @@ public class Conditions extends org.eclipse.swtbot.swt.finder.waits.Conditions {
 	public static WaitForPart waitForPart(Matcher<?> matcher) {
 		return new WaitForPart(matcher);
 	}
+
+	/**
+	 * @param matcher a matcher
+	 * @return a condition that waits until the matcher evaluates to true.
+	 */
+	public static WaitForEditor waitForEditor(Matcher<?> matcher) {
+		return new WaitForEditor(matcher);
+	}
 }

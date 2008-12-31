@@ -11,6 +11,7 @@
 package org.eclipse.swtbot.eclipse.finder;
 
 import static org.eclipse.swtbot.eclipse.finder.matchers.WidgetMatcherFactory.withPartName;
+import static org.eclipse.swtbot.eclipse.finder.waits.Conditions.waitForEditor;
 import static org.eclipse.swtbot.eclipse.finder.waits.Conditions.waitForPart;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.instanceOf;
@@ -18,7 +19,7 @@ import static org.hamcrest.Matchers.instanceOf;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import org.eclipse.swtbot.eclipse.finder.waits.WaitForEditor;
 import org.eclipse.swtbot.eclipse.finder.waits.WaitForPart;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEclipseEditor;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotView;
@@ -105,7 +106,7 @@ public class SWTEclipseBot extends SWTBot {
 		Matcher matcher = allOf(instanceOf(IViewReference.class), withPartName(label));
 		WaitForPart waitForView = waitForPart(matcher);
 		waitUntilWidgetAppears(waitForView);
-		return new SWTBotView((IViewReference) waitForView.get(index), this);
+		return new SWTBotView(waitForView.get(index), this);
 	}
 
 	/**
@@ -117,10 +118,10 @@ public class SWTEclipseBot extends SWTBot {
 	@SuppressWarnings("unchecked")
 	public List<SWTBotEclipseEditor> editors() throws WidgetNotFoundException {
 		Matcher matcher = allOf(instanceOf(IEditorReference.class));
-		WaitForPart waitForView = waitForPart(matcher);
-		waitUntilWidgetAppears(waitForView);
+		WaitForEditor waiForEditor = waitForEditor(matcher);
+		waitUntilWidgetAppears(waiForEditor);
 
-		List<IWorkbenchPartReference> editors = waitForView.all();
+		List<IEditorReference> editors = waiForEditor.all();
 		List<SWTBotEclipseEditor> result = new ArrayList<SWTBotEclipseEditor>(editors.size());
 
 		for (IWorkbenchPartReference editor : editors) {
@@ -141,7 +142,7 @@ public class SWTEclipseBot extends SWTBot {
 		WaitForPart waitForView = waitForPart(matcher);
 		waitUntilWidgetAppears(waitForView);
 
-		List<IWorkbenchPartReference> editors = waitForView.all();
+		List<IViewReference> editors = waitForView.all();
 		List<SWTBotView> result = new ArrayList<SWTBotView>(editors.size());
 
 		for (IWorkbenchPartReference editor : editors) {
