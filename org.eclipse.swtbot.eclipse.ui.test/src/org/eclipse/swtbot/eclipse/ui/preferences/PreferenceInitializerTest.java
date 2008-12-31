@@ -29,13 +29,15 @@ public class PreferenceInitializerTest extends TestCase {
 	private PreferenceStore			swtbotPreferenceStore;
 	private PreferenceStore			jdtPreferenceStore;
 	private static final String		JDT_IMPORT_PROPERTY	= "content_assist_favorite_static_members";
-	private static final String		DEFAULT_IMPORTS		= "org.eclipse.swtbot.swt.finder.matcher.WidgetMatcherFactory.*;"
+	private static final String		DEFAULT_IMPORTS		= "org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.*;"
 																+ "org.hamcrest.Matchers.*;org.hamcrest.MatcherAssert.*;"
 																+ "junit.framework.Assert.*;"
-																+ "org.eclipse.swtbot.eclipse.finder.matcher.WidgetMatcherFactory.*;"
-																+ "org.eclipse.swtbot.swt.finder.finder.UIThreadRunnable.*;"
+																+ "org.eclipse.swtbot.eclipse.finder.matchers.WidgetMatcherFactory.*;"
+																+ "org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable.*;"
 																+ "org.eclipse.swtbot.swt.finder.SWTBotTestCase.*;"
-																+ "org.eclipse.swtbot.swt.finder.wait.Conditions.*";
+																+ "org.eclipse.swtbot.eclipse.finder.SWTBotEclipseTestCase.*;"
+																+ "org.eclipse.swtbot.eclipse.finder.waits.Conditions.*;"
+																+ "org.eclipse.swtbot.swt.finder.waits.Conditions.*";
 
 	public void testCanPullJDTImports() throws Exception {
 		jdtPreferenceStore.setValue(JDT_IMPORT_PROPERTY, "foo.*;bar.*");

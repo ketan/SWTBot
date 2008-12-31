@@ -14,15 +14,24 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import junit.framework.Assert;
+
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jdt.ui.PreferenceConstants;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.swtbot.eclipse.finder.SWTBotEclipseTestCase;
+import org.eclipse.swtbot.eclipse.finder.matchers.WidgetMatcherFactory;
+import org.eclipse.swtbot.eclipse.finder.waits.Conditions;
 import org.eclipse.swtbot.eclipse.ui.Activator;
+import org.eclipse.swtbot.swt.finder.SWTBotTestCase;
 import org.eclipse.swtbot.swt.finder.collections.OrderedSet;
+import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.utils.StringUtils;
 import org.eclipse.ui.IStartup;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 
 /**
  * Initializes the default preferences if none exist.
@@ -89,15 +98,21 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer impleme
 
 	private OrderedSet<String> getDefaultFavorites() {
 		OrderedSet<String> orderedSet = new OrderedSet<String>();
-		orderedSet.add("org.eclipse.swtbot.swt.finder.matcher.WidgetMatcherFactory.*");
-		orderedSet.add("org.hamcrest.Matchers.*");
-		orderedSet.add("org.hamcrest.MatcherAssert.*");
-		orderedSet.add("junit.framework.Assert.*");
-		orderedSet.add("org.eclipse.swtbot.eclipse.finder.matcher.WidgetMatcherFactory.*");
-		orderedSet.add("org.eclipse.swtbot.swt.finder.finder.UIThreadRunnable.*");
-		orderedSet.add("org.eclipse.swtbot.swt.finder.SWTBotTestCase.*");
-		orderedSet.add("org.eclipse.swtbot.swt.finder.wait.Conditions.*");
+		orderedSet.add(importStatement(org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.class));
+		orderedSet.add(importStatement(Matchers.class));
+		orderedSet.add(importStatement(MatcherAssert.class));
+		orderedSet.add(importStatement(Assert.class));
+		orderedSet.add(importStatement(WidgetMatcherFactory.class));
+		orderedSet.add(importStatement(UIThreadRunnable.class));
+		orderedSet.add(importStatement(SWTBotTestCase.class));
+		orderedSet.add(importStatement(SWTBotEclipseTestCase.class));
+		orderedSet.add(importStatement(Conditions.class));
+		orderedSet.add(importStatement(org.eclipse.swtbot.swt.finder.waits.Conditions.class));
 		return orderedSet;
+	}
+
+	private String importStatement(Class<?> clazz) {
+		return clazz.getName() + ".*";
 	}
 
 	public void propertyChange(PropertyChangeEvent event) {

@@ -14,7 +14,10 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.debug.ui,
  org.eclipse.jdt.junit.runtime,
  org.eclipse.jdt.ui,
- org.eclipse.swtbot.swt.finder
+ org.eclipse.swtbot.swt.finder,
+ org.eclipse.swtbot.eclipse.finder,
+ org.junit,
+ org.hamcrest
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: Eclipse.org
 Export-Package: org.eclipse.swtbot.eclipse.ui,

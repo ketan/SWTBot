@@ -1,0 +1,6 @@
+#Tue Dec 30 21:55:00 IST 2008
+eclipse.preferences.version=1
+org.moreunit.flexiblenaming=true
+org.moreunit.prefixes=
+org.moreunit.unitsourcefolder=org.eclipse.swtbot.eclipse.ui\:src\:org.eclipse.swtbot.eclipse.ui.test\:src
+org.moreunit.useprojectsettings=true
