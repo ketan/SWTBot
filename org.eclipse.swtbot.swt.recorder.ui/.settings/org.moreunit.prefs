@@ -1,0 +1,6 @@
+#Wed Dec 31 22:51:04 IST 2008
+eclipse.preferences.version=1
+org.moreunit.flexiblenaming=true
+org.moreunit.prefixes=
+org.moreunit.unitsourcefolder=org.eclipse.swtbot.swt.recorder.ui\:src\:org.eclipse.swtbot.swt.recorder.ui.test\:src
+org.moreunit.useprojectsettings=true
