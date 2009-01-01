@@ -6,15 +6,15 @@ System Requirements
 
 To build SWTBot from source you need to download all code from SVN using the following command.
 
-$ svn co http://swtbot.svn.sourceforge.net/svnroot/swtbot/trunk swtbot
+$ svn co http://dev.eclipse.org/svnroot/technology/org.eclipse.swtbot/trunk swtbot
 
 Then you need to download the following from the Eclipse download site (http://download.eclipse.org/eclipse/downloads/ or http://archive.eclipse.org/eclipse/downloads/index.php for archives)
 
     * Eclipse SDK 3.3 or higher
 
-Copy over the eclipse-SDK-x.y.tar.gz (or eclipse-SDK-x.y.zip) to swtbot/org.eclipse.swtbot.releng/test-sandbox
+Copy over the eclipse-SDK-x.y.tar.gz (or eclipse-SDK-x.y.zip) to swtbot/org.eclipse.swtbot.releng/externals
 
-$ cp /path/to/eclipse-SDK-x.y.tar.gz swtbot/org.eclipse.swtbot.releng/test-sandbox
+$ cp /path/to/eclipse-SDK-x.y.tar.gz swtbot/org.eclipse.swtbot.releng/externals
 
 Change directory to org.eclipse.swtbot.releng
 
@@ -32,6 +32,8 @@ eclipse.buildId = 3.3
 Extract a target eclipse against which SWTBot will be built.
 
 $ ant materialize-workspace
+
+You can now point your workspace root to the directory where you checked out SWTBot, then import all the swtbot projects. Under Preferences>Target-Platform set the target eclipse to the eclipse directory under the swtbot checkout.
 
 Build swtbot and run all tests:
 $ ant
