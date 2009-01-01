@@ -7,11 +7,12 @@
  * 
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
+ *     Ketan Patel - https://bugs.eclipse.org/bugs/show_bug.cgi?id=259837
  *******************************************************************************/
 
 package org.eclipse.swtbot.swt.finder.waits;
 
-
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
@@ -88,6 +89,16 @@ public abstract class Conditions {
 	 */
 	public static WaitForShell waitForShell(Matcher<?> matcher) {
 		return new WaitForShell(matcher);
+	}
+
+	/**
+	 * @param matcher the matcher.
+	 * @param parent the parent under which a shell will be found or <code>null</code> to search all shells.
+	 * @return a condition that waits until the matcher evaluates to true.
+	 * @since 2.0
+	 */
+	public static WaitForShell waitForShell(Matcher<?> matcher, Shell parent) {
+		return new WaitForShellInParent(parent, matcher);
 	}
 
 	/**

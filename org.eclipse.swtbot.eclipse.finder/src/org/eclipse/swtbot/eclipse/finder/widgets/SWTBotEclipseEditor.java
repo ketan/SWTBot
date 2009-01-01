@@ -7,6 +7,7 @@
  * 
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
+ *     Ketan Patel - https://bugs.eclipse.org/bugs/show_bug.cgi?id=259837
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.finder.widgets;
 
@@ -218,7 +219,7 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	 */
 	private SWTBotShell activatePopupShell() throws QuickFixNotFoundException {
 		try {
-			SWTBotShell shell = bot.shell("", 0);
+			SWTBotShell shell = bot.shell("", bot.activeShell().widget);
 			shell.activate();
 			log.debug("Activated quickfix shell.");
 			return shell;

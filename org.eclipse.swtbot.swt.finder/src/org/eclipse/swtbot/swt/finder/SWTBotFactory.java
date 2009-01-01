@@ -10,6 +10,7 @@
  *     Vincent Mahe - http://swtbot.org/bugzilla/show_bug.cgi?id=123
  *     Ketan Padegaonkar - http://swtbot.org/bugzilla/show_bug.cgi?id=136
  *     Hans Schwaebli - http://swtbot.org/bugzilla/show_bug.cgi?id=135
+ *     Ketan Patel - https://bugs.eclipse.org/bugs/show_bug.cgi?id=259837
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder;
 
@@ -122,6 +123,37 @@ abstract class SWTBotFactory {
 	 */
 	public List<Shell> shells(String text) {
 		WaitForShell waitForShell = waitForShell(withText(text));
+		waitUntilWidgetAppears(waitForShell);
+		ArrayList<Shell> allShells = waitForShell.getAllShells();
+		return allShells;
+	}
+
+	/**
+	 * @return a wrapper around a @{link Shell} with the specified text.
+	 * @param text the text on the shell.
+	 * @param parent the parent under which a shell will be found.
+	 */
+	public SWTBotShell shell(String text, Shell parent) {
+		return shell(text, parent, 0);
+	}
+
+	/**
+	 * @return a wrapper around a {@link Shell} with the specified index.
+	 * @param text the text on the shell.
+	 * @param parent the parent under which a shell will be found.
+	 * @param index the index of the shell, in case there are multiple shells with the same text.
+	 */
+	public SWTBotShell shell(String text, Shell parent, int index) {
+		return new SWTBotShell(shells(text, parent).get(index));
+	}
+
+	/**
+	 * @return a List of {@link Shell} which matched.
+	 * @param text the text on the shell.
+	 * @param parent the parent under which a shell will be found.
+	 */
+	public List<Shell> shells(String text, Shell parent) {
+		WaitForShell waitForShell = waitForShell(withText(text), parent);
 		waitUntilWidgetAppears(waitForShell);
 		ArrayList<Shell> allShells = waitForShell.getAllShells();
 		return allShells;

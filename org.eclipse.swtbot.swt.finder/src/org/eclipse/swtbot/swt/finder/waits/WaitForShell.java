@@ -36,7 +36,7 @@ public class WaitForShell extends DefaultCondition {
 	}
 
 	public boolean test() throws Exception {
-		Shell[] shells = bot.getFinder().getShells();
+		Shell[] shells = findShells();
 		this.matchingShells = new ArrayList<Shell>();
 		for (Shell shell : shells) {
 			if (matcher.matches(shell)) {
@@ -44,6 +44,13 @@ public class WaitForShell extends DefaultCondition {
 			}
 		}
 		return !matchingShells.isEmpty();
+	}
+
+	/**
+	 * Subclasses may override to find other shells.
+	 */
+	protected Shell[] findShells() {
+		return bot.getFinder().getShells();
 	}
 
 	public ArrayList<Shell> getAllShells() {
