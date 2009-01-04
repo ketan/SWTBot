@@ -83,7 +83,9 @@ public class SWTBotShell extends AbstractSWTBot<Shell> {
 		notify(SWT.Close);
 		asyncExec(new VoidResult() {
 			public void run() {
-				widget.close();
+				// TODO investigate bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=259895
+				if (!widget.isDisposed())
+					widget.close();
 			}
 		});
 		new SWTBot().waitUntil(new DefaultCondition() {
