@@ -107,16 +107,16 @@ public class HamcrestFactoryWriter implements HamcrestWriter {
 
 		imports.add("import org.eclipse.swt.SWT");
 
-		imports.add("import static org.eclipse.swtbot.swt.finder.matcher.WidgetMatcherFactory.withMnemonic");
-		imports.add("import static org.eclipse.swtbot.swt.finder.matcher.WidgetMatcherFactory.withText");
-		imports.add("import static org.eclipse.swtbot.swt.finder.matcher.WidgetMatcherFactory.withId");
-		imports.add("import static org.eclipse.swtbot.swt.finder.matcher.WidgetMatcherFactory.withLabel");
-		imports.add("import static org.eclipse.swtbot.swt.finder.matcher.WidgetMatcherFactory.withText");
-		imports.add("import static org.eclipse.swtbot.swt.finder.matcher.WidgetMatcherFactory.inGroup");
-		imports.add("import static org.eclipse.swtbot.swt.finder.matcher.WidgetMatcherFactory.withStyle");
-		imports.add("import static org.eclipse.swtbot.swt.finder.matcher.WidgetMatcherFactory.withTooltip");
-		imports.add("import static org.eclipse.swtbot.swt.finder.matcher.WidgetMatcherFactory.widgetOfType");
-		imports.add("import static org.eclipse.swtbot.swt.finder.matcher.WidgetMatcherFactory.allOf");
+		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMnemonic");
+		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withText");
+		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withId");
+		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withLabel");
+		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withText");
+		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.inGroup");
+		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withStyle");
+		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withTooltip");
+		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widgetOfType");
+		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.allOf");
 
 		imports.add("import org.hamcrest.Matcher");
 
