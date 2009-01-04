@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swtbot.swt.finder.ReferenceBy;
@@ -23,6 +22,7 @@ import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.StringUtils;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
+import org.hamcrest.SelfDescribing;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -33,21 +33,32 @@ public class SWTBotList extends AbstractSWTBot<List> {
 
 	/**
 	 * Constructs an isntance of this with the given list widget.
-	 *
+	 * 
 	 * @param list the list.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 */
 	public SWTBotList(List list) throws WidgetNotFoundException {
-		super(list);
+		this(list, null);
+	}
+
+	/**
+	 * Constructs an isntance of this with the given list widget.
+	 * 
+	 * @param list the list.
+	 * @param description the description of the widget, this will be reported by {@link #toString()}
+	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
+	 */
+	public SWTBotList(List list, SelfDescribing description) throws WidgetNotFoundException {
+		super(list, description);
 	}
 
 	/**
 	 * Selects the item matching the given text.
-	 *
+	 * 
 	 * @param item the item to select in the list.
 	 */
 	public void select(final String item) {
-			log.debug(MessageFormat.format("Set selection {0} to text {1}", this, item));
+		log.debug(MessageFormat.format("Set selection {0} to text {1}", this, item));
 		assertEnabled();
 		final int indexOf = indexOf(item);
 		Assert.isTrue(indexOf != -1, "Item `" + item + "' not found in list.");
@@ -61,15 +72,15 @@ public class SWTBotList extends AbstractSWTBot<List> {
 
 	/**
 	 * Selects the given index.
-	 *
+	 * 
 	 * @param index the selection index.
 	 */
 	public void select(final int index) {
-			log.debug(MessageFormat.format("Set selection {0} to index {1}", this, index));
+		log.debug(MessageFormat.format("Set selection {0} to index {1}", this, index));
 		assertEnabled();
 		int itemCount = itemCount();
-		Assert.isTrue(index <= itemCount, java.text.MessageFormat.format("The index ({0}) is more than the number of items ({1}) in the list.",
-				index, itemCount));
+		Assert.isTrue(index <= itemCount, java.text.MessageFormat.format(
+				"The index ({0}) is more than the number of items ({1}) in the list.", index, itemCount));
 		asyncExec(new VoidResult() {
 			public void run() {
 				widget.setSelection(index);
@@ -80,7 +91,7 @@ public class SWTBotList extends AbstractSWTBot<List> {
 
 	/**
 	 * Gets the item count in the list
-	 *
+	 * 
 	 * @return the number of items in the list.
 	 */
 	public int itemCount() {
@@ -93,7 +104,7 @@ public class SWTBotList extends AbstractSWTBot<List> {
 
 	/**
 	 * Gets the selection count.
-	 *
+	 * 
 	 * @return the number of selected items in the list.
 	 */
 	public int selectionCount() {
@@ -106,7 +117,7 @@ public class SWTBotList extends AbstractSWTBot<List> {
 
 	/**
 	 * Gets the arrray of selected items.
-	 *
+	 * 
 	 * @return the selected items in the list.
 	 */
 	public String[] selection() {
@@ -119,7 +130,7 @@ public class SWTBotList extends AbstractSWTBot<List> {
 
 	/**
 	 * Selects the indexes provided.
-	 *
+	 * 
 	 * @param indices the indices to select in the list.
 	 */
 	public void select(final int[] indices) {
@@ -136,7 +147,7 @@ public class SWTBotList extends AbstractSWTBot<List> {
 
 	/**
 	 * Sets the selection to the given list of items.
-	 *
+	 * 
 	 * @param items the items to select in the list.
 	 */
 	public void select(final String[] items) {
@@ -178,7 +189,7 @@ public class SWTBotList extends AbstractSWTBot<List> {
 
 	/**
 	 * Gets the index of the given item.
-	 *
+	 * 
 	 * @param item the search item.
 	 * @return the index of the item, or -1 if the item does not exist.
 	 */
@@ -192,7 +203,7 @@ public class SWTBotList extends AbstractSWTBot<List> {
 
 	/**
 	 * Gets the item at the given index.
-	 *
+	 * 
 	 * @param index the zero based index.
 	 * @return the item at the specified index.
 	 */

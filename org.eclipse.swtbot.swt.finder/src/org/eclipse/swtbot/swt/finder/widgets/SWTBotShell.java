@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.SWTBot;
@@ -20,6 +19,7 @@ import org.eclipse.swtbot.swt.finder.results.BoolResult;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
+import org.hamcrest.SelfDescribing;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -35,7 +35,18 @@ public class SWTBotShell extends AbstractSWTBot<Shell> {
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 */
 	public SWTBotShell(Shell shell) throws WidgetNotFoundException {
-		super(shell);
+		this(shell, null);
+	}
+
+	/**
+	 * Constructs an instance of this with the given shell.
+	 * 
+	 * @param shell the widget.
+	 * @param description the description of the widget, this will be reported by {@link #toString()}
+	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
+	 */
+	public SWTBotShell(Shell shell, SelfDescribing description) throws WidgetNotFoundException {
+		super(shell, description);
 	}
 
 	// @Override

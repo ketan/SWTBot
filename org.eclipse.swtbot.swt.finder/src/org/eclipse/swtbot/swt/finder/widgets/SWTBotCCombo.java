@@ -14,7 +14,6 @@ package org.eclipse.swtbot.swt.finder.widgets;
 
 import java.util.Arrays;
 
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swtbot.swt.finder.ReferenceBy;
@@ -25,6 +24,7 @@ import org.eclipse.swtbot.swt.finder.results.IntResult;
 import org.eclipse.swtbot.swt.finder.results.StringResult;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
+import org.hamcrest.SelfDescribing;
 
 /**
  * This represents a {@link CCombo} widget.
@@ -43,7 +43,18 @@ public class SWTBotCCombo extends AbstractSWTBot<CCombo> {
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 */
 	public SWTBotCCombo(CCombo w) throws WidgetNotFoundException {
-		super(w);
+		this(w, null);
+	}
+	
+	/**
+	 * Constructs an instance of this with the given widget.
+	 * 
+	 * @param w the widget.
+	 * @param description the description of the widget, this will be reported by {@link #toString()}
+	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
+	 */
+	public SWTBotCCombo(CCombo w, SelfDescribing description) throws WidgetNotFoundException {
+		super(w, description);
 	}
 
 	/**

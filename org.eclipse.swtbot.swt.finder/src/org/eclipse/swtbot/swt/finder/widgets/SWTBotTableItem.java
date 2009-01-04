@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
-
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Event;
@@ -25,6 +23,7 @@ import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.results.WidgetResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
+import org.hamcrest.SelfDescribing;
 
 /**
  * @author Vincent MAHE &lt;vmahe [at] free [dot]fr&gt;
@@ -40,7 +39,16 @@ public class SWTBotTableItem extends AbstractSWTBot<TableItem> {
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 */
 	public SWTBotTableItem(final TableItem tableItem) throws WidgetNotFoundException {
-		super(tableItem);
+		this(tableItem, null);
+	}
+
+	/**
+	 * @param tableItem the widget.
+	 * @param description the description of the widget, this will be reported by {@link #toString()}
+	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
+	 */
+	public SWTBotTableItem(final TableItem tableItem, SelfDescribing description) throws WidgetNotFoundException {
+		super(tableItem, description);
 		this.table = syncExec(new WidgetResult<Table>() {
 			public Table run() {
 				return tableItem.getParent();
@@ -50,7 +58,7 @@ public class SWTBotTableItem extends AbstractSWTBot<TableItem> {
 
 	/**
 	 * Selects the current table item.
-	 *
+	 * 
 	 * @return the current node.
 	 */
 	public SWTBotTableItem select() {
@@ -67,7 +75,7 @@ public class SWTBotTableItem extends AbstractSWTBot<TableItem> {
 
 	/**
 	 * Click on the table at given coordinates
-	 *
+	 * 
 	 * @param x the x co-ordinate of the click
 	 * @param y the y co-ordinate of the click
 	 */
@@ -98,7 +106,7 @@ public class SWTBotTableItem extends AbstractSWTBot<TableItem> {
 
 	/**
 	 * Clicks on this node.
-	 *
+	 * 
 	 * @return the current node.
 	 */
 	public SWTBotTableItem click() {
@@ -150,7 +158,7 @@ public class SWTBotTableItem extends AbstractSWTBot<TableItem> {
 
 	/**
 	 * Gets if the checkbox button is checked.
-	 *
+	 * 
 	 * @return <code>true</code> if the checkbox is checked. Otherwise <code>false</code>.
 	 */
 	public boolean isChecked() {
@@ -164,7 +172,7 @@ public class SWTBotTableItem extends AbstractSWTBot<TableItem> {
 
 	/**
 	 * Creates an event for CheckboxTableItem case.
-	 *
+	 * 
 	 * @return an event that encapsulates {@link #widget} and {@link #display}.
 	 */
 	private Event createCheckEvent() {
@@ -199,7 +207,7 @@ public class SWTBotTableItem extends AbstractSWTBot<TableItem> {
 
 	/**
 	 * notify listeners about checkbox state change.
-	 *
+	 * 
 	 * @since 1.3
 	 */
 	private void notifyCheck() {

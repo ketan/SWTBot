@@ -36,15 +36,17 @@ import org.eclipse.swtbot.swt.finder.results.Result;
 import org.eclipse.swtbot.swt.finder.results.StringResult;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.results.WidgetResult;
-import org.eclipse.swtbot.swt.finder.utils.ClassUtils;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.SWTBotEvents;
 import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.utils.Traverse;
+import org.eclipse.swtbot.swt.finder.utils.WidgetTextDescription;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 import org.hamcrest.Matcher;
+import org.hamcrest.SelfDescribing;
+import org.hamcrest.StringDescription;
 
 /**
  * Helper to find SWT {@link Widget}s and perform operations on them.
@@ -55,11 +57,13 @@ import org.hamcrest.Matcher;
 public abstract class AbstractSWTBot<T extends Widget> {
 
 	/** The logger. */
-	protected final Logger	log;
+	protected final Logger			log;
 	/** With great power comes great responsibility, use carefully. */
-	public final T			widget;
+	public final T					widget;
 	/** With great power comes great responsibility, use carefully. */
-	public final Display	display;
+	public final Display			display;
+	/** The description of the widget. */
+	private final SelfDescribing	description;
 
 	/**
 	 * Constructs a new instance with the given widget.
@@ -68,11 +72,29 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 */
 	public AbstractSWTBot(T w) throws WidgetNotFoundException {
+		this(w, new WidgetTextDescription(w));
+	}
+
+	/**
+	 * Constructs a new instance with the given widget.
+	 * 
+	 * @param w the widget.
+	 * @param description the description of the widget, this will be reported by {@link #toString()}
+	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
+	 */
+	public AbstractSWTBot(T w, SelfDescribing description) throws WidgetNotFoundException {
 		if (w == null)
 			throw new WidgetNotFoundException("The widget was null.");
+
+		this.widget = w;
+		if (description == null)
+			this.description = new WidgetTextDescription(w);
+		else
+			this.description = description;
+
 		if (w.isDisposed())
-			throw new WidgetNotFoundException("The widget was disposed." + SWTUtils.toString(w));
-		widget = w;
+			throw new WidgetNotFoundException("The widget {" + description + "} was disposed." + SWTUtils.toString(w));
+
 		display = w.getDisplay();
 		log = Logger.getLogger(getClass());
 	}
@@ -108,7 +130,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 		createEvent.type = eventType;
 		final Object[] result = syncExec(new ArrayResult<Object>() {
 			public Object[] run() {
-				return new Object[] { SWTBotEvents.toString(createEvent), this.toString() };
+				return new Object[] { SWTBotEvents.toString(createEvent), AbstractSWTBot.this.toString() };
 			}
 		});
 
@@ -238,7 +260,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 
 	@Override
 	public String toString() {
-		return ClassUtils.simpleClassName(this) + " " + SWTUtils.toString(widget);
+		return StringDescription.toString(description);
 	}
 
 	// /**
@@ -571,7 +593,8 @@ public abstract class AbstractSWTBot<T extends Widget> {
 		setFocus();
 
 		if (!(widget instanceof Control))
-			throw new UnsupportedOperationException("Can only traverse widgets of type Control. You're traversing a widget of type: " + widget.getClass().getName());
+			throw new UnsupportedOperationException("Can only traverse widgets of type Control. You're traversing a widget of type: "
+					+ widget.getClass().getName());
 
 		return syncExec(new BoolResult() {
 			public Boolean run() {

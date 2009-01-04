@@ -23,3 +23,4 @@ Export-Package: org.eclipse.swtbot.eclipse.finder,
  org.eclipse.swtbot.eclipse.finder.test.ui.views,
  org.eclipse.swtbot.eclipse.finder.widgets,
  org.eclipse.swtbot.eclipse.finder.widgets.helpers
+Eclipse-RegisterBuddy: org.apache.log4j

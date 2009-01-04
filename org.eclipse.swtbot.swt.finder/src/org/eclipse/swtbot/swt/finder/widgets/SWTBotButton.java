@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swtbot.swt.finder.ReferenceBy;
@@ -19,6 +18,7 @@ import org.eclipse.swtbot.swt.finder.Style;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
+import org.hamcrest.SelfDescribing;
 
 /**
  * This represents a {@link Button} widget.
@@ -37,7 +37,19 @@ public class SWTBotButton extends AbstractSWTBot<Button> {
 	 * @since 2.0
 	 */
 	public SWTBotButton(Button button) {
-		super(button);
+		this(button, null);
+	}
+
+	/**
+	 * Constructs an instance of this object with the given button
+	 * 
+	 * @param button the widget.
+	 * @param description the description of the widget, this will be reported by {@link #toString()}
+	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
+	 * @since 2.0
+	 */
+	public SWTBotButton(Button button, SelfDescribing description) {
+		super(button, description);
 	}
 
 	/**

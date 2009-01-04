@@ -15,7 +15,6 @@ import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMn
 
 import java.util.List;
 
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.MenuItem;
@@ -29,10 +28,11 @@ import org.eclipse.swtbot.swt.finder.finders.EventContextMenuFinder;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
+import org.hamcrest.SelfDescribing;
 
 /**
  * This represents a toolbar item that is a drop down button.
- *
+ * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  * @since 1.2
@@ -43,19 +43,30 @@ public class SWTBotToolbarDropDownButton extends SWTBotToolbarButton {
 
 	/**
 	 * Construcst an new instance of this item.
-	 *
+	 * 
 	 * @param w the tool item.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 */
 	public SWTBotToolbarDropDownButton(ToolItem w) throws WidgetNotFoundException {
-		super(w);
+		this(w, null);
+	}
+
+	/**
+	 * Construcst an new instance of this item.
+	 * 
+	 * @param w the tool item.
+	 * @param description the description of the widget, this will be reported by {@link #toString()}
+	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
+	 */
+	public SWTBotToolbarDropDownButton(ToolItem w, SelfDescribing description) throws WidgetNotFoundException {
+		super(w, description);
 		Assert.isTrue(SWTUtils.hasStyle(w, SWT.DROP_DOWN), "Expecting a drop down button.");
 
 	}
 
 	/**
 	 * Finds the submenu inside this menu item.
-	 *
+	 * 
 	 * @param menuItem the submenu to search
 	 * @return the menu item with the specified text
 	 * @throws WidgetNotFoundException if the menuItem could not be found
@@ -93,7 +104,7 @@ public class SWTBotToolbarDropDownButton extends SWTBotToolbarButton {
 
 	/**
 	 * Gets the arrow event.
-	 *
+	 * 
 	 * @return The event.
 	 */
 	private Event arrowEvent() {

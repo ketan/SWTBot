@@ -47,7 +47,7 @@ public class AbstractSWTBotTest extends AbstractSWTTestCase {
 			};
 			fail("Was expecting a WidgetNotFoundException");
 		} catch (WidgetNotFoundException e) {
-			assertEquals("The widget was disposed.", e.getMessage());
+			assertEquals("The widget {Shell with text {}} was disposed.", e.getMessage());
 		}
 	}
 

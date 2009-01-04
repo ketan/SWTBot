@@ -10,4 +10,5 @@ Require-Bundle: org.eclipse.ui,
  org.junit,
  org.eclipse.swtbot.swt.recorder,
  org.eclipse.swtbot.swt.finder.test,
- org.apache.log4j
+ org.apache.log4j,
+ org.hamcrest

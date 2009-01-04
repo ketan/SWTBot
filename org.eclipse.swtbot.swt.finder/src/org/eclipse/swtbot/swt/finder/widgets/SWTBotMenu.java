@@ -14,7 +14,6 @@ import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMn
 
 import java.util.List;
 
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
@@ -24,6 +23,7 @@ import org.eclipse.swtbot.swt.finder.results.BoolResult;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.results.WidgetResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
+import org.hamcrest.SelfDescribing;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -33,10 +33,19 @@ public class SWTBotMenu extends AbstractSWTBot<MenuItem> {
 
 	/**
 	 * @param w the widget.
+	 * @param description the description of the widget, this will be reported by {@link #toString()}
+	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
+	 */
+	public SWTBotMenu(MenuItem w, SelfDescribing description) throws WidgetNotFoundException {
+		super(w, description);
+	}
+
+	/**
+	 * @param w the widget.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 */
 	public SWTBotMenu(MenuItem w) throws WidgetNotFoundException {
-		super(w);
+		this(w, null);
 	}
 
 	/**
@@ -64,7 +73,7 @@ public class SWTBotMenu extends AbstractSWTBot<MenuItem> {
 
 	/**
 	 * Gets the menu matching the given name.
-	 *
+	 * 
 	 * @param menuName the name of the menu item that is to be found
 	 * @return the first menu that matches the menuName
 	 * @throws WidgetNotFoundException if the widget is not found.
@@ -93,7 +102,7 @@ public class SWTBotMenu extends AbstractSWTBot<MenuItem> {
 
 	/**
 	 * Gets if this menu item is checked.
-	 *
+	 * 
 	 * @return <code>true</code> if the menu is checked, <code>false</code> otherwise.
 	 * @see MenuItem#getSelection()
 	 * @since 1.2

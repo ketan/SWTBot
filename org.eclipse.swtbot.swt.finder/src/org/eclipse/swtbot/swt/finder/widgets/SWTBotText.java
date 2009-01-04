@@ -11,8 +11,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
-
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Text;
@@ -21,10 +19,11 @@ import org.eclipse.swtbot.swt.finder.SWTBotWidget;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
+import org.hamcrest.SelfDescribing;
 
 /**
  * This represents a {@link Text} widget.
- *
+ * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
@@ -35,17 +34,28 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 
 	/**
 	 * Constructs a new instance of this object.
-	 *
+	 * 
 	 * @param w the widget.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 */
 	public SWTBotText(Text w) throws WidgetNotFoundException {
-		super(w);
+		this(w, null);
+	}
+
+	/**
+	 * Constructs a new instance of this object.
+	 * 
+	 * @param w the widget.
+	 * @param description the description of the widget, this will be reported by {@link #toString()}
+	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
+	 */
+	public SWTBotText(Text w, SelfDescribing description) throws WidgetNotFoundException {
+		super(w, description);
 	}
 
 	/**
 	 * Sets the text of the widget.
-	 *
+	 * 
 	 * @param text the text to be set.
 	 */
 	public void setText(final String text) {
@@ -59,7 +69,7 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 
 	/**
 	 * Types the string in the text box.
-	 *
+	 * 
 	 * @param text the text to be typed.
 	 * @since 1.2
 	 */
@@ -69,7 +79,7 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 
 	/**
 	 * Types the string in the text box.
-	 *
+	 * 
 	 * @param text the text to be typed.
 	 * @param interval the interval between consecutive key strokes.
 	 * @since 1.2
@@ -86,7 +96,7 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 
 	/**
 	 * FIXME need some work for CTRL|SHIFT + 1 the 1 is to be sent as '!' in this case.
-	 *
+	 * 
 	 * @param modificationKey the modification key.
 	 * @param c the character.
 	 * @see Event#character

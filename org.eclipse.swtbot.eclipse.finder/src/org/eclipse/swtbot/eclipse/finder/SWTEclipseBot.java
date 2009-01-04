@@ -74,9 +74,9 @@ public class SWTEclipseBot extends SWTBot {
 	@SuppressWarnings("unchecked")
 	public SWTBotEclipseEditor editor(String fileName, int index) throws WidgetNotFoundException {
 		Matcher matcher = allOf(instanceOf(IEditorReference.class), withPartName(fileName));
-		WaitForPart waitForView = waitForPart(matcher);
+		WaitForEditor waitForView = waitForEditor(matcher);
 		waitUntilWidgetAppears(waitForView);
-		return new SWTBotEclipseEditor((IEditorReference) waitForView.get(index), this);
+		return new SWTBotEclipseEditor(waitForView.get(index), this);
 	}
 
 	/**

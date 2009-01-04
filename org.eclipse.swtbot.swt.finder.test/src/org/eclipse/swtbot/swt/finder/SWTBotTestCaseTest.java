@@ -12,13 +12,13 @@ package org.eclipse.swtbot.swt.finder;
 
 import java.io.File;
 
+import junit.framework.AssertionFailedError;
+import junit.framework.TestCase;
+
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBotTest;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
-
-import junit.framework.AssertionFailedError;
-import junit.framework.TestCase;
 
 public class SWTBotTestCaseTest extends AbstractSWTBotTest {
 
@@ -69,7 +69,7 @@ public class SWTBotTestCaseTest extends AbstractSWTBotTest {
 			assertEnabled(button);
 			fail("Expecting an exception");
 		} catch (AssertionFailedError e) {
-			assertEquals("Expected widget SWTBotButton Button {One} to be enabled.", e.getMessage());
+			assertEquals("Expected widget (of type 'Button' and with mnemonic 'One' and with style 'SWT.PUSH') to be enabled.", e.getMessage());
 		} finally {
 			UIThreadRunnable.syncExec(new VoidResult() {
 				public void run() {
@@ -84,7 +84,7 @@ public class SWTBotTestCaseTest extends AbstractSWTBotTest {
 			assertNotEnabled(bot.button("One"));
 			fail("Expecting an exception");
 		} catch (AssertionFailedError e) {
-			assertEquals("Expected widget SWTBotButton Button {One} to be disabled.", e.getMessage());
+			assertEquals("Expected widget (of type 'Button' and with mnemonic 'One' and with style 'SWT.PUSH') to be disabled.", e.getMessage());
 		}
 	}
 

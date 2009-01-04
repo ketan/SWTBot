@@ -13,7 +13,6 @@ package org.eclipse.swtbot.swt.finder.widgets;
 import java.util.Calendar;
 import java.util.Date;
 
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swtbot.swt.finder.ReferenceBy;
@@ -22,6 +21,7 @@ import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.results.Result;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
+import org.hamcrest.SelfDescribing;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -32,18 +32,30 @@ public class SWTBotDateTime extends AbstractSWTBot<DateTime> {
 
 	/**
 	 * Constructs an instance of this object with the given widget.
-	 *
+	 * 
 	 * @param w the widget.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 * @since 2.0
 	 */
 	public SWTBotDateTime(DateTime w) throws WidgetNotFoundException {
-		super(w);
+		this(w, null);
+	}
+
+	/**
+	 * Constructs an instance of this object with the given widget.
+	 * 
+	 * @param w the widget.
+	 * @param description the description of the widget, this will be reported by {@link #toString()}
+	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
+	 * @since 2.0
+	 */
+	public SWTBotDateTime(DateTime w, SelfDescribing description) throws WidgetNotFoundException {
+		super(w, description);
 	}
 
 	/**
 	 * Gets the date of this widget.
-	 *
+	 * 
 	 * @return the date/time set into the widget.
 	 */
 	public Date getDate() {
@@ -67,7 +79,7 @@ public class SWTBotDateTime extends AbstractSWTBot<DateTime> {
 
 	/**
 	 * Sets the date.
-	 *
+	 * 
 	 * @param toSet the date to set into the control.
 	 */
 	public void setDate(final Date toSet) {

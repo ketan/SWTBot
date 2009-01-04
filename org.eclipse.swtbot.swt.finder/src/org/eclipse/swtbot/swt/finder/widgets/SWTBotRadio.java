@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Widget;
@@ -23,23 +22,35 @@ import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
+import org.hamcrest.SelfDescribing;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-@SWTBotWidget(clasz = Button.class, style = @Style(name = "SWT.RADIO", value = SWT.RADIO), preferredName = "radio", referenceBy = { ReferenceBy.LABEL, ReferenceBy.MNEMONIC,
-		ReferenceBy.TOOLTIP })
+@SWTBotWidget(clasz = Button.class, style = @Style(name = "SWT.RADIO", value = SWT.RADIO), preferredName = "radio", referenceBy = {
+		ReferenceBy.LABEL, ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })
 public class SWTBotRadio extends AbstractSWTBot<Button> {
 
 	/**
 	 * Constructs an instance of this with the given widget.
-	 *
+	 * 
 	 * @param w the widget.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 */
 	public SWTBotRadio(Button w) throws WidgetNotFoundException {
-		super(w);
+		this(w, null);
+	}
+
+	/**
+	 * Constructs an instance of this with the given widget.
+	 * 
+	 * @param w the widget.
+	 * @param description the description of the widget, this will be reported by {@link #toString()}
+	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
+	 */
+	public SWTBotRadio(Button w, SelfDescribing description) throws WidgetNotFoundException {
+		super(w, description);
 		Assert.isTrue(SWTUtils.hasStyle(w, SWT.RADIO), "Expecting a radio.");
 	}
 
@@ -90,7 +101,7 @@ public class SWTBotRadio extends AbstractSWTBot<Button> {
 
 	/**
 	 * Checks if the item is selected.
-	 *
+	 * 
 	 * @return <code>true</code> if the radio button is selected. Otherwise <code>false</code>.
 	 */
 	public boolean isSelected() {

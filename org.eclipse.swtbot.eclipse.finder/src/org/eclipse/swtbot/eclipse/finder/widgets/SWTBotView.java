@@ -72,7 +72,7 @@ public class SWTBotView extends SWTBotWorkbenchPart<IViewReference> {
 	 * @see #show()
 	 */
 	public Widget getWidget() {
-		assertActive();
+		show();
 		if (widget == null)
 			widget = findWidget(anything());
 		return widget;

@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
@@ -36,6 +35,7 @@ import org.eclipse.swtbot.swt.finder.utils.TableCollection;
 import org.eclipse.swtbot.swt.finder.utils.TableRow;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
+import org.hamcrest.SelfDescribing;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -48,10 +48,21 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 	 * Constructs an instance of this object with the given tree.
 	 *
 	 * @param tree the widget.
+	 * @param description the description of the widget, this will be reported by {@link #toString()}
+	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
+	 */
+	public SWTBotTree(Tree tree, SelfDescribing description) throws WidgetNotFoundException {
+		super(tree, description);
+	}
+
+	/**
+	 * Constructs an instance of this object with the given tree.
+	 *
+	 * @param tree the widget.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 */
 	public SWTBotTree(Tree tree) throws WidgetNotFoundException {
-		super(tree);
+		this(tree, null);
 	}
 
 	/**

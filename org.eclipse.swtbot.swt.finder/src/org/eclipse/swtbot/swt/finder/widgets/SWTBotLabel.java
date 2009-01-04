@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
-
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swtbot.swt.finder.ReferenceBy;
@@ -18,10 +17,11 @@ import org.eclipse.swtbot.swt.finder.SWTBotWidget;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.results.IntResult;
 import org.eclipse.swtbot.swt.finder.results.Result;
+import org.hamcrest.SelfDescribing;
 
 /**
  * This represents a {@link Label} widget.
- *
+ * 
  * @author Stephen Paulin &lt;paulin [at] developerskingdom [dot] com&gt;
  * @version $Id$
  * @since 1.2
@@ -31,17 +31,28 @@ public class SWTBotLabel extends AbstractSWTBot<Label> {
 
 	/**
 	 * Constructs an instance of this using the given finder and text to search for.
-	 *
+	 * 
 	 * @param widget the widget
 	 * @throws WidgetNotFoundException if the widget is null or disposed.
 	 */
 	public SWTBotLabel(Label widget) throws WidgetNotFoundException {
-		super(widget);
+		this(widget, null);
+	}
+
+	/**
+	 * Constructs an instance of this using the given finder and text to search for.
+	 * 
+	 * @param widget the widget
+	 * @param description the description of the widget, this will be reported by {@link #toString()}
+	 * @throws WidgetNotFoundException if the widget is null or disposed.
+	 */
+	public SWTBotLabel(Label widget, SelfDescribing description) throws WidgetNotFoundException {
+		super(widget, description);
 	}
 
 	/**
 	 * Return the Label's image or <code>null</code>.
-	 *
+	 * 
 	 * @return the image of the label or <code>null</code>.
 	 */
 	public Image image() {
@@ -54,7 +65,7 @@ public class SWTBotLabel extends AbstractSWTBot<Label> {
 
 	/**
 	 * Returns the alignment. The alignment style (LEFT, CENTER or RIGHT) is returned.
-	 *
+	 * 
 	 * @return SWT.LEFT, SWT.RIGHT or SWT.CENTER
 	 */
 	public int alignment() {

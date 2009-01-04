@@ -14,6 +14,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
+import org.hamcrest.SelfDescribing;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -25,14 +26,27 @@ public class SWTBotTableColumn extends AbstractSWTBot<TableColumn> {
 
 	/**
 	 * Constructs a new instance of this object.
-	 *
+	 * 
 	 * @param w the widget.
 	 * @param parent the parent table.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 * @since 2.0
 	 */
 	public SWTBotTableColumn(TableColumn w, Table parent) throws WidgetNotFoundException {
-		super(w);
+		this(w, parent, null);
+	}
+
+	/**
+	 * Constructs a new instance of this object.
+	 * 
+	 * @param w the widget.
+	 * @param parent the parent table.
+	 * @param description the description of the widget, this will be reported by {@link #toString()}
+	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
+	 * @since 2.0
+	 */
+	public SWTBotTableColumn(TableColumn w, Table parent, SelfDescribing description) throws WidgetNotFoundException {
+		super(w, description);
 		this.parent = parent;
 	}
 

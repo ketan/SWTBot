@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
-
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swtbot.swt.finder.ReferenceBy;
@@ -19,6 +17,7 @@ import org.eclipse.swtbot.swt.finder.SWTBotWidget;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.results.BoolResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
+import org.hamcrest.SelfDescribing;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -29,17 +28,28 @@ public class SWTBotToolbarButton extends AbstractSWTBot<ToolItem> {
 
 	/**
 	 * Construcst an new instance of this item.
-	 *
+	 * 
 	 * @param w the tool item.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 */
 	public SWTBotToolbarButton(ToolItem w) throws WidgetNotFoundException {
-		super(w);
+		this(w, null);
+	}
+
+	/**
+	 * Construcst an new instance of this item.
+	 * 
+	 * @param w the tool item.
+	 * @param description the description of the widget, this will be reported by {@link #toString()}
+	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
+	 */
+	public SWTBotToolbarButton(ToolItem w, SelfDescribing description) throws WidgetNotFoundException {
+		super(w, description);
 	}
 
 	/**
 	 * Click on the tool item.
-	 *
+	 * 
 	 * @since 1.0
 	 */
 	public void click() {

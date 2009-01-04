@@ -29,7 +29,9 @@ import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.results.WidgetResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
+import org.eclipse.swtbot.swt.finder.utils.TextDescription;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
+import org.hamcrest.SelfDescribing;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -44,7 +46,16 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 */
 	public SWTBotTreeItem(final TreeItem treeItem) throws WidgetNotFoundException {
-		super(treeItem);
+		this(treeItem, null);
+	}
+
+	/**
+	 * @param treeItem the widget.
+	 * @param description the description of the widget, this will be reported by {@link #toString()}
+	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
+	 */
+	public SWTBotTreeItem(final TreeItem treeItem, SelfDescribing description) throws WidgetNotFoundException {
+		super(treeItem, description);
 		this.tree = syncExec(new WidgetResult<Tree>() {
 			public Tree run() {
 				return treeItem.getParent();
@@ -54,7 +65,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Expands the tree item to simulate click the plus sign.
-	 *
+	 * 
 	 * @return the tree item, after expanding it.
 	 */
 	public SWTBotTreeItem expand() {
@@ -71,7 +82,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Send the {@link SWT#Expand} event to build the child items of the tree item that we are expanding.
-	 *
+	 * 
 	 * @since 1.2
 	 */
 	private void preExpandNotify() {
@@ -80,7 +91,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Notifies the item of expansion.
-	 *
+	 * 
 	 * @since 1.2
 	 */
 	private void postExpandNotify() {
@@ -110,7 +121,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Gets the nodes of the tree item.
-	 *
+	 * 
 	 * @return the list of nodes in the treeitem.
 	 */
 	public List<String> getNodes() {
@@ -128,7 +139,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Expands the node matching the given node text.
-	 *
+	 * 
 	 * @param nodeText the text on the node.
 	 * @return the node that was expanded or <code>null</code> if not match exists.
 	 */
@@ -139,7 +150,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Gets the node matching the given node text.
-	 *
+	 * 
 	 * @param nodeText the text on the node.
 	 * @return the node with the specified text <code>null</code> if not match exists.
 	 * @since 1.2
@@ -150,7 +161,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 				TreeItem[] items = widget.getItems();
 				for (TreeItem treeItem : items) {
 					if (treeItem.getText().equals(nodeText))
-						return new SWTBotTreeItem(treeItem);
+						return new SWTBotTreeItem(treeItem, new TextDescription("Tree node with text: " + nodeText));
 				}
 				return null;
 			}
@@ -162,7 +173,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Selects the current tree item.
-	 *
+	 * 
 	 * @return the current node.
 	 * @since 1.0
 	 */
@@ -180,7 +191,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Click on the table at given coordinates
-	 *
+	 * 
 	 * @param x the x co-ordinate of the click
 	 * @param y the y co-ordinate of the click
 	 * @since 1.2
@@ -205,7 +216,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Clicks on this node.
-	 *
+	 * 
 	 * @return the current node.
 	 * @since 1.2
 	 */
@@ -222,7 +233,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Double clicks on this node.
-	 *
+	 * 
 	 * @return the current node.
 	 * @since 1.2
 	 */
@@ -236,7 +247,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Selects the items matching the array provided.
-	 *
+	 * 
 	 * @param items the items to select.
 	 * @return the current node.
 	 * @since 1.0
@@ -266,7 +277,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Selects the item matching the given name.
-	 *
+	 * 
 	 * @param item the items to select.
 	 * @return the current node.
 	 * @since 1.0
@@ -277,7 +288,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * notifies the tree widget about selection changes.
-	 *
+	 * 
 	 * @since 1.0
 	 */
 	private void notifySelect() {
@@ -310,7 +321,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Toggle the tree item.
-	 *
+	 * 
 	 * @since 1.3
 	 */
 	public void toggleCheck() {
@@ -319,7 +330,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Check the tree item.
-	 *
+	 * 
 	 * @since 1.3
 	 */
 	public void check() {
@@ -328,7 +339,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Uncheck the tree item.
-	 *
+	 * 
 	 * @since 1.3
 	 */
 	public void uncheck() {
@@ -337,7 +348,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Gets if the checkbox button is checked.
-	 *
+	 * 
 	 * @return <code>true</code> if the checkbox is checked. Otherwise <code>false</code>.
 	 * @since 1.3
 	 */
@@ -352,7 +363,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Creates an event for CheckboxTreeItem case.
-	 *
+	 * 
 	 * @return an event that encapsulates {@link #widget} and {@link #display}.
 	 */
 	private Event createCheckEvent() {
@@ -382,7 +393,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * notify listeners about checkbox state change.
-	 *
+	 * 
 	 * @since 1.3
 	 */
 	private void notifyCheck() {
@@ -395,7 +406,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Gets the selection event.
-	 *
+	 * 
 	 * @return The event.
 	 */
 	private Event selectionEvent() {

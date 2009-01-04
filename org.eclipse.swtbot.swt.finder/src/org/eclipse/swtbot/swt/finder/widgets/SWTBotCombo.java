@@ -14,7 +14,6 @@ package org.eclipse.swtbot.swt.finder.widgets;
 
 import java.util.Arrays;
 
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swtbot.swt.finder.ReferenceBy;
@@ -25,6 +24,7 @@ import org.eclipse.swtbot.swt.finder.results.IntResult;
 import org.eclipse.swtbot.swt.finder.results.StringResult;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
+import org.hamcrest.SelfDescribing;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -35,18 +35,30 @@ public class SWTBotCombo extends AbstractSWTBot<Combo> {
 
 	/**
 	 * Constructs an instance of this with the given combo box.
-	 *
+	 * 
 	 * @param w the widget.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 * @since 1.0
 	 */
 	public SWTBotCombo(Combo w) throws WidgetNotFoundException {
-		super(w);
+		this(w, null);
+	}
+
+	/**
+	 * Constructs an instance of this with the given combo box.
+	 * 
+	 * @param w the widget.
+	 * @param description the description of the widget, this will be reported by {@link #toString()}
+	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
+	 * @since 1.0
+	 */
+	public SWTBotCombo(Combo w, SelfDescribing description) throws WidgetNotFoundException {
+		super(w, description);
 	}
 
 	/**
 	 * Set the selection to the specified text.
-	 *
+	 * 
 	 * @param text the text to set into the combo.
 	 */
 	public void setSelection(final String text) {
@@ -59,7 +71,7 @@ public class SWTBotCombo extends AbstractSWTBot<Combo> {
 
 	/**
 	 * Sets the selection to the given text.
-	 *
+	 * 
 	 * @param text The text to select.
 	 */
 	private void _setSelection(final String text) {
@@ -80,7 +92,7 @@ public class SWTBotCombo extends AbstractSWTBot<Combo> {
 
 	/**
 	 * Attempts to select the current item.
-	 *
+	 * 
 	 * @return the current selection in the combo box.
 	 */
 	public String selection() {
@@ -93,7 +105,7 @@ public class SWTBotCombo extends AbstractSWTBot<Combo> {
 
 	/**
 	 * Sets the selection to the given index.
-	 *
+	 * 
 	 * @return the zero based index of the current selection.
 	 */
 	public int selectionIndex() {
@@ -106,7 +118,7 @@ public class SWTBotCombo extends AbstractSWTBot<Combo> {
 
 	/**
 	 * Sets the selection to the specified index.
-	 *
+	 * 
 	 * @param index the zero based index.
 	 */
 	public void setSelection(final int index) {
@@ -125,7 +137,7 @@ public class SWTBotCombo extends AbstractSWTBot<Combo> {
 
 	/**
 	 * Gets the item count in the combo box.
-	 *
+	 * 
 	 * @return the number of items in the combo box.
 	 */
 	public int itemCount() {
@@ -138,7 +150,7 @@ public class SWTBotCombo extends AbstractSWTBot<Combo> {
 
 	/**
 	 * Returns an array of <code>String</code>s which are the items in the receiver's list.
-	 *
+	 * 
 	 * @return the items in the receiver's list
 	 * @since 1.0
 	 */
@@ -152,7 +164,7 @@ public class SWTBotCombo extends AbstractSWTBot<Combo> {
 
 	/**
 	 * Sets the text of the combo box.
-	 *
+	 * 
 	 * @param text the text to set.
 	 * @since 1.0
 	 */

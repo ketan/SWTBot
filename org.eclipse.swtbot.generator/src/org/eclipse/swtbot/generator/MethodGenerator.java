@@ -64,7 +64,7 @@ public class MethodGenerator {
 		result += "	public " + ClassUtils.simpleClassName(returnType) + " " + methodName() + methodArgsWithIndex() + " {\n";
 		result += "		Matcher matcher = allOf(" + instanceOf() + (otherMatchers().length() > 0 ? ", " : "") + otherMatchers() + ");\n";
 		result += "		return new " + ClassUtils.simpleClassName(returnType) + "((" + ClassUtils.simpleClassName(widgetType)
-				+ ") widget(matcher, index));\n";
+				+ ") widget(matcher, index), matcher);\n";
 		result += "	}\n";
 		return result;
 	}

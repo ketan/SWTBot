@@ -41,7 +41,7 @@ public abstract class AbstractMatcher<T> extends BaseMatcher<T> {
 				text = SWTUtils.getText(item);
 				try {
 					if (text.length() > 20)
-						text = text.substring(0, 20);
+						text = text.substring(0, 20) + "...";
 				} catch (Exception e) {
 					// do nothing
 				}
