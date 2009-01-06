@@ -66,6 +66,19 @@
 	<target name="initialize-environment" depends="guess-pde-build-version, create-build-properties-from-template" />
 
 	<!-- guess svn revision -->
+	<exec executable="git" output="${java.io.tmpdir}/git.svn.properties" dir=".." failifexecutionfails="false" failonerror="true">
+		<arg line="svn info" />
+	</exec>
+
+	<!-- prefix all properties with "svn." and replace spaces to make the keys unique -->
+	<loadproperties srcfile="${java.io.tmpdir}/git.svn.properties">
+		<filterchain>
+			<prefixlines prefix="svn." />
+			<deletecharacters chars="\ " />
+		</filterchain>
+	</loadproperties>
+
+	<!-- guess svn revision -->
 	<exec executable="svn" output="${java.io.tmpdir}/svn.properties" dir="..">
 		<arg value="info" />
 	</exec>
