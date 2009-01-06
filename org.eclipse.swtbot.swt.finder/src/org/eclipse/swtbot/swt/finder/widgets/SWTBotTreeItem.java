@@ -8,6 +8,7 @@
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *     Cédric Chabanois - http://swtbot.org/bugzilla/show_bug.cgi?id=10
+ *     Ketan Patel - https://bugs.eclipse.org/bugs/show_bug.cgi?id=259720
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
@@ -23,18 +24,22 @@ import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.BoolResult;
+import org.eclipse.swtbot.swt.finder.results.IntResult;
 import org.eclipse.swtbot.swt.finder.results.ListResult;
 import org.eclipse.swtbot.swt.finder.results.Result;
+import org.eclipse.swtbot.swt.finder.results.StringResult;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.results.WidgetResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
+import org.eclipse.swtbot.swt.finder.utils.TableRow;
 import org.eclipse.swtbot.swt.finder.utils.TextDescription;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 import org.hamcrest.SelfDescribing;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
+ * @author Ketan Patel
  * @version $Id$
  */
 public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
@@ -61,6 +66,89 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 				return treeItem.getParent();
 			}
 		});
+	}
+
+	/**
+	 * Returns the text stored at the given column index in the receiver, or empty string if the text has not been set.
+	 * Throws an exception if the column is greater than the number of columns in the tree.
+	 * 
+	 * @param column the column index.
+	 * @return the cell at the location specified by the column
+	 */
+	public String cell(final int column) {
+		if (column == 0) {
+			return getText();
+		}
+		int columnCount = new SWTBotTree(tree).columnCount();
+		Assert.isLegal(column < columnCount, java.text.MessageFormat.format("The column index ({0}) is more than the number of column({1}) in the tree.", column, columnCount));
+		return syncExec(new StringResult() {
+			public String run() {
+				return widget.getText(column);
+			}
+		});
+	}
+
+	/**
+	 * Returns the table row representation of cell values
+	 * 
+	 * @return the cell values for this item
+	 */
+	public TableRow row() {
+		return syncExec(new Result<TableRow>() {
+			public TableRow run() {
+				int columnCount = tree.getColumnCount();
+				TableRow tableRow = new TableRow();
+				if (columnCount == 0)
+					tableRow.add(widget.getText());
+				else
+					for (int j = 0; j < columnCount; j++)
+						tableRow.add(widget.getText(j));
+				return tableRow;
+			}
+		});
+	}
+
+	/**
+	 * Returns the number of items contained in the receiver that are direct item children of the receiver.
+	 * 
+	 * @return the number of items
+	 */
+	public int rowCount() {
+		return syncExec(new IntResult() {
+			public Integer run() {
+				return widget.getItemCount();
+			}
+		});
+	}
+
+	/**
+	 * Gets the nodes at the given, zero-relative index in the receiver. Throws an exception if the index is out of
+	 * range.
+	 * 
+	 * @param row the index of the item to return
+	 * @return the item at the given index
+	 */
+	public SWTBotTreeItem getNode(final int row) {
+		int rowCount = rowCount();
+		Assert.isLegal(row < rowCount, java.text.MessageFormat.format("The row number ({0}) is more than the number of rows({1}) in the tree.", row, rowCount));
+		return syncExec(new Result<SWTBotTreeItem>() {
+			public SWTBotTreeItem run() {
+				return new SWTBotTreeItem(widget.getItem(row));
+			}
+		});
+	}
+
+	/**
+	 * Gets the cell data for the given row/column index.
+	 * 
+	 * @param row the row index.
+	 * @param column the column index.
+	 * @return the cell at the location specified by the row and column
+	 * @see #getNode(int)
+	 * @see #cell(int)
+	 */
+	public String cell(final int row, final int column) {
+		return getNode(row).cell(column);
 	}
 
 	/**
@@ -222,8 +310,8 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	 */
 	public SWTBotTreeItem click() {
 		assertEnabled();
-		Rectangle cellBounds = (Rectangle) syncExec(new Result() {
-			public Object run() {
+		Rectangle cellBounds = syncExec(new Result<Rectangle>() {
+			public Rectangle run() {
 				return widget.getBounds();
 			}
 		});
