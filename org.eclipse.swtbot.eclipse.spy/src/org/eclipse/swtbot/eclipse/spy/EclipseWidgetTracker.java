@@ -345,27 +345,27 @@ class EclipseWidgetTracker implements Runnable {
 			result += "NO_MERGE_PAINTS | "; //$NON-NLS-1$
 		if ((style & 1 << 22) != 0)
 			if (w instanceof Text)
-				result += "PASSWORD | ";
+				result += "PASSWORD | "; //$NON-NLS-1$
 			else if (w instanceof Composite)
-				result += "NO_RADIO_GROUP | ";
+				result += "NO_RADIO_GROUP | "; //$NON-NLS-1$
 			else
-				result += "NO_RADIO_GROUP or PASSWORD | ";
+				result += "NO_RADIO_GROUP or PASSWORD | "; //$NON-NLS-1$
 		if ((style & 1 << 23) != 0)
-			result += "FLAT | ";
+			result += "FLAT | "; //$NON-NLS-1$
 		if ((style & 1 << 24) != 0)
 			if ((w instanceof Button) || (w instanceof Label) || (w instanceof TableColumn))
-				result += "CENTER | ";
+				result += "CENTER | "; //$NON-NLS-1$
 			else
-				result += "EMBEDDED or CENTER | ";
+				result += "EMBEDDED or CENTER | "; //$NON-NLS-1$
 		if ((style & 1 << 25) != 0)
-			result += "LEFT_TO_RIGHT | ";
+			result += "LEFT_TO_RIGHT | "; //$NON-NLS-1$
 		if ((style & 1 << 26) != 0)
-			result += "RIGHT_TO_LEFT | ";
+			result += "RIGHT_TO_LEFT | "; //$NON-NLS-1$
 		if ((style & 1 << 27) != 0)
-			result += "MIRRORED | ";
+			result += "MIRRORED | "; //$NON-NLS-1$
 		if ((style & 1 << 28) != 0)
-			result += "VIRTUAL | ";
-		int lastOr = result.lastIndexOf("|");
+			result += "VIRTUAL | "; //$NON-NLS-1$
+		int lastOr = result.lastIndexOf("|"); //$NON-NLS-1$
 		if (lastOr == result.length() - 2)
 			result = result.substring(0, result.length() - 2);
 		return result;

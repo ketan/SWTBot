@@ -27,8 +27,7 @@ import org.hamcrest.SelfDescribing;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-@SWTBotWidget(clasz = Button.class, style = @Style(name = "SWT.CHECK", value = SWT.CHECK), preferredName = "checkBox", referenceBy = {
-		ReferenceBy.LABEL, ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })
+@SWTBotWidget(clasz = Button.class, style = @Style(name = "SWT.CHECK", value = SWT.CHECK), preferredName = "checkBox", referenceBy = { ReferenceBy.LABEL, ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })  //$NON-NLS-1$
 public class SWTBotCheckBox extends AbstractSWTBot<Button> {
 
 	/**

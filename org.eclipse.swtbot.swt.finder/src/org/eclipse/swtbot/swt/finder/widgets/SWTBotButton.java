@@ -26,7 +26,7 @@ import org.hamcrest.SelfDescribing;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-@SWTBotWidget(clasz = Button.class, style = @Style(name = "SWT.PUSH", value = SWT.PUSH), preferredName = "button", referenceBy = { ReferenceBy.LABEL, ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })
+@SWTBotWidget(clasz = Button.class, style = @Style(name = "SWT.PUSH", value = SWT.PUSH), preferredName = "button", referenceBy = { ReferenceBy.LABEL, ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })  //$NON-NLS-1$ 
 public class SWTBotButton extends AbstractSWTBot<Button> {
 
 	/**

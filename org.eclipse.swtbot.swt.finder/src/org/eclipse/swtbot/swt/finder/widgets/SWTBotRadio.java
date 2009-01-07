@@ -28,8 +28,7 @@ import org.hamcrest.SelfDescribing;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-@SWTBotWidget(clasz = Button.class, style = @Style(name = "SWT.RADIO", value = SWT.RADIO), preferredName = "radio", referenceBy = {
-		ReferenceBy.LABEL, ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })
+@SWTBotWidget(clasz = Button.class, style = @Style(name = "SWT.RADIO", value = SWT.RADIO), preferredName = "radio", referenceBy = {	ReferenceBy.LABEL, ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })  //$NON-NLS-1$
 public class SWTBotRadio extends AbstractSWTBot<Button> {
 
 	/**
