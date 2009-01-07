@@ -15,7 +15,7 @@ import org.eclipse.pde.ui.launcher.JUnitWorkbenchLaunchShortcut;
 public class SWTBotLaunchShortcut extends JUnitWorkbenchLaunchShortcut {
 
 	protected String getLaunchConfigurationTypeId() {
-		return "org.eclipse.swtbot.eclipse.ui.launcher.JunitLaunchConfig";
+		return "org.eclipse.swtbot.eclipse.ui.launcher.JunitLaunchConfig"; //$NON-NLS-1$
 	}
 
 }

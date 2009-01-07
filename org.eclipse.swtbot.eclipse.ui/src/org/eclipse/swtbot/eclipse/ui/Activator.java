@@ -19,8 +19,8 @@ import org.osgi.framework.BundleContext;
  */
 public class Activator extends AbstractUIPlugin {
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.eclipse.swtbot.eclipse.ui";
-	public static final String APPLICATION_ID = "org.eclipse.swtbot.eclipse.core.swtbottestapplication";
+	public static final String PLUGIN_ID = "org.eclipse.swtbot.eclipse.ui"; //$NON-NLS-1$
+	public static final String APPLICATION_ID = "org.eclipse.swtbot.eclipse.core.swtbottestapplication"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Activator plugin;

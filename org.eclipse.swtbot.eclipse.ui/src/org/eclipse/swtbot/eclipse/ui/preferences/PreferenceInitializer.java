@@ -41,8 +41,12 @@ import org.hamcrest.Matchers;
  */
 public class PreferenceInitializer extends AbstractPreferenceInitializer implements IStartup, IPropertyChangeListener {
 
+	private static final String	EMPTY	= ""; //$NON-NLS-1$
+	private static final String	SEMI_COLON	= ";"; //$NON-NLS-1$
+	
 	private final IPreferenceStore	swtbotPreferenceStore;
 	private final IPreferenceStore	jdtPreferenceStore;
+	static final String				ENABLE_ADDITIONAL_AUTOCOMPLETE_FAVOURTES	= "ENABLE_ADDITIONAL_AUTOCOMPLETE_FAVOURTES"; //$NON-NLS-1$
 
 	/**
 	 * Creates a default preference initializer.
@@ -63,8 +67,6 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer impleme
 		swtbotPreferenceStore.addPropertyChangeListener(this);
 	}
 
-	static final String	ENABLE_ADDITIONAL_AUTOCOMPLETE_FAVOURTES	= "ENABLE_ADDITIONAL_AUTOCOMPLETE_FAVOURTES";
-
 	public void initializeDefaultPreferences() {
 		swtbotPreferenceStore.setDefault(PreferenceInitializer.ENABLE_ADDITIONAL_AUTOCOMPLETE_FAVOURTES, true);
 	}
@@ -83,16 +85,16 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer impleme
 			if (imports.containsAll(getDefaultFavorites()))
 				imports.removeAll(getDefaultFavorites());
 		}
-		String join = StringUtils.join(imports, ";");
+		String join = StringUtils.join(imports, SEMI_COLON);
 		jdtPreferenceStore.setValue(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, join);
 	}
 
 	public List<String> getJDTImports() {
 		String preference = jdtPreferenceStore.getString(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS);
-		if (preference.trim().equals("")) {
+		if (EMPTY.equals(preference.trim())) {
 			return new ArrayList<String>();
 		}
-		String[] imports = preference.split(";");
+		String[] imports = preference.split(SEMI_COLON);
 		return new ArrayList<String>(Arrays.asList(imports));
 	}
 
@@ -112,7 +114,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer impleme
 	}
 
 	private String importStatement(Class<?> clazz) {
-		return clazz.getName() + ".*";
+		return clazz.getName() + ".*"; //$NON-NLS-1$
 	}
 
 	public void propertyChange(PropertyChangeEvent event) {
