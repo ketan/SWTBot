@@ -60,13 +60,13 @@ public class SWTBotTabItem extends AbstractSWTBot<TabItem> {
 	 * @throws TimeoutException if the tab does not activate
 	 */
 	public void activate() throws TimeoutException {
-		log.trace(MessageFormat.format("Activating {0}", this));
+		log.trace(MessageFormat.format("Activating {0}", this)); //$NON-NLS-1$
 		assertEnabled();
 		// this runs in sync because tabFolder.setSelection() does not send a notification, and so should not block.
 		asyncExec(new VoidResult() {
 			public void run() {
 				widget.getParent().setSelection(widget);
-				log.debug(MessageFormat.format("Activated {0}", this));
+				log.debug(MessageFormat.format("Activated {0}", this)); //$NON-NLS-1$
 			}
 		});
 
@@ -78,7 +78,7 @@ public class SWTBotTabItem extends AbstractSWTBot<TabItem> {
 			}
 
 			public String getFailureMessage() {
-				return "Timed out waiting for " + SWTUtils.toString(widget) + " to activate";
+				return "Timed out waiting for " + SWTUtils.toString(widget) + " to activate"; //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		});
 	}

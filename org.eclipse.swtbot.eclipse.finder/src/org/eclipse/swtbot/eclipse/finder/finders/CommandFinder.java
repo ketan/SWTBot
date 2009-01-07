@@ -73,7 +73,7 @@ public class CommandFinder {
 						if (matcher.matches(name))
 							l.add(new SWTBotCommand(commands[i]));
 					} catch (Exception e) {
-						log.error("Failed with an exception on the command: " + commands[i].toString(), e);
+						log.error("Failed with an exception on the command: " + commands[i].toString(), e); //$NON-NLS-1$
 					}
 
 				return l;

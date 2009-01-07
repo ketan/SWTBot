@@ -32,13 +32,13 @@ public class ImageFormatConverter {
 	 * The default constructor.
 	 */
 	public ImageFormatConverter() {
-		this.imageTypes.add(new ImageType("BMP", SWT.IMAGE_BMP));
-		this.imageTypes.add(new ImageType("GIF", SWT.IMAGE_GIF));
-		this.imageTypes.add(new ImageType("ICO", SWT.IMAGE_ICO));
-		this.imageTypes.add(new ImageType("JPEG", SWT.IMAGE_JPEG));
-		this.imageTypes.add(new ImageType("JPG", SWT.IMAGE_JPEG));
-		this.imageTypes.add(new ImageType("PNG", SWT.IMAGE_PNG));
-		this.imageTypes.add(new ImageType("TIFF", SWT.IMAGE_TIFF));
+		this.imageTypes.add(new ImageType("BMP", SWT.IMAGE_BMP)); //$NON-NLS-1$
+		this.imageTypes.add(new ImageType("GIF", SWT.IMAGE_GIF)); //$NON-NLS-1$
+		this.imageTypes.add(new ImageType("ICO", SWT.IMAGE_ICO)); //$NON-NLS-1$
+		this.imageTypes.add(new ImageType("JPEG", SWT.IMAGE_JPEG)); //$NON-NLS-1$
+		this.imageTypes.add(new ImageType("JPG", SWT.IMAGE_JPEG)); //$NON-NLS-1$
+		this.imageTypes.add(new ImageType("PNG", SWT.IMAGE_PNG)); //$NON-NLS-1$
+		this.imageTypes.add(new ImageType("TIFF", SWT.IMAGE_TIFF)); //$NON-NLS-1$
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class ImageFormatConverter {
 			if (type.name.equalsIgnoreCase(format))
 				return type;
 		}
-		throw new IllegalArgumentException("Did not understand format: " + format);
+		throw new IllegalArgumentException("Did not understand format: " + format); //$NON-NLS-1$
 	}
 
 	/**

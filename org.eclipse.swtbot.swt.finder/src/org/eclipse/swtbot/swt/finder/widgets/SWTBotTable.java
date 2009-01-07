@@ -172,11 +172,11 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 	 * @return the cell in the table at the specified row and columnheader
 	 */
 	public String cell(int row, String columnName) {
-		Assert.isLegal(columns().contains(columnName), "The column `" + columnName + "' is not found.");
+		Assert.isLegal(columns().contains(columnName), "The column `" + columnName + "' is not found."); //$NON-NLS-1$ //$NON-NLS-2$
 		List<String> columns = columns();
 		int columnIndex = columns.indexOf(columnName);
 		if (columnIndex == -1)
-			return "";
+			return ""; //$NON-NLS-1$
 		return cell(row, columnIndex);
 	}
 
@@ -226,7 +226,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 		asyncExec(new VoidResult() {
 			public void run() {
 				TableItem item = widget.getItem(rowIndex);
-				log.debug(MessageFormat.format("Selecting row [{0}] {1} in {2}", rowIndex, item.getText(), widget));
+				log.debug(MessageFormat.format("Selecting row [{0}] {1} in {2}", rowIndex, item.getText(), widget)); //$NON-NLS-1$
 				lastSelectionItem = item;
 				widget.setSelection(rowIndex);
 			}
@@ -235,7 +235,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 	}
 
 	private void assertIsLegalRowIndex(final int rowIndex) {
-		Assert.isLegal(rowIndex < rowCount(), "The row number: " + rowIndex + " does not exist in the table");
+		Assert.isLegal(rowIndex < rowCount(), "The row number: " + rowIndex + " does not exist in the table"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -247,7 +247,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 	public void select(final String item) {
 		assertEnabled();
 		int itemIndex = indexOf(item);
-		Assert.isLegal(itemIndex >= 0, "Could not find item:" + item + " in table");
+		Assert.isLegal(itemIndex >= 0, "Could not find item:" + item + " in table"); //$NON-NLS-1$ //$NON-NLS-2$
 		select(itemIndex);
 		notifySelect();
 	}
@@ -314,7 +314,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 		assertEnabled();
 		asyncExec(new VoidResult() {
 			public void run() {
-				log.debug(MessageFormat.format("Unselecting all in {0}", widget));
+				log.debug(MessageFormat.format("Unselecting all in {0}", widget)); //$NON-NLS-1$
 				widget.deselectAll();
 			}
 		});
@@ -328,7 +328,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 	public void select(final int[] indices) {
 		assertEnabled();
 		assertMultiSelect();
-		log.debug(MessageFormat.format("Selecting rows {0} in table {1}", StringUtils.join(indices, ", "), this));
+		log.debug(MessageFormat.format("Selecting rows {0} in table {1}", StringUtils.join(indices, ", "), this)); //$NON-NLS-1$ //$NON-NLS-2$
 		unselect();
 		for (int i = 0; i < indices.length; i++)
 			additionalSelectAndNotify(indices[i]);
@@ -349,7 +349,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 	}
 
 	private void assertMultiSelect() {
-		Assert.isLegal(hasStyle(widget, SWT.MULTI), "Table does not support multi selection.");
+		Assert.isLegal(hasStyle(widget, SWT.MULTI), "Table does not support multi selection."); //$NON-NLS-1$
 	}
 
 	/**
@@ -427,9 +427,9 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 		int rowCount = rowCount();
 		int columnCount = columnCount(); // 0 if no TableColumn has been created by user
 
-		Assert.isLegal(row < rowCount, "The row number (" + row + ") is more than the number of rows(" + rowCount + ") in the table.");
-		Assert.isLegal((column < columnCount) || ((columnCount == 0) && (column == 0)), "The column number (" + column
-				+ ") is more than the number of column(" + columnCount + ") in the table.");
+		Assert.isLegal(row < rowCount, "The row number (" + row + ") is more than the number of rows(" + rowCount + ") in the table."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		Assert.isLegal((column < columnCount) || ((columnCount == 0) && (column == 0)), "The column number (" + column //$NON-NLS-1$
+				+ ") is more than the number of column(" + columnCount + ") in the table."); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -444,7 +444,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 		try {
 			new SWTBot().waitUntil(new DefaultCondition() {
 				public String getFailureMessage() {
-					return "Could not find node with text " + itemText;
+					return "Could not find node with text " + itemText; //$NON-NLS-1$
 				}
 
 				public boolean test() throws Exception {
@@ -452,7 +452,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 				}
 			});
 		} catch (TimeoutException e) {
-			throw new WidgetNotFoundException("Timed out waiting for table item " + itemText, e);
+			throw new WidgetNotFoundException("Timed out waiting for table item " + itemText, e); //$NON-NLS-1$
 		}
 		return new SWTBotTableItem(getItem(itemText));
 	}
@@ -489,7 +489,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 		try {
 			new SWTBot().waitUntil(new DefaultCondition() {
 				public String getFailureMessage() {
-					return "Could not find table item for row " + row;
+					return "Could not find table item for row " + row; //$NON-NLS-1$
 				}
 
 				public boolean test() throws Exception {
@@ -497,7 +497,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 				}
 			});
 		} catch (TimeoutException e) {
-			throw new WidgetNotFoundException("Timed out waiting for table item in row " + row, e);
+			throw new WidgetNotFoundException("Timed out waiting for table item in row " + row, e); //$NON-NLS-1$
 		}
 		return new SWTBotTableItem(getItem(row));
 	}

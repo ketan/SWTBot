@@ -63,15 +63,15 @@ public class SWTBotAccessor {
 	 * @return the Java representation of this accessor.
 	 */
 	public String toJava() {
-		String index = "";
+		String index = ""; //$NON-NLS-1$
 		if (this.index != 0)
-			index = ", " + this.index;
+			index = ", " + this.index; //$NON-NLS-1$
 
-		String accessor = "";
-		if (!"".equals(this.accessor))
-			accessor = "\"" + this.accessor + "\"";
+		String accessor = ""; //$NON-NLS-1$
+		if (!"".equals(this.accessor)) //$NON-NLS-1$
+			accessor = "\"" + this.accessor + "\""; //$NON-NLS-1$ //$NON-NLS-2$
 
-		return bot + "." + methodCall + "(" + accessor + index + ")";
+		return bot + "." + methodCall + "(" + accessor + index + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	public boolean equals(Object obj) {

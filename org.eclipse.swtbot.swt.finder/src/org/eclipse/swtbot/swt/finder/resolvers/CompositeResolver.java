@@ -33,12 +33,12 @@ public class CompositeResolver implements IChildrenResolver, IParentResolver {
 
 	public boolean canResolve(Widget w) {
 		// FIXME https://bugs.eclipse.org/bugs/show_bug.cgi?id=206868
-		return (w instanceof Composite) && !(w.getClass().getName().equals("org.eclipse.swt.widgets.DateTime"));
+		return (w instanceof Composite) && !(w.getClass().getName().equals("org.eclipse.swt.widgets.DateTime")); //$NON-NLS-1$
 	}
 
 	public List getChildren(Widget w) {
 		// FIXME https://bugs.eclipse.org/bugs/show_bug.cgi?id=206868
-		if (w.getClass().getName().equals("org.eclipse.swt.widgets.DateTime"))
+		if (w.getClass().getName().equals("org.eclipse.swt.widgets.DateTime")) //$NON-NLS-1$
 			return new ArrayList();
 		return hasChildren(w) ? Arrays.asList(((Composite) w).getChildren()) : new ArrayList();
 	}
@@ -60,7 +60,7 @@ public class CompositeResolver implements IChildrenResolver, IParentResolver {
 	public boolean hasChildren(Widget w) {
 		// FIXME https://bugs.eclipse.org/bugs/show_bug.cgi?id=206868
 		// No "instanceof DateTime" is used in order to be compatible with PDE 3.2.
-		if (w.getClass().getName().equals("org.eclipse.swt.widgets.DateTime"))
+		if (w.getClass().getName().equals("org.eclipse.swt.widgets.DateTime")) //$NON-NLS-1$
 			return false;
 		return canResolve(w) && ((Composite) w).getChildren().length > 0;
 	}

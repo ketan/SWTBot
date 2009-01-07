@@ -46,7 +46,7 @@ public class WithMnemonic<T extends Widget> extends AbstractMatcher<T> {
 	 * @param ignoreCase Determines if this should ignore case during the comparison.
 	 */
 	public WithMnemonic(String text, boolean ignoreCase) {
-		this.text = text.replaceAll("&", "");
+		this.text = text.replaceAll("&", ""); //$NON-NLS-1$ //$NON-NLS-2$
 		this.ignoreCase = ignoreCase;
 	}
 
@@ -63,11 +63,11 @@ public class WithMnemonic<T extends Widget> extends AbstractMatcher<T> {
 	 * @see Method#invoke(Object, Object[])
 	 */
 	String getText(Object obj) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-		return WithText.getText(obj).replaceAll("&", "").split("\t")[0];
+		return WithText.getText(obj).replaceAll("&", "").split("\t")[0]; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	public void describeTo(Description description) {
-		description.appendText("with mnemonic '").appendText(text).appendText("'");
+		description.appendText("with mnemonic '").appendText(text).appendText("'"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	protected boolean doMatch(Object obj) {

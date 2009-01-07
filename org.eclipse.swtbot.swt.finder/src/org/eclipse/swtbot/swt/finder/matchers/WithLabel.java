@@ -73,7 +73,7 @@ public class WithLabel<T extends Widget> extends AbstractMatcher<T> {
 	}
 
 	public void describeTo(Description description) {
-		description.appendText("with label (").appendDescriptionOf(mnemonicTextMatcher).appendText(")");
+		description.appendText("with label (").appendDescriptionOf(mnemonicTextMatcher).appendText(")"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**

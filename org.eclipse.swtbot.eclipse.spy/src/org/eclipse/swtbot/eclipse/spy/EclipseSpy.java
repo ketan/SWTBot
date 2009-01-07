@@ -51,7 +51,7 @@ public class EclipseSpy {
 	}
 
 	private void createActionMonitor() {
-		actionMonitor = new Action("Monitor", IAction.AS_CHECK_BOX) {
+		actionMonitor = new Action("Monitor", IAction.AS_CHECK_BOX) { //$NON-NLS-1$
 			public void run() {
 				if (actionMonitor.isChecked()) {
 					Display display = output.getDisplay();
@@ -60,14 +60,14 @@ public class EclipseSpy {
 			}
 		};
 
-		actionMonitor.setToolTipText("Enable/Disable monitoring of widgets");
+		actionMonitor.setToolTipText("Enable/Disable monitoring of widgets"); //$NON-NLS-1$
 		actionMonitor.setChecked(false);
 	}
 
 	private void createOutputText() {
 		output = new StyledText(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.READ_ONLY);
 		output.setLayoutData(new GridData(GridData.FILL_HORIZONTAL, GridData.FILL_VERTICAL, true, true));
-		output.setFont(new Font(Display.getCurrent(), "Courier New", 10, SWT.NONE));
+		output.setFont(new Font(Display.getCurrent(), "Courier New", 10, SWT.NONE)); //$NON-NLS-1$
 	}
 
 	private void hookAccelerator() {

@@ -47,7 +47,7 @@ public class MessageFormat extends ThreadLocal<Map> {
 		try {
 			return formatter(pattern).format(args);
 		} catch (Exception e) {
-			return "MessageFormat: Could not translate message: '" + pattern + "' using arguments " + Arrays.asList(args);
+			return "MessageFormat: Could not translate message: '" + pattern + "' using arguments " + Arrays.asList(args); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 

@@ -126,7 +126,7 @@ public class SWTBotRecorder {
 	 */
 	public void start() {
 		if (running)
-			throw new IllegalStateException("Already recording");
+			throw new IllegalStateException("Already recording"); //$NON-NLS-1$
 		running = true;
 		clear();
 		hookListeners();
@@ -137,7 +137,7 @@ public class SWTBotRecorder {
 	 */
 	public ActionList stop() {
 		if (!running)
-			throw new IllegalStateException("Not recording");
+			throw new IllegalStateException("Not recording"); //$NON-NLS-1$
 		running = false;
 		unregisterAllListeners();
 		return getEvents();

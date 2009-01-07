@@ -40,7 +40,7 @@ public class SWTBotDemo {
 		Thread applicationThread = new Thread() {
 			public void run() {
 				try {
-					mainClass.getMethod("main", new Class[] { String[].class }).invoke(null, new Object[] { args });
+					mainClass.getMethod("main", new Class[] { String[].class }).invoke(null, new Object[] { args }); //$NON-NLS-1$
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -84,32 +84,32 @@ public class SWTBotDemo {
 	 * 
 	 */
 	private void playWithCombos() throws Exception {
-		bot.tabItem("Combo").activate();
-		bot.checkBox("Listen").click();
-		SWTBotCombo comboBox = bot.comboBox("Line 3");
-		bot.button("Clear").click();
-		comboBox.setSelection("Line 7");
-		bot.checkBox("Listen").click();
-		bot.tabItem("Button").activate();
+		bot.tabItem("Combo").activate(); //$NON-NLS-1$
+		bot.checkBox("Listen").click(); //$NON-NLS-1$
+		SWTBotCombo comboBox = bot.comboBox("Line 3"); //$NON-NLS-1$
+		bot.button("Clear").click(); //$NON-NLS-1$
+		comboBox.setSelection("Line 7"); //$NON-NLS-1$
+		bot.checkBox("Listen").click(); //$NON-NLS-1$
+		bot.tabItem("Button").activate(); //$NON-NLS-1$
 	}
 
 	/**
 	 * 
 	 */
 	private void playWithShells() throws Exception {
-		bot.tabItem("Shell").activate();
+		bot.tabItem("Shell").activate(); //$NON-NLS-1$
 
-		bot.checkBox("SWT.NO_TRIM").click();
+		bot.checkBox("SWT.NO_TRIM").click(); //$NON-NLS-1$
 		createAndCloseShell();
 
-		bot.checkBox("SWT.TITLE").click();
+		bot.checkBox("SWT.TITLE").click(); //$NON-NLS-1$
 		createAndCloseShell();
 
-		bot.checkBox("SWT.RESIZE").click();
+		bot.checkBox("SWT.RESIZE").click(); //$NON-NLS-1$
 		createAndCloseShell();
 
-		bot.checkBox("Image").click();
-		bot.checkBox("Background Image").click();
+		bot.checkBox("Image").click(); //$NON-NLS-1$
+		bot.checkBox("Background Image").click(); //$NON-NLS-1$
 		createAndCloseShell();
 
 	}
@@ -118,68 +118,68 @@ public class SWTBotDemo {
 	 * 
 	 */
 	private void createAndCloseShell() throws Exception {
-		bot.button("Create Shell").click();
-		bot.shell("Title:0").activate();
-		bot.button("Close").click();
-		bot.shell("SWT Controls").activate();
-		bot.button("Close All Shells").click();
+		bot.button("Create Shell").click(); //$NON-NLS-1$
+		bot.shell("Title:0").activate(); //$NON-NLS-1$
+		bot.button("Close").click(); //$NON-NLS-1$
+		bot.shell("SWT Controls").activate(); //$NON-NLS-1$
+		bot.button("Close All Shells").click(); //$NON-NLS-1$
 	}
 
 	/**
 	 * 
 	 */
 	private void playWithTabs() throws Exception {
-		bot.tabItem("TabFolder").activate();
-		bot.tabItem("Tab 2").activate();
-		bot.tabItem("Tab 1").activate();
-		bot.tabItem("Tab 0").activate();
-		bot.tabItem("Button").activate();
+		bot.tabItem("TabFolder").activate(); //$NON-NLS-1$
+		bot.tabItem("Tab 2").activate(); //$NON-NLS-1$
+		bot.tabItem("Tab 1").activate(); //$NON-NLS-1$
+		bot.tabItem("Tab 0").activate(); //$NON-NLS-1$
+		bot.tabItem("Button").activate(); //$NON-NLS-1$
 	}
 
 	/**
 	 * 
 	 */
 	private void playWithListeners() throws Exception {
-		bot.button("Select Listeners").click();
-		SWTBotShell shell = bot.shell("Select Listeners");
+		bot.button("Select Listeners").click(); //$NON-NLS-1$
+		SWTBotShell shell = bot.shell("Select Listeners"); //$NON-NLS-1$
 		shell.activate();
-		bot.button("Deselect All").click();
-		bot.button("Select All").click();
+		bot.button("Deselect All").click(); //$NON-NLS-1$
+		bot.button("Select All").click(); //$NON-NLS-1$
 		shell.close();
-		bot.checkBox("Listen").click();
-		bot.button("One").click();
-		bot.checkBox("Listen").click();
-		bot.button("Clear").click();
+		bot.checkBox("Listen").click(); //$NON-NLS-1$
+		bot.button("One").click(); //$NON-NLS-1$
+		bot.checkBox("Listen").click(); //$NON-NLS-1$
+		bot.button("Clear").click(); //$NON-NLS-1$
 	}
 
 	/**
 	 * @param bot
 	 */
 	private void playWithRadioControls() throws Exception {
-		bot.radio("SWT.PUSH").click();
-		bot.radio("SWT.CHECK").click();
-		bot.radio("SWT.RADIO").click();
-		bot.radio("SWT.TOGGLE").click();
+		bot.radio("SWT.PUSH").click(); //$NON-NLS-1$
+		bot.radio("SWT.CHECK").click(); //$NON-NLS-1$
+		bot.radio("SWT.RADIO").click(); //$NON-NLS-1$
+		bot.radio("SWT.TOGGLE").click(); //$NON-NLS-1$
 	}
 
 	/**
 	 * @param bot
 	 */
 	private void playWithEnableAndVisibliity() throws Exception {
-		bot.checkBox("Enabled").click();
-		bot.checkBox("Visible").click();
-		bot.checkBox("Visible").click();
-		bot.checkBox("Enabled").click();
+		bot.checkBox("Enabled").click(); //$NON-NLS-1$
+		bot.checkBox("Visible").click(); //$NON-NLS-1$
+		bot.checkBox("Visible").click(); //$NON-NLS-1$
+		bot.checkBox("Enabled").click(); //$NON-NLS-1$
 	}
 
 	/**
 	 * @param bot
 	 */
 	private void playWithFillControls() throws Exception {
-		bot.checkBox("Horizontal Fill").click();
-		bot.checkBox("Vertical Fill").click();
-		bot.checkBox("Horizontal Fill").click();
-		bot.checkBox("Vertical Fill").click();
+		bot.checkBox("Horizontal Fill").click(); //$NON-NLS-1$
+		bot.checkBox("Vertical Fill").click(); //$NON-NLS-1$
+		bot.checkBox("Horizontal Fill").click(); //$NON-NLS-1$
+		bot.checkBox("Vertical Fill").click(); //$NON-NLS-1$
 	}
 
 }

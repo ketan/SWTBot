@@ -96,7 +96,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotButton buttonWithLabel(String label, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), withStyle(SWT.PUSH, "SWT.PUSH"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), withStyle(SWT.PUSH, "SWT.PUSH")); //$NON-NLS-1$
 		return new SWTBotButton((Button) widget(matcher, index), matcher);
 	}
 
@@ -115,7 +115,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotButton button(String mnemonicText, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withMnemonic(mnemonicText), withStyle(SWT.PUSH, "SWT.PUSH"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withMnemonic(mnemonicText), withStyle(SWT.PUSH, "SWT.PUSH")); //$NON-NLS-1$
 		return new SWTBotButton((Button) widget(matcher, index), matcher);
 	}
 
@@ -134,7 +134,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotButton buttonWithTooltip(String tooltip, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), withStyle(SWT.PUSH, "SWT.PUSH"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), withStyle(SWT.PUSH, "SWT.PUSH")); //$NON-NLS-1$
 		return new SWTBotButton((Button) widget(matcher, index), matcher);
 	}
 
@@ -155,7 +155,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotButton buttonWithId(String key, String value, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withId(key, value), withStyle(SWT.PUSH, "SWT.PUSH"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withId(key, value), withStyle(SWT.PUSH, "SWT.PUSH")); //$NON-NLS-1$
 		return new SWTBotButton((Button) widget(matcher, index), matcher);
 	}
 
@@ -174,7 +174,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotButton buttonWithId(String value, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withId(value), withStyle(SWT.PUSH, "SWT.PUSH"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withId(value), withStyle(SWT.PUSH, "SWT.PUSH")); //$NON-NLS-1$
 		return new SWTBotButton((Button) widget(matcher, index), matcher);
 	}
 
@@ -193,7 +193,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotButton buttonInGroup(String inGroup, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), inGroup(inGroup), withStyle(SWT.PUSH, "SWT.PUSH"));
+		Matcher matcher = allOf(widgetOfType(Button.class), inGroup(inGroup), withStyle(SWT.PUSH, "SWT.PUSH")); //$NON-NLS-1$
 		return new SWTBotButton((Button) widget(matcher, index), matcher);
 	}
 
@@ -210,7 +210,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotButton button(int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withStyle(SWT.PUSH, "SWT.PUSH"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withStyle(SWT.PUSH, "SWT.PUSH")); //$NON-NLS-1$
 		return new SWTBotButton((Button) widget(matcher, index), matcher);
 	}
 
@@ -231,7 +231,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotButton buttonWithLabelInGroup(String label, String inGroup, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), inGroup(inGroup), withStyle(SWT.PUSH, "SWT.PUSH"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), inGroup(inGroup), withStyle(SWT.PUSH, "SWT.PUSH")); //$NON-NLS-1$
 		return new SWTBotButton((Button) widget(matcher, index), matcher);
 	}
 
@@ -252,7 +252,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotButton buttonInGroup(String mnemonicText, String inGroup, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withMnemonic(mnemonicText), inGroup(inGroup), withStyle(SWT.PUSH, "SWT.PUSH"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withMnemonic(mnemonicText), inGroup(inGroup), withStyle(SWT.PUSH, "SWT.PUSH")); //$NON-NLS-1$
 		return new SWTBotButton((Button) widget(matcher, index), matcher);
 	}
 
@@ -273,7 +273,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotButton buttonWithTooltipInGroup(String tooltip, String inGroup, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.PUSH, "SWT.PUSH"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.PUSH, "SWT.PUSH")); //$NON-NLS-1$
 		return new SWTBotButton((Button) widget(matcher, index), matcher);
 	}
 
@@ -292,7 +292,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotCheckBox checkBoxWithLabel(String label, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), withStyle(SWT.CHECK, "SWT.CHECK"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), withStyle(SWT.CHECK, "SWT.CHECK")); //$NON-NLS-1$
 		return new SWTBotCheckBox((Button) widget(matcher, index), matcher);
 	}
 
@@ -311,7 +311,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotCheckBox checkBox(String mnemonicText, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withMnemonic(mnemonicText), withStyle(SWT.CHECK, "SWT.CHECK"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withMnemonic(mnemonicText), withStyle(SWT.CHECK, "SWT.CHECK")); //$NON-NLS-1$
 		return new SWTBotCheckBox((Button) widget(matcher, index), matcher);
 	}
 
@@ -330,7 +330,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotCheckBox checkBoxWithTooltip(String tooltip, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), withStyle(SWT.CHECK, "SWT.CHECK"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), withStyle(SWT.CHECK, "SWT.CHECK")); //$NON-NLS-1$
 		return new SWTBotCheckBox((Button) widget(matcher, index), matcher);
 	}
 
@@ -351,7 +351,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotCheckBox checkBoxWithId(String key, String value, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withId(key, value), withStyle(SWT.CHECK, "SWT.CHECK"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withId(key, value), withStyle(SWT.CHECK, "SWT.CHECK")); //$NON-NLS-1$
 		return new SWTBotCheckBox((Button) widget(matcher, index), matcher);
 	}
 
@@ -370,7 +370,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotCheckBox checkBoxWithId(String value, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withId(value), withStyle(SWT.CHECK, "SWT.CHECK"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withId(value), withStyle(SWT.CHECK, "SWT.CHECK")); //$NON-NLS-1$
 		return new SWTBotCheckBox((Button) widget(matcher, index), matcher);
 	}
 
@@ -389,7 +389,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotCheckBox checkBoxInGroup(String inGroup, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), inGroup(inGroup), withStyle(SWT.CHECK, "SWT.CHECK"));
+		Matcher matcher = allOf(widgetOfType(Button.class), inGroup(inGroup), withStyle(SWT.CHECK, "SWT.CHECK")); //$NON-NLS-1$
 		return new SWTBotCheckBox((Button) widget(matcher, index), matcher);
 	}
 
@@ -406,7 +406,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotCheckBox checkBox(int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withStyle(SWT.CHECK, "SWT.CHECK"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withStyle(SWT.CHECK, "SWT.CHECK")); //$NON-NLS-1$
 		return new SWTBotCheckBox((Button) widget(matcher, index), matcher);
 	}
 
@@ -427,7 +427,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotCheckBox checkBoxWithLabelInGroup(String label, String inGroup, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), inGroup(inGroup), withStyle(SWT.CHECK, "SWT.CHECK"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), inGroup(inGroup), withStyle(SWT.CHECK, "SWT.CHECK")); //$NON-NLS-1$
 		return new SWTBotCheckBox((Button) widget(matcher, index), matcher);
 	}
 
@@ -448,7 +448,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotCheckBox checkBoxInGroup(String mnemonicText, String inGroup, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withMnemonic(mnemonicText), inGroup(inGroup), withStyle(SWT.CHECK, "SWT.CHECK"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withMnemonic(mnemonicText), inGroup(inGroup), withStyle(SWT.CHECK, "SWT.CHECK")); //$NON-NLS-1$
 		return new SWTBotCheckBox((Button) widget(matcher, index), matcher);
 	}
 
@@ -469,7 +469,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotCheckBox checkBoxWithTooltipInGroup(String tooltip, String inGroup, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.CHECK, "SWT.CHECK"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.CHECK, "SWT.CHECK")); //$NON-NLS-1$
 		return new SWTBotCheckBox((Button) widget(matcher, index), matcher);
 	}
 
@@ -488,7 +488,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotRadio radioWithLabel(String label, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), withStyle(SWT.RADIO, "SWT.RADIO"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), withStyle(SWT.RADIO, "SWT.RADIO")); //$NON-NLS-1$
 		return new SWTBotRadio((Button) widget(matcher, index), matcher);
 	}
 
@@ -507,7 +507,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotRadio radio(String mnemonicText, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withMnemonic(mnemonicText), withStyle(SWT.RADIO, "SWT.RADIO"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withMnemonic(mnemonicText), withStyle(SWT.RADIO, "SWT.RADIO")); //$NON-NLS-1$
 		return new SWTBotRadio((Button) widget(matcher, index), matcher);
 	}
 
@@ -526,7 +526,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotRadio radioWithTooltip(String tooltip, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), withStyle(SWT.RADIO, "SWT.RADIO"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), withStyle(SWT.RADIO, "SWT.RADIO")); //$NON-NLS-1$
 		return new SWTBotRadio((Button) widget(matcher, index), matcher);
 	}
 
@@ -547,7 +547,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotRadio radioWithId(String key, String value, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withId(key, value), withStyle(SWT.RADIO, "SWT.RADIO"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withId(key, value), withStyle(SWT.RADIO, "SWT.RADIO")); //$NON-NLS-1$
 		return new SWTBotRadio((Button) widget(matcher, index), matcher);
 	}
 
@@ -566,7 +566,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotRadio radioWithId(String value, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withId(value), withStyle(SWT.RADIO, "SWT.RADIO"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withId(value), withStyle(SWT.RADIO, "SWT.RADIO")); //$NON-NLS-1$
 		return new SWTBotRadio((Button) widget(matcher, index), matcher);
 	}
 
@@ -585,7 +585,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotRadio radioInGroup(String inGroup, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), inGroup(inGroup), withStyle(SWT.RADIO, "SWT.RADIO"));
+		Matcher matcher = allOf(widgetOfType(Button.class), inGroup(inGroup), withStyle(SWT.RADIO, "SWT.RADIO")); //$NON-NLS-1$
 		return new SWTBotRadio((Button) widget(matcher, index), matcher);
 	}
 
@@ -602,7 +602,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotRadio radio(int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withStyle(SWT.RADIO, "SWT.RADIO"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withStyle(SWT.RADIO, "SWT.RADIO")); //$NON-NLS-1$
 		return new SWTBotRadio((Button) widget(matcher, index), matcher);
 	}
 
@@ -623,7 +623,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotRadio radioWithLabelInGroup(String label, String inGroup, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), inGroup(inGroup), withStyle(SWT.RADIO, "SWT.RADIO"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), inGroup(inGroup), withStyle(SWT.RADIO, "SWT.RADIO")); //$NON-NLS-1$
 		return new SWTBotRadio((Button) widget(matcher, index), matcher);
 	}
 
@@ -644,7 +644,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotRadio radioInGroup(String mnemonicText, String inGroup, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withMnemonic(mnemonicText), inGroup(inGroup), withStyle(SWT.RADIO, "SWT.RADIO"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withMnemonic(mnemonicText), inGroup(inGroup), withStyle(SWT.RADIO, "SWT.RADIO")); //$NON-NLS-1$
 		return new SWTBotRadio((Button) widget(matcher, index), matcher);
 	}
 
@@ -665,7 +665,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotRadio radioWithTooltipInGroup(String tooltip, String inGroup, int index) {
-		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.RADIO, "SWT.RADIO"));
+		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.RADIO, "SWT.RADIO")); //$NON-NLS-1$
 		return new SWTBotRadio((Button) widget(matcher, index), matcher);
 	}
 
@@ -2316,7 +2316,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotToolbarDropDownButton toolbarDropDownButton(String mnemonicText, int index) {
-		Matcher matcher = allOf(widgetOfType(ToolItem.class), withMnemonic(mnemonicText), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN"));
+		Matcher matcher = allOf(widgetOfType(ToolItem.class), withMnemonic(mnemonicText), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN")); //$NON-NLS-1$
 		return new SWTBotToolbarDropDownButton((ToolItem) widget(matcher, index), matcher);
 	}
 
@@ -2335,7 +2335,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotToolbarDropDownButton toolbarDropDownButtonWithTooltip(String tooltip, int index) {
-		Matcher matcher = allOf(widgetOfType(ToolItem.class), withTooltip(tooltip), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN"));
+		Matcher matcher = allOf(widgetOfType(ToolItem.class), withTooltip(tooltip), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN")); //$NON-NLS-1$
 		return new SWTBotToolbarDropDownButton((ToolItem) widget(matcher, index), matcher);
 	}
 
@@ -2356,7 +2356,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotToolbarDropDownButton toolbarDropDownButtonWithId(String key, String value, int index) {
-		Matcher matcher = allOf(widgetOfType(ToolItem.class), withId(key, value), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN"));
+		Matcher matcher = allOf(widgetOfType(ToolItem.class), withId(key, value), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN")); //$NON-NLS-1$
 		return new SWTBotToolbarDropDownButton((ToolItem) widget(matcher, index), matcher);
 	}
 
@@ -2375,7 +2375,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotToolbarDropDownButton toolbarDropDownButtonWithId(String value, int index) {
-		Matcher matcher = allOf(widgetOfType(ToolItem.class), withId(value), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN"));
+		Matcher matcher = allOf(widgetOfType(ToolItem.class), withId(value), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN")); //$NON-NLS-1$
 		return new SWTBotToolbarDropDownButton((ToolItem) widget(matcher, index), matcher);
 	}
 
@@ -2394,7 +2394,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotToolbarDropDownButton toolbarDropDownButtonInGroup(String inGroup, int index) {
-		Matcher matcher = allOf(widgetOfType(ToolItem.class), inGroup(inGroup), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN"));
+		Matcher matcher = allOf(widgetOfType(ToolItem.class), inGroup(inGroup), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN")); //$NON-NLS-1$
 		return new SWTBotToolbarDropDownButton((ToolItem) widget(matcher, index), matcher);
 	}
 
@@ -2411,7 +2411,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotToolbarDropDownButton toolbarDropDownButton(int index) {
-		Matcher matcher = allOf(widgetOfType(ToolItem.class), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN"));
+		Matcher matcher = allOf(widgetOfType(ToolItem.class), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN")); //$NON-NLS-1$
 		return new SWTBotToolbarDropDownButton((ToolItem) widget(matcher, index), matcher);
 	}
 
@@ -2432,7 +2432,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotToolbarDropDownButton toolbarDropDownButtonInGroup(String mnemonicText, String inGroup, int index) {
-		Matcher matcher = allOf(widgetOfType(ToolItem.class), withMnemonic(mnemonicText), inGroup(inGroup), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN"));
+		Matcher matcher = allOf(widgetOfType(ToolItem.class), withMnemonic(mnemonicText), inGroup(inGroup), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN")); //$NON-NLS-1$
 		return new SWTBotToolbarDropDownButton((ToolItem) widget(matcher, index), matcher);
 	}
 
@@ -2453,7 +2453,7 @@ public class SWTBot extends SWTBotFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotToolbarDropDownButton toolbarDropDownButtonWithTooltipInGroup(String tooltip, String inGroup, int index) {
-		Matcher matcher = allOf(widgetOfType(ToolItem.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN"));
+		Matcher matcher = allOf(widgetOfType(ToolItem.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN")); //$NON-NLS-1$
 		return new SWTBotToolbarDropDownButton((ToolItem) widget(matcher, index), matcher);
 	}
 

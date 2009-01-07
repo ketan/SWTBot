@@ -27,8 +27,8 @@ public class Main {
 
 	public static void main(String[] args) throws Exception  {
 		if (args.length == 0){
-			System.err.println("Usage: java " + Main.class.getName() + " com.your.MainClass [arguments to your main...]");
-			throw new IllegalArgumentException("Usage: java " + Main.class.getName() + " com.your.MainClass [arguments to your main...]");
+			System.err.println("Usage: java " + Main.class.getName() + " com.your.MainClass [arguments to your main...]"); //$NON-NLS-1$ //$NON-NLS-2$
+			throw new IllegalArgumentException("Usage: java " + Main.class.getName() + " com.your.MainClass [arguments to your main...]"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		try{
 			new Main(args).start();
@@ -40,10 +40,10 @@ public class Main {
 
 	void start() throws Exception {
 		final Class mainClass = Class.forName(mainClassName());
-		Thread applicationThread = new Thread("ApplicationThread") {
+		Thread applicationThread = new Thread("ApplicationThread") { //$NON-NLS-1$
 			public void run() {
 				try {
-					mainClass.getMethod("main", new Class[] { String[].class }).invoke(null, new Object[] { getProgramArguments() });
+					mainClass.getMethod("main", new Class[] { String[].class }).invoke(null, new Object[] { getProgramArguments() }); //$NON-NLS-1$
 				} catch (Exception e) {
 					throw new RuntimeException(e);
 				}

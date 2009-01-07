@@ -63,10 +63,10 @@ public class SWTBotCCombo extends AbstractSWTBot<CCombo> {
 	 * @param text the text to set.
 	 */
 	public void setText(final String text) {
-		log.debug(MessageFormat.format("Setting text on widget {0} to {1}", this, text));
+		log.debug(MessageFormat.format("Setting text on widget {0} to {1}", this, text)); //$NON-NLS-1$
 		assertEnabled();
 		if (hasStyle(widget, SWT.READ_ONLY))
-			throw new RuntimeException("This combo box is read-only.");
+			throw new RuntimeException("This combo box is read-only."); //$NON-NLS-1$
 		asyncExec(new VoidResult() {
 			public void run() {
 				widget.setText(text);
@@ -95,10 +95,10 @@ public class SWTBotCCombo extends AbstractSWTBot<CCombo> {
 	 * @param text the text to set into the combo.
 	 */
 	public void setSelection(final String text) {
-		log.debug(MessageFormat.format("Setting selection on {0} to {1}", widget, text));
+		log.debug(MessageFormat.format("Setting selection on {0} to {1}", widget, text)); //$NON-NLS-1$
 		_setSelection(text);
 		notify(SWT.Selection);
-		log.debug(MessageFormat.format("Set selection on {0} to {1}", widget, text));
+		log.debug(MessageFormat.format("Set selection on {0} to {1}", widget, text)); //$NON-NLS-1$
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class SWTBotCCombo extends AbstractSWTBot<CCombo> {
 			}
 		});
 		if (indexOf == -1)
-			throw new RuntimeException("Item `" + text + "' not found in combo box.");
+			throw new RuntimeException("Item `" + text + "' not found in combo box."); //$NON-NLS-1$ //$NON-NLS-2$
 
 		select(indexOf);
 	}
@@ -167,7 +167,7 @@ public class SWTBotCCombo extends AbstractSWTBot<CCombo> {
 		assertEnabled();
 		int itemCount = itemCount();
 		if (index > itemCount)
-			throw new RuntimeException("The index (" + index + ") is more than the number of items (" + itemCount + ") in the combo.");
+			throw new RuntimeException("The index (" + index + ") is more than the number of items (" + itemCount + ") in the combo."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 		select(index);
 	}

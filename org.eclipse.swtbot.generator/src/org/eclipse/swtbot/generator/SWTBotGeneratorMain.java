@@ -18,7 +18,7 @@ public class SWTBotGeneratorMain {
 
 	public static void main(String[] args) {
 		try {
-			XmlConfigurator.main(new String[] { "widgets.xml", "../org.eclipse.swtbot.swt.finder/src", "org.eclipse.swtbot.swt.finder.SWTBot", "../org.eclipse.swtbot.swt.finder/src" });
+			XmlConfigurator.main(new String[] { "widgets.xml", "../org.eclipse.swtbot.swt.finder/src", "org.eclipse.swtbot.swt.finder.SWTBot", "../org.eclipse.swtbot.swt.finder/src" }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

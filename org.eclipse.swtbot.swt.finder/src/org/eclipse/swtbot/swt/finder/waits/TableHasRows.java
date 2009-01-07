@@ -41,8 +41,8 @@ class TableHasRows extends DefaultCondition {
 	 * @throws IllegalArgumentException Thrown if the row count is less then 1.
 	 */
 	TableHasRows(SWTBotTable table, int rowCount) {
-		Assert.isNotNull(table, "The table can not be null");
-		Assert.isLegal(rowCount >= 0, "The row count must be greater then zero (0)");
+		Assert.isNotNull(table, "The table can not be null"); //$NON-NLS-1$
+		Assert.isLegal(rowCount >= 0, "The row count must be greater then zero (0)"); //$NON-NLS-1$
 		this.table = table;
 		this.rowCount = rowCount;
 	}
@@ -65,6 +65,6 @@ class TableHasRows extends DefaultCondition {
 	 * @return The failure message.
 	 */
 	public String getFailureMessage() {
-		return "Timed out waiting for " + table + " to contain " + rowCount + " rows.";
+		return "Timed out waiting for " + table + " to contain " + rowCount + " rows."; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 }

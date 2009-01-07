@@ -68,7 +68,7 @@ public class EventContextMenuFinder extends MenuFinder {
 	 * @throws NullPointerException Thrown if the display is <code>null</code>.
 	 */
 	public EventContextMenuFinder(Display display) {
-		Assert.isNotNull(display, "The display can not be null");
+		Assert.isNotNull(display, "The display can not be null"); //$NON-NLS-1$
 		this.display = display;
 		showHideListener = new ShowHideListener();
 	}

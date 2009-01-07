@@ -96,68 +96,68 @@ class EclipseWidgetTracker implements Runnable {
 
 	public void getCompositeInformation(Control control, StringBuffer buf) {
 		List children = childrenResolver.getChildren(control);
-		buf.append("\nChildren: " + children.size() + "\n");
+		buf.append("\nChildren: " + children.size() + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
 		for (Iterator iterator = children.iterator(); iterator.hasNext();)
-			buf.append("\t" + iterator.next() + "\n");
-		buf.append("\n");
+			buf.append("\t" + iterator.next() + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
+		buf.append("\n"); //$NON-NLS-1$
 	}
 
 	public void getLayoutInformation(Control control, StringBuffer buf) {
-		buf.append("Layout Information: \n");
-		buf.append(SWTUtils.toString(control) + " @ " + control.handle + "\n");
-		buf.append("\tStyle: " + getStyle(control) + "\n");
-		buf.append("\tLayout Data: " + control.getLayoutData() + "\n");
-		buf.append("\tBounds: " + control.getBounds() + "\n");
-		buf.append("\n");
+		buf.append("Layout Information: \n"); //$NON-NLS-1$
+		buf.append(SWTUtils.toString(control) + " @ " + control.handle + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
+		buf.append("\tStyle: " + getStyle(control) + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
+		buf.append("\tLayout Data: " + control.getLayoutData() + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
+		buf.append("\tBounds: " + control.getBounds() + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
+		buf.append("\n"); //$NON-NLS-1$
 	}
 
 	public void getLocationInformation(Control control, StringBuffer buf) {
 		TreePath path = controlFinder.getPath(control);
 		String stringFromPath = new PathGenerator().getPathAsString(path);
-		buf.append("Location: \n").append(stringFromPath).append("\n\n");
+		buf.append("Location: \n").append(stringFromPath).append("\n\n"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	public void getParentInformation(Control control, StringBuffer buf) {
 		Composite parent = control.getParent();
 		if (parent != null) {
-			buf.append("Parent Tree:\n");
+			buf.append("Parent Tree:\n"); //$NON-NLS-1$
 
 			TreePath parents = controlFinder.getPath(control).getParentPath();
 
 			int segmentCount = parents.getSegmentCount();
 			for (int i = segmentCount - 1; i >= 0; i--) {
-				String prefix = "";
+				String prefix = ""; //$NON-NLS-1$
 				Widget segment = (Widget) parents.getSegment(i);
 				for (int j = 0; j < segmentCount - i - 1; j++)
-					prefix += "\t";
+					prefix += "\t"; //$NON-NLS-1$
 
-				buf.append(prefix + renderWidget(segment) + "[" + SWTUtils.widgetIndex(segment) + "]" + "@" + "\n");
+				buf.append(prefix + renderWidget(segment) + "[" + SWTUtils.widgetIndex(segment) + "]" + "@" + "\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 				if (segment instanceof Composite) {
-					buf.append(prefix + "\t Layout: " + getClassName(((Composite) segment).getLayout()) + "\n");
-					buf.append(prefix + "\t LayoutData: " + getClassName(((Control) segment).getLayoutData()) + "\n");
+					buf.append(prefix + "\t Layout: " + getClassName(((Composite) segment).getLayout()) + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
+					buf.append(prefix + "\t LayoutData: " + getClassName(((Control) segment).getLayoutData()) + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
 				}
 			}
-			buf.append("\n");
+			buf.append("\n"); //$NON-NLS-1$
 		}
 	}
 
 	public void getSiblingInformation(Control control, StringBuffer buf) {
 		Widget[] siblings = SWTUtils.siblings(control);
-		buf.append("Siblings: " + siblings.length + "\n");
+		buf.append("Siblings: " + siblings.length + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
 
 		for (int i = 0; i < siblings.length; i++) {
 			Widget sibling = siblings[i];
 			if (sibling == control)
-				buf.append("\t[*]");
+				buf.append("\t[*]"); //$NON-NLS-1$
 			else
-				buf.append("\t   ");
+				buf.append("\t   "); //$NON-NLS-1$
 			if (sibling instanceof Control)
-				buf.append(renderWidget(sibling) + ": Layout Data: "
-						+ ((Control) sibling).getLayoutData() + "\n");
+				buf.append(renderWidget(sibling) + ": Layout Data: " //$NON-NLS-1$
+						+ ((Control) sibling).getLayoutData() + "\n"); //$NON-NLS-1$
 			else
-				buf.append(renderWidget(sibling) +  "\n");
+				buf.append(renderWidget(sibling) +  "\n"); //$NON-NLS-1$
 		}
-		buf.append("\n");
+		buf.append("\n"); //$NON-NLS-1$
 	}
 
 	private String renderWidget(Widget sibling) {
@@ -175,7 +175,7 @@ class EclipseWidgetTracker implements Runnable {
 		display.getCursorLocation();
 
 		if (control == null) {
-			view.output.setText("");
+			view.output.setText(""); //$NON-NLS-1$
 			view.lastWidget = 0;
 		} else if (control.handle != view.lastWidget) {
 			view.lastWidget = control.handle;
@@ -205,144 +205,144 @@ class EclipseWidgetTracker implements Runnable {
 	String getStyle(Widget w) {
 
 		int style = w.getStyle();
-		String result = "";
+		String result = ""; //$NON-NLS-1$
 		if (style == SWT.DEFAULT)
-			return "DEFAULT - bad!";
+			return "DEFAULT - bad!"; //$NON-NLS-1$
 		if ((style & 1 << 1) != 0)
 			if ((w instanceof CTabFolder) || (w instanceof StyledText) || (w instanceof List) || (w instanceof Text)
 					|| (w instanceof Table) || (w instanceof Tree))
-				result += "MULTI | ";
+				result += "MULTI | "; //$NON-NLS-1$
 			else if (w instanceof Menu)
-				result += "BAR | ";
+				result += "BAR | "; //$NON-NLS-1$
 			else if ((w instanceof Label) || (w instanceof MenuItem) || (w instanceof ToolItem))
-				result += "SEPARATOR | ";
+				result += "SEPARATOR | "; //$NON-NLS-1$
 			else if (w instanceof Button)
-				result += "TOGGLE | ";
+				result += "TOGGLE | "; //$NON-NLS-1$
 			else if (w instanceof ProgressBar)
-				result += "INDETERMINATE | ";
+				result += "INDETERMINATE | "; //$NON-NLS-1$
 			else
-				result += "BAR or SEPARATOR or TOGGLE or MULTI or INDETERMINATE or DBCS | ";
+				result += "BAR or SEPARATOR or TOGGLE or MULTI or INDETERMINATE or DBCS | "; //$NON-NLS-1$
 		if ((style & 1 << 2) != 0)
 			if ((w instanceof Menu) || (w instanceof ToolItem) || (w instanceof CoolItem) || (w instanceof Combo))
-				result += "DROP_DOWN | ";
+				result += "DROP_DOWN | "; //$NON-NLS-1$
 			else if (w instanceof Button)
-				result += "ARROW | ";
+				result += "ARROW | "; //$NON-NLS-1$
 			else if ((w instanceof CTabFolder) || (w instanceof StyledText) || (w instanceof List)
 					|| (w instanceof Text) || (w instanceof Table) || (w instanceof Tree))
-				result += "SINGLE | ";
+				result += "SINGLE | "; //$NON-NLS-1$
 			else if ((w instanceof Label) || (w instanceof Group))
-				result += "SHADOW_IN | ";
+				result += "SHADOW_IN | "; //$NON-NLS-1$
 			else if (w instanceof Decorations)
-				result += "TOOL | ";
+				result += "TOOL | "; //$NON-NLS-1$
 			else
-				result += "ALPHA or TOOL or SINGLE or ARROW or DROP_DOWN or SHADOW_IN | ";
+				result += "ALPHA or TOOL or SINGLE or ARROW or DROP_DOWN or SHADOW_IN | "; //$NON-NLS-1$
 		if ((style & 1 << 3) != 0)
 			if (w instanceof Menu)
-				result += "POP_UP | ";
+				result += "POP_UP | "; //$NON-NLS-1$
 			else if ((w instanceof Button) || (w instanceof MenuItem) || (w instanceof ToolItem))
-				result += "PUSH | ";
+				result += "PUSH | "; //$NON-NLS-1$
 			else if ((w instanceof Combo) || (w instanceof Text) || (w instanceof StyledText))
-				result += "READ_ONLY | ";
+				result += "READ_ONLY | "; //$NON-NLS-1$
 			else if ((w instanceof Label) || (w instanceof Group) || (w instanceof ToolBar))
-				result += "SHADOW_OUT | ";
+				result += "SHADOW_OUT | "; //$NON-NLS-1$
 			else if (w instanceof Decorations)
-				result += "NO_TRIM | ";
+				result += "NO_TRIM | "; //$NON-NLS-1$
 			else
-				result += "POP_UP or PUSH or READ_ONLY or SHADOW_OUT or NO_TRIM or NATIVE | ";
+				result += "POP_UP or PUSH or READ_ONLY or SHADOW_OUT or NO_TRIM or NATIVE | "; //$NON-NLS-1$
 		if ((style & 1 << 4) != 0)
 			if ((w instanceof Button) || (w instanceof MenuItem) || (w instanceof ToolItem))
-				result += "RADIO | ";
+				result += "RADIO | "; //$NON-NLS-1$
 			else if (w instanceof Group)
-				result += "SHADOW_ETCHED_IN | ";
+				result += "SHADOW_ETCHED_IN | "; //$NON-NLS-1$
 			else if ((w instanceof Decorations) || (w instanceof Tracker))
-				result += "RESIZE | ";
+				result += "RESIZE | "; //$NON-NLS-1$
 			else
-				result += "RESIZE or SHADOW_ETCHED_IN or RADIO or PHONETIC | ";
+				result += "RESIZE or SHADOW_ETCHED_IN or RADIO or PHONETIC | "; //$NON-NLS-1$
 		if ((style & 1 << 5) != 0)
 			if ((w instanceof Button) || (w instanceof MenuItem) || (w instanceof ToolItem) || (w instanceof Table)
 					|| (w instanceof Tree))
-				result += "CHECK | ";
+				result += "CHECK | "; //$NON-NLS-1$
 			else if ((w instanceof Label) || (w instanceof Group))
-				result += "SHADOW_NONE | ";
+				result += "SHADOW_NONE | "; //$NON-NLS-1$
 			else if (w instanceof Decorations)
-				result += "TITLE | ";
+				result += "TITLE | "; //$NON-NLS-1$
 			else
-				result += "ROMAN or CHECK  or SHADOW_NONE or TITLE | ";
+				result += "ROMAN or CHECK  or SHADOW_NONE or TITLE | "; //$NON-NLS-1$
 		if ((style & 1 << 6) != 0)
 			if (w instanceof MenuItem)
-				result += "CASCADE | ";
+				result += "CASCADE | "; //$NON-NLS-1$
 			else if ((w instanceof StyledText) || (w instanceof Label) || (w instanceof Text) || (w instanceof ToolBar))
-				result += "WRAP | ";
+				result += "WRAP | "; //$NON-NLS-1$
 			else if (w instanceof Combo)
-				result += "SIMPLE | ";
+				result += "SIMPLE | "; //$NON-NLS-1$
 			else if (w instanceof Group)
-				result += "SHADOW_ETCHED_OUT | ";
+				result += "SHADOW_ETCHED_OUT | "; //$NON-NLS-1$
 			else if ((w instanceof Decorations) || (w instanceof CTabFolder) || (w instanceof CTabItem))
-				result += "CLOSE | ";
+				result += "CLOSE | "; //$NON-NLS-1$
 			else
-				result += "CLOSE or MENU or CASCADE or WRAP or SIMPLE or SHADOW_ETCHED_OUT | ";
+				result += "CLOSE or MENU or CASCADE or WRAP or SIMPLE or SHADOW_ETCHED_OUT | "; //$NON-NLS-1$
 		if ((style & 1 << 7) != 0)
 			if (w instanceof Decorations)
-				result += "MIN | ";
+				result += "MIN | "; //$NON-NLS-1$
 			else if ((w instanceof Button) || (w instanceof Tracker))
-				result += "UP | ";
+				result += "UP | "; //$NON-NLS-1$
 			else if (w instanceof CTabFolder)
-				result += "TOP | ";
+				result += "TOP | "; //$NON-NLS-1$
 			else
-				result += "MIN or UP or TOP | ";
+				result += "MIN or UP or TOP | "; //$NON-NLS-1$
 		if ((style & 1 << 8) != 0)
-			result += "HORIZONTAL | ";
+			result += "HORIZONTAL | "; //$NON-NLS-1$
 		if ((style & 1 << 9) != 0)
-			result += "VERTICAL | ";
+			result += "VERTICAL | "; //$NON-NLS-1$
 		if ((style & 1 << 10) != 0)
 			if (w instanceof Decorations)
-				result += "MAX | ";
+				result += "MAX | "; //$NON-NLS-1$
 			else if ((w instanceof Button) || (w instanceof Tracker))
-				result += "DOWN | ";
+				result += "DOWN | "; //$NON-NLS-1$
 			else if (w instanceof CTabFolder)
-				result += "BOTTOM | ";
+				result += "BOTTOM | "; //$NON-NLS-1$
 			else
-				result += "MAX or DOWN or BOTTOM | ";
+				result += "MAX or DOWN or BOTTOM | "; //$NON-NLS-1$
 		if ((style & 1 << 11) != 0)
-			result += "BORDER | ";
+			result += "BORDER | "; //$NON-NLS-1$
 		if ((style & 1 << 12) != 0)
-			result += "CLIP_CHILDREN | ";
+			result += "CLIP_CHILDREN | "; //$NON-NLS-1$
 		if ((style & 1 << 13) != 0)
-			result += "CLIP_SIBLINGS | ";
+			result += "CLIP_SIBLINGS | "; //$NON-NLS-1$
 		if ((style & 1 << 14) != 0)
-			result += "ON_TOP or LEAD or LEFT | ";
+			result += "ON_TOP or LEAD or LEFT | "; //$NON-NLS-1$
 		if ((style & 1 << 15) != 0)
 			if (w instanceof Shell)
-				result += "PRIMARY_MODAL | ";
+				result += "PRIMARY_MODAL | "; //$NON-NLS-1$
 			else if (w instanceof Table)
-				result += "HIDE_SELECTION | ";
+				result += "HIDE_SELECTION | "; //$NON-NLS-1$
 			else
-				result += "PRIMARY_MODAL or HIDE_SELECTION | ";
+				result += "PRIMARY_MODAL or HIDE_SELECTION | "; //$NON-NLS-1$
 		if ((style & 1 << 16) != 0)
 			if ((w instanceof StyledText) || (w instanceof Table))
-				result += "FULL_SELECTION | ";
+				result += "FULL_SELECTION | "; //$NON-NLS-1$
 			else if (w instanceof Shell)
-				result += "APPLICATION_MODAL | ";
+				result += "APPLICATION_MODAL | "; //$NON-NLS-1$
 			else if (w instanceof ProgressBar)
-				result += "SMOOTH | ";
+				result += "SMOOTH | "; //$NON-NLS-1$
 			else
-				result += "FULL_SELECTION or SMOOTH or APPLICATION_MODAL | ";
+				result += "FULL_SELECTION or SMOOTH or APPLICATION_MODAL | "; //$NON-NLS-1$
 		if ((style & 1 << 17) != 0)
 			if (w instanceof Shell)
-				result += "SYSTEM_MODAL | ";
+				result += "SYSTEM_MODAL | "; //$NON-NLS-1$
 			else if ((w instanceof Button) || (w instanceof Label) || (w instanceof TableColumn)
 					|| (w instanceof Tracker) || (w instanceof ToolBar))
-				result += "TRAIL | ";
+				result += "TRAIL | "; //$NON-NLS-1$
 			else
-				result += "SYSTEM_MODAL or TRAIL or RIGHT | ";
+				result += "SYSTEM_MODAL or TRAIL or RIGHT | "; //$NON-NLS-1$
 		if ((style & 1 << 18) != 0)
-			result += "NO_BACKGROUND | ";
+			result += "NO_BACKGROUND | "; //$NON-NLS-1$
 		if ((style & 1 << 19) != 0)
-			result += "NO_FOCUS | ";
+			result += "NO_FOCUS | "; //$NON-NLS-1$
 		if ((style & 1 << 20) != 0)
-			result += "NO_REDRAW_RESIZE | ";
+			result += "NO_REDRAW_RESIZE | "; //$NON-NLS-1$
 		if ((style & 1 << 21) != 0)
-			result += "NO_MERGE_PAINTS | ";
+			result += "NO_MERGE_PAINTS | "; //$NON-NLS-1$
 		if ((style & 1 << 22) != 0)
 			if (w instanceof Text)
 				result += "PASSWORD | ";

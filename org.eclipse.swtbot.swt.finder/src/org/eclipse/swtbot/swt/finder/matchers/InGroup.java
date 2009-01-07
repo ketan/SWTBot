@@ -67,7 +67,7 @@ public class InGroup<T extends Widget> extends AbstractMatcher<T> {
 	}
 
 	public void describeTo(Description description) {
-		description.appendText("in group (").appendDescriptionOf(matcher).appendText(")");
+		description.appendText("in group (").appendDescriptionOf(matcher).appendText(")"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**

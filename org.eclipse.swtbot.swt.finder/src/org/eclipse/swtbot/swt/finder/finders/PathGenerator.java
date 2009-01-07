@@ -51,7 +51,7 @@ public class PathGenerator {
 	 * @return the path to a component represented by <code>stringPath</code>
 	 */
 	public TreePath getPathFromString(String stringPath, Display display) {
-		String[] elements = stringPath.split("//");
+		String[] elements = stringPath.split("//"); //$NON-NLS-1$
 		if (elements.length <= 1)
 			return null;
 
@@ -61,7 +61,7 @@ public class PathGenerator {
 
 		for (int i = 1; i < elements.length; i++) {
 			String token = elements[i];
-			String[] pathElements = token.split("/");
+			String[] pathElements = token.split("/"); //$NON-NLS-1$
 
 			parent = getParent(treePath, parent, i, pathElements);
 		}
@@ -165,7 +165,7 @@ public class PathGenerator {
 	protected void pathAsString(Widget w, StringBuffer result) {
 		String className = w.getClass().getName();
 		int widgetIndex = SWTUtils.widgetIndex(w);
-		result.append("//" + className.substring(className.lastIndexOf(".") + 1) + "/" + widgetIndex);
+		result.append("//" + className.substring(className.lastIndexOf(".") + 1) + "/" + widgetIndex); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	/**

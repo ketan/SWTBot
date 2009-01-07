@@ -32,7 +32,7 @@ public class WaitForShell extends DefaultCondition {
 	}
 
 	public String getFailureMessage() {
-		return "Could not find shell matching: " + matcher;
+		return "Could not find shell matching: " + matcher; //$NON-NLS-1$
 	}
 
 	public boolean test() throws Exception {

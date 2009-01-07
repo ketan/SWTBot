@@ -84,7 +84,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 */
 	public AbstractSWTBot(T w, SelfDescribing description) throws WidgetNotFoundException {
 		if (w == null)
-			throw new WidgetNotFoundException("The widget was null.");
+			throw new WidgetNotFoundException("The widget was null."); //$NON-NLS-1$
 
 		this.widget = w;
 		if (description == null)
@@ -93,7 +93,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 			this.description = description;
 
 		if (w.isDisposed())
-			throw new WidgetNotFoundException("The widget {" + description + "} was disposed." + SWTUtils.toString(w));
+			throw new WidgetNotFoundException("The widget {" + description + "} was disposed." + SWTUtils.toString(w)); //$NON-NLS-1$ //$NON-NLS-2$
 
 		display = w.getDisplay();
 		log = Logger.getLogger(getClass());
@@ -134,20 +134,20 @@ public abstract class AbstractSWTBot<T extends Widget> {
 			}
 		});
 
-		log.trace(MessageFormat.format("Enquing event {0} on {1}", result));
+		log.trace(MessageFormat.format("Enquing event {0} on {1}", result)); //$NON-NLS-1$
 		asyncExec(new VoidResult() {
 			public void run() {
 				if ((widget == null) || widget.isDisposed()) {
-					log.trace(MessageFormat.format("Not notifying {0} is null or has been disposed", this));
+					log.trace(MessageFormat.format("Not notifying {0} is null or has been disposed", this)); //$NON-NLS-1$
 					return;
 				}
 				if (!isEnabledInternal()) {
-					log.warn(MessageFormat.format("Widget is not enabled: {0}", this));
+					log.warn(MessageFormat.format("Widget is not enabled: {0}", this)); //$NON-NLS-1$
 					return;
 				}
-				log.trace(MessageFormat.format("Sending event {0} to {1}", result));
+				log.trace(MessageFormat.format("Sending event {0} to {1}", result)); //$NON-NLS-1$
 				widget.notifyListeners(eventType, createEvent);
-				log.debug(MessageFormat.format("Sent event {0} to {1}", result));
+				log.debug(MessageFormat.format("Sent event {0} to {1}", result)); //$NON-NLS-1$
 			}
 		});
 
@@ -217,7 +217,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 * @since 2.0
 	 */
 	protected void clickXY(int x, int y) {
-		log.debug(MessageFormat.format("Clicking on {0}", this));
+		log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
 		notify(SWT.MouseEnter);
 		notify(SWT.MouseMove);
 		notify(SWT.Activate);
@@ -230,7 +230,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 		notify(SWT.MouseExit);
 		notify(SWT.Deactivate);
 		notify(SWT.FocusOut);
-		log.debug(MessageFormat.format("Clicked on {0}", this));
+		log.debug(MessageFormat.format("Clicked on {0}", this)); //$NON-NLS-1$
 	}
 
 	/**
@@ -241,7 +241,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 * @since 2.0
 	 */
 	protected void doubleClickXY(int x, int y) {
-		log.debug(MessageFormat.format("Double-clicking on {0}", widget));
+		log.debug(MessageFormat.format("Double-clicking on {0}", widget)); //$NON-NLS-1$
 		notify(SWT.MouseEnter);
 		notify(SWT.MouseMove);
 		notify(SWT.Activate);
@@ -255,7 +255,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 		notify(SWT.MouseExit);
 		notify(SWT.Deactivate);
 		notify(SWT.FocusOut);
-		log.debug(MessageFormat.format("Double-clicked on {0}", widget));
+		log.debug(MessageFormat.format("Double-clicked on {0}", widget)); //$NON-NLS-1$
 	}
 
 	@Override
@@ -355,7 +355,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 		if (widget instanceof Control) {
 			return contextMenu((Control) widget, text);
 		}
-		throw new WidgetNotFoundException("Could not find menu: " + text);
+		throw new WidgetNotFoundException("Could not find menu: " + text); //$NON-NLS-1$
 	}
 
 	/**
@@ -373,7 +373,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 
 		new SWTBot().waitUntil(new DefaultCondition() {
 			public String getFailureMessage() {
-				return "Could not find context menu with text: " + text;
+				return "Could not find context menu with text: " + text; //$NON-NLS-1$
 			}
 
 			public boolean test() throws Exception {
@@ -410,7 +410,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 */
 	protected boolean isEnabledInternal() {
 		try {
-			return ((Boolean) SWTUtils.invokeMethod(widget, "isEnabled")).booleanValue();
+			return ((Boolean) SWTUtils.invokeMethod(widget, "isEnabled")).booleanValue(); //$NON-NLS-1$
 		} catch (Exception e) {
 			return true;
 		}
@@ -546,7 +546,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 * @since 1.3
 	 */
 	protected void assertEnabled() {
-		Assert.isTrue(isEnabled(), "Widget " + this + " is not enabled.");
+		Assert.isTrue(isEnabled(), "Widget " + this + " is not enabled."); //$NON-NLS-1$ //$NON-NLS-2$
 
 	}
 
@@ -580,7 +580,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 				return true;
 			}
 		});
-		Assert.isTrue(focusSet, "Could not set focus");
+		Assert.isTrue(focusSet, "Could not set focus"); //$NON-NLS-1$
 	}
 
 	/**
@@ -593,7 +593,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 		setFocus();
 
 		if (!(widget instanceof Control))
-			throw new UnsupportedOperationException("Can only traverse widgets of type Control. You're traversing a widget of type: "
+			throw new UnsupportedOperationException("Can only traverse widgets of type Control. You're traversing a widget of type: " //$NON-NLS-1$
 					+ widget.getClass().getName());
 
 		return syncExec(new BoolResult() {

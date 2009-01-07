@@ -85,7 +85,7 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 	 * @since 1.2
 	 */
 	public void typeText(final String text, int interval) {
-		log.debug(MessageFormat.format("Inserting text:{0} into text {1}", text, this));
+		log.debug(MessageFormat.format("Inserting text:{0} into text {1}", text, this)); //$NON-NLS-1$
 
 		setFocus();
 		for (int i = 0; i < text.length(); i++) {
@@ -118,7 +118,7 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 	 * @since 1.2
 	 */
 	public void notifyKeyboardEvent(int modificationKey, char c, int keyCode) {
-		log.debug(MessageFormat.format("Enquing keyboard notification: {0}", toString(modificationKey, c)));
+		log.debug(MessageFormat.format("Enquing keyboard notification: {0}", toString(modificationKey, c))); //$NON-NLS-1$
 
 		assertEnabled();
 
@@ -148,14 +148,14 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 	}
 
 	private String toString(int modificationKey, char c) {
-		String mod = "";
+		String mod = ""; //$NON-NLS-1$
 		if ((modificationKey & SWT.CTRL) != 0)
-			mod += "SWT.CTRL + ";
+			mod += "SWT.CTRL + "; //$NON-NLS-1$
 		if ((modificationKey & SWT.SHIFT) != 0)
-			mod += "SWT.SHIFT + ";
-		int lastPlus = mod.lastIndexOf(" + ");
+			mod += "SWT.SHIFT + "; //$NON-NLS-1$
+		int lastPlus = mod.lastIndexOf(" + "); //$NON-NLS-1$
 		if (lastPlus == (mod.length() - 3))
-			mod = mod.substring(0, mod.length() - 3) + " + ";
+			mod = mod.substring(0, mod.length() - 3) + " + "; //$NON-NLS-1$
 		mod = mod + c;
 		return mod;
 	}

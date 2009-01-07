@@ -31,13 +31,13 @@ class ShellIsActive extends DefaultCondition {
 	private String	text;
 
 	ShellIsActive(String text) {
-		Assert.isNotNull(text, "The shell text was null");
-		Assert.isLegal(!StringUtils.isEmpty(text), "The shell text was empty");
+		Assert.isNotNull(text, "The shell text was null"); //$NON-NLS-1$
+		Assert.isLegal(!StringUtils.isEmpty(text), "The shell text was empty"); //$NON-NLS-1$
 		this.text = text;
 	}
 
 	public String getFailureMessage() {
-		return "The shell '" + text + "' did not activate";
+		return "The shell '" + text + "' did not activate"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	public boolean test() throws Exception {

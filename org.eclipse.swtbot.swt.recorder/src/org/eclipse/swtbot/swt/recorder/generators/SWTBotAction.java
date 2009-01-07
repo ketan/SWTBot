@@ -39,7 +39,7 @@ public class SWTBotAction {
 	 * @return the java representation of this action
 	 */
 	public String toJava() {
-		return accessor.toJava() + "." + event.methodCall() + "(" + event.args() + ")" + ";";
+		return accessor.toJava() + "." + event.methodCall() + "(" + event.args() + ")" + ";"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 	}
 
 	public String toString() {

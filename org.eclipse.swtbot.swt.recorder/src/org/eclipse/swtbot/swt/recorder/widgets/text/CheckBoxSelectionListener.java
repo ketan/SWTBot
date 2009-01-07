@@ -31,7 +31,7 @@ public class CheckBoxSelectionListener extends AbstractTextBasedRecorderListener
 
 	protected SWTBotEvent createEvent(Event event) {
 		Button checkBox = (Button) event.widget;
-		return new SWTBotEvent(checkBox.getSelection() ? "select" : "deselect");
+		return new SWTBotEvent(checkBox.getSelection() ? "select" : "deselect"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	protected boolean doCanHandleEvent(Event event) {

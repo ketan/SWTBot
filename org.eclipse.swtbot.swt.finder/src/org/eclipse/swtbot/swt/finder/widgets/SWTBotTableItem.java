@@ -80,7 +80,7 @@ public class SWTBotTableItem extends AbstractSWTBot<TableItem> {
 	 * @param y the y co-ordinate of the click
 	 */
 	protected void clickXY(int x, int y) {
-		log.debug(MessageFormat.format("Clicking on {0}", this));
+		log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
 		notifyTable(SWT.MouseEnter);
 		notifyTable(SWT.MouseMove);
 		notifyTable(SWT.Activate);
@@ -93,7 +93,7 @@ public class SWTBotTableItem extends AbstractSWTBot<TableItem> {
 		notifyTable(SWT.MouseExit);
 		notifyTable(SWT.Deactivate);
 		notifyTable(SWT.FocusOut);
-		log.debug(MessageFormat.format("Clicked on {0}", this));
+		log.debug(MessageFormat.format("Clicked on {0}", this)); //$NON-NLS-1$
 	}
 
 	private void notifyTable(int eventType, Event event) {
@@ -194,7 +194,7 @@ public class SWTBotTableItem extends AbstractSWTBot<TableItem> {
 		syncExec(new VoidResult() {
 			public void run() {
 				TableItem item = widget;
-				log.debug(MessageFormat.format("Setting state to {0} on: {1}", (checked ? "checked" : "unchecked"), item.getText()));
+				log.debug(MessageFormat.format("Setting state to {0} on: {1}", (checked ? "checked" : "unchecked"), item.getText())); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				item.setChecked(checked);
 			}
 		});
@@ -202,7 +202,7 @@ public class SWTBotTableItem extends AbstractSWTBot<TableItem> {
 	}
 
 	private void assertIsCheck() {
-		Assert.isLegal(hasStyle(table, SWT.CHECK), "The table does not have the style SWT.CHECK");
+		Assert.isLegal(hasStyle(table, SWT.CHECK), "The table does not have the style SWT.CHECK"); //$NON-NLS-1$
 	}
 
 	/**

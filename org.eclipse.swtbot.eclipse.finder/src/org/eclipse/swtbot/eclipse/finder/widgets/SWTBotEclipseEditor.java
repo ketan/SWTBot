@@ -150,13 +150,13 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	 * @throws QuickFixNotFoundException if the quickfix could not be found.
 	 */
 	protected void applyQuickFix(SWTBotTable quickFixTable, String quickFixName, int retries) throws QuickFixNotFoundException {
-		log.debug("Trying to activate quickfix shell.");
+		log.debug("Trying to activate quickfix shell."); //$NON-NLS-1$
 		int quickFixIndex = quickFixTable.indexOf(quickFixName);
 		if (quickFixIndex >= 0) {
 			applyQuickFix(quickFixTable, quickFixIndex);
 			return;
 		}
-		throw new QuickFixNotFoundException("Quickfix options not found. Giving up.");
+		throw new QuickFixNotFoundException("Quickfix options not found. Giving up."); //$NON-NLS-1$
 	}
 
 	/**
@@ -171,7 +171,7 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 			Table table = (Table) bot.widget(widgetOfType(Table.class), quickFixShell.widget);
 			return new SWTBotTable(table);
 		} catch (Exception e) {
-			throw new QuickFixNotFoundException("Quickfix options not found. Giving up.", e);
+			throw new QuickFixNotFoundException("Quickfix options not found. Giving up.", e); //$NON-NLS-1$
 		}
 	}
 
@@ -185,7 +185,7 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 		UIThreadRunnable.asyncExec(new VoidResult() {
 			public void run() {
 				Table table = quickFixTable.widget;
-				log.debug(MessageFormat.format("Selecting row [{0}] {1} in {2}", quickFixIndex, table.getItem(quickFixIndex).getText(),
+				log.debug(MessageFormat.format("Selecting row [{0}] {1} in {2}", quickFixIndex, table.getItem(quickFixIndex).getText(), //$NON-NLS-1$
 						table));
 				table.setSelection(quickFixIndex);
 				Event event = new Event();
@@ -219,12 +219,12 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	 */
 	private SWTBotShell activatePopupShell() throws QuickFixNotFoundException {
 		try {
-			SWTBotShell shell = bot.shell("", bot.activeShell().widget);
+			SWTBotShell shell = bot.shell("", bot.activeShell().widget); //$NON-NLS-1$
 			shell.activate();
-			log.debug("Activated quickfix shell.");
+			log.debug("Activated quickfix shell."); //$NON-NLS-1$
 			return shell;
 		} catch (Exception e) {
-			throw new QuickFixNotFoundException("Quickfix popup not found. Giving up.", e);
+			throw new QuickFixNotFoundException("Quickfix popup not found. Giving up.", e); //$NON-NLS-1$
 		}
 	}
 

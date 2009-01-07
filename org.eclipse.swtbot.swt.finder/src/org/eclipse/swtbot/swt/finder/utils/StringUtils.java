@@ -32,7 +32,7 @@ public class StringUtils {
 	 */
 	public static String join(Object[] toJoin, String delimiter) {
 		if ((toJoin == null) || (toJoin.length == 0))
-			return "";
+			return ""; //$NON-NLS-1$
 		Assert.isTrue(!isEmptyOrNull(delimiter));
 		StringBuffer result = new StringBuffer();
 
@@ -42,7 +42,7 @@ public class StringUtils {
 		}
 
 		result.lastIndexOf(delimiter);
-		result.replace(result.length() - delimiter.length(), result.length(), "");
+		result.replace(result.length() - delimiter.length(), result.length(), ""); //$NON-NLS-1$
 		return result.toString();
 	}
 
@@ -87,7 +87,7 @@ public class StringUtils {
 	 * @since 1.3
 	 */
 	public static boolean isEmpty(String text) {
-		return text.trim().equals("");
+		return text.trim().equals(""); //$NON-NLS-1$
 	}
 
 	/**
@@ -109,9 +109,9 @@ public class StringUtils {
 	 */
 	public static String toCamelCase(String string) {
 		StringBuffer result = new StringBuffer(string);
-		while (result.indexOf("_") != -1) {
-			int indexOf = result.indexOf("_");
-			result.replace(indexOf, indexOf + 2, "" + Character.toUpperCase(result.charAt(indexOf + 1)));
+		while (result.indexOf("_") != -1) { //$NON-NLS-1$
+			int indexOf = result.indexOf("_"); //$NON-NLS-1$
+			result.replace(indexOf, indexOf + 2, "" + Character.toUpperCase(result.charAt(indexOf + 1))); //$NON-NLS-1$
 		}
 		return result.toString();
 	}
@@ -126,7 +126,7 @@ public class StringUtils {
 	 */
 	public static String capitalize(String string) {
 		StringBuffer result = new StringBuffer(toCamelCase(string));
-		result.replace(0, 1, "" + Character.toUpperCase(result.charAt(0)));
+		result.replace(0, 1, "" + Character.toUpperCase(result.charAt(0))); //$NON-NLS-1$
 		return result.toString();
 	}
 

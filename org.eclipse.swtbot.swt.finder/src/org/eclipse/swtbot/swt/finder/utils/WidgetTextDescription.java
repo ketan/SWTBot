@@ -30,7 +30,7 @@ public class WidgetTextDescription implements SelfDescribing {
 	}
 
 	public void describeTo(Description description) {
-		description.appendText(ClassUtils.simpleClassName(widget) + " with text {" + SWTUtils.toString(widget) + "}");
+		description.appendText(ClassUtils.simpleClassName(widget) + " with text {" + SWTUtils.toString(widget) + "}"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	public String toString() {

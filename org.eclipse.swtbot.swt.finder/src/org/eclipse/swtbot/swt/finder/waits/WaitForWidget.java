@@ -29,7 +29,7 @@ public class WaitForWidget extends DefaultCondition {
 	}
 
 	public String getFailureMessage() {
-		return "Could not find widget matching: " + matcher;
+		return "Could not find widget matching: " + matcher; //$NON-NLS-1$
 	}
 
 	public boolean test() throws Exception {

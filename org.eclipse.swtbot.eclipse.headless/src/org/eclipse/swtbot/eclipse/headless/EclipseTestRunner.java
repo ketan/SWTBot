@@ -75,7 +75,7 @@ public class EclipseTestRunner implements TestListener {
 	 */
 	public static final int		ERRORS				= 2;
 
-	private static final String	SUITE_METHODNAME	= "suite";
+	private static final String	SUITE_METHODNAME	= "suite"; //$NON-NLS-1$
 	/**
 	 * The current test result
 	 */
@@ -157,41 +157,41 @@ public class EclipseTestRunner implements TestListener {
 		if (args.length > 0)
 			// support the JUnit task commandline syntax where
 			// the first argument is the name of the test class
-			if (!args[0].startsWith("-")) {
+			if (!args[0].startsWith("-")) { //$NON-NLS-1$
 				className = args[0];
 				startArgs++;
 			}
 		for (int i = startArgs; i < args.length; i++)
-			if (args[i].toLowerCase().equals("-classname")) {
+			if (args[i].toLowerCase().equals("-classname")) { //$NON-NLS-1$
 				if (i < args.length - 1)
 					className = args[i + 1];
 				i++;
-			} else if (args[i].toLowerCase().equals("-testpluginname")) {
+			} else if (args[i].toLowerCase().equals("-testpluginname")) { //$NON-NLS-1$
 				if (i < args.length - 1)
 					testPluginName = args[i + 1];
 				i++;
-			} else if (args[i].startsWith("haltOnError="))
+			} else if (args[i].startsWith("haltOnError=")) //$NON-NLS-1$
 				haltError = Project.toBoolean(args[i].substring(12));
-			else if (args[i].startsWith("haltOnFailure="))
+			else if (args[i].startsWith("haltOnFailure=")) //$NON-NLS-1$
 				haltFail = Project.toBoolean(args[i].substring(14));
-			else if (args[i].startsWith("formatter="))
+			else if (args[i].startsWith("formatter=")) //$NON-NLS-1$
 				try {
 					createAndStoreFormatter(args[i].substring(10));
 				} catch (BuildException be) {
 					System.err.println(be.getMessage());
 					return ERRORS;
 				}
-				else if (args[i].startsWith("propsfile=")) {
+				else if (args[i].startsWith("propsfile=")) { //$NON-NLS-1$
 					FileInputStream in = new FileInputStream(args[i].substring(10));
 					props.load(in);
 					in.close();
-				} else if (args[i].equals("-testlistener")) {
-					System.err.println("The -testlistener option is no longer supported\nuse the formatter= option instead");
+				} else if (args[i].equals("-testlistener")) { //$NON-NLS-1$
+					System.err.println("The -testlistener option is no longer supported\nuse the formatter= option instead"); //$NON-NLS-1$
 					return ERRORS;
 				}
 
 		if (className == null)
-			throw new IllegalArgumentException("Test class name not specified");
+			throw new IllegalArgumentException("Test class name not specified"); //$NON-NLS-1$
 
 		JUnitTest t = new JUnitTest(className);
 
@@ -243,7 +243,7 @@ public class EclipseTestRunner implements TestListener {
 			String clazz = e.getMessage();
 			if (clazz == null)
 				clazz = suiteClassName;
-			runFailed("Class not found \"" + clazz + "\"");
+			runFailed("Class not found \"" + clazz + "\""); //$NON-NLS-1$ //$NON-NLS-2$
 			return null;
 		} catch (Exception e) {
 			runFailed(e);
@@ -258,7 +258,7 @@ public class EclipseTestRunner implements TestListener {
 			return new TestSuite(testClass);
 		}
 		if (!Modifier.isStatic(suiteMethod.getModifiers())) {
-			runFailed("suite() method must be static");
+			runFailed("suite() method must be static"); //$NON-NLS-1$
 			return null;
 		}
 		Test test = null;
@@ -267,10 +267,10 @@ public class EclipseTestRunner implements TestListener {
 			if (test == null)
 				return test;
 		} catch (InvocationTargetException e) {
-			runFailed("Failed to invoke suite():" + e.getTargetException().toString());
+			runFailed("Failed to invoke suite():" + e.getTargetException().toString()); //$NON-NLS-1$
 			return null;
 		} catch (IllegalAccessException e) {
-			runFailed("Failed to invoke suite():" + e.toString());
+			runFailed("Failed to invoke suite():" + e.toString()); //$NON-NLS-1$
 			return null;
 		}
 		clearStatus();
@@ -298,7 +298,7 @@ public class EclipseTestRunner implements TestListener {
 			return Class.forName(suiteClassName);
 		Bundle bundle = Platform.getBundle(fTestPluginName);
 		if (bundle == null)
-			throw new ClassNotFoundException(suiteClassName, new Exception("Could not find plugin \"" + fTestPluginName + "\""));
+			throw new ClassNotFoundException(suiteClassName, new Exception("Could not find plugin \"" + fTestPluginName + "\"")); //$NON-NLS-1$ //$NON-NLS-2$
 
 		// is the plugin a fragment?
 		Dictionary headers = bundle.getHeaders();
@@ -310,7 +310,7 @@ public class EclipseTestRunner implements TestListener {
 			try {
 				hostElement = ManifestElement.parseHeader(Constants.FRAGMENT_HOST, hostHeader);
 			} catch (BundleException e) {
-				throw new RuntimeException("Could not find host for fragment:" + fTestPluginName, e);
+				throw new RuntimeException("Could not find host for fragment:" + fTestPluginName, e); //$NON-NLS-1$
 			}
 			Bundle host = Platform.getBundle(hostElement[0].getValue());
 			// we really want to get the host not the fragment
@@ -447,7 +447,7 @@ public class EclipseTestRunner implements TestListener {
 		OutputStream out = System.out;
 
 		if (classname == null)
-			throw new BuildException("you must specify type or classname");
+			throw new BuildException("you must specify type or classname"); //$NON-NLS-1$
 		Class f = null;
 		try {
 			f = EclipseTestRunner.class.getClassLoader().loadClass(classname);
@@ -465,7 +465,7 @@ public class EclipseTestRunner implements TestListener {
 		}
 
 		if (!(o instanceof JUnitResultFormatter))
-			throw new BuildException(classname + " is not a JUnitResultFormatter");
+			throw new BuildException(classname + " is not a JUnitResultFormatter"); //$NON-NLS-1$
 
 		JUnitResultFormatter r = (JUnitResultFormatter) o;
 

@@ -59,7 +59,7 @@ public class WithId<T extends Widget> extends AbstractMatcher<T> {
 	}
 
 	public void describeTo(Description description) {
-		description.appendText("with key/value (").appendText(key).appendText("/").appendText(value).appendText(")");
+		description.appendText("with key/value (").appendText(key).appendText("/").appendText(value).appendText(")"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	/**

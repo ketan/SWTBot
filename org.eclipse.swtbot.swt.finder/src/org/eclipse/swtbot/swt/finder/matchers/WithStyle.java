@@ -47,7 +47,7 @@ public class WithStyle<T extends Widget> extends AbstractMatcher<T> {
 	}
 
 	public void describeTo(Description description) {
-		description.appendText("with style '").appendText(styleDescription).appendText("'");
+		description.appendText("with style '").appendText(styleDescription).appendText("'"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**

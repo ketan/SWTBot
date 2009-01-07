@@ -40,7 +40,7 @@ public class AllOf<T> extends AbstractMatcher<T> {
 	}
 
 	public void describeTo(Description description) {
-		description.appendList("(", " and ", ")", Arrays.asList(matchers));
+		description.appendList("(", " and ", ")", Arrays.asList(matchers)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	/**

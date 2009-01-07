@@ -55,6 +55,6 @@ public class Position {
 
 	@Override
 	public String toString() {
-		return "Position: (" + line + ", " + column + ")";
+		return "Position: (" + line + ", " + column + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 }

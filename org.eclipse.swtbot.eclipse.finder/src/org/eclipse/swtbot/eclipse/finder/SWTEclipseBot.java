@@ -171,7 +171,7 @@ public class SWTEclipseBot extends SWTBot {
 			}
 		});
 		if (editor == null)
-			throw new WidgetNotFoundException("There is no active editor");
+			throw new WidgetNotFoundException("There is no active editor"); //$NON-NLS-1$
 		return new SWTBotEclipseEditor(editor, this);
 	}
 }

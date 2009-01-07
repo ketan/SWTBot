@@ -119,9 +119,9 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 		int rowCount = rowCount();
 		int columnCount = columnCount();
 
-		Assert.isLegal(row < rowCount, "The row number (" + row + ") is more than the number of rows(" + rowCount + ") in the tree.");
-		Assert.isLegal(column < columnCount, "The column number (" + column + ") is more than the number of column(" + columnCount
-				+ ") in the tree.");
+		Assert.isLegal(row < rowCount, "The row number (" + row + ") is more than the number of rows(" + rowCount + ") in the tree."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		Assert.isLegal(column < columnCount, "The column number (" + column + ") is more than the number of column(" + columnCount //$NON-NLS-1$ //$NON-NLS-2$
+				+ ") in the tree."); //$NON-NLS-1$
 
 		return syncExec(new StringResult() {
 			public String run() {
@@ -140,10 +140,10 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 	 */
 	public String cell(int row, String columnName) {
 		List<String> columns = columns();
-		Assert.isLegal(columns.contains(columnName), "The column `" + columnName + "' is not found.");
+		Assert.isLegal(columns.contains(columnName), "The column `" + columnName + "' is not found."); //$NON-NLS-1$ //$NON-NLS-2$
 		int columnIndex = columns.indexOf(columnName);
 		if (columnIndex == -1)
-			return "";
+			return ""; //$NON-NLS-1$
 		return cell(row, columnIndex);
 	}
 
@@ -205,7 +205,7 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 					}
 				}
 				if (hasStyle(widget, SWT.MULTI) && items.length > 1)
-					log.warn("Tree does not support SWT.MULTI, cannot make multiple selections");
+					log.warn("Tree does not support SWT.MULTI, cannot make multiple selections"); //$NON-NLS-1$
 				widget.setSelection(selection.toArray(new TreeItem[] {}));
 			}
 		});
@@ -222,7 +222,7 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 		assertEnabled();
 		asyncExec(new VoidResult() {
 			public void run() {
-				log.debug(MessageFormat.format("Unselecting all in {0}", widget));
+				log.debug(MessageFormat.format("Unselecting all in {0}", widget)); //$NON-NLS-1$
 				widget.deselectAll();
 			}
 		});
@@ -240,9 +240,9 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 		assertEnabled();
 		asyncExec(new VoidResult() {
 			public void run() {
-				log.debug(MessageFormat.format("Selecting rows [{0}] in tree{1}", StringUtils.join(indices, ", "), this));
+				log.debug(MessageFormat.format("Selecting rows [{0}] in tree{1}", StringUtils.join(indices, ", "), this)); //$NON-NLS-1$ //$NON-NLS-2$
 				if (hasStyle(widget, SWT.MULTI) && indices.length > 1)
-					log.warn("Tree does not support SWT.MULTI, cannot make multiple selections");
+					log.warn("Tree does not support SWT.MULTI, cannot make multiple selections"); //$NON-NLS-1$
 				TreeItem items[] = new TreeItem[indices.length];
 				for (int i = 0; i < indices.length; i++)
 					items[i] = widget.getItem(indices[i]);
@@ -362,7 +362,7 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 		try {
 			new SWTBot().waitUntil(new DefaultCondition() {
 				public String getFailureMessage() {
-					return "Could not find node with text " + nodeText;
+					return "Could not find node with text " + nodeText; //$NON-NLS-1$
 				}
 
 				public boolean test() throws Exception {
@@ -370,7 +370,7 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 				}
 			});
 		} catch (TimeoutException e) {
-			throw new WidgetNotFoundException("Timed out waiting for tree item " + nodeText, e);
+			throw new WidgetNotFoundException("Timed out waiting for tree item " + nodeText, e); //$NON-NLS-1$
 		}
 		return new SWTBotTreeItem(getItem(nodeText));
 	}

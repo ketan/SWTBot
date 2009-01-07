@@ -48,62 +48,62 @@ public class MethodGenerator {
 
 	public String methodArguments() {
 		StringBuffer result = new StringBuffer();
-		String delimiter = ", ";
+		String delimiter = ", "; //$NON-NLS-1$
 
 		for (ReferenceBy ref : list) {
 			result.append(ref.methodArgument()).append(delimiter);
 		}
 		result.lastIndexOf(delimiter);
-		result.replace(result.length() - delimiter.length(), result.length(), "");
+		result.replace(result.length() - delimiter.length(), result.length(), ""); //$NON-NLS-1$
 
 		return result.toString();
 	}
 
 	public String methodContentsWithIndex() {
-		String result = "	@SuppressWarnings(\"unchecked\")\n";
-		result += "	public " + ClassUtils.simpleClassName(returnType) + " " + methodName() + methodArgsWithIndex() + " {\n";
-		result += "		Matcher matcher = allOf(" + instanceOf() + (otherMatchers().length() > 0 ? ", " : "") + otherMatchers() + ");\n";
-		result += "		return new " + ClassUtils.simpleClassName(returnType) + "((" + ClassUtils.simpleClassName(widgetType)
-				+ ") widget(matcher, index), matcher);\n";
-		result += "	}\n";
+		String result = "	@SuppressWarnings(\"unchecked\")\n"; //$NON-NLS-1$
+		result += "	public " + ClassUtils.simpleClassName(returnType) + " " + methodName() + methodArgsWithIndex() + " {\n"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		result += "		Matcher matcher = allOf(" + instanceOf() + (otherMatchers().length() > 0 ? ", " : "") + otherMatchers() + ");\n"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		result += "		return new " + ClassUtils.simpleClassName(returnType) + "((" + ClassUtils.simpleClassName(widgetType) //$NON-NLS-1$ //$NON-NLS-2$
+				+ ") widget(matcher, index), matcher);\n"; //$NON-NLS-1$
+		result += "	}\n"; //$NON-NLS-1$
 		return result;
 	}
 
 	public String methodContents() {
-		String result = "";
-		result += "	public " + ClassUtils.simpleClassName(returnType) + " " + methodName() + methodArgsWithoutIndex() + " {\n";
-		result += "		return " + methodName() + "(" + (methodInvocationArgs().equals(", ") ? "" : methodInvocationArgs()) + "0);\n";
-		result += "	}\n";
+		String result = ""; //$NON-NLS-1$
+		result += "	public " + ClassUtils.simpleClassName(returnType) + " " + methodName() + methodArgsWithoutIndex() + " {\n"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		result += "		return " + methodName() + "(" + (methodInvocationArgs().equals(", ") ? "" : methodInvocationArgs()) + "0);\n"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+		result += "	}\n"; //$NON-NLS-1$
 		return result;
 	}
 
 	public String commentContents() {
-		String string = "";
+		String string = ""; //$NON-NLS-1$
 		string += params();
 		string += returnStatement();
-		string += ".\n";
+		string += ".\n"; //$NON-NLS-1$
 		return comment(string);
 	}
 
 	public String commentContentsWithIndex() {
-		String string = "";
+		String string = ""; //$NON-NLS-1$
 		string += params();
-		string += "@param index the index of the widget.\n";
+		string += "@param index the index of the widget.\n"; //$NON-NLS-1$
 		string += returnStatement();
-		string += ".\n";
+		string += ".\n"; //$NON-NLS-1$
 		return comment(string);
 	}
 
 	private String returnStatement() {
-		String string = "@return a {@link " + ClassUtils.simpleClassName(returnType) + "}";
+		String string = "@return a {@link " + ClassUtils.simpleClassName(returnType) + "}"; //$NON-NLS-1$ //$NON-NLS-2$
 		for (ReferenceBy ref : list) {
-			string += " " + ref.describeJavaDoc();
+			string += " " + ref.describeJavaDoc(); //$NON-NLS-1$
 		}
 		return string;
 	}
 
 	private String params() {
-		String string = "";
+		String string = ""; //$NON-NLS-1$
 		for (ReferenceBy ref : list) {
 			string += ref.paramJavaDoc();
 		}
@@ -111,29 +111,29 @@ public class MethodGenerator {
 	}
 
 	private String comment(String string) {
-		String[] lines = string.split("\n");
+		String[] lines = string.split("\n"); //$NON-NLS-1$
 		StringBuffer buf = new StringBuffer();
-		buf.append("	/**\n");
+		buf.append("	/**\n"); //$NON-NLS-1$
 		for (String line : lines) {
-			buf.append("	 * ").append(line).append("\n");
+			buf.append("	 * ").append(line).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
-		buf.append("	 */");
+		buf.append("	 */"); //$NON-NLS-1$
 		return buf.toString();
 	}
 
 	private String methodInvocationArgs() {
-		String invocation = "";
-		String[] methodArgs = methodArguments().split(",");
+		String invocation = ""; //$NON-NLS-1$
+		String[] methodArgs = methodArguments().split(","); //$NON-NLS-1$
 		for (String methodArg : methodArgs) {
-			String[] arg = methodArg.split("\\s");
-			invocation += arg[arg.length - 1] + ", ";
+			String[] arg = methodArg.split("\\s"); //$NON-NLS-1$
+			invocation += arg[arg.length - 1] + ", "; //$NON-NLS-1$
 		}
 		return invocation;
 	}
 
 	private String otherMatchers() {
 		StringBuffer result = new StringBuffer();
-		String delimiter = ", ";
+		String delimiter = ", "; //$NON-NLS-1$
 
 		for (ReferenceBy ref : list) {
 			String matcherMethod = ref.matcherMethod();
@@ -142,28 +142,28 @@ public class MethodGenerator {
 		}
 
 		if (hasStyle())
-			result.append("withStyle(" + style + ", \"" + style + "\")").append(delimiter);
+			result.append("withStyle(" + style + ", \"" + style + "\")").append(delimiter); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 		if (result.lastIndexOf(delimiter) >= 0)
-			result.replace(result.length() - delimiter.length(), result.length(), "");
+			result.replace(result.length() - delimiter.length(), result.length(), ""); //$NON-NLS-1$
 
 		return result.toString();
 	}
 
 	private boolean hasStyle() {
-		return !"SWT.NONE".equals(style);
+		return !"SWT.NONE".equals(style); //$NON-NLS-1$
 	}
 
 	private String instanceOf() {
-		return "widgetOfType(" + ClassUtils.simpleClassName(widgetType) + ".class)";
+		return "widgetOfType(" + ClassUtils.simpleClassName(widgetType) + ".class)"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	private String methodArgsWithIndex() {
-		return "(" + methodArguments() + (methodArguments().length() > 0 ? ", " : "") + "int index)";
+		return "(" + methodArguments() + (methodArguments().length() > 0 ? ", " : "") + "int index)"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 	}
 
 	private String methodArgsWithoutIndex() {
-		return "(" + methodArguments() + ")";
+		return "(" + methodArguments() + ")"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	private String methodName() {
@@ -176,8 +176,8 @@ public class MethodGenerator {
 
 	public List<String> imports() {
 		ArrayList<String> imports = new ArrayList<String>();
-		imports.add("import " + returnType.getName());
-		imports.add("import " + widgetType.getName());
+		imports.add("import " + returnType.getName()); //$NON-NLS-1$
+		imports.add("import " + widgetType.getName()); //$NON-NLS-1$
 		return imports;
 	}
 

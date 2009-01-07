@@ -105,11 +105,11 @@ public abstract class SWTUtils {
 	public static String getText(final Object obj) {
 		if ((obj instanceof Widget) && !((Widget) obj).isDisposed()) {
 			Widget widget = (Widget) obj;
-			String text = UIThreadRunnable.syncExec(widget.getDisplay(), new ReflectionInvoker(obj, "getText"));
-			text = text.replaceAll(Text.DELIMITER, "\n");
+			String text = UIThreadRunnable.syncExec(widget.getDisplay(), new ReflectionInvoker(obj, "getText")); //$NON-NLS-1$
+			text = text.replaceAll(Text.DELIMITER, "\n"); //$NON-NLS-1$
 			return text;
 		}
-		return "";
+		return ""; //$NON-NLS-1$
 	}
 
 	/**
@@ -122,9 +122,9 @@ public abstract class SWTUtils {
 	public static String getToolTipText(final Object obj) {
 		if ((obj instanceof Widget) && !((Widget) obj).isDisposed()) {
 			Widget widget = (Widget) obj;
-			return UIThreadRunnable.syncExec(widget.getDisplay(), new ReflectionInvoker(obj, "getToolTipText"));
+			return UIThreadRunnable.syncExec(widget.getDisplay(), new ReflectionInvoker(obj, "getToolTipText")); //$NON-NLS-1$
 		}
-		return "";
+		return ""; //$NON-NLS-1$
 	}
 
 	/**
@@ -135,7 +135,7 @@ public abstract class SWTUtils {
 	 */
 	public static String toString(final Widget w) {
 		if ((w == null) || w.isDisposed())
-			return "";
+			return ""; //$NON-NLS-1$
 		return toString(w.getDisplay(), w);
 	}
 
@@ -147,7 +147,7 @@ public abstract class SWTUtils {
 	 * @return the string representation of the object when evaluated in the display thread.
 	 */
 	public static String toString(Display display, final Object o) {
-		return ClassUtils.simpleClassName(o) + " {" + trimToLength(getText(o), 20) + "}";
+		return ClassUtils.simpleClassName(o) + " {" + trimToLength(getText(o), 20) + "}"; //$NON-NLS-1$ //$NON-NLS-2$
 
 	}
 
@@ -160,7 +160,7 @@ public abstract class SWTUtils {
 	 */
 	private static String trimToLength(String result, int maxLength) {
 		if (result.length() > maxLength)
-			result = result.substring(0, maxLength) + "...";
+			result = result.substring(0, maxLength) + "..."; //$NON-NLS-1$
 		return result;
 	}
 
@@ -190,7 +190,7 @@ public abstract class SWTUtils {
 		try {
 			Thread.sleep(millis);
 		} catch (InterruptedException e) {
-			throw new RuntimeException("Could not sleep", e);
+			throw new RuntimeException("Could not sleep", e); //$NON-NLS-1$
 		}
 	}
 
@@ -238,7 +238,7 @@ public abstract class SWTUtils {
 					display = d;
 			}
 			if (display == null)
-				throw new IllegalStateException("Could not find a display");
+				throw new IllegalStateException("Could not find a display"); //$NON-NLS-1$
 		}
 		return display;
 	}
@@ -252,7 +252,7 @@ public abstract class SWTUtils {
 	// TODO recommend changing the name to isEmptyText since null isn't being check and if getText returned a null an
 	// exception would be thrown.
 	public static boolean isEmptyOrNullText(Widget w) {
-		return getText(w).trim().equals("");
+		return getText(w).trim().equals(""); //$NON-NLS-1$
 	}
 
 	/**
@@ -320,7 +320,7 @@ public abstract class SWTUtils {
 		GC gc = new GC(display);
 		Image image = null;
 		try {
-			log.debug(MessageFormat.format("Capturing screenshot ''{0}''", fileName));
+			log.debug(MessageFormat.format("Capturing screenshot ''{0}''", fileName)); //$NON-NLS-1$
 			Rectangle bounds = display.getBounds();
 			int width = bounds.width;
 			int height = bounds.height;
@@ -332,14 +332,14 @@ public abstract class SWTUtils {
 			imageLoader.save(fileName, new ImageFormatConverter().imageTypeOf(fileName.substring(fileName.lastIndexOf('.') + 1)));
 			return true;
 		} catch (Exception e) {
-			log.warn("Could not capture screenshot: " + fileName + "'", e);
+			log.warn("Could not capture screenshot: " + fileName + "'", e); //$NON-NLS-1$ //$NON-NLS-2$
 			File brokenImage = new File(fileName).getAbsoluteFile();
 			if (brokenImage.exists()) {
 				try {
-					log.trace(MessageFormat.format("Broken screenshot set to be deleted on exit: {0}", fileName));
+					log.trace(MessageFormat.format("Broken screenshot set to be deleted on exit: {0}", fileName)); //$NON-NLS-1$
 					brokenImage.deleteOnExit();
 				} catch (Exception ex) {
-					log.info(MessageFormat.format("Could not set broken screenshot to be deleted on exit: {0}", fileName), ex);
+					log.info(MessageFormat.format("Could not set broken screenshot to be deleted on exit: {0}", fileName), ex); //$NON-NLS-1$
 				}
 			}
 			return false;

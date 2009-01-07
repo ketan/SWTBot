@@ -58,10 +58,10 @@ public class SWTBotList extends AbstractSWTBot<List> {
 	 * @param item the item to select in the list.
 	 */
 	public void select(final String item) {
-		log.debug(MessageFormat.format("Set selection {0} to text {1}", this, item));
+		log.debug(MessageFormat.format("Set selection {0} to text {1}", this, item)); //$NON-NLS-1$
 		assertEnabled();
 		final int indexOf = indexOf(item);
-		Assert.isTrue(indexOf != -1, "Item `" + item + "' not found in list.");
+		Assert.isTrue(indexOf != -1, "Item `" + item + "' not found in list."); //$NON-NLS-1$ //$NON-NLS-2$
 		asyncExec(new VoidResult() {
 			public void run() {
 				widget.setSelection(indexOf);
@@ -76,11 +76,11 @@ public class SWTBotList extends AbstractSWTBot<List> {
 	 * @param index the selection index.
 	 */
 	public void select(final int index) {
-		log.debug(MessageFormat.format("Set selection {0} to index {1}", this, index));
+		log.debug(MessageFormat.format("Set selection {0} to index {1}", this, index)); //$NON-NLS-1$
 		assertEnabled();
 		int itemCount = itemCount();
 		Assert.isTrue(index <= itemCount, java.text.MessageFormat.format(
-				"The index ({0}) is more than the number of items ({1}) in the list.", index, itemCount));
+				"The index ({0}) is more than the number of items ({1}) in the list.", index, itemCount)); //$NON-NLS-1$
 		asyncExec(new VoidResult() {
 			public void run() {
 				widget.setSelection(index);
@@ -134,7 +134,7 @@ public class SWTBotList extends AbstractSWTBot<List> {
 	 * @param indices the indices to select in the list.
 	 */
 	public void select(final int[] indices) {
-		log.debug(MessageFormat.format("Set selection {0} to indices {1}]", this, StringUtils.join(indices, ", ")));
+		log.debug(MessageFormat.format("Set selection {0} to indices {1}]", this, StringUtils.join(indices, ", "))); //$NON-NLS-1$ //$NON-NLS-2$
 		assertEnabled();
 		asyncExec(new VoidResult() {
 			public void run() {
@@ -151,7 +151,7 @@ public class SWTBotList extends AbstractSWTBot<List> {
 	 * @param items the items to select in the list.
 	 */
 	public void select(final String[] items) {
-		log.debug(MessageFormat.format("Set selection {0} to items [{1}]", this, StringUtils.join(items, ", ")));
+		log.debug(MessageFormat.format("Set selection {0} to items [{1}]", this, StringUtils.join(items, ", "))); //$NON-NLS-1$ //$NON-NLS-2$
 		assertEnabled();
 		asyncExec(new VoidResult() {
 			public void run() {

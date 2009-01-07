@@ -184,7 +184,7 @@ public class ControlFinder {
 			return new ArrayList<Widget>();
 		if (!visible(parentWidget)) {
 			if (!isComposite(parentWidget))
-				log.trace(MessageFormat.format("{0} is not visible, skipping.", parentWidget));
+				log.trace(MessageFormat.format("{0} is not visible, skipping.", parentWidget)); //$NON-NLS-1$
 			return new ArrayList<Widget>();
 		}
 		OrderedSet<Widget> controls = new OrderedSet<Widget>();

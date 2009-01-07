@@ -56,7 +56,7 @@ public class SWTBotButton extends AbstractSWTBot<Button> {
 	 * Click on the button.
 	 */
 	public void click() {
-		log.debug(MessageFormat.format("Clicking on {0}", SWTUtils.getText(widget)));
+		log.debug(MessageFormat.format("Clicking on {0}", SWTUtils.getText(widget))); //$NON-NLS-1$
 		assertEnabled();
 		notify(SWT.MouseEnter);
 		notify(SWT.MouseMove);
@@ -70,7 +70,7 @@ public class SWTBotButton extends AbstractSWTBot<Button> {
 		notify(SWT.MouseExit);
 		notify(SWT.Deactivate);
 		notify(SWT.FocusOut);
-		log.debug(MessageFormat.format("Clicked on {0}", SWTUtils.getText(widget)));
+		log.debug(MessageFormat.format("Clicked on {0}", SWTUtils.getText(widget))); //$NON-NLS-1$
 	}
 
 }

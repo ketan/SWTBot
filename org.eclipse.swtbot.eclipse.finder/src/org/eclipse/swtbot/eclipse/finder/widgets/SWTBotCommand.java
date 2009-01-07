@@ -61,7 +61,7 @@ public class SWTBotCommand extends SWTBotViewMenu {
 				}
 			});
 		} else
-			throw new WidgetNotFoundException("The command to could not be execute due to the lack of an ID.");
+			throw new WidgetNotFoundException("The command to could not be execute due to the lack of an ID."); //$NON-NLS-1$
 	}
 
 	/**

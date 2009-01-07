@@ -47,7 +47,7 @@ public class WithRegex<T extends Widget> extends AbstractMatcher<T> {
 	}
 
 	public void describeTo(Description description) {
-		description.appendText("with regex '").appendText(regex).appendText("'");
+		description.appendText("with regex '").appendText(regex).appendText("'"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**

@@ -41,8 +41,8 @@ public class SWTBotEvent {
 	 * @param arguments the arguments that the method takes.
 	 */
 	public SWTBotEvent(String methodCall, SWTBotEventArguments arguments) {
-		if ((methodCall == null) || "".equals(methodCall.trim()))
-			throw new IllegalArgumentException("Argument cannot be empty or null");
+		if ((methodCall == null) || "".equals(methodCall.trim())) //$NON-NLS-1$
+			throw new IllegalArgumentException("Argument cannot be empty or null"); //$NON-NLS-1$
 		Assert.isNotNull(arguments);
 		this.methodCall = methodCall;
 		this.arguments = arguments;

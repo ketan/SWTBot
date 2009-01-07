@@ -33,12 +33,12 @@ public class PlayBackThread extends Thread {
 	private final Event			e;
 
 	public PlayBackThread(Event e) {
-		super("PlayBackThread");
+		super("PlayBackThread"); //$NON-NLS-1$
 		this.e = e;
 	}
 
 	public void run() {
-		log.debug("running...");
+		log.debug("running..."); //$NON-NLS-1$
 
 		try {
 			perform();
@@ -58,31 +58,31 @@ public class PlayBackThread extends Thread {
 		createJavaProject(bot);
 		createJavaClass(bot);
 		Thread.sleep(1000);
-		SWTBotEclipseEditor editor = bot.editor("HelloWorld.java");
+		SWTBotEclipseEditor editor = bot.editor("HelloWorld.java"); //$NON-NLS-1$
 
 		Thread.sleep(1000);
 		editor.notifyKeyboardEvent(SWT.CTRL, '.');
-		editor.quickfix("Add unimplemented methods");
+		editor.quickfix("Add unimplemented methods"); //$NON-NLS-1$
 
 		editor.navigateTo(7, 0);
-		editor.autoCompleteProposal("sys", "sysout - print to standard out");
+		editor.autoCompleteProposal("sys", "sysout - print to standard out"); //$NON-NLS-1$ //$NON-NLS-2$
 
-		editor.typeText("\"Hello World\"");
+		editor.typeText("\"Hello World\""); //$NON-NLS-1$
 
 		editor.navigateTo(3, 0);
-		editor.autoCompleteProposal("main", "main - main method");
+		editor.autoCompleteProposal("main", "main - main method"); //$NON-NLS-1$ //$NON-NLS-2$
 
-		editor.typeText("new Thread (new HelloWorld ());");
+		editor.typeText("new Thread (new HelloWorld ());"); //$NON-NLS-1$
 		if (true)
 			return;
 		editor.notifyKeyboardEvent(SWT.CTRL, '2');
 		editor.notifyKeyboardEvent(SWT.NONE, 'L');
 		editor.notifyKeyboardEvent(SWT.NONE, '\n');
 
-		editor.typeText("\n");
-		editor.typeText("thread.start();\n");
-		editor.typeText("thread.join();");
-		editor.quickfix("Add throws declaration");
+		editor.typeText("\n"); //$NON-NLS-1$
+		editor.typeText("thread.start();\n"); //$NON-NLS-1$
+		editor.typeText("thread.join();"); //$NON-NLS-1$
+		editor.quickfix("Add throws declaration"); //$NON-NLS-1$
 		editor.notifyKeyboardEvent(SWT.NONE, (char) 27);
 		editor.notifyKeyboardEvent(SWT.NONE, '\n');
 
@@ -102,34 +102,34 @@ public class PlayBackThread extends Thread {
 	 * @param bot
 	 */
 	private void createJavaClass(SWTEclipseBot bot) throws Exception {
-		bot.menu("File").menu("New").menu("Class").click();
-		bot.shell("New Java Class").activate();
-		bot.textWithLabel("Name:").setText("HelloWorld");
-		bot.textWithLabel("Package:").setText("com.helloworld");
-		implementsInterface(bot, "java.lang.Runnable");
-		bot.checkBox("Inherited abstract methods").click();
-		bot.button("Finish").click();
+		bot.menu("File").menu("New").menu("Class").click(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		bot.shell("New Java Class").activate(); //$NON-NLS-1$
+		bot.textWithLabel("Name:").setText("HelloWorld"); //$NON-NLS-1$ //$NON-NLS-2$
+		bot.textWithLabel("Package:").setText("com.helloworld"); //$NON-NLS-1$ //$NON-NLS-2$
+		implementsInterface(bot, "java.lang.Runnable"); //$NON-NLS-1$
+		bot.checkBox("Inherited abstract methods").click(); //$NON-NLS-1$
+		bot.button("Finish").click(); //$NON-NLS-1$
 	}
 
 	/**
 	 * @param bot
 	 */
 	private void implementsInterface(final SWTEclipseBot bot, String interfaceClass) throws Exception {
-		bot.button("Add...").click();
-		bot.shell("Implemented Interfaces Selection").activate();
-		bot.textWithLabel("Choose interfaces:").setText(interfaceClass);
+		bot.button("Add...").click(); //$NON-NLS-1$
+		bot.shell("Implemented Interfaces Selection").activate(); //$NON-NLS-1$
+		bot.textWithLabel("Choose interfaces:").setText(interfaceClass); //$NON-NLS-1$
 		bot.waitUntil(Conditions.tableHasRows(bot.table(), 1));
-		bot.button("OK").click();
-		bot.shell("New Java Class").activate();
+		bot.button("OK").click(); //$NON-NLS-1$
+		bot.shell("New Java Class").activate(); //$NON-NLS-1$
 	}
 
 	/**
 	 * @param bot
 	 */
 	private void createJavaProject(SWTBot bot) throws Exception {
-		bot.menu("File").menu("New").menu("Java Project").click();
-		bot.shell("New Java Project").activate();
-		bot.textWithLabel("Project name:").setText("MyProject");
-		bot.button("Finish").click();
+		bot.menu("File").menu("New").menu("Java Project").click(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		bot.shell("New Java Project").activate(); //$NON-NLS-1$
+		bot.textWithLabel("Project name:").setText("MyProject"); //$NON-NLS-1$ //$NON-NLS-2$
+		bot.button("Finish").click(); //$NON-NLS-1$
 	}
 }

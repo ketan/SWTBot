@@ -60,7 +60,7 @@ public class SWTBotToolbarDropDownButton extends SWTBotToolbarButton {
 	 */
 	public SWTBotToolbarDropDownButton(ToolItem w, SelfDescribing description) throws WidgetNotFoundException {
 		super(w, description);
-		Assert.isTrue(SWTUtils.hasStyle(w, SWT.DROP_DOWN), "Expecting a drop down button.");
+		Assert.isTrue(SWTUtils.hasStyle(w, SWT.DROP_DOWN), "Expecting a drop down button."); //$NON-NLS-1$
 
 	}
 
@@ -76,7 +76,7 @@ public class SWTBotToolbarDropDownButton extends SWTBotToolbarButton {
 		EventContextMenuFinder menuFinder = new EventContextMenuFinder();
 		try {
 			menuFinder.register();
-			log.debug(MessageFormat.format("Clicking on {0}", this));
+			log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
 			assertEnabled();
 			notify(SWT.MouseEnter);
 			notify(SWT.MouseMove);
@@ -90,12 +90,12 @@ public class SWTBotToolbarDropDownButton extends SWTBotToolbarButton {
 			notify(SWT.MouseExit);
 			notify(SWT.Deactivate);
 			notify(SWT.FocusOut);
-			log.debug(MessageFormat.format("Clicked on {0}", this));
+			log.debug(MessageFormat.format("Clicked on {0}", this)); //$NON-NLS-1$
 
 			List<?> findMenus = menuFinder.findMenus(new SWTBot().activeShell().widget, withMnemonic(menuItem), true);
 			log.debug(findMenus);
 			if (findMenus.isEmpty())
-				throw new WidgetNotFoundException("Could not find a menu item");
+				throw new WidgetNotFoundException("Could not find a menu item"); //$NON-NLS-1$
 			return new SWTBotMenu((MenuItem) findMenus.get(0));
 		} finally {
 			menuFinder.unregister();

@@ -28,13 +28,13 @@ public class Test {
 		shell.setLayout(new FillLayout());
 
 		Button blah0 = new Button(shell, SWT.RADIO);
-		blah0.setText("blah0");
+		blah0.setText("blah0"); //$NON-NLS-1$
 		Button blah1 = new Button(shell, SWT.RADIO);
-		blah1.setText("blah1");
+		blah1.setText("blah1"); //$NON-NLS-1$
 		Button blah2 = new Button(shell, SWT.RADIO);
-		blah2.setText("blah2");
+		blah2.setText("blah2"); //$NON-NLS-1$
 		Button blah3 = new Button(shell, SWT.RADIO);
-		blah3.setText("blah3");
+		blah3.setText("blah3"); //$NON-NLS-1$
 
 		blah2.setSelection(true);
 		blah3.setSelection(true);

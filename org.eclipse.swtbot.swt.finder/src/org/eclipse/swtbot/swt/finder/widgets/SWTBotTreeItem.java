@@ -80,7 +80,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 			return getText();
 		}
 		int columnCount = new SWTBotTree(tree).columnCount();
-		Assert.isLegal(column < columnCount, java.text.MessageFormat.format("The column index ({0}) is more than the number of column({1}) in the tree.", column, columnCount));
+		Assert.isLegal(column < columnCount, java.text.MessageFormat.format("The column index ({0}) is more than the number of column({1}) in the tree.", column, columnCount)); //$NON-NLS-1$
 		return syncExec(new StringResult() {
 			public String run() {
 				return widget.getText(column);
@@ -130,7 +130,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	 */
 	public SWTBotTreeItem getNode(final int row) {
 		int rowCount = rowCount();
-		Assert.isLegal(row < rowCount, java.text.MessageFormat.format("The row number ({0}) is more than the number of rows({1}) in the tree.", row, rowCount));
+		Assert.isLegal(row < rowCount, java.text.MessageFormat.format("The row number ({0}) is more than the number of rows({1}) in the tree.", row, rowCount)); //$NON-NLS-1$
 		return syncExec(new Result<SWTBotTreeItem>() {
 			public SWTBotTreeItem run() {
 				return new SWTBotTreeItem(widget.getItem(row));
@@ -249,13 +249,13 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 				TreeItem[] items = widget.getItems();
 				for (TreeItem treeItem : items) {
 					if (treeItem.getText().equals(nodeText))
-						return new SWTBotTreeItem(treeItem, new TextDescription("Tree node with text: " + nodeText));
+						return new SWTBotTreeItem(treeItem, new TextDescription("Tree node with text: " + nodeText)); //$NON-NLS-1$
 				}
 				return null;
 			}
 		});
 		if (item == null)
-			throw new WidgetNotFoundException("Could not find node with text: " + nodeText);
+			throw new WidgetNotFoundException("Could not find node with text: " + nodeText); //$NON-NLS-1$
 		return item;
 	}
 
@@ -286,7 +286,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	 */
 	@Override
 	protected void clickXY(int x, int y) {
-		log.debug(MessageFormat.format("Clicking on {0}", this));
+		log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
 		notifyTree(SWT.MouseEnter);
 		notifyTree(SWT.MouseMove);
 		notifyTree(SWT.Activate);
@@ -299,7 +299,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 		notifyTree(SWT.MouseExit);
 		notifyTree(SWT.Deactivate);
 		notifyTree(SWT.FocusOut);
-		log.debug(MessageFormat.format("Clicked on {0}", this));
+		log.debug(MessageFormat.format("Clicked on {0}", this)); //$NON-NLS-1$
 	}
 
 	/**
@@ -468,7 +468,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 		assertIsCheck();
 		syncExec(new VoidResult() {
 			public void run() {
-				log.debug(MessageFormat.format("Setting state to {0} on: {1}", (checked ? "checked" : "unchecked"), widget.getText()));
+				log.debug(MessageFormat.format("Setting state to {0} on: {1}", (checked ? "checked" : "unchecked"), widget.getText())); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				widget.setChecked(checked);
 			}
 		});
@@ -476,7 +476,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	}
 
 	private void assertIsCheck() {
-		Assert.isLegal(hasStyle(tree, SWT.CHECK), "The tree does not have the style SWT.CHECK");
+		Assert.isLegal(hasStyle(tree, SWT.CHECK), "The tree does not have the style SWT.CHECK"); //$NON-NLS-1$
 	}
 
 	/**

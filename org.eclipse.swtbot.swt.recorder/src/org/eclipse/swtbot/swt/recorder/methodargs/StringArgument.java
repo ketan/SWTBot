@@ -31,6 +31,6 @@ public class StringArgument extends AbstractSWTBotEventArguments {
 	}
 
 	public String asString() {
-		return "\"" + arg + "\"";
+		return "\"" + arg + "\""; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 }

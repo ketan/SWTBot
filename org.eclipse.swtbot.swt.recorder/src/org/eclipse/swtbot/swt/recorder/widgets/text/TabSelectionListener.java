@@ -33,7 +33,7 @@ public class TabSelectionListener extends AbstractTextBasedRecorderListener {
 	}
 
 	protected SWTBotEvent createEvent(Event event) {
-		return new SWTBotEvent("activate");
+		return new SWTBotEvent("activate"); //$NON-NLS-1$
 	}
 
 	protected boolean doCanHandleEvent(Event event) {

@@ -116,7 +116,7 @@ public class TableCollection {
 		for (final Iterator<TableRow> iterator = rows.iterator(); iterator.hasNext();) {
 			final TableRow row = iterator.next();
 			buf.append(row);
-			buf.append("\n");
+			buf.append("\n"); //$NON-NLS-1$
 		}
 		return buf.toString();
 	}

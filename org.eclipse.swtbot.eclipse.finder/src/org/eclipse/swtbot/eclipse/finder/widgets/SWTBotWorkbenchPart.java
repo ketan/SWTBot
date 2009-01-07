@@ -58,7 +58,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 
 	public SWTBotWorkbenchPart(T partReference, SWTEclipseBot bot) {
 		this.bot = bot;
-		Assert.isNotNull(partReference, "The part reference cannot be null");
+		Assert.isNotNull(partReference, "The part reference cannot be null"); //$NON-NLS-1$
 		this.partReference = partReference;
 		this.menuFinder = new ViewMenuFinder();
 		log = Logger.getLogger(getClass());
@@ -86,7 +86,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 					partReference.getPage().activate(partReference.getPart(true));
 					partReference.getPage().showView(partReference.getId());
 				} catch (PartInitException e) {
-					throw new RuntimeException("Could not show partReference - " + partReference.getPartName(), e);
+					throw new RuntimeException("Could not show partReference - " + partReference.getPartName(), e); //$NON-NLS-1$
 				}
 			}
 		});
@@ -141,7 +141,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 			}
 			return menuItems.get(index);
 		} catch (Exception e) {
-			throw new WidgetNotFoundException("Could not find view menu with label " + label + " at index " + index, e);
+			throw new WidgetNotFoundException("Could not find view menu with label " + label + " at index " + index, e); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -163,7 +163,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 					try {
 						l.add(new SWTBotToolbarButton(items[i]));
 					} catch (WidgetNotFoundException e) {
-						log.warn("Failed to find widget " + items[i].getText(), e);
+						log.warn("Failed to find widget " + items[i].getText(), e); //$NON-NLS-1$
 					}
 				}
 
@@ -190,7 +190,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 			}
 		}
 
-		throw new WidgetNotFoundException("Unable to find toolitem with the given tooltip '" + tooltip + "'");
+		throw new WidgetNotFoundException("Unable to find toolitem with the given tooltip '" + tooltip + "'"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -206,7 +206,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 		try {
 			return finder.findControls(control, matcher, true).get(0);
 		} catch (Exception e) {
-			throw new WidgetNotFoundException("Could not find any control inside the view " + partReference.getPartName(), e);
+			throw new WidgetNotFoundException("Could not find any control inside the view " + partReference.getPartName(), e); //$NON-NLS-1$
 		} finally {
 			finder.setShouldFindInvisibleControls(shouldFindInvisibleControls);
 		}

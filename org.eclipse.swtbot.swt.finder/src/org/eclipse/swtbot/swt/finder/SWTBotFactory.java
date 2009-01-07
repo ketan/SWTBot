@@ -353,7 +353,7 @@ abstract class SWTBotFactory {
 		try {
 			waitUntil(waitForWidget);
 		} catch (TimeoutException e) {
-			throw new WidgetNotFoundException("Could not find widget.", e);
+			throw new WidgetNotFoundException("Could not find widget.", e); //$NON-NLS-1$
 		}
 	}
 
@@ -406,8 +406,8 @@ abstract class SWTBotFactory {
 	 * @throws TimeoutException if the condition does not evaluate to true after timeout milliseconds.
 	 */
 	private void waitUntil(ICondition condition, long timeout, long interval) throws TimeoutException {
-		Assert.isTrue(interval >= 0, "interval value is negative");
-		Assert.isTrue(timeout >= 0, "timeout value is negative");
+		Assert.isTrue(interval >= 0, "interval value is negative"); //$NON-NLS-1$
+		Assert.isTrue(timeout >= 0, "timeout value is negative"); //$NON-NLS-1$
 		long limit = System.currentTimeMillis() + timeout;
 		condition.init((SWTBot) this);
 		while (true) {
@@ -419,7 +419,7 @@ abstract class SWTBotFactory {
 			}
 			sleep(interval);
 			if (System.currentTimeMillis() > limit)
-				throw new TimeoutException("Timeout after: " + timeout + " ms.: " + condition.getFailureMessage());
+				throw new TimeoutException("Timeout after: " + timeout + " ms.: " + condition.getFailureMessage()); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -457,8 +457,8 @@ abstract class SWTBotFactory {
 	 * @since 2.0
 	 */
 	private void waitWhile(ICondition condition, long timeout, long interval) throws TimeoutException {
-		Assert.isTrue(interval >= 0, "interval value is negative");
-		Assert.isTrue(timeout >= 0, "timeout value is negative");
+		Assert.isTrue(interval >= 0, "interval value is negative"); //$NON-NLS-1$
+		Assert.isTrue(timeout >= 0, "timeout value is negative"); //$NON-NLS-1$
 		long limit = System.currentTimeMillis() + timeout;
 		condition.init((SWTBot) this);
 		while (true) {
@@ -470,7 +470,7 @@ abstract class SWTBotFactory {
 			}
 			sleep(interval);
 			if (System.currentTimeMillis() > limit)
-				throw new TimeoutException("Timeout after: " + timeout + " ms.: " + condition.getFailureMessage());
+				throw new TimeoutException("Timeout after: " + timeout + " ms.: " + condition.getFailureMessage()); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 

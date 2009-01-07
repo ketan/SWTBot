@@ -33,12 +33,12 @@ class ShellCloses extends DefaultCondition {
 	 * @param shell the shell to be monitored.
 	 */
 	ShellCloses(SWTBotShell shell) {
-		Assert.isNotNull(shell, "The shell was null");
+		Assert.isNotNull(shell, "The shell was null"); //$NON-NLS-1$
 		this.shell = shell;
 	}
 
 	public String getFailureMessage() {
-		return "The shell " + shell + " did not close.";
+		return "The shell " + shell + " did not close."; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	public boolean test() throws Exception {

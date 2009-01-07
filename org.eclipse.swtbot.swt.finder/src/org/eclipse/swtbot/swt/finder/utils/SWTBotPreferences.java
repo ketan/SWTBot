@@ -24,7 +24,7 @@ public class SWTBotPreferences {
 
 	/** The default key used to match SWT widgets.
 	 * @since 2.0*/
-	public static final String	DEFAULT_KEY	= "org.eclipse.swtbot.widget.key";
+	public static final String	DEFAULT_KEY	= "org.eclipse.swtbot.widget.key"; //$NON-NLS-1$
 
 	/**
 	 * Gets the timeout. To set use the system property {@code org.eclipse.swtbot.search.timeout}.
@@ -33,7 +33,7 @@ public class SWTBotPreferences {
 	 * @since 1.3
 	 */
 	public static long getTimeout() {
-		return toLong(System.getProperty("org.eclipse.swtbot.search.timeout", "5000"));
+		return toLong(System.getProperty("org.eclipse.swtbot.search.timeout", "5000")); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class SWTBotPreferences {
 	 * @return the recorder file name.
 	 */
 	public static String recorderFileName() {
-		return System.getProperty("org.eclipse.swtbot.recorder.file.name");
+		return System.getProperty("org.eclipse.swtbot.recorder.file.name"); //$NON-NLS-1$
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class SWTBotPreferences {
 	 * @return the playback delay.
 	 */
 	public static long playbackDelay() {
-		return toLong(System.getProperty("org.eclipse.swtbot.playback.delay", "0"));
+		return toLong(System.getProperty("org.eclipse.swtbot.playback.delay", "0")); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
     /**
@@ -61,7 +61,7 @@ public class SWTBotPreferences {
      * @since 1.3
      */
 	public static int getMaximumScreenshots() {
-	    return toInt(System.getProperty("org.eclipse.swtbot.maximum.screenshots", "100"));
+	    return toInt(System.getProperty("org.eclipse.swtbot.maximum.screenshots", "100")); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
     /**
@@ -72,7 +72,7 @@ public class SWTBotPreferences {
      * @since 1.3
      */
 	public static String getScreenshotFormat() {
-	    return System.getProperty("org.eclipse.swtbot.screenshot.format", "jpeg");
+	    return System.getProperty("org.eclipse.swtbot.screenshot.format", "jpeg"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	private static long toLong(String timeoutValue) {

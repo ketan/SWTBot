@@ -60,7 +60,7 @@ public class SWTBotViewMenu {
 		try {
 			text = cmdItem.getName();
 		} catch (NotDefinedException e) {
-			text = "";
+			text = ""; //$NON-NLS-1$
 		}
 	}
 
@@ -110,7 +110,7 @@ public class SWTBotViewMenu {
 				}
 			});
 		else
-			throw new WidgetNotFoundException("There is no action or contribution id to execute.");
+			throw new WidgetNotFoundException("There is no action or contribution id to execute."); //$NON-NLS-1$
 	}
 
 	/**

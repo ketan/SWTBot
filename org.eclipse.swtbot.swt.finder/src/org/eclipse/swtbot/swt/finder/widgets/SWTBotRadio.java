@@ -51,7 +51,7 @@ public class SWTBotRadio extends AbstractSWTBot<Button> {
 	 */
 	public SWTBotRadio(Button w, SelfDescribing description) throws WidgetNotFoundException {
 		super(w, description);
-		Assert.isTrue(SWTUtils.hasStyle(w, SWT.RADIO), "Expecting a radio.");
+		Assert.isTrue(SWTUtils.hasStyle(w, SWT.RADIO), "Expecting a radio."); //$NON-NLS-1$
 	}
 
 	/**
@@ -59,15 +59,15 @@ public class SWTBotRadio extends AbstractSWTBot<Button> {
 	 */
 	public void click() {
 		if (isSelected()) {
-			log.debug(MessageFormat.format("Widget {0} is already selected, not clicking again.", this));
+			log.debug(MessageFormat.format("Widget {0} is already selected, not clicking again.", this)); //$NON-NLS-1$
 			return;
 		}
 		assertEnabled();
-		log.debug(MessageFormat.format("Clicking on {0}", this));
+		log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
 		asyncExec(new VoidResult() {
 			public void run() {
 				deselectOtherRadioButtons();
-				log.debug(MessageFormat.format("Clicking on {0}", this));
+				log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
 				widget.setSelection(true);
 			}
 
@@ -96,7 +96,7 @@ public class SWTBotRadio extends AbstractSWTBot<Button> {
 		notify(SWT.MouseExit);
 		notify(SWT.Deactivate);
 		notify(SWT.FocusOut);
-		log.debug(MessageFormat.format("Clicked on {0}", this));
+		log.debug(MessageFormat.format("Clicked on {0}", this)); //$NON-NLS-1$
 	}
 
 	/**

@@ -186,7 +186,7 @@ public abstract class SWTBotTestCase extends TestCase {
 	 * @param widget the widget.
 	 */
 	public static void assertEnabled(AbstractSWTBot<? extends Widget> widget) {
-		assertTrue("Expected widget " + widget + " to be enabled.", widget.isEnabled());
+		assertTrue("Expected widget " + widget + " to be enabled.", widget.isEnabled()); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -195,7 +195,7 @@ public abstract class SWTBotTestCase extends TestCase {
 	 * @param widget the widget.
 	 */
 	public static void assertNotEnabled(AbstractSWTBot<? extends Widget> widget) {
-		assertTrue("Expected widget " + widget + " to be disabled.", !widget.isEnabled());
+		assertTrue("Expected widget " + widget + " to be disabled.", !widget.isEnabled()); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -204,7 +204,7 @@ public abstract class SWTBotTestCase extends TestCase {
 	 * @param widget the widget.
 	 */
 	public static void assertVisible(AbstractSWTBot<? extends Widget> widget) {
-		assertTrue("Expected widget " + widget + " to be visible.", widget.isVisible());
+		assertTrue("Expected widget " + widget + " to be visible.", widget.isVisible()); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -213,7 +213,7 @@ public abstract class SWTBotTestCase extends TestCase {
 	 * @param widget the widget.
 	 */
 	public static void assertNotVisible(AbstractSWTBot<? extends Widget> widget) {
-		assertTrue("Expected widget " + widget + " to be visible.", !widget.isVisible());
+		assertTrue("Expected widget " + widget + " to be visible.", !widget.isVisible()); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -246,17 +246,17 @@ public abstract class SWTBotTestCase extends TestCase {
 	private void captureScreenshot() {
 		try {
 			int maximumScreenshots = SWTBotPreferences.getMaximumScreenshots();
-			String fileName = "screenshots/screenshot-" + ClassUtils.simpleClassName(getClass()) + "." + getName() + "."
+			String fileName = "screenshots/screenshot-" + ClassUtils.simpleClassName(getClass()) + "." + getName() + "." //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 					+ SWTBotPreferences.getScreenshotFormat().toLowerCase();
 			if (++screenshotCounter <= maximumScreenshots) {
-				new File("screenshots").mkdirs();
+				new File("screenshots").mkdirs(); //$NON-NLS-1$
 				captureScreenshot(fileName);
 			} else {
-				log.info("No screenshot captured for '" + ClassUtils.simpleClassName(getClass()) + "." + getName()
-						+ "' because maximum number of screenshots reached: " + maximumScreenshots);
+				log.info("No screenshot captured for '" + ClassUtils.simpleClassName(getClass()) + "." + getName() //$NON-NLS-1$ //$NON-NLS-2$
+						+ "' because maximum number of screenshots reached: " + maximumScreenshots); //$NON-NLS-1$
 			}
 		} catch (Exception e) {
-			log.warn("Could not capture screenshot", e);
+			log.warn("Could not capture screenshot", e); //$NON-NLS-1$
 		}
 	}
 

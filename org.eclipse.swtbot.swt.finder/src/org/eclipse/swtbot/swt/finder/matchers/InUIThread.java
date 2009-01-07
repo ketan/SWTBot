@@ -47,7 +47,7 @@ public class InUIThread<T extends Widget> extends AbstractMatcher<T> {
 	}
 
 	public void describeTo(Description description) {
-		description.appendText("evaluates matcher [").appendDescriptionOf(matcher).appendText("] in the ui thread");
+		description.appendText("evaluates matcher [").appendDescriptionOf(matcher).appendText("] in the ui thread"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**

@@ -52,11 +52,11 @@ public class SWTBotMenu extends AbstractSWTBot<MenuItem> {
 	 * Clicks on the menu item
 	 */
 	public void click() {
-		log.debug(MessageFormat.format("Clicking on {0}", this));
+		log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
 		assertEnabled();
 		toggleSelection();
 		notify(SWT.Selection);
-		log.debug(MessageFormat.format("Clicked on {0}", this));
+		log.debug(MessageFormat.format("Clicked on {0}", this)); //$NON-NLS-1$
 	}
 
 	/**

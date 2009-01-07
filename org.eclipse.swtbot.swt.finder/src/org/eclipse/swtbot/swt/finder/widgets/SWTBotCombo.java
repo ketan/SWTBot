@@ -62,11 +62,11 @@ public class SWTBotCombo extends AbstractSWTBot<Combo> {
 	 * @param text the text to set into the combo.
 	 */
 	public void setSelection(final String text) {
-		log.debug(MessageFormat.format("Setting selection on {0} to {1}", this, text));
+		log.debug(MessageFormat.format("Setting selection on {0} to {1}", this, text)); //$NON-NLS-1$
 		assertEnabled();
 		_setSelection(text);
 		notify(SWT.Selection);
-		log.debug(MessageFormat.format("Set selection on {0} to {1}", this, text));
+		log.debug(MessageFormat.format("Set selection on {0} to {1}", this, text)); //$NON-NLS-1$
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class SWTBotCombo extends AbstractSWTBot<Combo> {
 			}
 		});
 		if (indexOf == -1)
-			throw new RuntimeException("Item `" + text + "' not found in combo box.");
+			throw new RuntimeException("Item `" + text + "' not found in combo box."); //$NON-NLS-1$ //$NON-NLS-2$
 		asyncExec(new VoidResult() {
 			public void run() {
 				widget.select(indexOf);
@@ -125,7 +125,7 @@ public class SWTBotCombo extends AbstractSWTBot<Combo> {
 		assertEnabled();
 		int itemCount = itemCount();
 		if (index > itemCount)
-			throw new RuntimeException("The index (" + index + ") is more than the number of items (" + itemCount + ") in the combo.");
+			throw new RuntimeException("The index (" + index + ") is more than the number of items (" + itemCount + ") in the combo."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 		asyncExec(new VoidResult() {
 			public void run() {
@@ -169,11 +169,11 @@ public class SWTBotCombo extends AbstractSWTBot<Combo> {
 	 * @since 1.0
 	 */
 	public void setText(final String text) {
-		log.debug(MessageFormat.format("Setting text on {0} to {1}", this, text));
+		log.debug(MessageFormat.format("Setting text on {0} to {1}", this, text)); //$NON-NLS-1$
 		assertEnabled();
 
 		if (hasStyle(widget, SWT.READ_ONLY))
-			throw new RuntimeException("This combo box is read-only.");
+			throw new RuntimeException("This combo box is read-only."); //$NON-NLS-1$
 
 		asyncExec(new VoidResult() {
 			public void run() {
@@ -181,7 +181,7 @@ public class SWTBotCombo extends AbstractSWTBot<Combo> {
 			}
 		});
 		notify(SWT.Modify);
-		log.debug(MessageFormat.format("Set text on {0} to {1}", this, text));
+		log.debug(MessageFormat.format("Set text on {0} to {1}", this, text)); //$NON-NLS-1$
 	}
 
 }

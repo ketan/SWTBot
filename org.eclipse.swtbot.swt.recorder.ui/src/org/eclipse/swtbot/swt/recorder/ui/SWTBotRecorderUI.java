@@ -40,11 +40,11 @@ import org.eclipse.swtbot.swt.recorder.generators.SWTBotAction;
  */
 public class SWTBotRecorderUI {
 
-	public static final String	CLEAR	= "clear";
-	public static final String	STOP	= "stop";
-	public static final String	SAVE	= "save";
-	public static final String	START	= "start";
-	public static final String	PAUSE	= "pause";
+	public static final String	CLEAR	= "clear"; //$NON-NLS-1$
+	public static final String	STOP	= "stop"; //$NON-NLS-1$
+	public static final String	SAVE	= "save"; //$NON-NLS-1$
+	public static final String	START	= "start"; //$NON-NLS-1$
+	public static final String	PAUSE	= "pause"; //$NON-NLS-1$
 
 	public static ImageRegistry	imageRegistry;
 	private Display				display;
@@ -66,7 +66,7 @@ public class SWTBotRecorderUI {
 	protected void createShell() {
 		shell = new Shell(display, SWT.TITLE | SWT.ON_TOP);
 		shell.setLayout(new GridLayout(4, false));
-		shell.setText("SWTBot Recorder");
+		shell.setText("SWTBot Recorder"); //$NON-NLS-1$
 
 		createStartPauseButton();
 		createStopRecorderButton();
@@ -143,7 +143,7 @@ public class SWTBotRecorderUI {
 	}
 
 	private void loadImage(String imageName) {
-		InputStream record = getClass().getClassLoader().getResourceAsStream("icons/" + imageName + ".gif");
+		InputStream record = getClass().getClassLoader().getResourceAsStream("icons/" + imageName + ".gif"); //$NON-NLS-1$ //$NON-NLS-2$
 		imageRegistry.put(imageName, new Image(display, record));
 	}
 
@@ -193,7 +193,7 @@ public class SWTBotRecorderUI {
 				return display;
 			SWTUtils.sleep(100);
 		}
-		throw new IllegalStateException("Was expecting a display to appear.");
+		throw new IllegalStateException("Was expecting a display to appear."); //$NON-NLS-1$
 	}
 
 	/**
@@ -257,7 +257,7 @@ public class SWTBotRecorderUI {
 	}
 
 	protected boolean isEmptyOrNull(String recorderFileName) {
-		return (recorderFileName == null) || recorderFileName.trim().equals("");
+		return (recorderFileName == null) || recorderFileName.trim().equals(""); //$NON-NLS-1$
 	}
 
 }

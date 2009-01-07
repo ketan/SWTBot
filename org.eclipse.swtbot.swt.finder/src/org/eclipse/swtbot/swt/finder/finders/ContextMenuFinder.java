@@ -39,7 +39,7 @@ public class ContextMenuFinder extends MenuFinder {
 	 */
 	public ContextMenuFinder(Control control) {
 		super();
-		Assert.isNotNull(control, "The control cannot be null");
+		Assert.isNotNull(control, "The control cannot be null"); //$NON-NLS-1$
 		this.control = control;
 	}
 

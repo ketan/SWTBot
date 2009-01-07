@@ -62,7 +62,7 @@ abstract class AbstractTextBasedRecorderListener implements Listener {
 				return;
 			doHandle(event);
 		} catch (Exception e) {
-			log.fatal("Could not record event " + SWTBotEvents.toString(event), e);
+			log.fatal("Could not record event " + SWTBotEvents.toString(event), e); //$NON-NLS-1$
 		}
 	}
 
@@ -75,7 +75,7 @@ abstract class AbstractTextBasedRecorderListener implements Listener {
 			Matcher<?> matcher = createMatcher(text);
 			List<? extends Widget> similarWidgets = similarWidgets(matcher, widget);
 			int index = similarWidgets.indexOf(widget);
-			return new SWTBotAccessor("bot", annotation.preferredName(), text, index);
+			return new SWTBotAccessor("bot", annotation.preferredName(), text, index); //$NON-NLS-1$
 		}
 		return null;
 	}
@@ -109,7 +109,7 @@ abstract class AbstractTextBasedRecorderListener implements Listener {
 	}
 
 	private final String getText(Widget widget) {
-		return SWTUtils.getText(widget).replaceAll("&", "");
+		return SWTUtils.getText(widget).replaceAll("&", ""); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	protected final Matcher<? extends Widget> mnemonicTextMatcher(String text) {
@@ -123,7 +123,7 @@ abstract class AbstractTextBasedRecorderListener implements Listener {
 	protected Shell getShell(Widget widget) {
 		if (widget instanceof Control)
 			return ((Control) widget).getShell();
-		throw new IllegalArgumentException("Cannot find the shell for widgets of type: " + ClassUtils.simpleClassName(widget));
+		throw new IllegalArgumentException("Cannot find the shell for widgets of type: " + ClassUtils.simpleClassName(widget)); //$NON-NLS-1$
 	}
 
 	private final Matcher<? extends Widget> styleMatcher() {

@@ -35,7 +35,7 @@ public class ActionList {
 	}
 
 	private boolean shouldPrint() {
-		return Boolean.getBoolean("org.eclipse.swtbot.recorder.actions.print");
+		return Boolean.getBoolean("org.eclipse.swtbot.recorder.actions.print"); //$NON-NLS-1$
 	}
 
 	/**

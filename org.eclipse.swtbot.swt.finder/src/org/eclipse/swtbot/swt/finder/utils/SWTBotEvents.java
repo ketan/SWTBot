@@ -41,47 +41,47 @@ import org.eclipse.swt.widgets.Menu;
 public abstract class SWTBotEvents {
 	private static final BidiMap	EVENTS	= new DualTreeBidiMap();
 	static {
-		EVENTS.put("Activate", new Integer(SWT.Activate));
-		EVENTS.put("Arm", new Integer(SWT.Arm));
-		EVENTS.put("Close", new Integer(SWT.Close));
-		EVENTS.put("Collapse", new Integer(SWT.Collapse));
-		EVENTS.put("Deactivate", new Integer(SWT.Deactivate));
-		EVENTS.put("DefaultSelection", new Integer(SWT.DefaultSelection));
-		EVENTS.put("Deiconify", new Integer(SWT.Deiconify));
-		EVENTS.put("Dispose", new Integer(SWT.Dispose));
-		EVENTS.put("DragDetect", new Integer(SWT.DragDetect));
-		EVENTS.put("EraseItem", new Integer(SWT.EraseItem));
-		EVENTS.put("Expand", new Integer(SWT.Expand));
-		EVENTS.put("FocusIn", new Integer(SWT.FocusIn));
-		EVENTS.put("FocusOut", new Integer(SWT.FocusOut));
-		EVENTS.put("HardKeyDown", new Integer(SWT.HardKeyDown));
-		EVENTS.put("HardKeyUp", new Integer(SWT.HardKeyUp));
-		EVENTS.put("Help", new Integer(SWT.Help));
-		EVENTS.put("Hide", new Integer(SWT.Hide));
-		EVENTS.put("Iconify", new Integer(SWT.Iconify));
-		EVENTS.put("KeyDown", new Integer(SWT.KeyDown));
-		EVENTS.put("KeyUp", new Integer(SWT.KeyUp));
-		EVENTS.put("MeasureItem", new Integer(SWT.MeasureItem));
-		EVENTS.put("MenuDetect", new Integer(SWT.MenuDetect));
-		EVENTS.put("Modify", new Integer(SWT.Modify));
-		EVENTS.put("MouseDoubleClick", new Integer(SWT.MouseDoubleClick));
-		EVENTS.put("MouseDown", new Integer(SWT.MouseDown));
-		EVENTS.put("MouseEnter", new Integer(SWT.MouseEnter));
-		EVENTS.put("MouseExit", new Integer(SWT.MouseExit));
-		EVENTS.put("MouseHover", new Integer(SWT.MouseHover));
-		EVENTS.put("MouseMove", new Integer(SWT.MouseMove));
-		EVENTS.put("MouseUp", new Integer(SWT.MouseUp));
-		EVENTS.put("MouseWheel", new Integer(SWT.MouseWheel));
-		EVENTS.put("Move", new Integer(SWT.Move));
-		EVENTS.put("Paint", new Integer(SWT.Paint));
-		EVENTS.put("PaintItem", new Integer(SWT.PaintItem));
-		EVENTS.put("Resize", new Integer(SWT.Resize));
-		EVENTS.put("Selection", new Integer(SWT.Selection));
-		EVENTS.put("SetData", new Integer(SWT.SetData));
-		EVENTS.put("Settings", new Integer(SWT.Settings)); // note: this event only goes to Display
-		EVENTS.put("Show", new Integer(SWT.Show));
-		EVENTS.put("Traverse", new Integer(SWT.Traverse));
-		EVENTS.put("Verify", new Integer(SWT.Verify));
+		EVENTS.put("Activate", new Integer(SWT.Activate)); //$NON-NLS-1$
+		EVENTS.put("Arm", new Integer(SWT.Arm)); //$NON-NLS-1$
+		EVENTS.put("Close", new Integer(SWT.Close)); //$NON-NLS-1$
+		EVENTS.put("Collapse", new Integer(SWT.Collapse)); //$NON-NLS-1$
+		EVENTS.put("Deactivate", new Integer(SWT.Deactivate)); //$NON-NLS-1$
+		EVENTS.put("DefaultSelection", new Integer(SWT.DefaultSelection)); //$NON-NLS-1$
+		EVENTS.put("Deiconify", new Integer(SWT.Deiconify)); //$NON-NLS-1$
+		EVENTS.put("Dispose", new Integer(SWT.Dispose)); //$NON-NLS-1$
+		EVENTS.put("DragDetect", new Integer(SWT.DragDetect)); //$NON-NLS-1$
+		EVENTS.put("EraseItem", new Integer(SWT.EraseItem)); //$NON-NLS-1$
+		EVENTS.put("Expand", new Integer(SWT.Expand)); //$NON-NLS-1$
+		EVENTS.put("FocusIn", new Integer(SWT.FocusIn)); //$NON-NLS-1$
+		EVENTS.put("FocusOut", new Integer(SWT.FocusOut)); //$NON-NLS-1$
+		EVENTS.put("HardKeyDown", new Integer(SWT.HardKeyDown)); //$NON-NLS-1$
+		EVENTS.put("HardKeyUp", new Integer(SWT.HardKeyUp)); //$NON-NLS-1$
+		EVENTS.put("Help", new Integer(SWT.Help)); //$NON-NLS-1$
+		EVENTS.put("Hide", new Integer(SWT.Hide)); //$NON-NLS-1$
+		EVENTS.put("Iconify", new Integer(SWT.Iconify)); //$NON-NLS-1$
+		EVENTS.put("KeyDown", new Integer(SWT.KeyDown)); //$NON-NLS-1$
+		EVENTS.put("KeyUp", new Integer(SWT.KeyUp)); //$NON-NLS-1$
+		EVENTS.put("MeasureItem", new Integer(SWT.MeasureItem)); //$NON-NLS-1$
+		EVENTS.put("MenuDetect", new Integer(SWT.MenuDetect)); //$NON-NLS-1$
+		EVENTS.put("Modify", new Integer(SWT.Modify)); //$NON-NLS-1$
+		EVENTS.put("MouseDoubleClick", new Integer(SWT.MouseDoubleClick)); //$NON-NLS-1$
+		EVENTS.put("MouseDown", new Integer(SWT.MouseDown)); //$NON-NLS-1$
+		EVENTS.put("MouseEnter", new Integer(SWT.MouseEnter)); //$NON-NLS-1$
+		EVENTS.put("MouseExit", new Integer(SWT.MouseExit)); //$NON-NLS-1$
+		EVENTS.put("MouseHover", new Integer(SWT.MouseHover)); //$NON-NLS-1$
+		EVENTS.put("MouseMove", new Integer(SWT.MouseMove)); //$NON-NLS-1$
+		EVENTS.put("MouseUp", new Integer(SWT.MouseUp)); //$NON-NLS-1$
+		EVENTS.put("MouseWheel", new Integer(SWT.MouseWheel)); //$NON-NLS-1$
+		EVENTS.put("Move", new Integer(SWT.Move)); //$NON-NLS-1$
+		EVENTS.put("Paint", new Integer(SWT.Paint)); //$NON-NLS-1$
+		EVENTS.put("PaintItem", new Integer(SWT.PaintItem)); //$NON-NLS-1$
+		EVENTS.put("Resize", new Integer(SWT.Resize)); //$NON-NLS-1$
+		EVENTS.put("Selection", new Integer(SWT.Selection)); //$NON-NLS-1$
+		EVENTS.put("SetData", new Integer(SWT.SetData)); //$NON-NLS-1$
+		EVENTS.put("Settings", new Integer(SWT.Settings)); // note: this event only goes to Display //$NON-NLS-1$
+		EVENTS.put("Show", new Integer(SWT.Show)); //$NON-NLS-1$
+		EVENTS.put("Traverse", new Integer(SWT.Traverse)); //$NON-NLS-1$
+		EVENTS.put("Verify", new Integer(SWT.Verify)); //$NON-NLS-1$
 	}
 
 	/**
@@ -118,7 +118,7 @@ public abstract class SWTBotEvents {
 	 * @return the typed event corresponding to the <code>event</code>.
 	 */
 	public static String toString(Event event) {
-		String toString = toString(event.type) + " [" + event.type + "]: ";
+		String toString = toString(event.type) + " [" + event.type + "]: "; //$NON-NLS-1$ //$NON-NLS-2$
 		switch (event.type) {
 		case SWT.KeyDown:
 		case SWT.KeyUp:

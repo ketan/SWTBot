@@ -48,7 +48,7 @@ public final class ReflectionInvoker implements StringResult {
 	 * @return The results of the invoke.
 	 */
 	public String run() {
-		String result = "";
+		String result = ""; //$NON-NLS-1$
 		try {
 			Method method = w.getClass().getMethod(methodName, new Class[]{});
 			Object invoke = method.invoke(w, new Object[0]);

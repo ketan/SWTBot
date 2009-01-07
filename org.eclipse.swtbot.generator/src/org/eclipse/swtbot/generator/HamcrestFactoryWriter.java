@@ -25,7 +25,7 @@ public class HamcrestFactoryWriter implements HamcrestWriter {
 	private final String		shortClassName;
 	private final PrintWriter	output;
 
-	private final String		newLine	= "\n";
+	private final String		newLine	= "\n"; //$NON-NLS-1$
 
 	public HamcrestFactoryWriter(String packageName, String shortClassName, FileWriter fileWriter) {
 		this.packageName = packageName;
@@ -35,8 +35,8 @@ public class HamcrestFactoryWriter implements HamcrestWriter {
 	}
 
 	public void writeHeader(Set<String> imports) {
-		output.append("// Generated source.").append(newLine);
-		output.append("package ").append(packageName).append(';').append(newLine);
+		output.append("// Generated source.").append(newLine); //$NON-NLS-1$
+		output.append("package ").append(packageName).append(';').append(newLine); //$NON-NLS-1$
 		output.append(newLine);
 		output.append(newLine);
 		writeImports(imports);
@@ -45,42 +45,42 @@ public class HamcrestFactoryWriter implements HamcrestWriter {
 	public void beginClassDefinition() {
 		output.append(newLine);
 		output.append(newLine);
-		output.append("/**\n" +
-				" * This class contains convenience API to find widgets in SWTBot.\n" +
-				" * Most users would start off as follows: \n" +
-				" * \n" +
-				" * <pre>\n" +
-				" *    SWTBot bot = new SWTBot();\n" +
-				" *    \n" +
-				" *    bot.button(&quot;hello world&quot;).click();\n" +
-				" *    \n" +
-				" *    // in case you have two edit buttons in two different groups\n" +
-				" *    // say an edit button in the &quot;Address&quot; section,\n" +
-				" *    // and another in &quot;Bank Account&quot; section, you can do the following\n" +
-				" *    // to click on the &quot;Edit&quot; button on the &quot;Bank Account&quot; section.\n" +
-				" *    // This is the recommended way to use SWTBot, instead of finding widgets based on its index.\n" +
-				" *    bot.buttonInGroup(&quot;Edit&quot;, &quot;Bank Account&quot;).click();\n" +
-				" * </pre>\n" +
-				" * \n" +
-				" * For finding widgets using custom matchers:\n" +
-				" * \n" +
-				" * <pre>\n" +
-				" *    SWTBot bot = new SWTBot();\n" +
-				" *    //\n" +
-				" *    // find a button within the currently active shell:\n" +
-				" *    //\n" +
-				" *    SWTBotButton button = new SWTBotButton((Button) bot.widget(aMatcher)); // or\n" +
-				" *    SWTBotButton button = new SWTBotButton((Button)bot.widget(aMatcher, 3)); // for the 4th widget\n" +
-				" *    //\n" +
-				" *    // to find a button within a particular parent composite:\n" +
-				" *    //\n" +
-				" *    SWTBotButton button = new SWTBotButton((Button) bot.widget(aMatcher, parentComposite)); //or\n" +
-				" *    SWTBotButton button = new SWTBotButton((Button) bot.widget(aMatcher, parentComposite, 3)); //for the 4th widget\n" +
-				" * </pre>\n" +
-				" *\n" +
-				" * @version $Id$\n" +
-				" */\n");
-		output.append("public class ").append(shortClassName).append(" extends SWTBotFactory {").append(newLine).append(newLine);
+		output.append("/**\n" + //$NON-NLS-1$
+				" * This class contains convenience API to find widgets in SWTBot.\n" + //$NON-NLS-1$
+				" * Most users would start off as follows: \n" + //$NON-NLS-1$
+				" * \n" + //$NON-NLS-1$
+				" * <pre>\n" + //$NON-NLS-1$
+				" *    SWTBot bot = new SWTBot();\n" + //$NON-NLS-1$
+				" *    \n" + //$NON-NLS-1$
+				" *    bot.button(&quot;hello world&quot;).click();\n" + //$NON-NLS-1$
+				" *    \n" + //$NON-NLS-1$
+				" *    // in case you have two edit buttons in two different groups\n" + //$NON-NLS-1$
+				" *    // say an edit button in the &quot;Address&quot; section,\n" + //$NON-NLS-1$
+				" *    // and another in &quot;Bank Account&quot; section, you can do the following\n" + //$NON-NLS-1$
+				" *    // to click on the &quot;Edit&quot; button on the &quot;Bank Account&quot; section.\n" + //$NON-NLS-1$
+				" *    // This is the recommended way to use SWTBot, instead of finding widgets based on its index.\n" + //$NON-NLS-1$
+				" *    bot.buttonInGroup(&quot;Edit&quot;, &quot;Bank Account&quot;).click();\n" + //$NON-NLS-1$
+				" * </pre>\n" + //$NON-NLS-1$
+				" * \n" + //$NON-NLS-1$
+				" * For finding widgets using custom matchers:\n" + //$NON-NLS-1$
+				" * \n" + //$NON-NLS-1$
+				" * <pre>\n" + //$NON-NLS-1$
+				" *    SWTBot bot = new SWTBot();\n" + //$NON-NLS-1$
+				" *    //\n" + //$NON-NLS-1$
+				" *    // find a button within the currently active shell:\n" + //$NON-NLS-1$
+				" *    //\n" + //$NON-NLS-1$
+				" *    SWTBotButton button = new SWTBotButton((Button) bot.widget(aMatcher)); // or\n" + //$NON-NLS-1$
+				" *    SWTBotButton button = new SWTBotButton((Button)bot.widget(aMatcher, 3)); // for the 4th widget\n" + //$NON-NLS-1$
+				" *    //\n" + //$NON-NLS-1$
+				" *    // to find a button within a particular parent composite:\n" + //$NON-NLS-1$
+				" *    //\n" + //$NON-NLS-1$
+				" *    SWTBotButton button = new SWTBotButton((Button) bot.widget(aMatcher, parentComposite)); //or\n" + //$NON-NLS-1$
+				" *    SWTBotButton button = new SWTBotButton((Button) bot.widget(aMatcher, parentComposite, 3)); //for the 4th widget\n" + //$NON-NLS-1$
+				" * </pre>\n" + //$NON-NLS-1$
+				" *\n" + //$NON-NLS-1$
+				" * @version $Id$\n" + //$NON-NLS-1$
+				" */\n"); //$NON-NLS-1$
+		output.append("public class ").append(shortClassName).append(" extends SWTBotFactory {").append(newLine).append(newLine); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 
@@ -105,23 +105,23 @@ public class HamcrestFactoryWriter implements HamcrestWriter {
 
 		imports = new TreeSet<String>(imports);
 
-		imports.add("import org.eclipse.swt.SWT");
+		imports.add("import org.eclipse.swt.SWT"); //$NON-NLS-1$
 
-		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMnemonic");
-		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withText");
-		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withId");
-		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withLabel");
-		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withText");
-		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.inGroup");
-		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withStyle");
-		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withTooltip");
-		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widgetOfType");
-		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.allOf");
+		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMnemonic"); //$NON-NLS-1$
+		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withText"); //$NON-NLS-1$
+		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withId"); //$NON-NLS-1$
+		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withLabel"); //$NON-NLS-1$
+		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withText"); //$NON-NLS-1$
+		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.inGroup"); //$NON-NLS-1$
+		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withStyle"); //$NON-NLS-1$
+		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withTooltip"); //$NON-NLS-1$
+		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widgetOfType"); //$NON-NLS-1$
+		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.allOf"); //$NON-NLS-1$
 
-		imports.add("import org.hamcrest.Matcher");
+		imports.add("import org.hamcrest.Matcher"); //$NON-NLS-1$
 
 		for (String importz : imports) {
-			output.append(importz).append(";").append(newLine);
+			output.append(importz).append(";").append(newLine); //$NON-NLS-1$
 		}
 
 	}

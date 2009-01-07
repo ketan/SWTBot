@@ -28,11 +28,11 @@ public enum ReferenceBy {
 		}
 
 		public String matcherMethod() {
-			return "withText(" + argumentName() + ")";
+			return "withText(" + argumentName() + ")"; //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		public String methodNameSuffix() {
-			return "";
+			return ""; //$NON-NLS-1$
 		}
 	},
 	MNEMONIC(100) {
@@ -41,15 +41,15 @@ public enum ReferenceBy {
 		}
 
 		public String matcherMethod() {
-			return "withMnemonic(" + argumentName() + ")";
+			return "withMnemonic(" + argumentName() + ")"; //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		public String methodNameSuffix() {
-			return "";
+			return ""; //$NON-NLS-1$
 		}
 
 		public String argumentName() {
-			return "mnemonicText";
+			return "mnemonicText"; //$NON-NLS-1$
 		}
 	},
 	LABEL(100) {
@@ -58,7 +58,7 @@ public enum ReferenceBy {
 		}
 
 		public String matcherMethod() {
-			return "withLabel(" + argumentName() + ")";
+			return "withLabel(" + argumentName() + ")"; //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	},
 	TOOLTIP(90) {
@@ -67,7 +67,7 @@ public enum ReferenceBy {
 		}
 
 		public String matcherMethod() {
-			return "withTooltip(" + argumentName() + ")";
+			return "withTooltip(" + argumentName() + ")"; //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	},
 	ID_KEY_VALUE(100) {
@@ -76,23 +76,23 @@ public enum ReferenceBy {
 		}
 
 		public String methodArgument() {
-			return "String key, String value";
+			return "String key, String value"; //$NON-NLS-1$
 		}
 
 		public String matcherMethod() {
-			return "withId(key, value)";
+			return "withId(key, value)"; //$NON-NLS-1$
 		}
 
 		public String paramJavaDoc() {
-			return "@param key the key set on the widget.\n" + "@param value the value for the key.\n";
+			return "@param key the key set on the widget.\n" + "@param value the value for the key.\n"; //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		public String methodNameSuffix() {
-			return "WithId";
+			return "WithId"; //$NON-NLS-1$
 		}
 
 		public String argumentName() {
-			return "key/value";
+			return "key/value"; //$NON-NLS-1$
 		}
 	},
 	ID_VALUE(100) {
@@ -101,23 +101,23 @@ public enum ReferenceBy {
 		}
 
 		public String methodArgument() {
-			return "String value";
+			return "String value"; //$NON-NLS-1$
 		}
 
 		public String matcherMethod() {
-			return "withId(value)";
+			return "withId(value)"; //$NON-NLS-1$
 		}
 
 		public String paramJavaDoc() {
-			return "@param value the value for the key {@value " + SWTBotPreferences.class.getName() + "#DEFAULT_KEY}.\n";
+			return "@param value the value for the key {@value " + SWTBotPreferences.class.getName() + "#DEFAULT_KEY}.\n"; //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		public String methodNameSuffix() {
-			return "WithId";
+			return "WithId"; //$NON-NLS-1$
 		}
 
 		public String argumentName() {
-			return "value";
+			return "value"; //$NON-NLS-1$
 		}
 	},
 	NONE(100) {
@@ -126,28 +126,28 @@ public enum ReferenceBy {
 		}
 
 		public String methodArgument() {
-			return "";
+			return ""; //$NON-NLS-1$
 		}
 
 		public String methodNameSuffix() {
-			return "";
+			return ""; //$NON-NLS-1$
 		}
 
 		public String matcherMethod() {
-			return "";
+			return ""; //$NON-NLS-1$
 		}
 
 		public String paramJavaDoc() {
-			return "";
+			return ""; //$NON-NLS-1$
 		}
 	},
 	IN_GROUP(80) {
 		public String methodNameSuffix() {
-			return "InGroup";
+			return "InGroup"; //$NON-NLS-1$
 		}
 
 		public String matcherMethod() {
-			return "inGroup(inGroup)";
+			return "inGroup(inGroup)"; //$NON-NLS-1$
 		}
 	};
 	private final int	priority;
@@ -165,11 +165,11 @@ public enum ReferenceBy {
 	}
 
 	public String describeJavaDoc() {
-		return "with the specified <code>" + argumentName() + "</code>";
+		return "with the specified <code>" + argumentName() + "</code>"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	public String methodArgument() {
-		return "String " + argumentName();
+		return "String " + argumentName(); //$NON-NLS-1$
 	}
 
 	public String argumentName() {
@@ -177,7 +177,7 @@ public enum ReferenceBy {
 	}
 
 	public String methodNameSuffix() {
-		return "With" + StringUtils.capitalize(name().toLowerCase());
+		return "With" + StringUtils.capitalize(name().toLowerCase()); //$NON-NLS-1$
 	}
 
 	public abstract String matcherMethod();
@@ -230,11 +230,11 @@ public enum ReferenceBy {
 	}
 
 	public String javadoc() {
-		return "the " + argumentName() + " on the widget.";
+		return "the " + argumentName() + " on the widget."; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	public String paramJavaDoc() {
-		return "@param " + argumentName() + " " + javadoc() + "\n";
+		return "@param " + argumentName() + " " + javadoc() + "\n"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 }

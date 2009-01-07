@@ -39,12 +39,12 @@ public class XmlConfigurator {
 		saxParser.parse(inputSource, new DefaultHandler() {
 			@Override
 			public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-				if (localName.equals("widget")) {
-					String className = attributes.getValue("class");
+				if (localName.equals("widget")) { //$NON-NLS-1$
+					String className = attributes.getValue("class"); //$NON-NLS-1$
 					try {
 						addClass(className);
 					} catch (ClassNotFoundException e) {
-						throw new SAXException("Cannot find Matcher class : " + className);
+						throw new SAXException("Cannot find Matcher class : " + className); //$NON-NLS-1$
 					}
 				}
 			}
@@ -58,21 +58,21 @@ public class XmlConfigurator {
 
 	public static void main(String... args) throws Exception {
 		if (args.length != 4) {
-			System.err.println("Args: config-file source-dir generated-class output-dir");
-			System.err.println("");
-			System.err.println("    config-file : Path to config file listing matchers to generate sugar for.");
-			System.err.println("                  e.g. path/to/matchers.xml");
-			System.err.println("");
-			System.err.println("    source-dir  : Path to Java source containing matchers to generate sugar for.");
-			System.err.println("                  May contain multiple paths, separated by commas.");
-			System.err.println("                  e.g. src/java,src/more-java");
-			System.err.println("");
-			System.err.println("generated-class : Full name of class to generate.");
-			System.err.println("                  e.g. org.myproject.MyMatchers");
-			System.err.println("");
-			System.err.println("     output-dir : Where to output generated code (package subdirs will be");
-			System.err.println("                  automatically created).");
-			System.err.println("                  e.g. build/generated-code");
+			System.err.println("Args: config-file source-dir generated-class output-dir"); //$NON-NLS-1$
+			System.err.println(""); //$NON-NLS-1$
+			System.err.println("    config-file : Path to config file listing matchers to generate sugar for."); //$NON-NLS-1$
+			System.err.println("                  e.g. path/to/matchers.xml"); //$NON-NLS-1$
+			System.err.println(""); //$NON-NLS-1$
+			System.err.println("    source-dir  : Path to Java source containing matchers to generate sugar for."); //$NON-NLS-1$
+			System.err.println("                  May contain multiple paths, separated by commas."); //$NON-NLS-1$
+			System.err.println("                  e.g. src/java,src/more-java"); //$NON-NLS-1$
+			System.err.println(""); //$NON-NLS-1$
+			System.err.println("generated-class : Full name of class to generate."); //$NON-NLS-1$
+			System.err.println("                  e.g. org.myproject.MyMatchers"); //$NON-NLS-1$
+			System.err.println(""); //$NON-NLS-1$
+			System.err.println("     output-dir : Where to output generated code (package subdirs will be"); //$NON-NLS-1$
+			System.err.println("                  automatically created)."); //$NON-NLS-1$
+			System.err.println("                  e.g. build/generated-code"); //$NON-NLS-1$
 			System.exit(-1);
 		}
 
@@ -81,13 +81,13 @@ public class XmlConfigurator {
 		String fullClassName = args[2];
 		File outputDir = new File(args[3]);
 
-		String fileName = fullClassName.replace('.', File.separatorChar) + ".java";
-		int dotIndex = fullClassName.lastIndexOf(".");
-		String packageName = dotIndex == -1 ? "" : fullClassName.substring(0, dotIndex);
+		String fileName = fullClassName.replace('.', File.separatorChar) + ".java"; //$NON-NLS-1$
+		int dotIndex = fullClassName.lastIndexOf("."); //$NON-NLS-1$
+		String packageName = dotIndex == -1 ? "" : fullClassName.substring(0, dotIndex); //$NON-NLS-1$
 		String shortClassName = fullClassName.substring(dotIndex + 1);
 
 		if (!outputDir.isDirectory()) {
-			System.err.println("Output directory not found : " + outputDir.getAbsolutePath());
+			System.err.println("Output directory not found : " + outputDir.getAbsolutePath()); //$NON-NLS-1$
 			System.exit(-1);
 		}
 
@@ -101,7 +101,7 @@ public class XmlConfigurator {
 
 			XmlConfigurator xmlConfigurator = new XmlConfigurator(sugarGenerator, XmlConfigurator.class.getClassLoader());
 			xmlConfigurator.load(new InputSource(configFile));
-			System.out.println("Generating " + fullClassName);
+			System.out.println("Generating " + fullClassName); //$NON-NLS-1$
 			sugarGenerator.generate();
 		} finally {
 			sugarGenerator.close();

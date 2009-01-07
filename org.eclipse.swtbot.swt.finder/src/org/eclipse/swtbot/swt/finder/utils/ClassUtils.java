@@ -26,7 +26,7 @@ public abstract class ClassUtils {
 	 * @return the classname of the object or an empty string.
 	 */
 	public static String simpleClassName(Object object) {
-		return object == null ? "" : ClassUtils.simpleClassName(object.getClass());
+		return object == null ? "" : ClassUtils.simpleClassName(object.getClass()); //$NON-NLS-1$
 	}
 
 	/**
@@ -37,9 +37,9 @@ public abstract class ClassUtils {
 	 */
 	public static String simpleClassName(Class clasz) {
 		if (clasz == null)
-			return "";
+			return ""; //$NON-NLS-1$
 		if (clasz.isMemberClass())
-			return clasz.getDeclaringClass().getSimpleName() + "$" + clasz.getSimpleName();
+			return clasz.getDeclaringClass().getSimpleName() + "$" + clasz.getSimpleName(); //$NON-NLS-1$
 		return clasz.getSimpleName();
 	}
 
@@ -52,7 +52,7 @@ public abstract class ClassUtils {
 	 */
 	public static String simpleClassName(String claszName) {
 		if (StringUtils.isEmptyOrNull(claszName))
-			return "";
-		return claszName.substring(claszName.lastIndexOf(".") + 1);
+			return ""; //$NON-NLS-1$
+		return claszName.substring(claszName.lastIndexOf(".") + 1); //$NON-NLS-1$
 	}
 }

@@ -69,7 +69,7 @@ public class SWTBotShell extends AbstractSWTBot<Shell> {
 	public void activate() throws TimeoutException {
 		new SWTBot().waitUntil(new DefaultCondition() {
 			public String getFailureMessage() {
-				return "Timed out waiting for " + SWTUtils.toString(widget) + " to get activated";
+				return "Timed out waiting for " + SWTUtils.toString(widget) + " to get activated"; //$NON-NLS-1$ //$NON-NLS-2$
 			}
 
 			public boolean test() throws Exception {
@@ -105,7 +105,7 @@ public class SWTBotShell extends AbstractSWTBot<Shell> {
 			}
 
 			public String getFailureMessage() {
-				return "Timed out waiting for " + SWTUtils.toString(widget) + " to close.";
+				return "Timed out waiting for " + SWTUtils.toString(widget) + " to close."; //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		});
 	}

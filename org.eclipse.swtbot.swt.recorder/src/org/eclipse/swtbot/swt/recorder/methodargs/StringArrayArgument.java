@@ -29,13 +29,13 @@ public class StringArrayArgument extends AbstractSWTBotEventArguments {
 	}
 
 	public String asString() {
-		String result = "new String [] { ";
+		String result = "new String [] { "; //$NON-NLS-1$
 		for (int i = 0; i < args.length; i++) {
 			String arg = args[i];
-			result += "\"" + arg + "\", ";
+			result += "\"" + arg + "\", "; //$NON-NLS-1$ //$NON-NLS-2$
 		}
-		result = result.substring(0, result.lastIndexOf(", "));
-		result = result + " }";
+		result = result.substring(0, result.lastIndexOf(", ")); //$NON-NLS-1$
+		result = result + " }"; //$NON-NLS-1$
 		return result;
 	}
 

@@ -26,12 +26,12 @@ public class MatcherGeneratorMain {
 
 	public static void main(String[] args) {
 		try {
-			org.hamcrest.generator.config.XmlConfigurator.main(new String[] { "swtbot-matchers.xml", "../org.eclipse.swtbot.swt.finder/src",
-					"org.eclipse.swtbot.swt.finder.matcher.WidgetMatcherFactory_Original", "../org.eclipse.swtbot.swt.finder/src" });
+			org.hamcrest.generator.config.XmlConfigurator.main(new String[] { "swtbot-matchers.xml", "../org.eclipse.swtbot.swt.finder/src", //$NON-NLS-1$ //$NON-NLS-2$
+					"org.eclipse.swtbot.swt.finder.matcher.WidgetMatcherFactory_Original", "../org.eclipse.swtbot.swt.finder/src" }); //$NON-NLS-1$ //$NON-NLS-2$
 
-			org.hamcrest.generator.config.XmlConfigurator.main(new String[] { "swtbot-eclipse-matchers.xml",
-					"../org.eclipse.swtbot.eclipse.finder/src", "org.eclipse.swtbot.eclipse.finder.matcher.WidgetMatcherFactory_Original",
-					"../org.eclipse.swtbot.eclipse.finder/src" });
+			org.hamcrest.generator.config.XmlConfigurator.main(new String[] { "swtbot-eclipse-matchers.xml", //$NON-NLS-1$
+					"../org.eclipse.swtbot.eclipse.finder/src", "org.eclipse.swtbot.eclipse.finder.matcher.WidgetMatcherFactory_Original", //$NON-NLS-1$ //$NON-NLS-2$
+					"../org.eclipse.swtbot.eclipse.finder/src" }); //$NON-NLS-1$
 
 			makeEclipseWidgetMatcherFactoryExtendSWTBotWidgetMatcherFactory();
 			makeWidgetMatcherFactoryAbstract();
@@ -46,17 +46,17 @@ public class MatcherGeneratorMain {
 	 * @throws IOException
 	 */
 	private static void makeEclipseWidgetMatcherFactoryExtendSWTBotWidgetMatcherFactory() throws FileNotFoundException, IOException {
-		String sourceFile = "../org.eclipse.swtbot.eclipse.finder/src/org/eclipse/swtbot/eclipse/finder/matcher/WidgetMatcherFactory_Original.java";
+		String sourceFile = "../org.eclipse.swtbot.eclipse.finder/src/org/eclipse/swtbot/eclipse/finder/matcher/WidgetMatcherFactory_Original.java"; //$NON-NLS-1$
 		BufferedReader reader = new BufferedReader(new FileReader(sourceFile));
 
 		BufferedWriter writer = new BufferedWriter(new FileWriter(
-						"../org.eclipse.swtbot.eclipse.finder/src/org/eclipse/swtbot/eclipse/finder/matcher/WidgetMatcherFactory.java"));
+						"../org.eclipse.swtbot.eclipse.finder/src/org/eclipse/swtbot/eclipse/finder/matcher/WidgetMatcherFactory.java")); //$NON-NLS-1$
 		while (reader.ready()) {
 			String line = reader.readLine();
-			line = line.replaceAll("public class WidgetMatcherFactory_Original \\{",
-					"public abstract class WidgetMatcherFactory extends org.eclipse.swtbot.swt.finder.matcher.WidgetMatcherFactory {");
+			line = line.replaceAll("public class WidgetMatcherFactory_Original \\{", //$NON-NLS-1$
+					"public abstract class WidgetMatcherFactory extends org.eclipse.swtbot.swt.finder.matcher.WidgetMatcherFactory {"); //$NON-NLS-1$
 			writer.write(line);
-			writer.write("\n");
+			writer.write("\n"); //$NON-NLS-1$
 		}
 		writer.close();
 		reader.close();
@@ -68,16 +68,16 @@ public class MatcherGeneratorMain {
 	 * @throws IOException
 	 */
 	private static void makeWidgetMatcherFactoryAbstract() throws FileNotFoundException, IOException {
-		String sourceFile = "../org.eclipse.swtbot.swt.finder/src/org/eclipse/swtbot/swt/finder/matcher/WidgetMatcherFactory_Original.java";
+		String sourceFile = "../org.eclipse.swtbot.swt.finder/src/org/eclipse/swtbot/swt/finder/matcher/WidgetMatcherFactory_Original.java"; //$NON-NLS-1$
 		BufferedReader reader = new BufferedReader(new FileReader(sourceFile));
 
 		BufferedWriter writer = new BufferedWriter(new FileWriter(
-				"../org.eclipse.swtbot.swt.finder/src/org/eclipse/swtbot/swt/finder/matcher/WidgetMatcherFactory.java"));
+				"../org.eclipse.swtbot.swt.finder/src/org/eclipse/swtbot/swt/finder/matcher/WidgetMatcherFactory.java")); //$NON-NLS-1$
 		while (reader.ready()) {
 			String line = reader.readLine();
-			line = line.replaceAll("public class WidgetMatcherFactory_Original \\{", "public abstract class WidgetMatcherFactory {");
+			line = line.replaceAll("public class WidgetMatcherFactory_Original \\{", "public abstract class WidgetMatcherFactory {"); //$NON-NLS-1$ //$NON-NLS-2$
 			writer.write(line);
-			writer.write("\n");
+			writer.write("\n"); //$NON-NLS-1$
 		}
 		writer.close();
 		reader.close();

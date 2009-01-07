@@ -32,7 +32,7 @@ public final class Assert {
 	 * @exception IllegalArgumentException if the legality test failed
 	 */
 	public static boolean isLegal(boolean expression) {
-		return isLegal(expression, "");
+		return isLegal(expression, ""); //$NON-NLS-1$
 	}
 
 	/**
@@ -58,7 +58,7 @@ public final class Assert {
 	 * @param object the value to test
 	 */
 	public static void isNotNull(Object object) {
-		isNotNull(object, "");
+		isNotNull(object, ""); //$NON-NLS-1$
 	}
 
 	/**
@@ -70,7 +70,7 @@ public final class Assert {
 	 */
 	public static void isNotNull(Object object, String message) {
 		if (object == null)
-			throw new AssertionFailedException("null argument:" + message);
+			throw new AssertionFailedException("null argument:" + message); //$NON-NLS-1$
 	}
 
 	/**
@@ -80,7 +80,7 @@ public final class Assert {
 	 * @param expression the outcode of the check
 	 */
 	public static void isTrue(boolean expression) {
-		isTrue(expression, "");
+		isTrue(expression, ""); //$NON-NLS-1$
 	}
 
 	/**
@@ -92,6 +92,6 @@ public final class Assert {
 	 */
 	public static void isTrue(boolean expression, String message) {
 		if (!expression)
-			throw new AssertionFailedException("assertion failed: " + message);
+			throw new AssertionFailedException("assertion failed: " + message); //$NON-NLS-1$
 	}
 }

@@ -19,7 +19,7 @@ package org.eclipse.swtbot.swt.recorder.methodargs;
 public class NullArgument extends AbstractSWTBotEventArguments {
 
 	public String asString() {
-		return "";
+		return ""; //$NON-NLS-1$
 	}
 
 }

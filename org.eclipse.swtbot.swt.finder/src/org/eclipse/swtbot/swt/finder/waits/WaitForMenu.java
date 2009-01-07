@@ -41,7 +41,7 @@ public class WaitForMenu extends DefaultCondition {
 	}
 
 	public String getFailureMessage() {
-		return "Could not find a menu within the shell '" + shell + "' matching '" + matcher + "'";
+		return "Could not find a menu within the shell '" + shell + "' matching '" + matcher + "'"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	public boolean test() throws Exception {

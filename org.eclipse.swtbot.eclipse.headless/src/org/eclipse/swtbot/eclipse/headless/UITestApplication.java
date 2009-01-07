@@ -60,7 +60,7 @@ public class UITestApplication  implements IPlatformRunnable, ITestHarness, IApp
 		else
 			result = runApplication(application, args);
 		if (!IPlatformRunnable.EXIT_OK.equals(result))
-			System.err.println("UITestRunner: Unexpected result from running application " + application + ": " + result);
+			System.err.println("UITestRunner: Unexpected result from running application " + application + ": " + result); //$NON-NLS-1$ //$NON-NLS-2$
 		return new Integer(fTestRunnerResult);
 	}
 
@@ -197,7 +197,7 @@ public class UITestApplication  implements IPlatformRunnable, ITestHarness, IApp
 
 	public Object start(IApplicationContext context) throws Exception {
 		appContext = context;
-		String[] args = (String[]) appContext.getArguments().get("application.args");
+		String[] args = (String[]) appContext.getArguments().get("application.args"); //$NON-NLS-1$
 		if (args == null)
 			args = new String[0];
 		return run(args);

@@ -26,7 +26,7 @@ public class QuickReferenceWriter implements HamcrestWriter {
 	}
 
 	public void writeMethod(String method) {
-		out.println(method.split("\n")[0]);
+		out.println(method.split("\n")[0]); //$NON-NLS-1$
 	}
 
 	public void writeHeader(Set<String> imports) {

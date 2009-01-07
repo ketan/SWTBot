@@ -29,7 +29,7 @@ public class RadioButtonSelectionListener extends AbstractTextBasedRecorderListe
 	}
 
 	protected SWTBotEvent createEvent(Event event) {
-		return new SWTBotEvent("click");
+		return new SWTBotEvent("click"); //$NON-NLS-1$
 	}
 
 	protected boolean doCanHandleEvent(Event event) {

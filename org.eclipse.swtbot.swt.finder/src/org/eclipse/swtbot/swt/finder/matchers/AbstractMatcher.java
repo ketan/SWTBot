@@ -36,19 +36,19 @@ public abstract class AbstractMatcher<T> extends BaseMatcher<T> {
 		boolean result = false;
 		try {
 			result = doMatch(item);
-			String text = "";
+			String text = ""; //$NON-NLS-1$
 			if (log.isDebugEnabled()) {
 				text = SWTUtils.getText(item);
 				try {
 					if (text.length() > 20)
-						text = text.substring(0, 20) + "...";
+						text = text.substring(0, 20) + "..."; //$NON-NLS-1$
 				} catch (Exception e) {
 					// do nothing
 				}
 				if (result) {
-					log.debug(MessageFormat.format("matched {0} with text \"{1}\", using matcher: {2}", ClassUtils.simpleClassName(item), text, StringDescription.toString(this)));
+					log.debug(MessageFormat.format("matched {0} with text \"{1}\", using matcher: {2}", ClassUtils.simpleClassName(item), text, StringDescription.toString(this))); //$NON-NLS-1$
 				} else
-					log.trace(MessageFormat.format("did not match {0} with text \"{1}\", using matcher: {2}", ClassUtils.simpleClassName(item), text, StringDescription.toString(this)));
+					log.trace(MessageFormat.format("did not match {0} with text \"{1}\", using matcher: {2}", ClassUtils.simpleClassName(item), text, StringDescription.toString(this))); //$NON-NLS-1$
 			}
 
 			if (log.isTraceEnabled() && (item instanceof Widget)) {
@@ -56,14 +56,14 @@ public abstract class AbstractMatcher<T> extends BaseMatcher<T> {
 				TreePath path = pathGenerator.getPath((Widget) item);
 				int segmentCount = path.getSegmentCount();
 
-				String prefix = "";
+				String prefix = ""; //$NON-NLS-1$
 				for (int i = 0; i < segmentCount - 1; i++)
-					prefix += "    ";
-				prefix += "+---";
-				log.trace(prefix + "Widget: " + ClassUtils.simpleClassName(item) + "{" + text + "}");
+					prefix += "    "; //$NON-NLS-1$
+				prefix += "+---"; //$NON-NLS-1$
+				log.trace(prefix + "Widget: " + ClassUtils.simpleClassName(item) + "{" + text + "}"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 		} catch (Exception e) {
-			log.warn("Matcher threw an exception: ", e);
+			log.warn("Matcher threw an exception: ", e); //$NON-NLS-1$
 		}
 		return result;
 	}

@@ -58,8 +58,8 @@ public class WithText<T extends Widget> extends AbstractMatcher<T> {
 	 * @since 1.2
 	 */
 	public WithText(String text, boolean ignoreCase) {
-		text = text.replaceAll("\\r\\n", "\n");
-		text = text.replaceAll("\\r", "\n");
+		text = text.replaceAll("\\r\\n", "\n"); //$NON-NLS-1$ //$NON-NLS-2$
+		text = text.replaceAll("\\r", "\n"); //$NON-NLS-1$ //$NON-NLS-2$
 		this.text = text;
 		this.ignoreCase = ignoreCase;
 	}
@@ -91,11 +91,11 @@ public class WithText<T extends Widget> extends AbstractMatcher<T> {
 	 * @see Method#invoke(Object, Object[])
 	 */
 	static String getText(Object obj) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-		return ((String) SWTUtils.invokeMethod(obj, "getText")).replaceAll(Text.DELIMITER, "\n");
+		return ((String) SWTUtils.invokeMethod(obj, "getText")).replaceAll(Text.DELIMITER, "\n"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	public void describeTo(Description description) {
-		description.appendText("with text '").appendText(text).appendText("'");
+		description.appendText("with text '").appendText(text).appendText("'"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
