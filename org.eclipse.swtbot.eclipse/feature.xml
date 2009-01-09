@@ -3,7 +3,8 @@
       id="org.eclipse.swtbot.eclipse"
       label="SWTBot for Eclipse Testing (incubation)"
       version="2.0.0.qualifier"
-      provider-name="Eclipse.org">
+      provider-name="Eclipse.org"
+      plugin="org.eclipse.swtbot.eclipse.ui">
 
    <description url="http://eclipse.org/">
       SWTBot for testing eclipse based plugins and applications (incubation)
