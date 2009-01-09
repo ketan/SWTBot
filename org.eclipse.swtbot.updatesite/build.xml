@@ -1,11 +1,11 @@
 <project name="org.eclipse.swtbot.updatesite" default="all" basedir=".">
 
-	<taskdef name="purge" classname="com.dallaway.ant.Purge" classpath="../org.eclipse.swtbot.releng/libs/purge.jar" />
+	<taskdef name="purge" classname="com.dallaway.ant.Purge" classpath="../org.eclipse.swtbot.releng/externals/libs/purge.jar" />
 
 	<taskdef resource="net/sf/antcontrib/antlib.xml" />
 	<property name="num.previous.revisions" value="1" />
 	<property name="target" value="${basedir}/target" />
-	<taskdef resource="net/sf/antcontrib/antlib.xml" classpath="../org.eclipse.swtbot.releng/libs/ant-contrib-1.0b3.jar" />
+	<taskdef resource="net/sf/antcontrib/antlib.xml" classpath="../org.eclipse.swtbot.releng/externals/libs/ant-contrib-1.0b3.jar" />
 
 	<condition property="should.generate.archives">
 		<equals arg1="${has.archives}" arg2="true" />
