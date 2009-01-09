@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<introContent>
+  	<extensionContent id="org.eclipse.swtbot.intro" style="css/tutorial.css" name="Java Development" path="tutorials/@">
+		<group style-id="content-group" id="orgeclipseswtboteclipseui-introLink-group" label="Test your applications">
+       		<link label="SWTBot" url="http://www.eclipse.org/swtbot" id="orgeclipseswtboteclipseui-introLink" style-id="content-link">
+          		<text>Learn how to use SWTBot to test your SWT applications and plugins.</text>
+       		</link>
+       	</group>
+  	</extensionContent>
+</introContent>

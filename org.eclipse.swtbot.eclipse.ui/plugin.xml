@@ -109,4 +109,11 @@
       <startup
             class="org.eclipse.swtbot.eclipse.ui.preferences.PreferenceInitializer"></startup>
    </extension>
+   <extension
+         point="org.eclipse.ui.intro.configExtension">
+      <configExtension
+            configId="org.eclipse.ui.intro.universalConfig"
+            content="intro/tutorialsExtensionContent.xml">
+      </configExtension>
+   </extension>
 </plugin>
