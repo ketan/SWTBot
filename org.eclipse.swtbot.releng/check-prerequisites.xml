@@ -57,7 +57,15 @@
 		</copy>
 	</target>
 
-	<target name="check-conditions" depends="check-windows-preconditions, check-other-preconditions">
+	<target name="check-prerequisites">
+		<available file="externals/${eclipse.sdk.archive}" property="eclipse-sdk-available" />
+	</target>
+
+	<target name="download-prerequisites" depends="check-prerequisites" unless="eclipse-sdk-available">
+		<get dest="externals/${eclipse.sdk.archive}" src="${eclipse.sdk.url}/${eclipse.sdk.archive}" verbose="true" usetimestamp="true" />
+	</target>
+
+	<target name="check-conditions" depends="check-windows-preconditions, check-other-preconditions, download-prerequisites">
 		<check.executable executable="svn" />
 		<available file="build.developer.properties" property="build.developer.properties.available" />
 		<fail unless="build.developer.properties.available">Could not find the file "build.developer.properties". Please create the file using "build.developer.properties.sample" as the starting point.</fail>
