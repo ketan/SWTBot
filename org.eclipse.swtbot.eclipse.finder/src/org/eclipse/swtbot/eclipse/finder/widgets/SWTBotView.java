@@ -45,7 +45,7 @@ public class SWTBotView extends SWTBotWorkbenchPart<IViewReference> {
 	public void setFocus() {
 		syncExec(new VoidResult() {
 			public void run() {
-				((Control) widget).setFocus();
+				((Control) getWidget()).setFocus();
 			}
 		});
 	}
