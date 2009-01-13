@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SWTBot Dsl for Eclipse IDE (incubation)
+Bundle-SymbolicName: org.eclipse.swtbot.eclipse.dsl
+Bundle-Version: 2.0.0.qualifier
+Bundle-Activator: org.eclipse.swtbot.eclipse.dsl.Activator
+Bundle-Vendor: Eclipse.org
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.swtbot.eclipse.finder,
+ org.eclipse.swtbot.swt.finder
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
