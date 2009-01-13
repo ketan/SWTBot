@@ -22,3 +22,7 @@ org.eclipse.swtbot.releng/artifacts/
 org.eclipse.swtbot.releng/test-sandbox/results/
 org.eclipse.swtbot.releng/test-sandbox/screenshots/
 org.eclipse.swtbot.releng/test-sandbox/test-eclipse/
+
+
+org.eclipse.swtbot.updatesite/target/
+org.eclipse.swtbot.updatesite/build/

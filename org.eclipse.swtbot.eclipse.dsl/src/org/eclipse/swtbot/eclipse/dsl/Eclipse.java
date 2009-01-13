@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 David Green and others.
+ * Copyright (c) 2009 David Green and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -23,7 +23,7 @@ public class Eclipse {
 		return workbench(new SWTEclipseBot());
 	}
 
-	public static DefaultWorkbench workbench(SWTEclipseBot eclipseBot) {
+	public static Workbench workbench(SWTEclipseBot eclipseBot) {
 		return new DefaultWorkbench(eclipseBot);
 	}
 

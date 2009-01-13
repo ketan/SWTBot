@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 David Green and others.
+ * Copyright (c) 2009 David Green and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -37,8 +37,12 @@ import org.eclipse.ui.PlatformUI;
 /**
  * A default implementation of the workbench. May be subclassed to provide alternate implementations for different
  * versions of Eclipse.
+ * <p>
+ * Do not access directly. Instead use <code>Eclipse.workbench()</code>
+ * </p>
  * 
  * @author David Green
+ * @see Eclipse
  */
 public class DefaultWorkbench implements Workbench {
 
