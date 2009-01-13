@@ -10,13 +10,14 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.utils;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 
 /**
  * A set of utilities for string manipulation.
- *
+ * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  * @since 1.0
@@ -47,6 +48,27 @@ public class StringUtils {
 	}
 
 	/**
+	 * Joins an array of objects using the given delimiter as spacing.
+	 * 
+	 * @param toJoin the objects to join into a string.
+	 * @param delimiter the delimiter used to join the objects.
+	 * @param converter the converter that can convert objects in the collection into strings.
+	 * @return the result of joining the <code>toJoin</code> with <code>delimiter</code>.
+	 */
+	public static String join(Object[] toJoin, String delimiter, StringConverter converter) {
+		if ((toJoin == null) || (toJoin.length == 0))
+			return ""; //$NON-NLS-1$
+		Assert.isTrue(!isEmptyOrNull(delimiter));
+
+		ArrayList<Object> convertedObjects = new ArrayList<Object>();
+		for (Object object : toJoin) {
+			convertedObjects.add(converter.toString(object));
+		}
+
+		return join(convertedObjects, delimiter);
+	}
+
+	/**
 	 * Joins a collection of objects using the given delimiter as spacing.
 	 * 
 	 * @param toJoin the objects to join into a string.
@@ -55,6 +77,18 @@ public class StringUtils {
 	 */
 	public static String join(Collection<?> toJoin, String delimiter) {
 		return join(toJoin.toArray(), delimiter);
+	}
+
+	/**
+	 * Joins a collection of objects using the given delimiter as spacing.
+	 * 
+	 * @param toJoin the objects to join into a string.
+	 * @param delimiter the delimiter used to join the objects.
+	 * @param converter the converter that can convert objects in the collection into strings.
+	 * @return the result of joining the <code>toJoin</code> with <code>delimiter</code>.
+	 */
+	public static String join(Collection<?> toJoin, String delimiter, StringConverter converter) {
+		return join(toJoin.toArray(), delimiter, converter);
 	}
 
 	/**
