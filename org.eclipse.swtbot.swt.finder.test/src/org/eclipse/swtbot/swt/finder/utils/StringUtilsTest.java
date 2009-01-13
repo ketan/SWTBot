@@ -17,7 +17,7 @@ import junit.framework.TestCase;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class StringUtilsTest extends TestCase  {
+public class StringUtilsTest extends TestCase {
 
 	public void testIsEmptyOrNull() throws Exception {
 		assertTrue(StringUtils.isEmptyOrNull(null));
@@ -27,8 +27,27 @@ public class StringUtilsTest extends TestCase  {
 		assertFalse(StringUtils.isEmptyOrNull("  foo bar "));
 	}
 
+	public void testCanJoinListsUsingTheObjectConverter() throws Exception {
+		Object[] toJoin = new Object[] { new TestObject("foo"), new TestObject("bar"), new TestObject("baz") };
+		StringConverter converter = new StringConverter() {
+			public String toString(Object object) {
+				return ((TestObject) object).string;
+			}
+		};
+
+		assertEquals("foo, bar, baz", StringUtils.join(toJoin, ", ", converter));
+	}
+
 	public void testJoinOfObjects() throws Exception {
 		assertEquals("foo, bar, baz", StringUtils.join(new String[] { "foo", "bar", "baz" }, ", "));
 	}
 
+	private class TestObject {
+
+		String	string;
+
+		public TestObject(String string) {
+			this.string = string;
+		}
+	}
 }
