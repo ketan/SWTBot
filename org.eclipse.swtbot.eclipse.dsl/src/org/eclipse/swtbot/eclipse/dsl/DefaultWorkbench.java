@@ -11,24 +11,16 @@
 package org.eclipse.swtbot.eclipse.dsl;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.eclipse.finder.SWTEclipseBot;
-import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotView;
-import org.eclipse.swtbot.swt.finder.SWTBot;
-import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
+import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEclipseEditor;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
-import org.eclipse.swtbot.swt.finder.results.BoolResult;
 import org.eclipse.swtbot.swt.finder.results.Result;
-import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.utils.StringConverter;
 import org.eclipse.swtbot.swt.finder.utils.StringUtils;
-import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
-import org.eclipse.swtbot.swt.finder.widgets.TimeoutException;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -46,6 +38,7 @@ import org.eclipse.ui.PlatformUI;
  */
 public class DefaultWorkbench implements Workbench {
 
+	/** The bot that may be used to drive the workbench. */
 	protected SWTEclipseBot	bot;
 
 	/**
@@ -57,25 +50,7 @@ public class DefaultWorkbench implements Workbench {
 		this.bot = bot;
 	}
 
-	/**
-	 * @return the active workbench window's shell.
-	 */
-	protected Widget getActiveWorkbenchWindowShell() {
-		return getActiveWorkbenchWindow().getShell();
-	}
-
-	/**
-	 * @return the active workbench window.
-	 */
-	protected IWorkbenchWindow getActiveWorkbenchWindow() {
-		return UIThreadRunnable.syncExec(bot.getDisplay(), new Result<IWorkbenchWindow>() {
-			public IWorkbenchWindow run() {
-				return PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-			}
-		});
-	}
-
-	public Workbench switchPerspectives(String perspectiveName) throws WidgetNotFoundException, TimeoutException {
+	public Workbench switchToPerspective(String perspectiveName) {
 		IPerspectiveDescriptor[] perspectives = PlatformUI.getWorkbench().getPerspectiveRegistry().getPerspectives();
 		for (IPerspectiveDescriptor perspective : perspectives) {
 			if (perspectiveNameMatches(perspective, perspectiveName)) {
@@ -95,68 +70,62 @@ public class DefaultWorkbench implements Workbench {
 				perspectiveName, availablePerspectives));
 	}
 
-	private boolean perspectiveNameMatches(final IPerspectiveDescriptor perspective, String perspectiveName) {
-		String perspectiveLabel = perspective.getLabel();
-		return perspectiveLabel.equals(perspectiveName) || perspective.getLabel().equals(perspectiveName + " (default)");
-	}
-
-	public Workbench resetPerspective() throws WidgetNotFoundException, TimeoutException {
+	public Workbench resetPerspective() {
 		bot.menu("Window").menu("Reset Perspective...").click();
 		bot.shell("Reset Perspective").activate();
 		bot.button("OK").click();
 		return this;
 	}
 
-	public void reset() throws WidgetNotFoundException, TimeoutException {
-		final Widget viewShells = getActiveWorkbenchWindowShell();
-		final List<Shell> closedShells = new ArrayList<Shell>();
-		UIThreadRunnable.syncExec(new VoidResult() {
-			public void run() {
-				Shell[] shells = Display.getCurrent().getShells();
-				for (Shell shell : shells) {
-					if (shell == viewShells) {
-						continue;
-					}
-					closedShells.add(shell);
-					shell.close();
-				}
-			}
-		});
-		UIThreadRunnable.syncExec(new VoidResult() {
-			public void run() {
-				// wait for event pump
-			}
-		});
-		if (!closedShells.isEmpty()) {
-			new SWTBot().waitUntil(new DefaultCondition() {
-				public boolean test() throws Exception {
-					return !isOneOpen(closedShells);
-				}
-
-				private boolean isOneOpen(final List<Shell> closedShells) {
-					return UIThreadRunnable.syncExec(new BoolResult() {
-						public Boolean run() {
-							for (Shell shell : closedShells) {
-								if (!shell.isDisposed() && shell.isVisible()) {
-									return true;
-								}
-							}
-							return false;
-						}
-					});
-				}
-
-				public String getFailureMessage() {
-					return "Timed out waiting for " + closedShells.size() + " shells to close.";
-				}
-			});
-		}
-
-		try {
-			SWTBotView view = bot.view("Welcome");
-			view.close();
-		} catch (WidgetNotFoundException e) {
-			// ignore, expected
-		}
+	public Workbench resetWorkbench() {
+		return closeAllShells().saveAllEditors().closeAllEditors();
 	}
+
+	public Workbench closeAllShells() {
+		SWTBotShell[] shells = bot.shells();
+		for (SWTBotShell shell : shells) {
+			if (!isEclipseShell(shell)) {
+				shell.close();
+			}
+		}
+		return this;
+	}
+
+	public Workbench saveAllEditors() {
+		List<SWTBotEclipseEditor> editors = bot.editors();
+		for (SWTBotEclipseEditor editor : editors) {
+			editor.save();
+		}
+		return this;
+	}
+
+	public Workbench closeAllEditors() {
+		List<SWTBotEclipseEditor> editors = bot.editors();
+		for (SWTBotEclipseEditor editor : editors) {
+			editor.close();
+		}
+		return this;
+	}
+
+	private boolean perspectiveNameMatches(final IPerspectiveDescriptor perspective, String perspectiveName) {
+		String perspectiveLabel = perspective.getLabel();
+		return perspectiveLabel.equals(perspectiveName) || perspective.getLabel().equals(perspectiveName + " (default)");
+	}
+
+	private boolean isEclipseShell(final SWTBotShell shell) {
+		return getActiveWorkbenchWindowShell() == shell.widget;
+	}
+
+	private IWorkbenchWindow getActiveWorkbenchWindow() {
+		return UIThreadRunnable.syncExec(bot.getDisplay(), new Result<IWorkbenchWindow>() {
+			public IWorkbenchWindow run() {
+				return PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+			}
+		});
+	}
+
+	private Widget getActiveWorkbenchWindowShell() {
+		return getActiveWorkbenchWindow().getShell();
+	}
+
 }

@@ -19,12 +19,19 @@ import org.eclipse.swtbot.eclipse.finder.SWTEclipseBot;
  */
 public class Eclipse {
 
+	/**
+	 * @return A new workbench that provides convenience API to access common features of the Eclipse workbench.
+	 */
 	public static Workbench workbench() {
 		return workbench(new SWTEclipseBot());
 	}
 
-	public static Workbench workbench(SWTEclipseBot eclipseBot) {
-		return new DefaultWorkbench(eclipseBot);
+	/**
+	 * @param bot the bot that can drive the workbench.
+	 * @return A new workbench that provides convenience API to access common features of the Eclipse workbench.
+	 */
+	public static Workbench workbench(SWTEclipseBot bot) {
+		return new DefaultWorkbench(bot);
 	}
 
 }

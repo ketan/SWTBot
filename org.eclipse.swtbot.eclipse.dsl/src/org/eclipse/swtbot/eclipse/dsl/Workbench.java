@@ -10,9 +10,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.dsl;
 
-import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
-import org.eclipse.swtbot.swt.finder.widgets.TimeoutException;
-
 /**
  * A DSL for manipulating the workbench. Clients can implement their own workbench interface for performing these
  * operations, which may be required for testing a custom RCP application, that needs to have a different implementation
@@ -26,34 +23,51 @@ import org.eclipse.swtbot.swt.finder.widgets.TimeoutException;
  * </pre>
  * 
  * @author David Green
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface Workbench {
 	/**
-	 * switch to the named perspective
+	 * Switch to the named perspective
 	 * 
 	 * @param perspectiveName the name of the perspective as it appears in the UI
-	 * @throws WidgetNotFoundException
-	 * @throws TimeoutException
+	 * @return itself
 	 */
-	public abstract Workbench switchPerspectives(String perspectiveName) throws WidgetNotFoundException, TimeoutException;
+	public Workbench switchToPerspective(String perspectiveName);
 
 	/**
-	 * reset the current perspective to its defaults
+	 * Reset the current perspective to its defaults.
 	 * 
-	 * @throws WidgetNotFoundException
-	 * @throws TimeoutException
+	 * @return itself
 	 */
-	public abstract Workbench resetPerspective() throws WidgetNotFoundException, TimeoutException;
+	public Workbench resetPerspective();
 
 	/**
-	 * Reset the workbench such that all open dialogs are closed. This is typically called in preparation for starting a
-	 * new test.
+	 * Reset the workbench such that all open editors are saved and closed, all open dialogs are closed. This is
+	 * typically called in preparation for starting a new test, or cleaning up after a test.
 	 * 
-	 * @throws WidgetNotFoundException
-	 * @throws TimeoutException
+	 * @return itself
 	 */
-	public abstract void reset() throws WidgetNotFoundException, TimeoutException;
+	public Workbench resetWorkbench();
 
-	// public abstract PackageExplorer packageExplorer() throws WidgetNotFoundException;
-	// public abstract OutlineView outlineView() throws WidgetNotFoundException;
+	/**
+	 * Closes all the open shells in the workbench. Does not close the workbench shell itself.
+	 * 
+	 * @return itself
+	 */
+	public Workbench closeAllShells();
+
+	/**
+	 * Closes all the open editors in the workbench.
+	 * 
+	 * @return itself
+	 */
+	public Workbench closeAllEditors();
+
+	/**
+	 * Saves all the open editors in the workbench.
+	 * 
+	 * @return itself
+	 */
+	public Workbench saveAllEditors();
+
 }
