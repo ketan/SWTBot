@@ -36,7 +36,7 @@ import org.eclipse.ui.PlatformUI;
  * @author David Green
  * @see Eclipse
  */
-public class DefaultWorkbench implements Workbench {
+public class DefaultWorkbench extends Workbench {
 
 	/** The bot that may be used to drive the workbench. */
 	protected SWTEclipseBot	bot;

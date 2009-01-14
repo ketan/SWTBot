@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright (c) 2009 David Green and others.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse public abstract License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
@@ -25,21 +25,21 @@ package org.eclipse.swtbot.eclipse.dsl;
  * @author David Green
  * @noimplement This interface is not intended to be implemented by clients.
  */
-public interface Workbench {
+public abstract class Workbench {
 	/**
 	 * Switch to the named perspective
 	 * 
 	 * @param perspectiveName the name of the perspective as it appears in the UI
 	 * @return itself
 	 */
-	public Workbench switchToPerspective(String perspectiveName);
+	public abstract Workbench switchToPerspective(String perspectiveName);
 
 	/**
 	 * Reset the current perspective to its defaults.
 	 * 
 	 * @return itself
 	 */
-	public Workbench resetPerspective();
+	public abstract Workbench resetPerspective();
 
 	/**
 	 * Reset the workbench such that all open editors are saved and closed, all open dialogs are closed. This is
@@ -47,27 +47,27 @@ public interface Workbench {
 	 * 
 	 * @return itself
 	 */
-	public Workbench resetWorkbench();
+	public abstract Workbench resetWorkbench();
 
 	/**
 	 * Closes all the open shells in the workbench. Does not close the workbench shell itself.
 	 * 
 	 * @return itself
 	 */
-	public Workbench closeAllShells();
+	public abstract Workbench closeAllShells();
 
 	/**
 	 * Closes all the open editors in the workbench.
 	 * 
 	 * @return itself
 	 */
-	public Workbench closeAllEditors();
+	public abstract Workbench closeAllEditors();
 
 	/**
 	 * Saves all the open editors in the workbench.
 	 * 
 	 * @return itself
 	 */
-	public Workbench saveAllEditors();
+	public abstract Workbench saveAllEditors();
 
 }
