@@ -108,7 +108,7 @@
 	<delete file="${java.io.tmpdir}/git.svn.properties" />
 	<touch file="${java.io.tmpdir}/git.svn.properties" />
 	<!-- guess svn revision -->
-	<exec executable="git" output="${java.io.tmpdir}/git.svn.properties" dir=".." failifexecutionfails="false" failonerror="true">
+	<exec executable="git" output="${java.io.tmpdir}/git.svn.properties" dir=".." failifexecutionfails="false" failonerror="false">
 		<arg line="svn info" />
 	</exec>
 
@@ -123,7 +123,7 @@
 	<delete file="${java.io.tmpdir}/svn.properties" />
 	<touch file="${java.io.tmpdir}/svn.properties" />
 	<!-- guess svn revision -->
-	<exec executable="svn" output="${java.io.tmpdir}/svn.properties" dir="..">
+	<exec executable="svn" output="${java.io.tmpdir}/svn.properties" dir=".." failifexecutionfails="false" failonerror="false">
 		<arg value="info" />
 	</exec>
 
@@ -136,6 +136,7 @@
 	</loadproperties>
 
 	<property name="svn.version" value="${svn.LastChangedRev}" />
+	<fail unless="svn.version" message="could not determine svn version number" />
 
 	<echo>Sandbox Revision: ${svn.version}</echo>
 
