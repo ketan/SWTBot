@@ -1,5 +1,9 @@
 <project>
 
+	<!-- load up the properties for cruise agents based on their hostnames, if available -->
+	<exec executable="hostname" outputproperty="hostname" />
+	<property file="host-files/build.${hostname}.properties" />
+
 	<taskdef resource="net/sf/antcontrib/antlib.xml">
 		<classpath>
 			<pathelement location="externals/libs/ant-contrib-1.0b3.jar" />
