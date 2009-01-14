@@ -333,7 +333,7 @@
 		</exec>
 	</target>
 
-	<target name="cruise" depends="materialize-workspace, all, create-update-site" description="used by cruise, creates update site in addition to the regular build" />
+	<target name="cruise" depends="init, materialize-workspace, all, create-update-site" description="used by cruise, creates update site in addition to the regular build" />
 
 	<target name="cruise-upload" depends="cruise, upload-to-server" description="run a cruise build and upload to server" />
 </project>
