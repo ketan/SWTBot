@@ -1,11 +1,10 @@
 <project name="org.eclipse.swtbot.releng" default="all" basedir=".">
 
-	<import file="check-prerequisites.xml" />
-
-
 	<!-- load up the properties for cruise agents based on their hostnames, if available -->
 	<exec executable="hostname" outputproperty="hostname" />
 	<property file="host-files/build.${hostname}.properties" />
+
+	<import file="check-prerequisites.xml" />
 
 	<property name="plugin.version.primary" value="2.0.0" />
 
