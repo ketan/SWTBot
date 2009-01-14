@@ -107,7 +107,7 @@
 		</exec>
 	</target>
 
-	<target name="materialize-workspace" description="Materializes a workspace for eclipse">
+	<target name="materialize-workspace" description="Materializes a workspace for eclipse" depends="download-dependencies">
 		<property name="eclipse-target" value="../eclipse" />
 
 		<delete dir="${eclipse-target}" />

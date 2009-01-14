@@ -64,7 +64,7 @@
 		<property file="build.properties" />
 	</target>
 
-	<target name="check-conditions" depends="check-windows-preconditions, check-other-preconditions, download-dependencies">
+	<target name="check-conditions" depends="download-dependencies, check-windows-preconditions, check-other-preconditions">
 		<check.executable executable="svn" />
 		<available file="build.developer.properties" property="build.developer.properties.available" />
 		<available file="host-conf/build.${hostname}.properties" property="build.developer.properties.available" />
