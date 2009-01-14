@@ -2,7 +2,9 @@
 
 	<!-- load up the properties for cruise agents based on their hostnames, if available -->
 	<exec executable="hostname" outputproperty="hostname" />
-	<property file="host-files/build.${hostname}.properties" />
+	<property file="host-conf/build.${hostname}.properties" />
+
+	<import file="download-dependencies.xml" />
 
 	<taskdef resource="net/sf/antcontrib/antlib.xml">
 		<classpath>
@@ -59,89 +61,52 @@
 				<filter token="PDE_BUILD_PLUGIN_VERSION" value="${pde-build-version}" />
 			</filterset>
 		</copy>
+		<property file="build.properties" />
 	</target>
 
-	<target name="check-prerequisites">
-		<mkdir dir="externals/plugins" />
-		<available file="externals/${eclipse.sdk.archive}" property="eclipse-sdk-available" />
-
-		<available file="externals/eclipse-test-framework-3.3.zip" property="eclipse-test-framework-available" />
-
-		<available file="externals/plugins/org.apache.log4j_1.2.13.v200806030600.jar" property="apache-log4j-available" />
-		<available file="externals/plugins/org.hamcrest_1.1.0.jar" property="hamcrest-available" />
-		<available file="externals/plugins/org.apache.commons.collections_3.2.0.v200803061811.jar" property="commons-collections-available" />
-	</target>
-
-	<target name="download-eclipse-sdk" unless="eclipse-sdk-available">
-		<get dest="externals/${eclipse.sdk.archive}" src="${eclipse.sdk.url}/${eclipse.sdk.archive}" verbose="true" usetimestamp="true" />
-	</target>
-
-	<target name="download-test-framework" unless="eclipse-test-framework-available">
-		<get dest="externals/eclipse-test-framework-3.3.zip" src="https://swtbot.svn.sourceforge.net/svnroot/swtbot/branches/java-1.5-api-spike/org.eclipse.swtbot.releng/test-sandbox/eclipse-test-framework-3.3.zip" verbose="true" usetimestamp="true" />
-	</target>
-
-	<target name="download-log4j" unless="apache-log4j-available">
-		<parallel>
-			<get dest="externals/plugins/org.apache.log4j_1.2.13.v200806030600.jar" src="https://swtbot.svn.sourceforge.net/svnroot/swtbot/branches/java-1.5-api-spike/org.eclipse.swtbot.releng/externals/plugins/org.apache.log4j_1.2.13.v200806030600.jar" verbose="true" usetimestamp="true" />
-			<get dest="externals/plugins/org.apache.log4j.source_1.2.13.v200806030600.jar" src="https://swtbot.svn.sourceforge.net/svnroot/swtbot/branches/java-1.5-api-spike/org.eclipse.swtbot.releng/externals/plugins/org.apache.log4j.source_1.2.13.v200806030600.jar" verbose="true" usetimestamp="true" />
-		</parallel>
-	</target>
-
-	<target name="download-hamcrest" unless="hamcrest-available">
-		<get dest="externals/plugins/org.hamcrest_1.1.0.jar" src="https://swtbot.svn.sourceforge.net/svnroot/swtbot/branches/java-1.5-api-spike/org.eclipse.swtbot.releng/externals/plugins/org.hamcrest_1.1.0.jar" verbose="true" usetimestamp="true" />
-	</target>
-
-
-	<target name="download-commons-collections" unless="commons-collections-available">
-		<parallel>
-			<get dest="externals/plugins/org.apache.commons.collections_3.2.0.v200803061811.jar" src="https://swtbot.svn.sourceforge.net/svnroot/swtbot/branches/java-1.5-api-spike/org.eclipse.swtbot.releng/externals/plugins/org.apache.commons.collections_3.2.0.v200803061811.jar" verbose="true" usetimestamp="true" />
-			<get dest="externals/plugins/org.apache.commons.collections.source_3.2.0.v200803061811.jar" src="https://swtbot.svn.sourceforge.net/svnroot/swtbot/branches/java-1.5-api-spike/org.eclipse.swtbot.releng/externals/plugins/org.apache.commons.collections.source_3.2.0.v200803061811.jar" verbose="true" usetimestamp="true" />
-		</parallel>
-	</target>
-
-	<target name="download-prerequisites" depends="check-prerequisites, download-eclipse-sdk, download-test-framework, download-log4j, download-commons-collections, download-hamcrest" />
-
-	<target name="check-conditions" depends="check-windows-preconditions, check-other-preconditions, download-prerequisites">
+	<target name="check-conditions" depends="check-windows-preconditions, check-other-preconditions, download-dependencies">
 		<check.executable executable="svn" />
 		<available file="build.developer.properties" property="build.developer.properties.available" />
-		<fail unless="build.developer.properties.available">Could not find the file "build.developer.properties". Please create the file using "build.developer.properties.sample" as the starting point.</fail>
+		<available file="host-conf/build.${hostname}.properties" property="build.developer.properties.available" />
+		<fail unless="build.developer.properties.available">Could not find the file "build.developer.properties", or host-conf/build.${hostname}.properties. Please create the file using "build.developer.properties.sample" as the starting point.</fail>
 	</target>
 
 	<target name="initialize-environment" depends="guess-pde-build-version, create-build-properties-from-template" />
 
-	<delete file="${java.io.tmpdir}/git.svn.properties" />
-	<touch file="${java.io.tmpdir}/git.svn.properties" />
-	<!-- guess svn revision -->
-	<exec executable="git" output="${java.io.tmpdir}/git.svn.properties" dir=".." failifexecutionfails="false" failonerror="false">
-		<arg line="svn info" />
-	</exec>
+	<target name="create-version-number">
+		<delete file="${java.io.tmpdir}/git.svn.properties" />
+		<touch file="${java.io.tmpdir}/git.svn.properties" />
+		<!-- guess svn revision -->
+		<exec executable="git" output="${java.io.tmpdir}/git.svn.properties" dir=".." failifexecutionfails="false" failonerror="false">
+			<arg line="svn info" />
+		</exec>
 
-	<!-- prefix all properties with "svn." and replace spaces to make the keys unique -->
-	<loadproperties srcfile="${java.io.tmpdir}/git.svn.properties">
-		<filterchain>
-			<prefixlines prefix="svn." />
-			<deletecharacters chars="\ " />
-		</filterchain>
-	</loadproperties>
+		<!-- prefix all properties with "svn." and replace spaces to make the keys unique -->
+		<loadproperties srcfile="${java.io.tmpdir}/git.svn.properties">
+			<filterchain>
+				<prefixlines prefix="svn." />
+				<deletecharacters chars="\ " />
+			</filterchain>
+		</loadproperties>
 
-	<delete file="${java.io.tmpdir}/svn.properties" />
-	<touch file="${java.io.tmpdir}/svn.properties" />
-	<!-- guess svn revision -->
-	<exec executable="svn" output="${java.io.tmpdir}/svn.properties" dir=".." failifexecutionfails="false" failonerror="false">
-		<arg value="info" />
-	</exec>
+		<delete file="${java.io.tmpdir}/svn.properties" />
+		<touch file="${java.io.tmpdir}/svn.properties" />
+		<!-- guess svn revision -->
+		<exec executable="svn" output="${java.io.tmpdir}/svn.properties" dir=".." failifexecutionfails="false" failonerror="false">
+			<arg value="info" />
+		</exec>
 
-	<!-- prefix all properties with "svn." and replace spaces to make the keys unique -->
-	<loadproperties srcfile="${java.io.tmpdir}/svn.properties">
-		<filterchain>
-			<prefixlines prefix="svn." />
-			<deletecharacters chars="\ " />
-		</filterchain>
-	</loadproperties>
+		<!-- prefix all properties with "svn." and replace spaces to make the keys unique -->
+		<loadproperties srcfile="${java.io.tmpdir}/svn.properties">
+			<filterchain>
+				<prefixlines prefix="svn." />
+				<deletecharacters chars="\ " />
+			</filterchain>
+		</loadproperties>
 
-	<property name="svn.version" value="${svn.LastChangedRev}" />
-	<fail unless="svn.version" message="could not determine svn version number" />
+		<property name="svn.version" value="${svn.LastChangedRev}" />
+		<fail unless="svn.version" message="could not determine svn version number" />
 
-	<echo>Sandbox Revision: ${svn.version}</echo>
-
+		<echo>Sandbox Revision: ${svn.version}</echo>
+	</target>
 </project>

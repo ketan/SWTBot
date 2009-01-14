@@ -128,7 +128,7 @@
 		<echoproperties prefix="java." />
 	</target>
 
-	<target name="init" depends="check-conditions, initialize-environment, printjvm, clean" description="initializes the build directory structure">
+	<target name="init" depends="create-version-number, check-conditions, initialize-environment, printjvm, clean" description="initializes the build directory structure">
 		<mkdir dir="${buildDirectory}" />
 		<mkdir dir="artifacts" />
 		<mkdir dir="${buildDirectory}/plugins" />
@@ -328,7 +328,7 @@
 		</exec>
 	</target>
 
-	<target name="cruise" depends="init, materialize-workspace, all, create-update-site" description="used by cruise, creates update site in addition to the regular build" />
+	<target name="cruise" depends="materialize-workspace, all, create-update-site" description="used by cruise, creates update site in addition to the regular build" />
 
 	<target name="cruise-upload" depends="cruise, upload-to-server" description="run a cruise build and upload to server" />
 </project>
