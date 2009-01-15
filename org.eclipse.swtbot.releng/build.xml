@@ -95,7 +95,7 @@
 
 	<!--setup for zip archives-->
 	<target name="setup-zip" description="Reinstall the test Eclipse installation if specified by user">
-		<unzip dest="${eclipse-target}" src="externals/${eclipse.sdk.archive}" failonerror="true">
+		<unzip dest="${eclipse-target}" src="externals/${eclipse.sdk.archive}">
 			<mapper type="glob" from="eclipse/*" to="${eclipse-target}/*" />
 		</unzip>
 	</target>
