@@ -73,40 +73,37 @@
 
 	<target name="initialize-environment" depends="guess-pde-build-version, create-build-properties-from-template" />
 
-	<target name="create-version-number">
-		<delete file="${java.io.tmpdir}/git.svn.properties" />
-		<touch file="${java.io.tmpdir}/git.svn.properties" />
-		<!-- guess svn revision -->
-		<exec executable="git" output="${java.io.tmpdir}/git.svn.properties" dir=".." failifexecutionfails="false" failonerror="false">
-			<arg line="svn info" />
-		</exec>
+	<delete file="${java.io.tmpdir}/git.svn.properties" />
+	<touch file="${java.io.tmpdir}/git.svn.properties" />
+	<!-- guess svn revision -->
+	<exec executable="git" output="${java.io.tmpdir}/git.svn.properties" dir=".." failifexecutionfails="false" failonerror="false">
+		<arg line="svn info" />
+	</exec>
 
-		<!-- prefix all properties with "svn." and replace spaces to make the keys unique -->
-		<loadproperties srcfile="${java.io.tmpdir}/git.svn.properties">
-			<filterchain>
-				<prefixlines prefix="svn." />
-				<deletecharacters chars="\ " />
-			</filterchain>
-		</loadproperties>
+	<!-- prefix all properties with "svn." and replace spaces to make the keys unique -->
+	<loadproperties srcfile="${java.io.tmpdir}/git.svn.properties">
+		<filterchain>
+			<prefixlines prefix="svn." />
+			<deletecharacters chars="\ " />
+		</filterchain>
+	</loadproperties>
 
-		<delete file="${java.io.tmpdir}/svn.properties" />
-		<touch file="${java.io.tmpdir}/svn.properties" />
-		<!-- guess svn revision -->
-		<exec executable="svn" output="${java.io.tmpdir}/svn.properties" dir=".." failifexecutionfails="false" failonerror="false">
-			<arg value="info" />
-		</exec>
+	<delete file="${java.io.tmpdir}/svn.properties" />
+	<touch file="${java.io.tmpdir}/svn.properties" />
+	<!-- guess svn revision -->
+	<exec executable="svn" output="${java.io.tmpdir}/svn.properties" dir=".." failifexecutionfails="false" failonerror="false">
+		<arg value="info" />
+	</exec>
 
-		<!-- prefix all properties with "svn." and replace spaces to make the keys unique -->
-		<loadproperties srcfile="${java.io.tmpdir}/svn.properties">
-			<filterchain>
-				<prefixlines prefix="svn." />
-				<deletecharacters chars="\ " />
-			</filterchain>
-		</loadproperties>
+	<!-- prefix all properties with "svn." and replace spaces to make the keys unique -->
+	<loadproperties srcfile="${java.io.tmpdir}/svn.properties">
+		<filterchain>
+			<prefixlines prefix="svn." />
+			<deletecharacters chars="\ " />
+		</filterchain>
+	</loadproperties>
 
-		<property name="svn.version" value="${svn.LastChangedRev}" />
-		<fail unless="svn.version" message="could not determine svn version number" />
+	<property name="svn.version" value="${svn.LastChangedRev}" />
+	<fail unless="svn.version" message="could not determine svn version number" />
 
-		<echo>Sandbox Revision: ${svn.version}</echo>
-	</target>
 </project>
