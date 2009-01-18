@@ -327,13 +327,13 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	 */
 	public SWTBotTreeItem doubleClick() {
 		assertEnabled();
-		notifyTree(SWT.MouseDown);
 		asyncExec(new VoidResult() {
 			public void run() {
 				tree.setSelection(widget);
 			}
 		});
 		notifyTree(SWT.Selection);
+		notifyTree(SWT.MouseDown);
 		notifyTree(SWT.MouseUp);
 		notifyTree(SWT.MouseDown);
 		notifyTree(SWT.MouseDoubleClick);
