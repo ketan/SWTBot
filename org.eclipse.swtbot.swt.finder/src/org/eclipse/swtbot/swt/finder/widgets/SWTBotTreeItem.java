@@ -174,7 +174,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	 * @since 1.2
 	 */
 	private void preExpandNotify() {
-		notifyTree(SWT.Expand, selectionEvent());
+		notifyTree(SWT.Expand, createEvent());
 	}
 
 	/**
@@ -293,7 +293,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 		notifyTree(SWT.FocusIn);
 		notifyTree(SWT.MouseDown, createMouseEvent(x, y, 1, SWT.BUTTON1, 1));
 		notifyTree(SWT.MouseUp);
-		notifyTree(SWT.Selection, selectionEvent());
+		notifyTree(SWT.Selection, createEvent());
 		notifyTree(SWT.MouseHover);
 		notifyTree(SWT.MouseMove);
 		notifyTree(SWT.MouseExit);
@@ -490,18 +490,6 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 				tree.notifyListeners(SWT.Selection, createCheckEvent());
 			}
 		});
-	}
-
-	/**
-	 * Gets the selection event.
-	 * 
-	 * @return The event.
-	 */
-	private Event selectionEvent() {
-		Event event = createEvent();
-		event.item = widget;
-		event.widget = tree;
-		return event;
 	}
 
 	protected void assertEnabled() {
