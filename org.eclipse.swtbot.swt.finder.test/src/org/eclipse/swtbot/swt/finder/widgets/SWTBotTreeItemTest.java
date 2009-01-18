@@ -177,6 +177,19 @@ public class SWTBotTreeItemTest extends AbstractSWTTestCase {
 		runCellOutOfRangeTest(tree.getTreeItem("Node 1"), 1);
 	}
 
+	public void testCanDoubleClickOnANode() throws Exception {
+		SWTBotTreeItem treeItem = tree.getTreeItem("Node 2");
+
+		treeItem.doubleClick();
+
+		assertTextContains("MouseDown [3]: MouseEvent{Tree {} ", listeners);
+		assertTextContains("Selection [13]: SelectionEvent{Tree {} ", listeners);
+		assertTextContains("item=TreeItem {Node 2}", listeners);
+		assertTextContains("MouseDoubleClick [8]: MouseEvent{Tree {} ", listeners);
+		assertTextContains("DefaultSelection [14]: SelectionEvent{Tree {} ", listeners);
+		assertTextContains("MouseUp [4]: MouseEvent{Tree {} ", listeners);
+	}
+
 	protected void setUp() throws Exception {
 		super.setUp();
 		bot.tabItem("Tree").activate();
