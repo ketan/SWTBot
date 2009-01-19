@@ -279,10 +279,10 @@
 		<attribute name="plugin.id" default="default" />
 		<sequential>
 			<echo>Copying @{plugin.id}</echo>
-			<copy todir="artifacts/to-upload/coverage/@{plugin.id}">
+			<copy todir="artifacts/to-upload/coverage/@{plugin.id}" failonerror="false">
 				<fileset dir="artifacts/tests/@{plugin.id}/coverage/html" />
 			</copy>
-			<copy todir="artifacts/to-upload/junit/@{plugin.id}">
+			<copy todir="artifacts/to-upload/junit/@{plugin.id}" failonerror="false">
 				<fileset dir="artifacts/tests/@{plugin.id}/junit/html" />
 			</copy>
 		</sequential>
@@ -293,7 +293,7 @@
 		<mkdir dir="artifacts/to-upload" />
 		<copy todir="artifacts/to-upload" includeemptydirs="false">
 			<fileset dir="artifacts">
-				<include name="org.eclipse.swtbot*${all.buildId}.zip" />
+				<include name="org.eclipse.swtbot.eclipse-*${all.buildId}.zip" />
 			</fileset>
 		</copy>
 
@@ -313,11 +313,13 @@
 			<fileset dir="artifacts/to-upload/update-site" />
 		</zip>
 
-		<!--
-		<copy-test-reports plugin.id="org.eclipse.swtbot.recorder.test" />
-		<copy-test-reports plugin.id="org.eclipse.swtbot.recorder.ui.test" />
-		-->
-		<copy-test-reports plugin.id="org.eclipse.swtbot.finder.test" />
+
+		<copy-test-reports plugin.id="org.eclipse.swtbot.swt.finder.test" />
+		<copy-test-reports plugin.id="org.eclipse.swtbot.generator.test" />
+		<copy-test-reports plugin.id="org.eclipse.swtbot.eclipse.finder.test" />
+		<copy-test-reports plugin.id="org.eclipse.swtbot.swt.recorder.test" />
+		<copy-test-reports plugin.id="org.eclipse.swtbot.swt.recorder.ui.test" />
+
 	</target>
 
 	<target name="upload-to-server" depends="create-upload-site" if="remote.path">

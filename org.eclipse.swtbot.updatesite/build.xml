@@ -17,7 +17,7 @@
 		<echo>Purging feaures</echo>
 		<purge keep="${num.previous.revisions}">
 			<fileset dir="${target}/features">
-				<include name="${feature.id}_*.jar" />
+				<include name="org.eclipse.swtbot_*.jar" />
 			</fileset>
 			<fileset dir="${target}/features">
 				<include name="org.eclipse.swtbot.eclipse_*.jar" />
@@ -42,9 +42,12 @@
 				<include name="org.eclipse.swtbot.swt.finder_*.jar" />
 			</fileset>
 
-			<!-- eclipse ui -->
+			<!-- eclipse ui and core-->
 			<fileset dir="${target}/plugins">
 				<include name="org.eclipse.swtbot.eclipse.ui_*.jar" />
+			</fileset>
+			<fileset dir="${target}/plugins">
+				<include name="org.eclipse.swtbot.eclipse.core_*.jar" />
 			</fileset>
 
 			<!-- spy -->
@@ -71,6 +74,9 @@
 			</fileset>
 			<fileset dir="${target}/plugins">
 				<include name="org.apache.log4j_*.jar" />
+			</fileset>
+			<fileset dir="${target}/plugins">
+				<include name="org.hamcrest_*.jar" />
 			</fileset>
 
 			<!-- swt examples -->
@@ -174,7 +180,7 @@
 		<mkdir dir="${target}" />
 
 		<unzip dest="${target}">
-			<fileset dir="../${plugin.prefix}.releng/artifacts" includes="org.eclipse.swtbot.eclipse*" />
+			<fileset dir="../${plugin.prefix}.releng/artifacts" includes="org.eclipse.swtbot.eclipse-*" />
 		</unzip>
 
 		<antcall target="-create.jars" inheritall="false" />
