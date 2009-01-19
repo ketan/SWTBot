@@ -204,7 +204,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 		boolean shouldFindInvisibleControls = finder.shouldFindInvisibleControls();
 		finder.setShouldFindInvisibleControls(true);
 		try {
-			return finder.findControls(control, matcher, true).get(0);
+			return bot.widget(matcher, control);
 		} catch (Exception e) {
 			throw new WidgetNotFoundException("Could not find any control inside the view " + partReference.getPartName(), e); //$NON-NLS-1$
 		} finally {
