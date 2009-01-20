@@ -92,7 +92,7 @@ public class SWTBotCComboTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testGetsLimits() throws Exception {
+	public void _testGetsLimits() throws Exception {
 		SWTBotCCombo ccombo = bot.ccomboBoxInGroup("Custom Combo");
 		assertEquals(Combo.LIMIT, ccombo.textLimit());
 	}
