@@ -38,7 +38,7 @@ public class ShellIsActiveTest extends AbstractSWTTestCase {
 		long end = System.currentTimeMillis();
 
 		int time = (int) (end - start);
-		assertThat(time, allOf(lessThan(200), greaterThan(0)));
+		assertThat(time, allOf(lessThan(200), greaterThanOrEqualTo(0)));
 	}
 
 	protected void setUp() throws Exception {
