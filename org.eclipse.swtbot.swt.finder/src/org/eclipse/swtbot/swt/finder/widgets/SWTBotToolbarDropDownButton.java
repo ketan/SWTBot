@@ -19,6 +19,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.ToolItem;
+import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.ReferenceBy;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.SWTBotWidget;
@@ -28,6 +29,7 @@ import org.eclipse.swtbot.swt.finder.finders.EventContextMenuFinder;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
+import org.hamcrest.Matcher;
 import org.hamcrest.SelfDescribing;
 
 /**
@@ -92,11 +94,12 @@ public class SWTBotToolbarDropDownButton extends SWTBotToolbarButton {
 			notify(SWT.FocusOut);
 			log.debug(MessageFormat.format("Clicked on {0}", this)); //$NON-NLS-1$
 
-			List<?> findMenus = menuFinder.findMenus(new SWTBot().activeShell().widget, withMnemonic(menuItem), true);
+			Matcher<? extends Widget> matcher = withMnemonic(menuItem);
+			List<?> findMenus = menuFinder.findMenus(new SWTBot().activeShell().widget, matcher, true);
 			log.debug(findMenus);
 			if (findMenus.isEmpty())
 				throw new WidgetNotFoundException("Could not find a menu item"); //$NON-NLS-1$
-			return new SWTBotMenu((MenuItem) findMenus.get(0));
+			return new SWTBotMenu((MenuItem) findMenus.get(0), matcher);
 		} finally {
 			menuFinder.unregister();
 		}

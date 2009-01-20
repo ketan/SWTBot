@@ -263,7 +263,7 @@ abstract class SWTBotFactory {
 	public SWTBotMenu menu(SWTBotShell shell, Matcher<? extends Widget> matcher, int index) {
 		WaitForMenu waitForMenu = waitForMenu(shell, matcher);
 		waitUntilWidgetAppears(waitForMenu);
-		return new SWTBotMenu(waitForMenu.get(index));
+		return new SWTBotMenu(waitForMenu.get(index), matcher);
 	}
 
 	/**

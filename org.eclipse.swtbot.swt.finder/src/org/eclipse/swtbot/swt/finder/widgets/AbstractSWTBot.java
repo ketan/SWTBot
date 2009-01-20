@@ -380,7 +380,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 				return !menuFinder.findMenus(matcher).isEmpty();
 			}
 		});
-		return new SWTBotMenu(menuFinder.findMenus(matcher).get(0));
+		return new SWTBotMenu(menuFinder.findMenus(matcher).get(0), matcher);
 	}
 
 	/**

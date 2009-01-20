@@ -58,7 +58,7 @@ public class MenuFinder {
 	 * @return all menus in all shells that match the matcher.
 	 */
 	public List<MenuItem> findMenus(Matcher<?> matcher) {
-		return findMenus(getShells(), matcher, false);
+		return findMenus(getShells(), matcher, true);
 	}
 
 	/**

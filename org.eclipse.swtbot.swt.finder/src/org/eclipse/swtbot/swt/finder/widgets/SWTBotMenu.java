@@ -17,12 +17,14 @@ import java.util.List;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.MenuFinder;
 import org.eclipse.swtbot.swt.finder.results.BoolResult;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.results.WidgetResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
+import org.hamcrest.Matcher;
 import org.hamcrest.SelfDescribing;
 
 /**
@@ -79,16 +81,17 @@ public class SWTBotMenu extends AbstractSWTBot<MenuItem> {
 	 * @throws WidgetNotFoundException if the widget is not found.
 	 */
 	public SWTBotMenu menu(final String menuName) throws WidgetNotFoundException {
+		final Matcher<? extends Widget> matcher = withMnemonic(menuName);
 		MenuItem menuItem = syncExec(new WidgetResult<MenuItem>() {
 			public MenuItem run() {
 				Menu bar = widget.getMenu();
-				List menus = new MenuFinder().findMenus(bar, withMnemonic(menuName), false);
+				List menus = new MenuFinder().findMenus(bar, matcher, false);
 				if (!menus.isEmpty())
 					return (MenuItem) menus.get(0);
 				return null;
 			}
 		});
-		return new SWTBotMenu(menuItem);
+		return new SWTBotMenu(menuItem, matcher);
 	}
 
 	@Override
