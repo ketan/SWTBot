@@ -18,7 +18,6 @@ import static org.hamcrest.Matchers.lessThan;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
-import org.eclipse.swtbot.swt.finder.waits.Conditions;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 
 /**
@@ -27,7 +26,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
  */
 public class ShellIsActiveTest extends AbstractSWTTestCase {
 
-	private static final String	TEXT	= "this should close in a while" + ShellIsActiveTest.class;
+	private static final String	TEXT	= "this should close in a while" + ShellIsActiveTest.class.getSimpleName();
 	private Shell	shell;
 
 	@SuppressWarnings("unchecked")

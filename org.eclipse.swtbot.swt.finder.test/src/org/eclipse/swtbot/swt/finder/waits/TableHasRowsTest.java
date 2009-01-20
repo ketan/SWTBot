@@ -18,7 +18,6 @@ import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
-import org.eclipse.swtbot.swt.finder.waits.Conditions;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
 
 /**
@@ -27,7 +26,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
  */
 public class TableHasRowsTest extends AbstractSWTTestCase {
 
-	private static final String	TEXT	= "this should close in a while - " + TableHasRowsTest.class;
+	private static final String	TEXT	= "this should close in a while - " + TableHasRowsTest.class.getSimpleName();
 	private Table	table;
 
 	public void testWaitsForTableToContainRows() throws Exception {
