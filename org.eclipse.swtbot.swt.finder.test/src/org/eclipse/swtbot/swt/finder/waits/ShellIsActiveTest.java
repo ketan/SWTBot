@@ -12,7 +12,7 @@ package org.eclipse.swtbot.swt.finder.waits;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThan;
 
 import org.eclipse.swt.widgets.Shell;
