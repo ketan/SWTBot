@@ -13,7 +13,7 @@ package org.eclipse.swtbot.swt.finder.waits;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withText;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThan;
 
 import org.eclipse.swtbot.swt.finder.SWTBot;
@@ -39,7 +39,7 @@ public class WaitForShellTest extends AbstractSWTTestCase {
 		long end = System.currentTimeMillis();
 
 		int time = (int) (end - start);
-		assertThat(time, allOf(lessThan(800), greaterThan(500)));
+		assertThat(time, allOf(lessThan(800), greaterThanOrEqualTo(500)));
 	}
 
 	private void destroyShellAfter800milliSecs() {
