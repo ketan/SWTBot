@@ -32,8 +32,7 @@ public class SWTBotCLabel extends AbstractSWTBot<CLabel> {
 	 * Constructs an instance of this using the given finder and text to search for.
 	 * 
 	 * @param w the widget.
-	 * @param description the description of the widget, this will be reported by {@link #toString()}
-	 * @throws WidgetNotFoundException if the widget is not found.
+ 	 * @throws WidgetNotFoundException if the widget is not found.
 	 * @since 2.0
 	 */
 	public SWTBotCLabel(CLabel w) throws WidgetNotFoundException {
