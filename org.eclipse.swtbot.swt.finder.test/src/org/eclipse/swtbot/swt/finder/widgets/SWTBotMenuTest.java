@@ -15,6 +15,7 @@ import static org.hamcrest.Matchers.anything;
 
 import java.util.List;
 
+
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swtbot.swt.finder.AbstractMenuExampleTest;
@@ -49,11 +50,11 @@ public class SWTBotMenuTest extends AbstractMenuExampleTest {
 			}
 		});
 
-		List findControls = menuFinder.findMenus(menuShell, anything(), true);
+		List findControls = menuFinder.findMenus(anything());
 		MenuItem menuItem = (MenuItem) findControls.get(14);
 		assertText("Last Name", menuItem);
 
-		bot.menu("Edit").menu("Sort").menu("Last Name").click();
+		bot.menu("Last Name").click();
 
 		final TableItem[][] treeItems = new TableItem[][] { null };
 		display.syncExec(new Runnable() {

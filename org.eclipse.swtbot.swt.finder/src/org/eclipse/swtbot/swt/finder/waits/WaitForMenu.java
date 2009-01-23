@@ -12,6 +12,7 @@ package org.eclipse.swtbot.swt.finder.waits;
 
 import java.util.List;
 
+
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.finders.MenuFinder;
@@ -44,7 +45,7 @@ public class WaitForMenu extends DefaultCondition {
 	}
 
 	public boolean test() throws Exception {
-		allMenuItems = new MenuFinder().findMenus(shell.widget, matcher, false);
+		allMenuItems = new MenuFinder().findMenus(shell.widget, matcher, true);
 		return !allMenuItems.isEmpty();
 	}
 

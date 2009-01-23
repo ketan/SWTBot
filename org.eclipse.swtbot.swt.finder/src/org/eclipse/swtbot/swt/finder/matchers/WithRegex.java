@@ -29,7 +29,7 @@ public class WithRegex<T extends Widget> extends AbstractMatcher<T> {
 	private final String	regex;
 
 	/**
-	 * Constructs the regular expression matcher with the given regular expression stirng.
+	 * COnstructs the regular expression matcher with the given regular expression stirng.
 	 *
 	 * @param regex the regex to match on the {@link org.eclipse.swt.widgets.Widget}
 	 */

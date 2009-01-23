@@ -13,6 +13,7 @@ package org.eclipse.swtbot.swt.finder.finders;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
@@ -52,7 +53,8 @@ public class MenuFinder {
 	}
 
 	/**
-	 * Finds a menu matching the given item in all available shells.
+	 * Finds a menu matching the given item in all available shells. If recursive is set, it will attempt to find the
+	 * controls recursively in each of the menus it that is found.
 	 *
 	 * @param matcher the matcher that can match menus and menu items.
 	 * @return all menus in all shells that match the matcher.

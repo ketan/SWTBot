@@ -11,11 +11,10 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.finders;
 
-
-
 import static org.hamcrest.Matchers.anything;
 
 import java.util.List;
+
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTException;
@@ -38,19 +37,13 @@ public class MenuFinderTest extends AbstractMenuExampleTest {
 		} catch (SWTException e) {
 			pass();
 		}
-		assertText("&Edit", menuItem);
+		assertText("&New Contact...	Ctrl+N", menuItem);
 	}
 
 	public void testFindsAllVisibleMenus() throws Exception {
-		List findControls = menuFinder.findMenus(menuShell, anything(), true);
+		List findControls = menuFinder.findMenus(anything());
 		assertEquals(25, findControls.size());
 		assertText("&Find...\tCtrl+F", (Widget) findControls.get(21));
-	}
-
-	public void testDoesFindsAllVisibleTopLevelMenus() throws Exception {
-		List findControls = menuFinder.findMenus(anything());
-		assertEquals(4, findControls.size());
-		assertText("&Edit", (Widget) findControls.get(1));
 	}
 
 }
