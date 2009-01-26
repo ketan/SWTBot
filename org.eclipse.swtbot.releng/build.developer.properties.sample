@@ -6,7 +6,7 @@ arch = x86
 update-site-location = ${basedir}/artifacts/update-site
 eclipse.sdk.archive = eclipse-SDK-3.4-macosx-carbon.tar.gz
 
-eclipse.buildId = 3.3
+eclipse.buildId = 3.4
 
 # don't add the trailing file name, the file name is automatically appended based on eclipse.sdk.archive
 # for locations of the eclipse SDKs 
