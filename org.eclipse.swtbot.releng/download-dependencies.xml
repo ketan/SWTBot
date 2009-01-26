@@ -4,6 +4,7 @@
 		<available file="externals/${eclipse.sdk.archive}" property="eclipse-sdk-available" />
 
 		<available file="externals/eclipse-test-framework-3.3.zip" property="eclipse-test-framework-available" />
+		<delete dir="externals/plugins" />
 	</target>
 
 	<target name="download-eclipse-sdk" unless="eclipse-sdk-available">
