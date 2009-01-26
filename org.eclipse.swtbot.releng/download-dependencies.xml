@@ -4,10 +4,6 @@
 		<available file="externals/${eclipse.sdk.archive}" property="eclipse-sdk-available" />
 
 		<available file="externals/eclipse-test-framework-3.3.zip" property="eclipse-test-framework-available" />
-
-		<available file="externals/plugins/org.apache.log4j_1.2.13.v200806030600.jar" property="apache-log4j-available" />
-		<available file="externals/plugins/org.hamcrest_1.1.0.jar" property="hamcrest-available" />
-		<available file="externals/plugins/org.apache.commons.collections_3.2.0.v200803061811.jar" property="commons-collections-available" />
 	</target>
 
 	<target name="download-eclipse-sdk" unless="eclipse-sdk-available">
@@ -18,24 +14,5 @@
 		<get dest="externals/eclipse-test-framework-3.3.zip" src="https://swtbot.svn.sourceforge.net/svnroot/swtbot/branches/java-1.5-api-spike/org.eclipse.swtbot.releng/test-sandbox/eclipse-test-framework-3.3.zip" verbose="true" usetimestamp="true" />
 	</target>
 
-	<target name="download-log4j" unless="apache-log4j-available">
-		<parallel>
-			<get dest="externals/plugins/org.apache.log4j_1.2.13.v200806030600.jar" src="https://swtbot.svn.sourceforge.net/svnroot/swtbot/branches/java-1.5-api-spike/org.eclipse.swtbot.releng/externals/plugins/org.apache.log4j_1.2.13.v200806030600.jar" verbose="true" usetimestamp="true" />
-			<get dest="externals/plugins/org.apache.log4j.source_1.2.13.v200806030600.jar" src="https://swtbot.svn.sourceforge.net/svnroot/swtbot/branches/java-1.5-api-spike/org.eclipse.swtbot.releng/externals/plugins/org.apache.log4j.source_1.2.13.v200806030600.jar" verbose="true" usetimestamp="true" />
-		</parallel>
-	</target>
-
-	<target name="download-hamcrest" unless="hamcrest-available">
-		<get dest="externals/plugins/org.hamcrest_1.1.0.jar" src="https://swtbot.svn.sourceforge.net/svnroot/swtbot/branches/java-1.5-api-spike/org.eclipse.swtbot.releng/externals/plugins/org.hamcrest_1.1.0.jar" verbose="true" usetimestamp="true" />
-	</target>
-
-
-	<target name="download-commons-collections" unless="commons-collections-available">
-		<parallel>
-			<get dest="externals/plugins/org.apache.commons.collections_3.2.0.v200803061811.jar" src="https://swtbot.svn.sourceforge.net/svnroot/swtbot/branches/java-1.5-api-spike/org.eclipse.swtbot.releng/externals/plugins/org.apache.commons.collections_3.2.0.v200803061811.jar" verbose="true" usetimestamp="true" />
-			<get dest="externals/plugins/org.apache.commons.collections.source_3.2.0.v200803061811.jar" src="https://swtbot.svn.sourceforge.net/svnroot/swtbot/branches/java-1.5-api-spike/org.eclipse.swtbot.releng/externals/plugins/org.apache.commons.collections.source_3.2.0.v200803061811.jar" verbose="true" usetimestamp="true" />
-		</parallel>
-	</target>
-
-	<target name="download-dependencies" depends="check-dependencies, download-eclipse-sdk, download-test-framework, download-log4j, download-commons-collections, download-hamcrest" />
+	<target name="download-dependencies" depends="check-dependencies, download-eclipse-sdk, download-test-framework" />
 </project>
