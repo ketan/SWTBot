@@ -12,7 +12,6 @@ package org.eclipse.swtbot.swt.finder.finders;
 
 import java.util.ArrayList;
 
-
 import org.apache.log4j.Logger;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swtbot.swt.finder.results.ArrayResult;
@@ -24,7 +23,7 @@ import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
  * Performs operations in the UI thread. If the {@link #run()} method of this class is called from an non-UI thread, the
  * instance ensures that it runs in the UI thread by invoking {@link Display#syncExec(Runnable)}, else it executes in
  * the UI thread. All operations are blocking operations.
- *
+ * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
@@ -41,7 +40,7 @@ public abstract class UIThreadRunnable implements Runnable {
 
 	/**
 	 * Runs synchronously in the UI thread.
-	 *
+	 * 
 	 * @param display The display to be used.
 	 */
 	private UIThreadRunnable(Display display) {
@@ -50,7 +49,7 @@ public abstract class UIThreadRunnable implements Runnable {
 
 	/**
 	 * A private contructor use to create this object.
-	 *
+	 * 
 	 * @param display The display to use.
 	 * @param async if the thread should run asynchronously or not.
 	 * @see Display#syncExec(Runnable)
@@ -79,7 +78,7 @@ public abstract class UIThreadRunnable implements Runnable {
 
 	/**
 	 * A runnable instance that is used internally.
-	 *
+	 * 
 	 * @return The runnable instance.
 	 */
 	private Runnable runnable() {
@@ -99,9 +98,10 @@ public abstract class UIThreadRunnable implements Runnable {
 	 * </p>
 	 */
 	private void dispatchAllEvents() {
-		while (true)
-			if (!display.readAndDispatch())
-				break;
+		display.wake();
+		// while (true)
+		// if (!display.readAndDispatch())
+		// break;
 	}
 
 	/**
@@ -114,7 +114,7 @@ public abstract class UIThreadRunnable implements Runnable {
 
 	/**
 	 * Return true if the current thread is the UI thread.
-	 *
+	 * 
 	 * @return <code>true</code> if this instance is running in the UI thread, <code>false</code> otherwise.
 	 */
 	public boolean isUIThread() {
@@ -123,7 +123,7 @@ public abstract class UIThreadRunnable implements Runnable {
 
 	/**
 	 * Return true if the current thread is the UI thread.
-	 *
+	 * 
 	 * @param display the display
 	 * @return <code>true</code> if the current thread is the UI thread, <code>false</code> otherwise.
 	 */
@@ -133,7 +133,7 @@ public abstract class UIThreadRunnable implements Runnable {
 
 	/**
 	 * Executes the {@code toExecute} on the UI thread, and blocks the calling thread.
-	 *
+	 * 
 	 * @param <T> the type of the result.
 	 * @param toExecute the runnable to execute.
 	 * @return the result of executing result on the UI thread.
@@ -144,7 +144,7 @@ public abstract class UIThreadRunnable implements Runnable {
 
 	/**
 	 * Executes the {@code toExecute} on the display thread, and blocks the calling thread.
-	 *
+	 * 
 	 * @param <T> the type of the result.
 	 * @param display the display on which toExecute must be executed.
 	 * @param toExecute the runnable to execute.
@@ -162,7 +162,7 @@ public abstract class UIThreadRunnable implements Runnable {
 
 	/**
 	 * Executes the {@code toExecute} on the display thread, and blocks the calling thread.
-	 *
+	 * 
 	 * @param <T> the type of the result.
 	 * @param toExecute the runnable to execute.
 	 * @return the object result of execution on the UI thread.
@@ -173,7 +173,7 @@ public abstract class UIThreadRunnable implements Runnable {
 
 	/**
 	 * Executes the {@code toExecute} on the display thread, and blocks the calling thread.
-	 *
+	 * 
 	 * @param <T> the type of the result.
 	 * @param display the display on which toExecute must be executed.
 	 * @param toExecute the runnable to execute.
@@ -192,7 +192,7 @@ public abstract class UIThreadRunnable implements Runnable {
 
 	/**
 	 * Executes the {@code toExecute} on the UI thread, and blocks the calling thread.
-	 *
+	 * 
 	 * @param toExecute the runnable to execute.
 	 * @since 1.0
 	 */
@@ -202,7 +202,7 @@ public abstract class UIThreadRunnable implements Runnable {
 
 	/**
 	 * Executes the {@code toExecute} on the display thread, and blocks the calling thread.
-	 *
+	 * 
 	 * @param display the display on which toExecute must be executed.
 	 * @param toExecute the runnable to execute.
 	 */
@@ -217,7 +217,7 @@ public abstract class UIThreadRunnable implements Runnable {
 
 	/**
 	 * Executes the {@code toExecute} on the UI thread asynchronously, and does not block the calling thread.
-	 *
+	 * 
 	 * @param toExecute the runnable to execute.
 	 * @since 1.0
 	 */
@@ -227,7 +227,7 @@ public abstract class UIThreadRunnable implements Runnable {
 
 	/**
 	 * Executes the {@code toExecute} on the UI thread asynchronously, and does not block the calling thread.
-	 *
+	 * 
 	 * @param display the display on which toExecute must be executed.
 	 * @param toExecute the runnable to execute.
 	 */
