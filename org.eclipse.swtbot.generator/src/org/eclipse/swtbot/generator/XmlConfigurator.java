@@ -1,4 +1,7 @@
-/*******************************************************************************
+/**
+ * This file is derived from Hamcrest's  {@link org.hamcrest.generator.config.XmlConfigurator} class.
+ * Portions modified by Ketan Padegaonkar are provided under the EPL.
+ *
  * Copyright (c) 2008 Ketan Padegaonkar and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
