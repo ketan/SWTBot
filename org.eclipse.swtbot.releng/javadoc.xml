@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="javadoc">
 
-	<target name="javadoc">
+	<target name="check-package-list">
+		<available file="javadoc/eclipse-package-list/package-list" property="package-list-available" />
+		<available file="javadoc/java-package-list/package-list" property="package-list-available" />
+	</target>
+
+	<target name="fetch-package-list" unless="package-list-available">
+		<delete dir="javadoc" />
+		<mkdir dir="javadoc/eclipse-package-list" />
+		<mkdir dir="javadoc/java-package-list" />
+		<get dest="javadoc/eclipse-package-list/package-list" src="http://help.eclipse.org/help33/topic/org.eclipse.platform.doc.isv/reference/api/package-list" />
+		<get dest="javadoc/java-package-list/package-list" src="http://java.sun.com/j2se/1.5.0/docs/api/package-list" />
+	</target>
+
+	<target name="javadoc" depends="check-package-list,fetch-package-list">
 		<delete dir="artifacts/apidocs" />
 		<javadoc destdir="artifacts/apidocs" access="protected" author="true" splitindex="true" use="true" version="true" source="1.5" doctitle="SWTBot API Documentation" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" useexternalfile="true" packagenames="
 				org.eclipse.swtbot.eclipse.finder,
