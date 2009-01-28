@@ -573,14 +573,17 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 */
 	public void setFocus() {
 		assertEnabled();
-		boolean focusSet = syncExec(new BoolResult() {
-			public Boolean run() {
-				if (widget instanceof Control)
-					return ((Control) widget).setFocus();
-				return true;
+		log.debug(MessageFormat.format("Attempting to set focus on {0}", this));
+		syncExec(new VoidResult() {
+			public void run() {
+				if (widget instanceof Control) {
+					Control control = (Control) widget;
+					control.getShell().forceActive();
+					control.getShell().forceFocus();
+					control.forceFocus();
+				}
 			}
 		});
-		Assert.isTrue(focusSet, "Could not set focus"); //$NON-NLS-1$
 	}
 
 	/**

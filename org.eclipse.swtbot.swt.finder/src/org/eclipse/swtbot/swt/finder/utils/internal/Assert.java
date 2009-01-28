@@ -45,9 +45,9 @@ public final class Assert {
 	 * @return <code>true</code> if the check passes (does not return if the check fails)
 	 * @exception IllegalArgumentException if the legality test failed
 	 */
-	public static boolean isLegal(boolean expression, String message) {
+	public static boolean isLegal(boolean expression, Object message) {
 		if (!expression)
-			throw new IllegalArgumentException(message);
+			throw new IllegalArgumentException(message.toString());
 		return expression;
 	}
 
@@ -68,9 +68,9 @@ public final class Assert {
 	 * @param object the value to test
 	 * @param message the message to include in the exception
 	 */
-	public static void isNotNull(Object object, String message) {
+	public static void isNotNull(Object object, Object message) {
 		if (object == null)
-			throw new AssertionFailedException("null argument:" + message); //$NON-NLS-1$
+			throw new AssertionFailedException("null argument: " + message); //$NON-NLS-1$
 	}
 
 	/**
@@ -90,7 +90,7 @@ public final class Assert {
 	 * @param expression the outcode of the check
 	 * @param message the message to include in the exception
 	 */
-	public static void isTrue(boolean expression, String message) {
+	public static void isTrue(boolean expression, Object message) {
 		if (!expression)
 			throw new AssertionFailedException("assertion failed: " + message); //$NON-NLS-1$
 	}
