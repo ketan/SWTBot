@@ -10,37 +10,22 @@
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.finder;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
-
 import org.eclipse.swtbot.eclipse.finder.exceptions.QuickFixNotFoundExceptionTest;
 import org.eclipse.swtbot.eclipse.finder.finders.CommandFinderTest;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEclipseEditorTest;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotViewTest;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
+@RunWith(Suite.class)
+@SuiteClasses( { QuickFixNotFoundExceptionTest.class, CommandFinderTest.class, SWTBotViewTest.class, SWTBotEclipseEditorTest.class })
 public class AllTests {
-
-	public static Test suite() {
-		TestSuite suite = new TestSuite("Test for org.eclipse.swtbot.eclipse.finder");
-		//$JUnit-BEGIN$
-
-		// Exception
-		suite.addTestSuite(QuickFixNotFoundExceptionTest.class);
-
-		// Finder
-		suite.addTestSuite(CommandFinderTest.class);
-
-		// Widgets
-		suite.addTestSuite(SWTBotViewTest.class);
-		suite.addTestSuite(SWTBotEclipseEditorTest.class);
-
-		//$JUnit-END$
-
-		return suite;
+	static{
+		System.out.println("Loaded AllTests");
 	}
-
 }

@@ -17,6 +17,7 @@ import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.swtbot.swt.finder.widgets.TimeoutException;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -27,6 +28,7 @@ public class SWTBotTest extends AbstractMenuExampleTest {
 
 	private SWTBot	bot;
 
+	@Test
 	public void testWaits5SecondsAndFailsForFailingCondition() throws Exception {
 		final long begin = System.currentTimeMillis();
 		try {

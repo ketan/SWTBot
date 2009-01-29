@@ -59,7 +59,7 @@ this has been copied from o.e.test plugin with some targets for SWTBot
 	<target name="swtbot-test" description="Eclipse application used to launch UI plugin tests." depends="init">
 		<antcall target="${launchTarget}">
 			<!--param name="application" value="org.eclipse.test.uitestapplication"/-->
-			<param name="application" value="org.eclipse.swtbot.eclipse.headless.swtbottestapplication"/>
+			<param name="application" value="org.eclipse.swtbot.eclipse.junit3.headless.swtbottestapplication"/>
 		</antcall>
 	</target>
 

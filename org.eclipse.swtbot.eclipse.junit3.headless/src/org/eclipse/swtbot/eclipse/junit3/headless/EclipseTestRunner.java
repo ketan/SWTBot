@@ -8,7 +8,7 @@
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
-package org.eclipse.swtbot.eclipse.headless;
+package org.eclipse.swtbot.eclipse.junit3.headless;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

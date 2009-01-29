@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: SWTBot Headless Launch Plug-in (incubation)
-Bundle-SymbolicName: org.eclipse.swtbot.eclipse.headless;singleton:=true
+Bundle-Name: SWTBot Headless JUnit3 Launch Plug-in (incubation)
+Bundle-SymbolicName: org.eclipse.swtbot.eclipse.junit3.headless;singleton:=true
 Bundle-Version: 2.0.0.qualifier
 Bundle-Vendor: Eclipse.org
 Require-Bundle: org.apache.ant,
@@ -11,4 +11,4 @@ Require-Bundle: org.apache.ant,
  org.eclipse.equinox.app
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipse.swtbot.eclipse.headless
+Export-Package: org.eclipse.swtbot.eclipse.junit3.headless

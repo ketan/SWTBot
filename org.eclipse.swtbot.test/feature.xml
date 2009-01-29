@@ -101,29 +101,33 @@ Java and all Java-based trademarks are trademarks of Sun Microsystems, Inc. in t
          version="0.0.0"/>
 
    <includes
+         id="org.eclipse.swtbot.eclipse.test"
+         version="0.0.0"/>
+
+   <includes
          id="org.eclipse.swtbot.recording"
          version="0.0.0"/>
 
    <requires>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.junit4"/>
+      <import plugin="org.eclipse.swt"/>
+      <import plugin="org.junit4" version="4.5.0" match="greaterOrEqual"/>
       <import plugin="org.hamcrest"/>
-      <import plugin="org.junit"/>
+      <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.jface.text"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.ui.editors"/>
       <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.apache.ant"/>
-      <import plugin="org.eclipse.equinox.app"/>
-      <import plugin="org.eclipse.pde.junit.runtime"/>
-      <import plugin="org.eclipse.jdt.junit"/>
-      <import plugin="org.eclipse.pde.ui"/>
-      <import plugin="org.eclipse.jdt.core"/>
-      <import plugin="org.eclipse.jdt.launching"/>
-      <import plugin="org.eclipse.debug.ui"/>
-      <import plugin="org.eclipse.jdt.junit.runtime"/>
-      <import plugin="org.eclipse.jdt.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.swtbot.swt.finder"/>
+      <import plugin="org.apache.log4j"/>
+      <import plugin="org.eclipse.swtbot.swt.recorder"/>
+      <import plugin="org.eclipse.swtbot.eclipse.finder"/>
+      <import plugin="org.hamcrest" version="1.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.swtbot.swt.recorder.ui"/>
+      <import plugin="org.eclipse.swtbot.generator"/>
+      <import plugin="org.eclipse.swtbot.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime.compatibility"/>
+      <import plugin="org.apache.ant" version="1.6.5" match="compatible"/>
    </requires>
 
    <plugin
@@ -152,54 +156,6 @@ Java and all Java-based trademarks are trademarks of Sun Microsystems, Inc. in t
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.swtbot.eclipse.finder"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.swtbot.eclipse.headless"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.eclipse.swtbot.eclipse.spy"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.swtbot.eclipse.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.swtbot.swt.finder"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.swtbot.swt.recorder"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.swtbot.swt.recorder.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.eclipse.swtbot.swt.recorder.ui.test"
          download-size="0"
          install-size="0"
@@ -213,27 +169,6 @@ Java and all Java-based trademarks are trademarks of Sun Microsystems, Inc. in t
          unpack="false"/>
 
    <plugin
-         id="org.apache.commons.collections"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.apache.log4j"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.swtbot.generator"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.eclipse.swtbot.generator.test"
          download-size="0"
          install-size="0"
@@ -241,6 +176,20 @@ Java and all Java-based trademarks are trademarks of Sun Microsystems, Inc. in t
 
    <plugin
          id="org.eclipse.swtbot.eclipse.ui.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.eclipse.swtbot.ant.optional.junit4"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.swtbot.generator"
          download-size="0"
          install-size="0"
          version="0.0.0"

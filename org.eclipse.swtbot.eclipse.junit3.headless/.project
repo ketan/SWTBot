@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>org.eclipse.swtbot.eclipse.headless</name>
+	<name>org.eclipse.swtbot.eclipse.junit3.headless</name>
 	<comment></comment>
 	<projects>
 	</projects>

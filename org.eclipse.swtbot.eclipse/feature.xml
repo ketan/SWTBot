@@ -101,8 +101,6 @@ Java and all Java-based trademarks are trademarks of Sun Microsystems, Inc. in t
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.swtbot.swt.finder"/>
-      <import plugin="org.junit"/>
-      <import plugin="org.hamcrest"/>
       <import plugin="org.apache.log4j"/>
       <import plugin="org.apache.commons.collections"/>
       <import plugin="org.eclipse.pde.junit.runtime"/>
@@ -115,6 +113,8 @@ Java and all Java-based trademarks are trademarks of Sun Microsystems, Inc. in t
       <import plugin="org.eclipse.jdt.ui"/>
       <import plugin="org.eclipse.ui.intro"/>
       <import plugin="org.eclipse.ui.intro.universal"/>
+      <import plugin="org.hamcrest" version="1.1.0" match="greaterOrEqual"/>
+      <import plugin="org.junit4" version="4.5.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin

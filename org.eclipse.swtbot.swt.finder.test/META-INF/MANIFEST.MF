@@ -7,7 +7,7 @@ Require-Bundle: org.eclipse.swt,
  org.eclipse.swt.examples,
  org.eclipse.swtbot.swt.finder,
  org.apache.log4j,
- org.junit4,
+ org.junit4;bundle-version="4.5.0",
  org.hamcrest
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .

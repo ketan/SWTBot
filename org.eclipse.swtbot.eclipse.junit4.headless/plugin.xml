@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   <extension
+         id="swtbottestapplication"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="org.eclipse.swtbot.eclipse.junit4.headless.UITestApplication">
+            <parameter
+                  name="productInfo"
+                  value="product.ini">
+            </parameter>
+         </run>
+      </application>
+   </extension>
+
+</plugin>
