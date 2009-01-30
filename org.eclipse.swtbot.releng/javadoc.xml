@@ -52,7 +52,7 @@
 					<include name="**/org.apache.commons.collections_*.jar" />
 					<include name="**/org.eclipse.osgi_*.jar" />
 					<include name="**/org.eclipse.core.commands_*.jar" />
-					<include name="**/org.junit_*/*.jar" />
+					<include name="**/org.junit4_4.5*/*.jar" />
 				</fileset>
 			</classpath>
 			<link href="http://help.eclipse.org/help33/topic/org.eclipse.platform.doc.isv/reference/api" offline="true" packagelistloc="javadoc/eclipse-package-list" />
