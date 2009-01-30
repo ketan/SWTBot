@@ -52,7 +52,6 @@
 		<unzip src="${basedir}/../artifacts/${feature.id}-${all.buildId}.zip" dest="${install}" />
 		<unzip src="${basedir}/../artifacts/${feature.id.test}-${all.buildId}.zip" dest="${install}" />
 		<unzip src="${basedir}/../artifacts/org.eclipse.swtbot.eclipse-${all.buildId}.zip" dest="${install}" />
-		<unzip src="../externals/eclipse-test-framework-3.3.zip" dest="${install}" />
 
 		<!-- copy over any other dependencies
 			<copy todir="${eclipse-home}" includeemptydirs="true">

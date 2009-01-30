@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: org.eclipse.swtbot.ant.optional.junit4
+Bundle-SymbolicName: org.eclipse.swtbot.ant.optional.junit3
 Bundle-Version: 2.0.0.qualifier
 Fragment-Host: org.apache.ant;bundle-version="[1.6.5,2.0.0)"
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime.compatibility,
- org.junit4;bundle-version="[4.5.0,5.0.0)"
+ org.junit;bundle-version="[3.8.0,4.0.0)"
 Bundle-Vendor: %providerName
