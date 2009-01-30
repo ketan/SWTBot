@@ -26,3 +26,5 @@ org.eclipse.swtbot.releng/test-sandbox/test-eclipse/
 
 org.eclipse.swtbot.updatesite/target/
 org.eclipse.swtbot.updatesite/build/
+
+swtbot/
