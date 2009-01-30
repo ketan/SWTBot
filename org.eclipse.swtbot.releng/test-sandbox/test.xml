@@ -255,7 +255,6 @@
 
 		<move file="${eclipse-home}/${report}.xml" todir="${junit.reports.xml.dir}" failonerror="false" />
 
-		<echo>${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit3.headless_${all.buildId}/JUNIT.XSL</echo>
 		<available file="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit3.headless_${all.buildId}/JUNIT.XSL" property="junit.xsl" value="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit3.headless_${all.buildId}/JUNIT.XSL" />
 		<available file="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit4.headless_${all.buildId}/JUNIT.XSL" property="junit.xsl" value="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit4.headless_${all.buildId}/JUNIT.XSL" />
 		
