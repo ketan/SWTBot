@@ -3,7 +3,7 @@
     <property name="eclipse-home" value="${basedir}\..\.." />
     <property name="plugin-name" value="org.eclipse.swtbot.eclipse.ui.test" />
 	<!--property name="library-file" value="../../library.xml" /-->
-    <property name="library-file" value="${eclipse-home}/plugins/org.eclipse.test_3.2.0/library.xml"/>
+    <property name="library-file" value="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit4.headless_${all.buildId}/library.xml"/>
 	
     <target name="init">
         <tstamp />
@@ -24,10 +24,10 @@
         <delete dir="${temp-workspace}" quiet="true" />
     	
     	<!-- remove junit4 fragment -->
-    	<delete dir="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit4.headless_${all.buildId}" />
-    	<delete dir="${eclipse-home}/plugins" includes="org.eclipse.swtbot.ant.optional.junit4_${all.buildId}.jar"/>
+    	<delete dir="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit3.headless_${all.buildId}" />
+    	<delete dir="${eclipse-home}/plugins" includes="org.eclipse.ant.optional.junit*.jar"/>
 
-    	<ant target="ui-test" antfile="${library-file}" dir="${eclipse-home}">
+    	<ant target="swtbot-test" antfile="${library-file}" dir="${eclipse-home}">
             <property name="data-dir" value="${temp-workspace}" />
             <property name="plugin-name" value="${plugin-name}" />
             <property name="classname" value="org.eclipse.swtbot.eclipse.ui.test.AllTests" />

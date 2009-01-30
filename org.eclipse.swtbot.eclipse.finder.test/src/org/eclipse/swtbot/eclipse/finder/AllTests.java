@@ -25,7 +25,4 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses( { QuickFixNotFoundExceptionTest.class, CommandFinderTest.class, SWTBotViewTest.class, SWTBotEclipseEditorTest.class })
 public class AllTests {
-	static{
-		System.out.println("Loaded AllTests");
-	}
 }

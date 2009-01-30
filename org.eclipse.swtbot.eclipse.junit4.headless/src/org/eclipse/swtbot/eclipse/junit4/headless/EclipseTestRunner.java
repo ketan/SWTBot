@@ -10,12 +10,16 @@
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.junit4.headless;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -23,6 +27,7 @@ import java.util.Properties;
 import java.util.Vector;
 
 import junit.framework.AssertionFailedError;
+import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
 import junit.framework.TestListener;
 import junit.framework.TestResult;
@@ -33,7 +38,6 @@ import org.apache.tools.ant.taskdefs.optional.junit.JUnitResultFormatter;
 import org.apache.tools.ant.taskdefs.optional.junit.JUnitTest;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.osgi.util.ManifestElement;
-import org.junit.runner.JUnitCore;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleException;
 import org.osgi.framework.Constants;
@@ -43,6 +47,7 @@ import org.osgi.framework.Constants;
  * JUnitResultFormatters and running tests inside Eclipse. Example call: EclipseTestRunner -classname
  * junit.samples.SimpleTest formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter
  */
+@SuppressWarnings("all")
 public class EclipseTestRunner implements TestListener {
 	class TestFailedException extends Exception {
 
@@ -60,61 +65,65 @@ public class EclipseTestRunner implements TestListener {
 	/**
 	 * No problems with this test.
 	 */
-	public static final int				SUCCESS				= 0;
+	public static final int		SUCCESS				= 0;
 	/**
 	 * Some tests failed.
 	 */
-	public static final int				FAILURES			= 1;
+	public static final int		FAILURES			= 1;
 	/**
 	 * An error occured.
 	 */
-	public static final int				ERRORS				= 2;
+	public static final int		ERRORS				= 2;
 
-	private static final String			SUITE_METHODNAME	= "suite";						//$NON-NLS-1$
+	private static final String	SUITE_METHODNAME	= "suite";		//$NON-NLS-1$
 	/**
 	 * The current test result
 	 */
-	private TestResult					fTestResult;
+	private TestResult			fTestResult;
 	/**
 	 * The name of the plugin containing the test
 	 */
-	private final String				fTestPluginName;
+	private final String		fTestPluginName;
+	/**
+	 * The corresponding testsuite.
+	 */
+	private Test				fSuite;
 	/**
 	 * Formatters from the command line.
 	 */
-	private static Vector				fgFromCmdLine		= new Vector();
+	private static Vector		fgFromCmdLine		= new Vector();
 	/**
 	 * Holds the registered formatters.
 	 */
-	private final Vector<TestListener>	formatters			= new Vector<TestListener>();
+	private final Vector		formatters			= new Vector();
 	/**
 	 * Do we stop on errors.
 	 */
-	private boolean						fHaltOnError		= false;
+	private boolean				fHaltOnError		= false;
 	/**
 	 * Do we stop on test failures.
 	 */
-	private boolean						fHaltOnFailure		= false;
+	private boolean				fHaltOnFailure		= false;
 	/**
 	 * The TestSuite we are currently running.
 	 */
-	private final JUnitTest				fJunitTest;
+	private final JUnitTest		fJunitTest;
 	/**
 	 * output written during the test
 	 */
-	private PrintStream					fSystemError;
+	private PrintStream			fSystemError;
 	/**
 	 * Error output during the test
 	 */
-	private PrintStream					fSystemOut;
+	private PrintStream			fSystemOut;
 	/**
 	 * Exception caught in constructor.
 	 */
-	private Exception					fException;
+	private Exception			fException;
 	/**
 	 * Returncode
 	 */
-	private int							fRetCode			= SUCCESS;
+	private int					fRetCode			= SUCCESS;
 
 	/**
 	 * The main entry point (the parameters are not yet consistent with the Ant JUnitTestRunner, but eventually they
@@ -208,12 +217,19 @@ public class EclipseTestRunner implements TestListener {
 		fTestPluginName = testPluginName;
 		fHaltOnError = haltOnError;
 		fHaltOnFailure = haltOnFailure;
+
+		try {
+			fSuite = getTest(test.getName());
+		} catch (Exception e) {
+			fRetCode = ERRORS;
+			fException = e;
+		}
 	}
 
 	/**
 	 * Returns the Test corresponding to the given suite.
 	 */
-	protected Class getTest(String suiteClassName) throws TestFailedException {
+	protected Test getTest(String suiteClassName) throws TestFailedException {
 		if (suiteClassName.length() <= 0) {
 			clearStatus();
 			return null;
@@ -233,8 +249,34 @@ public class EclipseTestRunner implements TestListener {
 			runFailed(e);
 			return null;
 		}
-
-		return testClass;
+		Method suiteMethod = null;
+		try {
+			suiteMethod = testClass.getMethod(SUITE_METHODNAME, new Class[0]);
+		} catch (Exception e) {
+			// try to extract a test suite automatically
+			clearStatus();
+			// perhaps the test is annotated with @RunWith and @SuiteClasses
+			return new JUnit4TestAdapter(testClass);
+		}
+		
+		if (!Modifier.isStatic(suiteMethod.getModifiers())) {
+			runFailed("suite() method must be static"); //$NON-NLS-1$
+			return null;
+		}
+		Test test = null;
+		try {
+			test = (Test) suiteMethod.invoke(null, new Class[0]); // static method
+			if (test == null)
+				return test;
+		} catch (InvocationTargetException e) {
+			runFailed("Failed to invoke suite():" + e.getTargetException().toString()); //$NON-NLS-1$
+			return null;
+		} catch (IllegalAccessException e) {
+			runFailed("Failed to invoke suite():" + e.toString()); //$NON-NLS-1$
+			return null;
+		}
+		clearStatus();
+		return test;
 	}
 
 	protected void runFailed(String message) throws TestFailedException {
@@ -283,54 +325,46 @@ public class EclipseTestRunner implements TestListener {
 	public void run() {
 		// IPerformanceMonitor pm = PerfMsrCorePlugin.getPerformanceMonitor(true);
 
-		JUnitCore jUnitCore = new JUnitCore();
-		jUnitCore.addListener(new XMLJUnitResultFormatter());
-		try {
-			jUnitCore.run(getTest("org.eclipse.swtbot.eclipse.finder.AllTests"));
-		} catch (TestFailedException e) {
-			throw new RuntimeException(e);
-		}
+		fTestResult = new TestResult();
+		fTestResult.addListener(this);
+		for (int i = 0; i < formatters.size(); i++)
+			fTestResult.addListener((TestListener) formatters.elementAt(i));
 
-		// fTestResult = new TestResult();
-		// fTestResult.addListener(this);
-		// for (int i = 0; i < formatters.size(); i++)
-		// fTestResult.addListener(formatters.elementAt(i));
-		//
-		// long start = System.currentTimeMillis();
-		// fireStartTestSuite();
-		//
-		// if (fException != null) { // had an exception in the constructor
-		// for (int i = 0; i < formatters.size(); i++)
-		// formatters.elementAt(i).addError(null, fException);
-		// fJunitTest.setCounts(1, 0, 1);
-		// fJunitTest.setRunTime(0);
-		// } else {
-		// ByteArrayOutputStream errStrm = new ByteArrayOutputStream();
-		// fSystemError = new PrintStream(errStrm);
-		//
-		// ByteArrayOutputStream outStrm = new ByteArrayOutputStream();
-		// fSystemOut = new PrintStream(outStrm);
-		//
-		// try {
-		// // pm.snapshot(1); // before
-		// fSuite.run(fTestResult);
-		// } finally {
-		// // pm.snapshot(2); // after
-		// fSystemError.close();
-		// fSystemError = null;
-		// fSystemOut.close();
-		// fSystemOut = null;
-		// sendOutAndErr(new String(outStrm.toByteArray()), new String(errStrm.toByteArray()));
-		// fJunitTest.setCounts(fTestResult.runCount(), fTestResult.failureCount(), fTestResult.errorCount());
-		// fJunitTest.setRunTime(System.currentTimeMillis() - start);
-		// }
-		// }
-		// fireEndTestSuite();
-		//
-		// if ((fRetCode != SUCCESS) || (fTestResult.errorCount() != 0))
-		// fRetCode = ERRORS;
-		// else if (fTestResult.failureCount() != 0)
-		// fRetCode = FAILURES;
+		long start = System.currentTimeMillis();
+		fireStartTestSuite();
+
+		if (fException != null) { // had an exception in the constructor
+			for (int i = 0; i < formatters.size(); i++)
+				((TestListener) formatters.elementAt(i)).addError(null, fException);
+			fJunitTest.setCounts(1, 0, 1);
+			fJunitTest.setRunTime(0);
+		} else {
+			ByteArrayOutputStream errStrm = new ByteArrayOutputStream();
+			fSystemError = new PrintStream(errStrm);
+
+			ByteArrayOutputStream outStrm = new ByteArrayOutputStream();
+			fSystemOut = new PrintStream(outStrm);
+
+			try {
+				// pm.snapshot(1); // before
+				fSuite.run(fTestResult);
+			} finally {
+				// pm.snapshot(2); // after
+				fSystemError.close();
+				fSystemError = null;
+				fSystemOut.close();
+				fSystemOut = null;
+				sendOutAndErr(new String(outStrm.toByteArray()), new String(errStrm.toByteArray()));
+				fJunitTest.setCounts(fTestResult.runCount(), fTestResult.failureCount(), fTestResult.errorCount());
+				fJunitTest.setRunTime(System.currentTimeMillis() - start);
+			}
+		}
+		fireEndTestSuite();
+
+		if ((fRetCode != SUCCESS) || (fTestResult.errorCount() != 0))
+			fRetCode = ERRORS;
+		else if (fTestResult.failureCount() != 0)
+			fRetCode = FAILURES;
 
 		// pm.upload(getClass().getName());
 	}
@@ -390,17 +424,17 @@ public class EclipseTestRunner implements TestListener {
 	 * Line format is: formatter=<classname>(,<pathname>)?
 	 */
 	private static void createAndStoreFormatter(String line) throws BuildException {
-//		String formatterClassName = null;
-//		File formatterFile = null;
-//
-//		int pos = line.indexOf(',');
-//		if (pos == -1)
-//			formatterClassName = line;
-//		else {
-//			formatterClassName = line.substring(0, pos);
-//			formatterFile = new File(line.substring(pos + 1)); // the method is package visible
-//		}
-//		fgFromCmdLine.addElement(createFormatter(formatterClassName, formatterFile));
+		String formatterClassName = null;
+		File formatterFile = null;
+
+		int pos = line.indexOf(',');
+		if (pos == -1)
+			formatterClassName = line;
+		else {
+			formatterClassName = line.substring(0, pos);
+			formatterFile = new File(line.substring(pos + 1)); // the method is package visible
+		}
+		fgFromCmdLine.addElement(createFormatter(formatterClassName, formatterFile));
 	}
 
 	private static void transferFormatters(EclipseTestRunner runner) {

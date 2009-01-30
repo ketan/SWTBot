@@ -88,7 +88,7 @@ this has been copied from o.e.test plugin with some targets for SWTBot
 			</classpath>
 			<arg line="-application ${application}" />
 			<arg line="-data ${data-dir}" />
-			<arg line="formatter=${formatter},${test-output}" />
+		    <arg line="formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,${test-output} formatter=org.apache.tools.ant.taskdefs.optional.junit.PlainJUnitResultFormatter"/>
 			<arg line="-testPluginName ${plugin-name}" />
 			<arg line="-className ${classname}" />
 			<arg line="-os ${os}" />
