@@ -29,7 +29,7 @@ public class WaitForShellTest extends AbstractSWTTestCase {
 
 	@SuppressWarnings("unchecked")
 	public void testWaitsForShellToAppear() throws Exception {
-		createShellAfter500milliSecs();
+		createShellAfter100milliSecs();
 
 		destroyShellAfter800milliSecs();
 
@@ -53,11 +53,11 @@ public class WaitForShellTest extends AbstractSWTTestCase {
 		}).start();
 	}
 
-	private void createShellAfter500milliSecs() {
+	private void createShellAfter100milliSecs() {
 		new Thread(new Runnable() {
 			public void run() {
 				try {
-					Thread.sleep(500);
+					Thread.sleep(100);
 				} catch (InterruptedException niceTry) {
 				}
 				createShell(TEXT);
