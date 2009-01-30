@@ -16,9 +16,6 @@
                         Overrides default in org.eclipse.test/library.xml-->
 	<property name="junit-report-output" value="${results}/${platform}" />
 
-	<!--Directory name of org.eclipse.test plug-in installed in ${eclipse-home}-->
-	<property name="org.eclipse.test" value="org.eclipse.test_3.2.0" />
-
 	<target name="setup" unless="noclean" depends="init">
 		<condition property="setupTarget" value="setup-zip">
 			<contains string="${runtimeArchive}" substring=".zip" />
@@ -257,7 +254,12 @@
 		<mkdir dir="${junit.reports.html.dir}" />
 
 		<move file="${eclipse-home}/${report}.xml" todir="${junit.reports.xml.dir}" failonerror="false" />
-		<style style="${eclipse-home}/plugins/${org.eclipse.test}/JUNIT.XSL" basedir="${junit.reports.xml.dir}" destdir="${junit.reports.html.dir}" />
+
+		<echo>${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit3.headless_${all.buildId}/JUNIT.XSL</echo>
+		<available file="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit3.headless_${all.buildId}/JUNIT.XSL" property="junit.xsl" value="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit3.headless_${all.buildId}/JUNIT.XSL" />
+		<available file="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit4.headless_${all.buildId}/JUNIT.XSL" property="junit.xsl" value="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit4.headless_${all.buildId}/JUNIT.XSL" />
+		
+		<style style="${junit.xsl}" basedir="${junit.reports.xml.dir}" destdir="${junit.reports.html.dir}" />
 	</target>
 
 	<target name="core-tests">

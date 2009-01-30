@@ -10,9 +10,5 @@
 		<get dest="externals/${eclipse.sdk.archive}" src="${eclipse.sdk.url}/${eclipse.sdk.archive}" verbose="true" usetimestamp="true" />
 	</target>
 
-	<target name="download-test-framework" unless="eclipse-test-framework-available">
-		<get dest="externals/eclipse-test-framework-3.3.zip" src="https://swtbot.svn.sourceforge.net/svnroot/swtbot/branches/java-1.5-api-spike/org.eclipse.swtbot.releng/test-sandbox/eclipse-test-framework-3.3.zip" verbose="true" usetimestamp="true" />
-	</target>
-
-	<target name="download-dependencies" depends="check-dependencies, download-eclipse-sdk, download-test-framework" />
+	<target name="download-dependencies" depends="check-dependencies, download-eclipse-sdk" />
 </project>

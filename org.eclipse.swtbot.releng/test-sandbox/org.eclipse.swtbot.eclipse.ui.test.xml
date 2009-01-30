@@ -23,9 +23,9 @@
     	<property name="temp-workspace" value="workspace" />
         <delete dir="${temp-workspace}" quiet="true" />
     	
-    	<!-- remove junit4 fragment -->
+    	<!-- remove junit3 fragment -->
     	<delete dir="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit3.headless_${all.buildId}" />
-    	<delete dir="${eclipse-home}/plugins" includes="org.eclipse.ant.optional.junit*.jar"/>
+    	<delete dir="${eclipse-home}/plugins" includes="org.eclipse.swtbot.ant.optional.junit3_${all.buildId}.jar"/>
 
     	<ant target="swtbot-test" antfile="${library-file}" dir="${eclipse-home}">
             <property name="data-dir" value="${temp-workspace}" />
