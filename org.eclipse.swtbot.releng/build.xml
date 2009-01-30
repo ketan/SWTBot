@@ -293,7 +293,9 @@
 		<mkdir dir="artifacts/to-upload" />
 		<copy todir="artifacts/to-upload" includeemptydirs="false">
 			<fileset dir="artifacts">
-				<include name="org.eclipse.swtbot.eclipse-*${all.buildId}.zip" />
+				<include name="org.eclipse.swtbot-${all.buildId}.zip" />
+				<include name="org.eclipse.swtbot.eclipse-${all.buildId}.zip" />
+				<include name="org.eclipse.swtbot.eclipse.test-${all.buildId}.zip" />
 			</fileset>
 		</copy>
 
