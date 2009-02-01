@@ -31,7 +31,6 @@ import org.eclipse.swtbot.eclipse.finder.exceptions.QuickFixNotFoundException;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.ListResult;
-import org.eclipse.swtbot.swt.finder.results.Result;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.Position;
@@ -42,7 +41,6 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
 import org.eclipse.swtbot.swt.finder.widgets.TimeoutException;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
-import org.eclipse.ui.PlatformUI;
 
 /**
  * This represents an eclipse editor item.
@@ -629,17 +627,6 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	}
 
 	public boolean isActive() {
-		IEditorReference activeEditor = UIThreadRunnable.syncExec(new Result<IEditorReference>() {
-			public IEditorReference run() {
-				try {
-					IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-					return (IEditorReference) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getReference(
-							activeEditor);
-				} catch (RuntimeException e) {
-					return null;
-				}
-			}
-		});
-		return activeEditor == partReference;
+		return bot.activeEditor().partReference == partReference;
 	}
 }
