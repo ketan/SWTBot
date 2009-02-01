@@ -30,6 +30,7 @@ import org.eclipse.swtbot.swt.finder.results.Result;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IViewReference;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPartReference;
 import org.eclipse.ui.PlatformUI;
 import org.hamcrest.Matcher;
@@ -74,9 +75,9 @@ public class SWTEclipseBot extends SWTBot {
 	@SuppressWarnings("unchecked")
 	public SWTBotEclipseEditor editor(String fileName, int index) throws WidgetNotFoundException {
 		Matcher matcher = allOf(instanceOf(IEditorReference.class), withPartName(fileName));
-		WaitForEditor waitForView = waitForEditor(matcher);
-		waitUntilWidgetAppears(waitForView);
-		return new SWTBotEclipseEditor(waitForView.get(index), this);
+		WaitForEditor waitForEditor = waitForEditor(matcher);
+		waitUntilWidgetAppears(waitForEditor);
+		return new SWTBotEclipseEditor(waitForEditor.get(index), this);
 	}
 
 	/**
@@ -162,9 +163,9 @@ public class SWTEclipseBot extends SWTBot {
 		IEditorReference editor = UIThreadRunnable.syncExec(new Result<IEditorReference>() {
 			public IEditorReference run() {
 				try {
-					IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-					return (IEditorReference) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getReference(
-							activeEditor);
+					IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+					IEditorPart activeEditor = activePage.getActiveEditor();
+					return (IEditorReference) activePage.getReference(activeEditor);
 				} catch (RuntimeException e) {
 					return null;
 				}
