@@ -8,6 +8,7 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.swtbot.swt.finder,
  org.eclipse.ui,
  org.hamcrest;bundle-version="1.1.0",
- org.eclipse.swtbot.eclipse.finder
+ org.eclipse.swtbot.eclipse.finder,
+ com.thoughtworks.qdox;bundle-version="1.6.3"
 Bundle-ClassPath: .
 Export-Package: org.eclipse.swtbot.generator

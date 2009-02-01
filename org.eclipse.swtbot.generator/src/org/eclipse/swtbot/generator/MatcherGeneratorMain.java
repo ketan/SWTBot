@@ -36,7 +36,7 @@ public class MatcherGeneratorMain {
 			makeEclipseWidgetMatcherFactoryExtendSWTBotWidgetMatcherFactory();
 			makeWidgetMatcherFactoryAbstract();
 
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 	}
