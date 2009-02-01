@@ -58,7 +58,7 @@ public class SWTBotView extends SWTBotWorkbenchPart<IViewReference> {
 	}
 
 	/**
-	 * The parent widget inside the partReference, that is the container for all controls within the view. If you want
+	 * The parent widget inside the partReference, that is the tabFolder for all controls within the view. If you want
 	 * to look for a particular widget within the part, this is a good place to start searching for the widget.
 	 * <p>
 	 * <b>NOTE:</b> Clients must ensure that the view is active at the time of making this call. If the view is not
