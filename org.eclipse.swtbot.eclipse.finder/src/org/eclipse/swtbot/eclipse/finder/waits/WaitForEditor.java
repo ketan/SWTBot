@@ -39,7 +39,7 @@ public class WaitForEditor extends DefaultCondition {
 	}
 
 	public String getFailureMessage() {
-		return null;
+		return "Could not find editor matching: " + matcher;
 	}
 
 	public boolean test() throws Exception {
