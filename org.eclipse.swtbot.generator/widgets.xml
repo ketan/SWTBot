@@ -11,6 +11,7 @@
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotList" />
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotTable" />
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotTabItem" />
+	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotCTabItem" />
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotStyledText" />
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotDateTime" />
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarButton" />
