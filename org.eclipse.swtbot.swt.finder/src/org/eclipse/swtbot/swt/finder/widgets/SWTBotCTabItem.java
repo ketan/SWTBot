@@ -104,9 +104,10 @@ public class SWTBotCTabItem extends AbstractSWTBot<CTabItem> {
 	/**
 	 * Activates the tabItem.
 	 * 
+	 * @return itself
 	 * @throws TimeoutException if the tab does not activate
 	 */
-	public void activate() throws TimeoutException {
+	public SWTBotCTabItem activate() throws TimeoutException {
 		log.trace(MessageFormat.format("Activating {0}", this));
 		assertEnabled();
 		// this runs in sync because tabFolder.setSelection() does not send a notification, and so should not block.
@@ -128,6 +129,8 @@ public class SWTBotCTabItem extends AbstractSWTBot<CTabItem> {
 				return "Timed out waiting for " + SWTUtils.toString(widget) + " to activate";
 			}
 		});
+
+		return this;
 	}
 
 }
