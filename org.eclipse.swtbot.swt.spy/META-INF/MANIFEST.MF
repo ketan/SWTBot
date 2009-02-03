@@ -6,7 +6,7 @@ Bundle-Version: 2.0.0.qualifier
 Require-Bundle: org.eclipse.ui,
  org.eclipse.swtbot.swt.finder,
  org.eclipse.swt.examples,
- org.junit4;bundle-version="4.5.0"
+ org.junit4
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
 Bundle-Vendor: Eclipse.org

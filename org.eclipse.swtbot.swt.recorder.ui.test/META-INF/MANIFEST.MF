@@ -4,7 +4,7 @@ Bundle-Name: SWTBot Recorder UI Test Plug-in (incubation)
 Bundle-SymbolicName: org.eclipse.swtbot.swt.recorder.ui.test;singleton:=true
 Bundle-Version: 2.0.0.qualifier
 Require-Bundle: org.eclipse.ui,
- org.junit4;bundle-version="4.5.0",
+ org.junit4,
  org.eclipse.swtbot.swt.recorder.ui
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
