@@ -11,12 +11,17 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertNotSameWidget;
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertSameWidget;
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.containsString;
+import static org.junit.Assert.assertNotNull;
 
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -28,18 +33,21 @@ public class SWTBotPopupMenuTest extends AbstractSWTTestCase {
 	private SWTBotShell	popupShell;
 	private SWTBotShell	activeShell;
 
-	public void testFindsMenus() throws Exception {
+	@Test
+	public void findsMenus() throws Exception {
 		assertNotNull(popupShell.contextMenu("Push").widget);
 		assertSameWidget(popupShell.contextMenu("Push").widget, popupShell.contextMenu("Push").widget);
 	}
 
-	public void testFindsSubMenus() throws Exception {
+	@Test
+	public void findsSubMenus() throws Exception {
 		SWTBotMenu cascade = popupShell.contextMenu("Cascade");
 		assertNotSameWidget(cascade.menu("Push").widget, popupShell.contextMenu("Push").widget);
 		assertNotSameWidget(cascade.menu("Cascade").menu("Push").widget, popupShell.contextMenu("Push").widget);
 	}
 
-	public void testClicksMenu() throws Exception {
+	@Test
+	public void clicksMenu() throws Exception {
 		tearDown();
 		activeShell.activate();
 		bot.checkBox("Listen").select();
@@ -52,11 +60,10 @@ public class SWTBotPopupMenuTest extends AbstractSWTTestCase {
 		String expectedLinux = "Show [22]: MenuEvent{Menu {Push, , Check, Radio1, Radio2, Cascade} time=";
 		String expectedWindows = "Show [22]: MenuEvent{Menu {Push, |, Check, Radio1, Radio2, Cascade} time=";
 		assertThat(text, anyOf(containsString(expectedWindows), containsString(expectedLinux)));
-		assertTextContains("Selection [13]: SelectionEvent{MenuItem {Push} time=",
-				bot.textInGroup("Listeners").widget);
+		assertTextContains("Selection [13]: SelectionEvent{MenuItem {Push} time=", bot.textInGroup("Listeners").widget);
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		bot = new SWTBot();
 		activeShell = bot.activeShell();
@@ -79,13 +86,12 @@ public class SWTBotPopupMenuTest extends AbstractSWTTestCase {
 		popupShell.activate();
 	}
 
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		popupShell.close();
 		bot.button("Close All Shells").click();
 		bot.checkBox("Listen").deselect();
 
 		bot.checkBox("Listen").deselect();
-
 
 		bot.checkBox("SWT.CASCADE").deselect();
 		bot.checkBox("SWT.CHECK").deselect();

@@ -15,6 +15,7 @@ import junit.framework.TestSuite;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.recorder.SWTBotRecorder;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -24,9 +25,8 @@ public class SWTBotRecorderMain {
 
 	public static void main(String[] args) {
 		try {
-			TestSuite testSuite = new TestSuite();
-			testSuite.addTestSuite(RunnerTest.class);
-			testSuite.runTest(new RunnerTest(), new TestResult());
+			TestSuite testSuite = new TestSuite(RunnerTest.class);
+			testSuite.run(new TestResult());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -36,7 +36,7 @@ public class SWTBotRecorderMain {
 
 		private SWTBotRecorder	recorder;
 
-		protected void setUp() throws Exception {
+		public void setUp() throws Exception {
 			super.setUp();
 			System.setProperty("org.eclipse.swtbot.recorder.actions.print", "true");
 			recorder = new SWTBotRecorder(display, new SWTBot());
@@ -52,7 +52,7 @@ public class SWTBotRecorderMain {
 			// });
 		}
 
-		// public void testRegisteringListenerAddsToListenerTable() throws Exception {
+		// @Test public void registeringListenerAddsToListenerTable() throws Exception {
 		// AbstractSWTBotRecorderListener listener = new ShellEventListener(null, new SWTBot());
 		// assertEquals(0, recorder.registeredListeners.size());
 		// recorder.registerListener(SWT.Activate, listener);
@@ -60,7 +60,7 @@ public class SWTBotRecorderMain {
 		// assertTrue(recorder.registeredListeners.contains(new ListenerSet(SWT.Activate, listener)));
 		// }
 		//
-		// public void testUnRegisteringListenerRemovesFromListenerTable() throws Exception {
+		// @Test public void unRegisteringListenerRemovesFromListenerTable() throws Exception {
 		// SWTBotRecorderListener listener = new ShellEventListener(null, new SWTBot());
 		// recorder.registerListener(SWT.Activate, listener);
 		// assertEquals(1, recorder.registeredListeners.size());
@@ -68,7 +68,8 @@ public class SWTBotRecorderMain {
 		// assertTrue(recorder.registeredListeners.isEmpty());
 		// }
 
-		public void testDoNothing() throws Exception {
+		@Test
+		public void doNothing() throws Exception {
 
 		}
 
@@ -84,7 +85,7 @@ public class SWTBotRecorderMain {
 			recorder.stop();
 		}
 
-		protected void tearDown() throws Exception {
+		public void tearDown() throws Exception {
 			// recorder.unregisterAllListeners();
 			super.tearDown();
 		}

@@ -10,17 +10,19 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.utils;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
 import org.eclipse.swt.SWT;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class ImageFormatConverterTest extends TestCase {
+public class ImageFormatConverterTest {
 
-	public void testTranslatesFromStringsToIds() throws Exception {
+	@Test
+	public void translatesFromStringsToIds() throws Exception {
 		assertEquals(SWT.IMAGE_PNG, new ImageFormatConverter().imageTypeOf("png"));
 		assertEquals(SWT.IMAGE_JPEG, new ImageFormatConverter().imageTypeOf("jpg"));
 		assertEquals(SWT.IMAGE_JPEG, new ImageFormatConverter().imageTypeOf("jpeg"));

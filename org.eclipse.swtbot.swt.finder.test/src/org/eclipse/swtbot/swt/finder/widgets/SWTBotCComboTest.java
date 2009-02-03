@@ -12,11 +12,15 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.junit.Test;
 
 /**
  * @author Cedric Chabanois &lt;cchabanois [at] no-log [dot] org&gt;
@@ -26,32 +30,37 @@ public class SWTBotCComboTest extends AbstractSWTTestCase {
 
 	private SWTBot	bot;
 
-	public void testFindCCombo() throws Exception {
+	@Test
+	public void findCCombo() throws Exception {
 		SWTBotCCombo ccombo = bot.ccomboBoxInGroup("Custom Combo");
 		assertNotNull(ccombo.widget);
 	}
 
-	public void testGetItems() throws Exception {
+	@Test
+	public void getItems() throws Exception {
 		SWTBotCCombo ccombo = bot.ccomboBoxInGroup("Custom Combo");
 		assertEquals(9, ccombo.itemCount());
 		assertEquals(9, ccombo.items().length);
 	}
 
-	public void testChangeAndVerifiesSelectionInComboByText() throws Exception {
+	@Test
+	public void changeAndVerifiesSelectionInComboByText() throws Exception {
 		SWTBotCCombo ccombo = bot.ccomboBoxInGroup("Custom Combo");
 		ccombo.setSelection("Grapefruit");
 		assertEquals("Grapefruit", ccombo.selection());
 		bot.ccomboBoxInGroup("Custom Combo");
 	}
 
-	public void testChangeAndVerifiesSelectionInComboByIndex() throws Exception {
+	@Test
+	public void changeAndVerifiesSelectionInComboByIndex() throws Exception {
 		SWTBotCCombo ccombo = bot.ccomboBoxInGroup("Custom Combo");
 		ccombo.setSelection(4);
 		assertEquals(4, ccombo.selectionIndex());
 		assertEquals("Peaches", ccombo.selection());
 	}
 
-	public void testThrowsExceptionInCaseOfInvalidIndexBasedSelection() throws Exception {
+	@Test
+	public void throwsExceptionInCaseOfInvalidIndexBasedSelection() throws Exception {
 		SWTBotCCombo ccombo = bot.ccomboBoxInGroup("Custom Combo");
 		try {
 			ccombo.setSelection(100);
@@ -61,7 +70,8 @@ public class SWTBotCComboTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testThrowsExceptionInCaseOfInvalidTextBasedSelection() throws Exception {
+	@Test
+	public void throwsExceptionInCaseOfInvalidTextBasedSelection() throws Exception {
 		SWTBotCCombo ccombo = bot.ccomboBoxInGroup("Custom Combo");
 		try {
 			ccombo.setSelection("non existent item");
@@ -71,7 +81,8 @@ public class SWTBotCComboTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testSetText() throws Exception {
+	@Test
+	public void setText() throws Exception {
 		SWTBotCCombo ccombo = bot.ccomboBoxInGroup("Custom Combo");
 		ccombo.setText("Apricots");
 		assertEquals(6, ccombo.selectionIndex());
@@ -81,7 +92,8 @@ public class SWTBotCComboTest extends AbstractSWTTestCase {
 		assertEquals(null, ccombo.selection());
 	}
 
-	public void testThrowsExceptionInCaseOfChangeTextOfReadOnlyCombo() throws Exception {
+	@Test
+	public void throwsExceptionInCaseOfChangeTextOfReadOnlyCombo() throws Exception {
 		bot.checkBox("SWT.READ_ONLY").select();
 		SWTBotCCombo ccombo = bot.ccomboBoxInGroup("Custom Combo");
 		try {
@@ -97,9 +109,9 @@ public class SWTBotCComboTest extends AbstractSWTTestCase {
 		assertEquals(Combo.LIMIT, ccombo.textLimit());
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
-		bot = new  SWTBot();
+		bot = new SWTBot();
 		bot.tabItem("CCombo").activate();
 		bot.checkBox("SWT.FLAT").deselect();
 		bot.checkBox("SWT.READ_ONLY").deselect();
@@ -108,6 +120,5 @@ public class SWTBotCComboTest extends AbstractSWTTestCase {
 	protected Shell getFocusShell() {
 		return customControlShell;
 	}
-
 
 }

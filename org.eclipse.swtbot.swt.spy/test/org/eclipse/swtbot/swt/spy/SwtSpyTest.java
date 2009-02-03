@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.spy;
 
-import junit.framework.TestCase;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.examples.controlexample.ControlExample;
 import org.eclipse.swt.layout.FillLayout;
@@ -19,18 +17,19 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.resolvers.DefaultChildrenResolver;
 import org.eclipse.swtbot.swt.finder.resolvers.DefaultParentResolver;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SwtSpyTest extends TestCase {
+public class SwtSpyTest {
 
 	private Display			display;
 
 	private Shell			controlExampleShell;
 
-	public void testSomething() throws Exception {
+	@Test public void Something() throws Exception {
 
 	}
 
@@ -52,13 +51,13 @@ public class SwtSpyTest extends TestCase {
 		new SWTSpy(display, new DefaultChildrenResolver(), new DefaultParentResolver());
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		display = new Display();
 		createShellToSpy();
 		createSwtSpy();
 	}
 
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		while (!controlExampleShell.isDisposed())
 			if (!display.readAndDispatch())
 				display.sleep();

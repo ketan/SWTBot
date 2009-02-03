@@ -9,10 +9,11 @@
  *     Hans Schwaebli - initial API and implementation (Bug 259787)
  *     Toby Weston  - initial API and implementation (Bug 259787)
  *******************************************************************************/
-package org.eclipse.swtbot.swt.finder;
+package org.eclipse.swtbot.swt.finder.junit4_5;
 
+import org.eclipse.swtbot.swt.finder.ApplicationRunner;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
-import org.junit.internal.runners.InitializationError;
+import org.junit.runners.model.InitializationError;
 
 /**
  * A runner that launches your application and captures screenshots on test failures. If you wish to control the
@@ -43,7 +44,6 @@ import org.junit.internal.runners.InitializationError;
  * @version $Id$
  * @see SWTBotJunit4ClassRunner
  */
-@SuppressWarnings("restriction")
 public abstract class SWTBotApplicationLauncherClassRunner extends SWTBotJunit4ClassRunner implements ApplicationRunner {
 
 	/**

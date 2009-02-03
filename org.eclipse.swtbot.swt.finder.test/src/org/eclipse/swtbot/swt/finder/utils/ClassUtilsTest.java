@@ -11,19 +11,22 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.utils;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class ClassUtilsTest extends TestCase {
+public class ClassUtilsTest {
 
 	public static final class MyClass {
 
 	}
 
-	public void testGetsSimpleClassName() throws Exception {
+	@Test
+	public void getsSimpleClassName() throws Exception {
 		assertEquals("ClassUtilsTest", ClassUtils.simpleClassName(getClass()));
 		assertEquals("ClassUtilsTest", ClassUtils.simpleClassName(this));
 		assertEquals("ClassUtilsTest$MyClass", ClassUtils.simpleClassName(MyClass.class));

@@ -11,6 +11,9 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertSameWidget;
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.pass;
+import static org.junit.Assert.fail;
 
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.SWTBot;
@@ -19,6 +22,7 @@ import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -31,27 +35,31 @@ public class SWTBotShellTest extends AbstractSWTTestCase {
 	private Shell	shell2;
 	private Shell	shell4;
 
-	public void testFindsShell() throws Exception {
+	@Test
+	public void findsShell() throws Exception {
 		assertSameWidget(menuShell, bot.shell("Address Book - Untitled").widget);
 	}
 
-	public void testBringsShellToFront() throws Exception {
+	@Test
+	public void bringsShellToFront() throws Exception {
 		SWTBotShell shell2 = bot.shell("shell2");
 		shell2.activate();
 		Shell activeShell = new ControlFinder().activeShell();
 		assertSameWidget(activeShell, shell2.widget);
 	}
 
-	public void testNoShellReturnsNull() throws Exception {
+	@Test
+	public void noShellReturnsNull() throws Exception {
 		try {
-			new  SWTBot().shell("non existing");
+			new SWTBot().shell("non existing");
 			fail("Was expecting an exception");
 		} catch (WidgetNotFoundException expected) {
 			pass();
 		}
 	}
 
-	public void testClosesShell() throws Exception {
+	@Test
+	public void closesShell() throws Exception {
 		UIThreadRunnable.asyncExec(display, new VoidResult() {
 			public void run() {
 				Shell shell = new Shell(controlShell);
@@ -69,7 +77,8 @@ public class SWTBotShellTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testGetsActiveShell() throws Exception {
+	@Test
+	public void getsActiveShell() throws Exception {
 		SWTBotShell shell2 = bot.shell("shell2");
 		shell2.activate();
 
@@ -77,9 +86,9 @@ public class SWTBotShellTest extends AbstractSWTTestCase {
 		assertSameWidget(shell2.widget, activeShell.widget);
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
-		bot = new  SWTBot();
+		bot = new SWTBot();
 		UIThreadRunnable.asyncExec(display, new VoidResult() {
 			public void run() {
 				shell4 = new Shell(display);
@@ -97,7 +106,7 @@ public class SWTBotShellTest extends AbstractSWTTestCase {
 		});
 	}
 
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		new SWTBotShell(shell2).close();
 		new SWTBotShell(shell3).close();
 		new SWTBotShell(shell4).close();

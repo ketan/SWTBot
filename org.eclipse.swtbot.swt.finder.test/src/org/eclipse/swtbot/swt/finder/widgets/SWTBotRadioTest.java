@@ -11,16 +11,22 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.pass;
 import static org.hamcrest.Matchers.instanceOf;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.List;
-
 
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -30,7 +36,8 @@ public class SWTBotRadioTest extends AbstractSWTTestCase {
 
 	private SWTBot	bot;
 
-	public void testClicksCheckBox() throws Exception {
+	@Test
+	public void clicksCheckBox() throws Exception {
 		try {
 			List findControls = new ControlFinder().findControls(instanceOf(Text.class));
 			SWTBotText text = new SWTBotText((Text) findControls.get(0));
@@ -45,7 +52,8 @@ public class SWTBotRadioTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testDoesNotMatchRadioButtons() throws Exception {
+	@Test
+	public void doesNotMatchRadioButtons() throws Exception {
 		try {
 			assertNull(bot.checkBox("SWT.PUSH").widget);
 			fail("Expecting WidgetNotFoundException");
@@ -60,7 +68,8 @@ public class SWTBotRadioTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testDoesNotMatchRegularButtons() throws Exception {
+	@Test
+	public void doesNotMatchRegularButtons() throws Exception {
 		try {
 			assertNull(bot.checkBox("One").widget);
 			fail("Expecting WidgetNotFoundException");
@@ -75,13 +84,15 @@ public class SWTBotRadioTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testIsSelectedWorks() throws Exception {
+	@Test
+	public void isSelectedWorks() throws Exception {
 		bot.radio("SWT.PUSH").click();
 		assertTrue(bot.radio("SWT.PUSH").isSelected());
 		assertFalse(bot.radio("SWT.ARROW").isSelected());
 	}
 
-	public void testClicksRadioButtons() throws Exception {
+	@Test
+	public void clicksRadioButtons() throws Exception {
 		bot.radio("SWT.CHECK").click();
 		assertFalse(bot.radio("SWT.PUSH").isSelected());
 		assertFalse(bot.radio("SWT.TOGGLE").isSelected());
@@ -91,9 +102,9 @@ public class SWTBotRadioTest extends AbstractSWTTestCase {
 		assertFalse(bot.radio("SWT.CHECK").isSelected());
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
-		bot = new  SWTBot();
+		bot = new SWTBot();
 		bot.tabItem("Button").activate();
 	}
 

@@ -14,7 +14,6 @@ package org.eclipse.swtbot.swt.finder.matchers;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;

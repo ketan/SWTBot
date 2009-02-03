@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder;
 
+import org.eclipse.swtbot.swt.finder.ApplicationRunner;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.junit.runners.model.InitializationError;
 

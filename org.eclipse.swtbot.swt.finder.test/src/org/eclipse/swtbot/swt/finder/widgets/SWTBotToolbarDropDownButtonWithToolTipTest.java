@@ -12,9 +12,15 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertNotSameWidget;
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.pass;
+import static org.junit.Assert.fail;
+
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -24,24 +30,27 @@ public class SWTBotToolbarDropDownButtonWithToolTipTest extends AbstractSWTTestC
 
 	private SWTBot	bot;
 
-	public void testFindsToolBarButtonWithIndex() throws Exception {
+	@Test
+	public void findsToolBarButtonWithIndex() throws Exception {
 		SWTBotToolbarButton button0 = bot.toolbarDropDownButton("Drop Down");
 		SWTBotToolbarButton button1 = bot.toolbarDropDownButton("Drop Down", 1);
 		assertNotSameWidget(button0.widget, button1.widget);
 	}
 
-	public void testClicksToolBarButton() throws Exception {
-		try{
+	@Test
+	public void clicksToolBarButton() throws Exception {
+		try {
 			bot.checkBox("Listen").select();
 			SWTBotToolbarButton button = bot.toolbarDropDownButton("Drop Down");
 			button.click();
 			assertTextContains("Selection [13]: SelectionEvent{ToolItem ", bot.textInGroup("Listeners").widget);
-		}finally{
+		} finally {
 			bot.checkBox("Listen").deselect();
 		}
 	}
 
-	public void testClicksADropDownMenuItem() throws Exception {
+	@Test
+	public void clicksADropDownMenuItem() throws Exception {
 		SWTBotToolbarDropDownButton button = bot.toolbarDropDownButtonWithTooltip("SWT.DROP_DOWN");
 		try {
 			bot.menu("Kiwi");
@@ -53,9 +62,9 @@ public class SWTBotToolbarDropDownButtonWithToolTipTest extends AbstractSWTTestC
 		button.menuItem("Kiwi").click();
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
-		bot = new  SWTBot();
+		bot = new SWTBot();
 		bot.tabItem("ToolBar").activate();
 	}
 }

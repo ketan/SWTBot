@@ -10,17 +10,20 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.collections;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class OrderedSetTest extends TestCase {
+public class OrderedSetTest {
 
-	public void testAddsItemsInOrder() throws Exception {
+	@Test
+	public void addsItemsInOrder() throws Exception {
 		OrderedSet<String> set = new OrderedSet<String>();
 		set.add("foo");
 		set.add("baz");

@@ -10,20 +10,23 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.resolvers;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.io.FileInputStream;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.swt.widgets.Shell;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class ResolverTest extends TestCase {
+public class ResolverTest {
 
-	public void testDoesNotGetResolverForNonRegisteredTypes() throws Exception {
+	@Test
+	public void doesNotGetResolverForNonRegisteredTypes() throws Exception {
 		Resolver resolver = new Resolver();
 		resolver.addResolver(new CompositeResolver());
 
@@ -31,7 +34,8 @@ public class ResolverTest extends TestCase {
 		assertTrue(resolvers.isEmpty());
 	}
 
-	public void testGetsResolverForRegisteredTypes() throws Exception {
+	@Test
+	public void getsResolverForRegisteredTypes() throws Exception {
 		Resolver resolver = new Resolver();
 		resolver.addResolver(new CompositeResolver());
 

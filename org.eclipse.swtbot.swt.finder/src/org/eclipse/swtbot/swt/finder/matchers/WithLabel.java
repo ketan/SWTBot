@@ -16,7 +16,6 @@ import static org.hamcrest.Matchers.anything;
 import java.util.List;
 import java.util.ListIterator;
 
-
 import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;

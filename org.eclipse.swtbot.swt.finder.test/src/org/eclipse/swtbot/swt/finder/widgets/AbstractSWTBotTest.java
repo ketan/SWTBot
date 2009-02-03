@@ -11,12 +11,15 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.WidgetResult;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -24,7 +27,8 @@ import org.eclipse.swtbot.swt.finder.results.WidgetResult;
  */
 public class AbstractSWTBotTest extends AbstractSWTTestCase {
 
-	public void testThrowsExceptionOnNullObjectPassedIntoConstructor() throws Exception {
+	@Test
+	public void throwsExceptionOnNullObjectPassedIntoConstructor() throws Exception {
 		try {
 			new AbstractSWTBot(null) {
 			};
@@ -34,7 +38,8 @@ public class AbstractSWTBotTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testThrowsExceptionOnDisposedObjectPassedIntoConstructor() throws Exception {
+	@Test
+	public void throwsExceptionOnDisposedObjectPassedIntoConstructor() throws Exception {
 		try {
 			Shell shell = UIThreadRunnable.syncExec(display, new WidgetResult<Shell>() {
 				public Shell run() {

@@ -11,6 +11,7 @@
 package org.eclipse.swtbot.swt.recorder.text;
 
 import org.eclipse.swtbot.swt.recorder.AbstractSWTBotRecorderTest;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -18,12 +19,14 @@ import org.eclipse.swtbot.swt.recorder.AbstractSWTBotRecorderTest;
  */
 public class RadioButtonSelectionListenerTest extends AbstractSWTBotRecorderTest {
 
-	public void testButtonClickIsRecorded() throws Exception {
+	@Test
+	public void buttonClickIsRecorded() throws Exception {
 		bot.radio("SWT.CHECK").click();
 		assertEvent("bot.radio(\"SWT.CHECK\").click();");
 	}
 
-	public void testButtonClickIsRecorded2() throws Exception {
+	@Test
+	public void buttonClickIsRecorded2() throws Exception {
 		bot.radio("SWT.PUSH").click();
 		assertEvent("bot.radio(\"SWT.PUSH\").click();");
 	}

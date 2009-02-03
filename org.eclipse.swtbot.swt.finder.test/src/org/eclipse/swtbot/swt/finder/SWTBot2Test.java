@@ -11,6 +11,14 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder;
 
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertEnabled;
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertNotEnabled;
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertSameWidget;
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Label;
@@ -22,6 +30,7 @@ import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.utils.Traverse;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotText;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -31,7 +40,8 @@ public class SWTBot2Test extends AbstractSWTTestCase {
 
 	private SWTBot	bot;
 
-	public void testFindsTextBox() throws Exception {
+	@Test
+	public void findsTextBox() throws Exception {
 		UIThreadRunnable.syncExec(display, new VoidResult() {
 			public void run() {
 				Shell shell2 = new Shell(display);
@@ -64,7 +74,8 @@ public class SWTBot2Test extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testIsEnabled() throws Exception {
+	@Test
+	public void isEnabled() throws Exception {
 		assertEnabled(bot.radio("Left"));
 		assertEnabled(bot.button("Clear"));
 
@@ -72,7 +83,8 @@ public class SWTBot2Test extends AbstractSWTTestCase {
 		assertNotEnabled(bot.radio("Down"));
 	}
 
-	public void testGetsActiveControl() throws Exception {
+	@Test
+	public void getsActiveControl() throws Exception {
 		bot.button("Two").setFocus();
 		assertFalse(bot.button("One").isActive());
 		assertTrue(bot.button("Two").isActive());
@@ -80,7 +92,8 @@ public class SWTBot2Test extends AbstractSWTTestCase {
 		assertSameWidget(bot.button("Two").widget, bot.getFocusedWidget());
 	}
 
-	public void testTabKeyTraversalSetsFocusOnTheNextControlAndSendsTraverseEvents() throws Exception {
+	@Test
+	public void tabKeyTraversalSetsFocusOnTheNextControlAndSendsTraverseEvents() throws Exception {
 		bot.checkBox("Listen").select();
 		bot.button("Clear").click();
 		bot.button("One").setFocus();
@@ -96,12 +109,12 @@ public class SWTBot2Test extends AbstractSWTTestCase {
 		assertTrue(bot.button("Two").isActive());
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		bot = new SWTBot();
 	}
 
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		super.tearDown();
 		bot.checkBox("Listen").deselect();
 		bot.button("Clear").click();

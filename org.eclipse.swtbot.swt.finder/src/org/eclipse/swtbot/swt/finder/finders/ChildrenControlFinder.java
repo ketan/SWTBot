@@ -12,7 +12,6 @@ package org.eclipse.swtbot.swt.finder.finders;
 
 import java.util.List;
 
-
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.resolvers.DefaultChildrenResolver;
 import org.eclipse.swtbot.swt.finder.resolvers.DefaultParentResolver;

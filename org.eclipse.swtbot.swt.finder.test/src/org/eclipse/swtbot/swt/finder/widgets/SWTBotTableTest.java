@@ -11,6 +11,10 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertSameWidget;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 
 import org.eclipse.swt.widgets.Table;
@@ -18,6 +22,7 @@ import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.utils.TableCollection;
 import org.eclipse.swtbot.swt.finder.utils.TableRow;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -28,19 +33,23 @@ public class SWTBotTableTest extends AbstractSWTTestCase {
 	private SWTBot		bot;
 	private SWTBotTable	table;
 
-	public void testFindsTable() throws Exception {
+	@Test
+	public void findsTable() throws Exception {
 		assertEquals(Table.class, table.widget.getClass());
 	}
 
-	public void testGetsRowCount() throws Exception {
+	@Test
+	public void getsRowCount() throws Exception {
 		assertEquals(16, table.rowCount());
 	}
 
-	public void testGetsColumnCount() throws Exception {
+	@Test
+	public void getsColumnCount() throws Exception {
 		assertEquals(4, table.columnCount());
 	}
 
-	public void testGetsAllColumnHeadings() throws Exception {
+	@Test
+	public void getsAllColumnHeadings() throws Exception {
 		bot.checkBox("Header Visible").click();
 		ArrayList<String> arrayList = new ArrayList<String>();
 		arrayList.add("Name");
@@ -50,7 +59,8 @@ public class SWTBotTableTest extends AbstractSWTTestCase {
 		assertEquals(arrayList, table.columns());
 	}
 
-	public void testGetsColumnTextBasedOnRowColumnNumbers() throws Exception {
+	@Test
+	public void getsColumnTextBasedOnRowColumnNumbers() throws Exception {
 		assertEquals("2556", table.cell(1, 2));
 		assertEquals("2556", table.cell(4, 2));
 		assertEquals("2556", table.cell(7, 2));
@@ -59,7 +69,8 @@ public class SWTBotTableTest extends AbstractSWTTestCase {
 		assertEquals("tomorrow", table.cell(7, 3));
 	}
 
-	public void testGetsTextCellBasedOnRowNumberColumnText() throws Exception {
+	@Test
+	public void getsTextCellBasedOnRowNumberColumnText() throws Exception {
 		assertEquals("2556", table.cell(1, "Size"));
 		assertEquals("2556", table.cell(4, "Size"));
 		assertEquals("2556", table.cell(7, "Size"));
@@ -68,7 +79,8 @@ public class SWTBotTableTest extends AbstractSWTTestCase {
 		assertEquals("tomorrow", table.cell(7, "Modified"));
 	}
 
-	public void testGetsSelectionCount() throws Exception {
+	@Test
+	public void getsSelectionCount() throws Exception {
 		TableCollection selection = table.selection();
 		assertEquals(new TableCollection(), selection);
 		assertEquals(0, selection.columnCount());
@@ -76,12 +88,14 @@ public class SWTBotTableTest extends AbstractSWTTestCase {
 		assertEquals(0, table.selectionCount());
 	}
 
-	public void testSetsSelection() throws Exception {
+	@Test
+	public void setsSelection() throws Exception {
 		table.select(5);
 		assertEquals(1, table.selectionCount());
 	}
 
-	public void testSettingSelectionOnInvalidRowTextThrowsException() throws Exception {
+	@Test
+	public void settingSelectionOnInvalidRowTextThrowsException() throws Exception {
 		table.select("Index:15");
 		try {
 			table.select("Index:16");
@@ -91,7 +105,8 @@ public class SWTBotTableTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testSettingSelectionOnInvalidRowNumberThrowsException() throws Exception {
+	@Test
+	public void settingSelectionOnInvalidRowNumberThrowsException() throws Exception {
 		table.select(15);
 		try {
 			table.select(16);
@@ -101,25 +116,28 @@ public class SWTBotTableTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testUnselectsSelection() throws Exception {
+	@Test
+	public void unselectsSelection() throws Exception {
 		table.unselect();
 		assertEquals(0, table.selectionCount());
 	}
 
-	public void testGetsSingleSelection() throws Exception {
+	@Test
+	public void getsSingleSelection() throws Exception {
 		table.select(10);
 		TableCollection selection = table.selection();
 		assertEquals(1, selection.rowCount());
 		assertEquals(4, selection.columnCount());
-		assertEquals(new TableCollection().add(new TableRow(
-				new String[] { "Index:10", "databases", "2556", "tomorrow" })), selection);
+		assertEquals(new TableCollection().add(new TableRow(new String[] { "Index:10", "databases", "2556", "tomorrow" })), selection);
 	}
 
-	public void testFindsAnyTable() throws Exception {
+	@Test
+	public void findsAnyTable() throws Exception {
 		assertSameWidget(table.widget, bot.table().widget);
 	}
 
-	public void testGetsMultipleSingleSelection() throws Exception {
+	@Test
+	public void getsMultipleSingleSelection() throws Exception {
 		bot.radio("SWT.MULTI").click();
 		table = bot.tableInGroup("Table");
 		table.select(new int[] { 5, 10 });
@@ -133,7 +151,8 @@ public class SWTBotTableTest extends AbstractSWTTestCase {
 		assertEquals(new TableRow(new String[] { "Index:10", "databases", "2556", "tomorrow" }), selection.get(1));
 	}
 
-	public void testSettingMultipleSelectionOfInvalidIndicesThrowsException() throws Exception {
+	@Test
+	public void settingMultipleSelectionOfInvalidIndicesThrowsException() throws Exception {
 		bot.radio("SWT.MULTI").click();
 		table = bot.tableInGroup("Table");
 		table.select(new int[] { 4, 15, 6 });
@@ -145,7 +164,8 @@ public class SWTBotTableTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testThrowsExceptionIfTheRowNumberIsIllegal() throws Exception {
+	@Test
+	public void throwsExceptionIfTheRowNumberIsIllegal() throws Exception {
 		try {
 			table.cell(100, 1);
 			fail("Was expecting an exception");
@@ -154,7 +174,8 @@ public class SWTBotTableTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testThrowsExceptionIfTheRowNumberIsIllegal2() throws Exception {
+	@Test
+	public void throwsExceptionIfTheRowNumberIsIllegal2() throws Exception {
 		try {
 			table.cell(100, "Size");
 			fail("Was expecting an exception");
@@ -163,7 +184,8 @@ public class SWTBotTableTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testThrowsExceptionIfTheColumnNumberIsIllegal() throws Exception {
+	@Test
+	public void throwsExceptionIfTheColumnNumberIsIllegal() throws Exception {
 		try {
 			table.cell(1, 100);
 			fail("Was expecting an exception");
@@ -172,7 +194,8 @@ public class SWTBotTableTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testThrowsExceptionIfTheColumnNameIsIllegal() throws Exception {
+	@Test
+	public void throwsExceptionIfTheColumnNameIsIllegal() throws Exception {
 		try {
 			table.cell(1, "some column");
 			fail("Was expecting an exception");
@@ -181,19 +204,22 @@ public class SWTBotTableTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testGetsIndexOfItem() throws Exception {
+	@Test
+	public void getsIndexOfItem() throws Exception {
 		assertEquals(7, table.indexOf("Index:7"));
 		assertEquals(-1, table.indexOf("non existent item"));
 	}
 
-	public void testGetsIndexOfItemInAColumnWithIndex() throws Exception {
+	@Test
+	public void getsIndexOfItemInAColumnWithIndex() throws Exception {
 		assertEquals(7, table.indexOf("Index:7", 0));
 		assertEquals(1, table.indexOf("2556", 2));
 		assertEquals(-1, table.indexOf("non existent item", 3));
 
 	}
 
-	public void testGetsIndexOfItemInAColumnWithText() throws Exception {
+	@Test
+	public void getsIndexOfItemInAColumnWithText() throws Exception {
 		bot.radio("SWT.MULTI").click();
 		table = bot.tableInGroup("Table");
 
@@ -202,7 +228,8 @@ public class SWTBotTableTest extends AbstractSWTTestCase {
 		assertEquals(-1, table.indexOf("non existent item", "foo"));
 	}
 
-	public void testFindsIndexOfColumn() throws Exception {
+	@Test
+	public void findsIndexOfColumn() throws Exception {
 		bot.radio("SWT.MULTI").click();
 		table = bot.tableInGroup("Table");
 
@@ -210,24 +237,28 @@ public class SWTBotTableTest extends AbstractSWTTestCase {
 		assertEquals(2, table.indexOfColumn("Size"));
 	}
 
-	public void testSelectsItemsBasedOnString() throws Exception {
+	@Test
+	public void selectsItemsBasedOnString() throws Exception {
 		table.select("Index:9");
 		TableCollection selection = table.selection();
 		assertEquals("Index:9", selection.get(0, 0));
 	}
 
-	public void testFindsItemsBasedOnIndex() throws Exception {
+	@Test
+	public void findsItemsBasedOnIndex() throws Exception {
 		SWTBotTableItem tableItem = table.getTableItem(3);
 		assertEquals("Index:3", tableItem.getText());
 	}
 
-	public void testFindsItemsBasedOnText() throws Exception {
+	@Test
+	public void findsItemsBasedOnText() throws Exception {
 		SWTBotTableItem tableItem = table.getTableItem("Index:3");
 		assertEquals("Index:3", tableItem.getText());
 	}
-	protected void setUp() throws Exception {
+
+	public void setUp() throws Exception {
 		super.setUp();
-		bot = new  SWTBot();
+		bot = new SWTBot();
 		bot.tabItem("Table").activate();
 		table = bot.tableInGroup("Table");
 	}

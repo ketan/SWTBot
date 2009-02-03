@@ -12,9 +12,15 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertNotSameWidget;
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.pass;
+import static org.junit.Assert.fail;
+
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -24,13 +30,15 @@ public class SWTBotToolbarDropDownButtonTest extends AbstractSWTTestCase {
 
 	private SWTBot	bot;
 
-	public void testFindsToolBarButtonWithIndex() throws Exception {
+	@Test
+	public void findsToolBarButtonWithIndex() throws Exception {
 		SWTBotToolbarButton button0 = bot.toolbarDropDownButton("Drop Down");
 		SWTBotToolbarButton button1 = bot.toolbarDropDownButton("Drop Down", 1);
 		assertNotSameWidget(button0.widget, button1.widget);
 	}
 
-	public void testClicksToolBarButton() throws Exception {
+	@Test
+	public void clicksToolBarButton() throws Exception {
 		try {
 			bot.checkBox("Listen").select();
 			SWTBotToolbarButton button = bot.toolbarDropDownButton("Drop Down");
@@ -41,7 +49,8 @@ public class SWTBotToolbarDropDownButtonTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testClicksADropDownMenuItem() throws Exception {
+	@Test
+	public void clicksADropDownMenuItem() throws Exception {
 		SWTBotToolbarDropDownButton button = bot.toolbarDropDownButton("Drop Down");
 		try {
 			bot.menu("Kiwi");
@@ -53,7 +62,7 @@ public class SWTBotToolbarDropDownButtonTest extends AbstractSWTTestCase {
 		button.menuItem("Kiwi").click();
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		bot = new SWTBot();
 		bot.tabItem("ToolBar").activate();

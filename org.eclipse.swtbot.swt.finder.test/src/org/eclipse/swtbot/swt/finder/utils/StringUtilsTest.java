@@ -11,15 +11,20 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.utils;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class StringUtilsTest extends TestCase {
+public class StringUtilsTest {
 
-	public void testIsEmptyOrNull() throws Exception {
+	@Test
+	public void isEmptyOrNull() throws Exception {
 		assertTrue(StringUtils.isEmptyOrNull(null));
 		assertTrue(StringUtils.isEmptyOrNull(""));
 		assertTrue(StringUtils.isEmptyOrNull("  "));
@@ -27,7 +32,8 @@ public class StringUtilsTest extends TestCase {
 		assertFalse(StringUtils.isEmptyOrNull("  foo bar "));
 	}
 
-	public void testCanJoinListsUsingTheObjectConverter() throws Exception {
+	@Test
+	public void canJoinListsUsingTheObjectConverter() throws Exception {
 		Object[] toJoin = new Object[] { new TestObject("foo"), new TestObject("bar"), new TestObject("baz") };
 		StringConverter converter = new StringConverter() {
 			public String toString(Object object) {
@@ -38,7 +44,8 @@ public class StringUtilsTest extends TestCase {
 		assertEquals("foo, bar, baz", StringUtils.join(toJoin, ", ", converter));
 	}
 
-	public void testJoinOfObjects() throws Exception {
+	@Test
+	public void joinOfObjects() throws Exception {
 		assertEquals("foo, bar, baz", StringUtils.join(new String[] { "foo", "bar", "baz" }, ", "));
 	}
 

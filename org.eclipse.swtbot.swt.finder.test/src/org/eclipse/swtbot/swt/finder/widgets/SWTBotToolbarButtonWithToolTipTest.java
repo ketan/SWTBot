@@ -11,14 +11,18 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import static org.junit.Assert.assertEquals;
+
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.junit.Test;
 
 public class SWTBotToolbarButtonWithToolTipTest extends AbstractSWTTestCase {
 
 	private SWTBot	bot;
 
-	public void testFindsToolBarButtonWithToolTipBasedOnIndex() throws Exception {
+	@Test
+	public void findsToolBarButtonWithToolTipBasedOnIndex() throws Exception {
 		SWTBotToolbarButton button = bot.toolbarButtonWithTooltip("SWT.PUSH", 0);
 		assertEquals("", button.getText());
 
@@ -32,25 +36,28 @@ public class SWTBotToolbarButtonWithToolTipTest extends AbstractSWTTestCase {
 		assertEquals("Push", button.getText());
 	}
 
-	public void testFindsToolBarButtonWithToolTip() throws Exception {
+	@Test
+	public void findsToolBarButtonWithToolTip() throws Exception {
 		for (int i = 0; i < 6; i++) {
 			bot.toolbarButtonWithTooltip("SWT.PUSH", i);
 		}
 	}
 
-	public void testFindsToolBarButtonWithToolTip2() throws Exception {
+	@Test
+	public void findsToolBarButtonWithToolTip2() throws Exception {
 		for (int i = 0; i < 6; i++) {
 			bot.toolbarButtonWithTooltip("SWT.RADIO", i);
 		}
 	}
 
-	public void testGetsTooltipOnButton() throws Exception {
+	@Test
+	public void getsTooltipOnButton() throws Exception {
 		SWTBotToolbarButton button = bot.toolbarButtonWithTooltip("SWT.RADIO");
 		String toolTipText = button.getToolTipText();
 		assertEquals("SWT.RADIO", toolTipText);
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		bot = new SWTBot();
 		bot.tabItem("ToolBar").activate();

@@ -13,10 +13,11 @@ package org.rcpmail;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swtbot.eclipse.finder.SWTBotEclipseTestCase;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
+import org.junit.Test;
 
 public class MySecondTest extends SWTBotEclipseTestCase {
 
-	public void testThatSWTBotDoesNotRunOnTheUIThread() throws Exception {
+	@Test public void ThatSWTBotDoesNotRunOnTheUIThread() throws Exception {
 		assertNull(Display.getCurrent());
 		assertNotSame(Thread.currentThread(), SWTUtils.display().getThread());
 	}

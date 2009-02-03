@@ -11,9 +11,12 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.utils;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -21,34 +24,41 @@ import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
  */
 public class SWTUtilsTest extends AbstractSWTTestCase {
 
-	public void testFindsRightIndexOfControlInParentWithNoParent() throws Exception {
+	@Test
+	public void findsRightIndexOfControlInParentWithNoParent() throws Exception {
 		assertEquals(-1, SWTUtils.widgetIndex(controlShell));
 	}
 
-	public void testFindsIndexOfArbritryControl() throws Exception {
+	@Test
+	public void findsIndexOfArbritryControl() throws Exception {
 		assertEquals(5, SWTUtils.widgetIndex(getChildren()[5]));
 		assertEquals(0, SWTUtils.widgetIndex(getChildren()[0]));
 		assertEquals(-1, SWTUtils.widgetIndex(null));
 	}
 
-	public void testFindsNextWidget() throws Exception {
+	@Test
+	public void findsNextWidget() throws Exception {
 		assertSame(getChildren()[1], SWTUtils.nextWidget(getChildren()[0]));
 	}
 
-	public void testNextWidgetOnLastWidgetIsNull() throws Exception {
+	@Test
+	public void nextWidgetOnLastWidgetIsNull() throws Exception {
 		final Control[] children = getChildren();
 		assertSame(null, SWTUtils.nextWidget(children[children.length - 1]));
 	}
 
-	public void testFindsPreviousWidget() throws Exception {
+	@Test
+	public void findsPreviousWidget() throws Exception {
 		assertSame(getChildren()[2], SWTUtils.previousWidget(getChildren()[3]));
 	}
 
-	public void testPreviousWidgetOnFirstWidget() throws Exception {
+	@Test
+	public void previousWidgetOnFirstWidget() throws Exception {
 		assertSame(null, SWTUtils.previousWidget(getChildren()[0]));
 	}
 
-	public void testToString() throws Exception {
+	@Test
+	public void getsToString() throws Exception {
 		assertEquals("TabFolder {}", SWTUtils.toString(controlExample.getTabFolder()));
 	}
 

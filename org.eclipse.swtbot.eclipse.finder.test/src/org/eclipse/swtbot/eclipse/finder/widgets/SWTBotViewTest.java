@@ -18,6 +18,7 @@ import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -25,15 +26,18 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem;
  */
 public class SWTBotViewTest extends SWTBotEclipseTestCase {
 
-	public void testFindsView() throws Exception {
+	@Test
+	public void findsView() throws Exception {
 		bot.view("Welcome");
 	}
 
-	public void testGetsViewTitle() throws Exception {
+	@Test
+	public void getsViewTitle() throws Exception {
 		assertEquals("Welcome", bot.view("Welcome").getTitle());
 	}
 
-	public void testNotFindingViewThrowsException() throws Exception {
+	@Test
+	public void notFindingViewThrowsException() throws Exception {
 		try {
 			bot.view("Non existent view");
 			fail("Expecting WidgetNotFoundException");
@@ -42,7 +46,8 @@ public class SWTBotViewTest extends SWTBotEclipseTestCase {
 		}
 	}
 
-	public void testClosesAView() throws Exception {
+	@Test
+	public void closesAView() throws Exception {
 		SWTEclipseBot bot = new SWTEclipseBot();
 		SWTBotView view = bot.view("Welcome");
 		view.close();
@@ -55,7 +60,8 @@ public class SWTBotViewTest extends SWTBotEclipseTestCase {
 		}
 	}
 
-	public void testOpenView() throws Exception {
+	@Test
+	public void openView() throws Exception {
 		openSWTBotTestView();
 	}
 
@@ -73,7 +79,8 @@ public class SWTBotViewTest extends SWTBotEclipseTestCase {
 		bot.view("SWTBot Test View").show();
 	}
 
-	public void testMenu() throws Exception {
+	@Test
+	public void menu() throws Exception {
 		openSWTBotTestView();
 
 		SWTBotView view = bot.view("SWTBot Test View");
@@ -89,7 +96,8 @@ public class SWTBotViewTest extends SWTBotEclipseTestCase {
 		// assertTrue(cICMenu.isChecked());
 	}
 
-	public void testGetToolbarButtons() throws Exception {
+	@Test
+	public void getToolbarButtons() throws Exception {
 		SWTEclipseBot bot = new SWTEclipseBot();
 		SWTBotView view = bot.view("SWTBot Test View");
 
@@ -98,7 +106,8 @@ public class SWTBotViewTest extends SWTBotEclipseTestCase {
 		assertEquals(1, l.size());
 	}
 
-	public void testToolbarButton() throws Exception {
+	@Test
+	public void toolbarButton() throws Exception {
 		SWTEclipseBot bot = new SWTEclipseBot();
 		SWTBotView view = bot.view("SWTBot Test View");
 
@@ -109,7 +118,8 @@ public class SWTBotViewTest extends SWTBotEclipseTestCase {
 		bot.button("OK").click();
 	}
 
-	public void testToolbarButtonNotFound() throws Exception {
+	@Test
+	public void toolbarButtonNotFound() throws Exception {
 		SWTEclipseBot bot = new SWTEclipseBot();
 		SWTBotView view = bot.view("SWTBot Test View");
 

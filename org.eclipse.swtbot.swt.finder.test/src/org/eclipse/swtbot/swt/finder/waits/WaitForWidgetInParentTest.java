@@ -14,13 +14,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThan;
+import static org.junit.Assert.assertFalse;
 
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
-import org.eclipse.swtbot.swt.finder.waits.Conditions;
-import org.eclipse.swtbot.swt.finder.waits.WaitForWidgetInParent;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -28,8 +28,8 @@ import org.hamcrest.Description;
  */
 public class WaitForWidgetInParentTest extends AbstractSWTTestCase {
 
-
-	public void testWaitsForWidgetToAppearInParent() throws Exception {
+	@Test
+	public void waitsForWidgetToAppearInParent() throws Exception {
 		long start = System.currentTimeMillis();
 
 		WaitForWidgetInParent condition = Conditions.waitForWidget(new EvaluateTrueAfterAWhile(500), getFocusShell());

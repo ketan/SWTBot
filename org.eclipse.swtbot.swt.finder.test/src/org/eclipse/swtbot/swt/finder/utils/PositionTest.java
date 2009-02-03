@@ -11,15 +11,19 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.utils;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class PositionTest extends TestCase {
+public class PositionTest {
 
-	public void testEqualsAndHashCode() throws Exception {
+	@Test
+	public void equalsAndHashCode() throws Exception {
 		assertEquals(position(), position());
 		assertEquals(position().hashCode(), position().hashCode());
 

@@ -57,7 +57,7 @@ public class SWTBotTestData {
 		if (obj instanceof SWTBotTestData) {
 			return this.getName().equals(((SWTBotTestData) obj).getName());
 		}
-		
+
 		return super.equals(obj);
 	}
 

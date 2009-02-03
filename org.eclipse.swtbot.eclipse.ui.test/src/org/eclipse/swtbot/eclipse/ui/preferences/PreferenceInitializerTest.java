@@ -10,12 +10,14 @@
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.ui.preferences;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Arrays;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.jface.preference.PreferenceStore;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Initializes the default preferences if none exist.
@@ -23,7 +25,7 @@ import org.eclipse.jface.preference.PreferenceStore;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class PreferenceInitializerTest extends TestCase {
+public class PreferenceInitializerTest {
 	/**  */
 	private PreferenceInitializer	initializer;
 	private PreferenceStore			swtbotPreferenceStore;
@@ -39,19 +41,22 @@ public class PreferenceInitializerTest extends TestCase {
 																+ "org.eclipse.swtbot.eclipse.finder.waits.Conditions.*;"
 																+ "org.eclipse.swtbot.swt.finder.waits.Conditions.*";
 
-	public void testCanPullJDTImports() throws Exception {
+	@Test
+	public void canPullJDTImports() throws Exception {
 		jdtPreferenceStore.setValue(JDT_IMPORT_PROPERTY, "foo.*;bar.*");
 		List<String> imports = initializer.getJDTImports();
 		assertEquals(Arrays.asList("foo.*", "bar.*"), imports);
 	}
 
-	public void testAddsFavoritesIfSWTBotPreferenceIsTrue() throws Exception {
+	@Test
+	public void addsFavoritesIfSWTBotPreferenceIsTrue() throws Exception {
 		assertEquals("", jdtPreferenceStore.getString(JDT_IMPORT_PROPERTY));
 		swtbotPreferenceStore.setValue(PreferenceInitializer.ENABLE_ADDITIONAL_AUTOCOMPLETE_FAVOURTES, true);
 		assertEquals(DEFAULT_IMPORTS, jdtPreferenceStore.getString(JDT_IMPORT_PROPERTY));
 	}
 
-	public void testRemovesFavoritesIfSWTBotPreferenceIsFalse() throws Exception {
+	@Test
+	public void removesFavoritesIfSWTBotPreferenceIsFalse() throws Exception {
 		assertEquals("", jdtPreferenceStore.getString(JDT_IMPORT_PROPERTY));
 		swtbotPreferenceStore.setValue(PreferenceInitializer.ENABLE_ADDITIONAL_AUTOCOMPLETE_FAVOURTES, true);
 		assertEquals(DEFAULT_IMPORTS, jdtPreferenceStore.getString(JDT_IMPORT_PROPERTY));
@@ -60,8 +65,8 @@ public class PreferenceInitializerTest extends TestCase {
 		assertEquals("", jdtPreferenceStore.getString(JDT_IMPORT_PROPERTY));
 	}
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		swtbotPreferenceStore = new PreferenceStore();
 		jdtPreferenceStore = new PreferenceStore();
 		initializer = new PreferenceInitializer(swtbotPreferenceStore, jdtPreferenceStore);

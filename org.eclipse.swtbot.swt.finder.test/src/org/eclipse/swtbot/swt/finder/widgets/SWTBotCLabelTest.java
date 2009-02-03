@@ -11,11 +11,14 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -25,15 +28,18 @@ public class SWTBotCLabelTest extends AbstractSWTTestCase {
 
 	private SWTBot	bot;
 
-	public void testFindsCLabel() throws Exception {
+	@Test
+	public void findsCLabel() throws Exception {
 		bot.clabel("One");
 	}
 
-	public void testFindsCLabel1() throws Exception {
+	@Test
+	public void findsCLabel1() throws Exception {
 		bot.clabel("The quick brown fox jumps over the lazy dog.\nOne Two Three");
 	}
 
-	public void testFindsAlignment() throws Exception {
+	@Test
+	public void findsAlignment() throws Exception {
 		assertEquals(SWT.LEFT, bot.clabel("One").alignment());
 		bot.radio("Center").click();
 		assertEquals(SWT.CENTER, bot.clabel("One").alignment());
@@ -41,13 +47,14 @@ public class SWTBotCLabelTest extends AbstractSWTTestCase {
 		assertEquals(SWT.RIGHT, bot.clabel("One").alignment());
 	}
 
-	public void testGetsImage() throws Exception {
+	@Test
+	public void getsImage() throws Exception {
 		assertNotNull(bot.clabel("One").image());
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
-		bot = new  SWTBot();
+		bot = new SWTBot();
 		bot.tabItem("CLabel").activate();
 	}
 

@@ -11,15 +11,17 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertText;
 import static org.hamcrest.Matchers.anything;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
-
 
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swtbot.swt.finder.AbstractMenuExampleTest;
 import org.eclipse.swtbot.swt.finder.SWTBot;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -29,24 +31,27 @@ public class SWTBotMenuTest extends AbstractMenuExampleTest {
 
 	private SWTBot	bot;
 
-	public void testFindsMenus() throws Exception {
+	@Test
+	public void findsMenus() throws Exception {
 		assertText("&File", bot.menu("File").widget);
 	}
 
-	public void testFindsSubMenus() throws Exception {
+	@Test
+	public void findsSubMenus() throws Exception {
 		SWTBotMenu menu = bot.menu("File").menu("Exit");
 		assertText("E&xit", menu.widget);
 	}
 
-	public void testClicksSubMenus() throws Exception {
+	@Test
+	public void clicksSubMenus() throws Exception {
 		display.syncExec(new Runnable() {
 			public void run() {
-				menuExample.addAddressBook(new String[] { "last2", "first", "business phone", "home phone",
-						"email@addres.ss", "fax number" });
-				menuExample.addAddressBook(new String[] { "last6", "first", "business phone", "home phone",
-						"email@addres.ss", "fax number" });
-				menuExample.addAddressBook(new String[] { "last4", "first", "business phone", "home phone",
-						"email@addres.ss", "fax number" });
+				menuExample
+						.addAddressBook(new String[] { "last2", "first", "business phone", "home phone", "email@addres.ss", "fax number" });
+				menuExample
+						.addAddressBook(new String[] { "last6", "first", "business phone", "home phone", "email@addres.ss", "fax number" });
+				menuExample
+						.addAddressBook(new String[] { "last4", "first", "business phone", "home phone", "email@addres.ss", "fax number" });
 			}
 		});
 
@@ -82,7 +87,7 @@ public class SWTBotMenuTest extends AbstractMenuExampleTest {
 		assertText("last2", tableItems[2]);
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		bot = new SWTBot();
 	}

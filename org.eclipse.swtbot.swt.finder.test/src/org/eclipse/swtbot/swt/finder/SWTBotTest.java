@@ -12,6 +12,11 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
@@ -29,7 +34,7 @@ public class SWTBotTest extends AbstractMenuExampleTest {
 	private SWTBot	bot;
 
 	@Test
-	public void testWaits5SecondsAndFailsForFailingCondition() throws Exception {
+	public void waits5SecondsAndFailsForFailingCondition() throws Exception {
 		final long begin = System.currentTimeMillis();
 		try {
 			bot.waitUntil(new DefaultCondition() {
@@ -51,7 +56,8 @@ public class SWTBotTest extends AbstractMenuExampleTest {
 		}
 	}
 
-	public void testDoesNotWait5SecondsAndPassesForPassingCondition() throws Exception {
+	@Test
+	public void doesNotWait5SecondsAndPassesForPassingCondition() throws Exception {
 		final long begin = System.currentTimeMillis();
 		bot.waitUntil(new DefaultCondition() {
 			public boolean test() throws Exception {
@@ -68,7 +74,8 @@ public class SWTBotTest extends AbstractMenuExampleTest {
 
 	}
 
-	public void testThrowsExceptionOnNegativeTimeOut() throws Exception {
+	@Test
+	public void throwsExceptionOnNegativeTimeOut() throws Exception {
 		try {
 			bot.waitUntil(null, -10);
 			fail("expecting an exception");
@@ -77,11 +84,13 @@ public class SWTBotTest extends AbstractMenuExampleTest {
 		}
 	}
 
-	public void testGetsAllShells() throws Exception {
+	@Test
+	public void getsAllShells() throws Exception {
 		assertEquals(7, bot.shells().length);
 	}
 
-	public void testFindsShellsById() throws Exception {
+	@Test
+	public void findsShellsById() throws Exception {
 		final SWTBotShell shell = bot.shell("SWT Clipboard");
 		UIThreadRunnable.syncExec(new VoidResult() {
 			public void run() {
@@ -92,7 +101,8 @@ public class SWTBotTest extends AbstractMenuExampleTest {
 		assertSame(shell.widget, bot.shellWithId("foo-shell", "bar").widget);
 	}
 
-	public void testWaitsLessThan5sWhenConditionSwitchToFailing() {
+	@Test
+	public void waitsLessThan5sWhenConditionSwitchToFailing() {
 		final long begin = System.currentTimeMillis();
 		bot.waitWhile(new DefaultCondition() {
 
@@ -113,7 +123,8 @@ public class SWTBotTest extends AbstractMenuExampleTest {
 		assertTrue(timeout < 5000);
 	}
 
-	public void testWaitsMoreThan5sWhenConditionDoesNotSwitchToFailing() {
+	@Test
+	public void waitsMoreThan5sWhenConditionDoesNotSwitchToFailing() {
 		final long begin = System.currentTimeMillis();
 		try {
 			bot.waitWhile(new DefaultCondition() {
@@ -138,7 +149,7 @@ public class SWTBotTest extends AbstractMenuExampleTest {
 		}
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		bot = new SWTBot();
 	}

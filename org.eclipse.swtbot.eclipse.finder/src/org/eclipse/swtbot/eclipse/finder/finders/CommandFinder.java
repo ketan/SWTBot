@@ -13,7 +13,6 @@ package org.eclipse.swtbot.eclipse.finder.finders;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.apache.log4j.Logger;
 import org.eclipse.core.commands.Command;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotCommand;

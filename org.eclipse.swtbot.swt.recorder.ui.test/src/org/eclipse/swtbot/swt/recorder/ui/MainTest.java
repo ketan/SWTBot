@@ -10,13 +10,16 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.recorder.ui;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class MainTest extends TestCase {
+public class MainTest {
 
 	public static class MyMain {
 		private static String[]	args;
@@ -26,16 +29,19 @@ public class MainTest extends TestCase {
 		}
 	}
 
-	public void testNoArgumentsThrowsException() throws Exception {
+	@Test
+	public void noArgumentsThrowsException() throws Exception {
 		try {
 			Main.main(new String[] {});
 			fail("expecting IllegalArgumentException");
 		} catch (IllegalArgumentException e) {
-			assertEquals("Usage: java org.eclipse.swtbot.swt.recorder.ui.Main com.your.MainClass [arguments to your main...]", e.getMessage());
+			assertEquals("Usage: java org.eclipse.swtbot.swt.recorder.ui.Main com.your.MainClass [arguments to your main...]", e
+					.getMessage());
 		}
 	}
 
-	public void testInvokesMain() throws Exception {
+	@Test
+	public void invokesMain() throws Exception {
 		try {
 			new Main(new String[] { "org.eclipse.swtbot.swt.recorder.ui.MainTest$MyMain", "my", "args" }).start();
 		} catch (IllegalStateException e) {

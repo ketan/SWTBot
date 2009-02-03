@@ -11,23 +11,26 @@
 package org.rcpmail;
 
 import org.eclipse.swtbot.eclipse.finder.SWTBotEclipseTestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 
 public class MyFirstTest extends SWTBotEclipseTestCase {
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 	}
 
-	protected void tearDown() throws Exception {
-		super.tearDown();
+	@After
+	public void tearDown() throws Exception {
 	}
 
-	public void testThisPasses() throws Exception {
+	@Test public void ThisPasses() throws Exception {
 		pass();
 	}
 
-	public void testThisFails() throws Exception {
+	@Test public void ThisFails() throws Exception {
 		fail();
 	}
 

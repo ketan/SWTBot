@@ -11,16 +11,20 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.finders;
 
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertText;
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.pass;
 import static org.hamcrest.Matchers.anything;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.List;
-
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTException;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.AbstractMenuExampleTest;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -28,7 +32,8 @@ import org.eclipse.swtbot.swt.finder.AbstractMenuExampleTest;
  */
 public class MenuFinderTest extends AbstractMenuExampleTest {
 
-	public void testClicksMenuItem() throws Exception {
+	@Test
+	public void clicksMenuItem() throws Exception {
 		List findControls = menuFinder.findMenus(anything());
 		MenuItem menuItem = (MenuItem) findControls.get(1);
 		try {
@@ -40,7 +45,8 @@ public class MenuFinderTest extends AbstractMenuExampleTest {
 		assertText("&New Contact...	Ctrl+N", menuItem);
 	}
 
-	public void testFindsAllVisibleMenus() throws Exception {
+	@Test
+	public void findsAllVisibleMenus() throws Exception {
 		List findControls = menuFinder.findMenus(anything());
 		assertEquals(25, findControls.size());
 		assertText("&Find...\tCtrl+F", (Widget) findControls.get(21));

@@ -12,37 +12,43 @@
 package org.eclipse.swtbot.swt.finder.matchers;
 
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMnemonic;
-import junit.framework.TestCase;
+import static org.junit.Assert.assertTrue;
 
 import org.hamcrest.Matcher;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class MenuMnemonicTextMatcherTest extends TestCase {
+public class MenuMnemonicTextMatcherTest {
 
-	public void testMatchesMenuWithMnemonic() throws Exception {
+	@Test
+	public void matchesMenuWithMnemonic() throws Exception {
 		Matcher matcher = withMnemonic("New Mnemonic");
 		assertTrue(matcher.matches(new ObjectWithGetText("New &Mnemonic\tCTRL_M")));
 	}
 
-	public void testMatchesMenuWithoutMnemonic() throws Exception {
+	@Test
+	public void matchesMenuWithoutMnemonic() throws Exception {
 		Matcher matcher = withMnemonic("New Mnemonic");
 		assertTrue(matcher.matches(new ObjectWithGetText("New Mnemonic\tCTRL_M")));
 	}
 
-	public void testMatchesMenuWithoutAccesor() throws Exception {
+	@Test
+	public void matchesMenuWithoutAccesor() throws Exception {
 		Matcher matcher = withMnemonic("New Mnemonic");
 		assertTrue(matcher.matches(new ObjectWithGetText("New Mnemonic")));
 	}
 
-	public void testMatchesMnemonic() throws Exception {
+	@Test
+	public void matchesMnemonic() throws Exception {
 		Object object = new ObjectWithGetText("&New Mnemonic");
 		assertTrue(withMnemonic("New Mnemonic").matches(object));
 	}
 
-	public void testMatchesWithoutMnemonic() throws Exception {
+	@Test
+	public void matchesWithoutMnemonic() throws Exception {
 		Object object = new ObjectWithGetText("New Mnemonic");
 		assertTrue(withMnemonic("New Mnemonic").matches(object));
 	}

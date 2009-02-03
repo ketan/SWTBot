@@ -13,14 +13,16 @@ package org.eclipse.swtbot.swt.finder.widgets;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.containsString;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import java.util.Calendar;
 import java.util.Date;
 
-
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -31,11 +33,13 @@ public class SWTBotDateTimeTest extends AbstractSWTTestCase {
 	private SWTBot			bot;
 	private SWTBotDateTime	dateTime;
 
-	public void testFindsDateTime() throws Exception {
+	@Test
+	public void findsDateTime() throws Exception {
 		assertEquals(DateTime.class, dateTime.widget.getClass());
 	}
 
-	public void testSetsAndGetsDateOnDateTime() throws Exception {
+	@Test
+	public void setsAndGetsDateOnDateTime() throws Exception {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(0);
 		calendar.set(2012, 10, 20, 0, 0, 0);
@@ -46,7 +50,8 @@ public class SWTBotDateTimeTest extends AbstractSWTTestCase {
 		assertEquals(expected, actual);
 	}
 
-	public void testSendsNotification() throws Exception {
+	@Test
+	public void sendsNotification() throws Exception {
 		bot.checkBox("Listen").click();
 		SWTBotDateTime dateTime = bot.dateTimeInGroup("DateTime");
 		dateTime.setDate(new Date());
@@ -59,9 +64,9 @@ public class SWTBotDateTimeTest extends AbstractSWTTestCase {
 		assertThat(text, containsString(" data=null item=null detail=0 x=0 y=0 width=0 height=0 stateMask=0 text=null doit=true}"));
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
-		bot = new  SWTBot();
+		bot = new SWTBot();
 		bot.tabItem("DateTime").activate();
 		dateTime = bot.dateTimeInGroup("DateTime");
 	}

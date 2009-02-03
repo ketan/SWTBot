@@ -15,7 +15,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-
 import org.apache.commons.collections.map.MultiValueMap;
 import org.eclipse.swtbot.swt.finder.collections.OrderedSet;
 

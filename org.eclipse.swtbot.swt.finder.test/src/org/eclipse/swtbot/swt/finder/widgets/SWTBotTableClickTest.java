@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import static org.junit.Assert.assertEquals;
 
 import org.eclipse.jface.snippets.viewers.Snippet009CellEditors;
 import org.eclipse.swt.SWT;
@@ -20,6 +21,7 @@ import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.junit.Test;
 
 /**
  * @author Cedric Chabanois &lt;cchabanois [at] no-log [dot] org&gt;
@@ -32,7 +34,8 @@ public class SWTBotTableClickTest extends AbstractSWTTestCase {
 	private SWTBotTable	table;
 	private Shell		snippetCellEditorShell;
 
-	public void testClickOnCell() throws Exception {
+	@Test
+	public void clickOnCell() throws Exception {
 		table.click(0, 0);
 		bot.sleep(1000);
 		bot.text("0", 0).setText("101");
@@ -46,7 +49,7 @@ public class SWTBotTableClickTest extends AbstractSWTTestCase {
 		return snippetCellEditorShell;
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		UIThreadRunnable.syncExec(new VoidResult() {
 			public void run() {
 				snippetCellEditorShell = new Shell(display, SWT.SHELL_TRIM);
@@ -57,11 +60,11 @@ public class SWTBotTableClickTest extends AbstractSWTTestCase {
 			}
 		});
 		super.setUp();
-		bot = new  SWTBot();
+		bot = new SWTBot();
 		table = bot.table();
 	}
 
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		UIThreadRunnable.syncExec(new VoidResult() {
 			public void run() {
 				snippetCellEditorShell.close();

@@ -11,13 +11,16 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.finders;
 
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertNotSameWidget;
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertText;
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.instanceOf;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import java.util.List;
-
-import junit.framework.Assert;
 
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Group;
@@ -28,6 +31,7 @@ import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.utils.TreePath;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTabItem;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -37,25 +41,29 @@ public class ControlFinderTest extends AbstractSWTTestCase {
 
 	private ControlFinder	finder;
 
-	public void testFindsAGroup() throws Exception {
+	@Test
+	public void findsAGroup() throws Exception {
 		final List frames = finder.findControls(instanceOf(Group.class));
 		assertEquals(12, frames.size());
 		assertText("Image Buttons", (Widget) frames.get(2));
 	}
 
-	public void testFindsAllTabItem() throws Exception {
+	@Test
+	public void findsAllTabItem() throws Exception {
 		List tabItems = finder.findControls(instanceOf(TabItem.class));
-		Assert.assertEquals(24, tabItems.size());
+		assertEquals(24, tabItems.size());
 	}
 
-	public void testFindsAShell() throws Exception {
+	@Test
+	public void findsAShell() throws Exception {
 		List shells = finder.findShells("SWT Controls");
-		Assert.assertFalse(shells.isEmpty());
-		Assert.assertEquals(1, shells.size());
-		Assert.assertEquals(controlShell, shells.get(0));
+		assertFalse(shells.isEmpty());
+		assertEquals(1, shells.size());
+		assertEquals(controlShell, shells.get(0));
 	}
 
-	public void testFindsATabItem() throws Exception {
+	@Test
+	public void findsATabItem() throws Exception {
 		List tabItems = finder.findControls(allOf(instanceOf(TabItem.class), withText("Dialog")));
 		final TabItem items[] = new TabItem[] { null };
 		display.syncExec(new Runnable() {
@@ -64,36 +72,41 @@ public class ControlFinderTest extends AbstractSWTTestCase {
 			}
 		});
 
-		Assert.assertEquals(1, tabItems.size());
-		Assert.assertEquals(items[0], tabItems.get(0));
+		assertEquals(1, tabItems.size());
+		assertEquals(items[0], tabItems.get(0));
 	}
 
-	public void testFindsText() throws Exception {
+	@Test
+	public void findsText() throws Exception {
 		List textBoxes = finder.findControls(instanceOf(Text.class));
-		Assert.assertEquals(1, textBoxes.size());
+		assertEquals(1, textBoxes.size());
 	}
 
-	public void testFindsTwoButtons() throws Exception {
+	@Test
+	public void findsTwoButtons() throws Exception {
 		final List buttons = finder.findControls(allOf(instanceOf(Button.class), withText("One")));
 		assertEquals(2, buttons.size());
 		assertText("One", (Widget) buttons.get(0));
 		assertText("One", (Widget) buttons.get(1));
 	}
 
-	public void testGetsControlPath() throws Exception {
+	@Test
+	public void getsControlPath() throws Exception {
 		List labels = finder.findControls(allOf(instanceOf(Button.class), withText("One")));
 		Widget w = (Widget) labels.get(0);
 		TreePath path = finder.getPath(w);
-		Assert.assertEquals(7, path.getSegmentCount());
+		assertEquals(7, path.getSegmentCount());
 	}
 
-	public void testGetsControlPathToTabItem() throws Exception {
+	@Test
+	public void getsControlPathToTabItem() throws Exception {
 		List tabItems = finder.findControls(allOf(instanceOf(TabItem.class), withText("Dialog")));
 		TreePath path = finder.getPath((Widget) tabItems.get(0));
-		Assert.assertEquals(3, path.getSegmentCount());
+		assertEquals(3, path.getSegmentCount());
 	}
 
-	public void testGetsOnlyVisibleControls() throws Exception {
+	@Test
+	public void getsOnlyVisibleControls() throws Exception {
 		// use the default tab
 		List textBoxesOnButtonTab = finder.findControls(instanceOf(Text.class));
 		assertEquals(1, textBoxesOnButtonTab.size());
@@ -111,10 +124,10 @@ public class ControlFinderTest extends AbstractSWTTestCase {
 		assertNotSameWidget((Widget) textBoxesOnButtonTab.get(0), (Widget) textBoxesOnTextTab.get(0));
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		finder = new ControlFinder();
-		new  SWTBot().tabItem("Button").activate();
+		new SWTBot().tabItem("Button").activate();
 	}
 
 }

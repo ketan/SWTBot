@@ -14,14 +14,14 @@ package org.eclipse.swtbot.swt.finder.finders;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.instanceOf;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
-
-import junit.framework.Assert;
 
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.utils.TreePath;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -31,27 +31,30 @@ public class PathGeneratorTest extends AbstractSWTTestCase {
 
 	private ControlFinder	finder;
 
-	public void testGeneratesStringFromPath() throws Exception {
+	@Test
+	public void generatesStringFromPath() throws Exception {
 		List tabItems = finder.findControls(allOf(instanceOf(TabItem.class), withText("Dialog")));
 		Widget widget = (Widget) tabItems.get(0);
 		String string = new PathGenerator().getPathAsString(widget);
-		Assert.assertEquals("//Shell/-1//TabFolder/0//TabItem/5", string);
+		assertEquals("//Shell/-1//TabFolder/0//TabItem/5", string);
 	}
 
-	public void testGetsPathFromInvalidString() throws Exception {
+	@Test
+	public void getsPathFromInvalidString() throws Exception {
 		TreePath path = new PathGenerator().getPathFromString("//", display);
-		Assert.assertEquals(null, path);
+		assertEquals(null, path);
 	}
 
-	public void testGetsPathFromString() throws Exception {
+	@Test
+	public void getsPathFromString() throws Exception {
 		TreePath path = new PathGenerator().getPathFromString("//Shell/0//TabFolder/0//TabItem/5", display);
 		List tabItems = finder.findControls(allOf(instanceOf(TabItem.class), withText("Dialog")));
 		TreePath expected = finder.getPath((Widget) tabItems.get(0));
 
-		Assert.assertEquals(expected, path);
+		assertEquals(expected, path);
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		finder = new ControlFinder();
 	}

@@ -11,10 +11,16 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertText;
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -22,13 +28,15 @@ import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
  */
 public class SWTBotListTest extends AbstractSWTTestCase {
 
-	public void testFindsAListWithoutLabel() throws Exception {
+	@Test
+	public void findsAListWithoutLabel() throws Exception {
 		SWTBotList list = bot.list();
 		assertNotNull(list.widget);
 		assertEquals(List.class, list.widget.getClass());
 	}
 
-	public void testSetsAndGetsSingleSelectionByText() throws Exception {
+	@Test
+	public void setsAndGetsSingleSelectionByText() throws Exception {
 		SWTBotList list = bot.listInGroup("List");
 		list.select("Bananas");
 
@@ -36,7 +44,8 @@ public class SWTBotListTest extends AbstractSWTTestCase {
 		assertEquals("Bananas", list.selection()[0]);
 	}
 
-	public void testSetsAndGetsSingleSelectionByIndex() throws Exception {
+	@Test
+	public void setsAndGetsSingleSelectionByIndex() throws Exception {
 		SWTBotList list = bot.listInGroup("List");
 		list.select(3);
 
@@ -44,7 +53,8 @@ public class SWTBotListTest extends AbstractSWTTestCase {
 		assertEquals("Grapefruit", list.selection()[0]);
 	}
 
-	public void testSetsAndGetsMultipleSelectionByText() throws Exception {
+	@Test
+	public void setsAndGetsMultipleSelectionByText() throws Exception {
 		bot.radio("SWT.MULTI").click();
 		SWTBotList list = bot.listInGroup("List");
 		list.select(new String[] { "Grapefruit", "Peaches", "Apricots" });
@@ -55,7 +65,8 @@ public class SWTBotListTest extends AbstractSWTTestCase {
 		assertEquals("Apricots", list.selection()[2]);
 	}
 
-	public void testSetsAndGetsMultipleSelectionByIndex() throws Exception {
+	@Test
+	public void setsAndGetsMultipleSelectionByIndex() throws Exception {
 		bot.radio("SWT.MULTI").click();
 		SWTBotList list = bot.listInGroup("List");
 		list.select(new int[] { 2, 4, 6 });
@@ -66,7 +77,8 @@ public class SWTBotListTest extends AbstractSWTTestCase {
 		assertEquals("Apricots", list.selection()[2]);
 	}
 
-	public void testUnSelectsSelection() throws Exception {
+	@Test
+	public void unSelectsSelection() throws Exception {
 		SWTBotList list = bot.listInGroup("List");
 		list.select(3);
 		assertEquals(1, list.selectionCount());
@@ -74,17 +86,20 @@ public class SWTBotListTest extends AbstractSWTTestCase {
 		assertEquals(0, list.selectionCount());
 	}
 
-	public void testGetsIndexOfItem() throws Exception {
+	@Test
+	public void getsIndexOfItem() throws Exception {
 		SWTBotList list = bot.listInGroup("List");
 		assertEquals(2, list.indexOf("Bananas"));
 	}
 
-	public void testGetsItemAtIndex() throws Exception {
+	@Test
+	public void getsItemAtIndex() throws Exception {
 		SWTBotList list = bot.listInGroup("List");
 		assertEquals("Bananas", list.itemAt(2));
 	}
 
-	public void testSelectionNotifiesListeners() throws Exception {
+	@Test
+	public void selectionNotifiesListeners() throws Exception {
 		SWTBotList list = bot.listInGroup("List");
 		bot.checkBox("Listen").select();
 		bot.button("Clear").click();
@@ -99,7 +114,8 @@ public class SWTBotListTest extends AbstractSWTTestCase {
 		assertTextContains("MouseDown [3]: MouseEvent{List {} ", text.widget);
 	}
 
-	public void testDeSelectNotifiesListeners() throws Exception {
+	@Test
+	public void deSelectNotifiesListeners() throws Exception {
 		SWTBotList list = bot.listInGroup("List");
 		list.select(3);
 		bot.checkBox("Listen").select();
@@ -115,7 +131,8 @@ public class SWTBotListTest extends AbstractSWTTestCase {
 		assertTextContains("MouseDown [3]: MouseEvent{List {} ", text.widget);
 	}
 
-	public void testThrowsExceptionInCaseOfInvalidIndexBasedSelection() throws Exception {
+	@Test
+	public void throwsExceptionInCaseOfInvalidIndexBasedSelection() throws Exception {
 		SWTBot bot = new SWTBot();
 		SWTBotList list = bot.listInGroup("List");
 		try {
@@ -126,7 +143,8 @@ public class SWTBotListTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testThrowsExceptionInCaseOfInvalidTextBasedSelection() throws Exception {
+	@Test
+	public void throwsExceptionInCaseOfInvalidTextBasedSelection() throws Exception {
 		SWTBot bot = new SWTBot();
 		SWTBotList list = bot.listInGroup("List");
 		try {
@@ -137,7 +155,7 @@ public class SWTBotListTest extends AbstractSWTTestCase {
 		}
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		bot = new SWTBot();
 		bot.tabItem("List").activate();

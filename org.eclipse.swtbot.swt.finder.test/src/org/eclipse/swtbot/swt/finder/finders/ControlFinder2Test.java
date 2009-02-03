@@ -14,10 +14,9 @@ package org.eclipse.swtbot.swt.finder.finders;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.instanceOf;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
-
-import junit.framework.Assert;
 
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.widgets.Shell;
@@ -25,6 +24,7 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.utils.TreePath;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -34,19 +34,20 @@ public class ControlFinder2Test extends AbstractSWTTestCase {
 
 	private ControlFinder	finder;
 
-	public void testFindsAllTabItem() throws Exception {
+	@Test
+	public void findsAllTabItem() throws Exception {
 		selectCTabFolder();
 		List tabItems = finder.findControls(instanceOf(CTabItem.class));
-		Assert.assertEquals(3, tabItems.size());
+		assertEquals(3, tabItems.size());
 	}
 
-	public void testGetsControlPath() throws Exception {
+	@Test
+	public void getsControlPath() throws Exception {
 		selectCTabFolder();
-		List labels = finder.findControls(allOf(instanceOf(CTabItem.class), withText(
-				"CTabItem 1")));
+		List labels = finder.findControls(allOf(instanceOf(CTabItem.class), withText("CTabItem 1")));
 		Widget w = (Widget) labels.get(0);
 		TreePath path = finder.getPath(w);
-		Assert.assertEquals(8, path.getSegmentCount());
+		assertEquals(8, path.getSegmentCount());
 	}
 
 	private void selectCTabFolder() {
@@ -59,7 +60,7 @@ public class ControlFinder2Test extends AbstractSWTTestCase {
 		});
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		finder = new ControlFinder();
 	}

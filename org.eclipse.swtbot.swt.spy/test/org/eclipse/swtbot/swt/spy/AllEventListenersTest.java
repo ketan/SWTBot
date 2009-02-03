@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.spy;
 
-import junit.framework.TestCase;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.examples.controlexample.ControlExample;
 import org.eclipse.swt.layout.FillLayout;
@@ -20,12 +18,13 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class AllEventListenersTest extends TestCase {
+public class AllEventListenersTest {
 
 	private Display			display;
 
@@ -37,7 +36,7 @@ public class AllEventListenersTest extends TestCase {
 
 	private ControlExample	controlExample2;
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		display = new Display();
 		createShell1();
 		createShell2();
@@ -62,7 +61,7 @@ public class AllEventListenersTest extends TestCase {
 		shell2.open();
 	}
 
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		while (!(shell1.isDisposed() || shell2.isDisposed()))
 			if (!display.readAndDispatch())
 				display.sleep();
@@ -70,7 +69,7 @@ public class AllEventListenersTest extends TestCase {
 		controlExample2.dispose();
 	}
 
-	public void testListensToAllEvents() throws Exception {
+	@Test public void ListensToAllEvents() throws Exception {
 		Listener listener = new Listener() {
 			public void handleEvent(Event event) {
 				System.out.println(event);

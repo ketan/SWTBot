@@ -10,21 +10,28 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.utils;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-public class TableRowTest extends TestCase  {
+import org.junit.Test;
 
-	public void testHashCodeIsSameForSameTableRows() throws Exception {
+public class TableRowTest {
+
+	@Test
+	public void hashCodeIsSameForSameTableRows() throws Exception {
 		assertEquals(emptyTableRow().hashCode(), emptyTableRow().hashCode());
 		assertEquals(emptyTableRow().hashCode(), emptyTableRow().hashCode());
 		assertEquals(helloWorldRow().hashCode(), helloWorldRow().hashCode());
 	}
 
-	public void testHashCodeIsDifferentForDifferentTableRows() throws Exception {
+	@Test
+	public void hashCodeIsDifferentForDifferentTableRows() throws Exception {
 		assertFalse(helloWorldRow().hashCode() == goodbyWorldRow().hashCode());
 	}
 
-	public void testEqualsForEqualTableRows() throws Exception {
+	@Test
+	public void equalsForEqualTableRows() throws Exception {
 		final TableRow tableRow = emptyTableRow();
 		assertTrue(tableRow.equals(tableRow));
 		assertFalse(tableRow.equals(null));
@@ -33,11 +40,13 @@ public class TableRowTest extends TestCase  {
 		assertTrue(tableRow.equals(emptyTableRow()));
 	}
 
-	public void testEqualsForUnequalTableRows() throws Exception {
+	@Test
+	public void equalsForUnequalTableRows() throws Exception {
 		assertFalse(helloWorldRow().equals(goodbyWorldRow()));
 	}
 
-	public void testToString() throws Exception {
+	@Test
+	public void getsToString() throws Exception {
 		assertEquals("[Hello, world]", helloWorldRow().toString());
 	}
 

@@ -10,27 +10,17 @@
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.ui.test;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
-
 import org.eclipse.swtbot.eclipse.ui.preferences.PreferenceInitializerTest;
+import org.eclipse.swtbot.swt.finder.junit4_5.SWTBotJunit4ClassRunner;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
+@RunWith(SWTBotJunit4ClassRunner.class)
+@SuiteClasses(PreferenceInitializerTest.class)
 public class AllTests {
-
-	public static Test suite() {
-		TestSuite suite = new TestSuite("Test for org.eclipse.swtbot.eclipse.ui.test");
-		//$JUnit-BEGIN$
-
-		// Widgets
-		suite.addTestSuite(PreferenceInitializerTest.class);
-
-		//$JUnit-END$
-
-		return suite;
-	}
 
 }

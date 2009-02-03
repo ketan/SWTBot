@@ -12,9 +12,11 @@
 package org.eclipse.swtbot.swt.finder.matchers;
 
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withLabel;
+import static org.junit.Assert.assertEquals;
 
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -22,12 +24,12 @@ import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
  */
 public class TextLabelMatcherTest extends AbstractSWTTestCase {
 
-
-	public void testToString() throws Exception {
+	@Test
+	public void getsToString() throws Exception {
 		assertEquals("with label (with mnemonic 'SomeLabel')", withLabel("SomeLabel").toString());
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 	}
 

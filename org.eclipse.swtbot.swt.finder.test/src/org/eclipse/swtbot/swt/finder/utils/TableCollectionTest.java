@@ -10,16 +10,22 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.utils;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-public class TableCollectionTest extends TestCase  {
+import org.junit.Test;
 
-	public void testHashCodeIsSameForSameTableCollections() throws Exception {
+public class TableCollectionTest {
+
+	@Test
+	public void hashCodeIsSameForSameTableCollections() throws Exception {
 		assertEquals(emptyTableCollection().hashCode(), emptyTableCollection().hashCode());
 		assertEquals(collection().hashCode(), collection().hashCode());
 	}
 
-	public void testEqualsForSameTableCollections() throws Exception {
+	@Test
+	public void equalsForSameTableCollections() throws Exception {
 		assertTrue(emptyTableCollection().equals(emptyTableCollection()));
 		assertTrue(collection().equals(collection()));
 
@@ -31,7 +37,8 @@ public class TableCollectionTest extends TestCase  {
 		assertFalse(collection().equals(this));
 	}
 
-	public void testToString() throws Exception {
+	@Test
+	public void getsToString() throws Exception {
 		assertEquals("[Hello, world]\n" + "[goodbye, world]\n", collection().toString());
 	}
 

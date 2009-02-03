@@ -12,7 +12,6 @@ package org.eclipse.swtbot.swt.finder.utils.internal;
 
 import java.util.Arrays;
 
-
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.results.IntResult;
 

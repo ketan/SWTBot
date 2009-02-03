@@ -10,34 +10,43 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.resolvers;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class NullResolverTest extends TestCase {
+public class NullResolverTest {
 
-	public void testGetChildren() {
+	@Test
+	public void getChildren() {
 		List children = new NullResolver().getChildren(null);
 		assertTrue(children.isEmpty());
 	}
 
-	public void testResolvesEverything() throws Exception {
+	@Test
+	public void resolvesEverything() throws Exception {
 		assertTrue(new NullResolver().canResolve(null));
 	}
 
-	public void testGetParent() {
+	@Test
+	public void getParent() {
 		assertNull(new NullResolver().getParent(null));
 	}
 
-	public void testHasChildren() {
+	@Test
+	public void hasChildren() {
 		assertFalse(new NullResolver().hasChildren(null));
 	}
 
-	public void testHasParent() {
+	@Test
+	public void hasParent() {
 		assertFalse(new NullResolver().hasParent(null));
 	}
 

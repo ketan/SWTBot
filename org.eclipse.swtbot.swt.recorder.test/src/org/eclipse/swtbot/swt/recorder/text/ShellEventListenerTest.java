@@ -11,6 +11,7 @@
 package org.eclipse.swtbot.swt.recorder.text;
 
 import org.eclipse.swtbot.swt.recorder.AbstractSWTBotRecorderTest;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -18,12 +19,14 @@ import org.eclipse.swtbot.swt.recorder.AbstractSWTBotRecorderTest;
  */
 public class ShellEventListenerTest extends AbstractSWTBotRecorderTest {
 
-	public void testShellActivationRecorded() throws Exception {
+	@Test
+	public void shellActivationRecorded() throws Exception {
 		bot.shell("SWT Custom Controls").activate();
 		assertEvent("bot.shell(\"SWT Custom Controls\").activate();");
 	}
 
-	public void testShellActivationRecorded2() throws Exception {
+	@Test
+	public void shellActivationRecorded2() throws Exception {
 		bot.shell("SWT Controls").activate();
 		assertEvent("bot.shell(\"SWT Controls\").activate();");
 	}

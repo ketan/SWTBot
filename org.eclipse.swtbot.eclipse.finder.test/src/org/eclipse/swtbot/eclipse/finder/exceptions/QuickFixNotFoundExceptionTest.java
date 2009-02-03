@@ -10,7 +10,9 @@
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.finder.exceptions;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 /**
  * Tests the quick fix not found exception.
@@ -18,25 +20,28 @@ import junit.framework.TestCase;
  * @author @author Stephen Paulin &lt;paulin [at] spextreme [dot] com&gt;
  * @version $Id$
  */
-public class QuickFixNotFoundExceptionTest extends TestCase {
+public class QuickFixNotFoundExceptionTest {
 
 	/**
 	 * Item under test.
 	 */
 	QuickFixNotFoundException	fix	= null;
 
-	public void testQuickFixNotFoundExceptionString() {
+	@Test
+	public void quickFixNotFoundExceptionString() {
 		fix = new QuickFixNotFoundException("Message");
 		assertEquals("Message", fix.getMessage());
 	}
 
-	public void testQuickFixNotFoundExceptionStringThrowable() {
+	@Test
+	public void quickFixNotFoundExceptionStringThrowable() {
 		Throwable throwable = new Throwable();
 		fix = new QuickFixNotFoundException(throwable);
 		assertEquals(throwable, fix.getCause());
 	}
 
-	public void testQuickFixNotFoundExceptionThrowable() {
+	@Test
+	public void quickFixNotFoundExceptionThrowable() {
 		Throwable throwable = new Throwable();
 		fix = new QuickFixNotFoundException("Message2", throwable);
 		assertEquals("Message2", fix.getMessage());

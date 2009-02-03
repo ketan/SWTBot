@@ -16,11 +16,12 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 
 /**
  * Screen object to create a new java class.
+ * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
 public class NewJavaClass {
-	
+
 	private SWTEclipseBot	bot	= new SWTEclipseBot();
 
 	public void createClass(String packageName, String className) throws Exception {
@@ -30,7 +31,7 @@ public class NewJavaClass {
 		bot.textWithLabel("Package:").setText(packageName);
 		bot.textWithLabel("Name:").setText(className);
 		bot.button("Finish").click();
-		
+
 		bot.waitUntil(Conditions.shellCloses(shell));
 	}
 }

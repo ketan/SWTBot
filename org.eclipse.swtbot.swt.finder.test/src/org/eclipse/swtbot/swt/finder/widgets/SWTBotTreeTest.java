@@ -12,6 +12,11 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertSameWidget;
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 
 import org.eclipse.swt.widgets.Tree;
@@ -20,6 +25,7 @@ import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.utils.TableCollection;
 import org.eclipse.swtbot.swt.finder.utils.TableRow;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -30,26 +36,31 @@ public class SWTBotTreeTest extends AbstractSWTTestCase {
 	private SWTBot		bot;
 	private SWTBotTree	tree;
 
-	public void testFindsTable() throws Exception {
+	@Test
+	public void findsTable() throws Exception {
 		assertEquals(Tree.class, tree.widget.getClass());
 	}
 
-	public void testGetsRowCount() throws Exception {
+	@Test
+	public void getsRowCount() throws Exception {
 		assertEquals(4, tree.rowCount());
 		assertTrue(tree.hasItems());
 	}
 
-	public void testGetsColumnCount() throws Exception {
+	@Test
+	public void getsColumnCount() throws Exception {
 		assertEquals(0, tree.columnCount());
 	}
 
-	public void testGetsColumnCountOnMultiColumnTree() throws Exception {
+	@Test
+	public void getsColumnCountOnMultiColumnTree() throws Exception {
 		bot.checkBox("Multiple Columns").select();
 		tree = bot.treeInGroup("Tree");
 		assertEquals(4, tree.columnCount());
 	}
 
-	public void testGetsAllColumnHeadings() throws Exception {
+	@Test
+	public void getsAllColumnHeadings() throws Exception {
 		bot.checkBox("Multiple Columns").select();
 		tree = bot.treeInGroup("Tree");
 		ArrayList<String> arrayList = new ArrayList<String>();
@@ -61,7 +72,8 @@ public class SWTBotTreeTest extends AbstractSWTTestCase {
 		assertEquals(arrayList, tree.columns());
 	}
 
-	public void testGetsColumnTextBasedOnRowColumnNumbers() throws Exception {
+	@Test
+	public void getsColumnTextBasedOnRowColumnNumbers() throws Exception {
 		bot.checkBox("Multiple Columns").select();
 		tree = bot.treeInGroup("Tree");
 
@@ -70,7 +82,8 @@ public class SWTBotTreeTest extends AbstractSWTTestCase {
 		assertEquals("today", tree.cell(3, 3));
 	}
 
-	public void testGetsTextCellBasedOnRowNumberColumnText() throws Exception {
+	@Test
+	public void getsTextCellBasedOnRowNumberColumnText() throws Exception {
 		bot.checkBox("Multiple Columns").select();
 		tree = bot.treeInGroup("Tree");
 
@@ -79,18 +92,21 @@ public class SWTBotTreeTest extends AbstractSWTTestCase {
 		assertEquals("today", tree.cell(3, "Modified"));
 	}
 
-	public void testGetsSelectionCount() throws Exception {
+	@Test
+	public void getsSelectionCount() throws Exception {
 		assertEquals(0, tree.selection().columnCount());
 		assertEquals(0, tree.selection().rowCount());
 		assertEquals(0, tree.selectionCount());
 	}
 
-	public void testSetsSelection() throws Exception {
+	@Test
+	public void setsSelection() throws Exception {
 		tree.select(3);
 		assertEquals(1, tree.selectionCount());
 	}
 
-	public void testSetsMultipleSelection() throws Exception {
+	@Test
+	public void setsMultipleSelection() throws Exception {
 		bot.radio("SWT.MULTI").click();
 		tree = bot.treeInGroup("Tree");
 		tree.select(new String[] { "Node 2", "Node 4" });
@@ -100,12 +116,14 @@ public class SWTBotTreeTest extends AbstractSWTTestCase {
 		assertEquals("Node 4", selection.get(1, 0));
 	}
 
-	public void testUnselectsSelection() throws Exception {
+	@Test
+	public void unselectsSelection() throws Exception {
 		tree.unselect();
 		assertEquals(0, tree.selectionCount());
 	}
 
-	public void testGetsSingleSelection() throws Exception {
+	@Test
+	public void getsSingleSelection() throws Exception {
 		bot.checkBox("Multiple Columns").select();
 		tree = bot.treeInGroup("Tree");
 		tree.select(2);
@@ -115,11 +133,13 @@ public class SWTBotTreeTest extends AbstractSWTTestCase {
 		assertEquals(new TableCollection().add(new TableRow(new String[] { "Node 3", "images", "91571", "yesterday" })), selection);
 	}
 
-	public void testFindsAnyTree() throws Exception {
+	@Test
+	public void findsAnyTree() throws Exception {
 		assertSameWidget(tree.widget, bot.tree().widget);
 	}
 
-	public void testGetsMultipleSingleSelection() throws Exception {
+	@Test
+	public void getsMultipleSingleSelection() throws Exception {
 		bot.radio("SWT.MULTI").click();
 		bot.checkBox("Multiple Columns").select();
 		tree = bot.treeInGroup("Tree");
@@ -134,7 +154,8 @@ public class SWTBotTreeTest extends AbstractSWTTestCase {
 		assertEquals(new TableRow(new String[] { "Node 3", "images", "91571", "yesterday" }), selection.get(1));
 	}
 
-	public void testExpandsNode() throws Exception {
+	@Test
+	public void expandsNode() throws Exception {
 		bot.checkBox("Multiple Columns").select();
 		bot.checkBox("Listen").select();
 		Widget notifications = bot.textInGroup("Listeners").widget;
@@ -146,7 +167,8 @@ public class SWTBotTreeTest extends AbstractSWTTestCase {
 				notifications);
 	}
 
-	public void testExpandsNodeToMax() throws Exception {
+	@Test
+	public void expandsNodeToMax() throws Exception {
 		bot.checkBox("Multiple Columns").select();
 		bot.checkBox("Listen").select();
 		tree = bot.treeInGroup("Tree");
@@ -158,13 +180,15 @@ public class SWTBotTreeTest extends AbstractSWTTestCase {
 				.textInGroup("Listeners").widget);
 	}
 
-	public void testGetsAllTreeItems() throws Exception {
+	@Test
+	public void getsAllTreeItems() throws Exception {
 		SWTBotTreeItem[] items = tree.getAllItems();
 		for (int i = 0; i < items.length; i++)
 			assertEquals("Node " + (i + 1), items[i].getText());
 	}
 
-	public void testClicksOnANode() throws Exception {
+	@Test
+	public void clicksOnANode() throws Exception {
 		bot.checkBox("Listen").select();
 		SWTBotTreeItem node = bot.tree().expandNode("Node 3").expandNode("Node 3.1");
 		bot.button("Clear").click();
@@ -176,7 +200,8 @@ public class SWTBotTreeTest extends AbstractSWTTestCase {
 		assertTextContains("MouseUp [4]: MouseEvent{Tree {}", listener);
 	}
 
-	public void testDoubleClicksOnANode() throws Exception {
+	@Test
+	public void doubleClicksOnANode() throws Exception {
 		bot.checkBox("Listen").select();
 		SWTBotTreeItem node = bot.tree().expandNode("Node 3").expandNode("Node 3.1");
 		bot.button("Clear").click();
@@ -191,7 +216,7 @@ public class SWTBotTreeTest extends AbstractSWTTestCase {
 		assertTextContains("MouseDoubleClick [8]: MouseEvent{Tree {} ", listener);
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		bot = new SWTBot();
 		bot.tabItem("Tree").activate();

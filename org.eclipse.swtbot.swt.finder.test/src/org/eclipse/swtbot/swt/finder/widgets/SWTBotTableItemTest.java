@@ -10,7 +10,15 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertText;
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.junit.Test;
 
 /**
  * @author Vincent MAHE &lt;vmahe [at] free [dot]fr&gt;
@@ -21,7 +29,8 @@ public class SWTBotTableItemTest extends AbstractSWTTestCase {
 	private SWTBotTable	table;
 	private SWTBotText	listeners;
 
-	public void testCanRightClickOnALine() throws Exception {
+	@Test
+	public void canRightClickOnALine() throws Exception {
 		SWTBotTableItem line = table.getTableItem("Index:2");
 		bot.button("Clear").click();
 		line.contextMenu("getItem(Point) on mouse coordinates").click();
@@ -30,17 +39,20 @@ public class SWTBotTableItemTest extends AbstractSWTTestCase {
 		assertTextContains("getItem(Point(Point {", listeners);
 	}
 
-	public void testCanFindALine() throws Exception {
+	@Test
+	public void canFindALine() throws Exception {
 		SWTBotTableItem line = table.getTableItem("Index:2");
 		assertText("Index:2", line);
 	}
 
-	public void testCanGetLineText() throws Exception {
+	@Test
+	public void canGetLineText() throws Exception {
 		SWTBotTableItem line = table.getTableItem("Index:2");
 		assertEquals("Index:2", line.getText());
 	}
 
-	public void testCheckingATableThatDoesNotHaveCheckStyleBitsThrowsException() throws Exception {
+	@Test
+	public void checkingATableThatDoesNotHaveCheckStyleBitsThrowsException() throws Exception {
 		try {
 			table.getTableItem("Index:2").check();
 			fail("Expecting an exception");
@@ -49,7 +61,8 @@ public class SWTBotTableItemTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testCanCheckALine() throws Exception {
+	@Test
+	public void canCheckALine() throws Exception {
 		bot.checkBox("SWT.CHECK").select();
 		table = bot.table();
 		SWTBotTableItem item = table.getTableItem("Index:2");
@@ -59,7 +72,8 @@ public class SWTBotTableItemTest extends AbstractSWTTestCase {
 		assertTextContains("data=null item=TableItem {Index:2} detail=32", listeners);
 	}
 
-	public void testCanUnCheckALine() throws Exception {
+	@Test
+	public void canUnCheckALine() throws Exception {
 		bot.checkBox("SWT.CHECK").select();
 		table = bot.table();
 		SWTBotTableItem item = table.getTableItem("Index:2");
@@ -69,7 +83,8 @@ public class SWTBotTableItemTest extends AbstractSWTTestCase {
 		assertTextContains("data=null item=TableItem {Index:2} detail=32", listeners);
 	}
 
-	public void testCanToggleALine() throws Exception {
+	@Test
+	public void canToggleALine() throws Exception {
 		bot.checkBox("SWT.CHECK").select();
 		table = bot.table();
 		SWTBotTableItem line = table.getTableItem("Index:2");
@@ -80,14 +95,16 @@ public class SWTBotTableItemTest extends AbstractSWTTestCase {
 		assertFalse(line.isChecked());
 	}
 
-	public void testCanSelectALine() throws Exception {
+	@Test
+	public void canSelectALine() throws Exception {
 		SWTBotTableItem line = table.getTableItem("Index:2");
 		bot.button("Clear").click();
 		line.select();
 		assertTextContains("Selection [13]: SelectionEvent{Table {} ", listeners);
 	}
 
-	public void testCanClickALine() throws Exception {
+	@Test
+	public void canClickALine() throws Exception {
 		SWTBotTableItem line = table.getTableItem("Index:2");
 		bot.button("Clear").click();
 		line.click();
@@ -95,7 +112,7 @@ public class SWTBotTableItemTest extends AbstractSWTTestCase {
 		assertTextContains("Selection [13]: SelectionEvent{Table {} ", listeners);
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		bot.tabItem("Table").activate();
 		bot.checkBox("Horizontal Fill").select();

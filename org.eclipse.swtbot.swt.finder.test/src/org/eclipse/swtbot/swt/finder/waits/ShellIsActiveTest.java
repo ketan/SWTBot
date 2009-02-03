@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -27,10 +28,11 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 public class ShellIsActiveTest extends AbstractSWTTestCase {
 
 	private static final String	TEXT	= "this should close in a while" + ShellIsActiveTest.class.getSimpleName();
-	private Shell	shell;
+	private Shell				shell;
 
 	@SuppressWarnings("unchecked")
-	public void testWaitsForShellToBecomeActive() throws Exception {
+	@Test
+	public void waitsForShellToBecomeActive() throws Exception {
 
 		long start = System.currentTimeMillis();
 		new SWTBot().waitUntil(Conditions.shellIsActive(TEXT));
@@ -40,7 +42,7 @@ public class ShellIsActiveTest extends AbstractSWTTestCase {
 		assertThat(time, allOf(lessThan(200), greaterThanOrEqualTo(0)));
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		shell = createShell(TEXT);
 

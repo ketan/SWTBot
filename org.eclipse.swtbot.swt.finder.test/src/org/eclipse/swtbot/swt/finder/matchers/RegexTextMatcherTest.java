@@ -12,37 +12,45 @@
 package org.eclipse.swtbot.swt.finder.matchers;
 
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withRegex;
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.hamcrest.Matcher;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class RegexTextMatcherTest extends TestCase {
+public class RegexTextMatcherTest {
 
-	public void testCannotNotMatchText() throws Exception {
+	@Test
+	public void cannotNotMatchText() throws Exception {
 		Matcher matcher = withRegex("Some Text");
 		assertFalse(matcher.matches(new Object()));
 	}
 
-	public void testDoesNotMatchNullText() throws Exception {
+	@Test
+	public void doesNotMatchNullText() throws Exception {
 		Matcher matcher = withRegex("Some Text");
 		assertFalse(matcher.matches(new ObjectWithGetText(null)));
 	}
 
-	public void testDoesNotMatchRegex() throws Exception {
+	@Test
+	public void doesNotMatchRegex() throws Exception {
 		Matcher matcher = withRegex("Some (.*) Text");
 		assertFalse(matcher.matches(new ObjectWithGetText("Some text that should not match")));
 	}
 
-	public void testMatchesRegex() throws Exception {
+	@Test
+	public void matchesRegex() throws Exception {
 		Matcher matcher = withRegex("Some (.*) Text");
 		assertTrue(matcher.matches(new ObjectWithGetText("Some long string Text")));
 	}
 
-	public void testToString() throws Exception {
+	@Test
+	public void getsToString() throws Exception {
 		Matcher matcher = withRegex("Some Text");
 		assertEquals("with regex 'Some Text'", matcher.toString());
 	}

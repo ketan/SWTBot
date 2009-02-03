@@ -14,97 +14,96 @@ package org.eclipse.swtbot.generator;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItem;
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swtbot.swt.finder.ReferenceBy;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class MethodGeneratorTest extends TestCase {
+public class MethodGeneratorTest {
 
 	private MethodGenerator	inGroup;
 	private MethodGenerator	withTextInGroup;
 	private MethodGenerator	withStyleWithTextInGroup;
 	private MethodGenerator	withStyle;
 
-	public void testGeneratesMethodArgumentsGivenASingleReference() throws Exception {
+	@Test
+	public void generatesMethodArgumentsGivenASingleReference() throws Exception {
 		assertThat(inGroup.methodArguments(), equalTo("String inGroup"));
 	}
 
-	public void testGeneratesMethodArgumentsGivenTwoReferences() throws Exception {
+	@Test
+	public void generatesMethodArgumentsGivenTwoReferences() throws Exception {
 		assertThat(withTextInGroup.methodArguments(), equalTo("String text, String inGroup"));
 	}
 
-	public void testGeneratesMethodContentsWithIndexGivenASingleReference() throws Exception {
-		assertEquals("	@SuppressWarnings(\"unchecked\")\n" + 
-				"	public SWTBotButton buttonInGroup(String inGroup, int index) {\n" + 
-				"		Matcher matcher = allOf(widgetOfType(Button.class), inGroup(inGroup));\n" +
-				"		return new SWTBotButton((Button) widget(matcher, index), matcher);\n" +
-				"	}\n"
-				, inGroup.methodContentsWithIndex());
+	@Test
+	public void generatesMethodContentsWithIndexGivenASingleReference() throws Exception {
+		assertEquals("	@SuppressWarnings(\"unchecked\")\n" + "	public SWTBotButton buttonInGroup(String inGroup, int index) {\n"
+				+ "		Matcher matcher = allOf(widgetOfType(Button.class), inGroup(inGroup));\n"
+				+ "		return new SWTBotButton((Button) widget(matcher, index), matcher);\n" + "	}\n", inGroup.methodContentsWithIndex());
 	}
 
-	public void testGeneratesMethodContentsWithIndexGivenTwoReferences() throws Exception {
-		assertEquals("	@SuppressWarnings(\"unchecked\")\n" +
-				"	public SWTBotButton buttonInGroup(String text, String inGroup, int index) {\n" + 
-				"		Matcher matcher = allOf(widgetOfType(Button.class), withText(text), inGroup(inGroup));\n" +
-				"		return new SWTBotButton((Button) widget(matcher, index), matcher);\n" + 
-				"	}\n"
-				, withTextInGroup.methodContentsWithIndex());
+	@Test
+	public void generatesMethodContentsWithIndexGivenTwoReferences() throws Exception {
+		assertEquals("	@SuppressWarnings(\"unchecked\")\n"
+				+ "	public SWTBotButton buttonInGroup(String text, String inGroup, int index) {\n"
+				+ "		Matcher matcher = allOf(widgetOfType(Button.class), withText(text), inGroup(inGroup));\n"
+				+ "		return new SWTBotButton((Button) widget(matcher, index), matcher);\n" + "	}\n", withTextInGroup
+				.methodContentsWithIndex());
 	}
 
-	public void testGeneratesMethodContentsWithIndexAndStyleGivenTwoReferences() throws Exception {
+	@Test
+	public void generatesMethodContentsWithIndexAndStyleGivenTwoReferences() throws Exception {
 		assertEquals(
-				"	@SuppressWarnings(\"unchecked\")\n" +
-				"	public SWTBotTree treeInGroup(String text, String inGroup, int index) {\n" +
-				"		Matcher matcher = allOf(widgetOfType(Tree.class), withText(text), inGroup(inGroup), withStyle(SWT.FOO_STYLE, \"SWT.FOO_STYLE\"));\n" +
-				"		return new SWTBotTree((Tree) widget(matcher, index), matcher);\n" +
-				"	}\n"
-				, withStyleWithTextInGroup.methodContentsWithIndex());
+				"	@SuppressWarnings(\"unchecked\")\n"
+						+ "	public SWTBotTree treeInGroup(String text, String inGroup, int index) {\n"
+						+ "		Matcher matcher = allOf(widgetOfType(Tree.class), withText(text), inGroup(inGroup), withStyle(SWT.FOO_STYLE, \"SWT.FOO_STYLE\"));\n"
+						+ "		return new SWTBotTree((Tree) widget(matcher, index), matcher);\n" + "	}\n", withStyleWithTextInGroup
+						.methodContentsWithIndex());
 	}
 
-	public void testGeneratesMethodContentsWithStyleWithNoReferences() throws Exception {
-		assertEquals("	@SuppressWarnings(\"unchecked\")\n" + 
-				"	public SWTBotTree tree(int index) {\n" +
-				"		Matcher matcher = allOf(widgetOfType(Tree.class), withStyle(SWT.FOO_STYLE, \"SWT.FOO_STYLE\"));\n" +
-				"		return new SWTBotTree((Tree) widget(matcher, index), matcher);\n" +
-				"	}\n"
-				, withStyle.methodContentsWithIndex());
+	@Test
+	public void generatesMethodContentsWithStyleWithNoReferences() throws Exception {
+		assertEquals("	@SuppressWarnings(\"unchecked\")\n" + "	public SWTBotTree tree(int index) {\n"
+				+ "		Matcher matcher = allOf(widgetOfType(Tree.class), withStyle(SWT.FOO_STYLE, \"SWT.FOO_STYLE\"));\n"
+				+ "		return new SWTBotTree((Tree) widget(matcher, index), matcher);\n" + "	}\n", withStyle.methodContentsWithIndex());
 	}
 
-	public void testGeneratesMethodContentsWithoutIndexGivenASingleReference() throws Exception {
-		assertEquals(
-				"	public SWTBotButton buttonInGroup(String inGroup) {\n" + 
-				"		return buttonInGroup(inGroup, 0);\n" 
-				+ "	}\n", inGroup
+	@Test
+	public void generatesMethodContentsWithoutIndexGivenASingleReference() throws Exception {
+		assertEquals("	public SWTBotButton buttonInGroup(String inGroup) {\n" + "		return buttonInGroup(inGroup, 0);\n" + "	}\n", inGroup
 				.methodContents());
 	}
 
-	public void testGeneratesMethodContentsWithoutIndexGivenTwoReferences() throws Exception {
-		assertEquals(
-				"	public SWTBotButton buttonInGroup(String text, String inGroup) {\n"
-				+ "		return buttonInGroup(text, inGroup, 0);\n"
+	@Test
+	public void generatesMethodContentsWithoutIndexGivenTwoReferences() throws Exception {
+		assertEquals("	public SWTBotButton buttonInGroup(String text, String inGroup) {\n" + "		return buttonInGroup(text, inGroup, 0);\n"
 				+ "	}\n", withTextInGroup.methodContents());
 	}
 
-	public void testGeneratesImports() throws Exception {
+	@Test
+	public void generatesImports() throws Exception {
 		assertThat(inGroup.imports(), hasItem("import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton"));
 		assertThat(inGroup.imports(), hasItem("import org.eclipse.swt.widgets.Button"));
 	}
 
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		inGroup = new MethodGenerator(SWTBotButton.class, Button.class, "button", "SWT.NONE", ReferenceBy.IN_GROUP);
 		withTextInGroup = new MethodGenerator(SWTBotButton.class, Button.class, "button", "SWT.NONE", ReferenceBy.TEXT,
 				ReferenceBy.IN_GROUP);
 		withStyle = new MethodGenerator(SWTBotTree.class, Tree.class, "tree", "SWT.FOO_STYLE", ReferenceBy.NONE);
-		withStyleWithTextInGroup = new MethodGenerator(SWTBotTree.class, Tree.class, "tree", "SWT.FOO_STYLE",
-				ReferenceBy.TEXT, ReferenceBy.IN_GROUP);
+		withStyleWithTextInGroup = new MethodGenerator(SWTBotTree.class, Tree.class, "tree", "SWT.FOO_STYLE", ReferenceBy.TEXT,
+				ReferenceBy.IN_GROUP);
 	}
 
 }

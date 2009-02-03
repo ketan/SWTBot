@@ -12,7 +12,6 @@ package org.eclipse.swtbot.swt.finder.waits;
 
 import java.util.List;
 
-
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.finders.MenuFinder;

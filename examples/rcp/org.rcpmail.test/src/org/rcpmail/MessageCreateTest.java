@@ -22,31 +22,32 @@ import org.eclipse.swtbot.swt.finder.finders.ChildrenControlFinder;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem;
 import org.hamcrest.Matcher;
+import org.junit.Test;
 
 public class MessageCreateTest extends SWTBotEclipseTestCase {
 
-	public void testCreatesAnotherMessageWindow() throws Exception {
+	@Test public void CreatesAnotherMessageWindow() throws Exception {
 		assertEquals(2, viewCount());
 		bot.menu("File").menu("Open Another Message View").click();
 
 		assertEquals(3, viewCount());
 	}
 
-	public void testClosesAllMessageWindows() throws Exception {
+	@Test public void ClosesAllMessageWindows() throws Exception {
 		bot.view("Message").close();
 		bot.view("Message").close();
 
 		assertEquals(1, viewCount());
 	}
 
-	public void testMyMailBoxContainsDrafts() throws Exception {
+	@Test public void MyMailBoxContainsDrafts() throws Exception {
 		SWTBotTree mailbox = mailBox();
 		SWTBotTreeItem myMailBox = mailbox.expandNode("me@this.com");
 		assertTrue(myMailBox.getNodes().contains("Drafts"));
 	}
 
 	// oops this fails
-	public void testOtherMailBoxContainsDrafts() throws Exception {
+	@Test public void OtherMailBoxContainsDrafts() throws Exception {
 		SWTBotTree mailbox = mailBox();
 		SWTBotTreeItem otherMailBox = mailbox.expandNode("other@aol.com");
 		assertTrue(otherMailBox.getNodes().contains("Drafts"));

@@ -10,20 +10,29 @@
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.finder.widgets;
 
+import static org.eclipse.swtbot.swt.finder.SWTBotAssert.assertContains;
+import static org.eclipse.swtbot.swt.finder.SWTBotAssert.assertDoesNotContain;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.swtbot.eclipse.finder.SWTBotEclipseTestCase;
+import org.eclipse.swtbot.eclipse.finder.SWTEclipseBot;
 import org.eclipse.swtbot.eclipse.finder.widgets.helpers.NewJavaClass;
 import org.eclipse.swtbot.eclipse.finder.widgets.helpers.NewJavaProject;
 import org.eclipse.swtbot.eclipse.finder.widgets.helpers.PackageExplorerView;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotEclipseEditorTest extends SWTBotEclipseTestCase {
+public class SWTBotEclipseEditorTest {
 
 	private static final String	PROJECT_NAME		= "FooBarProject";
 	private static final String	PACKAGE_NAME		= "org.eclipse.swtbot.eclipse.test";
@@ -34,8 +43,10 @@ public class SWTBotEclipseEditorTest extends SWTBotEclipseTestCase {
 	NewJavaProject				javaProject			= new NewJavaProject();
 	PackageExplorerView			packageExplorerView	= new PackageExplorerView();
 	private SWTBotEclipseEditor	editor;
+	private SWTEclipseBot	bot;
 
-	public void testGetsAutoCompleteProposals() throws Exception {
+	@Test
+	public void getsAutoCompleteProposals() throws Exception {
 		editor.navigateTo(3, 0);
 		List autoCompleteProposals = editor.getAutoCompleteProposals("JFr");
 		assertEquals(2, autoCompleteProposals.size());
@@ -44,19 +55,18 @@ public class SWTBotEclipseEditorTest extends SWTBotEclipseTestCase {
 		assertTrue(string.equals("JFr()  void - Method stub") || string.equals("JFr() : void - Method stub"));
 	}
 
-	public void testCanAutoCompleteProposals() throws Exception {
+	@Test
+	public void canAutoCompleteProposals() throws Exception {
 		editor.navigateTo(3, 0);
 		assertDoesNotContain("public static void main", editor.getText());
 		editor.autoCompleteProposal("main", "main - main method");
 		assertContains("public static void main", editor.getText());
 	}
 
-	public static void assertDoesNotContain() {
 
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
+		bot = new SWTEclipseBot();
 		closeWelcomePage();
 		javaProject.createProject(PROJECT_NAME);
 
@@ -72,8 +82,8 @@ public class SWTBotEclipseEditorTest extends SWTBotEclipseTestCase {
 		}
 	}
 
-	protected void tearDown() throws Exception {
-		super.tearDown();
+	@After
+	public void tearDown() throws Exception {
 		saveAndCloseAllEditors();
 		packageExplorerView.deleteProject(PROJECT_NAME);
 	}
@@ -89,7 +99,8 @@ public class SWTBotEclipseEditorTest extends SWTBotEclipseTestCase {
 		}
 	}
 
-	public void testIsActiveIsTrueForActiveEditor() throws Exception {
+	@Test
+	public void isActiveIsTrueForActiveEditor() throws Exception {
 		javaClass.createClass("com.foo.example", "FooClass");
 		javaClass.createClass("com.foo.example", "BarClass");
 		javaClass.createClass("com.foo.example", "BazClass");

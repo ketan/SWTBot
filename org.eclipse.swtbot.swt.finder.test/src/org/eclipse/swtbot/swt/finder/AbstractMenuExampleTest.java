@@ -11,7 +11,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder;
 
-
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.MenuFinder;
@@ -31,7 +30,7 @@ public abstract class AbstractMenuExampleTest extends AbstractSWTTestCase {
 		super();
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		menuFinder = new MenuFinder();
 	}

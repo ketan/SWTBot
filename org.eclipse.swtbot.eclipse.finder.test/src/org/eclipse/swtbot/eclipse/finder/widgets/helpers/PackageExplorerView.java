@@ -26,7 +26,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 
 /**
  * Screen object that represents the operations that can be performed on the package explorer view.
- *
+ * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */

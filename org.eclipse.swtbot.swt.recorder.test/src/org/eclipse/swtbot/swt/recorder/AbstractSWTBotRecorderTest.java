@@ -13,11 +13,9 @@ package org.eclipse.swtbot.swt.recorder;
 import java.util.Iterator;
 import java.util.List;
 
-
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
-import org.eclipse.swtbot.swt.recorder.SWTBotRecorder;
 import org.eclipse.swtbot.swt.recorder.generators.SWTBotAction;
 import org.eclipse.swtbot.swt.recorder.listeners.ActionList;
 
@@ -35,7 +33,7 @@ public abstract class AbstractSWTBotRecorderTest extends AbstractSWTTestCase {
 		super();
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		bot = new SWTBot();
 		if (bot.activeShell().widget == controlShell)
@@ -48,7 +46,7 @@ public abstract class AbstractSWTBotRecorderTest extends AbstractSWTTestCase {
 		return "Button";
 	}
 
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		recorder.stop();
 		super.tearDown();
 	}

@@ -12,12 +12,17 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
-
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -27,37 +32,42 @@ public class SWTBotComboTest extends AbstractSWTTestCase {
 
 	private SWTBot	bot;
 
-	public void testFindsCombo() throws Exception {
+	@Test
+	public void findsCombo() throws Exception {
 		SWTBotCombo combo = bot.comboBoxInGroup("Background Mode on Parent");
 		assertNotNull(combo.widget);
 	}
 
-	public void testGetItems() throws Exception {
+	@Test
+	public void getItems() throws Exception {
 		bot.tabItem("Combo").activate();
 		SWTBotCombo comboBox = bot.comboBoxInGroup("Combo");
 		assertEquals(9, comboBox.itemCount());
 		List items = Arrays.asList(comboBox.items());
 		assertEquals(9, items.size());
-		for(int i = 1; i < 9; i++)
-			assertTrue("Expected to contain: " + "Line "+i, items.contains("Line " + i));
+		for (int i = 1; i < 9; i++)
+			assertTrue("Expected to contain: " + "Line " + i, items.contains("Line " + i));
 		assertTrue("Expected to contain: " + "Longest Line In List", items.contains("Longest Line In List"));
 	}
 
-	public void testChangeAndVerifiesSelectionInComboByText() throws Exception {
+	@Test
+	public void changeAndVerifiesSelectionInComboByText() throws Exception {
 		bot.tabItem("Combo").activate();
 		SWTBotCombo comboBox = bot.comboBoxInGroup("Combo");
 		comboBox.setSelection("Line 7");
 		assertEquals("Line 7", comboBox.selection());
 	}
 
-	public void testChangeAndVerifiesSelectionInComboByIndex() throws Exception {
+	@Test
+	public void changeAndVerifiesSelectionInComboByIndex() throws Exception {
 		SWTBotCombo comboBox = bot.comboBoxInGroup("Combo");
 		comboBox.setSelection(2);
 		assertEquals(2, comboBox.selectionIndex());
 		assertEquals("Line 3", comboBox.selection());
 	}
 
-	public void testThrowsExceptionInCaseOfInvalidIndexBasedSelection() throws Exception {
+	@Test
+	public void throwsExceptionInCaseOfInvalidIndexBasedSelection() throws Exception {
 		SWTBotCombo comboBox = bot.comboBoxInGroup("Combo");
 		try {
 			comboBox.setSelection(100);
@@ -67,7 +77,8 @@ public class SWTBotComboTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testThrowsExceptionInCaseOfInvalidTextBasedSelection() throws Exception {
+	@Test
+	public void throwsExceptionInCaseOfInvalidTextBasedSelection() throws Exception {
 		SWTBotCombo comboBox = bot.comboBoxInGroup("Combo");
 		try {
 			comboBox.setSelection("non existent item");
@@ -77,14 +88,16 @@ public class SWTBotComboTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testChangeAndVerifiesTextInCombo() throws Exception {
+	@Test
+	public void changeAndVerifiesTextInCombo() throws Exception {
 		bot.checkBox("SWT.READ_ONLY").deselect();
 		SWTBotCombo comboBox = bot.comboBoxInGroup("Combo");
 		comboBox.setText("New Text");
 		assertEquals("New Text", comboBox.getText());
 	}
 
-	public void testThrowsExceptionInCaseOfChangeTextOfReadOnlyCombo() throws Exception {
+	@Test
+	public void throwsExceptionInCaseOfChangeTextOfReadOnlyCombo() throws Exception {
 		bot.checkBox("SWT.READ_ONLY").select();
 		SWTBotCombo comboBox = bot.comboBoxInGroup("Combo");
 		try {
@@ -92,14 +105,14 @@ public class SWTBotComboTest extends AbstractSWTTestCase {
 			fail("Was expecting an exception");
 		} catch (RuntimeException e) {
 			assertEquals("This combo box is read-only.", e.getMessage());
-		}finally{
+		} finally {
 			bot.checkBox("SWT.READ_ONLY").deselect();
 		}
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
-		bot = new  SWTBot();
+		bot = new SWTBot();
 		bot.tabItem("Combo").activate();
 	}
 

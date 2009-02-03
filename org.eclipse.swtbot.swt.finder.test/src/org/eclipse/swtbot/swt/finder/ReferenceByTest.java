@@ -20,19 +20,23 @@ import static org.eclipse.swtbot.swt.finder.ReferenceBy.TEXT;
 import static org.eclipse.swtbot.swt.finder.ReferenceBy.TOOLTIP;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class ReferenceByTest extends TestCase {
+public class ReferenceByTest {
 
-	public void testMethodArguments() throws Exception {
+	@Test
+	public void methodArguments() throws Exception {
 		assertThat(IN_GROUP.methodArgument(), equalTo("String inGroup"));
 		assertThat(LABEL.methodArgument(), equalTo("String label"));
 		assertThat(NONE.methodArgument(), equalTo(""));
@@ -41,7 +45,8 @@ public class ReferenceByTest extends TestCase {
 		assertThat(ID_KEY_VALUE.methodArgument(), equalTo("String key, String value"));
 	}
 
-	public void testMethodNameSuffix() throws Exception {
+	@Test
+	public void methodNameSuffix() throws Exception {
 		assertThat(IN_GROUP.methodNameSuffix(), equalTo("InGroup"));
 		assertThat(LABEL.methodNameSuffix(), equalTo("WithLabel"));
 		assertThat(NONE.methodNameSuffix(), equalTo(""));
@@ -51,7 +56,8 @@ public class ReferenceByTest extends TestCase {
 		assertThat(ID_KEY_VALUE.methodNameSuffix(), equalTo("WithId"));
 	}
 
-	public void testMatcherMethod() throws Exception {
+	@Test
+	public void matcherMethod() throws Exception {
 		assertThat(IN_GROUP.matcherMethod(), equalTo("inGroup(inGroup)"));
 		assertThat(LABEL.matcherMethod(), equalTo("withLabel(label)"));
 		assertThat(NONE.matcherMethod(), equalTo(""));
@@ -61,7 +67,8 @@ public class ReferenceByTest extends TestCase {
 		assertThat(ID_KEY_VALUE.matcherMethod(), equalTo("withId(key, value)"));
 	}
 
-	public void testCompatibilityWithOtherReferences() throws Exception {
+	@Test
+	public void compatibilityWithOtherReferences() throws Exception {
 		assertFalse(TEXT.isCompatibleWith(LABEL));
 		assertFalse(TEXT.isCompatibleWith(TOOLTIP));
 		assertFalse(TEXT.isCompatibleWith(MNEMONIC));
@@ -94,7 +101,8 @@ public class ReferenceByTest extends TestCase {
 		assertFalse(NONE.isCompatibleWith(null));
 	}
 
-	public void testGeneratesCombinations() throws Exception {
+	@Test
+	public void generatesCombinations() throws Exception {
 		List<List<ReferenceBy>> combinations = ReferenceBy.getCombinations(ReferenceBy.values());
 		assertEquals(12, combinations.size());
 		assertTrue(combinations.contains(Arrays.asList(TEXT)));

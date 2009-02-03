@@ -30,7 +30,7 @@ public class Setup {
 
 	private Controls	controls;
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		final boolean hasSetup[] = new boolean[] { false };
 
 		if (shouldRunInSeparateThread())

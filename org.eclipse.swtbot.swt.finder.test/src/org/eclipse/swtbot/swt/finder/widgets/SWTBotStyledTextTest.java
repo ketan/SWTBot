@@ -11,6 +11,11 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertContains;
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.Bullet;
@@ -22,6 +27,7 @@ import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.utils.Position;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -29,27 +35,31 @@ import org.eclipse.swtbot.swt.finder.utils.Position;
  */
 public class SWTBotStyledTextTest extends AbstractSWTTestCase {
 
-	private SWTBot bot;
-	private SWTBotStyledText styledText;
+	private SWTBot				bot;
+	private SWTBotStyledText	styledText;
 
-	public void testFindsStyledText() throws Exception {
+	@Test
+	public void findsStyledText() throws Exception {
 		assertTextContains("The quick brown fox", styledText.widget);
 	}
 
-	public void testSelectsRange() throws Exception {
+	@Test
+	public void selectsRange() throws Exception {
 		styledText.setText("hello world\n" + "it is a very good day today\n" + "good bye world\n" + "it was nice to meet you");
 		styledText.selectRange(1, 0, 27);
 		assertEquals("it is a very good day today", styledText.getSelection());
 	}
 
-	public void testFindsTextStyle() throws Exception {
+	@Test
+	public void findsTextStyle() throws Exception {
 		setStyles();
 		StyleRange range = styledText.getStyle(1, 2);
 		assertEquals(SWT.BOLD, range.fontStyle);
 		assertTrue(range.underline);
 	}
 
-	public void testFindsStylesRangeInARange() throws Exception {
+	@Test
+	public void findsStylesRangeInARange() throws Exception {
 		setStyles();
 		StyleRange[] styles = styledText.getStyles(1, 0, 30);
 		assertEquals(2, styles.length);
@@ -71,12 +81,14 @@ public class SWTBotStyledTextTest extends AbstractSWTTestCase {
 		bot.buttonWithLabel("Italic").click();
 	}
 
-	public void testSetsText() throws Exception {
+	@Test
+	public void setsText() throws Exception {
 		styledText.setText("hello world");
 		assertTextContains("hello world", styledText.widget);
 	}
 
-	public void testSends_CTRL_1_Notification() throws Exception {
+	@Test
+	public void sends_CTRL_1_Notification() throws Exception {
 		try {
 			bot.checkBox("Listen").click();
 			SWTBotStyledText styledText = bot.styledTextInGroup("StyledText");
@@ -92,19 +104,21 @@ public class SWTBotStyledTextTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testNavigatesToAParticularLocation() throws Exception {
+	@Test
+	public void navigatesToAParticularLocation() throws Exception {
 		styledText.setText("hello world\n" + "it is a very good day today\n" + "good bye world\n" + "it was nice to meet you");
 		styledText.navigateTo(1, 17);
 		assertEquals(new Position(1, 17), styledText.cursorPosition());
 	}
 
-	public void testTypesTextAtALocation() throws Exception {
+	@Test
+	public void typesTextAtALocation() throws Exception {
 		styledText.typeText(1, 0, "---typed text---\n");
 		assertTextContains("---typed text---", styledText.widget);
 	}
 
-
-	public void testInsertsTextAtALocation() throws Exception {
+	@Test
+	public void insertsTextAtALocation() throws Exception {
 		styledText.insertText(1, 0, "---inserted text---\n");
 		assertTextContains("---inserted text---", styledText.widget);
 	}
@@ -115,13 +129,15 @@ public class SWTBotStyledTextTest extends AbstractSWTTestCase {
 		assertTextContains("---\n\typed text\n---\n", styledText.widget);
 	}
 
-	public void testGetsTextOnCurrentLine() throws Exception {
+	@Test
+	public void getsTextOnCurrentLine() throws Exception {
 		styledText.setText("hello world\n" + "it is a very good day today\n" + "good bye world\n" + "it was nice to meet you");
 		styledText.navigateTo(1, 0);
 		assertEquals("it is a very good day today", styledText.getTextOnCurrentLine());
 	}
 
-	public void testGetsBullet() throws Exception {
+	@Test
+	public void getsBullet() throws Exception {
 
 		styledText.setText("hello world\n" + "it is a very good day today\n" + "good bye world\n" + "it was nice to meet you");
 		styledText.navigateTo(1, 0);
@@ -139,9 +155,9 @@ public class SWTBotStyledTextTest extends AbstractSWTTestCase {
 		assertTrue(styledText.hasBulletOnCurrentLine());
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
-		bot = new  SWTBot();
+		bot = new SWTBot();
 		bot.shell("SWT Custom Controls").activate();
 		bot.tabItem("StyledText").activate();
 		styledText = bot.styledTextInGroup("StyledText");

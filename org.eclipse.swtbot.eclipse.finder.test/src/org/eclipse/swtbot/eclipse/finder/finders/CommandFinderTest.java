@@ -16,8 +16,8 @@ import static org.hamcrest.Matchers.equalTo;
 import java.util.List;
 
 import org.eclipse.swtbot.eclipse.finder.SWTBotEclipseTestCase;
-import org.eclipse.swtbot.eclipse.finder.finders.CommandFinder;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotCommand;
+import org.junit.Test;
 
 /**
  * Tests the command finder.
@@ -27,7 +27,8 @@ import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotCommand;
  */
 public class CommandFinderTest extends SWTBotEclipseTestCase {
 
-	public void testFindCommandIMatcher() throws Exception {
+	@Test
+	public void findCommandIMatcher() throws Exception {
 		CommandFinder finder = new CommandFinder();
 
 		List l = finder.findCommand(equalTo("Contribution Item Command"));
@@ -43,7 +44,8 @@ public class CommandFinderTest extends SWTBotEclipseTestCase {
 		bot.button("OK").click();
 	}
 
-	public void testFindCommandNoMatch() throws Exception {
+	@Test
+	public void findCommandNoMatch() throws Exception {
 		CommandFinder finder = new CommandFinder();
 
 		List l = finder.findCommand(withMnemonic("BadMatchName"));

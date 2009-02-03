@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.waits;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Table;
@@ -19,6 +21,7 @@ import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -27,21 +30,22 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
 public class TableHasRowsTest extends AbstractSWTTestCase {
 
 	private static final String	TEXT	= "this should close in a while - " + TableHasRowsTest.class.getSimpleName();
-	private Table	table;
+	private Table				table;
 
-	public void testWaitsForTableToContainRows() throws Exception {
+	@Test
+	public void waitsForTableToContainRows() throws Exception {
 		keepAddingRowsInTable(table, 49);
 		assertFalse(Conditions.tableHasRows(new SWTBotTable(table), 50).test());
 		keepAddingRowsInTable(table, 1);
 		assertTrue(Conditions.tableHasRows(new SWTBotTable(table), 50).test());
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		table = createTable(createShell(TEXT));
 	}
 
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		super.tearDown();
 		new SWTBot().shell(TEXT).close();
 	}

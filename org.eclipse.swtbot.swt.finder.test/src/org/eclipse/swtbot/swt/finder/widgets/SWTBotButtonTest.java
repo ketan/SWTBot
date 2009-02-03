@@ -14,8 +14,12 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -25,12 +29,14 @@ public class SWTBotButtonTest extends AbstractSWTTestCase {
 
 	private SWTBot	bot;
 
-	public void testFindsButtons() throws Exception {
+	@Test
+	public void findsButtons() throws Exception {
 		assertEquals("One", bot.button("One").getText());
 		assertEquals("Select Listeners", bot.button("Select Listeners").getText());
 	}
 
-	public void testClicksButtons() throws Exception {
+	@Test
+	public void clicksButtons() throws Exception {
 		SWTBotShell shell2 = null;
 		try {
 			SWTBotButton button = bot.button("Set/Get API");
@@ -44,17 +50,19 @@ public class SWTBotButtonTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void testFindsBackgroundColor() throws Exception {
+	@Test
+	public void findsBackgroundColor() throws Exception {
 		assertNotNull(bot.button("One").backgroundColor());
 	}
 
-	public void testFindsForegroundColor() throws Exception {
+	@Test
+	public void findsForegroundColor() throws Exception {
 		assertNotNull(bot.button("One").foregroundColor());
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
-		bot = new  SWTBot();
+		bot = new SWTBot();
 		bot.tabItem("Button").activate();
 	}
 

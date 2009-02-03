@@ -11,8 +11,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.finders;
 
-
-
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.examples.addressbook.AddressBook;
@@ -25,19 +23,20 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
-import org.eclipse.swtbot.swt.finder.SWTBotTestCase;
+import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.alltests.Controls;
-import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.WidgetResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
+import org.junit.After;
+import org.junit.Before;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public abstract class AbstractSWTTestCase extends SWTBotTestCase {
+public abstract class AbstractSWTTestCase {
 
 	static {
 		// System.setProperty(LogFactory.DIAGNOSTICS_DEST_PROPERTY, "STDOUT");
@@ -61,14 +60,17 @@ public abstract class AbstractSWTTestCase extends SWTBotTestCase {
 	public static final Thread					UIThread				= Controls.getInstance().UIThread;
 
 	protected final Logger						log;
+	protected SWTBot							bot;
 
 	public AbstractSWTTestCase() {
 		super();
 		log = Logger.getLogger(getClass());
 	}
 
-	protected void setUp() throws Exception {
-		log.debug(MessageFormat.format("Executing test: {0}#{1}", getClass(), getName()));
+	@Before
+	public void setUp() throws Exception {
+		bot = new SWTBot();
+		// log.debug(MessageFormat.format("Executing test: {0}#{1}", getClass(), getName()));
 		log.debug(MessageFormat.format("Activating shell: {0}", SWTUtils.toString(getFocusShell())));
 		SWTBotShell shell = new SWTBotShell(getFocusShell());
 		shell.activate();
@@ -82,9 +84,9 @@ public abstract class AbstractSWTTestCase extends SWTBotTestCase {
 		// });
 	}
 
-	protected void tearDown() throws Exception {
-		super.tearDown();
-		log.debug(MessageFormat.format("Finished executing test: {0}#{1}", getClass(), getName()));
+	@After
+	public void tearDown() throws Exception {
+		// log.debug(MessageFormat.format("Finished executing test: {0}#{1}", getClass(), getName()));
 	}
 
 	protected Shell getFocusShell() {

@@ -19,6 +19,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
+ * 
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
  */
@@ -30,15 +31,11 @@ public class SampleHandler extends AbstractHandler {
 	}
 
 	/**
-	 * the command has been executed, so extract extract the needed information
-	 * from the application context.
+	 * the command has been executed, so extract extract the needed information from the application context.
 	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
-		MessageDialog.openInformation(
-				window.getShell(),
-				"SWTBot Eclipse Control Finder Plug-in Test",
-				"Hello, Eclipse world");
+		MessageDialog.openInformation(window.getShell(), "SWTBot Eclipse Control Finder Plug-in Test", "Hello, Eclipse world");
 		return null;
 	}
 }

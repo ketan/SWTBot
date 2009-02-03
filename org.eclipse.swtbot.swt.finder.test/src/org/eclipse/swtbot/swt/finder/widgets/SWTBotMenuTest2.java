@@ -11,13 +11,19 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.junit.Test;
 
 public class SWTBotMenuTest2 extends AbstractSWTTestCase {
 
 	private SWTBotText	listeners;
 
-	public void testClicksCheckMenus() throws Exception {
+	@Test
+	public void clicksCheckMenus() throws Exception {
 		SWTBotMenu menu = bot.menu("Cascade").menu("Check");
 		assertFalse(menu.isChecked());
 		menu.click();
@@ -25,7 +31,7 @@ public class SWTBotMenuTest2 extends AbstractSWTTestCase {
 		assertTextContains("Selection [13]: SelectionEvent{MenuItem {&Check	Ctrl+Shift+C}", listeners);
 	}
 
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		bot.tabItem("Menu").activate();
 		listeners = bot.textInGroup("Listeners");
@@ -45,14 +51,13 @@ public class SWTBotMenuTest2 extends AbstractSWTTestCase {
 		bot.checkBox("Sub-Menu").select();
 		bot.checkBox("Sub-Sub-Menu").select();
 
-
 		bot.checkBox("Listen").select();
 		bot.button("Clear").click();
 		bot.button("Create Shell").click();
 		bot.shell("Title:0").activate();
 	}
 
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		bot.shell("SWT Controls").activate();
 		bot.button("Close All Shells").click();
 
