@@ -31,7 +31,7 @@ public class EclipseSpy {
 
 	Action					actionMonitor;
 
-	long					lastWidget;
+	Object					lastWidget;
 
 	StyledText				output;
 

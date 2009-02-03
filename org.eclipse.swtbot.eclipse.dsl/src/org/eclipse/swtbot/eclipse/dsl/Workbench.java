@@ -23,7 +23,7 @@ package org.eclipse.swtbot.eclipse.dsl;
  * </pre>
  * 
  * @author David Green
- * @noimplement This interface is not intended to be implemented by clients.
+ * @noextend This class is not intended to be subclassed by clients.
  */
 public abstract class Workbench {
 	/**

@@ -104,7 +104,7 @@ class WidgetTracker implements Runnable {
 
 	public void getLayoutInformation(Control control, StringBuffer buf) {
 		buf.append("Layout Information: \n");
-		buf.append(control + " @ " + control.handle + "\n");
+		buf.append(control + "\n");
 		buf.append("\tStyle: " + getStyle(control) + "\n");
 		buf.append("\tLayout Data: " + control.getLayoutData() + "\n");
 		buf.append("\tBounds: " + control.getBounds() + "\n");
@@ -172,8 +172,8 @@ class WidgetTracker implements Runnable {
 		if (control == null) {
 			view.output.setText("");
 			view.lastWidget = 0;
-		} else if (control.handle != view.lastWidget) {
-			view.lastWidget = control.handle;
+		} else if (control != view.lastWidget) {
+			view.lastWidget = control;
 
 			StringBuffer buf = new StringBuffer();
 			getInformation(control, buf);

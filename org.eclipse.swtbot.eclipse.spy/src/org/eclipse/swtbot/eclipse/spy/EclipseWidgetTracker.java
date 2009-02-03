@@ -104,7 +104,7 @@ class EclipseWidgetTracker implements Runnable {
 
 	public void getLayoutInformation(Control control, StringBuffer buf) {
 		buf.append("Layout Information: \n"); //$NON-NLS-1$
-		buf.append(SWTUtils.toString(control) + " @ " + control.handle + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
+		buf.append(SWTUtils.toString(control) + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
 		buf.append("\tStyle: " + getStyle(control) + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
 		buf.append("\tLayout Data: " + control.getLayoutData() + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
 		buf.append("\tBounds: " + control.getBounds() + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -177,8 +177,8 @@ class EclipseWidgetTracker implements Runnable {
 		if (control == null) {
 			view.output.setText(""); //$NON-NLS-1$
 			view.lastWidget = 0;
-		} else if (control.handle != view.lastWidget) {
-			view.lastWidget = control.handle;
+		} else if (control != view.lastWidget) {
+			view.lastWidget = control;
 
 			StringBuffer buf = new StringBuffer();
 			getInformation(control, buf);

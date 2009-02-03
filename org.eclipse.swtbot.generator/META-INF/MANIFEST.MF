@@ -9,6 +9,7 @@ Require-Bundle: org.eclipse.swtbot.swt.finder,
  org.eclipse.ui,
  org.hamcrest;bundle-version="1.1.0",
  org.eclipse.swtbot.eclipse.finder,
- com.thoughtworks.qdox;bundle-version="1.6.3"
+ com.thoughtworks.qdox;bundle-version="1.6.3",
+ org.eclipse.swt
 Bundle-ClassPath: .
 Export-Package: org.eclipse.swtbot.generator

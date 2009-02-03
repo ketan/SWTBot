@@ -36,7 +36,7 @@ public class SWTSpy {
 
 	Action			actionMonitor;
 
-	long			lastWidget;
+	Object			lastWidget;
 
 	StyledText		output;
 
