@@ -36,7 +36,6 @@ public abstract class SWTBotAssert {
 	/**
 	 * Asserts that two widgets do not refer to the same object.
 	 * 
-	 * @see #assertNotSame(String, Object, Object)
 	 * @param expected the object you don't expect
 	 * @param actual the object to compare to unexpected
 	 */
