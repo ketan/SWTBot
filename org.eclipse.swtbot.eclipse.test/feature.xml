@@ -95,7 +95,7 @@ Java and all Java-based trademarks are trademarks of Sun Microsystems, Inc. in t
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.equinox.app"/>
       <import plugin="org.junit" version="3.8.0" match="compatible"/>
-      <import plugin="org.junit4" version="4.4.0" match="compatible"/>
+      <import plugin="org.junit4" version="4.3.1" match="greaterOrEqual"/>
    </requires>
 
    <plugin
