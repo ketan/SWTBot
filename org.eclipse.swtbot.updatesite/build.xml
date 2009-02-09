@@ -67,6 +67,15 @@
 			<fileset dir="${target}/plugins">
 				<include name="org.eclipse.swtbot.swt.recorder.ui_*.jar" />
 			</fileset>
+			
+			<!-- junit comptibility -->
+			<fileset dir="${target}/plugins">
+				<include name="org.eclipse.swtbot.swt.finder.junit4_53_*.jar" />
+			</fileset>
+			
+			<fileset dir="${target}/plugins">
+				<include name="org.eclipse.swtbot.swt.finder.junit4_5_*.jar" />
+			</fileset>
 
 			<!-- apache jars -->
 			<fileset dir="${target}/plugins">
