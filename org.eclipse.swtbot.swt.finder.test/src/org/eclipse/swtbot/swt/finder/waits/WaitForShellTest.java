@@ -31,9 +31,9 @@ public class WaitForShellTest extends AbstractSWTTestCase {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void waitsForShellToAppear() throws Exception {
-		createShellAfter100milliSecs();
+		createShellAfter(100);
 
-		destroyShellAfter800milliSecs();
+		destroyShellAfter(600);
 
 		long start = System.currentTimeMillis();
 		new SWTBot().waitUntil(Conditions.waitForShell(withText(TEXT)));
@@ -43,28 +43,42 @@ public class WaitForShellTest extends AbstractSWTTestCase {
 		assertThat(time, allOf(lessThan(800), greaterThanOrEqualTo(500)));
 	}
 
-	private void destroyShellAfter800milliSecs() {
-		new Thread(new Runnable() {
+	private void destroyShellAfter(int delay) {
+		new Thread(new DelayedExecutionRunnable(new Runnable() {
 			public void run() {
-				try {
-					Thread.sleep(800);
-				} catch (InterruptedException niceTry) {
-				}
 				new SWTBot().shell(TEXT).close();
 			}
-		}).start();
+		}, delay)).start();
 	}
 
-	private void createShellAfter100milliSecs() {
-		new Thread(new Runnable() {
+	private void createShellAfter(int delay) {
+		new Thread(new DelayedExecutionRunnable(new Runnable() {
 			public void run() {
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException niceTry) {
-				}
 				createShell(TEXT);
 			}
-		}).start();
+		}, delay)).start();
+	}
+
+	private class DelayedExecutionRunnable implements Runnable {
+
+		private final Runnable	runnable;
+		private final int		delayInMillis;
+
+		public DelayedExecutionRunnable(Runnable runnable, int delayInMillis) {
+			this.runnable = runnable;
+			this.delayInMillis = delayInMillis;
+		}
+
+		public void run() {
+			try {
+				Thread.sleep(delayInMillis);
+			} catch (InterruptedException e) {
+				throw new RuntimeException(e);
+			}
+			runnable.run();
+
+		}
+
 	}
 
 }
