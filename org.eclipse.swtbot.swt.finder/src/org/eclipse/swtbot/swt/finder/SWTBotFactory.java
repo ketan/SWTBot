@@ -584,14 +584,13 @@ abstract class SWTBotFactory {
 	 * @param matcher the matcher used to match tray item
 	 * @return List of {@link SWTBotTrayItem} matching the matcher.
 	 */
-	public java.util.List<SWTBotTrayItem> trayItems(Matcher<?> matcher) {
+	public List<SWTBotTrayItem> trayItems(Matcher<?> matcher) {
 		WithItem<TrayItem> itemMatcher = Conditions.withItem(matcher);
 		WaitForWidgetInParent waitForWidget = waitForWidget(itemMatcher, systemTray());
 		waitUntilWidgetAppears(waitForWidget);
-		java.util.List<SWTBotTrayItem> items = new ArrayList<SWTBotTrayItem>();
-		for (Object item : itemMatcher.getAllMatches()) {
-			items.add(new SWTBotTrayItem((TrayItem) item));
-		}
+		List<SWTBotTrayItem> items = new ArrayList<SWTBotTrayItem>();
+		for (TrayItem item : itemMatcher.getAllMatches())
+			items.add(new SWTBotTrayItem(item));
 		return items;
 	}
 
