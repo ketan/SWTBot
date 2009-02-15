@@ -11,13 +11,18 @@
  *     Ketan Padegaonkar - http://swtbot.org/bugzilla/show_bug.cgi?id=136
  *     Hans Schwaebli - http://swtbot.org/bugzilla/show_bug.cgi?id=135
  *     Ketan Patel - https://bugs.eclipse.org/bugs/show_bug.cgi?id=259837
+ *     Toby Weston - (Bug 259860)
+ *     Ketan Patel - (Bug 259860)
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder;
 
 import static org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable.syncExec;
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.allOf;
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widgetOfType;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withId;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMnemonic;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withText;
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withTooltip;
 import static org.eclipse.swtbot.swt.finder.waits.Conditions.waitForMenu;
 import static org.eclipse.swtbot.swt.finder.waits.Conditions.waitForShell;
 import static org.eclipse.swtbot.swt.finder.waits.Conditions.waitForWidget;
@@ -28,6 +33,8 @@ import java.util.List;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Tray;
+import org.eclipse.swt.widgets.TrayItem;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
@@ -37,13 +44,16 @@ import org.eclipse.swtbot.swt.finder.results.WidgetResult;
 import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
+import org.eclipse.swtbot.swt.finder.waits.Conditions;
 import org.eclipse.swtbot.swt.finder.waits.ICondition;
 import org.eclipse.swtbot.swt.finder.waits.WaitForMenu;
 import org.eclipse.swtbot.swt.finder.waits.WaitForShell;
 import org.eclipse.swtbot.swt.finder.waits.WaitForWidget;
 import org.eclipse.swtbot.swt.finder.waits.WaitForWidgetInParent;
+import org.eclipse.swtbot.swt.finder.waits.WithItem;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotTrayItem;
 import org.eclipse.swtbot.swt.finder.widgets.TimeoutException;
 import org.hamcrest.Matcher;
 
@@ -525,5 +535,78 @@ abstract class SWTBotFactory {
 				return display.getFocusControl();
 			}
 		});
+	}
+
+	/**
+	 * @return the first {@link SWTBotTrayItem}
+	 */
+	public SWTBotTrayItem trayItem() {
+		return trayItem(0);
+	}
+
+	/**
+	 * @param index he index of the tray item.
+	 * @return a {@link SWTBotTrayItem} at specified <code>index</code>
+	 */
+	public SWTBotTrayItem trayItem(int index) {
+		return trayItems().get(index);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the tray item.
+	 * @return the first {@link SWTBotTrayItem} with the specified <code>tooltip</code>.
+	 */
+	public SWTBotTrayItem trayItemWithTooltip(String tooltip) {
+		return trayItemWithTooltip(tooltip, 0);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the tray item.
+	 * @param index the index of the tray item.
+	 * @return a {@link SWTBotTrayItem} with the specified <code>tooltip</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotTrayItem trayItemWithTooltip(String tooltip, int index) {
+		java.util.List<SWTBotTrayItem> items = trayItems(allOf(widgetOfType(TrayItem.class), withTooltip(tooltip)));
+		if (items.isEmpty() || items.size() <= index)
+			throw new WidgetNotFoundException("Widget does not contain an item at index " + index);
+		return items.get(index);
+	}
+
+	/**
+	 * @return List of all tray items in the system tray.
+	 */
+	public java.util.List<SWTBotTrayItem> trayItems() {
+		return trayItems(widgetOfType(TrayItem.class));
+	}
+
+	/**
+	 * @param matcher the matcher used to match tray item
+	 * @return List of {@link SWTBotTrayItem} matching the matcher.
+	 */
+	public java.util.List<SWTBotTrayItem> trayItems(Matcher<?> matcher) {
+		WithItem<TrayItem> itemMatcher = Conditions.withItem(matcher);
+		WaitForWidgetInParent waitForWidget = waitForWidget(itemMatcher, systemTray());
+		waitUntilWidgetAppears(waitForWidget);
+		java.util.List<SWTBotTrayItem> items = new ArrayList<SWTBotTrayItem>();
+		for (Object item : itemMatcher.getAllMatches()) {
+			items.add(new SWTBotTrayItem((TrayItem) item));
+		}
+		return items;
+	}
+
+	/**
+	 * @return The single instance of the system tray
+	 */
+	protected Tray systemTray() {
+		Tray tray = syncExec(SWTUtils.display(), new WidgetResult<Tray>() {
+			public Tray run() {
+				return SWTUtils.display().getSystemTray();
+			}
+		});
+		if (tray == null) {
+			throw new WidgetNotFoundException("no system tray found");
+		}
+		return tray;
 	}
 }
