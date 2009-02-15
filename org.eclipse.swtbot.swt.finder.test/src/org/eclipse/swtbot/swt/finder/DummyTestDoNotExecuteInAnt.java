@@ -11,10 +11,12 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder;
 
+import org.junit.Test;
 
 public class DummyTestDoNotExecuteInAnt extends SWTBotTestCase {
 
-	public void testThisFails() throws Exception {
+	@Test
+	public void thisFails() throws Exception {
 		fail();
 	}
 }
