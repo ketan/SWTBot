@@ -32,12 +32,12 @@ public class PreferenceInitializerTest {
 	private PreferenceStore			jdtPreferenceStore;
 	private static final String		JDT_IMPORT_PROPERTY	= "content_assist_favorite_static_members";
 	private static final String		DEFAULT_IMPORTS		= "org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.*;"
-																+ "org.hamcrest.Matchers.*;org.hamcrest.MatcherAssert.*;"
-																+ "junit.framework.Assert.*;"
+																+ "org.hamcrest.Matchers.*;"
+																+ "org.hamcrest.MatcherAssert.*;"
+																+ "org.junit.Assert.*;"
 																+ "org.eclipse.swtbot.eclipse.finder.matchers.WidgetMatcherFactory.*;"
 																+ "org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable.*;"
-																+ "org.eclipse.swtbot.swt.finder.SWTBotTestCase.*;"
-																+ "org.eclipse.swtbot.eclipse.finder.SWTBotEclipseTestCase.*;"
+																+ "org.eclipse.swtbot.swt.finder.SWTBotAssert.*;"
 																+ "org.eclipse.swtbot.eclipse.finder.waits.Conditions.*;"
 																+ "org.eclipse.swtbot.swt.finder.waits.Conditions.*";
 
