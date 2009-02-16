@@ -12,16 +12,17 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder;
 
+import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.sameInstance;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBot;
+import org.junit.Assert;
 
 /**
  * The SWTBotAssert provides extra capabilities for comparing widgets and other UI items. A set of assert methods.
@@ -36,6 +37,7 @@ public abstract class SWTBotAssert {
 	/**
 	 * Asserts that two widgets do not refer to the same object.
 	 * 
+	 * @see Assert#assertNotSame(String, Object, Object)
 	 * @param expected the object you don't expect
 	 * @param actual the object to compare to unexpected
 	 */

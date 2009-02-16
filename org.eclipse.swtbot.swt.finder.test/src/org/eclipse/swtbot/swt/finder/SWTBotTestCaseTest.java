@@ -21,7 +21,6 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 
-import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
@@ -80,7 +79,7 @@ public class SWTBotTestCaseTest extends AbstractSWTBotTest {
 		try {
 			assertEnabled(button);
 			fail("Expecting an exception");
-		} catch (AssertionFailedError e) {
+		} catch (AssertionError e) {
 			assertEquals("Expected widget (of type 'Button' and with mnemonic 'One' and with style 'SWT.PUSH') to be enabled.", e
 					.getMessage());
 		} finally {
@@ -97,7 +96,7 @@ public class SWTBotTestCaseTest extends AbstractSWTBotTest {
 		try {
 			assertNotEnabled(bot.button("One"));
 			fail("Expecting an exception");
-		} catch (AssertionFailedError e) {
+		} catch (AssertionError e) {
 			assertEquals("Expected widget (of type 'Button' and with mnemonic 'One' and with style 'SWT.PUSH') to be disabled.", e
 					.getMessage());
 		}

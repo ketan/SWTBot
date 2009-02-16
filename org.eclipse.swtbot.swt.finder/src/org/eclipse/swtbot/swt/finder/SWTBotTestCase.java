@@ -12,11 +12,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.sameInstance;
-
 import java.io.File;
 
 import junit.framework.TestCase;
@@ -34,6 +29,7 @@ import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBot;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  * @since 1.0
+ * @see SWTBotAssert
  */
 public abstract class SWTBotTestCase extends TestCase {
 
@@ -58,7 +54,7 @@ public abstract class SWTBotTestCase extends TestCase {
 	 * @param actual the object to compare to unexpected
 	 */
 	public static void assertNotSameWidget(Widget expected, Widget actual) {
-		assertThat(expected, not(sameInstance(actual)));
+		SWTBotAssert.assertNotSameWidget(expected, actual);
 	}
 
 	/**
@@ -69,7 +65,7 @@ public abstract class SWTBotTestCase extends TestCase {
 	 * @param actual the object to compare to unexpected
 	 */
 	public static void assertNotSameWidget(String message, Widget expected, Widget actual) {
-		assertThat(message, expected, not(sameInstance(actual)));
+		SWTBotAssert.assertNotSameWidget(message, expected, actual);
 	}
 
 	/**
@@ -79,7 +75,7 @@ public abstract class SWTBotTestCase extends TestCase {
 	 * @param hayStack the text to look within.
 	 */
 	public static void assertContains(String needle, String hayStack) {
-		assertThat(hayStack, containsString(needle));
+		SWTBotAssert.assertContains(needle, hayStack);
 	}
 
 	/**
@@ -89,7 +85,7 @@ public abstract class SWTBotTestCase extends TestCase {
 	 * @param hayStack the text to look within.
 	 */
 	public static void assertDoesNotContain(String needle, String hayStack) {
-		assertThat(hayStack, not(containsString(needle)));
+		SWTBotAssert.assertDoesNotContain(needle, hayStack);
 	}
 
 	/**
@@ -99,7 +95,7 @@ public abstract class SWTBotTestCase extends TestCase {
 	 * @param actual the widget to compare to expected
 	 */
 	public static void assertSameWidget(Widget expected, Widget actual) {
-		assertThat(actual, sameInstance(expected));
+		SWTBotAssert.assertSameWidget(expected, actual);
 	}
 
 	/**
@@ -110,7 +106,7 @@ public abstract class SWTBotTestCase extends TestCase {
 	 * @param actual the widget to compare to expected
 	 */
 	public static void assertSameWidget(String message, Widget expected, Widget actual) {
-		assertThat(message, actual, sameInstance(expected));
+		SWTBotAssert.assertSameWidget(message, expected, actual);
 	}
 
 	/**
@@ -127,7 +123,7 @@ public abstract class SWTBotTestCase extends TestCase {
 	 * @param widget the widget to get the text from to compare.
 	 */
 	public static void assertText(String expected, Widget widget) {
-		assertEquals(expected, SWTUtils.getText(widget));
+		SWTBotAssert.assertText(expected, widget);
 	}
 
 	/**
@@ -137,7 +133,7 @@ public abstract class SWTBotTestCase extends TestCase {
 	 * @param widget the widget to get the text from to compare.
 	 */
 	public static void assertText(String expected, AbstractSWTBot<? extends Widget> widget) {
-		assertEquals(expected, widget.getText());
+		SWTBotAssert.assertText(expected, widget);
 	}
 
 	/**
@@ -147,7 +143,7 @@ public abstract class SWTBotTestCase extends TestCase {
 	 * @param widget the widget
 	 */
 	public static void assertTextContains(String expected, Widget widget) {
-		assertThat(SWTUtils.getText(widget), containsString(expected));
+		SWTBotAssert.assertTextContains(expected, widget);
 	}
 
 	/**
@@ -157,7 +153,7 @@ public abstract class SWTBotTestCase extends TestCase {
 	 * @param widget the widget
 	 */
 	public static void assertTextContains(String expected, AbstractSWTBot<? extends Widget> widget) {
-		assertThat(widget.getText(), containsString(expected));
+		SWTBotAssert.assertTextContains(expected, widget);
 	}
 
 	/**
@@ -167,7 +163,7 @@ public abstract class SWTBotTestCase extends TestCase {
 	 * @param widget the widget
 	 */
 	public static void assertTextDoesNotContain(String expected, Widget widget) {
-		assertThat(SWTUtils.getText(widget), not(containsString(expected)));
+		SWTBotAssert.assertTextDoesNotContain(expected, widget);
 	}
 
 	/**
@@ -177,7 +173,7 @@ public abstract class SWTBotTestCase extends TestCase {
 	 * @param widget the widget
 	 */
 	public static void assertTextDoesNotContain(String expected, AbstractSWTBot<? extends Widget> widget) {
-		assertThat(widget.getText(), not(containsString(expected)));
+		SWTBotAssert.assertTextDoesNotContain(expected, widget);
 	}
 
 	/**
@@ -186,7 +182,7 @@ public abstract class SWTBotTestCase extends TestCase {
 	 * @param widget the widget.
 	 */
 	public static void assertEnabled(AbstractSWTBot<? extends Widget> widget) {
-		assertTrue("Expected widget " + widget + " to be enabled.", widget.isEnabled()); //$NON-NLS-1$ //$NON-NLS-2$
+		SWTBotAssert.assertEnabled(widget);
 	}
 
 	/**
@@ -195,7 +191,7 @@ public abstract class SWTBotTestCase extends TestCase {
 	 * @param widget the widget.
 	 */
 	public static void assertNotEnabled(AbstractSWTBot<? extends Widget> widget) {
-		assertTrue("Expected widget " + widget + " to be disabled.", !widget.isEnabled()); //$NON-NLS-1$ //$NON-NLS-2$
+		SWTBotAssert.assertNotEnabled(widget);
 	}
 
 	/**
@@ -204,7 +200,7 @@ public abstract class SWTBotTestCase extends TestCase {
 	 * @param widget the widget.
 	 */
 	public static void assertVisible(AbstractSWTBot<? extends Widget> widget) {
-		assertTrue("Expected widget " + widget + " to be visible.", widget.isVisible()); //$NON-NLS-1$ //$NON-NLS-2$
+		SWTBotAssert.assertVisible(widget);
 	}
 
 	/**
@@ -213,7 +209,7 @@ public abstract class SWTBotTestCase extends TestCase {
 	 * @param widget the widget.
 	 */
 	public static void assertNotVisible(AbstractSWTBot<? extends Widget> widget) {
-		assertTrue("Expected widget " + widget + " to be visible.", !widget.isVisible()); //$NON-NLS-1$ //$NON-NLS-2$
+		SWTBotAssert.assertNotVisible(widget);
 	}
 
 	/**
@@ -250,7 +246,7 @@ public abstract class SWTBotTestCase extends TestCase {
 					+ SWTBotPreferences.getScreenshotFormat().toLowerCase();
 			if (++screenshotCounter <= maximumScreenshots) {
 				new File("screenshots").mkdirs(); //$NON-NLS-1$
-				captureScreenshot(fileName);
+				SWTUtils.captureScreenshot(fileName);
 			} else {
 				log.info("No screenshot captured for '" + ClassUtils.simpleClassName(getClass()) + "." + getName() //$NON-NLS-1$ //$NON-NLS-2$
 						+ "' because maximum number of screenshots reached: " + maximumScreenshots); //$NON-NLS-1$
