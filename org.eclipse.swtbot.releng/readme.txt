@@ -1,10 +1,4 @@
-System Requirements
-# Ant 1.7 or higher (http://ant.apache.org)
-# JDK 1.4 or above (http://java.sun.com)
-# Info-Zip zip and unzip executables on system path. Tar for *nix distributions (http://www.info-zip.org/)
-# A minimum of 1GB of free disk space
-
-To build SWTBot from source you need to download all code from SVN using the following command.
+To build/run/test SWTBot from source you need to do the following:
 
 Checkout code:
  $ svn co http://dev.eclipse.org/svnroot/technology/org.eclipse.swtbot/trunk swtbot
