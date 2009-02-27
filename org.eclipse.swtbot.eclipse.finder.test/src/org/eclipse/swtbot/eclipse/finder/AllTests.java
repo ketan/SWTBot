@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
@@ -23,6 +23,6 @@ import org.junit.runners.Suite.SuiteClasses;
  * @version $Id$
  */
 @RunWith(Suite.class)
-@SuiteClasses( { QuickFixNotFoundExceptionTest.class, CommandFinderTest.class, SWTBotViewTest.class, SWTBotEclipseEditorTest.class })
+@SuiteClasses( { QuickFixNotFoundExceptionTest.class, CommandFinderTest.class, SWTBotEclipseEditorTest.class, SWTBotViewTest.class })
 public class AllTests {
 }

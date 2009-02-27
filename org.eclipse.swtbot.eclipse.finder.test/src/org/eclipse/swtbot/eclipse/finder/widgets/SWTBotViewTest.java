@@ -22,21 +22,24 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem;
 import org.junit.Test;
+
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotViewTest  {
+public class SWTBotViewTest {
 
-	private SWTEclipseBot bot = new SWTEclipseBot();
+	private SWTEclipseBot	bot	= new SWTEclipseBot();
 
 	@Test
 	public void findsView() throws Exception {
+		bot.menu("Help").menu("Welcome").click();
 		bot.view("Welcome");
 	}
 
 	@Test
 	public void getsViewTitle() throws Exception {
+		bot.menu("Help").menu("Welcome").click();
 		assertEquals("Welcome", bot.view("Welcome").getTitle());
 	}
 
@@ -52,7 +55,7 @@ public class SWTBotViewTest  {
 
 	@Test
 	public void closesAView() throws Exception {
-		SWTEclipseBot bot = new SWTEclipseBot();
+		bot.menu("Help").menu("Welcome").click();
 		SWTBotView view = bot.view("Welcome");
 		view.close();
 
@@ -79,7 +82,6 @@ public class SWTBotViewTest  {
 		SWTBotTreeItem expandNode = tree.expandNode("SWTBot Test Category");
 		expandNode.select("SWTBot Test View").click();
 		bot.button("OK").click();
-
 		bot.view("SWTBot Test View").show();
 	}
 
@@ -97,7 +99,7 @@ public class SWTBotViewTest  {
 		SWTBotViewMenu cICMenu = view.menu("Contribution Item Command");
 		cICMenu.click();
 		bot.button("OK").click();
-		// assertTrue(cICMenu.isChecked());
+//		assertTrue(cICMenu.isChecked());
 	}
 
 	@Test

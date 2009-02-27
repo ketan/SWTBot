@@ -11,15 +11,15 @@
 package org.eclipse.swtbot.eclipse.ui.test;
 
 import org.eclipse.swtbot.eclipse.ui.preferences.PreferenceInitializerTest;
-import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
 import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-@RunWith(SWTBotJunit4ClassRunner.class)
+@RunWith(Suite.class)
 @SuiteClasses(PreferenceInitializerTest.class)
 public class AllTests {
 
