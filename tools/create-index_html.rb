@@ -23,4 +23,3 @@ end
 
 puts "</table>"
 puts "</html>"
-

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<site>
-	<description url="http://eclipse.org/update-site/">
+<site mirrorsURL="http://www.eclipse.org/downloads/download.php?file=${update.site.relative.url}/site.xml&amp;format=xml">
+	<description url="http://download.eclipse.org/${update.site.relative.url}">
 		The SWTBot Update site.
 	</description>

@@ -9,7 +9,7 @@ eclipse.sdk.archive = eclipse-SDK-3.4-macosx-carbon.tar.gz
 eclipse.buildId = 3.4
 
 # don't add the trailing file name, the file name is automatically appended based on eclipse.sdk.archive
-# for locations of the eclipse SDKs 
+# for locations of the eclipse SDKs
 # see http://download.eclipse.org/eclipse/downloads/ and http://archive.eclipse.org/eclipse/downloads/index.php
 
 # for eclipse 3.4
@@ -31,3 +31,8 @@ update.site.plugins.url = plugins
 
 rsync.opts = --delete-after
 remote.path = kpadegaonkar,swtbot@web.sf.net:/home/groups/s/sw/swtbot/htdocs/artifacts/2.0-eclipse
+
+# the dev update site
+update.site.relative.url=/technology/swtbot/dev-build/update-site
+# the stable update site
+# update.site.relative.url=/technology/swtbot/update-site

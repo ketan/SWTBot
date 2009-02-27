@@ -67,12 +67,12 @@
 			<fileset dir="${target}/plugins">
 				<include name="org.eclipse.swtbot.swt.recorder.ui_*.jar" />
 			</fileset>
-			
+
 			<!-- junit comptibility -->
 			<fileset dir="${target}/plugins">
 				<include name="org.eclipse.swtbot.swt.finder.junit4_53_*.jar" />
 			</fileset>
-			
+
 			<fileset dir="${target}/plugins">
 				<include name="org.eclipse.swtbot.swt.finder.junit4_5_*.jar" />
 			</fileset>
@@ -155,13 +155,20 @@
 	</target>
 
 	<target name="create_site_xml" depends="create_features_list">
-		<concat destfile="${target}/site.xml" fixlastline="true" eol="unix">
+		<concat destfile="${target}/site.xml.tokenize" fixlastline="true" eol="unix">
 			<header file="site.template.header.xml" />
 			<fileset file="build/${plugin.prefix}.featurelist.xml" />
 			<fileset file="build/${plugin.prefix}.pluginarchivelist.xml" />
 			<fileset file="site.template.categories.xml" />
 			<footer file="site.template.footer.xml" />
 		</concat>
+
+		<move file="${target}/site.xml.tokenize" tofile="${target}/site.xml">
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</move>
+
 	</target>
 
 	<target name="clean">
@@ -214,26 +221,23 @@
 		</copy>
 	</target>
 
-	<available file="${eclipse3.4.home}" property="is.eclipse.3.4" />
-
-	<target name="create-p2-site" if="is.eclipse.3.4">
+	<target name="create-p2-site">
 
 		<java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true">
 			<classpath>
-				<fileset dir="${eclipse3.4.home}/plugins">
-					<include name="org.eclipse.equinox.launcher_*.jar"/>
-					<include name="org.eclipse.equinox.p2.metadata.generator_*.jar"/>
+				<fileset dir="../eclipse/plugins">
+					<include name="org.eclipse.equinox.launcher_*.jar" />
 				</fileset>
 			</classpath>
 
-			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator"/>
-			<arg line="-updateSite ${target}"/>
-			<arg line="-site file:${target}/site.xml"/>
-			<arg line="-metadataRepository file:${target}"/>
-			<arg line="-metadataRepositoryName 'SWTBot Update Site'"/>
-			<arg line="-artifactRepository file:${target}"/>
-			<arg line="-artifactRepositoryName 'SWTBot Artifacts'"/>
-			<arg line="-compress -reusePack200Files -vmargs -Xmx128M"/>
+			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
+			<arg line="-updateSite ${target}" />
+			<arg line="-site file:${target}/site.xml" />
+			<arg line="-metadataRepository file:${target}" />
+			<arg line="-metadataRepositoryName 'SWTBot Update Site'" />
+			<arg line="-artifactRepository file:${target}" />
+			<arg line="-artifactRepositoryName 'SWTBot Artifacts'" />
+			<arg line="-compress -reusePack200Files -vmargs -Xmx128M" />
 		</java>
 	</target>
 

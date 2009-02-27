@@ -1,0 +1,28 @@
+#!/bin/bash
+set -e
+set -x
+
+rm -rf /opt/public/download-staging.priv/technology/swtbot/signed
+rm -rf /opt/public/download-staging.priv/technology/swtbot/to-sign
+
+mkdir /opt/public/download-staging.priv/technology/swtbot/signed 
+mkdir /opt/public/download-staging.priv/technology/swtbot/to-sign
+
+cp -f ~/to-upload/*.zip /opt/public/download-staging.priv/technology/swtbot/to-sign
+cp -rf ~/to-upload/update-site /opt/public/download-staging.priv/technology/swtbot/to-sign
+
+
+cd /opt/public/download-staging.priv/technology/swtbot/to-sign
+
+mkdir /opt/public/download-staging.priv/technology/swtbot/signed/update-site /opt/public/download-staging.priv/technology/swtbot/signed/update-site/plugins /opt/public/download-staging.priv/technology/swtbot/signed/update-site/features
+
+find * -iname "*.zip" >> files
+find * -iname "*.jar" >> files
+
+
+cat files | while read LINE; do
+	sign `pwd`/$LINE mail /opt/public/download-staging.priv/technology/swtbot/signed/`dirname $LINE`
+done
+
+
+
