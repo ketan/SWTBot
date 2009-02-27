@@ -24,15 +24,19 @@ import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 import org.hamcrest.SelfDescribing;
 
 /**
+ * Represents a checkbox {@link Button} of type {@link SWT#CHECK}.
+ *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
+ * @see SWTBotButton
+ * @see SWTBotRadio
  */
-@SWTBotWidget(clasz = Button.class, style = @Style(name = "SWT.CHECK", value = SWT.CHECK), preferredName = "checkBox", referenceBy = { ReferenceBy.LABEL, ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })  //$NON-NLS-1$
+@SWTBotWidget(clasz = Button.class, style = @Style(name = "SWT.CHECK", value = SWT.CHECK), preferredName = "checkBox", referenceBy = { ReferenceBy.LABEL, ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })//$NON-NLS-1$
 public class SWTBotCheckBox extends AbstractSWTBot<Button> {
 
 	/**
 	 * Constructs an instance of this object with the given button (Checkbox)
-	 * 
+	 *
 	 * @param w the widget.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 * @since 1.0
@@ -43,7 +47,7 @@ public class SWTBotCheckBox extends AbstractSWTBot<Button> {
 
 	/**
 	 * Constructs an instance of this object with the given button (Checkbox)
-	 * 
+	 *
 	 * @param w the widget.
 	 * @param description the description of the widget, this will be reported by {@link #toString()}
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
@@ -136,7 +140,7 @@ public class SWTBotCheckBox extends AbstractSWTBot<Button> {
 
 	/**
 	 * Gets if the checkbox button is checked.
-	 * 
+	 *
 	 * @return <code>true</code> if the checkbox is checked. Otherwise <code>false</code>.
 	 */
 	public boolean isChecked() {

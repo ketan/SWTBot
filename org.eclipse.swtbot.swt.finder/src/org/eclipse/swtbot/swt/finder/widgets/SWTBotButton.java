@@ -21,17 +21,19 @@ import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.hamcrest.SelfDescribing;
 
 /**
- * This represents a {@link Button} widget.
- * 
+ * This represents a {@link Button} widget of type {@link SWT#PUSH}.
+ *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
+ * @see SWTBotCheckBox
+ * @see SWTBotRadio
  */
-@SWTBotWidget(clasz = Button.class, style = @Style(name = "SWT.PUSH", value = SWT.PUSH), preferredName = "button", referenceBy = { ReferenceBy.LABEL, ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })  //$NON-NLS-1$ 
+@SWTBotWidget(clasz = Button.class, style = @Style(name = "SWT.PUSH", value = SWT.PUSH), preferredName = "button", referenceBy = { ReferenceBy.LABEL, ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })  //$NON-NLS-1$
 public class SWTBotButton extends AbstractSWTBot<Button> {
 
 	/**
 	 * Constructs an instance of this object with the given button
-	 * 
+	 *
 	 * @param button the widget.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 * @since 2.0
@@ -42,7 +44,7 @@ public class SWTBotButton extends AbstractSWTBot<Button> {
 
 	/**
 	 * Constructs an instance of this object with the given button
-	 * 
+	 *
 	 * @param button the widget.
 	 * @param description the description of the widget, this will be reported by {@link #toString()}
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
