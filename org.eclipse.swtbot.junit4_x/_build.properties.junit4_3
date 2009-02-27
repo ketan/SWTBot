@@ -1,0 +1,8 @@
+source.. = junit4_5/,\
+           src/
+output.. = bin/
+bin.includes = META-INF/,\
+               .,\
+               junit4_3/,\
+               about.html,\
+               LICENSE.EPL

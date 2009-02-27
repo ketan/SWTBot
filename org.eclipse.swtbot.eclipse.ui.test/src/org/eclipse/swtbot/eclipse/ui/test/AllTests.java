@@ -4,14 +4,14 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.ui.test;
 
 import org.eclipse.swtbot.eclipse.ui.preferences.PreferenceInitializerTest;
-import org.eclipse.swtbot.swt.finder.junit4_5.SWTBotJunit4ClassRunner;
+import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite.SuiteClasses;
 

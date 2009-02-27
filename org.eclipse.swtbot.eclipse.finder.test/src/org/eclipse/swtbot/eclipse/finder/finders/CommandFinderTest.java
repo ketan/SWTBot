@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
@@ -12,20 +12,24 @@ package org.eclipse.swtbot.eclipse.finder.finders;
 
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMnemonic;
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
-import org.eclipse.swtbot.eclipse.finder.SWTBotEclipseTestCase;
+import org.eclipse.swtbot.eclipse.finder.SWTEclipseBot;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotCommand;
 import org.junit.Test;
 
 /**
  * Tests the command finder.
- * 
+ *
  * @author @author Stephen Paulin &lt;paulin [at] spextreme [dot] com&gt;
  * @version $Id$
  */
-public class CommandFinderTest extends SWTBotEclipseTestCase {
+public class CommandFinderTest {
+
+	private SWTEclipseBot bot = new SWTEclipseBot();
 
 	@Test
 	public void findCommandIMatcher() throws Exception {

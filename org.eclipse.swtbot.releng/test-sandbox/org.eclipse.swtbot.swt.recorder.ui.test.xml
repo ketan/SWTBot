@@ -30,7 +30,7 @@
 			<include name="org.eclipse.equinox.common_*.jar" />
 			<include name="org.eclipse.jface_*.jar" />
 			<include name="org.eclipse.core.commands_*.jar" />
-			<include name="org.junit4_4.5*/junit*.jar" />
+			<include name="org.junit4_*/junit*.jar" />
 			<include name="org.eclipse.swtbot*" />
 			<include name="org.apache.commons.collections_3.2.0*.jar" />
 			<include name="org.apache.log4j_1.2.*.jar" />

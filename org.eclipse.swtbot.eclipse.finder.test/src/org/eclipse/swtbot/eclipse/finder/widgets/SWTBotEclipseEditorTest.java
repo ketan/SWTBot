@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
@@ -43,7 +43,7 @@ public class SWTBotEclipseEditorTest {
 	NewJavaProject				javaProject			= new NewJavaProject();
 	PackageExplorerView			packageExplorerView	= new PackageExplorerView();
 	private SWTBotEclipseEditor	editor;
-	private SWTEclipseBot	bot;
+	private SWTEclipseBot		bot;
 
 	@Test
 	public void getsAutoCompleteProposals() throws Exception {
@@ -62,7 +62,6 @@ public class SWTBotEclipseEditorTest {
 		editor.autoCompleteProposal("main", "main - main method");
 		assertContains("public static void main", editor.getText());
 	}
-
 
 	@Before
 	public void setUp() throws Exception {
