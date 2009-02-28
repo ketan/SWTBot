@@ -12,6 +12,7 @@ package org.eclipse.swtbot.swt.finder.finders;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,7 +22,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Widget;
-import org.eclipse.swtbot.swt.finder.collections.OrderedSet;
 import org.eclipse.swtbot.swt.finder.resolvers.DefaultChildrenResolver;
 import org.eclipse.swtbot.swt.finder.resolvers.DefaultParentResolver;
 import org.eclipse.swtbot.swt.finder.resolvers.IChildrenResolver;
@@ -36,7 +36,7 @@ import org.hamcrest.Matcher;
 
 /**
  * Finds controls matching a particular matcher.
- * 
+ *
  * @see UIThreadRunnable
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
@@ -60,7 +60,7 @@ public class ControlFinder {
 	/**
 	 * Set to true if the control finder should find invisible controls. Invisible controls are ones hidden from the
 	 * display (isVisible() = false)
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public boolean						shouldFindInVisibleControls	= false;
@@ -74,7 +74,7 @@ public class ControlFinder {
 
 	/**
 	 * Creates a control finder using the given resolvers.
-	 * 
+	 *
 	 * @param childrenResolver the resolver used to resolve children of a control.
 	 * @param parentResolver the resolver used to resolve parent of a control.
 	 */
@@ -89,7 +89,7 @@ public class ControlFinder {
 	 * <p>
 	 * Note: This method is thread safe.
 	 * </p>
-	 * 
+	 *
 	 * @param matcher the matcher used to find controls in the active shell.
 	 * @return all controls in the active shell that the matcher matches.
 	 * @see Display#getActiveShell()
@@ -101,7 +101,7 @@ public class ControlFinder {
 	/**
 	 * Finds the controls matching one of the widgets using the given matcher. This will also go recursively though the
 	 * {@code widgets} provided.
-	 * 
+	 *
 	 * @param widgets the list of widgets.
 	 * @param matcher the matcher used to match the widgets.
 	 * @param recursive if the match should be recursive.
@@ -120,7 +120,7 @@ public class ControlFinder {
 	 * <p>
 	 * TODO visibility of tab items.
 	 * </p>
-	 * 
+	 *
 	 * @param w the widget
 	 * @return <code>true</code> if the control is visible, <code>false</code> otherwise.
 	 * @see Control#getVisible()
@@ -138,7 +138,7 @@ public class ControlFinder {
 	 * <p>
 	 * This method is thread safe.
 	 * </p>
-	 * 
+	 *
 	 * @param parentWidget the parent widget in which controls should be found.
 	 * @param matcher the matcher used to match the widgets.
 	 * @param recursive if the match should be recursive.
@@ -159,11 +159,11 @@ public class ControlFinder {
 	 * <p>
 	 * This method is not thread safe and must be invoked from the UI thread.
 	 * </p>
-	 * 
+	 *
 	 * @see #findControls(List, Matcher, boolean)
 	 */
 	private List<? extends Widget> findControlsInternal(final List<Widget> widgets, final Matcher<?> matcher, final boolean recursive) {
-		OrderedSet<Widget> list = new OrderedSet<Widget>();
+		LinkedHashSet<Widget> list = new LinkedHashSet<Widget>();
 		for (Widget w : widgets) {
 			list.addAll(findControlsInternal(w, matcher, recursive));
 		}
@@ -176,7 +176,7 @@ public class ControlFinder {
 	 * <p>
 	 * This method is not thread safe and must be invoked from the UI thread.
 	 * </p>
-	 * 
+	 *
 	 * @see #findControlsInternal(Widget, Matcher, boolean)
 	 */
 	private List<Widget> findControlsInternal(final Widget parentWidget, final Matcher<?> matcher, final boolean recursive) {
@@ -187,7 +187,7 @@ public class ControlFinder {
 				log.trace(MessageFormat.format("{0} is not visible, skipping.", parentWidget)); //$NON-NLS-1$
 			return new ArrayList<Widget>();
 		}
-		OrderedSet<Widget> controls = new OrderedSet<Widget>();
+		LinkedHashSet<Widget> controls = new LinkedHashSet<Widget>();
 		if (matcher.matches(parentWidget) && !controls.contains(parentWidget))
 			controls.add(parentWidget);
 		if (recursive) {
@@ -203,7 +203,7 @@ public class ControlFinder {
 
 	/**
 	 * Finds the shell matching the given text (shell.getText()).
-	 * 
+	 *
 	 * @param text The text on the Shell
 	 * @return A Shell containing the specified text
 	 */
@@ -223,7 +223,7 @@ public class ControlFinder {
 
 	/**
 	 * Gets the registered children resolver. If the resolver had never been set a default resolver will be created.
-	 * 
+	 *
 	 * @return the childrenResolver
 	 */
 	public IChildrenResolver getChildrenResolver() {
@@ -232,7 +232,7 @@ public class ControlFinder {
 
 	/**
 	 * Gets the registered parent resolver. If the resolver was not registered then a default instance will be returned.
-	 * 
+	 *
 	 * @return the parentResolver
 	 */
 	public IParentResolver getParentResolver() {
@@ -241,7 +241,7 @@ public class ControlFinder {
 
 	/**
 	 * Gets the path to the widget. The path is the list of all parent containers of the widget.
-	 * 
+	 *
 	 * @param w the widget.
 	 * @return the path to the widget w.
 	 */
@@ -251,7 +251,7 @@ public class ControlFinder {
 
 	/**
 	 * Gets the shells registered with the display.
-	 * 
+	 *
 	 * @return the shells
 	 */
 	public Shell[] getShells() {
@@ -264,7 +264,7 @@ public class ControlFinder {
 
 	/**
 	 * Return the active shell.
-	 * 
+	 *
 	 * @return the active shell.
 	 * @see Display#getActiveShell()
 	 */

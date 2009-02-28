@@ -4,13 +4,14 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.finders;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -20,7 +21,6 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swtbot.swt.finder.collections.OrderedSet;
 import org.eclipse.swtbot.swt.finder.results.ArrayResult;
 import org.eclipse.swtbot.swt.finder.results.ListResult;
 import org.eclipse.swtbot.swt.finder.results.WidgetResult;
@@ -72,7 +72,7 @@ public class MenuFinder {
 	 * @return all menus in the specified shells that match the matcher.
 	 */
 	public List<MenuItem> findMenus(Shell[] shells, Matcher<?> matcher, boolean recursive) {
-		OrderedSet<MenuItem> result = new OrderedSet<MenuItem>();
+		LinkedHashSet<MenuItem> result = new LinkedHashSet<MenuItem>();
 		for (Shell shell : shells)
 			result.addAll(findMenus(shell, matcher, recursive));
 		return new ArrayList<MenuItem>(result);
@@ -88,7 +88,7 @@ public class MenuFinder {
 	 * @return all menus in the specified shell that match the matcher.
 	 */
 	public List<MenuItem> findMenus(final Shell shell, Matcher<?> matcher, boolean recursive) {
-		OrderedSet<MenuItem> result = new OrderedSet<MenuItem>();
+		LinkedHashSet<MenuItem> result = new LinkedHashSet<MenuItem>();
 		result.addAll(findMenus(menuBar(shell), matcher, recursive));
 		return new ArrayList<MenuItem>(result);
 	}
@@ -147,7 +147,7 @@ public class MenuFinder {
 	 * @return
 	 */
 	private List<MenuItem> findMenusInternal(final Menu bar, final Matcher<?> matcher, final boolean recursive) {
-		OrderedSet<MenuItem> result = new OrderedSet<MenuItem>();
+		LinkedHashSet<MenuItem> result = new LinkedHashSet<MenuItem>();
 		if (bar != null) {
 			bar.notifyListeners(SWT.Show, new Event());
 			MenuItem[] items = bar.getItems();

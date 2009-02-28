@@ -13,10 +13,10 @@ package org.eclipse.swtbot.swt.finder.resolvers;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import org.apache.commons.collections.map.MultiValueMap;
-import org.eclipse.swtbot.swt.finder.collections.OrderedSet;
 
 /**
  * A resolver that maps classes to the {@link IChildrenResolver}s that resolve the classes.
@@ -28,7 +28,7 @@ import org.eclipse.swtbot.swt.finder.collections.OrderedSet;
 public class Resolver {
 
 	/** The map that maps classes to {@link IChildrenResolver}s */
-	MultiValueMap	map	= MultiValueMap.decorate(new HashMap(), OrderedSet.class);
+	MultiValueMap	map	= MultiValueMap.decorate(new HashMap(), LinkedHashSet.class);
 
 	/**
 	 * Map all the classes that the resolver resolver to the resolver.
@@ -50,7 +50,7 @@ public class Resolver {
 	 */
 	public List<IResolvable> getResolvers(Class clazz) {
 
-		OrderedSet<IResolvable> result = new OrderedSet<IResolvable>();
+		LinkedHashSet<IResolvable> result = new LinkedHashSet<IResolvable>();
 
 		Collection resolvers = map.getCollection(clazz);
 

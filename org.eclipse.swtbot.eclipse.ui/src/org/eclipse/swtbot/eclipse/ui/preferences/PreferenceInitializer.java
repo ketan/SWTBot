@@ -4,15 +4,16 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.ui.preferences;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import junit.framework.Assert;
 
@@ -25,7 +26,6 @@ import org.eclipse.swtbot.eclipse.finder.matchers.WidgetMatcherFactory;
 import org.eclipse.swtbot.eclipse.finder.waits.Conditions;
 import org.eclipse.swtbot.eclipse.ui.Activator;
 import org.eclipse.swtbot.swt.finder.SWTBotAssert;
-import org.eclipse.swtbot.swt.finder.collections.OrderedSet;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.utils.StringUtils;
 import org.eclipse.ui.IStartup;
@@ -34,7 +34,7 @@ import org.hamcrest.Matchers;
 
 /**
  * Initializes the default preferences if none exist.
- * 
+ *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
@@ -42,7 +42,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer impleme
 
 	private static final String	EMPTY	= ""; //$NON-NLS-1$
 	private static final String	SEMI_COLON	= ";"; //$NON-NLS-1$
-	
+
 	private final IPreferenceStore	swtbotPreferenceStore;
 	private final IPreferenceStore	jdtPreferenceStore;
 	static final String				ENABLE_ADDITIONAL_AUTOCOMPLETE_FAVOURTES	= "ENABLE_ADDITIONAL_AUTOCOMPLETE_FAVOURTES"; //$NON-NLS-1$
@@ -56,7 +56,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer impleme
 
 	/**
 	 * Create a preference initializer with the two preference stores.
-	 * 
+	 *
 	 * @param swtbotPreferenceStore used by swtbot.
 	 * @param jdtPreferenceStore used by JDT.
 	 */
@@ -75,9 +75,9 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer impleme
 	}
 
 	void initializeFavorites() {
-		List<String> imports;
+		Set<String> imports;
 		if (swtbotPreferenceStore.getBoolean(PreferenceInitializer.ENABLE_ADDITIONAL_AUTOCOMPLETE_FAVOURTES)) {
-			imports = new OrderedSet<String>(getJDTImports());
+			imports = new LinkedHashSet<String>(getJDTImports());
 			imports.addAll(getDefaultFavorites());
 		} else {
 			imports = getJDTImports();
@@ -88,17 +88,17 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer impleme
 		jdtPreferenceStore.setValue(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, join);
 	}
 
-	public List<String> getJDTImports() {
+	public Set<String> getJDTImports() {
 		String preference = jdtPreferenceStore.getString(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS);
 		if (EMPTY.equals(preference.trim())) {
-			return new ArrayList<String>();
+			return new HashSet<String>();
 		}
 		String[] imports = preference.split(SEMI_COLON);
-		return new ArrayList<String>(Arrays.asList(imports));
+		return new HashSet<String>(Arrays.asList(imports));
 	}
 
-	private OrderedSet<String> getDefaultFavorites() {
-		OrderedSet<String> orderedSet = new OrderedSet<String>();
+	private LinkedHashSet<String> getDefaultFavorites() {
+		LinkedHashSet<String> orderedSet = new LinkedHashSet<String>();
 		orderedSet.add(importStatement(org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.class));
 		orderedSet.add(importStatement(Matchers.class));
 		orderedSet.add(importStatement(MatcherAssert.class));
