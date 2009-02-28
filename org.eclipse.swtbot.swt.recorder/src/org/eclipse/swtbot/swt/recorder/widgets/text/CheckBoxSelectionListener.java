@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
@@ -25,6 +25,11 @@ import org.eclipse.swtbot.swt.recorder.listeners.ActionList;
  */
 public class CheckBoxSelectionListener extends AbstractTextBasedRecorderListener {
 
+	/**
+	 * Creates a Checkbox selection listener.
+	 * @param eventList the event list to append to.
+	 * @param bot a helper swtbot instance.
+	 */
 	public CheckBoxSelectionListener(ActionList eventList, SWTBot bot) {
 		super(SWTBotCheckBox.class, eventList, bot);
 	}

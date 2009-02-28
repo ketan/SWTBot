@@ -75,7 +75,7 @@ public class SWTBotMenu extends AbstractSWTBot<MenuItem> {
 
 	/**
 	 * Gets the menu matching the given name.
-	 * 
+	 *
 	 * @param menuName the name of the menu item that is to be found
 	 * @return the first menu that matches the menuName
 	 * @throws WidgetNotFoundException if the widget is not found.
@@ -85,9 +85,9 @@ public class SWTBotMenu extends AbstractSWTBot<MenuItem> {
 		MenuItem menuItem = syncExec(new WidgetResult<MenuItem>() {
 			public MenuItem run() {
 				Menu bar = widget.getMenu();
-				List menus = new MenuFinder().findMenus(bar, withMnemonic(menuName), true);
+				List<MenuItem> menus = new MenuFinder().findMenus(bar, withMnemonic(menuName), true);
 				if (!menus.isEmpty())
-					return (MenuItem) menus.get(0);
+					return menus.get(0);
 				return null;
 			}
 		});
@@ -105,7 +105,7 @@ public class SWTBotMenu extends AbstractSWTBot<MenuItem> {
 
 	/**
 	 * Gets if this menu item is checked.
-	 * 
+	 *
 	 * @return <code>true</code> if the menu is checked, <code>false</code> otherwise.
 	 * @see MenuItem#getSelection()
 	 * @since 1.2

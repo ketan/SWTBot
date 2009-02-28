@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
@@ -26,14 +26,19 @@ import org.hamcrest.Matcher;
 
 /**
  * Waits until an editor that matches the specified matcher appears.
- * 
+ *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
 public class WaitForEditor extends DefaultCondition {
-	public final Matcher			matcher;
+	private final Matcher<?>		matcher;
 	private List<IEditorReference>	workbenchParts;
 
+	/**
+	 * Creates a condition that waits until the matcher is true.
+	 *
+	 * @param matcher the matcher
+	 */
 	public WaitForEditor(Matcher<?> matcher) {
 		this.matcher = matcher;
 	}

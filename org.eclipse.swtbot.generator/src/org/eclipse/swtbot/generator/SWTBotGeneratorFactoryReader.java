@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
@@ -23,7 +23,7 @@ import org.eclipse.swtbot.swt.finder.SWTBotWidget;
 public class SWTBotGeneratorFactoryReader {
 
 	private SWTBotWidget	annotation;
-	private Constructor		constructor;
+	private Constructor<?>	constructor;
 	private Class<?>		clasz;
 
 	public SWTBotGeneratorFactoryReader(String className) throws ClassNotFoundException {
@@ -45,13 +45,12 @@ public class SWTBotGeneratorFactoryReader {
 		return MethodFactory.imports(annotation, constructor.getDeclaringClass(), annotation.clasz(), annotation.preferredName());
 	}
 
-	private Constructor getConstructor() {
+	private Constructor<?> getConstructor() {
 		return clasz.getConstructors()[0];
 	}
 
 	private SWTBotWidget getSWTBotAnnotation() {
 		return clasz.getAnnotation(SWTBotWidget.class);
 	}
-
 
 }

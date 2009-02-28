@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
@@ -44,18 +44,27 @@ import org.hamcrest.Matcher;
 /**
  * This represents the eclipse {@link IWorkbenchPartReference} item, subclasses must extend this to implement support
  * for various {@link IWorkbenchPartReference}s.
- * 
+ *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  * @since 2.0
  */
 public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 
+	/** The IWorkbenchPartReference reference that this part encapsulates. */
 	protected final T				partReference;
+	/** The logger. */
 	protected final Logger			log;
-	private final ViewMenuFinder	menuFinder;
+	/** A helper swtbot instance. */
 	protected final SWTEclipseBot	bot;
+	private final ViewMenuFinder	menuFinder;
 
+	/**
+	 * Creates an instance of a workbench part.
+	 *
+	 * @param partReference the part reference.
+	 * @param bot the helper bot.
+	 */
 	public SWTBotWorkbenchPart(T partReference, SWTEclipseBot bot) {
 		this.bot = bot;
 		Assert.isNotNull(partReference, "The part reference cannot be null"); //$NON-NLS-1$
@@ -94,7 +103,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 
 	/**
 	 * Gets the title of the partReference.
-	 * 
+	 *
 	 * @return the title of the part as visible in the tab
 	 */
 	public String getTitle() {
@@ -103,16 +112,16 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 
 	/**
 	 * Gets a list of all menus within the partReference. This will also include sub menus.
-	 * 
-	 * @return The list of menus (IContributionItems).
+	 *
+	 * @return The list of menus
 	 */
-	public List menus() {
+	public List<SWTBotViewMenu> menus() {
 		return menuFinder.findMenus((IViewReference) partReference, anything(), true);
 	}
 
 	/**
 	 * Gets a menu item matching the give label within the partReference menu if one exists.
-	 * 
+	 *
 	 * @param label The label matching name in the menu.
 	 * @return The {@link SWTBotMenu} item.
 	 * @throws WidgetNotFoundException Thrown if the menu can not be found or if the partReference does not contain a
@@ -124,7 +133,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 
 	/**
 	 * Gets a menu item matching the give label within the partReference menu if one exists.
-	 * 
+	 *
 	 * @param label The label matching name in the menu.
 	 * @param index The index of the menu to choose.
 	 * @return The {@link SWTBotMenu} item.
@@ -147,7 +156,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 
 	/**
 	 * Gets the toolbar buttons currently visible.
-	 * 
+	 *
 	 * @return The set of toolbar buttons.
 	 */
 	public List<SWTBotToolbarButton> getToolbarButtons() {
@@ -175,7 +184,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 
 	/**
 	 * Gets the toolbar button matching the given toolbar button.
-	 * 
+	 *
 	 * @param tooltip The tooltip to use to find the button to return.
 	 * @return The toolbar button.
 	 * @throws WidgetNotFoundException Thrown if the widget was not found matching the given tooltip.
@@ -214,7 +223,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 
 	/**
 	 * Asserts that the viewpart is active.
-	 * 
+	 *
 	 * @throws WorkbenchPartNotActiveException if the part is not currently active.
 	 */
 	protected void assertActive() {

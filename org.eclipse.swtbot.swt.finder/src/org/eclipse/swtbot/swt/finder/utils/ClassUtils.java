@@ -35,7 +35,7 @@ public abstract class ClassUtils {
 	 * @param clasz the class
 	 * @return the classname of the clasz
 	 */
-	public static String simpleClassName(Class clasz) {
+	public static String simpleClassName(Class<?> clasz) {
 		if (clasz == null)
 			return ""; //$NON-NLS-1$
 		if (clasz.isMemberClass())

@@ -16,7 +16,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.swtbot.eclipse.finder.SWTEclipseBot;
@@ -94,9 +93,8 @@ public class SWTBotEclipseEditorTest {
 	 * @throws WidgetNotFoundException
 	 */
 	private void saveAndCloseAllEditors() throws WidgetNotFoundException {
-		List editors = bot.editors();
-		for (Iterator iterator = editors.iterator(); iterator.hasNext();) {
-			SWTBotEclipseEditor editor = (SWTBotEclipseEditor) iterator.next();
+		List<SWTBotEclipseEditor> editors = bot.editors();
+		for (SWTBotEclipseEditor editor : editors) {
 			editor.saveAndClose();
 		}
 	}

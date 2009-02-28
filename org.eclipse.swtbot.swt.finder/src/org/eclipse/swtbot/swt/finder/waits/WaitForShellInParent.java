@@ -4,9 +4,9 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *     Ketan Patel - initial API and implementation 
+ *     Ketan Patel - initial API and implementation
  *     			(https://bugs.eclipse.org/bugs/show_bug.cgi?id=259837)
  *     Ketan Padegaonkar - modification to initial implementation
  *******************************************************************************/
@@ -19,8 +19,8 @@ import org.hamcrest.Matcher;
 
 /**
  * A contdition that waits until a shell matching the matcher appears in the parent shell.
- * 
- * @author Ketan Patel Ketan Patel &lt;ktp420@live.com&gt;
+ *
+ * @author Ketan Patel &lt;ktp420@live.com&gt;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */

@@ -4,11 +4,13 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
 package org.eclipse.swtbot.generator;
+
+import java.io.File;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -18,7 +20,7 @@ public class SWTBotGeneratorMain {
 
 	public static void main(String[] args) {
 		try {
-			XmlConfigurator.main(new String[] { "widgets.xml", "../org.eclipse.swtbot.swt.finder/src", "org.eclipse.swtbot.swt.finder.SWTBot", "../org.eclipse.swtbot.swt.finder/src" }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			XmlConfigurator.main("widgets.xml", "org.eclipse.swtbot.swt.finder.SWTBot", new File("../org.eclipse.swtbot.swt.finder/src" ));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

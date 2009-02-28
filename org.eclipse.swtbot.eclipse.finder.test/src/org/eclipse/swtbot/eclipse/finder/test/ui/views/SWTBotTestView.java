@@ -72,7 +72,7 @@ public class SWTBotTestView extends ViewPart {
 		viewer.setLabelProvider(new SWTBotTestLabelProvider());
 		viewer.setSorter(new ViewerSorter());
 
-		List data = new ArrayList();
+		List<SWTBotTestData> data = new ArrayList<SWTBotTestData>();
 		data.add(new SWTBotTestData("Test Data 1"));
 		data.add(new SWTBotTestData("Test Data 2"));
 		data.add(new SWTBotTestData("Test Data 3"));

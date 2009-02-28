@@ -38,12 +38,12 @@ public class CommandFinderTest {
 	public void findCommandIMatcher() throws Exception {
 		CommandFinder finder = new CommandFinder();
 
-		List l = finder.findCommand(equalTo("Contribution Item Command"));
+		List<SWTBotCommand> l = finder.findCommand(equalTo("Contribution Item Command"));
 
 		assertNotNull(l);
 		assertEquals(1, l.size());
 
-		SWTBotCommand command = (SWTBotCommand) l.get(0);
+		SWTBotCommand command = l.get(0);
 		assertEquals("Contribution Item Command", command.getText());
 
 		command.click();
@@ -55,7 +55,7 @@ public class CommandFinderTest {
 	public void findCommandNoMatch() throws Exception {
 		CommandFinder finder = new CommandFinder();
 
-		List l = finder.findCommand(withMnemonic("BadMatchName"));
+		List<SWTBotCommand> l = finder.findCommand(withMnemonic("BadMatchName"));
 
 		assertNotNull(l);
 		assertEquals(0, l.size());

@@ -23,6 +23,7 @@ import org.osgi.framework.Bundle;
  * Copied verbatim from PDE to remove PDE dependency.
  * Runs JUnit tests contained inside a plugin.
  */
+@SuppressWarnings("all")
 public class RemotePluginTestRunner extends RemoteTestRunner {
 
 	private String fTestPluginName;
@@ -48,7 +49,7 @@ public class RemotePluginTestRunner extends RemoteTestRunner {
 		}
 	}
 
-	/** 
+	/**
 	 * The main entry point. Supported arguments in addition
 	 * to the ones supported by RemoteTestRunner:
 	 * <pre>

@@ -16,5 +16,8 @@ package org.eclipse.swtbot.swt.finder.results;
  * @since 2.0
  */
 public interface VoidResult {
+	/**
+	 * returns nothing.
+	 */
 	public void run();
 }

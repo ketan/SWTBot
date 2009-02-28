@@ -25,6 +25,7 @@ import org.junit.Test;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
+@SuppressWarnings("all")
 public class AbstractSWTBotTest extends AbstractSWTTestCase {
 
 	@Test

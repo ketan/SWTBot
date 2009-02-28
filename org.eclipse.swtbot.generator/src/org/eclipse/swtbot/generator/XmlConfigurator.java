@@ -7,7 +7,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
@@ -59,30 +59,7 @@ public class XmlConfigurator {
 		sugarConfiguration.addImports(new SWTBotGeneratorFactoryReader(className));
 	}
 
-	public static void main(String... args) throws Exception {
-		if (args.length != 4) {
-			System.err.println("Args: config-file source-dir generated-class output-dir"); //$NON-NLS-1$
-			System.err.println(""); //$NON-NLS-1$
-			System.err.println("    config-file : Path to config file listing matchers to generate sugar for."); //$NON-NLS-1$
-			System.err.println("                  e.g. path/to/matchers.xml"); //$NON-NLS-1$
-			System.err.println(""); //$NON-NLS-1$
-			System.err.println("    source-dir  : Path to Java source containing matchers to generate sugar for."); //$NON-NLS-1$
-			System.err.println("                  May contain multiple paths, separated by commas."); //$NON-NLS-1$
-			System.err.println("                  e.g. src/java,src/more-java"); //$NON-NLS-1$
-			System.err.println(""); //$NON-NLS-1$
-			System.err.println("generated-class : Full name of class to generate."); //$NON-NLS-1$
-			System.err.println("                  e.g. org.myproject.MyMatchers"); //$NON-NLS-1$
-			System.err.println(""); //$NON-NLS-1$
-			System.err.println("     output-dir : Where to output generated code (package subdirs will be"); //$NON-NLS-1$
-			System.err.println("                  automatically created)."); //$NON-NLS-1$
-			System.err.println("                  e.g. build/generated-code"); //$NON-NLS-1$
-			System.exit(-1);
-		}
-
-		String configFile = args[0];
-		String srcDirs = args[1];
-		String fullClassName = args[2];
-		File outputDir = new File(args[3]);
+	public static void main(String configFile, String fullClassName, File outputDir) throws Exception {
 
 		String fileName = fullClassName.replace('.', File.separatorChar) + ".java"; //$NON-NLS-1$
 		int dotIndex = fullClassName.lastIndexOf("."); //$NON-NLS-1$

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
@@ -25,8 +25,7 @@ import org.eclipse.swtbot.swt.finder.SWTBotWidget;
  */
 public class MethodFactory {
 
-	@SuppressWarnings("all")
-	public static ArrayList<String> methods(SWTBotWidget annotation, Class returnType, Class<? extends Widget> widgetType, String methodPrefix) {
+	public static ArrayList<String> methods(SWTBotWidget annotation, Class<?> returnType, Class<? extends Widget> widgetType, String methodPrefix) {
 		ArrayList<String> result = new ArrayList<String>();
 
 		List<List<ReferenceBy>> references = getReferenceCombinations(annotation);
@@ -40,13 +39,13 @@ public class MethodFactory {
 	}
 
 	private static List<List<ReferenceBy>> getReferenceCombinations(SWTBotWidget annotation) {
-		List<ReferenceBy> value = new ArrayList(Arrays.asList(annotation.referenceBy()));
+		List<ReferenceBy> value = new ArrayList<ReferenceBy>(Arrays.asList(annotation.referenceBy()));
 		value.addAll(Arrays.asList(annotation.defaultReferenceBy()));
 		ReferenceBy[] array = value.toArray(new ReferenceBy[] {});
 		return ReferenceBy.getCombinations(array);
 	}
 
-	public static Collection<? extends String> imports(SWTBotWidget annotation, Class returnType, Class<? extends Widget> widgetType, String methodPrefix) {
+	public static Collection<? extends String> imports(SWTBotWidget annotation, Class<?> returnType, Class<? extends Widget> widgetType, String methodPrefix) {
 		ArrayList<String> result = new ArrayList<String>();
 		List<List<ReferenceBy>> references = getReferenceCombinations(annotation);
 		for (List<ReferenceBy> list : references) {

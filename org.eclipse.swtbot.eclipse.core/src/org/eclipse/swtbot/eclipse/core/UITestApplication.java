@@ -31,6 +31,7 @@ import org.eclipse.ui.testing.TestableObject;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
+@SuppressWarnings("all")
 public class UITestApplication implements IApplication, ITestHarness {
 
 	private static final String DEFAULT_APP_3_0 = "org.eclipse.ui.ide.workbench"; //$NON-NLS-1$
@@ -101,7 +102,7 @@ public class UITestApplication implements IApplication, ITestHarness {
 	 * If the PDE JUnit launcher did not set this argument, then return
 	 * the name of the default application.
 	 * In 3.0, the default is the "org.eclipse.ui.ide.worbench" application.
-	 * 
+	 *
 	 */
 	private String getApplicationToRun(String[] args) {
 		IProduct product = Platform.getProduct();

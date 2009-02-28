@@ -4,13 +4,12 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
 package org.eclipse.swtbot.swt.spy;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.swt.SWT;
@@ -44,7 +43,6 @@ import org.eclipse.swtbot.swt.finder.resolvers.IChildrenResolver;
 import org.eclipse.swtbot.swt.finder.resolvers.IParentResolver;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.utils.TreePath;
-
 class WidgetTracker implements Runnable {
 	protected IChildrenResolver	childrenResolver;
 
@@ -95,10 +93,10 @@ class WidgetTracker implements Runnable {
 	}
 
 	public void getCompositeInformation(Control control, StringBuffer buf) {
-		List children = childrenResolver.getChildren(control);
+		List<Widget> children = childrenResolver.getChildren(control);
 		buf.append("\nChildren: " + children.size() + "\n");
-		for (Iterator iterator = children.iterator(); iterator.hasNext();)
-			buf.append("\t" + iterator.next() + "\n");
+		for (Widget widget : children)
+			buf.append("\t" + widget + "\n");
 		buf.append("\n");
 	}
 
@@ -204,7 +202,7 @@ class WidgetTracker implements Runnable {
 		if (style == SWT.DEFAULT)
 			return "DEFAULT - bad!";
 		if ((style & 1 << 1) != 0)
-			if ((w instanceof CTabFolder) || (w instanceof StyledText) || (w instanceof List) || (w instanceof Text)
+			if ((w instanceof CTabFolder) || (w instanceof StyledText) || (w instanceof org.eclipse.swt.widgets.List) || (w instanceof Text)
 					|| (w instanceof Table) || (w instanceof Tree))
 				result += "MULTI | ";
 			else if (w instanceof Menu)
@@ -222,7 +220,7 @@ class WidgetTracker implements Runnable {
 				result += "DROP_DOWN | ";
 			else if (w instanceof Button)
 				result += "ARROW | ";
-			else if ((w instanceof CTabFolder) || (w instanceof StyledText) || (w instanceof List)
+			else if ((w instanceof CTabFolder) || (w instanceof StyledText) || (w instanceof org.eclipse.swt.widgets.List)
 					|| (w instanceof Text) || (w instanceof Table) || (w instanceof Tree))
 				result += "SINGLE | ";
 			else if ((w instanceof Label) || (w instanceof Group))

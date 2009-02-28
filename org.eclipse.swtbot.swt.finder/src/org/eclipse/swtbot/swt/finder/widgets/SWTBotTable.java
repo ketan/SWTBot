@@ -53,7 +53,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Constructs a new instance of this object.
-	 * 
+	 *
 	 * @param table the widget.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 */
@@ -63,7 +63,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Constructs a new instance of this object.
-	 * 
+	 *
 	 * @param table the widget.
 	 * @param description the description of the widget, this will be reported by {@link #toString()}
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
@@ -74,7 +74,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Gets the row count.
-	 * 
+	 *
 	 * @return the number of rows in the table
 	 */
 	public int rowCount() {
@@ -87,7 +87,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Gets the column count.
-	 * 
+	 *
 	 * @return the number of columns in the table
 	 */
 	public int columnCount() {
@@ -100,7 +100,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Gets the columns in this table.
-	 * 
+	 *
 	 * @return the list of columns in the table.
 	 */
 	public List<String> columns() {
@@ -127,7 +127,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Gets the column matching the given label.
-	 * 
+	 *
 	 * @param label the header text.
 	 * @return the header of the table.
 	 * @throws WidgetNotFoundException if the header is not found.
@@ -148,7 +148,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Gets the cell data for the given row/column index.
-	 * 
+	 *
 	 * @param row the row in the table.
 	 * @param column the column in the table.
 	 * @return the cell at the location specified by the row and column
@@ -166,7 +166,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Gets the cell data for the given row and column label.
-	 * 
+	 *
 	 * @param row the row in the table
 	 * @param columnName the column title.
 	 * @return the cell in the table at the specified row and columnheader
@@ -182,7 +182,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Gets the selected item count.
-	 * 
+	 *
 	 * @return the number of selected items.
 	 */
 	public int selectionCount() {
@@ -195,13 +195,13 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Gets the selected items.
-	 * 
+	 *
 	 * @return the selection in the table
 	 */
 	public TableCollection selection() {
 		final int columnCount = columnCount();
-		return (TableCollection) syncExec(new Result() {
-			public Object run() {
+		return syncExec(new Result<TableCollection>() {
+			public TableCollection run() {
 				final TableCollection selection = new TableCollection();
 				TableItem[] items = widget.getSelection();
 				for (TableItem item : items) {
@@ -217,7 +217,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Sets the selected item to the given index.
-	 * 
+	 *
 	 * @param rowIndex the zero-based index of the row to be selected.
 	 */
 	public void select(final int rowIndex) {
@@ -240,7 +240,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Sets the selection to the given item.
-	 * 
+	 *
 	 * @param item the item to select in the table.
 	 * @since 1.0
 	 */
@@ -254,7 +254,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Gets the index of the item matching the given item.
-	 * 
+	 *
 	 * @param item the index of the item in the table, or -1 if the item does not exist in the table.
 	 * @return the index of the specified item in the table.
 	 * @since 1.0
@@ -275,7 +275,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Gets the index of the item matching the given item and the given column.
-	 * 
+	 *
 	 * @param item the index of the item in the table, or -1 if the item does not exist in the table.
 	 * @param column the column for which to get the index of.
 	 * @return the index of the specified item and of the specified column in the table.
@@ -297,7 +297,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Gets the index of the item matching the given item and the given column.
-	 * 
+	 *
 	 * @param item the index of the item in the table, or -1 if the item does not exist in the table.
 	 * @param column the column for which to get the index of.
 	 * @return the index of the specified item and of the specified column in the table.
@@ -322,7 +322,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Selects the given index items.
-	 * 
+	 *
 	 * @param indices the row indices to select in the table.
 	 */
 	public void select(final int[] indices) {
@@ -378,7 +378,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Click on the table on given cell. This can be used to activate a cellEditor on a cell.
-	 * 
+	 *
 	 * @param row the row in the table.
 	 * @param column the column in the table.
 	 * @since 1.2
@@ -398,7 +398,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Click on the table on given cell. This can be used to activate a cellEditor on a cell.
-	 * 
+	 *
 	 * @param row the row in the table.
 	 * @param column the column in the table.
 	 * @since 1.2
@@ -418,7 +418,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Asserts that the row and column are legal for this instance of the table.
-	 * 
+	 *
 	 * @param row the row number
 	 * @param column the column number
 	 * @since 1.2
@@ -434,7 +434,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Gets the table item matching the given name.
-	 * 
+	 *
 	 * @param itemText the text on the node.
 	 * @return the table item with the specified text.
 	 * @throws WidgetNotFoundException if the node was not found.
@@ -459,7 +459,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Gets the item matching the given name.
-	 * 
+	 *
 	 * @param itemText the text on the node.
 	 * @return the table item with the specified text.
 	 */
@@ -479,7 +479,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Gets the table item matching the given row number.
-	 * 
+	 *
 	 * @param row the row number.
 	 * @return the table item with the specified row.
 	 * @throws WidgetNotFoundException if the node was not found.
@@ -504,7 +504,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Gets the item matching the given row number.
-	 * 
+	 *
 	 * @param row the row number.
 	 * @return the table item with the specified row.
 	 */

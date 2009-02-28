@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
@@ -19,7 +19,7 @@ import org.eclipse.jface.viewers.Viewer;
 
 /**
  * This is the content provider for getting the data for the SWTBotTest Tree Viewer.
- * 
+ *
  * @author Stephen Paulin &lt;paulin [at] spextreme [dot] com&gt;
  * @version $Id$
  */
@@ -28,7 +28,7 @@ public class SWTBotTestContentProvider implements IStructuredContentProvider {
 	/**
 	 * The list of managed data.
 	 */
-	List		data	= new ArrayList();
+	List<SWTBotTestData>		data	= new ArrayList<SWTBotTestData>();
 	/**
 	 * The table view instance assigned to this provider.
 	 */
@@ -43,7 +43,7 @@ public class SWTBotTestContentProvider implements IStructuredContentProvider {
 
 	/**
 	 * Adds an item to the content provider.
-	 * 
+	 *
 	 * @param item The item to add.
 	 */
 	public void add(SWTBotTestData item) {
@@ -55,7 +55,7 @@ public class SWTBotTestContentProvider implements IStructuredContentProvider {
 
 	/**
 	 * Adds an item to the content provider.
-	 * 
+	 *
 	 * @param item The item to add.
 	 */
 	public void remove(SWTBotTestData item) {
@@ -74,10 +74,11 @@ public class SWTBotTestContentProvider implements IStructuredContentProvider {
 		viewer = null;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		// This does not do any checking of the type before casting...This will
 		// just pass the error up the chain.
 		this.viewer = (TableViewer) viewer;
-		data = (List) newInput;
+		data = (List<SWTBotTestData>) newInput;
 	}
 }
