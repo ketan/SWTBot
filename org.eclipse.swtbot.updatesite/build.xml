@@ -70,11 +70,7 @@
 
 			<!-- junit comptibility -->
 			<fileset dir="${target}/plugins">
-				<include name="org.eclipse.swtbot.swt.finder.junit4_53_*.jar" />
-			</fileset>
-
-			<fileset dir="${target}/plugins">
-				<include name="org.eclipse.swtbot.swt.finder.junit4_5_*.jar" />
+				<include name="org.eclipse.swtbot.junit4_x*.jar" />
 			</fileset>
 
 			<!-- apache jars -->
