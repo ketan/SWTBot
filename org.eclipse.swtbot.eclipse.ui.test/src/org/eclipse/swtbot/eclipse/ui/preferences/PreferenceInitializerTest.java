@@ -4,16 +4,17 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.ui.preferences;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasItems;
 import static org.junit.Assert.assertEquals;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 
 import org.eclipse.jface.preference.PreferenceStore;
 import org.junit.Before;
@@ -21,7 +22,7 @@ import org.junit.Test;
 
 /**
  * Initializes the default preferences if none exist.
- * 
+ *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
@@ -44,8 +45,8 @@ public class PreferenceInitializerTest {
 	@Test
 	public void canPullJDTImports() throws Exception {
 		jdtPreferenceStore.setValue(JDT_IMPORT_PROPERTY, "foo.*;bar.*");
-		List<String> imports = initializer.getJDTImports();
-		assertEquals(Arrays.asList("foo.*", "bar.*"), imports);
+		Set<String> imports = initializer.getJDTImports();
+		assertThat(imports, hasItems("foo.*", "bar.*"));
 	}
 
 	@Test

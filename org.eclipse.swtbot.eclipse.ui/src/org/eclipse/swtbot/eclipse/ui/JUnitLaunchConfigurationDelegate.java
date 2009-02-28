@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
@@ -54,7 +54,7 @@ import org.eclipse.pde.ui.launcher.PDESourcePathProvider;
  * This class is a copy of {@link org.eclipse.pde.ui.launcher.JUnitLaunchConfigurationDelegate}
  * with the {@link #collectExecutionArguments(ILaunchConfiguration, List, List)} modified to use
  * {@value Activator#APPLICATION_ID}.
- * 
+ *
  * A launch delegate for launching JUnit Plug-in tests.
  *
  * @since 3.3
@@ -62,11 +62,12 @@ import org.eclipse.pde.ui.launcher.PDESourcePathProvider;
 @SuppressWarnings("all")
 public class JUnitLaunchConfigurationDelegate extends org.eclipse.jdt.junit.launcher.JUnitLaunchConfigurationDelegate  {
 
-	private static String[] REQUIRED_PLUGINS = {"org.junit", "org.eclipse.jdt.junit.runtime", "org.eclipse.pde.junit.runtime"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	public static final String	LAUNCH_CONFIG_ID	= "org.eclipse.swtbot.eclipse.ui.launcher.JunitLaunchConfig";							//$NON-NLS-1$
+	private static String[]		REQUIRED_PLUGINS	= { "org.junit", "org.eclipse.jdt.junit.runtime", "org.eclipse.pde.junit.runtime" };	//$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	protected File				fConfigDir			= null;
+	private Map					fPluginMap;
 
-	protected File fConfigDir = null;
-
-	private Map fPluginMap;
+	/**  */
 
 	/*
 	 * (non-Javadoc)
@@ -297,7 +298,7 @@ public class JUnitLaunchConfigurationDelegate extends org.eclipse.jdt.junit.laun
 
 	/**
 	 * Returns the location of the configuration area
-	 * 
+	 *
 	 * @param configuration
 	 * 				the launch configuration
 	 * @return a directory where the configuration area is located
@@ -330,7 +331,7 @@ public class JUnitLaunchConfigurationDelegate extends org.eclipse.jdt.junit.laun
 	/**
 	 * Adds a listener to the launch to be notified at interesting launch lifecycle
 	 * events such as when the launch terminates.
-	 * 
+	 *
 	 * @param launch
 	 * 			the launch
 	 */
@@ -365,7 +366,7 @@ public class JUnitLaunchConfigurationDelegate extends org.eclipse.jdt.junit.laun
 	 * Checks for old-style plugin.xml files that have become stale since the last launch.
 	 * For any stale plugin.xml files found, the corresponding MANIFEST.MF is deleted
 	 * from the runtime configuration area so that it gets regenerated upon startup.
-	 * 
+	 *
 	 * @param configuration
 	 * 			the launch configuration
 	 * @param monitor
@@ -379,7 +380,7 @@ public class JUnitLaunchConfigurationDelegate extends org.eclipse.jdt.junit.laun
 	/**
 	 * Clears the workspace prior to launching if the workspace exists and the option to
 	 * clear it is turned on.  Also clears the configuration area if that option is chosen.
-	 * 
+	 *
 	 * @param configuration
 	 * 			the launch configuration
 	 * @param monitor
@@ -404,7 +405,7 @@ public class JUnitLaunchConfigurationDelegate extends org.eclipse.jdt.junit.laun
 	/**
 	 * Checks if the Automated Management of Dependencies option is turned on.
 	 * If so, it makes aure all manifests are updated with the correct dependencies.
-	 * 
+	 *
 	 * @param configuration
 	 * 			the launch configuration
 	 * @param monitor
@@ -417,7 +418,7 @@ public class JUnitLaunchConfigurationDelegate extends org.eclipse.jdt.junit.laun
 	/**
 	 * Validates inter-bundle dependencies automatically prior to launching
 	 * if that option is turned on.
-	 * 
+	 *
 	 * @param configuration
 	 * 			the launch configuration
 	 * @param monitor

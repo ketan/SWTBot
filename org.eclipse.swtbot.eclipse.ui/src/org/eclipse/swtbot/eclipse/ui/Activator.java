@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
@@ -19,7 +19,9 @@ import org.osgi.framework.BundleContext;
  */
 public class Activator extends AbstractUIPlugin {
 	// The plug-in ID
+	/**  The plugin id. */
 	public static final String PLUGIN_ID = "org.eclipse.swtbot.eclipse.ui"; //$NON-NLS-1$
+	/**  The application ID of the swtbot test application. */
 	public static final String APPLICATION_ID = "org.eclipse.swtbot.eclipse.core.swtbottestapplication"; //$NON-NLS-1$
 
 	// The shared instance

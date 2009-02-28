@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
@@ -12,10 +12,16 @@ package org.eclipse.swtbot.eclipse.ui;
 
 import org.eclipse.pde.ui.launcher.JUnitWorkbenchLaunchShortcut;
 
+/**
+ * Enhances the {@link JUnitWorkbenchLaunchShortcut} to launch SWTBot's launch configuration.
+ *
+ * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
+ * @version $Id$
+ */
 public class SWTBotLaunchShortcut extends JUnitWorkbenchLaunchShortcut {
 
 	protected String getLaunchConfigurationTypeId() {
-		return "org.eclipse.swtbot.eclipse.ui.launcher.JunitLaunchConfig"; //$NON-NLS-1$
+		return JUnitLaunchConfigurationDelegate.LAUNCH_CONFIG_ID;
 	}
 
 }

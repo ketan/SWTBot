@@ -15,8 +15,6 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import junit.framework.Assert;
-
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jdt.ui.PreferenceConstants;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -31,6 +29,7 @@ import org.eclipse.swtbot.swt.finder.utils.StringUtils;
 import org.eclipse.ui.IStartup;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Assert;
 
 /**
  * Initializes the default preferences if none exist.
@@ -40,12 +39,12 @@ import org.hamcrest.Matchers;
  */
 public class PreferenceInitializer extends AbstractPreferenceInitializer implements IStartup, IPropertyChangeListener {
 
-	private static final String	EMPTY	= ""; //$NON-NLS-1$
-	private static final String	SEMI_COLON	= ";"; //$NON-NLS-1$
+	private static final String		EMPTY										= "";											//$NON-NLS-1$
+	private static final String		SEMI_COLON									= ";";											//$NON-NLS-1$
 
 	private final IPreferenceStore	swtbotPreferenceStore;
 	private final IPreferenceStore	jdtPreferenceStore;
-	static final String				ENABLE_ADDITIONAL_AUTOCOMPLETE_FAVOURTES	= "ENABLE_ADDITIONAL_AUTOCOMPLETE_FAVOURTES"; //$NON-NLS-1$
+	static final String				ENABLE_ADDITIONAL_AUTOCOMPLETE_FAVOURTES	= "ENABLE_ADDITIONAL_AUTOCOMPLETE_FAVOURTES";	//$NON-NLS-1$
 
 	/**
 	 * Creates a default preference initializer.
@@ -88,13 +87,16 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer impleme
 		jdtPreferenceStore.setValue(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, join);
 	}
 
+	/**
+	 * @return the JDT favourite imports.
+	 */
 	public Set<String> getJDTImports() {
 		String preference = jdtPreferenceStore.getString(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS);
 		if (EMPTY.equals(preference.trim())) {
 			return new HashSet<String>();
 		}
 		String[] imports = preference.split(SEMI_COLON);
-		return new HashSet<String>(Arrays.asList(imports));
+		return new LinkedHashSet<String>(Arrays.asList(imports));
 	}
 
 	private LinkedHashSet<String> getDefaultFavorites() {

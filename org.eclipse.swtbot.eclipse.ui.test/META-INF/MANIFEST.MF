@@ -7,4 +7,5 @@ Bundle-Vendor: Eclipse.org
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.swtbot.eclipse.ui,
  org.eclipse.ui,
- org.junit4
+ org.junit4,
+ org.hamcrest
