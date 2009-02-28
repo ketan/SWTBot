@@ -18,15 +18,18 @@ import java.util.List;
 
 import org.eclipse.swtbot.eclipse.finder.SWTEclipseBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
+import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
+@RunWith(SWTBotJunit4ClassRunner.class)
 public class SWTBotViewTest {
 
 	private SWTEclipseBot	bot	= new SWTEclipseBot();

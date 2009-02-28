@@ -8,7 +8,8 @@ Require-Bundle: org.eclipse.swt,
  org.eclipse.swtbot.swt.finder,
  org.apache.log4j,
  org.junit4,
- org.hamcrest
+ org.hamcrest,
+ org.eclipse.swtbot.junit4_x
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
 Export-Package: org.eclipse.swtbot.swt.finder,

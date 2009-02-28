@@ -24,14 +24,17 @@ import org.eclipse.swtbot.eclipse.finder.widgets.helpers.NewJavaClass;
 import org.eclipse.swtbot.eclipse.finder.widgets.helpers.NewJavaProject;
 import org.eclipse.swtbot.eclipse.finder.widgets.helpers.PackageExplorerView;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
+import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
+@RunWith(SWTBotJunit4ClassRunner.class)
 public class SWTBotEclipseEditorTest {
 
 	private static final String	PROJECT_NAME		= "FooBarProject";

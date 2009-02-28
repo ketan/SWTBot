@@ -19,7 +19,9 @@ import java.util.List;
 
 import org.eclipse.swtbot.eclipse.finder.SWTEclipseBot;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotCommand;
+import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests the command finder.
@@ -27,6 +29,7 @@ import org.junit.Test;
  * @author @author Stephen Paulin &lt;paulin [at] spextreme [dot] com&gt;
  * @version $Id$
  */
+@RunWith(SWTBotJunit4ClassRunner.class)
 public class CommandFinderTest {
 
 	private SWTEclipseBot bot = new SWTEclipseBot();
