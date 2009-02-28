@@ -11,39 +11,37 @@
 package org.eclipse.swtbot.swt.finder.waits;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.swt.widgets.Shell;
 import org.hamcrest.Matcher;
 
 /**
  * Condiion that waits for a shell with the specified text to appear.
- * 
+ *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  * @since 2.0
  */
-public class WaitForShell extends DefaultCondition {
-
-	private ArrayList<Shell>	matchingShells;
-	private final Matcher<?>	matcher;
+public class WaitForShell extends WaitForObjectCondition<Shell> {
 
 	WaitForShell(Matcher<?> matcher) {
-		this.matcher = matcher;
+		super(matcher);
 	}
 
 	public String getFailureMessage() {
 		return "Could not find shell matching: " + matcher; //$NON-NLS-1$
 	}
 
-	public boolean test() throws Exception {
+	protected List<Shell> findMatches() {
 		Shell[] shells = findShells();
-		this.matchingShells = new ArrayList<Shell>();
+		ArrayList<Shell> matchingShells = new ArrayList<Shell>();
 		for (Shell shell : shells) {
 			if (matcher.matches(shell)) {
 				matchingShells.add(shell);
 			}
 		}
-		return !matchingShells.isEmpty();
+		return matchingShells;
 	}
 
 	/**
@@ -51,14 +49,6 @@ public class WaitForShell extends DefaultCondition {
 	 */
 	protected Shell[] findShells() {
 		return bot.getFinder().getShells();
-	}
-
-	public ArrayList<Shell> getAllShells() {
-		return matchingShells;
-	}
-
-	public Shell get(int index) {
-		return matchingShells.get(index);
 	}
 
 }

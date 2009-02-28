@@ -20,28 +20,18 @@ import org.hamcrest.Matcher;
  * @version $Id$
  * @since 2.0
  */
-public class WaitForWidget extends DefaultCondition {
-	private final Matcher<?>		matcher;
-	private List<? extends Widget>	controls;
+public class WaitForWidget<T extends Widget> extends WaitForObjectCondition<T> {
 
 	WaitForWidget(Matcher<?> matcher) {
-		this.matcher = matcher;
+		super(matcher);
 	}
 
 	public String getFailureMessage() {
 		return "Could not find widget matching: " + matcher; //$NON-NLS-1$
 	}
 
-	public boolean test() throws Exception {
-		controls = bot.getFinder().findControls(matcher);
-		return !controls.isEmpty();
+	protected List<T> findMatches() {
+		return (List<T>) bot.getFinder().findControls(matcher);
 	}
 
-	public List<? extends Widget> getWidgets() {
-		return controls;
-	}
-
-	public Widget get(int index) {
-		return controls.get(index);
-	}
 }

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *     Ketan Patel - https://bugs.eclipse.org/bugs/show_bug.cgi?id=259837
@@ -21,7 +21,7 @@ import org.hamcrest.Matcher;
 
 /**
  * This is a factory class to create some conditions provided with SWTBot.
- * 
+ *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
@@ -30,7 +30,7 @@ public abstract class Conditions {
 	/**
 	 * Gets the condition for checking tables have the proper number of rows. Useful in cases where the table is
 	 * populated continuously from a non UI thread.
-	 * 
+	 *
 	 * @param table the table
 	 * @param rowCount the number of rows that the table must have, in order for {@link ICondition#test()} to evaluate
 	 *            to <code>true</code>.
@@ -44,7 +44,7 @@ public abstract class Conditions {
 
 	/**
 	 * Gets the condition for checking if shells have closed. Useful in cases where a shell takes long to close.
-	 * 
+	 *
 	 * @param shell the shell to monitor.
 	 * @return a condition that evaluates to false until the shell is closed or invisible.
 	 * @since 1.2
@@ -55,7 +55,7 @@ public abstract class Conditions {
 
 	/**
 	 * Gets the condition for checking if an awaited shell is visible and has focus
-	 * 
+	 *
 	 * @param shellText the text of the shell.
 	 * @return a condition that evaluates to false until the shell is visible and has focus.
 	 * @since 1.3
@@ -69,8 +69,8 @@ public abstract class Conditions {
 	 * @return a condition that waits until the matcher evaluates to true.
 	 * @since 2.0
 	 */
-	public static WaitForWidget waitForWidget(Matcher<?> matcher) {
-		return new WaitForWidget(matcher);
+	public static WaitForWidget<Widget> waitForWidget(Matcher<?> matcher) {
+		return new WaitForWidget<Widget>(matcher);
 	}
 
 	/**
@@ -79,8 +79,8 @@ public abstract class Conditions {
 	 * @return a condition that waits until the matcher evaluates to true.
 	 * @since 2.0
 	 */
-	public static WaitForWidgetInParent waitForWidget(Matcher<?> matcher, Widget parent) {
-		return new WaitForWidgetInParent(matcher, parent);
+	public static WaitForWidgetInParent<Widget> waitForWidget(Matcher<?> matcher, Widget parent) {
+		return new WaitForWidgetInParent<Widget>(matcher, parent);
 	}
 
 	/**

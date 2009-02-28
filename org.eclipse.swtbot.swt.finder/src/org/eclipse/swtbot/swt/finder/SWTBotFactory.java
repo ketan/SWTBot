@@ -62,7 +62,7 @@ import org.hamcrest.Matcher;
  * <p>
  * Note: The SWTEclipeBot should be used if testing an eclipse based product/plug-in.
  * </p>
- * 
+ *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @author Vincent Mahe &lt;vmahe [at] irisa [dot] fr&gt;
  * @version $Id$
@@ -74,7 +74,7 @@ abstract class SWTBotFactory {
 	public static final long	DEFAULT_POLL_DELAY	= 500;
 	/**
 	 * the default timeout while waiting for a condition to become true.
-	 * 
+	 *
 	 * @see SWTBotPreferences#getTimeout() for overriding this.
 	 */
 	public static final long	DEFAULT_TIMEOUT		= 5000;
@@ -92,7 +92,7 @@ abstract class SWTBotFactory {
 
 	/**
 	 * Constructs an instance of the bot using the given control finder and menu finder.
-	 * 
+	 *
 	 * @param controlFinder the {@link ControlFinder} used to identify and find controls.
 	 * @param menuFinder the {@link MenuFinder} used to find menu items.
 	 */
@@ -102,7 +102,7 @@ abstract class SWTBotFactory {
 
 	/**
 	 * Constructs a bot with the given finder.
-	 * 
+	 *
 	 * @param finder the finder.
 	 */
 	public SWTBotFactory(Finder finder) {
@@ -134,7 +134,7 @@ abstract class SWTBotFactory {
 	public List<Shell> shells(String text) {
 		WaitForShell waitForShell = waitForShell(withText(text));
 		waitUntilWidgetAppears(waitForShell);
-		ArrayList<Shell> allShells = waitForShell.getAllShells();
+		List<Shell> allShells = waitForShell.getAllMatches();
 		return allShells;
 	}
 
@@ -165,7 +165,7 @@ abstract class SWTBotFactory {
 	public List<Shell> shells(String text, Shell parent) {
 		WaitForShell waitForShell = waitForShell(withText(text), parent);
 		waitUntilWidgetAppears(waitForShell);
-		ArrayList<Shell> allShells = waitForShell.getAllShells();
+		List<Shell> allShells = waitForShell.getAllMatches();
 		return allShells;
 	}
 
@@ -311,7 +311,7 @@ abstract class SWTBotFactory {
 	 * @return the first widget that matchs the matcher.
 	 */
 	public Widget widget(Matcher<?> matcher, Widget parentWidget, int index) {
-		WaitForWidgetInParent waitForWidget = waitForWidget(matcher, parentWidget);
+		WaitForWidgetInParent<Widget> waitForWidget = waitForWidget(matcher, parentWidget);
 		waitUntilWidgetAppears(waitForWidget);
 		return waitForWidget.get(index);
 	}
@@ -322,7 +322,7 @@ abstract class SWTBotFactory {
 	 * @return the index'th widget matching the matcher.
 	 */
 	public Widget widget(Matcher<?> matcher, int index) {
-		WaitForWidget waitForWidget = waitForWidget(matcher);
+		WaitForWidget<Widget> waitForWidget = waitForWidget(matcher);
 		waitUntilWidgetAppears(waitForWidget);
 		return waitForWidget.get(index);
 	}
@@ -337,7 +337,7 @@ abstract class SWTBotFactory {
 
 	/**
 	 * Gets the list of shells found in the display.
-	 * 
+	 *
 	 * @return all the shells in the display.
 	 */
 	public SWTBotShell[] shells() {
@@ -351,7 +351,7 @@ abstract class SWTBotFactory {
 
 	/**
 	 * Gets the current active shell.
-	 * 
+	 *
 	 * @return the current active shell
 	 * @throws WidgetNotFoundException if the widget is not found.
 	 */
@@ -369,7 +369,7 @@ abstract class SWTBotFactory {
 
 	/**
 	 * Gets the timeout as specified by the SWTBotFactory preferences.
-	 * 
+	 *
 	 * @return the value of {@link SWTBotPreferences#getTimeout()}, or {@value #DEFAULT_TIMEOUT} if that cannot be
 	 *         evaluated.
 	 */
@@ -385,7 +385,7 @@ abstract class SWTBotFactory {
 
 	/**
 	 * Waits until a specified condition evaluates to true.
-	 * 
+	 *
 	 * @param condition the {@link ICondition} to be evaluated.
 	 * @throws TimeoutException if the condition does not evaluate to true after {@link #timeout()} milliseconds.
 	 * @since 1.2
@@ -396,7 +396,7 @@ abstract class SWTBotFactory {
 
 	/**
 	 * Waits until the timeout is reached or the condition is met.
-	 * 
+	 *
 	 * @param condition the condition to be evaluated.
 	 * @param timeout the timeout.
 	 * @throws TimeoutException if the condition does not evaluate to true after timeout milliseconds.
@@ -409,7 +409,7 @@ abstract class SWTBotFactory {
 	/**
 	 * Waits until the condition has been meet, or the timeout is reached. The interval is the delay between evaluating
 	 * the condition after it has failed.
-	 * 
+	 *
 	 * @param condition the condition to be evaluated.
 	 * @param timeout the timeout.
 	 * @param interval The delay time.
@@ -435,7 +435,7 @@ abstract class SWTBotFactory {
 
 	/**
 	 * Waits while the condition is true.
-	 * 
+	 *
 	 * @param condition the {@link ICondition} to be evaluated.
 	 * @throws TimeoutException if the condition does not evaluate to false after {@link #timeout()} milliseconds.
 	 * @since 2.0
@@ -446,7 +446,7 @@ abstract class SWTBotFactory {
 
 	/**
 	 * Waits while the condition is true, until the timeout is reached.
-	 * 
+	 *
 	 * @param condition the condition to be evaluated.
 	 * @param timeout the timeout.
 	 * @throws TimeoutException if the condition does not evaluate to false after timeout milliseconds.
@@ -459,7 +459,7 @@ abstract class SWTBotFactory {
 	/**
 	 * Waits while the condition is true, until the timeout is reached. The interval is the delay between evaluating the
 	 * condition after it has succeed.
-	 * 
+	 *
 	 * @param condition the condition to be evaluated.
 	 * @param timeout the timeout.
 	 * @param interval The delay time.
@@ -486,7 +486,7 @@ abstract class SWTBotFactory {
 
 	/**
 	 * Sleeps for the given number of milliseconds.
-	 * 
+	 *
 	 * @param millis the time in milliseconds for which to sleep.
 	 */
 	public void sleep(long millis) {
@@ -495,7 +495,7 @@ abstract class SWTBotFactory {
 
 	/**
 	 * Gets the display
-	 * 
+	 *
 	 * @return the display
 	 * @since 1.0
 	 */
@@ -505,7 +505,7 @@ abstract class SWTBotFactory {
 
 	/**
 	 * Captures a screenshot to the given file name.
-	 * 
+	 *
 	 * @see SWTUtils#captureScreenshot(String)
 	 * @param fileName the filename to save screenshot to.
 	 * @return <code>true</code> if the screenshot was created and saved, <code>false</code> otherwise.
@@ -525,7 +525,7 @@ abstract class SWTBotFactory {
 	/**
 	 * Returns the control which currently has keyboard focus, or <code>null</code> if keyboard events are not currently
 	 * going to any of the controls built by the currently running application.
-	 * 
+	 *
 	 * @return the control which currently has focus, or <code>null</code>
 	 * @see Display#getFocusControl()
 	 */

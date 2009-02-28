@@ -20,14 +20,12 @@ import org.hamcrest.Matcher;
  * @version $Id$
  * @since 2.0
  */
-public class WaitForWidgetInParent extends DefaultCondition {
+public class WaitForWidgetInParent<T extends Widget> extends WaitForObjectCondition<T>{
 
-	private final Matcher<?>		matcher;
 	private final Widget			parent;
-	private List<? extends Widget>	controls;
 
 	WaitForWidgetInParent(Matcher<?> matcher, Widget parent) {
-		this.matcher = matcher;
+		super(matcher);
 		this.parent = parent;
 	}
 
@@ -35,16 +33,12 @@ public class WaitForWidgetInParent extends DefaultCondition {
 		return "Could not find widget matching: " + matcher; //$NON-NLS-1$
 	}
 
-	public boolean test() throws Exception {
-		controls = bot.getFinder().findControls(parent, matcher, true);
-		return !controls.isEmpty();
+	protected List<T> findMatches() {
+		return (List<T>) bot.getFinder().findControls(parent, matcher, true);
 	}
 
 	public List<? extends Widget> getWidgets() {
-		return controls;
+		return getAllMatches();
 	}
 
-	public Widget get(int index) {
-		return controls.get(index);
-	}
 }
