@@ -7,7 +7,7 @@ Bundle-Activator: org.eclipse.swtbot.eclipse.finder.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.swtbot.swt.finder,
- org.hamcrest;bundle-version="1.1.0",
+ org.hamcrest,
  org.junit4,
  org.apache.log4j,
  org.apache.commons.collections
