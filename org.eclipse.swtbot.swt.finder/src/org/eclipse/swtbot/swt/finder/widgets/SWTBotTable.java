@@ -107,10 +107,13 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 		return syncExec(new ListResult<String>() {
 			public List<String> run() {
 				ArrayList<String> result = new ArrayList<String>();
+
 				TableColumn[] columns = widget.getColumns();
-				for (TableColumn tableColumn : columns) {
-					result.add(tableColumn.getText());
+
+				for (int i : widget.getColumnOrder()) {
+					result.add(columns[i].getText());
 				}
+
 				return result;
 			}
 		});
