@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *     Ketan Patel - https://bugs.eclipse.org/bugs/show_bug.cgi?id=259837
@@ -44,7 +44,7 @@ import org.eclipse.ui.IEditorReference;
 
 /**
  * This represents an eclipse editor item.
- * 
+ *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
@@ -54,14 +54,14 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 
 	/**
 	 * The StyledText widget inside the editor
-	 * 
+	 *
 	 * @since 2.0
 	 */
 	public final StyledText			widget;
 
 	/**
 	 * Constructs an instance of the given object.
-	 * 
+	 *
 	 * @param editorReference the editor reference.
 	 * @param bot the instance of {@link SWTEclipseBot} which will be used to drive operations on behalf of this object.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
@@ -82,7 +82,7 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 
 	/**
 	 * Applys a quick fix item at the given index.
-	 * 
+	 *
 	 * @param quickFixIndex the index of the quickfix item to apply.
 	 * @throws QuickFixNotFoundException if the quickfix could not be found.
 	 * @throws WidgetNotFoundException if the quickfix could not be found.
@@ -95,7 +95,7 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 
 	/**
 	 * Applys a quick fix item with the given name.
-	 * 
+	 *
 	 * @param quickFixName the name of the quick fix to apply.
 	 * @throws QuickFixNotFoundException if the quickfix could not be found.
 	 */
@@ -108,7 +108,7 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 
 	/**
 	 * Finds all the quickfixes in the quickfix list.
-	 * 
+	 *
 	 * @return the list of all available quickfixes.
 	 * @throws QuickFixNotFoundException if the quickfix could not be found.
 	 * @since 1.2
@@ -125,7 +125,7 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 
 	/**
 	 * Gets the quick fix item count.
-	 * 
+	 *
 	 * @return the number of quickfix items in the quickfix proposals.
 	 * @throws QuickFixNotFoundException if the quickfix could not be found.
 	 * @since 1.2
@@ -141,7 +141,7 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	 * <p>
 	 * FIXME: this needs a lot of optimization.
 	 * </p>
-	 * 
+	 *
 	 * @param quickFixTable the table containing the quickfix.
 	 * @param quickFixName the name of the quickfix to apply.
 	 * @param retries the number of retries, before giving up.
@@ -159,7 +159,7 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 
 	/**
 	 * Gets the quick fix table.
-	 * 
+	 *
 	 * @param quickFixShell the shell containing the quickfixes.
 	 * @return the table containing the quickfix.
 	 * @throws QuickFixNotFoundException if the table could not be found.
@@ -175,7 +175,7 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 
 	/**
 	 * Applies the specified quickfix.
-	 * 
+	 *
 	 * @param quickFixTable the table containing the quickfix
 	 * @param quickFixIndex the index of the quickfix.
 	 */
@@ -200,7 +200,7 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 
 	/**
 	 * Gets teh active quick fix shell.
-	 * 
+	 *
 	 * @return the quickfix shell.
 	 * @throws QuickFixNotFoundException if the quickfix shell is not found.
 	 */
@@ -211,7 +211,7 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 
 	/**
 	 * This activates the popup shell.
-	 * 
+	 *
 	 * @return The shell.
 	 * @throws QuickFixNotFoundException Throw if a quick fix problem occurs.
 	 */
@@ -228,7 +228,7 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 
 	/**
 	 * Gets the auto completion proposal matching the given text..
-	 * 
+	 *
 	 * @param insertText the proposal text to type before auto completing
 	 * @return the list of proposals
 	 * @throws QuickFixNotFoundException if the autocomplete proposal could not be found.
@@ -258,7 +258,7 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 
 	/**
 	 * Auto completes the given proposal.
-	 * 
+	 *
 	 * @param insertText the text to be inserted before activating the auto-complete.
 	 * @param proposalText the auto-completion proposal to select from the list.
 	 * @throws QuickFixNotFoundException if the auto-complete proposal could not be found.
@@ -271,7 +271,7 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 
 	/**
 	 * This performs the auto complete.
-	 * 
+	 *
 	 * @param proposalText The text to propose.
 	 * @throws QuickFixNotFoundException Thrown if the quick fix error occurs.
 	 */
@@ -284,7 +284,7 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 
 	/**
 	 * Gets the active auto complete shell.
-	 * 
+	 *
 	 * @return The shell.
 	 * @throws QuickFixNotFoundException Thrown if a qaick fix error occurs.
 	 */
@@ -295,7 +295,7 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 
 	/**
 	 * Gets the context menu in the editor.
-	 * 
+	 *
 	 * @param text the context menu item.
 	 * @return the menu
 	 * @throws WidgetNotFoundException if the menu with the specified text could not be found.
@@ -306,8 +306,8 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	}
 
 	/**
-	 * Gets the current cursor position.
-	 * 
+	 * Gets the current position of the cursor. The returned position will contain a 0-based line and column.
+	 *
 	 * @return the position of the cursor.
 	 * @see SWTBotStyledText#cursorPosition()
 	 */
@@ -317,7 +317,7 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 
 	/**
 	 * Gets if the object's widget is enabled.
-	 * 
+	 *
 	 * @return <code>true</code> if the widget is enabled.
 	 * @see org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBot#isEnabled()
 	 */
@@ -327,7 +327,7 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 
 	/**
 	 * Gets the current selection.
-	 * 
+	 *
 	 * @return The selected string.
 	 */
 	public String getSelection() {
@@ -336,19 +336,19 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 
 	/**
 	 * Gets the style text.
-	 * 
-	 * @param line the line number.
+	 *
+	 * @param lineIndex the line index, 0 based.
 	 * @param column the column number.
 	 * @return the {@link StyleRange} at the specified location
 	 * @see SWTBotStyledText#getStyle(int, int)
 	 */
-	public StyleRange getStyle(int line, int column) {
-		return styledText.getStyle(line, column);
+	public StyleRange getStyle(int lineIndex, int column) {
+		return styledText.getStyle(lineIndex, column);
 	}
 
 	/**
 	 * Gets the text of this object's widget.
-	 * 
+	 *
 	 * @return the text on the styledtext.
 	 * @see org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBot#getText()
 	 */
@@ -357,14 +357,14 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	}
 
 	/**
-	 * @param line the line number.
+	 * @param lineIndex the line index, 0 based.
 	 * @param column the column number.
 	 * @param text the text to be typed at the specified location
 	 * @see SWTBotStyledText#typeText(int, int, java.lang.String)
 	 * @since 1.0
 	 */
-	public void typeText(int line, int column, String text) {
-		styledText.typeText(line, column, text);
+	public void typeText(int lineIndex, int column, String text) {
+		styledText.typeText(lineIndex, column, text);
 	}
 
 	/**
@@ -377,13 +377,13 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	}
 
 	/**
-	 * @param line the line number.
+	 * @param lineIndex the line index, 0 based.
 	 * @param column the column number.
 	 * @param text the text to be inserted at the specified location
 	 * @see SWTBotStyledText#insertText(int, int, java.lang.String)
 	 */
-	public void insertText(int line, int column, String text) {
-		styledText.insertText(line, column, text);
+	public void insertText(int lineIndex, int column, String text) {
+		styledText.insertText(lineIndex, column, text);
 	}
 
 	/**
@@ -405,12 +405,12 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	}
 
 	/**
-	 * @param line the line numnber.
+	 * @param lineIndex the line index, 0 based.
 	 * @param column the column number.
 	 * @see SWTBotStyledText#navigateTo(int, int)
 	 */
-	public void navigateTo(int line, int column) {
-		styledText.navigateTo(line, column);
+	public void navigateTo(int lineIndex, int column) {
+		styledText.navigateTo(lineIndex, column);
 	}
 
 	/**
@@ -425,27 +425,27 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	}
 
 	/**
-	 * @param line the line number.
+	 * @param lineIndex the line index, 0 based.
 	 * @param column the column number.
 	 * @param length the length of the selection.
 	 * @see SWTBotStyledText#selectRange(int, int, int)
 	 */
-	public void selectRange(int line, int column, int length) {
-		styledText.selectRange(line, column, length);
+	public void selectRange(int lineIndex, int column, int length) {
+		styledText.selectRange(lineIndex, column, length);
 	}
 
 	/**
-	 * @param line the line number to select.
+	 * @param lineIndex the line number to select, 0 based.
 	 * @see SWTBotStyledText#selectLine(int)
 	 * @since 1.1
 	 */
-	public void selectLine(int line) {
-		styledText.selectLine(line);
+	public void selectLine(int lineIndex) {
+		styledText.selectLine(lineIndex);
 	}
 
 	/**
 	 * Selects the text on the current line.
-	 * 
+	 *
 	 * @see SWTBotStyledText#selectCurrentLine()
 	 * @since 1.1
 	 */
@@ -504,23 +504,23 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	}
 
 	/**
-	 * @param line the line number.
+	 * @param lineIndex the line index, 0 based.
 	 * @return the bullet on the given line.
 	 * @see SWTBotStyledText#getBulletOnLine(int)
 	 */
-	public Bullet getBulletOnLine(int line) {
-		return styledText.getBulletOnLine(line);
+	public Bullet getBulletOnLine(int lineIndex) {
+		return styledText.getBulletOnLine(lineIndex);
 	}
 
 	/**
-	 * @param line the line number.
+	 * @param lineIndex the line index, 0 based.
 	 * @param column the column number.
 	 * @param length the length.
 	 * @return the styles in the specified range.
 	 * @see SWTBotStyledText#getStyles(int, int, int)
 	 */
-	public StyleRange[] getStyles(int line, int column, int length) {
-		return styledText.getStyles(line, column, length);
+	public StyleRange[] getStyles(int lineIndex, int column, int length) {
+		return styledText.getStyles(lineIndex, column, length);
 	}
 
 	/**
@@ -532,12 +532,12 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	}
 
 	/**
-	 * @param line the line number.
+	 * @param lineIndex the line index, 0 based.
 	 * @return the text on the given line number, without the line delimiters.
 	 * @see SWTBotStyledText#getTextOnLine(int)
 	 */
-	public String getTextOnLine(int line) {
-		return styledText.getTextOnLine(line);
+	public String getTextOnLine(int lineIndex) {
+		return styledText.getTextOnLine(lineIndex);
 	}
 
 	/**
@@ -549,12 +549,12 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	}
 
 	/**
-	 * @param line the line number.
+	 * @param lineIndex the line index, 0 based.
 	 * @return <code>true</code> if the styledText has a bullet on the given line, <code>false</code> otherwise.
 	 * @see SWTBotStyledText#hasBulletOnLine(int)
 	 */
-	public boolean hasBulletOnLine(int line) {
-		return styledText.hasBulletOnLine(line);
+	public boolean hasBulletOnLine(int lineIndex) {
+		return styledText.hasBulletOnLine(lineIndex);
 	}
 
 	/**
@@ -581,7 +581,7 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 
 	/**
 	 * Gets the background color of the widget.
-	 * 
+	 *
 	 * @return the background color on the widget, or <code>null</code> if the widget is not an instance of
 	 *         {@link Control}.
 	 * @since 1.3
@@ -593,7 +593,7 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 
 	/**
 	 * Gets the foreground color of the widget.
-	 * 
+	 *
 	 * @return the foreground color on the widget, or <code>null</code> if the widget is not an instance of
 	 *         {@link Control}.
 	 * @since 1.3
@@ -605,19 +605,19 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 
 	/**
 	 * Gets the color of the background on the specified line.
-	 * 
-	 * @param lineNumber the line number.
+	 *
+	 * @param lineIndex the line index, 0 based.
 	 * @return the RGB of the line background color of the specified line.
 	 * @since 1.3
 	 * @see SWTBotStyledText#getLineBackground(int)
 	 */
-	public RGB getLineBackground(int lineNumber) {
-		return styledText.getLineBackground(lineNumber);
+	public RGB getLineBackground(int lineIndex) {
+		return styledText.getLineBackground(lineIndex);
 	}
 
 	/**
 	 * Gets the tooltip of this object's widget.
-	 * 
+	 *
 	 * @return the tooltip on the widget.
 	 * @see org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBot#getToolTipText()
 	 * @since 1.3

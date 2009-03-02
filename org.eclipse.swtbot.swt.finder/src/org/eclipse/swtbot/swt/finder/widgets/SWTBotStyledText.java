@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
@@ -40,7 +40,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 
 	/**
 	 * Constructs a new instance of this object.
-	 * 
+	 *
 	 * @param styledText the widget.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 * @since 2.0
@@ -51,7 +51,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 
 	/**
 	 * Constructs a new instance of this object.
-	 * 
+	 *
 	 * @param styledText the widget.
 	 * @param description the description of the widget, this will be reported by {@link #toString()}
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
@@ -63,7 +63,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 
 	/**
 	 * Sets the text into the styled text.
-	 * 
+	 *
 	 * @param text the text to set.
 	 */
 	public void setText(final String text) {
@@ -80,7 +80,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 	 * <p>
 	 * FIXME need some work for CTRL|SHIFT + 1 the 1 is to be sent as '!' in this case.
 	 * </p>
-	 * 
+	 *
 	 * @param modificationKey the modification key.
 	 * @param c the character.
 	 * @see Event#character
@@ -93,7 +93,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 
 	/**
 	 * Notifies of keyboard event.
-	 * 
+	 *
 	 * @param modificationKey the modification key.
 	 * @param c the character.
 	 * @param keyCode the keycode.
@@ -110,7 +110,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 
 	/**
 	 * Converts the given data to a string.
-	 * 
+	 *
 	 * @param modificationKey The modification key.
 	 * @param c The character.
 	 * @return The string.
@@ -130,7 +130,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 
 	/**
 	 * Gets the key event.
-	 * 
+	 *
 	 * @param c the character.
 	 * @param modificationKey the modification key.
 	 * @return a key event with the specified keys.
@@ -143,7 +143,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 
 	/**
 	 * Gets the key event.
-	 * 
+	 *
 	 * @param c the character.
 	 * @param modificationKey the modification key.
 	 * @param keyCode the keycode.
@@ -162,25 +162,25 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 
 	/**
 	 * Sets the caret at the specified location.
-	 * 
-	 * @param line the line numnber.
+	 *
+	 * @param lineIndex the line index, 0 based.
 	 * @param column the column number.
 	 */
-	public void navigateTo(final int line, final int column) {
-		log.debug(MessageFormat.format("Enquing navigation to location {0}, {1} in {2}", line, column, this)); //$NON-NLS-1$
+	public void navigateTo(final int lineIndex, final int column) {
+		log.debug(MessageFormat.format("Enquing navigation to location {0}, {1} in {2}", lineIndex, column, this)); //$NON-NLS-1$
 		assertEnabled();
 		setFocus();
 		asyncExec(new VoidResult() {
 			public void run() {
-				log.debug(MessageFormat.format("Navigating to location {0}, {1} in {2}", line, column, widget)); //$NON-NLS-1$
-				widget.setSelection(offset(line, column));
+				log.debug(MessageFormat.format("Navigating to location {0}, {1} in {2}", lineIndex, column, widget)); //$NON-NLS-1$
+				widget.setSelection(offset(lineIndex, column));
 			}
 		});
 	}
 
 	/**
-	 * Gets the current position of the cursor.
-	 * 
+	 * Gets the current position of the cursor. The returned position will contain a 0-based line and column.
+	 *
 	 * @return the position of the cursor in the styled text.
 	 */
 	public Position cursorPosition() {
@@ -188,36 +188,36 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 			public Position run() {
 				widget.setFocus();
 				int offset = widget.getSelectionRange().x;
-				int lineNumber = widget.getContent().getLineAtOffset(offset);
-				int offsetAtLine = widget.getContent().getOffsetAtLine(lineNumber);
-				int columnNumber = offset - offsetAtLine;
-				return new Position(lineNumber, columnNumber);
+				int lineIndex = widget.getContent().getLineAtOffset(offset);
+				int offsetAtLine = widget.getContent().getOffsetAtLine(lineIndex);
+				int column = offset - offsetAtLine;
+				return new Position(lineIndex, column);
 			}
 		});
 	}
 
 	/**
 	 * Types the text at the given location.
-	 * 
-	 * @param line the line number.
+	 *
+	 * @param lineIndex the line index, 0 based.
 	 * @param column the column number.
 	 * @param text the text to be typed at the specified location
 	 * @since 1.0
 	 */
-	public void typeText(int line, int column, String text) {
-		navigateTo(line, column);
+	public void typeText(int lineIndex, int column, String text) {
+		navigateTo(lineIndex, column);
 		typeText(text);
 	}
 
 	/**
 	 * Inserts text at the given location.
-	 * 
-	 * @param line the line number.
+	 *
+	 * @param lineIndex the line index, 0 based.
 	 * @param column the column number.
 	 * @param text the text to be inserted at the specified location
 	 */
-	public void insertText(int line, int column, String text) {
-		navigateTo(line, column);
+	public void insertText(int lineIndex, int column, String text) {
+		navigateTo(lineIndex, column);
 		insertText(text);
 	}
 
@@ -226,7 +226,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 	 * <p>
 	 * FIXME handle line endings
 	 * </p>
-	 * 
+	 *
 	 * @param text the text to be inserted at the location of the caret.
 	 */
 	public void insertText(final String text) {
@@ -243,7 +243,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 	 * <p>
 	 * FIXME handle line endings
 	 * </p>
-	 * 
+	 *
 	 * @param text the text to be typed at the location of the caret.
 	 * @since 1.0
 	 */
@@ -256,7 +256,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 	 * <p>
 	 * FIXME handle line endings
 	 * </p>
-	 * 
+	 *
 	 * @param text the text to be typed at the location of the caret.
 	 * @param interval the interval between consecutive key strokes.
 	 * @since 1.0
@@ -272,43 +272,43 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 
 	/**
 	 * Gets the style for the given line.
-	 * 
-	 * @param line the line number.
+	 *
+	 * @param lineIndex the line index, 0 based.
 	 * @param column the column number.
 	 * @return the {@link StyleRange} at the specified location
 	 */
-	public StyleRange getStyle(final int line, final int column) {
+	public StyleRange getStyle(final int lineIndex, final int column) {
 		return syncExec(new Result<StyleRange>() {
 			public StyleRange run() {
-				return widget.getStyleRangeAtOffset(offset(line, column));
+				return widget.getStyleRangeAtOffset(offset(lineIndex, column));
 			}
 		});
 	}
 
 	/**
 	 * Gets the offset.
-	 * 
-	 * @param line the line number.
+	 *
+	 * @param lineIndex the line index, 0 based.
 	 * @param column the column number.
 	 * @return the character offset at the specified location in the styledtext.
 	 * @see StyledTextContent#getOffsetAtLine(int)
 	 */
-	protected int offset(final int line, final int column) {
-		return widget.getContent().getOffsetAtLine(line) + column;
+	protected int offset(final int lineIndex, final int column) {
+		return widget.getContent().getOffsetAtLine(lineIndex) + column;
 	}
 
 	/**
 	 * Selects the range.
-	 * 
-	 * @param line the line number.
+	 *
+	 * @param lineIndex the line index, 0 based.
 	 * @param column the column number.
 	 * @param length the length of the selection.
 	 */
-	public void selectRange(final int line, final int column, final int length) {
+	public void selectRange(final int lineIndex, final int column, final int length) {
 		assertEnabled();
 		asyncExec(new VoidResult() {
 			public void run() {
-				int offset = offset(line, column);
+				int offset = offset(lineIndex, column);
 				widget.setSelection(offset, offset + length);
 			}
 		});
@@ -317,7 +317,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 
 	/**
 	 * Gets the current selection text.
-	 * 
+	 *
 	 * @return the selection in the styled text
 	 */
 	public String getSelection() {
@@ -330,17 +330,17 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 
 	/**
 	 * Gets the style information.
-	 * 
-	 * @param line the line number.
+	 *
+	 * @param lineIndex the line index, 0 based.
 	 * @param column the column number.
 	 * @param length the length.
 	 * @return the styles in the specified range.
 	 * @see StyledText#getStyleRanges(int, int)
 	 */
-	public StyleRange[] getStyles(final int line, final int column, final int length) {
+	public StyleRange[] getStyles(final int lineIndex, final int column, final int length) {
 		return syncExec(new ArrayResult<StyleRange>() {
 			public StyleRange[] run() {
-				return widget.getStyleRanges(offset(line, column), length);
+				return widget.getStyleRanges(offset(lineIndex, column), length);
 			}
 
 		});
@@ -348,7 +348,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 
 	/**
 	 * Gets the text on the current line.
-	 * 
+	 *
 	 * @return the text on the current line, without the line delimiters.
 	 * @see SWTBotStyledText#getTextOnLine(int)
 	 */
@@ -363,21 +363,21 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 	 * <p>
 	 * TODO: throw exception if the line is out of range.
 	 * </p>
-	 * 
-	 * @param line the line number.
+	 *
+	 * @param lineIndex the line index, 0 based.
 	 * @return the text on the given line number, without the line delimiters.
 	 */
-	public String getTextOnLine(final int line) {
+	public String getTextOnLine(final int lineIndex) {
 		return syncExec(new StringResult() {
 			public String run() {
-				return widget.getContent().getLine(line);
+				return widget.getContent().getLine(lineIndex);
 			}
 		});
 	}
 
 	/**
 	 * Checks if this has a bullet on the current line.
-	 * 
+	 *
 	 * @return <code>true</code> if the styledText has a bullet on the given line, <code>false</code> otherwise.
 	 * @see StyledText#getLineBullet(int)
 	 */
@@ -387,18 +387,18 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 
 	/**
 	 * Gets if this has a bullet on the specific line.
-	 * 
-	 * @param line the line number.
+	 *
+	 * @param lineIndex the line index, 0 based.
 	 * @return <code>true</code> if the styledText has a bullet on the given line, <code>false</code> otherwise.
 	 * @see StyledText#getLineBullet(int)
 	 */
-	public boolean hasBulletOnLine(final int line) {
-		return getBulletOnLine(line) != null;
+	public boolean hasBulletOnLine(final int lineIndex) {
+		return getBulletOnLine(lineIndex) != null;
 	}
 
 	/**
 	 * Gets the bullet on the current line.
-	 * 
+	 *
 	 * @return the bullet on the current line.
 	 * @see StyledText#getLineBullet(int)
 	 */
@@ -408,32 +408,32 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 
 	/**
 	 * Gets the bullet on the given line.
-	 * 
-	 * @param line the line number.
+	 *
+	 * @param lineIndex the line index, 0 based.
 	 * @return the bullet on the given line.
 	 * @see StyledText#getLineBullet(int)
 	 */
-	public Bullet getBulletOnLine(final int line) {
+	public Bullet getBulletOnLine(final int lineIndex) {
 		return syncExec(new Result<Bullet>() {
 			public Bullet run() {
-				return widget.getLineBullet(line);
+				return widget.getLineBullet(lineIndex);
 			}
 		});
 	}
 
 	/**
 	 * Selects the text on the specified line.
-	 * 
-	 * @param line the line number.
+	 *
+	 * @param lineIndex the line index, 0 based.
 	 * @since 1.1
 	 */
-	public void selectLine(int line) {
-		selectRange(line, 0, getTextOnLine(line).length());
+	public void selectLine(int lineIndex) {
+		selectRange(lineIndex, 0, getTextOnLine(lineIndex).length());
 	}
 
 	/**
 	 * Selects the text on the current line.
-	 * 
+	 *
 	 * @since 1.1
 	 */
 	public void selectCurrentLine() {
@@ -442,15 +442,15 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 
 	/**
 	 * Gets the color of the background on the specified line.
-	 * 
-	 * @param lineNumber the line number.
+	 *
+	 * @param lineIndex the line index, 0 based.
 	 * @return the RGB of the line background color of the specified line.
 	 * @since 1.3
 	 */
-	public RGB getLineBackground(final int lineNumber) {
+	public RGB getLineBackground(final int lineIndex) {
 		return syncExec(new Result<RGB>() {
 			public RGB run() {
-				return widget.getLineBackground(lineNumber).getRGB();
+				return widget.getLineBackground(lineIndex).getRGB();
 			}
 		});
 	}
