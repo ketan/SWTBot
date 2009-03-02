@@ -40,7 +40,7 @@ public class WaitForShellTest extends AbstractSWTTestCase {
 		long end = System.currentTimeMillis();
 
 		int time = (int) (end - start);
-		assertThat(time, allOf(lessThan(800), greaterThanOrEqualTo(500)));
+		assertThat(time, allOf(lessThan(800), greaterThanOrEqualTo(450)));
 	}
 
 	private void destroyShellAfter(int delay) {
