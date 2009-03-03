@@ -4,20 +4,21 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *     Ketan Patel - https://bugs.eclipse.org/bugs/show_bug.cgi?id=259720
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import static junit.framework.Assert.assertEquals;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertText;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import org.eclipse.swtbot.swt.finder.exceptions.AssertionFailedException;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.utils.TableRow;
 import org.junit.Test;
@@ -46,6 +47,18 @@ public class SWTBotTreeItemTest extends AbstractSWTTestCase {
 	public void canFindANode() throws Exception {
 		SWTBotTreeItem node = tree.expandNode("Node 2");
 		assertText("Node 2.2", node.getNode("Node 2.2"));
+		assertText("Node 2.2", node.getNode("Node 2.2", 0));
+	}
+
+	@Test
+	public void cannotFindANodeWithIncorrectNodeIndex() throws Exception {
+		SWTBotTreeItem node = tree.expandNode("Node 2");
+		try {
+			node.getNode("Node 2.2", 1);
+			fail("Was expecting an AssertionFailedException");
+		} catch (AssertionFailedException e) {
+			assertEquals("assertion failed: The index (1) was more than the number of nodes (1) in the tree.", e.getMessage());
+		}
 	}
 
 	@Test

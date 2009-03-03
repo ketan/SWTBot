@@ -71,7 +71,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	/**
 	 * Returns the text stored at the given column index in the receiver, or empty string if the text has not been set.
 	 * Throws an exception if the column is greater than the number of columns in the tree.
-	 * 
+	 *
 	 * @param column the column index.
 	 * @return the cell at the location specified by the column
 	 */
@@ -90,7 +90,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Returns the table row representation of cell values
-	 * 
+	 *
 	 * @return the cell values for this item
 	 */
 	public TableRow row() {
@@ -110,7 +110,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Returns the number of items contained in the receiver that are direct item children of the receiver.
-	 * 
+	 *
 	 * @return the number of items
 	 */
 	public int rowCount() {
@@ -124,7 +124,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	/**
 	 * Gets the nodes at the given, zero-relative index in the receiver. Throws an exception if the index is out of
 	 * range.
-	 * 
+	 *
 	 * @param row the index of the item to return
 	 * @return the item at the given index
 	 */
@@ -140,7 +140,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Gets the cell data for the given row/column index.
-	 * 
+	 *
 	 * @param row the row index.
 	 * @param column the column index.
 	 * @return the cell at the location specified by the row and column
@@ -153,7 +153,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Expands the tree item to simulate click the plus sign.
-	 * 
+	 *
 	 * @return the tree item, after expanding it.
 	 */
 	public SWTBotTreeItem expand() {
@@ -170,7 +170,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Send the {@link SWT#Expand} event to build the child items of the tree item that we are expanding.
-	 * 
+	 *
 	 * @since 1.2
 	 */
 	private void preExpandNotify() {
@@ -179,7 +179,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Notifies the item of expansion.
-	 * 
+	 *
 	 * @since 1.2
 	 */
 	private void postExpandNotify() {
@@ -209,14 +209,14 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Gets the nodes of the tree item.
-	 * 
+	 *
 	 * @return the list of nodes in the treeitem.
 	 */
 	public List<String> getNodes() {
 		return syncExec(new ListResult<String>() {
 			public List<String> run() {
 				TreeItem[] items = widget.getItems();
-				ArrayList<String> result = new ArrayList<String>(items.length);
+				List<String> result = new ArrayList<String>(items.length);
 				for (TreeItem item : items)
 					result.add(item.getText());
 				return result;
@@ -227,7 +227,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Expands the node matching the given node text.
-	 * 
+	 *
 	 * @param nodeText the text on the node.
 	 * @return the node that was expanded or <code>null</code> if not match exists.
 	 */
@@ -237,31 +237,57 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	}
 
 	/**
-	 * Gets the node matching the given node text.
-	 * 
+	 * Gets the node matching the given node text and index.
+	 *
 	 * @param nodeText the text on the node.
-	 * @return the node with the specified text <code>null</code> if not match exists.
+	 * @param index the n'th node with the nodeText.
+	 * @return the node with the specified text or <code>WidgetNotFoundException</code> if not match exists.
+	 * @since 2.0
+	 */
+	public SWTBotTreeItem getNode(final String nodeText, final int index) {
+		List<SWTBotTreeItem> nodes = getNodes(nodeText);
+		Assert.isTrue(index < nodes.size(), MessageFormat.format("The index ({0}) was more than the number of nodes ({1}) in the tree.", index, nodes.size()));
+		return nodes.get(index);
+	}
+
+	/**
+	 * Gets all nodes matching the given node text.
+	 *
+	 * @param nodeText the text on the node.
+	 * @return the nodes with the specified text or <code>WidgetNotFoundException</code> if not match exists.
+	 * @since 2.0
+	 */
+	public List<SWTBotTreeItem> getNodes(final String nodeText) {
+		List<SWTBotTreeItem> foundItems = syncExec(new ListResult<SWTBotTreeItem>() {
+			public List<SWTBotTreeItem> run() {
+				TreeItem[] items = widget.getItems();
+				List<SWTBotTreeItem> results = new ArrayList<SWTBotTreeItem>();
+				for (TreeItem treeItem : items) {
+					if (treeItem.getText().equals(nodeText))
+						results.add(new SWTBotTreeItem(treeItem, new TextDescription("Tree node with text: " + nodeText)));
+				}
+				return results;
+			}
+		});
+		if (foundItems.isEmpty())
+			throw new WidgetNotFoundException("Could not find node with text: " + nodeText); //$NON-NLS-1$
+		return foundItems;
+	}
+
+	/**
+	 * Gets the first node found matching the given node text.
+	 *
+	 * @param nodeText the text on the node.
+	 * @return the first node with the specified text or <code>WidgetNotFoundException</code> if not match exists.
 	 * @since 1.2
 	 */
 	public SWTBotTreeItem getNode(final String nodeText) {
-		SWTBotTreeItem item = syncExec(new Result<SWTBotTreeItem>() {
-			public SWTBotTreeItem run() {
-				TreeItem[] items = widget.getItems();
-				for (TreeItem treeItem : items) {
-					if (treeItem.getText().equals(nodeText))
-						return new SWTBotTreeItem(treeItem, new TextDescription("Tree node with text: " + nodeText)); //$NON-NLS-1$
-				}
-				return null;
-			}
-		});
-		if (item == null)
-			throw new WidgetNotFoundException("Could not find node with text: " + nodeText); //$NON-NLS-1$
-		return item;
+		return getNode(nodeText, 0);
 	}
 
 	/**
 	 * Selects the current tree item.
-	 * 
+	 *
 	 * @return the current node.
 	 * @since 1.0
 	 */
@@ -279,7 +305,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Click on the table at given coordinates
-	 * 
+	 *
 	 * @param x the x co-ordinate of the click
 	 * @param y the y co-ordinate of the click
 	 * @since 1.2
@@ -304,7 +330,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Clicks on this node.
-	 * 
+	 *
 	 * @return the current node.
 	 * @since 1.2
 	 */
@@ -321,7 +347,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Double clicks on this node.
-	 * 
+	 *
 	 * @return the current node.
 	 * @since 1.2
 	 */
@@ -344,7 +370,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Selects the items matching the array provided.
-	 * 
+	 *
 	 * @param items the items to select.
 	 * @return the current node.
 	 * @since 1.0
@@ -374,7 +400,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Selects the item matching the given name.
-	 * 
+	 *
 	 * @param item the items to select.
 	 * @return the current node.
 	 * @since 1.0
@@ -385,7 +411,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * notifies the tree widget about selection changes.
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	private void notifySelect() {
@@ -418,7 +444,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Toggle the tree item.
-	 * 
+	 *
 	 * @since 1.3
 	 */
 	public void toggleCheck() {
@@ -427,7 +453,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Check the tree item.
-	 * 
+	 *
 	 * @since 1.3
 	 */
 	public void check() {
@@ -436,7 +462,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Uncheck the tree item.
-	 * 
+	 *
 	 * @since 1.3
 	 */
 	public void uncheck() {
@@ -445,7 +471,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Gets if the checkbox button is checked.
-	 * 
+	 *
 	 * @return <code>true</code> if the checkbox is checked. Otherwise <code>false</code>.
 	 * @since 1.3
 	 */
@@ -460,7 +486,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Creates an event for CheckboxTreeItem case.
-	 * 
+	 *
 	 * @return an event that encapsulates {@link #widget} and {@link #display}.
 	 */
 	private Event createCheckEvent() {
@@ -490,7 +516,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * notify listeners about checkbox state change.
-	 * 
+	 *
 	 * @since 1.3
 	 */
 	private void notifyCheck() {
