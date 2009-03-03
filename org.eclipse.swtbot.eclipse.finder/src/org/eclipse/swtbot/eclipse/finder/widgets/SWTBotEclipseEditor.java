@@ -337,13 +337,13 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	/**
 	 * Gets the style text.
 	 *
-	 * @param lineIndex the line index, 0 based.
-	 * @param column the column number.
+	 * @param line the line number, 0 based.
+	 * @param column the column number, 0 based.
 	 * @return the {@link StyleRange} at the specified location
 	 * @see SWTBotStyledText#getStyle(int, int)
 	 */
-	public StyleRange getStyle(int lineIndex, int column) {
-		return styledText.getStyle(lineIndex, column);
+	public StyleRange getStyle(int line, int column) {
+		return styledText.getStyle(line, column);
 	}
 
 	/**
@@ -357,14 +357,14 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	}
 
 	/**
-	 * @param lineIndex the line index, 0 based.
-	 * @param column the column number.
+	 * @param line the line number, 0 based.
+	 * @param column the column number, 0 based.
 	 * @param text the text to be typed at the specified location
 	 * @see SWTBotStyledText#typeText(int, int, java.lang.String)
 	 * @since 1.0
 	 */
-	public void typeText(int lineIndex, int column, String text) {
-		styledText.typeText(lineIndex, column, text);
+	public void typeText(int line, int column, String text) {
+		styledText.typeText(line, column, text);
 	}
 
 	/**
@@ -377,13 +377,13 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	}
 
 	/**
-	 * @param lineIndex the line index, 0 based.
-	 * @param column the column number.
+	 * @param line the line number, 0 based.
+	 * @param column the column number, 0 based.
 	 * @param text the text to be inserted at the specified location
 	 * @see SWTBotStyledText#insertText(int, int, java.lang.String)
 	 */
-	public void insertText(int lineIndex, int column, String text) {
-		styledText.insertText(lineIndex, column, text);
+	public void insertText(int line, int column, String text) {
+		styledText.insertText(line, column, text);
 	}
 
 	/**
@@ -405,12 +405,12 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	}
 
 	/**
-	 * @param lineIndex the line index, 0 based.
-	 * @param column the column number.
+	 * @param line the line number, 0 based.
+	 * @param column the column number, 0 based.
 	 * @see SWTBotStyledText#navigateTo(int, int)
 	 */
-	public void navigateTo(int lineIndex, int column) {
-		styledText.navigateTo(lineIndex, column);
+	public void navigateTo(int line, int column) {
+		styledText.navigateTo(line, column);
 	}
 
 	/**
@@ -425,22 +425,22 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	}
 
 	/**
-	 * @param lineIndex the line index, 0 based.
-	 * @param column the column number.
+	 * @param line the line number, 0 based.
+	 * @param column the column number, 0 based.
 	 * @param length the length of the selection.
 	 * @see SWTBotStyledText#selectRange(int, int, int)
 	 */
-	public void selectRange(int lineIndex, int column, int length) {
-		styledText.selectRange(lineIndex, column, length);
+	public void selectRange(int line, int column, int length) {
+		styledText.selectRange(line, column, length);
 	}
 
 	/**
-	 * @param lineIndex the line number to select, 0 based.
+	 * @param line the line number to select, 0 based.
 	 * @see SWTBotStyledText#selectLine(int)
 	 * @since 1.1
 	 */
-	public void selectLine(int lineIndex) {
-		styledText.selectLine(lineIndex);
+	public void selectLine(int line) {
+		styledText.selectLine(line);
 	}
 
 	/**
@@ -504,23 +504,23 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	}
 
 	/**
-	 * @param lineIndex the line index, 0 based.
+	 * @param line the line number, 0 based.
 	 * @return the bullet on the given line.
 	 * @see SWTBotStyledText#getBulletOnLine(int)
 	 */
-	public Bullet getBulletOnLine(int lineIndex) {
-		return styledText.getBulletOnLine(lineIndex);
+	public Bullet getBulletOnLine(int line) {
+		return styledText.getBulletOnLine(line);
 	}
 
 	/**
-	 * @param lineIndex the line index, 0 based.
-	 * @param column the column number.
+	 * @param line the line number, 0 based.
+	 * @param column the column number, 0 based.
 	 * @param length the length.
 	 * @return the styles in the specified range.
 	 * @see SWTBotStyledText#getStyles(int, int, int)
 	 */
-	public StyleRange[] getStyles(int lineIndex, int column, int length) {
-		return styledText.getStyles(lineIndex, column, length);
+	public StyleRange[] getStyles(int line, int column, int length) {
+		return styledText.getStyles(line, column, length);
 	}
 
 	/**
@@ -532,12 +532,12 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	}
 
 	/**
-	 * @param lineIndex the line index, 0 based.
+	 * @param line the line number, 0 based.
 	 * @return the text on the given line number, without the line delimiters.
 	 * @see SWTBotStyledText#getTextOnLine(int)
 	 */
-	public String getTextOnLine(int lineIndex) {
-		return styledText.getTextOnLine(lineIndex);
+	public String getTextOnLine(int line) {
+		return styledText.getTextOnLine(line);
 	}
 
 	/**
@@ -549,12 +549,12 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	}
 
 	/**
-	 * @param lineIndex the line index, 0 based.
+	 * @param line the line number, 0 based.
 	 * @return <code>true</code> if the styledText has a bullet on the given line, <code>false</code> otherwise.
 	 * @see SWTBotStyledText#hasBulletOnLine(int)
 	 */
-	public boolean hasBulletOnLine(int lineIndex) {
-		return styledText.hasBulletOnLine(lineIndex);
+	public boolean hasBulletOnLine(int line) {
+		return styledText.hasBulletOnLine(line);
 	}
 
 	/**
@@ -606,13 +606,13 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	/**
 	 * Gets the color of the background on the specified line.
 	 *
-	 * @param lineIndex the line index, 0 based.
+	 * @param line the line number, 0 based.
 	 * @return the RGB of the line background color of the specified line.
 	 * @since 1.3
 	 * @see SWTBotStyledText#getLineBackground(int)
 	 */
-	public RGB getLineBackground(int lineIndex) {
-		return styledText.getLineBackground(lineIndex);
+	public RGB getLineBackground(int line) {
+		return styledText.getLineBackground(line);
 	}
 
 	/**
