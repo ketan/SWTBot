@@ -12,11 +12,11 @@ package org.eclipse.swtbot.swt.finder.resolvers;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
-import org.apache.commons.collections.map.MultiValueMap;
+import org.eclipse.swtbot.swt.finder.utils.MultiValueMap;
 
 /**
  * A resolver that maps classes to the {@link IChildrenResolver}s that resolve the classes.
@@ -28,7 +28,7 @@ import org.apache.commons.collections.map.MultiValueMap;
 public class Resolver {
 
 	/** The map that maps classes to {@link IChildrenResolver}s */
-	MultiValueMap	map	= MultiValueMap.decorate(new HashMap(), LinkedHashSet.class);
+	private final MultiValueMap<Class<?>, IResolvable>	map	= new MultiValueMap<Class<?>, IResolvable>();
 
 	/**
 	 * Map all the classes that the resolver resolver to the resolver.
@@ -37,7 +37,7 @@ public class Resolver {
 	 * @see IChildrenResolver#getResolvableClasses()
 	 */
 	public void addResolver(IResolvable resolver) {
-		Class[] resolvableClasses = resolver.getResolvableClasses();
+		Class<?>[] resolvableClasses = resolver.getResolvableClasses();
 		if ((resolvableClasses != null) && (resolvableClasses.length > 0))
 			addResolver(resolver, resolvableClasses);
 	}
@@ -48,18 +48,18 @@ public class Resolver {
 	 * @param clazz the class that should be resolved using the resolvers.
 	 * @return the list of {@link Resolver}s that can resolve objects of type <code>clazz</code>
 	 */
-	public List<IResolvable> getResolvers(Class clazz) {
+	public List<IResolvable> getResolvers(Class<?> clazz) {
 
 		LinkedHashSet<IResolvable> result = new LinkedHashSet<IResolvable>();
 
-		Collection resolvers = map.getCollection(clazz);
+		Collection<IResolvable> resolvers = map.getCollection(clazz);
 
 		if ((resolvers != null) && !resolvers.isEmpty())
 			result.addAll(resolvers);
 		else if (!Object.class.equals(clazz))
 			result.addAll(getResolvers(clazz.getSuperclass()));
 
-		return new ArrayList(result);
+		return new ArrayList<IResolvable>(result);
 	}
 
 	/**
@@ -68,9 +68,14 @@ public class Resolver {
 	 * @param resolver The resolver to add.
 	 * @param resolvableClasses The classes supported by the resolver.
 	 */
-	private void addResolver(IResolvable resolver, Class[] resolvableClasses) {
-		for (Class clazz : resolvableClasses) {
+	private void addResolver(IResolvable resolver, Class<?>[] resolvableClasses) {
+		for (Class<?> clazz : resolvableClasses) {
 			map.put(clazz, resolver);
 		}
+	}
+
+	Class<?>[] getResolvableClasses() {
+		Set<Class<?>> keySet = map.keySet();
+		return keySet.toArray(new Class[keySet.size()]);
 	}
 }

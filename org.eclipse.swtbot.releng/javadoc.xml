@@ -49,7 +49,6 @@
 					<include name="**/org.eclipse.equinox.common_*.jar" />
 					<include name="**/org.eclipse.core.runtime_*.jar" />
 					<include name="**/org.apache.log4j_*.jar" />
-					<include name="**/org.apache.commons.collections_*.jar" />
 					<include name="**/org.eclipse.osgi_*.jar" />
 					<include name="**/org.eclipse.core.commands_*.jar" />
 					<include name="**/org.junit4_*/*.jar" />

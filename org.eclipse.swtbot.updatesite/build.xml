@@ -75,9 +75,6 @@
 
 			<!-- apache jars -->
 			<fileset dir="${target}/plugins">
-				<include name="org.apache.commons.collections_*.jar" />
-			</fileset>
-			<fileset dir="${target}/plugins">
 				<include name="org.apache.log4j_*.jar" />
 			</fileset>
 			<fileset dir="${target}/plugins">

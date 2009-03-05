@@ -12,9 +12,9 @@
 package org.eclipse.swtbot.swt.finder.utils;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.Map;
-
-import org.apache.commons.collections.map.LRUMap;
+import java.util.Map.Entry;
 
 /**
  * Message formatter to optimize logging performance. The cost of logging is mostly in the string concatenation and
@@ -29,10 +29,15 @@ import org.apache.commons.collections.map.LRUMap;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class MessageFormat extends ThreadLocal<Map> {
+public class MessageFormat {
 
-	private final String	pattern;
-	private final Object[]	args;
+	private final String													pattern;
+	private final Object[]													args;
+	private static final ThreadLocal<Map<String, java.text.MessageFormat>>	threadLocal	= new ThreadLocal<Map<String, java.text.MessageFormat>>() {
+																							protected java.util.Map<String, java.text.MessageFormat> initialValue() {
+																								return new LRUMap<String, java.text.MessageFormat>();
+																							};
+																						};
 
 	private MessageFormat(String pattern, Object... args) {
 		this.pattern = pattern;
@@ -45,23 +50,27 @@ public class MessageFormat extends ThreadLocal<Map> {
 
 	public String toString() {
 		try {
-			return formatter(pattern).format(args);
+			java.text.MessageFormat formatter = formatter(pattern);
+			return formatter.format(args);
 		} catch (Exception e) {
 			return "MessageFormat: Could not translate message: '" + pattern + "' using arguments " + Arrays.asList(args); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
-	protected Map initialValue() {
-		return new LRUMap(512);
-	}
-
-	@SuppressWarnings("unchecked")
 	private java.text.MessageFormat formatter(String pattern) {
-		java.text.MessageFormat formatter = (java.text.MessageFormat) get().get(pattern);
+		java.text.MessageFormat formatter = threadLocal.get().get(pattern);
 		if (formatter == null) {
 			formatter = new java.text.MessageFormat(pattern);
-			get().put(pattern, formatter);
+			threadLocal.get().put(pattern, formatter);
 		}
 		return formatter;
+	}
+
+	private static final class LRUMap<K, V> extends LinkedHashMap<K, V> {
+		private static final int	MAX_SIZE	= 512;
+
+		protected boolean removeEldestEntry(Entry<K, V> eldest) {
+			return size() > MAX_SIZE;
+		}
 	}
 }

@@ -9,8 +9,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.swtbot.swt.finder,
  org.hamcrest,
  org.junit4,
- org.apache.log4j,
- org.apache.commons.collections
+ org.apache.log4j
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: Eclipse.org
 Export-Package: org.eclipse.swtbot.eclipse.finder,
