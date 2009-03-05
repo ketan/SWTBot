@@ -21,7 +21,9 @@ import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
@@ -311,6 +313,42 @@ public abstract class SWTUtils {
 	}
 
 	/**
+	 * This captures a screen shot of a widget and saves it to the given file.
+	 * 
+	 * @param fileName the filename to save screenshot to.
+	 * @param control the control
+	 * @return <code>true</code> if the screenshot was created and saved, <code>false</code> otherwise.
+	 * @since 2.0
+	 */
+	public static boolean captureScreenshot(final String fileName, final Control control) {
+		new ImageFormatConverter().imageTypeOf(fileName.substring(fileName.lastIndexOf('.') + 1));
+		return UIThreadRunnable.syncExec(new BoolResult() {
+			public Boolean run() {
+				Point p = control.toDisplay(0, 0);
+				Rectangle bounds = control.getBounds();
+				return captureScreenshotInternal(fileName, new Rectangle(p.x, p.y, bounds.width, bounds.height));
+			}
+		});
+	}
+	
+	/**
+	 * This captures a screen shot of an area and saves it to the given file.
+	 * 
+	 * @param fileName the filename to save screenshot to.
+	 * @param bounds the area to capture.
+	 * @return <code>true</code> if the screenshot was created and saved, <code>false</code> otherwise.
+	 * @since 2.0
+	 */
+	public static boolean captureScreenshot(final String fileName, final Rectangle bounds) {
+		new ImageFormatConverter().imageTypeOf(fileName.substring(fileName.lastIndexOf('.') + 1));
+		return UIThreadRunnable.syncExec(new BoolResult() {
+			public Boolean run() {
+				return captureScreenshotInternal(fileName, bounds);
+			}
+		});
+	}
+
+	/**
 	 * Captures a screen shot. Used internally.
 	 * <p>
 	 * NOTE: This method is not thread safe. Clients must ensure that they do invoke this from a UI thread.
@@ -318,19 +356,29 @@ public abstract class SWTUtils {
 	 * 
 	 * @param fileName the filename to save screenshot to.
 	 * @return <code>true</code> if the screenshot was created and saved, <code>false</code> otherwise.
-	 * @since 1.1
 	 */
-	protected static boolean captureScreenshotInternal(final String fileName) {
+	private static boolean captureScreenshotInternal(final String fileName) {
+		return captureScreenshotInternal(fileName, display.getBounds());
+	}
+
+	/**
+	 * Captures a screen shot. Used internally.
+	 * <p>
+	 * NOTE: This method is not thread safe. Clients must ensure that they do invoke this from a UI thread.
+	 * </p>
+	 * 
+	 * @param fileName the filename to save screenshot to.
+	 * @param bounds the area relative to the display that should be captured.
+	 * @return <code>true</code> if the screenshot was created and saved, <code>false</code> otherwise.
+	 */
+	private static boolean captureScreenshotInternal(final String fileName, Rectangle bounds) {
 		GC gc = new GC(display);
 		Image image = null;
 		try {
 			log.debug(MessageFormat.format("Capturing screenshot ''{0}''", fileName)); //$NON-NLS-1$
-			Rectangle bounds = display.getBounds();
-			int width = bounds.width;
-			int height = bounds.height;
 
-			image = new Image(display, width, height);
-			gc.copyArea(image, 0, 0);
+			image = new Image(display, bounds.width, bounds.height);
+			gc.copyArea(image, bounds.x, bounds.y);
 			ImageLoader imageLoader = new ImageLoader();
 			imageLoader.data = new ImageData[] { image.getImageData() };
 			imageLoader.save(fileName, new ImageFormatConverter().imageTypeOf(fileName.substring(fileName.lastIndexOf('.') + 1)));
