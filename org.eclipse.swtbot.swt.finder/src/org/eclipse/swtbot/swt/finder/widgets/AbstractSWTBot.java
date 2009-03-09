@@ -138,11 +138,11 @@ public abstract class AbstractSWTBot<T extends Widget> {
 		asyncExec(new VoidResult() {
 			public void run() {
 				if ((widget == null) || widget.isDisposed()) {
-					log.trace(MessageFormat.format("Not notifying {0} is null or has been disposed", this)); //$NON-NLS-1$
+					log.trace(MessageFormat.format("Not notifying {0} is null or has been disposed", AbstractSWTBot.this)); //$NON-NLS-1$
 					return;
 				}
 				if (!isEnabledInternal()) {
-					log.warn(MessageFormat.format("Widget is not enabled: {0}", this)); //$NON-NLS-1$
+					log.warn(MessageFormat.format("Widget is not enabled: {0}", AbstractSWTBot.this)); //$NON-NLS-1$
 					return;
 				}
 				log.trace(MessageFormat.format("Sending event {0} to {1}", result)); //$NON-NLS-1$
@@ -546,7 +546,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 * @since 1.3
 	 */
 	protected void assertEnabled() {
-		Assert.isTrue(isEnabled(), "Widget " + this + " is not enabled."); //$NON-NLS-1$ //$NON-NLS-2$
+		Assert.isTrue(isEnabled(), MessageFormat.format("Widget {0} is not enabled.", this)); //$NON-NLS-1$ //$NON-NLS-2$
 
 	}
 
