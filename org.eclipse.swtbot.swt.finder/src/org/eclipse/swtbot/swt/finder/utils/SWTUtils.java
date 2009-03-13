@@ -449,4 +449,23 @@ public abstract class SWTUtils {
 				throw new TimeoutException("Timeout after: " + timeout + " ms.: " + condition.getFailureMessage()); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
+
+	/**
+	 * Return true if the current thread is the UI thread.
+	 * 
+	 * @param display the display
+	 * @return <code>true</code> if the current thread is the UI thread, <code>false</code> otherwise.
+	 */
+	public static boolean isUIThread(Display display) {
+		return display.getThread() == Thread.currentThread();
+	}
+
+	/**
+	 * Return true if the current thread is the UI thread.
+	 * 
+	 * @return <code>true</code> if this instance is running in the UI thread, <code>false</code> otherwise.
+	 */
+	public static boolean isUIThread() {
+		return isUIThread(display);
+	}
 }

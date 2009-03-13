@@ -10,6 +10,9 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.finders;
 
+import static org.eclipse.swtbot.swt.finder.utils.SWTUtils.display;
+import static org.eclipse.swtbot.swt.finder.utils.SWTUtils.isUIThread;
+
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
@@ -17,7 +20,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swtbot.swt.finder.results.ArrayResult;
 import org.eclipse.swtbot.swt.finder.results.Result;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
-import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 
 /**
  * Performs operations in the UI thread. If the {@link #run()} method of this class is called from an non-UI thread, the
@@ -113,25 +115,6 @@ public abstract class UIThreadRunnable implements Runnable {
 	protected abstract void doRun();
 
 	/**
-	 * Return true if the current thread is the UI thread.
-	 * 
-	 * @return <code>true</code> if this instance is running in the UI thread, <code>false</code> otherwise.
-	 */
-	public boolean isUIThread() {
-		return isUIThread(display);
-	}
-
-	/**
-	 * Return true if the current thread is the UI thread.
-	 * 
-	 * @param display the display
-	 * @return <code>true</code> if the current thread is the UI thread, <code>false</code> otherwise.
-	 */
-	public static boolean isUIThread(Display display) {
-		return display.getThread() == Thread.currentThread();
-	}
-
-	/**
 	 * Executes the {@code toExecute} on the UI thread, and blocks the calling thread.
 	 * 
 	 * @param <T> the type of the result.
@@ -139,7 +122,7 @@ public abstract class UIThreadRunnable implements Runnable {
 	 * @return the result of executing result on the UI thread.
 	 */
 	public static <T> T syncExec(final Result<T> toExecute) {
-		return syncExec(SWTUtils.display(), toExecute);
+		return syncExec(display(), toExecute);
 	}
 
 	/**
@@ -168,7 +151,7 @@ public abstract class UIThreadRunnable implements Runnable {
 	 * @return the object result of execution on the UI thread.
 	 */
 	public static <T> T[] syncExec(final ArrayResult<T> toExecute) {
-		return syncExec(SWTUtils.display(), toExecute);
+		return syncExec(display(), toExecute);
 	}
 
 	/**
@@ -197,7 +180,7 @@ public abstract class UIThreadRunnable implements Runnable {
 	 * @since 1.0
 	 */
 	public static void syncExec(final VoidResult toExecute) {
-		syncExec(SWTUtils.display(), toExecute);
+		syncExec(display(), toExecute);
 	}
 
 	/**
@@ -222,7 +205,7 @@ public abstract class UIThreadRunnable implements Runnable {
 	 * @since 1.0
 	 */
 	public static void asyncExec(final VoidResult toExecute) {
-		asyncExec(SWTUtils.display(), toExecute);
+		asyncExec(display(), toExecute);
 	}
 
 	/**
