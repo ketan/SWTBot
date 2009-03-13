@@ -12,7 +12,6 @@
 
 package org.eclipse.swtbot.swt.finder.waits;
 
-import org.eclipse.swt.widgets.Item;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
@@ -110,15 +109,6 @@ public abstract class Conditions {
 	 */
 	public static WaitForMenu waitForMenu(SWTBotShell shell, Matcher<? extends Widget> matcher) {
 		return new WaitForMenu(shell, matcher);
-	}
-
-	/**
-	 * @param matcher the matcher.
-	 * @return a condition that waits until the matcher evaluates to true.
-	 * @since 2.0
-	 */
-	public static <T extends Item> WithItem<T> withItem(Matcher<?> matcher) {
-		return new WithItem<T>(matcher);
 	}
 
 }

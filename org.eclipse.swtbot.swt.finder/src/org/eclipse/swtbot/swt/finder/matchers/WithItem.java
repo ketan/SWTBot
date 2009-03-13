@@ -8,15 +8,15 @@
  * Contributors:
  *     Ketan Patel - initial API and implementation (Bug 259860)
  *******************************************************************************/
-package org.eclipse.swtbot.swt.finder.waits;
+package org.eclipse.swtbot.swt.finder.matchers;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 import org.eclipse.swt.widgets.Item;
-import org.eclipse.swtbot.swt.finder.matchers.AbstractMatcher;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.hamcrest.Description;
+import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
 /**
@@ -71,4 +71,17 @@ public class WithItem<T extends Item> extends AbstractMatcher<T> {
 		return this.matches.get(index);
 	}
 
+	/**
+	 * Returns a matcher that matches objects containing an item that matches the matcher.
+	 * <p>
+	 * <strong>Note:</strong> This invokes getItems method on the object and expects to see an array as a return value.
+	 * </p>
+	 * 
+	 * @param matcher the matcher.
+	 * @return a matcher.
+	 */
+	@Factory
+	public static <T extends Item> WithItem<T> withItem(Matcher<?> matcher) {
+		return new WithItem<T>(matcher);
+	}
 }

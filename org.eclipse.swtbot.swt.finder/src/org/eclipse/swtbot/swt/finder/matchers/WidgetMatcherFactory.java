@@ -118,6 +118,19 @@ public abstract class WidgetMatcherFactory {
   }
 
   /**
+   * Returns a matcher that matches objects containing an item that matches the matcher.
+   * <p>
+   * <strong>Note:</strong> This invokes getItems method on the object and expects to see an array as a return value.
+   * </p>
+   * 
+   * @param matcher the matcher.
+   * @return a matcher.
+   */
+  public static <T extends org.eclipse.swt.widgets.Item> org.hamcrest.Matcher<T> withItem(org.hamcrest.Matcher<?> matcher) {
+    return org.eclipse.swtbot.swt.finder.matchers.WithItem.withItem(matcher);
+  }
+
+  /**
    * Matches a widget that belongs to the specified group
    * 
    * @param labelText the label.

@@ -8,6 +8,7 @@
 	<factory class="org.eclipse.swtbot.swt.finder.matchers.WithStyle" />
 	<factory class="org.eclipse.swtbot.swt.finder.matchers.WithTooltip" />
 	<factory class="org.eclipse.swtbot.swt.finder.matchers.WithId" />
+	<factory class="org.eclipse.swtbot.swt.finder.matchers.WithItem" />
 	<factory class="org.eclipse.swtbot.swt.finder.matchers.InGroup" />
 	<factory class="org.eclipse.swtbot.swt.finder.matchers.WidgetOfType" />
 	<factory class="org.eclipse.swtbot.swt.finder.matchers.InUIThread" />

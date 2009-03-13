@@ -40,17 +40,16 @@ import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
 import org.eclipse.swtbot.swt.finder.finders.Finder;
 import org.eclipse.swtbot.swt.finder.finders.MenuFinder;
+import org.eclipse.swtbot.swt.finder.matchers.WithItem;
 import org.eclipse.swtbot.swt.finder.results.WidgetResult;
 import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
-import org.eclipse.swtbot.swt.finder.waits.Conditions;
 import org.eclipse.swtbot.swt.finder.waits.ICondition;
 import org.eclipse.swtbot.swt.finder.waits.WaitForMenu;
 import org.eclipse.swtbot.swt.finder.waits.WaitForShell;
 import org.eclipse.swtbot.swt.finder.waits.WaitForWidget;
 import org.eclipse.swtbot.swt.finder.waits.WaitForWidgetInParent;
-import org.eclipse.swtbot.swt.finder.waits.WithItem;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTrayItem;
@@ -585,8 +584,8 @@ abstract class SWTBotFactory {
 	 * @return List of {@link SWTBotTrayItem} matching the matcher.
 	 */
 	public List<SWTBotTrayItem> trayItems(Matcher<?> matcher) {
-		WithItem<TrayItem> itemMatcher = Conditions.withItem(matcher);
-		WaitForWidgetInParent waitForWidget = waitForWidget(itemMatcher, systemTray());
+		WithItem<TrayItem> itemMatcher = WithItem.withItem(matcher);
+		WaitForWidgetInParent<?> waitForWidget = waitForWidget(itemMatcher, systemTray());
 		waitUntilWidgetAppears(waitForWidget);
 		List<SWTBotTrayItem> items = new ArrayList<SWTBotTrayItem>();
 		for (TrayItem item : itemMatcher.getAllMatches())
