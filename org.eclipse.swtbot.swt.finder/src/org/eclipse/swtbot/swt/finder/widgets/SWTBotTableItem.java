@@ -7,6 +7,7 @@
  *
  * Contributors:
  *     http://www.inria.fr/ - initial API and implementation
+ *     Cédric Chabanois - bug 269164
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
@@ -27,6 +28,7 @@ import org.hamcrest.SelfDescribing;
 
 /**
  * @author Vincent MAHE &lt;vmahe [at] free [dot]fr&gt;
+ * @author Cédric Chabanois
  * @version $Id$
  * @since 1.3
  */
