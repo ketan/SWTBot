@@ -171,6 +171,20 @@ public class SWTBotTableItem extends AbstractSWTBot<TableItem> {
 	}
 
 	/**
+	 * Gets if the checkbox button is grayed.
+	 * 
+	 * @return <code>true</code> if the checkbox is grayed, <code>false</code> otherwise.
+	 */
+	public boolean isGrayed() {
+		assertIsCheck();
+		return syncExec(new BoolResult() {
+			public Boolean run() {
+				return widget.getGrayed();
+			}
+		});
+	}
+
+	/**
 	 * Creates an event for CheckboxTableItem case.
 	 * 
 	 * @return an event that encapsulates {@link #widget} and {@link #display}.
