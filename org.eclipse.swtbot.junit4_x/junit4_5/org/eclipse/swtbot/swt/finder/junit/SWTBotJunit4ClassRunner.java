@@ -13,6 +13,7 @@ package org.eclipse.swtbot.swt.finder.junit;
 
 import org.junit.runner.notification.RunListener;
 import org.junit.runner.notification.RunNotifier;
+import org.junit.runners.BlockJUnit4ClassRunner;
 
 /**
  * A runner that captures screenshots on test failures. If you wish to launch your application for your tests use

@@ -71,7 +71,23 @@
 		<fail unless="build.developer.properties.available">Could not find the file "build.developer.properties", or host-conf/build.${hostname}.properties. Please create the file using "build.developer.properties.sample" as the starting point.</fail>
 	</target>
 
-	<target name="initialize-environment" depends="guess-pde-build-version, create-build-properties-from-template" />
+	<target name="guess-junit-version">
+		<echo>Guessing plugin version of org.junit4.</echo>
+		<for param="junit-version-file">
+			<dirset dir="../eclipse/plugins/" includes="org.junit4_*" />
+			<sequential>
+				<propertyregex property="junit4-build-version" input="@{junit-version-file}" regexp="org.junit4_(.*)" select="\1" />
+			</sequential>
+		</for>
+		<condition property="isJunit4.5">
+			<contains string="${junit4-build-version}" substring="4.5" />
+		</condition>
+		<fail unless="junit4-build-version" message="Could not find org.junit4 in target eclipse" />
+		<echo>Plugin version of org.junit is "${junit4-build-version}"</echo>
+		<echo>isJunit4.5: ${isJunit4.5}</echo>
+	</target>
+
+	<target name="initialize-environment" depends="guess-junit-version, guess-pde-build-version, create-build-properties-from-template" />
 
 	<delete file="${java.io.tmpdir}/git.svn.properties" />
 	<touch file="${java.io.tmpdir}/git.svn.properties" />

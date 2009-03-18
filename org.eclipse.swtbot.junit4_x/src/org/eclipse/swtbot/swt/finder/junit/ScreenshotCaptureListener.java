@@ -24,7 +24,6 @@ import org.junit.runner.notification.RunListener;
  * @author Hans Schwaebli (Bug 259787)
  * @version $Id$
  * @noinstantiate This class is not intended to be instantiated by clients.
- * @noextend This class is not intended to be subclassed by clients.
  */
 final class ScreenshotCaptureListener extends RunListener {
 	/** The logger. */

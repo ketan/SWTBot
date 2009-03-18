@@ -36,7 +36,7 @@
 		<delete dir="test-sandbox/screenshots" />
 	</target>
 
-	<target name="copy-sources" depends="copy-features, copy-plugins" description="copies sources" />
+	<target name="copy-sources" depends="copy-features, copy-plugins, make-substitutions" description="copies sources" />
 
 	<target name="copy-eclipse" description="copies an eclispse instance to a temporary location">
 		<echo>Sync eclipse from ${base} to ${eclipseLocation}</echo>
@@ -49,7 +49,8 @@
 	</target>
 
 	<target name="copy-features" description="copies the feature sources into the features folder">
-		<sync todir="${buildDirectory}/features" includeemptydirs="true" overwrite="true">
+		<delete dir="${buildDirectory}/features" includes="**/feature.xml"/>
+		<sync todir="${buildDirectory}/features" includeemptydirs="true">
 			<fileset dir="../">
 				<!-- list all your features here -->
 				<include name="${feature.id}/**" />
@@ -62,7 +63,8 @@
 	</target>
 
 	<target name="copy-plugins" description="copies plugin sources into the plugins folder">
-		<sync todir="${buildDirectory}/plugins" includeemptydirs="true" overwrite="true">
+		<delete dir="${buildDirectory}/plugins" includes="**/MANIFEST.MF" />
+		<sync todir="${buildDirectory}/plugins" includeemptydirs="true">
 			<fileset dir="../">
 				<!-- include plugins here -->
 				<include name="${plugin.prefix}*/**" />
@@ -81,6 +83,12 @@
 				<exclude name="*/bin/**" />
 			</fileset>
 		</sync>
+	</target>
+	
+	<target name="make-substitutions" if="isJunit4.5" depends="guess-junit-version">
+		<copy file="${buildDirectory}/plugins/org.eclipse.swtbot.junit4_x/META-INF/MANIFEST.MF_junit4_5" tofile="${buildDirectory}/plugins/org.eclipse.swtbot.junit4_x/META-INF/MANIFEST.MF" overwrite="true" />
+		<copy file="${buildDirectory}/plugins/org.eclipse.swtbot.junit4_x/_build.properties.junit4_5" tofile="${buildDirectory}/plugins/org.eclipse.swtbot.junit4_x/build.properties" overwrite="true" />
+		<copy file="${buildDirectory}/plugins/org.eclipse.swtbot.junit4_x/_classpath.junit4_5" tofile="${buildDirectory}/plugins/org.eclipse.swtbot.junit4_x/.classpath" overwrite="true" />
 	</target>
 
 	<target name="extract-eclipse">
