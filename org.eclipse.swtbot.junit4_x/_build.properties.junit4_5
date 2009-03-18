@@ -1,8 +1,8 @@
-source.. = junit4_3/,\
+source.. = junit4_5/,\
            src/
 output.. = bin/
 bin.includes = META-INF/,\
                .,\
-               junit4_3/,\
+               junit4_5/,\
                about.html,\
                LICENSE.EPL

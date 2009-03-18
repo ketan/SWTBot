@@ -1,4 +1,4 @@
-source.. = junit4_5/,\
+source.. = junit4_3/,\
            src/
 output.. = bin/
 bin.includes = META-INF/,\
