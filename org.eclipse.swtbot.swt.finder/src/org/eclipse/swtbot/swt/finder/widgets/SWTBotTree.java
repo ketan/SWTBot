@@ -263,7 +263,6 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 		notify(SWT.FocusIn);
 		notify(SWT.MouseDown);
 		notify(SWT.Selection);
-		notify(SWT.DefaultSelection);
 		notify(SWT.MouseUp);
 		notify(SWT.MouseHover);
 		notify(SWT.MouseMove);
