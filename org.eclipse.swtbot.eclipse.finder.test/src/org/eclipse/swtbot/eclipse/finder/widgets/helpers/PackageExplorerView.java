@@ -48,7 +48,7 @@ public class PackageExplorerView {
 			bot.button("Yes").click();
 			bot.waitUntil(Conditions.shellCloses(shell));
 		}
-		if (version.startsWith("3.4")) {
+		if (version.startsWith("3.4") || version.startsWith("3.5")) {
 			SWTBotShell shell = bot.shell("Delete Resources");
 			shell.activate();
 			Button button = (Button) bot.widget(widgetOfType(Button.class), shell.widget);
