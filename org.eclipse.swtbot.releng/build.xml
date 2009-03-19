@@ -64,6 +64,9 @@
 
 	<target name="copy-plugins" description="copies plugin sources into the plugins folder">
 		<delete dir="${buildDirectory}/plugins" includes="**/MANIFEST.MF" />
+		<delete dir="${buildDirectory}/plugins" includes="**/build.properties" />
+		<delete dir="${buildDirectory}/plugins" includes="**/.classpath" />
+		<delete dir="${buildDirectory}/plugins" includes="**/.project" />
 		<sync todir="${buildDirectory}/plugins" includeemptydirs="true">
 			<fileset dir="../">
 				<!-- include plugins here -->
