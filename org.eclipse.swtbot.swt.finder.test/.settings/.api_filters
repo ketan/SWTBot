@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component id="org.eclipse.swtbot.swt.finder.test" version="2">
+<resource path="src/org/eclipse/swtbot/swt/finder/utils/MultiValueMapTest.java" type="org.eclipse.swtbot.swt.finder.utils.MultiValueMapTest">
+<filter id="572522506">
+<message_arguments>
+<message_argument value="MultiValueMap&lt;K, V&gt;"/>
+<message_argument value="MultiValueMapTest"/>
+</message_arguments>
+</filter>
+</resource>
+<resource path="src/org/eclipse/swtbot/swt/finder/utils/BidiMapTest.java" type="org.eclipse.swtbot.swt.finder.utils.BidiMapTest">
+<filter id="572522506">
+<message_arguments>
+<message_argument value="BidiMap&lt;K, V&gt;"/>
+<message_argument value="BidiMapTest"/>
+</message_arguments>
+</filter>
+</resource>
+</component>
