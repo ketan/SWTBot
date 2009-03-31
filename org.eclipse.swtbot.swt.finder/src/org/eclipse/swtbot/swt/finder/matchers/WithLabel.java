@@ -47,7 +47,7 @@ public class WithLabel<T extends Widget> extends AbstractMatcher<T> {
 	 * 
 	 * @param labelText the label.
 	 */
-	public WithLabel(String labelText) {
+	WithLabel(String labelText) {
 		mnemonicTextMatcher = new WithMnemonic<Widget>(labelText);
 	}
 

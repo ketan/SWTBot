@@ -15,10 +15,9 @@ import org.eclipse.swt.widgets.Widget;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 
-
 /**
  * Tells if a particular widget is of a specified type.
- *
+ * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  * @since 2.0
@@ -32,10 +31,10 @@ public class WidgetOfType<T extends Widget> extends AbstractMatcher<T> {
 
 	/**
 	 * Matches a widget that has the specified type
-	 *
+	 * 
 	 * @param type the type of the widget.
 	 */
-	public WidgetOfType(Class<? extends Widget> type) {
+	WidgetOfType(Class<? extends Widget> type) {
 		this.type = type;
 	}
 
@@ -49,7 +48,7 @@ public class WidgetOfType<T extends Widget> extends AbstractMatcher<T> {
 
 	/**
 	 * Matches a widget that has the specified type
-	 *
+	 * 
 	 * @param type the type of the widget.
 	 * @return a matcher.
 	 * @since 2.0

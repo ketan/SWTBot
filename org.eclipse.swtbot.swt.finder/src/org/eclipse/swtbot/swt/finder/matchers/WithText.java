@@ -20,10 +20,9 @@ import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 
-
 /**
  * Matches widgets if the getText() method of the widget matches the specified text.
- *
+ * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  * @since 2.0
@@ -35,28 +34,28 @@ public class WithText<T extends Widget> extends AbstractMatcher<T> {
 
 	/**
 	 * A flag to denote if this should ignore case.
-	 *
+	 * 
 	 * @since 1.2
 	 */
 	protected boolean	ignoreCase	= false;
 
 	/**
 	 * Constructs this matcher with the given text.
-	 *
+	 * 
 	 * @param text the text to match on the {@link org.eclipse.swt.widgets.Widget}
 	 */
-	public WithText(String text) {
+	WithText(String text) {
 		this(text, false);
 	}
 
 	/**
 	 * Constructs this matcher with the given text.
-	 *
+	 * 
 	 * @param text the text to match on the {@link org.eclipse.swt.widgets.Widget}
 	 * @param ignoreCase Determines if this should ignore case during the comparison.
 	 * @since 1.2
 	 */
-	public WithText(String text, boolean ignoreCase) {
+	WithText(String text, boolean ignoreCase) {
 		text = text.replaceAll("\\r\\n", "\n"); //$NON-NLS-1$ //$NON-NLS-2$
 		text = text.replaceAll("\\r", "\n"); //$NON-NLS-1$ //$NON-NLS-2$
 		this.text = text;
@@ -81,7 +80,7 @@ public class WithText<T extends Widget> extends AbstractMatcher<T> {
 	/**
 	 * Gets the text of the object using the getText method. If the object doesn't contain a get text method an
 	 * exception is thrown.
-	 *
+	 * 
 	 * @param obj any object to get the text from.
 	 * @return the return value of obj#getText()
 	 * @throws NoSuchMethodException if the method "getText" does not exist on the object.
@@ -99,7 +98,7 @@ public class WithText<T extends Widget> extends AbstractMatcher<T> {
 
 	/**
 	 * Matches a widget that has the specified exact text.
-	 *
+	 * 
 	 * @param text the label.
 	 * @return a matcher.
 	 * @since 2.0
@@ -111,7 +110,7 @@ public class WithText<T extends Widget> extends AbstractMatcher<T> {
 
 	/**
 	 * Matches a widget that has the specified text, ignoring case considerations.
-	 *
+	 * 
 	 * @param text the label.
 	 * @return a matcher.
 	 * @since 2.0

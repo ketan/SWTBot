@@ -11,7 +11,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.matchers;
 
-
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.BoolResult;
@@ -19,10 +18,9 @@ import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
-
 /**
  * Matches another matcher in the context of the UI thread. Useful if you want to make a matcher UI thread safe.
- *
+ * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  * @since 2.0
@@ -34,7 +32,7 @@ public class InUIThread<T extends Widget> extends AbstractMatcher<T> {
 	/**
 	 * @param matcher another matcher
 	 */
-	public InUIThread(Matcher<?> matcher) {
+	InUIThread(Matcher<?> matcher) {
 		this.matcher = matcher;
 	}
 
@@ -52,7 +50,7 @@ public class InUIThread<T extends Widget> extends AbstractMatcher<T> {
 
 	/**
 	 * Matches another matcher in the context of the UI thread. Useful if you want to make a matcher UI thread safe.
-	 *
+	 * 
 	 * @param matcher the matcher
 	 * @return a matcher.
 	 * @since 2.0

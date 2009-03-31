@@ -21,7 +21,7 @@ import org.hamcrest.Factory;
 /**
  * Matches {@link org.eclipse.swt.widgets.Widget}s with the specified text. Skips mnemonics, so "Username" will match
  * items with text "&amp;Username" and "User&amp;name"
- *
+ * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  * @since 2.0
@@ -32,20 +32,20 @@ public class WithMnemonic<T extends Widget> extends AbstractMatcher<T> {
 
 	/**
 	 * Constructs the Mnemonic text matcher with the given text.
-	 *
+	 * 
 	 * @param text the mnemonic to match on the {@link org.eclipse.swt.widgets.Widget}
 	 */
-	public WithMnemonic(String text) {
+	WithMnemonic(String text) {
 		this(text, false);
 	}
 
 	/**
 	 * Constructs the Mnemonic text matcher with the given text.
-	 *
+	 * 
 	 * @param text the mnemonic to match on the {@link org.eclipse.swt.widgets.Widget}
 	 * @param ignoreCase Determines if this should ignore case during the comparison.
 	 */
-	public WithMnemonic(String text, boolean ignoreCase) {
+	WithMnemonic(String text, boolean ignoreCase) {
 		this.text = text.replaceAll("&", ""); //$NON-NLS-1$ //$NON-NLS-2$
 		this.ignoreCase = ignoreCase;
 	}
@@ -53,7 +53,7 @@ public class WithMnemonic<T extends Widget> extends AbstractMatcher<T> {
 	/**
 	 * Extends the behaviour of WithText my removing the mnemonics "&amp;" that are used as keyboard accessors from the
 	 * text.
-	 *
+	 * 
 	 * @see org.eclipse.swtbot.swt.finder.matchers.WithText#getText(java.lang.Object)
 	 * @param obj The object to get the text from.
 	 * @return The newly formated string.
@@ -86,7 +86,7 @@ public class WithMnemonic<T extends Widget> extends AbstractMatcher<T> {
 
 	/**
 	 * Matches a widget that has the specified text, after striping the mnemonics "&"
-	 *
+	 * 
 	 * @param text the text.
 	 * @return a matcher.
 	 * @since 2.0

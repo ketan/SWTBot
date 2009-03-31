@@ -11,7 +11,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.matchers;
 
-
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.finders.PathGenerator;
@@ -21,10 +20,9 @@ import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
-
 /**
  * Tells if a particular widget is within a {@link Group} with the specified text.
- *
+ * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  * @since 2.0
@@ -38,19 +36,19 @@ public class InGroup<T extends Widget> extends AbstractMatcher<T> {
 
 	/**
 	 * Matches a widget that has the specified Label.
-	 *
+	 * 
 	 * @param labelText the label.
 	 */
-	public InGroup(String labelText) {
+	InGroup(String labelText) {
 		matcher = new WithMnemonic<Widget>(labelText);
 	}
 
 	/**
 	 * Matches a widget in a group, if the matcher evaluates to true for the group.
-	 *
+	 * 
 	 * @param matcher the matcher.
 	 */
-	public InGroup(Matcher matcher) {
+	InGroup(Matcher matcher) {
 		this.matcher = matcher;
 	}
 
@@ -72,7 +70,7 @@ public class InGroup<T extends Widget> extends AbstractMatcher<T> {
 
 	/**
 	 * Matches a widget that belongs to the specified group
-	 *
+	 * 
 	 * @param labelText the label.
 	 * @return a matcher.
 	 * @since 2.0
@@ -84,7 +82,7 @@ public class InGroup<T extends Widget> extends AbstractMatcher<T> {
 
 	/**
 	 * Matches a widget in a group, if the matcher evaluates to true for the group.
-	 *
+	 * 
 	 * @param matcher the matcher.
 	 * @return a matcher.
 	 * @since 2.0

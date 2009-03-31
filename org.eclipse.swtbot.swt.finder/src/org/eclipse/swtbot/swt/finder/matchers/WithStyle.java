@@ -11,16 +11,14 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.matchers;
 
-
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 
-
 /**
  * Matches if the widget has the specified style bits set.
- *
+ * 
  * @see Widget#getStyle()
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
@@ -33,11 +31,11 @@ public class WithStyle<T extends Widget> extends AbstractMatcher<T> {
 
 	/**
 	 * Matches a widget that has the specified style bit set.
-	 *
+	 * 
 	 * @param style the style bits.
 	 * @param styleDescription the description of the style bits.
 	 */
-	public WithStyle(int style, String styleDescription) {
+	WithStyle(int style, String styleDescription) {
 		this.style = style;
 		this.styleDescription = styleDescription;
 	}
@@ -52,7 +50,7 @@ public class WithStyle<T extends Widget> extends AbstractMatcher<T> {
 
 	/**
 	 * Matches a widget that has the specified style bit set.
-	 *
+	 * 
 	 * @param style the style bits.
 	 * @param styleDescription the description of the style bits.
 	 * @return a matcher.

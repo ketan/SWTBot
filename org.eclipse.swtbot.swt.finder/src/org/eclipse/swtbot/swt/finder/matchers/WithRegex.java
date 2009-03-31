@@ -15,10 +15,9 @@ import org.eclipse.swt.widgets.Widget;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 
-
 /**
  * Matches widgets if the getText() method of the widget matches the specified regex.
- *
+ * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  * @since 2.0
@@ -30,10 +29,10 @@ public class WithRegex<T extends Widget> extends AbstractMatcher<T> {
 
 	/**
 	 * COnstructs the regular expression matcher with the given regular expression stirng.
-	 *
+	 * 
 	 * @param regex the regex to match on the {@link org.eclipse.swt.widgets.Widget}
 	 */
-	public WithRegex(String regex) {
+	WithRegex(String regex) {
 		this.regex = regex;
 	}
 
@@ -52,7 +51,7 @@ public class WithRegex<T extends Widget> extends AbstractMatcher<T> {
 
 	/**
 	 * Matches a widget that has the specified regex.
-	 *
+	 * 
 	 * @param regex the label.
 	 * @return a matcher.
 	 * @since 2.0

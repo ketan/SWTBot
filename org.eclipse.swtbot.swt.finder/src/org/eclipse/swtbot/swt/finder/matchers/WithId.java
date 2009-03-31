@@ -11,17 +11,15 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.matchers;
 
-
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.Result;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 
-
 /**
  * Tells if a particular widget has value for the given key.
- *
+ * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  * @since 2.0
@@ -39,18 +37,18 @@ public class WithId<T extends Widget> extends AbstractMatcher<T> {
 
 	/**
 	 * Matches a widget that has the specified Key/Value pair set as data into it.
-	 *
+	 * 
 	 * @see Widget#setData(String, Object)
 	 * @param key the key
 	 * @param value the value
 	 */
-	public WithId(String key, String value) {
+	WithId(String key, String value) {
 		this.key = key;
 		this.value = value;
 	}
 
 	protected boolean doMatch(final Object obj) {
-		String data = UIThreadRunnable.syncExec(new Result<String>(){
+		String data = UIThreadRunnable.syncExec(new Result<String>() {
 			public String run() {
 				return (String) ((Widget) obj).getData(key);
 			}
@@ -64,7 +62,7 @@ public class WithId<T extends Widget> extends AbstractMatcher<T> {
 
 	/**
 	 * Matches a widget that has the specified Key/Value pair set as data into it.
-	 *
+	 * 
 	 * @see org.eclipse.swt.widgets.Widget#setData(String, Object)
 	 * @param key the key
 	 * @param value the value
@@ -78,7 +76,7 @@ public class WithId<T extends Widget> extends AbstractMatcher<T> {
 	/**
 	 * Matches a widget that has the specified value set for the key
 	 * {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
-	 *
+	 * 
 	 * @see org.eclipse.swt.widgets.Widget#setData(String, Object)
 	 * @param value the value
 	 * @return a matcher.
