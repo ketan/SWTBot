@@ -165,8 +165,11 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 			public List<SWTBotToolbarButton> run() {
 				ViewPane obj = (ViewPane) ((WorkbenchPartReference) partReference).getPane();
 				ToolBar toolbar = (ToolBar) obj.getToolBar();
-
 				List<SWTBotToolbarButton> l = new ArrayList<SWTBotToolbarButton>();
+
+				if (toolbar == null)
+					return l; 
+
 				ToolItem[] items = toolbar.getItems();
 				for (int i = 0; i < items.length; i++) {
 					try {
