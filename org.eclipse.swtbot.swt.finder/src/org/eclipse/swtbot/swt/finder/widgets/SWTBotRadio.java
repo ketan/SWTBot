@@ -31,6 +31,7 @@ import org.hamcrest.SelfDescribing;
  * @version $Id$
  * @see SWTBotButton
  * @see SWTBotCheckBox
+ * @see SWTBotToggleButton
  */
 @SWTBotWidget(clasz = Button.class, style = @Style(name = "SWT.RADIO", value = SWT.RADIO), preferredName = "radio", referenceBy = { ReferenceBy.LABEL, ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })//$NON-NLS-1$
 public class SWTBotRadio extends AbstractSWTBot<Button> {

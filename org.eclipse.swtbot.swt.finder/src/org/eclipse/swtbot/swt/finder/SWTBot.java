@@ -31,6 +31,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotStyledText;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTabItem;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotText;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotToggleButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarDropDownButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
@@ -669,6 +670,202 @@ public class SWTBot extends SWTBotFactory {
 	public SWTBotRadio radioWithTooltipInGroup(String tooltip, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.RADIO, "SWT.RADIO"));
 		return new SWTBotRadio((Button) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @return a {@link SWTBotToggleButton} with the specified <code>label</code>.
+	 */
+	public SWTBotToggleButton toggleButtonWithLabel(String label) {
+		return toggleButtonWithLabel(label, 0);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotToggleButton} with the specified <code>label</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotToggleButton toggleButtonWithLabel(String label, int index) {
+		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), withStyle(SWT.TOGGLE, "SWT.TOGGLE"));
+		return new SWTBotToggleButton((Button) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param mnemonicText the mnemonicText on the widget.
+	 * @return a {@link SWTBotToggleButton} with the specified <code>mnemonicText</code>.
+	 */
+	public SWTBotToggleButton toggleButton(String mnemonicText) {
+		return toggleButton(mnemonicText, 0);
+	}
+
+	/**
+	 * @param mnemonicText the mnemonicText on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotToggleButton} with the specified <code>mnemonicText</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotToggleButton toggleButton(String mnemonicText, int index) {
+		Matcher matcher = allOf(widgetOfType(Button.class), withMnemonic(mnemonicText), withStyle(SWT.TOGGLE, "SWT.TOGGLE"));
+		return new SWTBotToggleButton((Button) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @return a {@link SWTBotToggleButton} with the specified <code>tooltip</code>.
+	 */
+	public SWTBotToggleButton toggleButtonWithTooltip(String tooltip) {
+		return toggleButtonWithTooltip(tooltip, 0);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotToggleButton} with the specified <code>tooltip</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotToggleButton toggleButtonWithTooltip(String tooltip, int index) {
+		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), withStyle(SWT.TOGGLE, "SWT.TOGGLE"));
+		return new SWTBotToggleButton((Button) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param key the key set on the widget.
+	 * @param value the value for the key.
+	 * @return a {@link SWTBotToggleButton} with the specified <code>key/value</code>.
+	 */
+	public SWTBotToggleButton toggleButtonWithId(String key, String value) {
+		return toggleButtonWithId(key, value, 0);
+	}
+
+	/**
+	 * @param key the key set on the widget.
+	 * @param value the value for the key.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotToggleButton} with the specified <code>key/value</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotToggleButton toggleButtonWithId(String key, String value, int index) {
+		Matcher matcher = allOf(widgetOfType(Button.class), withId(key, value), withStyle(SWT.TOGGLE, "SWT.TOGGLE"));
+		return new SWTBotToggleButton((Button) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @return a {@link SWTBotToggleButton} with the specified <code>value</code>.
+	 */
+	public SWTBotToggleButton toggleButtonWithId(String value) {
+		return toggleButtonWithId(value, 0);
+	}
+
+	/**
+	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotToggleButton} with the specified <code>value</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotToggleButton toggleButtonWithId(String value, int index) {
+		Matcher matcher = allOf(widgetOfType(Button.class), withId(value), withStyle(SWT.TOGGLE, "SWT.TOGGLE"));
+		return new SWTBotToggleButton((Button) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotToggleButton} with the specified <code>inGroup</code>.
+	 */
+	public SWTBotToggleButton toggleButtonInGroup(String inGroup) {
+		return toggleButtonInGroup(inGroup, 0);
+	}
+
+	/**
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotToggleButton} with the specified <code>inGroup</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotToggleButton toggleButtonInGroup(String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Button.class), inGroup(inGroup), withStyle(SWT.TOGGLE, "SWT.TOGGLE"));
+		return new SWTBotToggleButton((Button) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @return a {@link SWTBotToggleButton} with the specified <code>none</code>.
+	 */
+	public SWTBotToggleButton toggleButton() {
+		return toggleButton(0);
+	}
+
+	/**
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotToggleButton} with the specified <code>none</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotToggleButton toggleButton(int index) {
+		Matcher matcher = allOf(widgetOfType(Button.class), withStyle(SWT.TOGGLE, "SWT.TOGGLE"));
+		return new SWTBotToggleButton((Button) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotToggleButton} with the specified <code>label</code> with the specified <code>inGroup</code>.
+	 */
+	public SWTBotToggleButton toggleButtonWithLabelInGroup(String label, String inGroup) {
+		return toggleButtonWithLabelInGroup(label, inGroup, 0);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotToggleButton} with the specified <code>label</code> with the specified <code>inGroup</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotToggleButton toggleButtonWithLabelInGroup(String label, String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), inGroup(inGroup), withStyle(SWT.TOGGLE, "SWT.TOGGLE"));
+		return new SWTBotToggleButton((Button) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param mnemonicText the mnemonicText on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotToggleButton} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
+	 */
+	public SWTBotToggleButton toggleButtonInGroup(String mnemonicText, String inGroup) {
+		return toggleButtonInGroup(mnemonicText, inGroup, 0);
+	}
+
+	/**
+	 * @param mnemonicText the mnemonicText on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotToggleButton} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotToggleButton toggleButtonInGroup(String mnemonicText, String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Button.class), withMnemonic(mnemonicText), inGroup(inGroup), withStyle(SWT.TOGGLE, "SWT.TOGGLE"));
+		return new SWTBotToggleButton((Button) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotToggleButton} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
+	 */
+	public SWTBotToggleButton toggleButtonWithTooltipInGroup(String tooltip, String inGroup) {
+		return toggleButtonWithTooltipInGroup(tooltip, inGroup, 0);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotToggleButton} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotToggleButton toggleButtonWithTooltipInGroup(String tooltip, String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.TOGGLE, "SWT.TOGGLE"));
+		return new SWTBotToggleButton((Button) widget(matcher, index), matcher);
 	}
 
 	/**

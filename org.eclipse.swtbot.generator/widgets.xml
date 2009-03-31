@@ -2,6 +2,7 @@
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotButton" />
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotCheckBox" />
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotRadio" />
+	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotToggleButton" />
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotTree" />
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotText" />
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotCombo" />

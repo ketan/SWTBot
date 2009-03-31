@@ -24,43 +24,43 @@ import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 import org.hamcrest.SelfDescribing;
 
 /**
- * Represents a checkbox {@link Button} of type {@link SWT#CHECK}.
+ * Represents a toggle button {@link Button} of type {@link SWT#TOGGLE}.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  * @see SWTBotButton
  * @see SWTBotRadio
- * @see SWTBotToggleButton
+ * @see SWTBotCheckBox
  */
-@SWTBotWidget(clasz = Button.class, style = @Style(name = "SWT.CHECK", value = SWT.CHECK), preferredName = "checkBox", referenceBy = { ReferenceBy.LABEL, ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })//$NON-NLS-1$
-public class SWTBotCheckBox extends AbstractSWTBot<Button> {
+@SWTBotWidget(clasz = Button.class, style = @Style(name = "SWT.TOGGLE", value = SWT.TOGGLE), preferredName = "toggleButton", referenceBy = { ReferenceBy.LABEL, ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })//$NON-NLS-1$
+public class SWTBotToggleButton extends AbstractSWTBot<Button> {
 
 	/**
-	 * Constructs an instance of this object with the given button (Checkbox)
+	 * Constructs an instance of this object with the given button (Toggle)
 	 *
 	 * @param w the widget.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 * @since 1.0
 	 */
-	public SWTBotCheckBox(Button w) throws WidgetNotFoundException {
+	public SWTBotToggleButton(Button w) throws WidgetNotFoundException {
 		this(w, null);
 	}
 
 	/**
-	 * Constructs an instance of this object with the given button (Checkbox)
+	 * Constructs an instance of this object with the given button (Toggle)
 	 *
 	 * @param w the widget.
 	 * @param description the description of the widget, this will be reported by {@link #toString()}
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 * @since 1.0
 	 */
-	public SWTBotCheckBox(Button w, SelfDescribing description) throws WidgetNotFoundException {
+	public SWTBotToggleButton(Button w, SelfDescribing description) throws WidgetNotFoundException {
 		super(w, description);
-		Assert.isTrue(SWTUtils.hasStyle(w, SWT.CHECK), "Expecting a checkbox."); //$NON-NLS-1$
+		Assert.isTrue(SWTUtils.hasStyle(w, SWT.TOGGLE), "Expecting a toggle button."); //$NON-NLS-1$
 	}
 
 	/**
-	 * Click on the checkbox, toggle it.
+	 * Click on the toggle button, toggle it.
 	 */
 	public void click() {
 		log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
@@ -69,12 +69,12 @@ public class SWTBotCheckBox extends AbstractSWTBot<Button> {
 	}
 
 	/**
-	 * Deselect the checkbox.
+	 * Un-press the toggle button.
 	 */
-	public void deselect() {
+	public void unpress() {
 		log.debug(MessageFormat.format("Deselecting {0}", this)); //$NON-NLS-1$
 		assertEnabled();
-		if (!isChecked()) {
+		if (!isPressed()) {
 			log.debug(MessageFormat.format("Widget {0} already deselected, not deselecting again.", this)); //$NON-NLS-1$
 			return;
 		}
@@ -88,12 +88,12 @@ public class SWTBotCheckBox extends AbstractSWTBot<Button> {
 	}
 
 	/**
-	 * Select the checkbox.
+	 * Select the toggle button.
 	 */
-	public void select() {
+	public void press() {
 		log.debug(MessageFormat.format("Selecting {0}", this)); //$NON-NLS-1$
 		assertEnabled();
-		if (isChecked()) {
+		if (isPressed()) {
 			log.debug(MessageFormat.format("Widget {0} already selected, not selecting again.", this)); //$NON-NLS-1$
 			return;
 		}
@@ -107,7 +107,7 @@ public class SWTBotCheckBox extends AbstractSWTBot<Button> {
 	}
 
 	/**
-	 * Toggle the checkbox.
+	 * Toggle the toggle button.
 	 */
 	protected void toggle() {
 		assertEnabled();
@@ -122,7 +122,7 @@ public class SWTBotCheckBox extends AbstractSWTBot<Button> {
 	}
 
 	/**
-	 * notify listeners about checkbox state change.
+	 * Notify listeners about toggle button state change.
 	 */
 	protected void notifyListeners() {
 		notify(SWT.MouseEnter);
@@ -140,11 +140,11 @@ public class SWTBotCheckBox extends AbstractSWTBot<Button> {
 	}
 
 	/**
-	 * Gets if the checkbox button is checked.
+	 * Gets if the toggle button is pressed.
 	 *
-	 * @return <code>true</code> if the checkbox is checked. Otherwise <code>false</code>.
+	 * @return <code>true</code> if the toggle button is pressed. Otherwise <code>false</code>.
 	 */
-	public boolean isChecked() {
+	public boolean isPressed() {
 		return syncExec(new BoolResult() {
 			public Boolean run() {
 				return widget.getSelection();
