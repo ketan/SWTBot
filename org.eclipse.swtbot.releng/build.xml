@@ -36,7 +36,7 @@
 		<delete dir="test-sandbox/screenshots" />
 	</target>
 
-	<target name="copy-sources" depends="copy-features, copy-plugins, make-substitutions" description="copies sources" />
+	<target name="copy-sources" depends="copy-features, copy-plugins" description="copies sources" />
 
 	<target name="copy-eclipse" description="copies an eclispse instance to a temporary location">
 		<echo>Sync eclipse from ${base} to ${eclipseLocation}</echo>
@@ -88,12 +88,20 @@
 		</sync>
 	</target>
 	
-	<target name="make-substitutions" if="isJunit4.5" depends="guess-junit-version">
-		<copy file="${buildDirectory}/plugins/org.eclipse.swtbot.junit4_x/META-INF/MANIFEST.MF_junit4_5" tofile="${buildDirectory}/plugins/org.eclipse.swtbot.junit4_x/META-INF/MANIFEST.MF" overwrite="true" />
-		<copy file="${buildDirectory}/plugins/org.eclipse.swtbot.junit4_x/_build.properties.junit4_5" tofile="${buildDirectory}/plugins/org.eclipse.swtbot.junit4_x/build.properties" overwrite="true" />
-		<copy file="${buildDirectory}/plugins/org.eclipse.swtbot.junit4_x/_classpath.junit4_5" tofile="${buildDirectory}/plugins/org.eclipse.swtbot.junit4_x/.classpath" overwrite="true" />
+	<target name="make-substitutions-4.5" if="isJunit4.5">
+		<copy file="../org.eclipse.swtbot.junit4_x/META-INF/MANIFEST.MF_junit4_5" tofile="../org.eclipse.swtbot.junit4_x/META-INF/MANIFEST.MF" overwrite="true" />
+		<copy file="../org.eclipse.swtbot.junit4_x/_build.properties.junit4_5" tofile="../org.eclipse.swtbot.junit4_x/build.properties" overwrite="true" />
+		<copy file="../org.eclipse.swtbot.junit4_x/_classpath.junit4_5" tofile="../org.eclipse.swtbot.junit4_x/.classpath" overwrite="true" />		
 	</target>
-
+	
+	<target name="make-substitutions-4.3" unless="isJunit4.5">
+		<copy file="../org.eclipse.swtbot.junit4_x/META-INF/MANIFEST.MF_junit4_3" tofile="../org.eclipse.swtbot.junit4_x/META-INF/MANIFEST.MF" overwrite="true" />
+		<copy file="../org.eclipse.swtbot.junit4_x/_build.properties.junit4_3" tofile="../org.eclipse.swtbot.junit4_x/build.properties" overwrite="true" />
+		<copy file="../org.eclipse.swtbot.junit4_x/_classpath.junit4_3" tofile="../org.eclipse.swtbot.junit4_x/.classpath" overwrite="true" />		
+	</target>
+	
+	<target name="make-substitutions" depends="guess-junit-version, make-substitutions-4.5, make-substitutions-4.3" />
+	
 	<target name="extract-eclipse">
 		<condition property="setupTarget" value="setup-zip">
 			<contains string="${eclipse.sdk.archive}" substring=".zip" />
@@ -132,6 +140,7 @@
 		<antcall target="extract-eclipse" />
 
 		<antcall target="initialize-environment" />
+		<antcall target="make-substitutions" />
 	</target>
 
 	<target name="printjvm">
