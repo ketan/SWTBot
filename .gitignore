@@ -29,3 +29,8 @@ org.eclipse.swtbot.updatesite/target/
 org.eclipse.swtbot.updatesite/build/
 
 /swtbot/
+
+org.eclipse.swtbot.junit4_x/.classpath
+org.eclipse.swtbot.junit4_x/META-INF/MANIFEST.MF
+org.eclipse.swtbot.junit4_x/build.properties
+
