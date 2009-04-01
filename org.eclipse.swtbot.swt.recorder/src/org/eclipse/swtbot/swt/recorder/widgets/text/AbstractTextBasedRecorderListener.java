@@ -10,10 +10,10 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.recorder.widgets.text;
 
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.allOf;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widgetOfType;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMnemonic;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withStyle;
-import static org.hamcrest.Matchers.allOf;
 
 import java.util.List;
 

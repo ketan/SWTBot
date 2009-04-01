@@ -10,7 +10,8 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.recorder.widgets.text;
 
-import static org.hamcrest.Matchers.allOf;
+
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.allOf;
 
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Shell;
