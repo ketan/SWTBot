@@ -27,6 +27,7 @@ import org.eclipse.swtbot.eclipse.finder.SWTEclipseBot;
 import org.eclipse.swtbot.eclipse.finder.exceptions.WorkbenchPartNotActiveException;
 import org.eclipse.swtbot.eclipse.finder.finders.CommandFinder;
 import org.eclipse.swtbot.eclipse.finder.finders.ViewMenuFinder;
+import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.Finder;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
@@ -212,7 +213,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 	 */
 	protected Widget findWidget(Matcher<?> matcher) {
 		Finder finder = bot.getFinder();
-		Control control = ((WorkbenchPartReference) partReference).getPane().getControl();
+		Control control = getControl();
 		boolean shouldFindInvisibleControls = finder.shouldFindInvisibleControls();
 		finder.setShouldFindInvisibleControls(true);
 		try {
@@ -222,6 +223,22 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 		} finally {
 			finder.setShouldFindInvisibleControls(shouldFindInvisibleControls);
 		}
+	}
+
+	/**
+	 * Returns the workbench pane control.
+	 * @return returns the workbench pane control.
+	 */
+	private Control getControl() {
+		return ((WorkbenchPartReference) partReference).getPane().getControl();
+	}
+	
+	/**
+	 * Returns a SWTBot instance that matches the contents of this workbench part.
+	 * @return SWTBot
+	 */
+	public SWTBot getContents() {
+		return new SWTBot(getControl());
 	}
 
 	/**
