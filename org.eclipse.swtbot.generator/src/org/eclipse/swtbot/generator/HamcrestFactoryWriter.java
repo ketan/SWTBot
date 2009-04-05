@@ -118,8 +118,10 @@ public class HamcrestFactoryWriter implements HamcrestWriter {
 		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widgetOfType"); //$NON-NLS-1$
 		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.allOf"); //$NON-NLS-1$
 		imports.add("import org.eclipse.swtbot.swt.finder.finders.ControlFinder"); //$NON-NLS-1$
+		imports.add("import org.eclipse.swtbot.swt.finder.finders.ChildrenControlFinder"); //$NON-NLS-1$
 		imports.add("import org.eclipse.swtbot.swt.finder.finders.Finder"); //$NON-NLS-1$
 		imports.add("import org.eclipse.swtbot.swt.finder.finders.MenuFinder"); //$NON-NLS-1$
+		imports.add("import org.eclipse.swt.widgets.Widget"); //$NON-NLS-1$
 
 		imports.add("import org.hamcrest.Matcher"); //$NON-NLS-1$
 
@@ -137,6 +139,14 @@ public class HamcrestFactoryWriter implements HamcrestWriter {
 				"		this(new ControlFinder(), new MenuFinder());\n" +
 				"	}\n" +
 				"\n" +
+				"	/**\n" + 
+				"	 * Constructs a bot that will match the contents of the given parentWidget.\n" + 
+				"	 * \n" + 
+				"	 * @param parent the parent\n" + 
+				"	 */\n" + 
+				"	public SWTBot(Widget parent) {\n" + 
+				"		this(new ChildrenControlFinder(parent), new MenuFinder());\n" + 
+				"	}\n" +
 				"	/**\n" +
 				"	 * Constructs an instance of the bot using the given control finder and menu finder.\n" +
 				"	 * \n" +

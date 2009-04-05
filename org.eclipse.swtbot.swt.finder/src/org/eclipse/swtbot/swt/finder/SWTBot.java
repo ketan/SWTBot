@@ -17,6 +17,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.Widget;
+import org.eclipse.swtbot.swt.finder.finders.ChildrenControlFinder;
 import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
 import org.eclipse.swtbot.swt.finder.finders.Finder;
 import org.eclipse.swtbot.swt.finder.finders.MenuFinder;
@@ -94,6 +96,14 @@ public class SWTBot extends SWTBotFactory {
 		this(new ControlFinder(), new MenuFinder());
 	}
 
+	/**
+	 * Constructs a bot that will match the contents of the given parentWidget.
+	 * 
+	 * @param parent the parent
+	 */
+	public SWTBot(Widget parent) {
+		this(new ChildrenControlFinder(parent), new MenuFinder());
+	}
 	/**
 	 * Constructs an instance of the bot using the given control finder and menu finder.
 	 * 
