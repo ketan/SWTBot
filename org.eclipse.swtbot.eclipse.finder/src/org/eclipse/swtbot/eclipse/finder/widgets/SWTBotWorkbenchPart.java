@@ -235,9 +235,10 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 	
 	/**
 	 * Returns a SWTBot instance that matches the contents of this workbench part.
+	 *
 	 * @return SWTBot
 	 */
-	public SWTBot getContents() {
+	public SWTBot bot() {
 		return new SWTBot(getControl());
 	}
 
