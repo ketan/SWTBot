@@ -17,6 +17,9 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
+import org.eclipse.swtbot.swt.finder.finders.Finder;
+import org.eclipse.swtbot.swt.finder.finders.MenuFinder;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotCCombo;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotCLabel;
@@ -83,6 +86,32 @@ import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withTo
  * @version $Id$
  */
 public class SWTBot extends SWTBotFactory {
+
+	/**
+	 * Constructs a bot.
+	 */
+	public SWTBot() {
+		this(new ControlFinder(), new MenuFinder());
+	}
+
+	/**
+	 * Constructs an instance of the bot using the given control finder and menu finder.
+	 * 
+	 * @param controlFinder the {@link ControlFinder} used to identify and find controls.
+	 * @param menuFinder the {@link MenuFinder} used to find menu items.
+	 */
+	public SWTBot(ControlFinder controlFinder, MenuFinder menuFinder) {
+		this(new Finder(controlFinder, menuFinder));
+	}
+
+	/**
+	 * Constructs a bot with the given finder.
+	 * 
+	 * @param finder the finder.
+	 */
+	public SWTBot(Finder finder) {
+		super(finder);
+	}
 
 	/**
 	 * @param label the label on the widget.

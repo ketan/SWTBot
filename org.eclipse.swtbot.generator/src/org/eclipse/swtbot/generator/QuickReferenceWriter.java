@@ -49,4 +49,8 @@ public class QuickReferenceWriter implements HamcrestWriter {
 
 	}
 
+	public void beginConstructors() {
+		
+	}
+
 }

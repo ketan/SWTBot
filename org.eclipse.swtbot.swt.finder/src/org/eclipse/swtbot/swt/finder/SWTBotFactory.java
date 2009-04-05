@@ -37,9 +37,7 @@ import org.eclipse.swt.widgets.Tray;
 import org.eclipse.swt.widgets.TrayItem;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
-import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
 import org.eclipse.swtbot.swt.finder.finders.Finder;
-import org.eclipse.swtbot.swt.finder.finders.MenuFinder;
 import org.eclipse.swtbot.swt.finder.matchers.WithItem;
 import org.eclipse.swtbot.swt.finder.results.WidgetResult;
 import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
@@ -81,23 +79,6 @@ abstract class SWTBotFactory {
 	protected final Display		display;
 	/** The finder used by the bot to find controls. */
 	protected final Finder		finder;
-
-	/**
-	 * Constructs a bot.
-	 */
-	public SWTBotFactory() {
-		this(new ControlFinder(), new MenuFinder());
-	}
-
-	/**
-	 * Constructs an instance of the bot using the given control finder and menu finder.
-	 *
-	 * @param controlFinder the {@link ControlFinder} used to identify and find controls.
-	 * @param menuFinder the {@link MenuFinder} used to find menu items.
-	 */
-	public SWTBotFactory(ControlFinder controlFinder, MenuFinder menuFinder) {
-		this(new Finder(controlFinder, menuFinder));
-	}
 
 	/**
 	 * Constructs a bot with the given finder.

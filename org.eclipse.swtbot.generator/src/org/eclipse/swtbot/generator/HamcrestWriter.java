@@ -30,4 +30,6 @@ public interface HamcrestWriter {
 
 	public abstract void close();
 
+	public abstract void beginConstructors();
+
 }

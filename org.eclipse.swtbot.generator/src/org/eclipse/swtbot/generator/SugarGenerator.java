@@ -33,6 +33,7 @@ public class SugarGenerator {
 		for (HamcrestWriter factoryWriter : factoryWriters) {
 			factoryWriter.writeHeader(imports);
 			factoryWriter.beginClassDefinition();
+			factoryWriter.beginConstructors();
 			writeMethods(factoryWriter);
 			factoryWriter.writeFooter();
 			factoryWriter.flush();
