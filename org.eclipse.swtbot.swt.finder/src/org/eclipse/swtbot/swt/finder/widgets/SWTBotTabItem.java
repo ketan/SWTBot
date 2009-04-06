@@ -28,6 +28,7 @@ import org.hamcrest.SelfDescribing;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
+ * @author Joshua Gosse &lt;jlgosse [at] ca [dot] ibm [dot] com&gt;
  * @version $Id$
  */
 @SWTBotWidget(clasz = TabItem.class, preferredName = "tabItem", referenceBy = { ReferenceBy.MNEMONIC })
@@ -113,4 +114,57 @@ public class SWTBotTabItem extends AbstractSWTBot<TabItem> {
 			}
 		});
 	}
+
+	// private Rectangle absoluteLocation() {
+	// return syncExec(new Result<Rectangle>() {
+	// public Rectangle run() {
+	// return display.map(widget.getParent(), null, widget.getBounds());
+	// }
+	// });
+	// }
+	//
+	// /**
+	// * Click on the center of the widget.
+	// *
+	// * @param post
+	// * Whether or not {@link Display#post} should be used
+	// */
+	// private SWTBotTabItem click(final boolean post) {
+	// if (post) {
+	// Rectangle location = absoluteLocation();
+	// click(location.x, location.y, true);
+	// }
+	// else
+	// click();
+	// return this;
+	// }
+	//	
+	// /**
+	// * Right click on the center of the widget.
+	// *
+	// * @param post
+	// * Whether or not {@link Display#post} should be used
+	// */
+	// private SWTBotTabItem rightClick(final boolean post) {
+	// if (post) {
+	// Rectangle location = absoluteLocation();
+	// rightClick(location.x, location.y, true);
+	// }
+	// else
+	// rightClick();
+	// return this;
+	// }
+	//
+	// /**
+	// * Moves the cursor to the center of the widget
+	// */
+	// private SWTBotTabItem moveMouseToWidget() {
+	// syncExec(new VoidResult() {
+	// public void run() {
+	// Rectangle location = absoluteLocation();
+	// moveMouse(location.x, location.y);
+	// }
+	// });
+	// return this;
+	// }
 }

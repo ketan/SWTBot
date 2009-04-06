@@ -30,7 +30,7 @@ import org.hamcrest.SelfDescribing;
  * @see SWTBotToggleButton
  */
 @SWTBotWidget(clasz = Button.class, style = @Style(name = "SWT.PUSH", value = SWT.PUSH), preferredName = "button", referenceBy = { ReferenceBy.LABEL, ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })  //$NON-NLS-1$
-public class SWTBotButton extends AbstractSWTBot<Button> {
+public class SWTBotButton extends AbstractSWTBotControl<Button> {
 
 	/**
 	 * Constructs an instance of this object with the given button
@@ -58,7 +58,7 @@ public class SWTBotButton extends AbstractSWTBot<Button> {
 	/**
 	 * Click on the button.
 	 */
-	public void click() {
+	public SWTBotButton click() {
 		log.debug(MessageFormat.format("Clicking on {0}", SWTUtils.getText(widget))); //$NON-NLS-1$
 		assertEnabled();
 		notify(SWT.MouseEnter);
@@ -74,6 +74,7 @@ public class SWTBotButton extends AbstractSWTBot<Button> {
 		notify(SWT.Deactivate);
 		notify(SWT.FocusOut);
 		log.debug(MessageFormat.format("Clicked on {0}", SWTUtils.getText(widget))); //$NON-NLS-1$
+		return this;
 	}
 
 }

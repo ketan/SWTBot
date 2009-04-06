@@ -52,7 +52,7 @@ public class SWTBotToolbarButton extends AbstractSWTBot<ToolItem> {
 	 * 
 	 * @since 1.0
 	 */
-	public void click() {
+	public SWTBotToolbarButton click() {
 		log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
 		assertEnabled();
 		notify(SWT.MouseEnter);
@@ -67,6 +67,7 @@ public class SWTBotToolbarButton extends AbstractSWTBot<ToolItem> {
 		notify(SWT.Deactivate);
 		notify(SWT.FocusOut);
 		log.debug(MessageFormat.format("Clicked on {0}", this)); //$NON-NLS-1$
+		return this;
 	}
 
 	@Override

@@ -253,4 +253,56 @@ public class SWTBotTableItem extends AbstractSWTBot<TableItem> {
 		return event;
 	}
 
+//	protected Rectangle absoluteLocation() {
+//		return syncExec(new Result<Rectangle>() {
+//			public Rectangle run() {
+//				return display.map(widget.getParent(), null, widget.getBounds());
+//			}
+//		});
+//	}
+//	
+//	/**
+//	 * Click on the center of the widget.
+//	 * 
+//	 * @param post
+//	 * 				Whether or not {@link Display#post} should be used
+//	 */
+//	private SWTBotTableItem click(final boolean post) {
+//		if (post) {
+//			Rectangle location = absoluteLocation();
+//			click(location.x, location.y, true);
+//		}
+//		else
+//			click();
+//		return this;
+//	}
+//	
+//	/**
+//	 * Right click on the center of the widget.
+//	 * 
+//	 * @param post
+//	 * 				Whether or not {@link Display#post} should be used
+//	 */
+//	private SWTBotTableItem rightClick(final boolean post) {
+//		if (post) {
+//			Rectangle location = absoluteLocation();
+//			rightClick(location.x, location.y, true);
+//		}
+//		else
+//			rightClick();
+//		return this;
+//	}
+//
+//	/**
+//	 * Moves the cursor to the center of the widget
+//	 */
+//	private SWTBotTableItem moveMouseToWidget() {
+//		syncExec(new VoidResult() {
+//			public void run() {
+//				Rectangle location = absoluteLocation();
+//				moveMouse(location.x, location.y);
+//			}
+//		});
+//		return this;
+//	}
 }

@@ -39,6 +39,7 @@ import org.hamcrest.SelfDescribing;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
+ * @author Joshua Gosse &lt;jlgosse [at] ca [dot] ibm [dot] com&gt;
  * @version $Id$
  */
 @SWTBotWidget(clasz = Tree.class, preferredName = "tree", referenceBy = { ReferenceBy.LABEL })
@@ -350,6 +351,53 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 		});
 	}
 
+
+	// /**
+	// * Expand the node using the keyboard
+	// *
+	// * @param node the node to be expanded.
+	// * @param recursive if the expansion should be recursive.
+	// * @return the tree item that was expanded.
+	// * @throws WidgetNotFoundException if the node is not found.
+	// */
+	// public SWTBotTreeItem expandNode(final SWTBotTreeItem node, final boolean recursive) throws
+	// WidgetNotFoundException {
+	// assertEnabled();
+	// return syncExec(new Result<SWTBotTreeItem>() {
+	// public SWTBotTreeItem run() {
+	// try {
+	// expandNode(node);
+	// } catch (WidgetNotFoundException e) {
+	// throw new RuntimeException(e);
+	// }
+	// return node;
+	// }
+	//
+	// private void expandNode(SWTBotTreeItem node) throws WidgetNotFoundException {
+	// if(node.getItems().length != 0) {
+	// node.expandWithKeys();
+	//
+	// node.keyPress(SWT.ARROW_DOWN, true);
+	//
+	// if (recursive) {
+	// expandTreeItem(node);
+	// }
+	// }
+	// else {
+	// keyPress(SWT.ARROW_DOWN, true);
+	// return;
+	// }
+	// }
+	//
+	// private void expandTreeItem(SWTBotTreeItem node) throws WidgetNotFoundException {
+	// SWTBotTreeItem[] items = node.getItems();
+	// for (SWTBotTreeItem item : items) {
+	// expandNode(item);
+	// }
+	// }
+	// });
+	// }
+
 	/**
 	 * Gets the tree item matching the given name.
 	 *
@@ -430,4 +478,31 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 		});
 	}
 
+	// /**
+	// * Expands all of the nodes in the tree
+	// */
+	// public void expandNodes() {
+	// SWTBotTreeItem[] children = getAllItems();
+	// for (SWTBotTreeItem node : children) {
+	// expandNode(node, true);
+	// }
+	// }
+	//
+	// /**
+	// * Collapses all of the nodes in the tree
+	// */
+	// public void collapseNodes() {
+	// SWTBotTreeItem[] children = getAllItems();
+	// for (SWTBotTreeItem node : children) {
+	// System.out.println("Pressing left key");
+	// node.keyPress(SWT.ARROW_LEFT, true);
+	// try {
+	// Thread.sleep(500);
+	// } catch (InterruptedException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	// node.keyPress(SWT.ARROW_DOWN, true);
+	// }
+	// }
 }

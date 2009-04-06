@@ -28,7 +28,7 @@ import org.hamcrest.SelfDescribing;
  * @version $Id$
  */
 @SWTBotWidget(clasz = DateTime.class, preferredName = "dateTime", referenceBy = { ReferenceBy.LABEL })
-public class SWTBotDateTime extends AbstractSWTBot<DateTime> {
+public class SWTBotDateTime extends AbstractSWTBotControl<DateTime> {
 
 	/**
 	 * Constructs an instance of this object with the given widget.

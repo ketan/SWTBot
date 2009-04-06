@@ -27,7 +27,7 @@ import org.hamcrest.SelfDescribing;
  * @since 1.2
  */
 @SWTBotWidget(clasz = Label.class, preferredName = "label", referenceBy = { ReferenceBy.MNEMONIC })
-public class SWTBotLabel extends AbstractSWTBot<Label> {
+public class SWTBotLabel extends AbstractSWTBotControl<Label> {
 
 	/**
 	 * Constructs an instance of this using the given finder and text to search for.

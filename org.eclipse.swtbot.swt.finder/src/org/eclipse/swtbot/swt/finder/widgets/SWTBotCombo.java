@@ -31,7 +31,7 @@ import org.hamcrest.SelfDescribing;
  * @version $Id$
  */
 @SWTBotWidget(clasz = Combo.class, preferredName = "comboBox", referenceBy = { ReferenceBy.LABEL, ReferenceBy.TEXT })
-public class SWTBotCombo extends AbstractSWTBot<Combo> {
+public class SWTBotCombo extends AbstractSWTBotControl<Combo> {
 
 	/**
 	 * Constructs an instance of this with the given combo box.

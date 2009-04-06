@@ -26,10 +26,11 @@ import org.hamcrest.SelfDescribing;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
+ * @author Joshua Gosse &lt;jlgosse [at] ca [dot] ibm [dot] com&gt;
  * @version $Id$
  */
 @SWTBotWidget(clasz = List.class, preferredName = "list", referenceBy = { ReferenceBy.LABEL })
-public class SWTBotList extends AbstractSWTBot<List> {
+public class SWTBotList extends AbstractSWTBotControl<List> {
 
 	/**
 	 * Constructs an isntance of this with the given list widget.
@@ -211,6 +212,19 @@ public class SWTBotList extends AbstractSWTBot<List> {
 		return syncExec(new StringResult() {
 			public String run() {
 				return widget.getItem(index);
+			}
+		});
+	}
+
+	/**
+	 * Gets the array of Strings from the List
+	 * 
+	 * @return an array of Strings
+	 */
+	public String[] getItems() {
+		return syncExec(new ArrayResult<String>() {
+			public String[] run() {
+				return widget.getItems();
 			}
 		});
 	}

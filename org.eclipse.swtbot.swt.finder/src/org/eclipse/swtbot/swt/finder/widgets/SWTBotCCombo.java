@@ -34,7 +34,7 @@ import org.hamcrest.SelfDescribing;
  * @since 1.0
  */
 @SWTBotWidget(clasz = CCombo.class, preferredName = "ccomboBox", referenceBy = { ReferenceBy.TEXT, ReferenceBy.LABEL })
-public class SWTBotCCombo extends AbstractSWTBot<CCombo> {
+public class SWTBotCCombo extends AbstractSWTBotControl<CCombo> {
 
 	/**
 	 * Constructs an instance of this with the given widget.

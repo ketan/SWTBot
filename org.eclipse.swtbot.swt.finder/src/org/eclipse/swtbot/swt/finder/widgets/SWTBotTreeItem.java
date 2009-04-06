@@ -40,11 +40,13 @@ import org.hamcrest.SelfDescribing;
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @author Ketan Patel
+ * @author Joshua Gosse &lt;jlgosse [at] ca [dot] ibm [dot] com&gt;
  * @version $Id$
  */
 public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
-
-	private Tree	tree;
+//	private static final int	expandKey	= SWT.getPlatform().equals("gtk") ? SWT.KEYPAD_ADD : SWT.ARROW_RIGHT;
+//	private static final int	collapseKey	= SWT.getPlatform().equals("gtk") ? SWT.KEYPAD_SUBTRACT : SWT.ARROW_LEFT;
+	private Tree				tree;
 
 	/**
 	 * @param treeItem the widget.
@@ -71,7 +73,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	/**
 	 * Returns the text stored at the given column index in the receiver, or empty string if the text has not been set.
 	 * Throws an exception if the column is greater than the number of columns in the tree.
-	 *
+	 * 
 	 * @param column the column index.
 	 * @return the cell at the location specified by the column
 	 */
@@ -80,7 +82,8 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 			return getText();
 		}
 		int columnCount = new SWTBotTree(tree).columnCount();
-		Assert.isLegal(column < columnCount, java.text.MessageFormat.format("The column index ({0}) is more than the number of column({1}) in the tree.", column, columnCount)); //$NON-NLS-1$
+		Assert.isLegal(column < columnCount, java.text.MessageFormat.format(
+				"The column index ({0}) is more than the number of column({1}) in the tree.", column, columnCount)); //$NON-NLS-1$
 		return syncExec(new StringResult() {
 			public String run() {
 				return widget.getText(column);
@@ -90,7 +93,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Returns the table row representation of cell values
-	 *
+	 * 
 	 * @return the cell values for this item
 	 */
 	public TableRow row() {
@@ -110,7 +113,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Returns the number of items contained in the receiver that are direct item children of the receiver.
-	 *
+	 * 
 	 * @return the number of items
 	 */
 	public int rowCount() {
@@ -124,13 +127,14 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	/**
 	 * Gets the nodes at the given, zero-relative index in the receiver. Throws an exception if the index is out of
 	 * range.
-	 *
+	 * 
 	 * @param row the index of the item to return
 	 * @return the item at the given index
 	 */
 	public SWTBotTreeItem getNode(final int row) {
 		int rowCount = rowCount();
-		Assert.isLegal(row < rowCount, java.text.MessageFormat.format("The row number ({0}) is more than the number of rows({1}) in the tree.", row, rowCount)); //$NON-NLS-1$
+		Assert.isLegal(row < rowCount, java.text.MessageFormat.format(
+				"The row number ({0}) is more than the number of rows({1}) in the tree.", row, rowCount)); //$NON-NLS-1$
 		return syncExec(new Result<SWTBotTreeItem>() {
 			public SWTBotTreeItem run() {
 				return new SWTBotTreeItem(widget.getItem(row));
@@ -140,7 +144,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Gets the cell data for the given row/column index.
-	 *
+	 * 
 	 * @param row the row index.
 	 * @param column the column index.
 	 * @return the cell at the location specified by the row and column
@@ -153,7 +157,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Expands the tree item to simulate click the plus sign.
-	 *
+	 * 
 	 * @return the tree item, after expanding it.
 	 */
 	public SWTBotTreeItem expand() {
@@ -170,7 +174,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Send the {@link SWT#Expand} event to build the child items of the tree item that we are expanding.
-	 *
+	 * 
 	 * @since 1.2
 	 */
 	private void preExpandNotify() {
@@ -179,7 +183,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Notifies the item of expansion.
-	 *
+	 * 
 	 * @since 1.2
 	 */
 	private void postExpandNotify() {
@@ -209,7 +213,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Gets the nodes of the tree item.
-	 *
+	 * 
 	 * @return the list of nodes in the treeitem.
 	 */
 	public List<String> getNodes() {
@@ -227,7 +231,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Expands the node matching the given node text.
-	 *
+	 * 
 	 * @param nodeText the text on the node.
 	 * @return the node that was expanded or <code>null</code> if not match exists.
 	 */
@@ -236,9 +240,31 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 		return getNode(nodeText).expand();
 	}
 
+	// /**
+	// * Expand the tree item using the right arrow key.
+	// *
+	// * @return the tree item, after expanding it.
+	// */
+	// SWTBotTreeItem expandWithKeys() {
+	// SWTBotTree parent = getParent();
+	// parent.keyPress(expandKey, true);
+	// return this;
+	// }
+
+	// /**
+	// * Collapse the tree item using the left arrow key.
+	// *
+	// * @return the tree item, after collapsing it.
+	// */
+	// SWTBotTreeItem collapseWithKeys() {
+	// SWTBotTree parent = getParent();
+	// parent.keyPress(collapseKey, true);
+	// return this;
+	// }
+
 	/**
 	 * Gets the node matching the given node text and index.
-	 *
+	 * 
 	 * @param nodeText the text on the node.
 	 * @param index the n'th node with the nodeText.
 	 * @return the node with the specified text or <code>WidgetNotFoundException</code> if not match exists.
@@ -246,13 +272,14 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	 */
 	public SWTBotTreeItem getNode(final String nodeText, final int index) {
 		List<SWTBotTreeItem> nodes = getNodes(nodeText);
-		Assert.isTrue(index < nodes.size(), MessageFormat.format("The index ({0}) was more than the number of nodes ({1}) in the tree.", index, nodes.size()));
+		Assert.isTrue(index < nodes.size(), MessageFormat.format("The index ({0}) was more than the number of nodes ({1}) in the tree.",
+				index, nodes.size()));
 		return nodes.get(index);
 	}
 
 	/**
 	 * Gets all nodes matching the given node text.
-	 *
+	 * 
 	 * @param nodeText the text on the node.
 	 * @return the nodes with the specified text or <code>WidgetNotFoundException</code> if not match exists.
 	 * @since 2.0
@@ -276,7 +303,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Gets the first node found matching the given node text.
-	 *
+	 * 
 	 * @param nodeText the text on the node.
 	 * @return the first node with the specified text or <code>WidgetNotFoundException</code> if not match exists.
 	 * @since 1.2
@@ -287,7 +314,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Selects the current tree item.
-	 *
+	 * 
 	 * @return the current node.
 	 * @since 1.0
 	 */
@@ -305,7 +332,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Click on the table at given coordinates
-	 *
+	 * 
 	 * @param x the x co-ordinate of the click
 	 * @param y the y co-ordinate of the click
 	 * @since 1.2
@@ -330,7 +357,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Clicks on this node.
-	 *
+	 * 
 	 * @return the current node.
 	 * @since 1.2
 	 */
@@ -347,7 +374,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Double clicks on this node.
-	 *
+	 * 
 	 * @return the current node.
 	 * @since 1.2
 	 */
@@ -370,7 +397,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Selects the items matching the array provided.
-	 *
+	 * 
 	 * @param items the items to select.
 	 * @return the current node.
 	 * @since 1.0
@@ -400,7 +427,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Selects the item matching the given name.
-	 *
+	 * 
 	 * @param item the items to select.
 	 * @return the current node.
 	 * @since 1.0
@@ -411,7 +438,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * notifies the tree widget about selection changes.
-	 *
+	 * 
 	 * @since 1.0
 	 */
 	private void notifySelect() {
@@ -444,7 +471,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Toggle the tree item.
-	 *
+	 * 
 	 * @since 1.3
 	 */
 	public void toggleCheck() {
@@ -453,7 +480,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Check the tree item.
-	 *
+	 * 
 	 * @since 1.3
 	 */
 	public void check() {
@@ -462,7 +489,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Uncheck the tree item.
-	 *
+	 * 
 	 * @since 1.3
 	 */
 	public void uncheck() {
@@ -471,7 +498,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Gets if the checkbox button is checked.
-	 *
+	 * 
 	 * @return <code>true</code> if the checkbox is checked. Otherwise <code>false</code>.
 	 * @since 1.3
 	 */
@@ -486,7 +513,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * Creates an event for CheckboxTreeItem case.
-	 *
+	 * 
 	 * @return an event that encapsulates {@link #widget} and {@link #display}.
 	 */
 	private Event createCheckEvent() {
@@ -516,7 +543,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	/**
 	 * notify listeners about checkbox state change.
-	 *
+	 * 
 	 * @since 1.3
 	 */
 	private void notifyCheck() {
@@ -541,5 +568,64 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 				return Arrays.asList(tree.getSelection()).contains(widget);
 			}
 		});
+	}
+
+	// protected Rectangle absoluteLocation() {
+	// return syncExec(new Result<Rectangle>() {
+	// public Rectangle run() {
+	// return display.map(widget.getParent(), null, getBounds());
+	// }
+	// });
+	// }
+	//
+	// /**
+	// * Click on the center of the widget.
+	// *
+	// * @param post Whether or not {@link Display#post} should be used
+	// */
+	// private SWTBotTreeItem click(final boolean post) {
+	// if (post) {
+	// Rectangle location = absoluteLocation();
+	// click(location.x, location.y, true);
+	// } else
+	// click();
+	// return this;
+	// }
+	//
+	// /**
+	// * Right click on the center of the widget.
+	// *
+	// * @param post Whether or not {@link Display#post} should be used
+	// */
+	// private SWTBotTreeItem rightClick(final boolean post) {
+	// if (post) {
+	// Rectangle location = absoluteLocation();
+	// rightClick(location.x, location.y, true);
+	// } else
+	// rightClick();
+	// return this;
+	// }
+	//
+	// /**
+	// * Moves the cursor to the center of the widget
+	// */
+	// private void moveMouseToWidget() {
+	// syncExec(new VoidResult() {
+	// public void run() {
+	// Rectangle bounds = getBounds();
+	// Point point = new Point(bounds.x + (bounds.width / 2), bounds.y + (bounds.height / 2));
+	// Point pt = display.map(widget.getParent(), null, point.x, point.y);
+	// moveMouse(pt.x, pt.y);
+	// }
+	// });
+	// }
+
+	public SWTBotTreeItem[] getItems() {
+		TreeItem[] items = widget.getItems();
+		SWTBotTreeItem[] children = new SWTBotTreeItem[items.length];
+		for (int i = 0; i < items.length; i++) {
+			children[i] = new SWTBotTreeItem(items[i]);
+		}
+		return children;
 	}
 }

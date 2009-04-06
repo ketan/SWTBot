@@ -26,7 +26,7 @@ import org.hamcrest.SelfDescribing;
  * @version $Id$
  */
 @SWTBotWidget(clasz = Shell.class, preferredName = "shell")
-public class SWTBotShell extends AbstractSWTBot<Shell> {
+public class SWTBotShell extends AbstractSWTBotControl<Shell> {
 
 	/**
 	 * Constructs an instance of this with the given shell.

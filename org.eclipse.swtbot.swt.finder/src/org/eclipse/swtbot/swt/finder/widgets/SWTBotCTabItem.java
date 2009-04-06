@@ -28,6 +28,7 @@ import org.hamcrest.SelfDescribing;
 
 /**
  * @author Ketan Patel
+ * @author Joshua Gosse &lt;jlgosse [at] ca [dot] ibm [dot] com&gt;
  */
 @SWTBotWidget(clasz = CTabItem.class, preferredName = "cTabItem", referenceBy = { ReferenceBy.MNEMONIC })
 public class SWTBotCTabItem extends AbstractSWTBot<CTabItem> {
@@ -104,7 +105,7 @@ public class SWTBotCTabItem extends AbstractSWTBot<CTabItem> {
 	/**
 	 * Activates the tabItem.
 	 * 
-	 * @return itself
+	 * @return itself.
 	 * @throws TimeoutException if the tab does not activate
 	 */
 	public SWTBotCTabItem activate() throws TimeoutException {
@@ -133,4 +134,61 @@ public class SWTBotCTabItem extends AbstractSWTBot<CTabItem> {
 		return this;
 	}
 
+	// /**
+	// * Get the bounds of the Widget in relation to Display.
+	// *
+	// * @return the bounds of the Widget in relation to Display.
+	// */
+	// protected Rectangle absoluteLocation() {
+	// return syncExec(new Result<Rectangle>() {
+	// public Rectangle run() {
+	// return display.map(widget.getParent(), null, widget.getBounds());
+	// }
+	// });
+	// }
+	//
+	// /**
+	// * Click on the center of the widget.
+	// *
+	// * @param post Whether or not {@link Display#post} should be used.
+	// * @return itself.
+	// */
+	// private SWTBotCTabItem click(final boolean post) {
+	// if (post) {
+	// Rectangle location = absoluteLocation();
+	// click(location.x, location.y, true);
+	// } else
+	// click();
+	// return this;
+	// }
+	//
+	// /**
+	// * Right click on the center of the widget.
+	// *
+	// * @param post Whether or not {@link Display#post} should be used.
+	// * @return itself.
+	// */
+	// private SWTBotCTabItem rightClick(final boolean post) {
+	// if (post) {
+	// Rectangle location = absoluteLocation();
+	// rightClick(location.x, location.y, true);
+	// } else
+	// rightClick();
+	// return this;
+	// }
+	//
+	// /**
+	// * Moves the cursor to the center of the widget.
+	// *
+	// * @return itself.
+	// */
+	// private SWTBotCTabItem moveMouseToWidget() {
+	// syncExec(new VoidResult() {
+	// public void run() {
+	// Rectangle location = absoluteLocation();
+	// moveMouse(location.x, location.y);
+	// }
+	// });
+	// return this;
+	// }
 }

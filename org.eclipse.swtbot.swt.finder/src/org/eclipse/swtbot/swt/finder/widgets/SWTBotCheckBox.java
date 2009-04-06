@@ -33,7 +33,7 @@ import org.hamcrest.SelfDescribing;
  * @see SWTBotToggleButton
  */
 @SWTBotWidget(clasz = Button.class, style = @Style(name = "SWT.CHECK", value = SWT.CHECK), preferredName = "checkBox", referenceBy = { ReferenceBy.LABEL, ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })//$NON-NLS-1$
-public class SWTBotCheckBox extends AbstractSWTBot<Button> {
+public class SWTBotCheckBox extends AbstractSWTBotControl<Button> {
 
 	/**
 	 * Constructs an instance of this object with the given button (Checkbox)
@@ -62,10 +62,11 @@ public class SWTBotCheckBox extends AbstractSWTBot<Button> {
 	/**
 	 * Click on the checkbox, toggle it.
 	 */
-	public void click() {
+	public SWTBotCheckBox click() {
 		log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
 		toggle();
 		log.debug(MessageFormat.format("Clicked on {0}", this)); //$NON-NLS-1$
+		return this;
 	}
 
 	/**

@@ -34,7 +34,7 @@ import org.hamcrest.SelfDescribing;
  * @see SWTBotToggleButton
  */
 @SWTBotWidget(clasz = Button.class, style = @Style(name = "SWT.RADIO", value = SWT.RADIO), preferredName = "radio", referenceBy = { ReferenceBy.LABEL, ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })//$NON-NLS-1$
-public class SWTBotRadio extends AbstractSWTBot<Button> {
+public class SWTBotRadio extends AbstractSWTBotControl<Button> {
 
 	/**
 	 * Constructs an instance of this with the given widget.
@@ -61,10 +61,10 @@ public class SWTBotRadio extends AbstractSWTBot<Button> {
 	/**
 	 * Selects the radio button.
 	 */
-	public void click() {
+	public SWTBotRadio click() {
 		if (isSelected()) {
 			log.debug(MessageFormat.format("Widget {0} is already selected, not clicking again.", this)); //$NON-NLS-1$
-			return;
+			return this;
 		}
 		assertEnabled();
 		log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
@@ -101,6 +101,7 @@ public class SWTBotRadio extends AbstractSWTBot<Button> {
 		notify(SWT.Deactivate);
 		notify(SWT.FocusOut);
 		log.debug(MessageFormat.format("Clicked on {0}", this)); //$NON-NLS-1$
+		return this;
 	}
 
 	/**

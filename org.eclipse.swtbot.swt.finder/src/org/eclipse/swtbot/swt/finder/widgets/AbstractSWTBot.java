@@ -19,6 +19,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
@@ -52,6 +53,7 @@ import org.hamcrest.StringDescription;
  * Helper to find SWT {@link Widget}s and perform operations on them.
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
+ * @author Joshua Gosse &lt;jlgosse [at] ca [dot] ibm [dot] com&gt;
  * @version $Id$
  */
 public abstract class AbstractSWTBot<T extends Widget> {
@@ -210,6 +212,20 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	}
 
 	/**
+	 * Create a key event
+	 * 
+	 * @param keyCode the key code of the key pressed
+	 * @param character the character representation of the key
+	 * @return an event that encapsulates {@link #widget} and {@link #display}
+	 */
+	private Event createKeyEvent(int keyCode, char character) {
+		Event event = createEvent();
+		event.keyCode = keyCode;
+		event.character = character;
+		return event;
+	}
+
+	/**
 	 * Click on the table at given coordinates
 	 * 
 	 * @param x the x co-ordinate of the click
@@ -231,6 +247,30 @@ public abstract class AbstractSWTBot<T extends Widget> {
 		notify(SWT.Deactivate);
 		notify(SWT.FocusOut);
 		log.debug(MessageFormat.format("Clicked on {0}", this)); //$NON-NLS-1$
+	}
+
+	/**
+	 * Right click on the widget at given coordinates
+	 * 
+	 * @param x the x co-ordinate of the click
+	 * @param y the y co-ordinate of the click
+	 * @since 2.0
+	 */
+	private void rightClickXY(int x, int y) {
+		log.debug(MessageFormat.format("Right clicking on {0}", this)); //$NON-NLS-1$
+		notify(SWT.MouseEnter);
+		notify(SWT.MouseMove);
+		notify(SWT.Activate);
+		notify(SWT.FocusIn);
+		notify(SWT.MouseDown, createMouseEvent(x, y, 1, SWT.BUTTON3, 1));
+		notify(SWT.MouseUp);
+		notify(SWT.Selection);
+		notify(SWT.MouseHover);
+		notify(SWT.MouseMove);
+		notify(SWT.MouseExit);
+		notify(SWT.Deactivate);
+		notify(SWT.FocusOut);
+		log.debug(MessageFormat.format("Right clicked on {0}", this)); //$NON-NLS-1$
 	}
 
 	/**
@@ -616,5 +656,159 @@ public abstract class AbstractSWTBot<T extends Widget> {
 				return display.getFocusControl() == widget;
 			}
 		});
+	}
+
+	/**
+	 * Empty method stub, since it should be overridden by subclass#click
+	 * @return itself.
+	 */
+	protected AbstractSWTBot<T> click() {
+		throw new UnsupportedOperationException("This operation is not supported by this widget.");
+	}
+
+	/**
+	 * Empty method stub, since it should be overridden by subclass#rightClick
+	 * @return itself.
+	 */
+	protected AbstractSWTBot<T> rightClick() {
+		throw new UnsupportedOperationException("This operation is not supported by this widget.");
+	}
+
+	/**
+	 * Perform a click action at the given coordinates
+	 * 
+	 * @param x the x coordinate
+	 * @param y the y coordinate
+	 * @param post Whether or not {@link Display#post} should be used
+	 * @return itself.
+	 */
+	protected AbstractSWTBot<T> click(final int x, final int y, final boolean post) {
+		if (post) {
+			syncExec(new VoidResult() {
+				public void run() {
+					moveMouse(x, y);
+					mouseDown(x, y, 1);
+					mouseUp(x, y, 1);
+				}
+			});
+		} else
+			clickXY(x, y);
+		return this;
+	}
+
+	/**
+	 * Perform a right-click action at the given coordinates
+	 * 
+	 * @param x the x coordinate
+	 * @param y the y coordinate
+	 * @param post Whether or not {@link Display#post} should be used
+	 * @return itself.
+	 */
+	protected AbstractSWTBot<T> rightClick(final int x, final int y, final boolean post) {
+		if (post) {
+			syncExec(new VoidResult() {
+				public void run() {
+					moveMouse(x, y);
+					mouseDown(x, y, 3);
+					mouseUp(x, y, 3);
+				}
+			});
+		} else
+			rightClickXY(x, y);
+		return this;
+	}
+
+	/**
+	 * Post an SWT.MouseMove event
+	 * 
+	 * @param x the x coordinate
+	 * @param y the y coordinate
+	 */
+	protected void moveMouse(final int x, final int y) {
+		syncExec(new VoidResult() {
+			public void run() {
+				Event event = createMouseEvent(x, y, 0, 0, 0);
+				event.type = SWT.MouseMove;
+				display.post(event);
+			}
+		});
+	}
+
+	/**
+	 * Post an SWT.MouseDown event
+	 * 
+	 * @param x the x coordinate
+	 * @param y the y coordinate
+	 * @param button the mouse button to be pressed
+	 */
+	protected void mouseDown(final int x, final int y, final int button) {
+		syncExec(new VoidResult() {
+			public void run() {
+				Event event = createMouseEvent(x, y, button, 0, 0);
+				event.type = SWT.MouseDown;
+				display.post(event);
+			}
+		});
+	}
+
+	/**
+	 * Post an SWT.MouseUp event.
+	 * 
+	 * @param x the x coordinate
+	 * @param y the y coordinate
+	 * @param button the mouse button to be pressed
+	 */
+	protected void mouseUp(final int x, final int y, final int button) {
+		syncExec(new VoidResult() {
+			public void run() {
+				Event event = createMouseEvent(x, y, button, 0, 0);
+				event.type = SWT.MouseUp;
+				display.post(event);
+			}
+		});
+	}
+
+	/**
+	 * Posts an SWT.KeyDown event
+	 * 
+	 * @param key the key to be pushed down
+	 */
+	protected void keyDown(final int key) {
+		Event event = createKeyEvent(key, (char) key);
+		event.type = SWT.KeyDown;
+		display.post(event);
+	}
+
+	/**
+	 * Posts an SWT.KeyUp event
+	 * 
+	 * @param key the key to be released
+	 */
+	protected void keyUp(final int key) {
+		Event event = createKeyEvent(key, (char) key);
+		event.type = SWT.KeyUp;
+		display.post(event);
+	}
+
+	/**
+	 * Simulates a user pushing a key, which involves both an SWT.KeyDown and an SWT.KeyUp event
+	 * 
+	 * @param key the key to be pressed
+	 */
+	protected AbstractSWTBot keyPress(final int key, boolean post) {
+		syncExec(new VoidResult() {
+			public void run() {
+				keyDown(key);
+				keyUp(key);
+			}
+		});
+		return this;
+	}
+
+	/**
+	 * @return the absolute location of the widget relative to the display.
+	 */
+	protected Rectangle absoluteLocation() {
+		throw new UnsupportedOperationException("This operation is not supported by this widget.");
 	}
 }
