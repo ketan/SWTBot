@@ -199,7 +199,7 @@ public class SWTWorkbenchBot extends SWTBot {
 	 * @throws WidgetNotFoundException if the editor is not found
 	 * @throws ResultNotUniqueException if more then one editor matches
 	 */
-	public SWTBotEditor editor(Matcher<?> matcher) {
+	public SWTBotEditor editorByTitle(Matcher<?> matcher) {
 		WaitForEditor waitForEditor = waitForEditor(matcher);
 		waitUntilWidgetAppears(waitForEditor);
 
@@ -235,10 +235,10 @@ public class SWTWorkbenchBot extends SWTBot {
 	 * 
 	 * @param fileName the the filename on the editor tab
 	 * @return the editor with the specified title
-	 * @see #editor(Matcher)
+	 * @see #editorByTitle(Matcher)
 	 */
 	public SWTBotEditor editorByTitle(String fileName) {
-		return editor(withPartName(fileName));
+		return editorByTitle(withPartName(fileName));
 	}
 
 	/**
@@ -246,10 +246,10 @@ public class SWTWorkbenchBot extends SWTBot {
 	 * 
 	 * @param id the the id on the editor tab
 	 * @return the editor with the specified title
-	 * @see #editor(Matcher)
+	 * @see #editorByTitle(Matcher)
 	 */
 	public SWTBotEditor editorById(String id) {
-		return editor(withPartId(id));
+		return editorByTitle(withPartId(id));
 	}
 
 	/**

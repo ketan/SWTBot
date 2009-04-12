@@ -42,6 +42,7 @@ public class SWTEclipseBot extends SWTWorkbenchBot {
 
 	/**
 	 * Constructs an eclipse bot.
+	 * @deprecated use {@link SWTWorkbenchBot#SWTWorkbenchBot()} instead
 	 */
 	public SWTEclipseBot() {
 		super();
@@ -54,6 +55,7 @@ public class SWTEclipseBot extends SWTWorkbenchBot {
 	 * @param fileName the name of the file.
 	 * @return an editor for the specified fileName.
 	 * @throws WidgetNotFoundException if the editor is not found.
+	 * @deprecated use {@link SWTWorkbenchBot#editorByTitle(String)}
 	 */
 	public SWTBotEclipseEditor editor(String fileName) throws WidgetNotFoundException {
 		return editor(fileName, 0);
@@ -67,6 +69,7 @@ public class SWTEclipseBot extends SWTWorkbenchBot {
 	 * @param index in case of multiple views with the same fileName.
 	 * @return an editor for the specified fileName.
 	 * @throws WidgetNotFoundException if the editor is not found.
+	 * @deprecated use {@link SWTWorkbenchBot#editorByTitle(String)}
 	 * @since 2.0
 	 */
 	@SuppressWarnings("unchecked")
@@ -84,6 +87,7 @@ public class SWTEclipseBot extends SWTWorkbenchBot {
 	 * @param label the label of the view.
 	 * @return a view with the specified label.
 	 * @throws WidgetNotFoundException if the view is not found.
+	 * @deprecated use {@link SWTWorkbenchBot#viewByTitle(String)}
 	 */
 	public SWTBotView view(String label) throws WidgetNotFoundException {
 		return view(label, 0);
@@ -97,6 +101,7 @@ public class SWTEclipseBot extends SWTWorkbenchBot {
 	 * @param index in case of multiple views with the same label.
 	 * @return a view with the specified label.
 	 * @throws WidgetNotFoundException if the view is not found.
+	 * @deprecated use {@link SWTWorkbenchBot#viewByTitle(String)}
 	 * @since 2.0
 	 */
 	@SuppressWarnings("unchecked")
@@ -112,6 +117,7 @@ public class SWTEclipseBot extends SWTWorkbenchBot {
 	 * 
 	 * @return all the editors in the workbench.
 	 * @throws WidgetNotFoundException if there are errors finding editors.
+	 * @deprecated use {@link SWTWorkbenchBot#editors()}
 	 */
 	@SuppressWarnings("unchecked")
 	public List<SWTBotEclipseEditor> editors() throws WidgetNotFoundException {
@@ -133,6 +139,7 @@ public class SWTEclipseBot extends SWTWorkbenchBot {
 	 * 
 	 * @return all the views in the workbench.
 	 * @throws WidgetNotFoundException if the views are not found.
+	 * @deprecated use {@link SWTWorkbenchBot#views()}
 	 */
 	@SuppressWarnings("unchecked")
 	public List<SWTBotView> views() throws WidgetNotFoundException {
@@ -155,6 +162,7 @@ public class SWTEclipseBot extends SWTWorkbenchBot {
 	 * @return the active editor, if any
 	 * @throws WidgetNotFoundException if there is no active editor.
 	 * @since 1.1
+	 * @deprecated use {@link SWTWorkbenchBot#activeEditor()}
 	 */
 	public SWTBotEclipseEditor activeEditor() throws WidgetNotFoundException {
 		return super.activeEditor().toTextEditor();

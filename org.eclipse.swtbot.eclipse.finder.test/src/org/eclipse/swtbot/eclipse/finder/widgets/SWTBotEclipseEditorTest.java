@@ -18,7 +18,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import org.eclipse.swtbot.eclipse.finder.SWTEclipseBot;
+import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.widgets.helpers.NewJavaClass;
 import org.eclipse.swtbot.eclipse.finder.widgets.helpers.NewJavaProject;
 import org.eclipse.swtbot.eclipse.finder.widgets.helpers.PackageExplorerView;
@@ -41,19 +41,19 @@ public class SWTBotEclipseEditorTest {
 	private static final String	CLASS_NAME			= "HelloWorld";
 	private static final String	CLASS_FILE_NAME		= CLASS_NAME + ".java";
 
-	NewJavaClass				javaClass			= new NewJavaClass();
-	NewJavaProject				javaProject			= new NewJavaProject();
-	PackageExplorerView			packageExplorerView	= new PackageExplorerView();
+	private NewJavaClass		javaClass			= new NewJavaClass();
+	private NewJavaProject		javaProject			= new NewJavaProject();
+	private PackageExplorerView	packageExplorerView	= new PackageExplorerView();
+	private SWTWorkbenchBot		bot					= new SWTWorkbenchBot();
 	private SWTBotEclipseEditor	editor;
-	private SWTEclipseBot		bot;
 
 	@Test
 	public void getsAutoCompleteProposals() throws Exception {
 		editor.navigateTo(3, 0);
-		List autoCompleteProposals = editor.getAutoCompleteProposals("JFr");
-		assertEquals(2, autoCompleteProposals.size());
+		List<String> autoCompleteProposals = editor.getAutoCompleteProposals("JFr");
+		assertEquals(autoCompleteProposals.toString(), 2, autoCompleteProposals.size());
 		assertEquals("JFrame - javax.swing", autoCompleteProposals.get(0));
-		String string = (String) autoCompleteProposals.get(1);
+		String string = autoCompleteProposals.get(1);
 		assertTrue(string.equals("JFr()  void - Method stub") || string.equals("JFr() : void - Method stub"));
 	}
 
@@ -67,17 +67,17 @@ public class SWTBotEclipseEditorTest {
 
 	@Before
 	public void setUp() throws Exception {
-		bot = new SWTEclipseBot();
 		closeWelcomePage();
 		javaProject.createProject(PROJECT_NAME);
 
 		javaClass.createClass(PACKAGE_NAME, CLASS_NAME);
-		editor = bot.editor(CLASS_FILE_NAME);
+		editor = bot.editorByTitle(CLASS_FILE_NAME).toTextEditor();
+		editor.save();
 	}
 
 	private void closeWelcomePage() {
 		try {
-			bot.view("Welcome").close();
+			bot.viewByTitle("Welcome").close();
 		} catch (WidgetNotFoundException e) {
 			// do nothing
 		}
@@ -93,8 +93,8 @@ public class SWTBotEclipseEditorTest {
 	 * @throws WidgetNotFoundException
 	 */
 	private void saveAndCloseAllEditors() throws WidgetNotFoundException {
-		List<SWTBotEclipseEditor> editors = bot.editors();
-		for (SWTBotEclipseEditor editor : editors) {
+		List<? extends SWTBotEditor> editors = bot.editors();
+		for (SWTBotEditor editor : editors) {
 			editor.saveAndClose();
 		}
 	}
@@ -106,8 +106,8 @@ public class SWTBotEclipseEditorTest {
 		javaClass.createClass("com.foo.example", "BazClass");
 
 		assertTrue(bot.activeEditor().isActive());
-		assertFalse(bot.editor("FooClass.java").isActive());
-		assertFalse(bot.editor("BarClass.java").isActive());
-		assertTrue(bot.editor("BazClass.java").isActive());
+		assertFalse(bot.editorByTitle("FooClass.java").isActive());
+		assertFalse(bot.editorByTitle("BarClass.java").isActive());
+		assertTrue(bot.editorByTitle("BazClass.java").isActive());
 	}
 }
