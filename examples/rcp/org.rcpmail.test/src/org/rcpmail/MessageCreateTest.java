@@ -34,8 +34,8 @@ public class MessageCreateTest extends SWTBotEclipseTestCase {
 	}
 
 	@Test public void ClosesAllMessageWindows() throws Exception {
-		bot.view("Message").close();
-		bot.view("Message").close();
+		bot.viewById("Message").close();
+		bot.viewById("Message").close();
 
 		assertEquals(1, viewCount());
 	}
@@ -54,7 +54,7 @@ public class MessageCreateTest extends SWTBotEclipseTestCase {
 	}
 
 	private SWTBotTree mailBox() throws WidgetNotFoundException {
-		Widget widget = bot.view("Mailboxes").getWidget();
+		Widget widget = bot.viewById("Mailboxes").getWidget();
 		// find the tree
 		ChildrenControlFinder finder = new ChildrenControlFinder(widget);
 		List findControls = finder.findControls(treeMatcher());

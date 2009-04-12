@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Ketan Padegaonkar and others.
+ * Copyright (c) 2008-2009 Ketan Padegaonkar and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,6 +7,7 @@
  * 
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
+ *     Ralf Ebert www.ralfebert.de - (bug 271630) SWTBot Improved RCP / Workbench support
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.finder;
 
@@ -33,8 +34,9 @@ import org.hamcrest.Matcher;
  * This extends the {@link SWTWorkbenchBot} and adds specific capabilities for writing Eclipse IDE tests.
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
+ * @author Ralf Ebert www.ralfebert.de (bug 271630)
  * @version $Id$
- * @deprecated use {@link SWTWorkbenchBot}
+ * @deprecated use {@link SWTWorkbenchBot}. This will be removed from future releases.
  */
 public class SWTEclipseBot extends SWTWorkbenchBot {
 
@@ -157,5 +159,5 @@ public class SWTEclipseBot extends SWTWorkbenchBot {
 	public SWTBotEclipseEditor activeEditor() throws WidgetNotFoundException {
 		return super.activeEditor().toTextEditor();
 	}
-	
+
 }

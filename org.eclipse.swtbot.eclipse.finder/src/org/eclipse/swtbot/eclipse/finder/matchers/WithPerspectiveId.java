@@ -1,14 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2008 Ketan Padegaonkar and others.
+ * Copyright (c) 2009 SWTBot Committers and others
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- *     Ketan Padegaonkar - initial API and implementation
- *     Ketan Padegaonkar - http://swtbot.org/bugzilla/show_bug.cgi?id=126
- *     Ketan Patel (bug 260088)
+ *     Ralf Ebert www.ralfebert.de - (bug 271630) SWTBot Improved RCP / Workbench support
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.finder.matchers;
 
@@ -21,21 +19,22 @@ import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
 /**
- * @author Ralf Ebert
+ * @author Ralf Ebert www.ralfebert.de (bug 271630)
  * @version $Id$
  * @since 2.0
  */
 public class WithPerspectiveId extends AbstractMatcher<IPerspectiveDescriptor> {
 
-	private final Matcher<String> idMatcher;
+	private final Matcher<String>	idMatcher;
 
 	/**
 	 * @param idMatcher the perspective id matcher.
 	 */
-	public WithPerspectiveId(Matcher<String> idMatcher) {
+	WithPerspectiveId(Matcher<String> idMatcher) {
 		this.idMatcher = idMatcher;
 	}
 
+	@Override
 	public boolean doMatch(Object item) {
 		if (item instanceof IPerspectiveDescriptor) {
 			IPerspectiveDescriptor perspective = (IPerspectiveDescriptor) item;
@@ -50,7 +49,7 @@ public class WithPerspectiveId extends AbstractMatcher<IPerspectiveDescriptor> {
 
 	/**
 	 * Matches a perspective with the specified id.
-	 *
+	 * 
 	 * @param id the id of the perspective.
 	 * @return a matcher.
 	 * @since 2.0
@@ -62,8 +61,8 @@ public class WithPerspectiveId extends AbstractMatcher<IPerspectiveDescriptor> {
 
 	/**
 	 * Matches a perspective with the specified id.
-	 *
-	 * @param id the id of the perspective.
+	 * 
+	 * @param idMatcher the matcher that matches the id of the perspective.
 	 * @return a matcher.
 	 * @since 2.0
 	 */

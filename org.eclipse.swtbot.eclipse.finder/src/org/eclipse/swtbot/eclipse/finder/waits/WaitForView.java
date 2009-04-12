@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Ketan Padegaonkar and others.
+ * Copyright (c) 2008-2009 Ketan Padegaonkar and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,7 +7,9 @@
  *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
+ *     Ralf Ebert www.ralfebert.de - (bug 271630) SWTBot Improved RCP / Workbench support
  *******************************************************************************/
+
 package org.eclipse.swtbot.eclipse.finder.waits;
 
 import java.util.List;
@@ -19,9 +21,9 @@ import org.hamcrest.Matcher;
 
 /**
  * Waits until a view part that matches the specified matcher appears.
- *
+ * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
- * @author Ralf Ebert www.ralfebert.de
+ * @author Ralf Ebert www.ralfebert.de (bug 271630)
  * @version $Id$
  */
 public class WaitForView extends WaitForObjectCondition<IViewReference> {
@@ -31,7 +33,7 @@ public class WaitForView extends WaitForObjectCondition<IViewReference> {
 	 * 
 	 * @param matcher the matcher
 	 */
-	public WaitForView(Matcher<?> matcher) {
+	WaitForView(Matcher<?> matcher) {
 		super(matcher);
 	}
 

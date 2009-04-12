@@ -1,13 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2008 Ketan Padegaonkar and others.
+ * Copyright (c) 2009 SWTBot Committers and others
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *     Ketan Padegaonkar - initial API and implementation
- *     Ketan Patel - https://bugs.eclipse.org/bugs/show_bug.cgi?id=259837
+ *     Ralf Ebert www.ralfebert.de - (bug 271630) SWTBot Improved RCP / Workbench support
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.finder.widgets;
 
@@ -22,19 +21,20 @@ import org.eclipse.ui.PlatformUI;
 
 /**
  * This represents an eclipse workbench perspective.
- *
- * @author Ralf Ebert
+ * 
+ * @author Ralf Ebert www.ralfebert.de (bug 271630)
  */
 public class SWTBotPerspective {
 
-	private SWTWorkbenchBot bot;
-	private IPerspectiveDescriptor perspectiveDescriptor;
+	private final SWTWorkbenchBot			bot;
+	private final IPerspectiveDescriptor	perspectiveDescriptor;
 
 	/**
 	 * Constructs an instance of the given object.
-	 *
+	 * 
 	 * @param perspectiveDescriptor the perspective descriptor.
-	 * @param bot the instance of {@link SWTWorkbenchBot} which will be used to drive operations on behalf of this object.
+	 * @param bot the instance of {@link SWTWorkbenchBot} which will be used to drive operations on behalf of this
+	 *            object.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 * @since 2.0
 	 */
@@ -42,13 +42,6 @@ public class SWTBotPerspective {
 		this.bot = bot;
 		Assert.isNotNull(perspectiveDescriptor, "The perspective descriptor cannot be null"); //$NON-NLS-1$
 		this.perspectiveDescriptor = perspectiveDescriptor;
-	}
-
-	/**
-	 * @return the perspective descriptor for this perspective.
-	 */
-	public IPerspectiveDescriptor getPerspectiveDescriptor() {
-		return perspectiveDescriptor;
 	}
 
 	/**
@@ -72,12 +65,12 @@ public class SWTBotPerspective {
 	 * @return true if this perspective is active in the active workbench page
 	 */
 	public boolean isActive() {
-		return bot.activePerspective().getPerspectiveDescriptor().getId().equals(this.perspectiveDescriptor.getId());
+		return bot.activePerspective().perspectiveDescriptor.getId().equals(this.perspectiveDescriptor.getId());
 	}
-	
-	@Override
+
 	public String toString() {
-		return "SWTBotEclipsePerspective[id=\""+perspectiveDescriptor.getLabel()+"\", label=\""+perspectiveDescriptor.getLabel()+"\"]";
+		return "SWTBotEclipsePerspective[id=\"" + perspectiveDescriptor.getLabel() + "\", label=\"" + perspectiveDescriptor.getLabel()
+				+ "\"]";
 	}
 
 }

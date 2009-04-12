@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Ketan Padegaonkar and others.
+ * Copyright (c) 2008-2009 Ketan Padegaonkar and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -45,8 +45,9 @@ import org.hamcrest.Matcher;
 /**
  * This represents the eclipse {@link IWorkbenchPartReference} item, subclasses must extend this to implement support
  * for various {@link IWorkbenchPartReference}s.
- *
+ * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
+ * @author Ralf Ebert www.ralfebert.de (bug 271630)
  * @version $Id$
  * @since 2.0
  */
@@ -62,7 +63,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 
 	/**
 	 * Creates an instance of a workbench part.
-	 *
+	 * 
 	 * @param partReference the part reference.
 	 * @param bot the helper bot.
 	 */
@@ -104,7 +105,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 
 	/**
 	 * Gets the title of the partReference.
-	 *
+	 * 
 	 * @return the title of the part as visible in the tab
 	 */
 	public String getTitle() {
@@ -113,7 +114,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 
 	/**
 	 * Gets a list of all menus within the partReference. This will also include sub menus.
-	 *
+	 * 
 	 * @return The list of menus
 	 */
 	public List<SWTBotViewMenu> menus() {
@@ -122,7 +123,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 
 	/**
 	 * Gets a menu item matching the give label within the partReference menu if one exists.
-	 *
+	 * 
 	 * @param label The label matching name in the menu.
 	 * @return The {@link SWTBotMenu} item.
 	 * @throws WidgetNotFoundException Thrown if the menu can not be found or if the partReference does not contain a
@@ -134,7 +135,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 
 	/**
 	 * Gets a menu item matching the give label within the partReference menu if one exists.
-	 *
+	 * 
 	 * @param label The label matching name in the menu.
 	 * @param index The index of the menu to choose.
 	 * @return The {@link SWTBotMenu} item.
@@ -157,7 +158,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 
 	/**
 	 * Gets the toolbar buttons currently visible.
-	 *
+	 * 
 	 * @return The set of toolbar buttons.
 	 */
 	public List<SWTBotToolbarButton> getToolbarButtons() {
@@ -169,7 +170,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 				List<SWTBotToolbarButton> l = new ArrayList<SWTBotToolbarButton>();
 
 				if (toolbar == null)
-					return l; 
+					return l;
 
 				ToolItem[] items = toolbar.getItems();
 				for (int i = 0; i < items.length; i++) {
@@ -188,7 +189,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 
 	/**
 	 * Gets the toolbar button matching the given toolbar button.
-	 *
+	 * 
 	 * @param tooltip The tooltip to use to find the button to return.
 	 * @return The toolbar button.
 	 * @throws WidgetNotFoundException Thrown if the widget was not found matching the given tooltip.
@@ -227,15 +228,16 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 
 	/**
 	 * Returns the workbench pane control.
+	 * 
 	 * @return returns the workbench pane control.
 	 */
 	private Control getControl() {
 		return ((WorkbenchPartReference) partReference).getPane().getControl();
 	}
-	
+
 	/**
 	 * Returns a SWTBot instance that matches the contents of this workbench part.
-	 *
+	 * 
 	 * @return SWTBot
 	 */
 	public SWTBot bot() {
@@ -244,7 +246,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 
 	/**
 	 * Asserts that the viewpart is active.
-	 *
+	 * 
 	 * @throws WorkbenchPartNotActiveException if the part is not currently active.
 	 */
 	protected void assertActive() {
