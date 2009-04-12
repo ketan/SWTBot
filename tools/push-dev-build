@@ -2,27 +2,80 @@
 set -e
 set -x
 
+# clean all dirs
 rm -rf /opt/public/download-staging.priv/technology/swtbot/signed
 rm -rf /opt/public/download-staging.priv/technology/swtbot/to-sign
 
-mkdir /opt/public/download-staging.priv/technology/swtbot/signed 
-mkdir /opt/public/download-staging.priv/technology/swtbot/to-sign
+# make the signing dirs
+mkdir -p /opt/public/download-staging.priv/technology/swtbot/to-sign
 
-cp -f ~/to-upload/*.zip /opt/public/download-staging.priv/technology/swtbot/to-sign
-cp -rf ~/to-upload/update-site /opt/public/download-staging.priv/technology/swtbot/to-sign
+# make the galileo dirs
+mkdir -p /opt/public/download-staging.priv/technology/swtbot/signed/galileo
 
+# make the ganymede dirs
+mkdir -p /opt/public/download-staging.priv/technology/swtbot/signed/ganymede
+
+cd /opt/public/download-staging.priv/technology/swtbot/
+# create update site structure
+mkdir -p \
+	signed/galileo/update-site \
+	signed/galileo/update-site/plugins \
+	signed/galileo/update-site/features \
+	signed/ganymede/update-site \
+	signed/ganymede/update-site/plugins \
+	signed/ganymede/update-site/features
 
 cd /opt/public/download-staging.priv/technology/swtbot/to-sign
 
-mkdir /opt/public/download-staging.priv/technology/swtbot/signed/update-site /opt/public/download-staging.priv/technology/swtbot/signed/update-site/plugins /opt/public/download-staging.priv/technology/swtbot/signed/update-site/features
+# copy all the binaries
+create-all-index.sh
+cp -fr ~/to-upload/* /opt/public/download-staging.priv/technology/swtbot/to-sign
 
-find * -iname "*.zip" >> files
-find * -iname "*.jar" >> files
-
+find * -type f -iname "*.zip" > files.unsort
+find * -type f -iname "*.jar" >> files.unsort
+sort files.unsort > files
+rm files.unsort
 
 cat files | while read LINE; do
 	sign `pwd`/$LINE mail /opt/public/download-staging.priv/technology/swtbot/signed/`dirname $LINE`
 done
 
 
+cd /opt/public/download-staging.priv/technology/swtbot/signed
+while true; do
+	find * -type f -iname "*.zip" > files.unsort
+	find * -type f -iname "*.jar" >> files.unsort
+	sort files.unsort > files
+	
+	diff files ../to-sign/files > diff
+	rm files
+	cat diff
+	if [ -s 'diff' ]; then
+		echo 'Still more to sign...'
+	else
+		echo 'Done signing...'
+		break
+	fi
+	sleep 5
+done
 
+# move the files to the download section
+cd /home/data/httpd/download.eclipse.org/technology/swtbot
+rm -rf new_version
+mkdir new_version
+cp -rf /opt/public/download-staging.priv/technology/swtbot/to-sign/* new_version
+
+# move the existing content to 'archives'
+CURRENT_VERSION_ON_DOWNLOAD_SITE=`cat galileo/dev-build/version.txt`
+#clear any existing archives
+rm -rf archives/$CURRENT_VERSION_ON_DOWNLOAD_SITE
+mkdir -p archives/$CURRENT_VERSION_ON_DOWNLOAD_SITE
+
+mv galileo ganymede archives/$CURRENT_VERSION_ON_DOWNLOAD_SITE
+mv new_version/* .
+rm -rf new_version
+
+# rebuild archives index
+cd archives
+create_index_html.rb > index.html
+cd ..
