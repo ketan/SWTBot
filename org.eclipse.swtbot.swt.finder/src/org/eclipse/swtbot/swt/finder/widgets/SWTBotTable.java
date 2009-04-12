@@ -242,16 +242,19 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 	}
 
 	/**
-	 * Sets the selection to the given item.
+	 * Sets the selection to the given items.
 	 *
-	 * @param item the item to select in the table.
+	 * @param items the items to select in the table.
 	 * @since 1.0
 	 */
-	public void select(final String item) {
+	public void select(final String... items) {
 		assertEnabled();
-		int itemIndex = indexOf(item);
-		Assert.isLegal(itemIndex >= 0, "Could not find item:" + item + " in table"); //$NON-NLS-1$ //$NON-NLS-2$
-		select(itemIndex);
+		int[] itemIndicies = new int[items.length];
+		for(int i = 0; i < items.length; i++) {
+			itemIndicies[i] = indexOf(items[i]);
+			Assert.isLegal(itemIndicies[i] >= 0, "Could not find item:" + items[i] + " in table"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		select(itemIndicies);
 		notifySelect();
 	}
 
