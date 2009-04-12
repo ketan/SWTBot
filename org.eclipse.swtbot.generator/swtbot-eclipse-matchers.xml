@@ -1,5 +1,8 @@
 <matchers>
 	<!-- text based -->
 	<factory class="org.eclipse.swtbot.eclipse.finder.matchers.WithPartName" />
+	<factory class="org.eclipse.swtbot.eclipse.finder.matchers.WithPartId" />
+	<factory class="org.eclipse.swtbot.eclipse.finder.matchers.WithPerspectiveId" />
+	<factory class="org.eclipse.swtbot.eclipse.finder.matchers.WithPerspectiveLabel" />
 </matchers>
 

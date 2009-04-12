@@ -13,41 +13,35 @@ package org.eclipse.swtbot.eclipse.finder.waits;
 import java.util.List;
 
 import org.eclipse.swtbot.eclipse.finder.finders.WorkbenchContentsFinder;
-import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
-import org.eclipse.swtbot.swt.finder.results.ListResult;
-import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.waits.WaitForObjectCondition;
-import org.eclipse.ui.IEditorReference;
+import org.eclipse.ui.IViewReference;
 import org.hamcrest.Matcher;
 
 /**
- * Waits until an editor that matches the specified matcher appears.
+ * Waits until a view part that matches the specified matcher appears.
  *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
+ * @author Ralf Ebert www.ralfebert.de
  * @version $Id$
  */
-public class WaitForEditor extends WaitForObjectCondition<IEditorReference> {
+public class WaitForView extends WaitForObjectCondition<IViewReference> {
 
 	/**
 	 * Creates a condition that waits until the matcher is true.
-	 *
+	 * 
 	 * @param matcher the matcher
 	 */
-	public WaitForEditor(Matcher<?> matcher) {
+	public WaitForView(Matcher<?> matcher) {
 		super(matcher);
 	}
 
 	public String getFailureMessage() {
-		return "Could not find editor matching: " + matcher;
+		return "Could not find view matching: " + matcher;
 	}
 
 	@Override
-	protected List<IEditorReference> findMatches() {
-		return UIThreadRunnable.syncExec(SWTUtils.display(), new ListResult<IEditorReference>() {
-			public List<IEditorReference> run() {
-				return new WorkbenchContentsFinder().findEditors(matcher);
-			}
-		});
+	protected List<IViewReference> findMatches() {
+		return new WorkbenchContentsFinder().findViews(matcher);
 	}
 
 }

@@ -23,7 +23,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.widgets.Widget;
-import org.eclipse.swtbot.eclipse.finder.SWTEclipseBot;
+import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.exceptions.WorkbenchPartNotActiveException;
 import org.eclipse.swtbot.eclipse.finder.finders.CommandFinder;
 import org.eclipse.swtbot.eclipse.finder.finders.ViewMenuFinder;
@@ -57,7 +57,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 	/** The logger. */
 	protected final Logger			log;
 	/** A helper swtbot instance. */
-	protected final SWTEclipseBot	bot;
+	protected final SWTWorkbenchBot	bot;
 	private final ViewMenuFinder	menuFinder;
 
 	/**
@@ -66,7 +66,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 	 * @param partReference the part reference.
 	 * @param bot the helper bot.
 	 */
-	public SWTBotWorkbenchPart(T partReference, SWTEclipseBot bot) {
+	public SWTBotWorkbenchPart(T partReference, SWTWorkbenchBot bot) {
 		this.bot = bot;
 		Assert.isNotNull(partReference, "The part reference cannot be null"); //$NON-NLS-1$
 		this.partReference = partReference;

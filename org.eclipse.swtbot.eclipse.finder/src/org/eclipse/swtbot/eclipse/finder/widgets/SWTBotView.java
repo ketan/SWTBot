@@ -17,7 +17,7 @@ import javax.swing.text.View;
 
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Widget;
-import org.eclipse.swtbot.eclipse.finder.SWTEclipseBot;
+import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.exceptions.WorkbenchPartNotActiveException;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
@@ -38,7 +38,7 @@ public class SWTBotView extends SWTBotWorkbenchPart<IViewReference> {
 	 * @param bot the bot that's used to find controls within this view.
 	 * @since 2.0
 	 */
-	public SWTBotView(IViewReference partReference, SWTEclipseBot bot) {
+	public SWTBotView(IViewReference partReference, SWTWorkbenchBot bot) {
 		super(partReference, bot);
 	}
 

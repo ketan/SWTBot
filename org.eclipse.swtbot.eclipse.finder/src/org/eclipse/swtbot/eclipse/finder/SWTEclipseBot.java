@@ -12,7 +12,7 @@ package org.eclipse.swtbot.eclipse.finder;
 
 import static org.eclipse.swtbot.eclipse.finder.matchers.WidgetMatcherFactory.withPartName;
 import static org.eclipse.swtbot.eclipse.finder.waits.Conditions.waitForEditor;
-import static org.eclipse.swtbot.eclipse.finder.waits.Conditions.waitForPart;
+import static org.eclipse.swtbot.eclipse.finder.waits.Conditions.waitForView;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.instanceOf;
 
@@ -20,28 +20,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.swtbot.eclipse.finder.waits.WaitForEditor;
-import org.eclipse.swtbot.eclipse.finder.waits.WaitForPart;
+import org.eclipse.swtbot.eclipse.finder.waits.WaitForView;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEclipseEditor;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotView;
-import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
-import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
-import org.eclipse.swtbot.swt.finder.results.Result;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IViewReference;
-import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPartReference;
-import org.eclipse.ui.PlatformUI;
 import org.hamcrest.Matcher;
 
 /**
- * This extends the {@link SWTBot} and adds specific capabilities for testsing eclipse based items (Views, Editors).
+ * This extends the {@link SWTWorkbenchBot} and adds specific capabilities for writing Eclipse IDE tests.
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
+ * @deprecated use {@link SWTWorkbenchBot}
  */
-public class SWTEclipseBot extends SWTBot {
+public class SWTEclipseBot extends SWTWorkbenchBot {
 
 	/**
 	 * Constructs an eclipse bot.
@@ -105,7 +100,7 @@ public class SWTEclipseBot extends SWTBot {
 	@SuppressWarnings("unchecked")
 	public SWTBotView view(String label, int index) throws WidgetNotFoundException {
 		Matcher matcher = allOf(instanceOf(IViewReference.class), withPartName(label));
-		WaitForPart waitForView = waitForPart(matcher);
+		WaitForView waitForView = waitForView(matcher);
 		waitUntilWidgetAppears(waitForView);
 		return new SWTBotView(waitForView.get(index), this);
 	}
@@ -119,10 +114,10 @@ public class SWTEclipseBot extends SWTBot {
 	@SuppressWarnings("unchecked")
 	public List<SWTBotEclipseEditor> editors() throws WidgetNotFoundException {
 		Matcher matcher = allOf(instanceOf(IEditorReference.class));
-		WaitForEditor waiForEditor = waitForEditor(matcher);
-		waitUntilWidgetAppears(waiForEditor);
+		WaitForEditor waitForEditor = waitForEditor(matcher);
+		waitUntilWidgetAppears(waitForEditor);
 
-		List<IEditorReference> editors = waiForEditor.all();
+		List<IEditorReference> editors = waitForEditor.getAllMatches();
 		List<SWTBotEclipseEditor> result = new ArrayList<SWTBotEclipseEditor>(editors.size());
 
 		for (IWorkbenchPartReference editor : editors) {
@@ -140,10 +135,10 @@ public class SWTEclipseBot extends SWTBot {
 	@SuppressWarnings("unchecked")
 	public List<SWTBotView> views() throws WidgetNotFoundException {
 		Matcher matcher = allOf(instanceOf(IViewReference.class));
-		WaitForPart waitForView = waitForPart(matcher);
+		WaitForView waitForView = waitForView(matcher);
 		waitUntilWidgetAppears(waitForView);
 
-		List<IViewReference> editors = waitForView.all();
+		List<IViewReference> editors = waitForView.getAllMatches();
 		List<SWTBotView> result = new ArrayList<SWTBotView>(editors.size());
 
 		for (IWorkbenchPartReference editor : editors) {
@@ -160,19 +155,7 @@ public class SWTEclipseBot extends SWTBot {
 	 * @since 1.1
 	 */
 	public SWTBotEclipseEditor activeEditor() throws WidgetNotFoundException {
-		IEditorReference editor = UIThreadRunnable.syncExec(new Result<IEditorReference>() {
-			public IEditorReference run() {
-				try {
-					IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-					IEditorPart activeEditor = activePage.getActiveEditor();
-					return (IEditorReference) activePage.getReference(activeEditor);
-				} catch (RuntimeException e) {
-					return null;
-				}
-			}
-		});
-		if (editor == null)
-			throw new WidgetNotFoundException("There is no active editor"); //$NON-NLS-1$
-		return new SWTBotEclipseEditor(editor, this);
+		return super.activeEditor().toTextEditor();
 	}
+	
 }

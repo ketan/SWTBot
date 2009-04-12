@@ -26,7 +26,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.swtbot.eclipse.finder.SWTEclipseBot;
+import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.exceptions.QuickFixNotFoundException;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
@@ -39,7 +39,6 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotStyledText;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
 import org.eclipse.swtbot.swt.finder.widgets.TimeoutException;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
 
 /**
@@ -48,7 +47,7 @@ import org.eclipse.ui.IEditorReference;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
+public class SWTBotEclipseEditor extends SWTBotEditor {
 
 	private final SWTBotStyledText	styledText;
 
@@ -63,11 +62,11 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	 * Constructs an instance of the given object.
 	 *
 	 * @param editorReference the editor reference.
-	 * @param bot the instance of {@link SWTEclipseBot} which will be used to drive operations on behalf of this object.
+	 * @param bot the instance of {@link SWTWorkbenchBot} which will be used to drive operations on behalf of this object.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 * @since 2.0
 	 */
-	public SWTBotEclipseEditor(IEditorReference editorReference, SWTEclipseBot bot) throws WidgetNotFoundException {
+	public SWTBotEclipseEditor(IEditorReference editorReference, SWTWorkbenchBot bot) throws WidgetNotFoundException {
 		super(editorReference, bot);
 		this.styledText = new SWTBotStyledText((StyledText) findWidget(widgetOfType(StyledText.class)));
 		this.widget = this.styledText.widget;
@@ -469,33 +468,6 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	}
 
 	/**
-	 * Save the editor and close it.
-	 */
-	public void saveAndClose() {
-		save();
-		close();
-	}
-
-	public void close() {
-		UIThreadRunnable.syncExec(new VoidResult() {
-			public void run() {
-				partReference.getPage().closeEditor(partReference.getEditor(false), false);
-			}
-		});
-	}
-
-	/**
-	 * Save the editor.
-	 */
-	public void save() {
-		UIThreadRunnable.syncExec(new VoidResult() {
-			public void run() {
-				partReference.getEditor(false).doSave(null);
-			}
-		});
-	}
-
-	/**
 	 * @return the bullet on the current line.
 	 * @see SWTBotStyledText#getBulletOnCurrentLine()
 	 */
@@ -568,18 +540,6 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	}
 
 	/**
-	 * Shows the editor if it is visible.
-	 */
-	public void show() {
-		UIThreadRunnable.syncExec(new VoidResult() {
-			public void run() {
-				IEditorPart editor = partReference.getEditor(true);
-				partReference.getPage().activate(editor);
-			}
-		});
-	}
-
-	/**
 	 * Gets the background color of the widget.
 	 *
 	 * @return the background color on the widget, or <code>null</code> if the widget is not an instance of
@@ -626,7 +586,4 @@ public class SWTBotEclipseEditor extends SWTBotWorkbenchPart<IEditorReference> {
 		return styledText.getToolTipText();
 	}
 
-	public boolean isActive() {
-		return bot.activeEditor().partReference == partReference;
-	}
 }

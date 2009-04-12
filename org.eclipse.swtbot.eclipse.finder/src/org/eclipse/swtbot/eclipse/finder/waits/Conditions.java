@@ -17,12 +17,13 @@ import org.hamcrest.Matcher;
  * @version $Id$
  */
 public class Conditions extends org.eclipse.swtbot.swt.finder.waits.Conditions {
+
 	/**
 	 * @param matcher a matcher
 	 * @return a condition that waits until the matcher evaluates to true.
 	 */
-	public static WaitForPart waitForPart(Matcher<?> matcher) {
-		return new WaitForPart(matcher);
+	public static WaitForView waitForView(Matcher<?> matcher) {
+		return new WaitForView(matcher);
 	}
 
 	/**
@@ -32,4 +33,5 @@ public class Conditions extends org.eclipse.swtbot.swt.finder.waits.Conditions {
 	public static WaitForEditor waitForEditor(Matcher<?> matcher) {
 		return new WaitForEditor(matcher);
 	}
+
 }
