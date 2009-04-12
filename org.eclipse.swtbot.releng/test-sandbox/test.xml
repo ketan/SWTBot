@@ -271,12 +271,16 @@
 		<mkdir dir="${junit.reports.xml.dir}" />
 		<mkdir dir="${junit.reports.html.dir}" />
 
-		<move file="${eclipse-home}/${report}.xml" todir="${junit.reports.xml.dir}" failonerror="false" />
+		<move file="${eclipse-home}/${report}.xml" tofile="${junit.reports.xml.dir}/index.xml" failonerror="false" />
 
 		<available file="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit3.headless_${all.buildId}/JUNIT.XSL" property="junit.xsl" value="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit3.headless_${all.buildId}/JUNIT.XSL" />
 		<available file="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit4.headless_${all.buildId}/JUNIT.XSL" property="junit.xsl" value="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit4.headless_${all.buildId}/JUNIT.XSL" />
 		
-		<style style="${junit.xsl}" basedir="${junit.reports.xml.dir}" destdir="${junit.reports.html.dir}" />
+		<style style="${junit.xsl}" in="${junit.reports.xml.dir}/index.xml" out="${junit.reports.html.dir}/index.html" />
+		
+		<xslt in="${junit.reports.xml.dir}/index.xml" out="./passFail.txt" style="passFail.xsl" />
+		<property file="passFail.txt" />
+		<fail message="Unit Tests failed." if="test.failed" />
 	</target>
 
 	<target name="core-tests">
