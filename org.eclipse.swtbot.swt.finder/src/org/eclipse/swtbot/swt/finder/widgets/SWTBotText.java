@@ -147,6 +147,17 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 		return keyEvent;
 	}
 
+	/**
+	 * Select the contents of the entire widget.
+	 */
+	public void selectAll() {
+		syncExec(new VoidResult() {
+			public void run() {
+				widget.selectAll();
+			}
+		});
+	}
+
 	private String toString(int modificationKey, char c) {
 		String mod = ""; //$NON-NLS-1$
 		if ((modificationKey & SWT.CTRL) != 0)

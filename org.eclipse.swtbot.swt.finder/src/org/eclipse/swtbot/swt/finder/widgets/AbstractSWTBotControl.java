@@ -64,12 +64,12 @@ public class AbstractSWTBotControl<T extends Control> extends AbstractSWTBot<T> 
 	 * Click on the center of the widget.
 	 * 
 	 * @param post Whether or not {@link Display#post} should be used
-	 * @return itself
+	 * @return itself.
 	 */
-	public AbstractSWTBotControl<T> click(final boolean post) {
+	protected AbstractSWTBotControl<T> click(final boolean post) {
 		if (post) {
 			Rectangle location = absoluteLocation();
-			click(location.x, location.y, true);
+			click(location.x + location.width / 2, location.y + location.height / 2, true);
 		} else
 			click();
 		return this;
@@ -81,10 +81,10 @@ public class AbstractSWTBotControl<T extends Control> extends AbstractSWTBot<T> 
 	 * @param post Whether or not {@link Display#post} should be used
 	 * @return itself
 	 */
-	public AbstractSWTBotControl<T> rightClick(final boolean post) {
+	protected AbstractSWTBotControl<T> rightClick(final boolean post) {
 		if (post) {
 			Rectangle location = absoluteLocation();
-			rightClick(location.x, location.y, true);
+			rightClick(location.x + location.width / 2, location.y + location.height / 2, true);
 		} else
 			rightClick();
 		return this;
@@ -95,11 +95,11 @@ public class AbstractSWTBotControl<T extends Control> extends AbstractSWTBot<T> 
 	 * 
 	 * @return itself
 	 */
-	public AbstractSWTBotControl<T> moveMouseToWidget() {
+	protected AbstractSWTBotControl<T> moveMouseToWidget() {
 		syncExec(new VoidResult() {
 			public void run() {
 				Rectangle location = absoluteLocation();
-				moveMouse(location.x, location.y);
+				moveMouse(location.x + location.width / 2, location.y + location.height / 2);
 			}
 		});
 		return this;
