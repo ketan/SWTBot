@@ -37,13 +37,11 @@ import org.hamcrest.Matcher;
  */
 public class WorkbenchContentsFinder {
 
-	private final IWorkbenchWindow	workbenchWindow;
-
 	/**
-	 * Creates a workbench content finder that can access workbench components
+	 * @return the active workbench window.
 	 */
-	public WorkbenchContentsFinder() {
-		workbenchWindow = syncExec(new Result<IWorkbenchWindow>() {
+	public IWorkbenchWindow activeWorkbenchWindow() {
+		return syncExec(new Result<IWorkbenchWindow>() {
 			public IWorkbenchWindow run() {
 				return PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 			}
@@ -61,10 +59,6 @@ public class WorkbenchContentsFinder {
 			}
 
 		});
-	}
-
-	private IWorkbenchPage[] getWorkbenchPages() {
-		return workbenchWindow.getPages();
 	}
 
 	/**
@@ -94,7 +88,7 @@ public class WorkbenchContentsFinder {
 
 	private List<IViewReference> findViewsInternal(final Matcher<?> matcher) {
 		List<IViewReference> result = new ArrayList<IViewReference>();
-		IWorkbenchPage[] pages = getWorkbenchPages();
+		IWorkbenchPage[] pages = workbenchPages();
 		for (IWorkbenchPage page : pages) {
 			IViewReference[] viewReferences = page.getViewReferences();
 			for (IViewReference viewReference : viewReferences) {
@@ -106,7 +100,7 @@ public class WorkbenchContentsFinder {
 	}
 
 	private List<IPerspectiveDescriptor> findPerspectivesInternal(final Matcher<?> matcher) {
-		IPerspectiveDescriptor[] perspectives = workbenchWindow.getWorkbench().getPerspectiveRegistry().getPerspectives();
+		IPerspectiveDescriptor[] perspectives = activeWorkbenchWindow().getWorkbench().getPerspectiveRegistry().getPerspectives();
 		List<IPerspectiveDescriptor> matchingPerspectives = new ArrayList<IPerspectiveDescriptor>();
 		for (IPerspectiveDescriptor perspectiveDescriptor : perspectives)
 			if (matcher.matches(perspectiveDescriptor))
@@ -116,7 +110,7 @@ public class WorkbenchContentsFinder {
 
 	private List<IEditorReference> findEditorsInternal(final Matcher<?> matcher) {
 		List<IEditorReference> result = new ArrayList<IEditorReference>();
-		IWorkbenchPage[] pages = getWorkbenchPages();
+		IWorkbenchPage[] pages = workbenchPages();
 		for (IWorkbenchPage page : pages) {
 			IEditorReference[] editorReferences = page.getEditorReferences();
 			for (IEditorReference editorReference : editorReferences) {
@@ -139,14 +133,10 @@ public class WorkbenchContentsFinder {
 	}
 
 	private IViewReference findActiveViewInternal() {
-		try {
-			IWorkbenchPartReference partReference = workbenchWindow.getActivePage().getActivePartReference();
-			if (partReference instanceof IViewReference)
-				return (IViewReference) partReference;
-			return null;
-		} catch (RuntimeException e) {
-			return null;
-		}
+		IWorkbenchPartReference partReference = activePageInternal().getActivePartReference();
+		if (partReference instanceof IViewReference)
+			return (IViewReference) partReference;
+		return null;
 	}
 
 	/**
@@ -160,15 +150,6 @@ public class WorkbenchContentsFinder {
 		});
 	}
 
-	private IPerspectiveDescriptor findActivePerspectiveInternal() {
-		try {
-			IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-			return activePage.getPerspective();
-		} catch (RuntimeException e) {
-			return null;
-		}
-	}
-
 	/**
 	 * @return the active editor.
 	 */
@@ -180,13 +161,21 @@ public class WorkbenchContentsFinder {
 		});
 	}
 
+	private IWorkbenchPage[] workbenchPages() {
+		return activeWorkbenchWindow().getPages();
+	}
+
 	private IEditorReference findActiveEditorInternal() {
-		try {
-			IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-			IEditorPart activeEditor = activePage.getActiveEditor();
-			return (IEditorReference) activePage.getReference(activeEditor);
-		} catch (RuntimeException e) {
-			return null;
-		}
+		IWorkbenchPage page = activePageInternal();
+		IEditorPart activeEditor = page.getActiveEditor();
+		return (IEditorReference) page.getReference(activeEditor);
+	}
+
+	private IPerspectiveDescriptor findActivePerspectiveInternal() {
+		return activePageInternal().getPerspective();
+	}
+
+	private IWorkbenchPage activePageInternal() {
+		return activeWorkbenchWindow().getActivePage();
 	}
 }
