@@ -76,8 +76,8 @@ public class InGroup<T extends Widget> extends AbstractMatcher<T> {
 	 * @since 2.0
 	 */
 	@Factory
-	public static Matcher<? extends Widget> inGroup(String labelText) {
-		return new InGroup<Widget>(labelText);
+	public static <T extends Widget> Matcher<T> inGroup(String labelText) {
+		return new InGroup<T>(labelText);
 	}
 
 	/**
@@ -88,8 +88,8 @@ public class InGroup<T extends Widget> extends AbstractMatcher<T> {
 	 * @since 2.0
 	 */
 	@Factory
-	public static Matcher<? extends Widget> inGroup(Matcher<?> matcher) {
-		return new InGroup<Widget>(matcher);
+	public static <T extends Widget> Matcher<T> inGroup(Matcher<?> matcher) {
+		return new InGroup<T>(matcher);
 	}
 
 }

@@ -58,7 +58,7 @@ public class WithPartName<T extends IWorkbenchPartReference> extends AbstractMat
 	 * @since 2.0
 	 */
 	@Factory
-	public static AbstractMatcher<? extends IWorkbenchPartReference> withPartName(String text) {
+	public static <T extends IWorkbenchPartReference> Matcher<T> withPartName(String text) {
 		return withPartName(equalTo(text));
 	}
 
@@ -70,7 +70,7 @@ public class WithPartName<T extends IWorkbenchPartReference> extends AbstractMat
 	 * @since 2.0
 	 */
 	@Factory
-	public static AbstractMatcher<? extends IWorkbenchPartReference> withPartName(Matcher<String> nameMatcher) {
-		return new WithPartName<IWorkbenchPartReference>(nameMatcher);
+	public static <T extends IWorkbenchPartReference> Matcher<T> withPartName(Matcher<String> nameMatcher) {
+		return new WithPartName<T>(nameMatcher);
 	}
 }

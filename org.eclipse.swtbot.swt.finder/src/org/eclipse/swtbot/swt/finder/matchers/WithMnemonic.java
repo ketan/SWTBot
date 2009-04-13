@@ -17,6 +17,7 @@ import java.lang.reflect.Method;
 import org.eclipse.swt.widgets.Widget;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
 
 /**
  * Matches {@link org.eclipse.swt.widgets.Widget}s with the specified text. Skips mnemonics, so "Username" will match
@@ -92,8 +93,8 @@ public class WithMnemonic<T extends Widget> extends AbstractMatcher<T> {
 	 * @since 2.0
 	 */
 	@Factory
-	public static AbstractMatcher<? extends Widget> withMnemonic(String text) {
-		return new WithMnemonic<Widget>(text);
+	public static <T extends Widget> Matcher<T> withMnemonic(String text) {
+		return new WithMnemonic<T>(text);
 	}
 
 }

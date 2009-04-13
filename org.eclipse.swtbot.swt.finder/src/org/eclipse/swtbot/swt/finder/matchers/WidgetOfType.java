@@ -14,6 +14,7 @@ package org.eclipse.swtbot.swt.finder.matchers;
 import org.eclipse.swt.widgets.Widget;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
 
 /**
  * Tells if a particular widget is of a specified type.
@@ -54,8 +55,8 @@ public class WidgetOfType<T extends Widget> extends AbstractMatcher<T> {
 	 * @since 2.0
 	 */
 	@Factory
-	public static AbstractMatcher<? extends Widget> widgetOfType(Class<? extends Widget> type) {
-		return new WidgetOfType<Widget>(type);
+	public static <T extends Widget> Matcher<T> widgetOfType(Class<? extends Widget> type) {
+		return new WidgetOfType<T>(type);
 	}
 
 }

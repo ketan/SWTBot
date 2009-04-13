@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
 
 /**
  * Matches if the widget has the specified style bits set.
@@ -57,8 +58,8 @@ public class WithStyle<T extends Widget> extends AbstractMatcher<T> {
 	 * @since 2.0
 	 */
 	@Factory
-	public static AbstractMatcher<? extends Widget> withStyle(int style, String styleDescription) {
-		return new WithStyle<Widget>(style, styleDescription);
+	public static <T extends Widget> Matcher<T> withStyle(int style, String styleDescription) {
+		return new WithStyle<T>(style, styleDescription);
 	}
 
 }

@@ -10,7 +10,7 @@ public abstract class WidgetMatcherFactory {
    * @return a matcher.
    * @since 2.0
    */
-  public static org.hamcrest.Matcher<? extends org.eclipse.swt.widgets.Widget> withLabel(java.lang.String labelText) {
+  public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> withLabel(java.lang.String labelText) {
     return org.eclipse.swtbot.swt.finder.matchers.WithLabel.withLabel(labelText);
   }
 
@@ -21,7 +21,7 @@ public abstract class WidgetMatcherFactory {
    * @return a matcher.
    * @since 2.0
    */
-  public static org.hamcrest.Matcher<? extends org.eclipse.swt.widgets.Widget> withMnemonic(java.lang.String text) {
+  public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> withMnemonic(java.lang.String text) {
     return org.eclipse.swtbot.swt.finder.matchers.WithMnemonic.withMnemonic(text);
   }
 
@@ -32,7 +32,7 @@ public abstract class WidgetMatcherFactory {
    * @return a matcher.
    * @since 2.0
    */
-  public static org.hamcrest.Matcher<? extends org.eclipse.swt.widgets.Widget> withRegex(java.lang.String regex) {
+  public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> withRegex(java.lang.String regex) {
     return org.eclipse.swtbot.swt.finder.matchers.WithRegex.withRegex(regex);
   }
 
@@ -43,7 +43,7 @@ public abstract class WidgetMatcherFactory {
    * @return a matcher.
    * @since 2.0
    */
-  public static org.hamcrest.Matcher<? extends org.eclipse.swt.widgets.Widget> withText(java.lang.String text) {
+  public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> withText(java.lang.String text) {
     return org.eclipse.swtbot.swt.finder.matchers.WithText.withText(text);
   }
 
@@ -54,7 +54,7 @@ public abstract class WidgetMatcherFactory {
    * @return a matcher.
    * @since 2.0
    */
-  public static org.hamcrest.Matcher<? extends org.eclipse.swt.widgets.Widget> withTextIgnoringCase(java.lang.String text) {
+  public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> withTextIgnoringCase(java.lang.String text) {
     return org.eclipse.swtbot.swt.finder.matchers.WithText.withTextIgnoringCase(text);
   }
 
@@ -66,7 +66,7 @@ public abstract class WidgetMatcherFactory {
    * @return a matcher.
    * @since 2.0
    */
-  public static org.hamcrest.Matcher<? extends org.eclipse.swt.widgets.Widget> withStyle(int style, java.lang.String styleDescription) {
+  public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> withStyle(int style, java.lang.String styleDescription) {
     return org.eclipse.swtbot.swt.finder.matchers.WithStyle.withStyle(style, styleDescription);
   }
 
@@ -77,7 +77,7 @@ public abstract class WidgetMatcherFactory {
    * @return a matcher.
    * @since 2.0
    */
-  public static org.hamcrest.Matcher<? extends org.eclipse.swt.widgets.Widget> withTooltip(java.lang.String text) {
+  public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> withTooltip(java.lang.String text) {
     return org.eclipse.swtbot.swt.finder.matchers.WithTooltip.withTooltip(text);
   }
 
@@ -88,7 +88,7 @@ public abstract class WidgetMatcherFactory {
    * @return a matcher.
    * @since 2.0
    */
-  public static org.hamcrest.Matcher<? extends org.eclipse.swt.widgets.Widget> withTooltipIgoringCase(java.lang.String text) {
+  public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> withTooltipIgoringCase(java.lang.String text) {
     return org.eclipse.swtbot.swt.finder.matchers.WithTooltip.withTooltipIgoringCase(text);
   }
 
@@ -100,7 +100,7 @@ public abstract class WidgetMatcherFactory {
    * @param value the value
    * @return a matcher.
    */
-  public static org.hamcrest.Matcher<? extends org.eclipse.swt.widgets.Widget> withId(java.lang.String key, java.lang.String value) {
+  public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> withId(java.lang.String key, java.lang.String value) {
     return org.eclipse.swtbot.swt.finder.matchers.WithId.withId(key, value);
   }
 
@@ -113,7 +113,7 @@ public abstract class WidgetMatcherFactory {
    * @return a matcher.
    * @since 2.0
    */
-  public static org.hamcrest.Matcher<? extends org.eclipse.swt.widgets.Widget> withId(java.lang.String value) {
+  public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> withId(java.lang.String value) {
     return org.eclipse.swtbot.swt.finder.matchers.WithId.withId(value);
   }
 
@@ -137,7 +137,7 @@ public abstract class WidgetMatcherFactory {
    * @return a matcher.
    * @since 2.0
    */
-  public static org.hamcrest.Matcher<? extends org.eclipse.swt.widgets.Widget> inGroup(java.lang.String labelText) {
+  public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> inGroup(java.lang.String labelText) {
     return org.eclipse.swtbot.swt.finder.matchers.InGroup.inGroup(labelText);
   }
 
@@ -148,7 +148,7 @@ public abstract class WidgetMatcherFactory {
    * @return a matcher.
    * @since 2.0
    */
-  public static org.hamcrest.Matcher<? extends org.eclipse.swt.widgets.Widget> inGroup(org.hamcrest.Matcher<?> matcher) {
+  public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> inGroup(org.hamcrest.Matcher<?> matcher) {
     return org.eclipse.swtbot.swt.finder.matchers.InGroup.inGroup(matcher);
   }
 
@@ -159,7 +159,7 @@ public abstract class WidgetMatcherFactory {
    * @return a matcher.
    * @since 2.0
    */
-  public static org.hamcrest.Matcher<? extends org.eclipse.swt.widgets.Widget> widgetOfType(java.lang.Class<? extends org.eclipse.swt.widgets.Widget> type) {
+  public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> widgetOfType(java.lang.Class<? extends org.eclipse.swt.widgets.Widget> type) {
     return org.eclipse.swtbot.swt.finder.matchers.WidgetOfType.widgetOfType(type);
   }
 
@@ -170,7 +170,7 @@ public abstract class WidgetMatcherFactory {
    * @return a matcher.
    * @since 2.0
    */
-  public static org.hamcrest.Matcher<? extends org.eclipse.swt.widgets.Widget> inUIThread(org.hamcrest.Matcher<?> matcher) {
+  public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> inUIThread(org.hamcrest.Matcher<?> matcher) {
     return org.eclipse.swtbot.swt.finder.matchers.InUIThread.inUIThread(matcher);
   }
 
@@ -179,7 +179,7 @@ public abstract class WidgetMatcherFactory {
    * 
    * @return a matcher.
    */
-  public static <T> org.hamcrest.Matcher<T> allOf(org.hamcrest.Matcher<? extends T>... matchers) {
+  public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> allOf(org.hamcrest.Matcher<T>... matchers) {
     return org.eclipse.swtbot.swt.finder.matchers.AllOf.allOf(matchers);
   }
 

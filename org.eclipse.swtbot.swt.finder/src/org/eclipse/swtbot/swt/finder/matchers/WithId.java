@@ -16,6 +16,7 @@ import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.Result;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
 
 /**
  * Tells if a particular widget has value for the given key.
@@ -69,8 +70,8 @@ public class WithId<T extends Widget> extends AbstractMatcher<T> {
 	 * @return a matcher.
 	 */
 	@Factory
-	public static AbstractMatcher<? extends Widget> withId(String key, String value) {
-		return new WithId<Widget>(key, value);
+	public static <T extends Widget> Matcher<T> withId(String key, String value) {
+		return new WithId<T>(key, value);
 	}
 
 	/**
@@ -83,8 +84,8 @@ public class WithId<T extends Widget> extends AbstractMatcher<T> {
 	 * @since 2.0
 	 */
 	@Factory
-	public static AbstractMatcher<? extends Widget> withId(String value) {
-		return new WithId<Widget>(org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences.DEFAULT_KEY, value);
+	public static <T extends Widget> Matcher<T> withId(String value) {
+		return new WithId<T>(org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences.DEFAULT_KEY, value);
 	}
 
 }

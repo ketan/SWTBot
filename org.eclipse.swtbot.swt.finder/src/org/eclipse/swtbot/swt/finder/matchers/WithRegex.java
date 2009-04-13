@@ -11,9 +11,12 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.matchers;
 
+import java.util.regex.Pattern;
+
 import org.eclipse.swt.widgets.Widget;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
 
 /**
  * Matches widgets if the getText() method of the widget matches the specified regex.
@@ -25,7 +28,7 @@ import org.hamcrest.Factory;
 public class WithRegex<T extends Widget> extends AbstractMatcher<T> {
 
 	/** The regular expression string. */
-	private final String	regex;
+	private Pattern	pattern;
 
 	/**
 	 * COnstructs the regular expression matcher with the given regular expression stirng.
@@ -33,12 +36,12 @@ public class WithRegex<T extends Widget> extends AbstractMatcher<T> {
 	 * @param regex the regex to match on the {@link org.eclipse.swt.widgets.Widget}
 	 */
 	WithRegex(String regex) {
-		this.regex = regex;
+		pattern = Pattern.compile("([\r\n]|.)*" + regex + "([\r\n]|.)*");
 	}
 
 	protected boolean doMatch(Object obj) {
 		try {
-			return WithText.getText(obj).matches(regex);
+			return pattern.matcher(WithText.getText(obj)).matches();
 		} catch (Exception e) {
 			// do nothing
 		}
@@ -46,7 +49,7 @@ public class WithRegex<T extends Widget> extends AbstractMatcher<T> {
 	}
 
 	public void describeTo(Description description) {
-		description.appendText("with regex '").appendText(regex).appendText("'"); //$NON-NLS-1$ //$NON-NLS-2$
+		description.appendText("with regex '").appendValue(pattern).appendText("'"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -57,7 +60,7 @@ public class WithRegex<T extends Widget> extends AbstractMatcher<T> {
 	 * @since 2.0
 	 */
 	@Factory
-	public static AbstractMatcher<? extends Widget> withRegex(String regex) {
-		return new WithRegex<Widget>(regex);
+	public static <T extends Widget> Matcher<T> withRegex(String regex) {
+		return new WithRegex<T>(regex);
 	}
 }

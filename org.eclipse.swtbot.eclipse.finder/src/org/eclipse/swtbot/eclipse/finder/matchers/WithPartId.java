@@ -52,7 +52,7 @@ public class WithPartId<T extends IWorkbenchPartReference> extends AbstractMatch
 	 * @since 2.0
 	 */
 	@Factory
-	public static Matcher<? extends IWorkbenchPartReference> withPartId(String id) {
+	public static <T extends IWorkbenchPartReference> Matcher<T> withPartId(String id) {
 		return withPartId(equalTo(id));
 	}
 
@@ -64,7 +64,7 @@ public class WithPartId<T extends IWorkbenchPartReference> extends AbstractMatch
 	 * @since 2.0
 	 */
 	@Factory
-	public static Matcher<? extends IWorkbenchPartReference> withPartId(Matcher<String> idMatcher) {
-		return new WithPartId<IWorkbenchPartReference>(idMatcher);
+	public static <T extends IWorkbenchPartReference> Matcher<T> withPartId(Matcher<String> idMatcher) {
+		return new WithPartId<T>(idMatcher);
 	}
 }

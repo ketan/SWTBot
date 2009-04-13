@@ -13,6 +13,7 @@ package org.eclipse.swtbot.swt.finder.matchers;
 
 import java.util.Arrays;
 
+import org.eclipse.swt.widgets.Widget;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
@@ -49,8 +50,8 @@ public class AllOf<T> extends AbstractMatcher<T> {
 	 * @return a matcher.
 	 */
 	@Factory
-	public static <T> Matcher<T> allOf(Matcher<? extends T>... matchers) {
-		return new AllOf(matchers);
+	public static <T extends Widget> Matcher<T> allOf(Matcher<T>... matchers) {
+		return new AllOf<T>(matchers);
 	}
 
 }

@@ -56,8 +56,8 @@ public class InUIThread<T extends Widget> extends AbstractMatcher<T> {
 	 * @since 2.0
 	 */
 	@Factory
-	public static Matcher<? extends Widget> inUIThread(Matcher<?> matcher) {
-		return new InUIThread<Widget>(matcher);
+	public static <T extends Widget> Matcher<T> inUIThread(Matcher<?> matcher) {
+		return new InUIThread<T>(matcher);
 	}
 
 }

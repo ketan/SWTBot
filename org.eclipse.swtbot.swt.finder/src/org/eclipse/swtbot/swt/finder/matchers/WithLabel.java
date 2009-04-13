@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
 
 /**
  * Tells if a particular widget has a label with the specified text.
@@ -83,8 +84,8 @@ public class WithLabel<T extends Widget> extends AbstractMatcher<T> {
 	 * @since 2.0
 	 */
 	@Factory
-	public static AbstractMatcher<? extends Widget> withLabel(String labelText) {
-		return new WithLabel<Widget>(labelText);
+	public static <T extends Widget> Matcher<T> withLabel(String labelText) {
+		return new WithLabel<T>(labelText);
 	}
 
 }

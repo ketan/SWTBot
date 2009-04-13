@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
 
 /**
  * Matches widgets if the getToolTipText() method of the widget matches the specified text.
@@ -104,8 +105,8 @@ public class WithTooltip<T extends Widget> extends AbstractMatcher<T> {
 	 * @since 2.0
 	 */
 	@Factory
-	public static AbstractMatcher<? extends Widget> withTooltip(String text) {
-		return new WithTooltip<Widget>(text);
+	public static <T extends Widget> Matcher<T> withTooltip(String text) {
+		return new WithTooltip<T>(text);
 	}
 
 	/**
@@ -116,8 +117,8 @@ public class WithTooltip<T extends Widget> extends AbstractMatcher<T> {
 	 * @since 2.0
 	 */
 	@Factory
-	public static AbstractMatcher<? extends Widget> withTooltipIgoringCase(String text) {
-		return new WithTooltip<Widget>(text, true);
+	public static <T extends Widget> Matcher<T> withTooltipIgoringCase(String text) {
+		return new WithTooltip<T>(text, true);
 	}
 
 }
