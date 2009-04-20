@@ -267,4 +267,33 @@ public abstract class SWTBotTestCase extends TestCase {
 		return SWTUtils.captureScreenshot(fileName);
 	}
 
+	/**
+	 * Assert that the widget text matches the regex.
+	 * 
+	 * @param regex the regex.
+	 * @param actual the widget.
+	 */
+	public static void assertMatchesRegex(String regex, AbstractSWTBot<? extends Widget> actual) {
+		SWTBotAssert.assertMatchesRegex(regex, actual);
+	}
+
+	/**
+	 * Assert that the widget text matches the regex.
+	 * 
+	 * @param regex the regex.
+	 * @param actual the widget.
+	 */
+	public static void assertMatchesRegex(String regex, Widget actual) {
+		SWTBotAssert.assertMatchesRegex(regex, actual);
+	}
+
+	/**
+	 * Assert that the widget text matches the regex.
+	 * 
+	 * @param regex the regex.
+	 * @param actual the widget.
+	 */
+	public static void assertMatchesRegex(String regex, String actual) {
+		SWTBotAssert.assertMatchesRegex(regex, actual);
+	}
 }

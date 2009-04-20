@@ -19,9 +19,13 @@ import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.sameInstance;
 import static org.junit.Assert.assertTrue;
 
+import java.util.regex.Pattern;
+
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBot;
+import org.hamcrest.Description;
+import org.hamcrest.TypeSafeMatcher;
 import org.junit.Assert;
 
 /**
@@ -33,6 +37,31 @@ import org.junit.Assert;
  * @since 2.0
  */
 public abstract class SWTBotAssert {
+
+	/**
+	 * 
+	 * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
+	 * @version $Id$
+	 */
+	private static final class RegexMatcher extends TypeSafeMatcher<String> {
+		/**  */
+		private final Pattern	pattern;
+
+		/**
+		 * @param pattern
+		 */
+		private RegexMatcher(Pattern pattern) {
+			this.pattern = pattern;
+		}
+
+		public boolean matchesSafely(String item) {
+			return pattern.matcher(item).matches();
+		}
+
+		public void describeTo(Description description) {
+			description.appendText("matching regex (").appendValue(pattern).appendText(")");
+		}
+	}
 
 	/**
 	 * Asserts that two widgets do not refer to the same object.
@@ -198,6 +227,36 @@ public abstract class SWTBotAssert {
 	 */
 	public static void assertNotVisible(AbstractSWTBot<? extends Widget> widget) {
 		assertTrue("Expected widget " + widget + " to be visible.", !widget.isVisible()); //$NON-NLS-1$ //$NON-NLS-2$
+	}
+
+	/**
+	 * Assert that the widget text matches the regex.
+	 * 
+	 * @param regex the regex.
+	 * @param actual the widget.
+	 */
+	public static void assertMatchesRegex(String regex, AbstractSWTBot<? extends Widget> actual) {
+		assertMatchesRegex(regex, actual.getText());
+	}
+	
+	/**
+	 * Assert that the widget text matches the regex.
+	 * 
+	 * @param regex the regex.
+	 * @param actual the widget.
+	 */
+	public static void assertMatchesRegex(String regex, Widget actual) {
+		assertMatchesRegex(regex, SWTUtils.getText(actual));
+	}
+	
+	/**
+	 * Assert that the widget text matches the regex.
+	 * 
+	 * @param regex the regex.
+	 * @param actual the widget.
+	 */
+	public static void assertMatchesRegex(String regex, String actual) {
+		assertThat(actual, new RegexMatcher(Pattern.compile("([\r\n]|.)*" + regex + "([\r\n]|.)*")));
 	}
 
 }
