@@ -80,7 +80,7 @@ abstract class AbstractTextBasedRecorderListener implements Listener {
 		return null;
 	}
 
-	protected Matcher<Widget> createMatcher(String text) {
+	protected Matcher<? extends Widget> createMatcher(String text) {
 		return allOf(typeMatcher(), mnemonicTextMatcher(text), styleMatcher());
 	}
 

@@ -4,6 +4,7 @@ Bundle-Name: SWTBot SWT Control Finder plugin (incubation)
 Bundle-SymbolicName: org.eclipse.swtbot.swt.finder;singleton:=true
 Bundle-Version: 2.0.0.qualifier
 Require-Bundle: org.eclipse.swt,
+ org.eclipse.jface,
  org.hamcrest,
  org.junit4,
  org.apache.log4j
@@ -12,6 +13,7 @@ Bundle-ClassPath: .
 Export-Package: org.eclipse.swtbot.swt.finder,
  org.eclipse.swtbot.swt.finder.exceptions,
  org.eclipse.swtbot.swt.finder.finders,
+ org.eclipse.swtbot.swt.finder.keyboard,
  org.eclipse.swtbot.swt.finder.matchers,
  org.eclipse.swtbot.swt.finder.resolvers,
  org.eclipse.swtbot.swt.finder.results,

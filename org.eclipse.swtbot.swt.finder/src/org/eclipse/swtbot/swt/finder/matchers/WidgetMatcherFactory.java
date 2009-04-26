@@ -179,7 +179,16 @@ public abstract class WidgetMatcherFactory {
    * 
    * @return a matcher.
    */
-  public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> allOf(org.hamcrest.Matcher<T>... matchers) {
+  public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> allOf(org.hamcrest.Matcher<? extends T>... matchers) {
+    return org.eclipse.swtbot.swt.finder.matchers.AllOf.allOf(matchers);
+  }
+
+  /**
+   * Evaluates to true only if ALL of the passed in matchers evaluate to true.
+   * 
+   * @return a matcher.
+   */
+  public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> allOf(java.lang.Iterable<org.hamcrest.Matcher<? extends T>> matchers) {
     return org.eclipse.swtbot.swt.finder.matchers.AllOf.allOf(matchers);
   }
 

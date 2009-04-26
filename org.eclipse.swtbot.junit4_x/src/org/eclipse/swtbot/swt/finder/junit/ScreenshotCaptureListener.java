@@ -55,5 +55,19 @@ final class ScreenshotCaptureListener extends RunListener {
 	private boolean captureScreenshot(String fileName) {
 		return SWTUtils.captureScreenshot(fileName);
 	}
+	
+	public int hashCode() {
+		return 31;
+	}
 
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		return true;
+	}
+	
 }

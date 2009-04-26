@@ -25,9 +25,9 @@ import org.hamcrest.Matcher;
  * @version $Id$
  */
 public class AllOf<T> extends AbstractMatcher<T> {
-	private final Matcher<? extends T>[]	matchers;
+	private final Iterable<Matcher<? extends T>>	matchers;
 
-	AllOf(Matcher<? extends T>... matchers) {
+	AllOf(Iterable<Matcher<? extends T>> matchers) {
 		this.matchers = matchers;
 	}
 
@@ -41,7 +41,7 @@ public class AllOf<T> extends AbstractMatcher<T> {
 	}
 
 	public void describeTo(Description description) {
-		description.appendList("(", " and ", ")", Arrays.asList(matchers)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		description.appendList("(", " and ", ")", matchers); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	/**
@@ -50,7 +50,17 @@ public class AllOf<T> extends AbstractMatcher<T> {
 	 * @return a matcher.
 	 */
 	@Factory
-	public static <T extends Widget> Matcher<T> allOf(Matcher<T>... matchers) {
+	public static <T extends Widget> Matcher<T> allOf(Matcher<? extends T>... matchers) {
+		return new AllOf<T>(Arrays.asList(matchers));
+	}
+	
+	/**
+	 * Evaluates to true only if ALL of the passed in matchers evaluate to true.
+	 * 
+	 * @return a matcher.
+	 */
+	@Factory
+	public static <T extends Widget> Matcher<T> allOf(Iterable<Matcher<? extends T>> matchers) {
 		return new AllOf<T>(matchers);
 	}
 

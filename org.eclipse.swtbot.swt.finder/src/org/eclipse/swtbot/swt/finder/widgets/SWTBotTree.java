@@ -195,6 +195,7 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 	 */
 	public SWTBotTree select(final String... items) {
 		assertEnabled();
+		setFocus();
 		asyncExec(new VoidResult() {
 			public void run() {
 				TreeItem[] treeItems = widget.getItems();
@@ -239,6 +240,7 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 	 */
 	public SWTBotTree select(final int... indices) {
 		assertEnabled();
+		setFocus();
 		asyncExec(new VoidResult() {
 			public void run() {
 				log.debug(MessageFormat.format("Selecting rows [{0}] in tree{1}", StringUtils.join(indices, ", "), this)); //$NON-NLS-1$ //$NON-NLS-2$

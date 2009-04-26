@@ -23,7 +23,7 @@ import org.eclipse.swtbot.swt.recorder.generators.SWTBotAction;
 public class ActionList {
 
 	/** the list of actions. */
-	protected List	actions	= new ArrayList();
+	protected List<SWTBotAction>	actions	= new ArrayList<SWTBotAction>();
 
 	/**
 	 * @param event the event to be added to the list.
@@ -76,7 +76,7 @@ public class ActionList {
 	public SWTBotAction lastAction() {
 		if (actions.isEmpty())
 			return null;
-		return (SWTBotAction) actions.get(actions.size() - 1);
+		return actions.get(actions.size() - 1);
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class ActionList {
 	 * @return the index(th) action in the list.
 	 */
 	public SWTBotAction get(int index) {
-		return (SWTBotAction) actions.get(index);
+		return actions.get(index);
 	}
 
 	/**
@@ -92,8 +92,8 @@ public class ActionList {
 	 * 
 	 * @return a copy of all the action, modifications to this copy will not affect this instance.
 	 */
-	public List getActions() {
-		return new ArrayList(actions);
+	public List<SWTBotAction> getActions() {
+		return new ArrayList<SWTBotAction>(actions);
 	}
 
 }

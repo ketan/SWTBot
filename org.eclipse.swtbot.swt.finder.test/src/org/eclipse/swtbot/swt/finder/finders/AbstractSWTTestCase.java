@@ -10,6 +10,9 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.finders;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.examples.addressbook.AddressBook;
@@ -126,6 +129,12 @@ public abstract class AbstractSWTTestCase {
 				return table;
 			}
 		});
+	}
+
+	protected void assertEventMatches(String listenersText, String expected) {
+		listenersText = listenersText.replaceAll("time=\\d+", "time=SOME_TIME_AGO");
+		expected = expected.replaceAll("time=\\d+", "time=SOME_TIME_AGO");
+		assertThat(listenersText, containsString(expected));
 	}
 
 }

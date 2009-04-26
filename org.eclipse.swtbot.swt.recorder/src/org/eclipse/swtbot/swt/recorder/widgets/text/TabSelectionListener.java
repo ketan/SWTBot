@@ -56,7 +56,7 @@ public class TabSelectionListener extends AbstractTextBasedRecorderListener {
 		return true;
 	}
 
-	protected Matcher<Widget> createMatcher(String text) {
+	protected Matcher<? extends Widget> createMatcher(String text) {
 		return allOf(typeMatcher(), mnemonicTextMatcher(text));
 	}
 }

@@ -14,6 +14,9 @@ update-site-location = ${basedir}/artifacts/update-site
 eclipse.sdk.archive = eclipse-SDK-3.4-macosx-carbon.tar.gz
 eclipse.buildId = 3.4
 
+#eclipse.sdk.archive = eclipse-SDK-3.3-macosx-carbon.tar.gz
+#eclipse.buildId = 3.3
+
 # don't add the trailing file name, the file name is automatically appended based on eclipse.sdk.archive
 # for locations of the eclipse SDKs
 # see http://download.eclipse.org/eclipse/downloads/ and http://archive.eclipse.org/eclipse/downloads/index.php

@@ -13,14 +13,15 @@ package org.eclipse.swtbot.swt.finder.utils;
 import java.io.BufferedWriter;
 import java.io.Closeable;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 /**
  * Provides utilities to read and write to files.
@@ -44,7 +45,7 @@ public class FileUtils {
 	 */
 	public static String read(File file) {
 		try {
-			return read(new FileReader(file));
+			return read(new FileInputStream(file));
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException(e);
 		}
@@ -55,7 +56,7 @@ public class FileUtils {
 	 * @return the contents of the inputstream.
 	 */
 	public static String read(InputStream in) {
-		return read(new InputStreamReader(in));
+		return read(new InputStreamReader(in, Charset.forName("UTF-8")));
 	}
 
 	/**

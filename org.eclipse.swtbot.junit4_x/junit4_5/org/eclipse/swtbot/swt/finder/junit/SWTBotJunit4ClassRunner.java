@@ -48,6 +48,7 @@ public class SWTBotJunit4ClassRunner extends BlockJUnit4ClassRunner {
 
 	public void run(RunNotifier notifier) {
 		RunListener failureSpy = new ScreenshotCaptureListener();
+		notifier.removeListener(failureSpy); // remove existing listeners that could be added by suite or class runners
 		notifier.addListener(failureSpy);
 		try {
 			super.run(notifier);

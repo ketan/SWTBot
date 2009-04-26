@@ -12,6 +12,10 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.utils;
 
+import java.awt.im.InputContext;
+
+import org.eclipse.swt.SWT;
+
 
 /**
  * Holds the preferences for the SWT Bot.
@@ -21,6 +25,26 @@ package org.eclipse.swtbot.swt.finder.utils;
  * @since 1.1
  */
 public class SWTBotPreferences {
+
+	private static class Keyboard {
+		private static String detectKeyboard() {
+			String keyboardLayout = "";
+			if (isMac()){
+				keyboardLayout += "MAC.";
+			}
+			
+			String country = InputContext.getInstance().getLocale().getCountry();
+			keyboardLayout += country;
+			
+			return keyboardLayout;
+		}
+	
+		private static boolean isMac() {
+			String swtPlatform = SWT.getPlatform();
+			return ("carbon".equals(swtPlatform) || "cocoa".equals(swtPlatform));
+		}
+	
+	}
 
 	/** The default key used to match SWT widgets.
 	 * @since 2.0*/
@@ -75,6 +99,18 @@ public class SWTBotPreferences {
 	    return System.getProperty("org.eclipse.swtbot.screenshot.format", "jpeg"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
+    /**
+	 * Gets the keyboard layout. This can be set using the system property {@code org.eclipse.swtbot.keyboardLayout}.
+	 * <p>
+	 * <strong>Note:</strong> the layout must be of the form [MAC.][upper-case-two-character-country-code]. Eg: "MAC.EN" or "MAC.GB" or just "FR" or "DE".
+	 * </p>
+	 *
+	 * @return the keyboard layout.
+	 */
+	public static String getKeyboardLayout() {
+		return System.getProperty("org.eclipse.swtbot.keyboardLayout", Keyboard.detectKeyboard());
+	}
+	
 	private static long toLong(String timeoutValue) {
 		try {
 			Long timeout = Long.valueOf(timeoutValue);
@@ -92,4 +128,5 @@ public class SWTBotPreferences {
             return 0;
         }
     }
+
 }
