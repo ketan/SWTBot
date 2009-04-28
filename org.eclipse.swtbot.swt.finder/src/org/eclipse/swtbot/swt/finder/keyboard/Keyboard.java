@@ -41,7 +41,6 @@ import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
  * <b>Special characters:</b> On a US keyboard '#' requires that you type SHIFT+3. ':' requires you to type SHIFT+;.
  * </p>
  * 
- * @see KeyboardLayout
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
@@ -109,18 +108,18 @@ public class Keyboard {
 	 * 
 	 * @param text the text to type on the keyboard.
 	 */
-	public void pressKeys(String text) {
+	public void typeText(String text) {
 		for (int i = 0; i < text.length(); i++) {
-			pressKey(text.charAt(i));
+			typeCharacter(text.charAt(i));
 		}
 	}
 
 	/**
-	 * Types the character on the keyboard.
+	 * Types the character on the keyboard. Note that the character may refer to multiple keystrokes.
 	 * 
 	 * @param ch the character to type on the keyboard.
 	 */
-	public void pressKey(char ch) {
+	public void typeCharacter(char ch) {
 		KeyStroke[] keys = Keystrokes.create(ch);
 		pressShortcut(keys);
 	}

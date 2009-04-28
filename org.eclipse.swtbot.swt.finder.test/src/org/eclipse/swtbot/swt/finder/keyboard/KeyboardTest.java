@@ -202,7 +202,7 @@ public class KeyboardTest extends AbstractSWTTestCase {
 	@Test
 	public void canTypeSmallCharacters() throws Exception {
 		styledText.setFocus();
-		keyboard.pressKeys("ab");
+		keyboard.typeText("ab");
 		assertEventMatches(listeners.getText(), "Verify [25]: VerifyEvent{StyledText {} time=358259489 data=null character='\\0' keyCode=0 stateMask=0 doit=true start=0 end=0 text=a}");
 		assertEventMatches(listeners.getText(), "Modify [24]: ModifyEvent{StyledText {} time=358259489 data=null}");
 		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=358259489 data=null character='a' keyCode=97 stateMask=0 doit=true}");
@@ -216,7 +216,7 @@ public class KeyboardTest extends AbstractSWTTestCase {
 	@Test
 	public void canTypeCapitalCharacters() throws Exception {
 		styledText.setFocus();
-		keyboard.pressKeys("A");
+		keyboard.typeText("A");
 		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=359800165 data=null character='\\0' keyCode=131072 stateMask=0 doit=true}");
 		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=359800165 data=null character='\\0' keyCode=131072 stateMask=0 doit=true}");
 		assertEventMatches(listeners.getText(), "Verify [25]: VerifyEvent{StyledText {} time=359800285 data=null character='\\0' keyCode=0 stateMask=0 doit=true start=0 end=0 text=A}");

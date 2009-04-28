@@ -29,7 +29,7 @@ import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class KeyboardLayout {
+class KeyboardLayout {
 	private final Map<Character, KeyStroke>	keyStrokes	= new TreeMap<Character, KeyStroke>();
 	private final String					layoutName;
 
@@ -63,7 +63,6 @@ public class KeyboardLayout {
 
 	/**
 	 * @return the default keyboard layout.
-	 * @see #getKeyboardLayout(String)
 	 * @see SWTBotPreferences#getKeyboardLayout()
 	 */
 	public static KeyboardLayout getDefaultKeyboardLayout() {

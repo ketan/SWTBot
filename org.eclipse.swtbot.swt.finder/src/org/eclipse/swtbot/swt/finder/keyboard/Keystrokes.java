@@ -22,7 +22,7 @@ import org.eclipse.swt.SWT;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class Keystrokes {
+class Keystrokes {
 
 	/** The SHIFT keystroke. */
 	public static final KeyStroke	SHIFT	= KeyStroke.getInstance(SWT.SHIFT, 0);
@@ -37,7 +37,7 @@ public class Keystrokes {
 	 * @param ch the character to convert to {@link KeyStroke}s.
 	 * @return the {@link KeyStroke}s corresponding to the character.
 	 */
-	public static KeyStroke[] create(char ch) {
+	static KeyStroke[] create(char ch) {
 		KeyStroke keyStroke = KeyboardLayout.getDefaultKeyboardLayout().keyStrokeFor(ch);
 		if (keyStroke.getModifierKeys() == KeyStroke.NO_KEY)
 			return new KeyStroke[] { keyStroke };
