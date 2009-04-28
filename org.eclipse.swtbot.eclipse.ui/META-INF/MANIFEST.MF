@@ -25,4 +25,3 @@ Bundle-Vendor: Eclipse.org
 Export-Package: org.eclipse.swtbot.eclipse.ui,
  org.eclipse.swtbot.eclipse.ui.preferences
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Bundle-ClassPath: .

@@ -4,7 +4,7 @@
    <extension
          point="org.eclipse.debug.core.launchConfigurationTypes">
       <launchConfigurationType
-            delegate="org.eclipse.swtbot.eclipse.ui.JUnitLaunchConfigurationDelegate"
+            delegate="org.eclipse.swtbot.eclipse.ui.SWTBotLaunchConfigurationDelegate"
             delegateDescription="This test launcher is used to run and debug SWTBot tests"
             delegateName="SWTBot Test Launcher"
             id="org.eclipse.swtbot.eclipse.ui.launcher.JunitLaunchConfig"
