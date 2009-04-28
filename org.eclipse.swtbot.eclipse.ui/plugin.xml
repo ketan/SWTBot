@@ -33,6 +33,14 @@
       </launchConfigurationTabGroup>
    </extension>
    <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="org.eclipse.swtbot.eclipse.ui.launcher.JunitLaunchConfig"
+            icon="icons/swtbot_runner.png"
+            id="org.eclipse.swtbot.eclipse.ui.launchConfigurationTypeImage">
+      </launchConfigurationTypeImage>
+   </extension>
+   <extension
          point="org.eclipse.jdt.junit.junitLaunchConfigs">
       <launchConfigType
             configTypeID="org.eclipse.swtbot.eclipse.ui.launcher.JunitLaunchConfig">
@@ -69,6 +77,8 @@
          point="org.eclipse.debug.ui.launchShortcuts">
       <shortcut
             class="org.eclipse.swtbot.eclipse.ui.SWTBotLaunchShortcut"
+            description="Launch an SWTBot Test"
+            icon="icons/swtbot_runner.png"
             id="org.eclipse.swtbot.eclipse.ui.junitShortcut"
             label="SWTBot Test"
             modes="run, debug">
