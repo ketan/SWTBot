@@ -24,12 +24,14 @@ import org.eclipse.swtbot.swt.finder.utils.FileUtils;
 import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 
 /**
+ * Allows mapping of characters to {@link KeyStroke}s based on keyboard layouts.
+ * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
 public class KeyboardLayout {
-	private final Map<Character, KeyStroke> keyStrokes = new TreeMap<Character, KeyStroke>();
-	private final String layoutName;
+	private final Map<Character, KeyStroke>	keyStrokes	= new TreeMap<Character, KeyStroke>();
+	private final String					layoutName;
 
 	private KeyboardLayout(String name, URL resource) throws IOException {
 		this.layoutName = name;
@@ -41,19 +43,37 @@ public class KeyboardLayout {
 		return layoutName + " keyboard layout";
 	}
 
+	/**
+	 * Returns the keystroke for typing the specified character.
+	 * <p>
+	 * E.g. 'T' will correspond to SHIFT+T. 't' will correspond to 'T'. '!' will correspond to SHIFT+1 on the US
+	 * keyboard.
+	 * </p>
+	 * 
+	 * @param ch a character.
+	 * @return the keystroke applicable corresponding to the character.
+	 */
 	public KeyStroke keyStrokeFor(char ch) {
 		KeyStroke keyStroke = keyStrokes.get(ch);
 		if (keyStroke != null) {
 			return keyStroke;
-		} else {
-			throw new IllegalArgumentException("no stroke available for character '" + ch + "'");
 		}
+		throw new IllegalArgumentException("no stroke available for character '" + ch + "'");
 	}
 
+	/**
+	 * @return the default keyboard layout.
+	 * @see #getKeyboardLayout(String)
+	 * @see SWTBotPreferences#getKeyboardLayout()
+	 */
 	public static KeyboardLayout getDefaultKeyboardLayout() {
 		return getKeyboardLayout(SWTBotPreferences.getKeyboardLayout());
 	}
 
+	/**
+	 * @param layoutName the layout of the keyboard.
+	 * @return the keyboard layout corresponding to the specified layout.
+	 */
 	public static KeyboardLayout getKeyboardLayout(String layoutName) {
 		URL configURL = KeyboardLayout.class.getResource(layoutName + ".keyboard");
 

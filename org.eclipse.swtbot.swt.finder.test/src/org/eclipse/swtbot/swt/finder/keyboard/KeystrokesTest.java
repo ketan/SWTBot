@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2009 Ketan Padegaonkar and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Ketan Padegaonkar - initial API and implementation
+ *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.keyboard;
 
 import static org.junit.Assert.assertEquals;
@@ -6,6 +16,10 @@ import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.swt.SWT;
 import org.junit.Test;
 
+/**
+ * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
+ * @version $Id$
+ */
 public class KeystrokesTest {
 
 	@Test
@@ -45,15 +59,4 @@ public class KeystrokesTest {
 		assertEquals(KeyStroke.getInstance(';'), Keystrokes.create(':')[1]);
 	}
 
-	@Test
-	public void getsKeystrokesForCombinationOfCharacters() throws Exception {
-		KeyStroke[] keys = Keystrokes.create("h$|P");
-		assertEquals(key('H'), keys[0]);
-		assertEquals(shift(), keys[1]);
-		assertEquals(key('4'), keys[2]);
-		assertEquals(shift(), keys[3]);
-		assertEquals(key('\\'), keys[4]);
-		assertEquals(shift(), keys[5]);
-		assertEquals(key('P'), keys[6]);
-	}
 }

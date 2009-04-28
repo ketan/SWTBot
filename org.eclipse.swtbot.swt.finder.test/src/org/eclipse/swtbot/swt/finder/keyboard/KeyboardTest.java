@@ -10,6 +10,11 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.keyboard;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotStyledText;
@@ -185,7 +190,7 @@ public class KeyboardTest extends AbstractSWTTestCase {
 	@Test
 	public void canTypeCTRL_SHIFT_T() throws Exception {
 		styledText.setFocus();
-		keyboard.pressShortcut(Keystrokes.CTRL, Keystrokes.SHIFT, Keystrokes.create("t"));
+		keyboard.pressShortcut(keys(Keystrokes.CTRL, Keystrokes.SHIFT, Keystrokes.create('t')));
 		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=356391804 data=null character='\\0' keyCode=262144 stateMask=0 doit=true}");
 		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=356392194 data=null character='\\0' keyCode=131072 stateMask=262144 doit=true}");
 		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=356393156 data=null character='' keyCode=116 stateMask=393216 doit=true}");
@@ -219,6 +224,14 @@ public class KeyboardTest extends AbstractSWTTestCase {
 		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=359800285 data=null character='A' keyCode=97 stateMask=131072 doit=true}");
 		assertEventMatches(listeners.getText(), "KeyUp [2]: KeyEvent{StyledText {} time=359800405 data=null character='A' keyCode=97 stateMask=131072 doit=true}");
 		assertEventMatches(listeners.getText(), "KeyUp [2]: KeyEvent{StyledText {} time=359800485 data=null character='\\0' keyCode=131072 stateMask=131072 doit=true}");
+	}
+
+	private List<KeyStroke> keys(KeyStroke ctrl, KeyStroke shift, KeyStroke[] keyStrokes) {
+		List<KeyStroke> keys = new ArrayList<KeyStroke>();
+		keys.add(ctrl);
+		keys.add(shift);
+		keys.addAll(Arrays.asList(keyStrokes));
+		return keys;
 	}
 
 	public void setUp() throws Exception {

@@ -20,61 +20,62 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
+import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 
 /**
+ * Represents a Keyboard. Allows for typing keys and pressing shortcuts. Pressing shortcuts is different from pressing
+ * normal characters and 'special characters'.
+ * <p>
+ * <b>NOTE:</b> This class needs that a {@link KeyStroke} be split. This means that a single {@link KeyStroke}
+ * representing a SHIFT+T needs to be split into two {@link KeyStroke}s, one representing a SHIFT and another
+ * representing a 'T'.
+ * </p>
+ * <p>
+ * <b>Shortcut:</b> CTRL+SHIFT+T for e.g. needs to press CTRL, SHIFT, T in that order while holding them down, and
+ * release them in the order T, SHIFT, CTRL.
+ * </p>
+ * <p>
+ * <b>Normal characters:</b> 't' requires that you type 'T'. 'T' requires that you type the shortcut SHIFT+T.
+ * </p>
+ * <p>
+ * <b>Special characters:</b> On a US keyboard '#' requires that you type SHIFT+3. ':' requires you to type SHIFT+;.
+ * </p>
+ * 
+ * @see KeyboardLayout
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
 public class Keyboard {
 
-	private final Display display;
+	private final Display	display;
 
+	/**
+	 * Creates a new keyboard.
+	 * 
+	 * @param display the display on which the keyboard will type.
+	 */
 	public Keyboard(Display display) {
 		this.display = display;
 	}
 
+	/**
+	 * Presses the shortcut specified by the given keys.
+	 * 
+	 * @param keys the keys to press
+	 */
 	public void pressShortcut(KeyStroke... keys) {
 		pressShortcut(new ArrayList<KeyStroke>(Arrays.asList(keys)));
 	}
 
-	public void pressShortcut(KeyStroke one, KeyStroke[] others) {
-		List<KeyStroke> keys = new ArrayList<KeyStroke>();
-		keys.add(one);
-		keys.addAll(Arrays.asList(others));
-		pressShortcut(keys);
-	}
-
-	public void pressShortcut(KeyStroke one, KeyStroke two, KeyStroke[] others) {
-		List<KeyStroke> keys = new ArrayList<KeyStroke>();
-		keys.add(one);
-		keys.add(two);
-		keys.addAll(Arrays.asList(others));
-		pressShortcut(keys);
-	}
-
-	public void pressShortcut(KeyStroke one, KeyStroke two, KeyStroke three, KeyStroke[] others) {
-		List<KeyStroke> keys = new ArrayList<KeyStroke>();
-		keys.add(one);
-		keys.add(two);
-		keys.add(three);
-		keys.addAll(Arrays.asList(others));
-		pressShortcut(keys);
-	}
-
-	public void pressShortcut(KeyStroke one, KeyStroke two, KeyStroke three, KeyStroke four, KeyStroke[] others) {
-		List<KeyStroke> keys = new ArrayList<KeyStroke>();
-		keys.add(one);
-		keys.add(two);
-		keys.add(three);
-		keys.add(four);
-		keys.addAll(Arrays.asList(others));
-		pressShortcut(keys);
-	}
-
-	private void pressShortcut(List<KeyStroke> strokes) {
-		pressKeys(strokes, SWT.KeyDown);
-		Collections.reverse(strokes);
-		pressKeys(strokes, SWT.KeyUp);
+	/**
+	 * Presses the shortcut specified by the given keys.
+	 * 
+	 * @param keys the keys to press
+	 */
+	public void pressShortcut(List<KeyStroke> keys) {
+		pressKeys(keys, SWT.KeyDown);
+		Collections.reverse(keys);
+		pressKeys(keys, SWT.KeyUp);
 	}
 
 	private void pressKeys(List<KeyStroke> keys, int type) {
@@ -84,6 +85,11 @@ public class Keyboard {
 	}
 
 	private void pressKey(KeyStroke key, int type) {
+		boolean hasNaturalKey = key.getNaturalKey() != KeyStroke.NO_KEY;
+		boolean hasModifiers = key.getModifierKeys() != KeyStroke.NO_KEY;
+
+		Assert.isTrue(hasNaturalKey ^ hasModifiers, "You just gave me a complex keystroke. Please split the keystroke into multiple keystrokes.");
+
 		Event e = keyEvent(key);
 		e.type = type;
 		display.post(e);
@@ -98,10 +104,24 @@ public class Keyboard {
 		return e;
 	}
 
+	/**
+	 * Types the string on the keyboard.
+	 * 
+	 * @param text the text to type on the keyboard.
+	 */
 	public void pressKeys(String text) {
 		for (int i = 0; i < text.length(); i++) {
-			KeyStroke[] keys = Keystrokes.create(text.charAt(i));
-			pressShortcut(keys);
+			pressKey(text.charAt(i));
 		}
+	}
+
+	/**
+	 * Types the character on the keyboard.
+	 * 
+	 * @param ch the character to type on the keyboard.
+	 */
+	public void pressKey(char ch) {
+		KeyStroke[] keys = Keystrokes.create(ch);
+		pressShortcut(keys);
 	}
 }
