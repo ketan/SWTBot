@@ -4,7 +4,8 @@
    <extension
          id="swtbottestapplication"
          point="org.eclipse.core.runtime.applications">
-      <application>
+      <application
+            visible="false">
          <run
                class="org.eclipse.swtbot.eclipse.junit3.headless.UITestApplication">
             <parameter
