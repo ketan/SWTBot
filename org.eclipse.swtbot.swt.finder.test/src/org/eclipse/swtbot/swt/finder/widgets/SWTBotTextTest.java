@@ -57,13 +57,15 @@ public class SWTBotTextTest extends AbstractSWTTestCase {
 	public void typesText() throws Exception {
 		final SWTBotText text = bot.textInGroup("Text");
 		final StringBuffer buffer = new StringBuffer();
+		text.setText("");
 
 		final KeyListener listener = new KeyListener() {
 			public void keyReleased(KeyEvent e) {
 			}
 
 			public void keyPressed(KeyEvent e) {
-				buffer.append(e.character);
+				if (e.character != 0)
+					buffer.append(e.character);
 			}
 		};
 
@@ -73,7 +75,6 @@ public class SWTBotTextTest extends AbstractSWTTestCase {
 			}
 		});
 
-		text.setText("");
 		text.typeText("Type This 123");
 		assertTextContains("Type This 123", text.widget);
 

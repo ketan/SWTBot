@@ -123,4 +123,16 @@ public class Keyboard {
 		KeyStroke[] keys = Keystrokes.create(ch);
 		pressShortcut(keys);
 	}
+
+	/**
+	 * Presses the shortcut specified by the given keys.
+	 * 
+	 * @param modificationKeys the combination of {@link SWT#ALT} | {@link SWT#CTRL} | {@link SWT#SHIFT} |
+	 *            {@link SWT#COMMAND}.
+	 * @param c the character
+	 */
+	public void pressShortcut(int modificationKeys, char c) {
+		pressShortcut(Keystrokes.toKeys(modificationKeys, c));
+	}
+
 }

@@ -32,10 +32,6 @@ public class KeystrokesTest {
 		assertEquals(key('T'), Keystrokes.create('T')[1]);
 	}
 
-	private KeyStroke shift() {
-		return KeyStroke.getInstance(SWT.SHIFT, 0);
-	}
-
 	@Test
 	public void getsKeyStrokeForSmallCharacters() throws Exception {
 		// c should generate C
@@ -44,19 +40,79 @@ public class KeystrokesTest {
 		assertEquals(key('T'), Keystrokes.create('t')[0]);
 	}
 
-	private KeyStroke key(char c) {
-		return KeyStroke.getInstance(c);
-	}
-
 	@Test
 	public void getsKeyStrokeForSpecialCharacters() throws Exception {
 		// ! should generate SHIFT+1
 		assertEquals(shift(), Keystrokes.create('!')[0]);
-		assertEquals(KeyStroke.getInstance('1'), Keystrokes.create('!')[1]);
+		assertEquals(key('1'), Keystrokes.create('!')[1]);
 
 		// : should generate SHIFT+;
 		assertEquals(shift(), Keystrokes.create(':')[0]);
-		assertEquals(KeyStroke.getInstance(';'), Keystrokes.create(':')[1]);
+		assertEquals(key(';'), Keystrokes.create(':')[1]);
 	}
 
+	@Test
+	public void getsKeystrokesForModificationKeys() throws Exception {
+		KeyStroke[] keys = Keystrokes.toKeys(SWT.CTRL | SWT.ALT | SWT.SHIFT | SWT.COMMAND, '\0');
+		assertEquals(4, keys.length);
+		assertEquals(alt(), keys[0]);
+		assertEquals(cmd(), keys[1]);
+		assertEquals(ctrl(), keys[2]);
+		assertEquals(shift(), keys[3]);
+	}
+
+	@Test
+	public void getsKeystrokesForModificationKey() throws Exception {
+		KeyStroke[] keys = Keystrokes.toKeys(SWT.CTRL, 't');
+		assertEquals(2, keys.length);
+		assertEquals(ctrl(), keys[0]);
+		assertEquals(key('T'), keys[1]);
+	}
+
+	@Test
+	public void getsKeystrokesForModificationKeyWithShiftAndSmallCharacter() throws Exception {
+		KeyStroke[] keys = Keystrokes.toKeys(SWT.CTRL | SWT.SHIFT, 't');
+		assertEquals(3, keys.length);
+		assertEquals(ctrl(), keys[0]);
+		assertEquals(shift(), keys[1]);
+		assertEquals(key('T'), keys[2]);
+	}
+
+	@Test
+	public void getsKeystrokesForModificationKeyWithShiftAndCapitalCharacter() throws Exception {
+		KeyStroke[] keys = Keystrokes.toKeys(SWT.CTRL | SWT.SHIFT, 'T');
+		assertEquals(3, keys.length);
+		assertEquals(ctrl(), keys[0]);
+		assertEquals(shift(), keys[1]);
+		assertEquals(key('T'), keys[2]);
+	}
+
+	@Test
+	public void getsKeystrokesForModificationKeyForCapitalCharacter() throws Exception {
+		KeyStroke[] keys = Keystrokes.toKeys(SWT.CTRL, 'T');
+		assertEquals(3, keys.length);
+		assertEquals(ctrl(), keys[0]);
+		assertEquals(shift(), keys[1]);
+		assertEquals(key('T'), keys[2]);
+	}
+
+	private KeyStroke shift() {
+		return KeyStroke.getInstance(SWT.SHIFT, 0);
+	}
+
+	private KeyStroke key(char c) {
+		return KeyStroke.getInstance(c);
+	}
+
+	private KeyStroke ctrl() {
+		return KeyStroke.getInstance(SWT.CTRL, 0);
+	}
+
+	private KeyStroke alt() {
+		return KeyStroke.getInstance(SWT.ALT, 0);
+	}
+
+	private KeyStroke cmd() {
+		return KeyStroke.getInstance(SWT.COMMAND, 0);
+	}
 }

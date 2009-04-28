@@ -218,7 +218,6 @@ public class KeyboardTest extends AbstractSWTTestCase {
 		styledText.setFocus();
 		keyboard.typeText("A");
 		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=359800165 data=null character='\\0' keyCode=131072 stateMask=0 doit=true}");
-		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=359800165 data=null character='\\0' keyCode=131072 stateMask=0 doit=true}");
 		assertEventMatches(listeners.getText(), "Verify [25]: VerifyEvent{StyledText {} time=359800285 data=null character='\\0' keyCode=0 stateMask=0 doit=true start=0 end=0 text=A}");
 		assertEventMatches(listeners.getText(), "Modify [24]: ModifyEvent{StyledText {} time=359800285 data=null}");
 		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=359800285 data=null character='A' keyCode=97 stateMask=131072 doit=true}");

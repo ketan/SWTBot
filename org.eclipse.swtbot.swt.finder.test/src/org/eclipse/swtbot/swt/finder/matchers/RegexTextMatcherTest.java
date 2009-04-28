@@ -51,7 +51,7 @@ public class RegexTextMatcherTest {
 	@Test
 	public void getsToString() throws Exception {
 		Matcher matcher = withRegex("Some Text");
-		assertEquals("with regex 'Some Text'", matcher.toString());
+		assertEquals("with regex '<([\r\n]|.)*Some Text([\r\n]|.)*>'", matcher.toString());
 	}
 
 }

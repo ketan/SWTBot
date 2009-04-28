@@ -29,6 +29,7 @@ import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.ContextMenuFinder;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
+import org.eclipse.swtbot.swt.finder.keyboard.Keyboard;
 import org.eclipse.swtbot.swt.finder.results.ArrayResult;
 import org.eclipse.swtbot.swt.finder.results.BoolResult;
 import org.eclipse.swtbot.swt.finder.results.IntResult;
@@ -660,6 +661,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 
 	/**
 	 * Empty method stub, since it should be overridden by subclass#click
+	 * 
 	 * @return itself.
 	 */
 	protected AbstractSWTBot<T> click() {
@@ -668,6 +670,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 
 	/**
 	 * Empty method stub, since it should be overridden by subclass#rightClick
+	 * 
 	 * @return itself.
 	 */
 	protected AbstractSWTBot<T> rightClick() {
@@ -771,6 +774,9 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	/**
 	 * Posts an SWT.KeyDown event
 	 * 
+	 * @deprecated use {@link Keyboard#typeCharacter(char)} or
+	 *             {@link Keyboard#pressShortcut(org.eclipse.jface.bindings.keys.KeyStroke...)} perhaps delegate if this
+	 *             is going to sit here.
 	 * @param key the key to be pushed down
 	 */
 	protected void keyDown(final int key) {
@@ -782,6 +788,9 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	/**
 	 * Posts an SWT.KeyUp event
 	 * 
+	 * @deprecated use {@link Keyboard#typeCharacter(char)} or
+	 *             {@link Keyboard#pressShortcut(org.eclipse.jface.bindings.keys.KeyStroke...)} perhaps delegate if this
+	 *             is going to sit here.
 	 * @param key the key to be released
 	 */
 	protected void keyUp(final int key) {
@@ -793,6 +802,9 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	/**
 	 * Simulates a user pushing a key, which involves both an SWT.KeyDown and an SWT.KeyUp event
 	 * 
+	 * @deprecated use {@link Keyboard#typeCharacter(char)} or
+	 *             {@link Keyboard#pressShortcut(org.eclipse.jface.bindings.keys.KeyStroke...)} perhaps delegate if this
+	 *             is going to sit here.
 	 * @param key the key to be pressed
 	 */
 	protected AbstractSWTBot keyPress(final int key, boolean post) {

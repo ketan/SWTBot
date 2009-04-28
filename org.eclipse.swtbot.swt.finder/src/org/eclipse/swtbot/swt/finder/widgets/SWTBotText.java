@@ -17,6 +17,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swtbot.swt.finder.ReferenceBy;
 import org.eclipse.swtbot.swt.finder.SWTBotWidget;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
+import org.eclipse.swtbot.swt.finder.keyboard.Keyboard;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.hamcrest.SelfDescribing;
@@ -86,12 +87,8 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 	 */
 	public void typeText(final String text, int interval) {
 		log.debug(MessageFormat.format("Inserting text:{0} into text {1}", text, this)); //$NON-NLS-1$
-
 		setFocus();
-		for (int i = 0; i < text.length(); i++) {
-			notifyKeyboardEvent(SWT.NONE, text.charAt(i));
-			sleep(interval);
-		}
+		new Keyboard(display).typeText(text);
 	}
 
 	/**
@@ -104,14 +101,14 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 	 * @since 1.2
 	 */
 	public void notifyKeyboardEvent(int modificationKey, char c) {
-		setFocus();
 		notifyKeyboardEvent(modificationKey, c, 0);
 	}
 
 	/**
+	 * @deprecated use {@link #notifyKeyboardEvent(int, char)} instead. This api will be removed.
 	 * @param modificationKey the modification key.
 	 * @param c the character.
-	 * @param keyCode the keycode.
+	 * @param keyCode the keycode (ignored)
 	 * @see Event#keyCode
 	 * @see Event#character
 	 * @see Event#stateMask
@@ -119,13 +116,9 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 	 */
 	public void notifyKeyboardEvent(int modificationKey, char c, int keyCode) {
 		log.debug(MessageFormat.format("Enquing keyboard notification: {0}", toString(modificationKey, c))); //$NON-NLS-1$
-
 		assertEnabled();
-
-		notify(SWT.KeyDown, keyEvent(modificationKey, c, keyCode));
-		notify(SWT.KeyUp, keyEvent(modificationKey, c, keyCode));
-
-		setText(getText() + c);
+		setFocus();
+		new Keyboard(display).pressShortcut(modificationKey, c);
 	}
 
 	/**

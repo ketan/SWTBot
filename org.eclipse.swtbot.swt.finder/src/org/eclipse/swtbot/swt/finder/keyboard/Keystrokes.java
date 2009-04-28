@@ -10,6 +10,11 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.keyboard;
 
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+
+import org.eclipse.jface.bindings.keys.IKeyLookup;
+import org.eclipse.jface.bindings.keys.KeyLookupFactory;
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.swt.SWT;
 
@@ -44,6 +49,47 @@ class Keystrokes {
 		KeyStroke modifier = KeyStroke.getInstance(keyStroke.getModifierKeys(), 0);
 		KeyStroke key = KeyStroke.getInstance(0, keyStroke.getNaturalKey());
 		return new KeyStroke[] { modifier, key };
+	}
+
+	/**
+	 * @param modificationKeys a combination of.
+	 * @param c the character to type.
+	 * @return the keystrokes corresponding to the modification keys and character.
+	 */
+	static KeyStroke[] toKeys(int modificationKeys, char c) {
+		LinkedHashSet<KeyStroke> keys = new LinkedHashSet<KeyStroke>();
+		if (modificationKeys != 0) {
+			int[] sortModifierKeys = sortModifierKeys(modificationKeys);
+			for (int modifierKey : sortModifierKeys) {
+				if (modifierKey != KeyStroke.NO_KEY)
+					keys.add(KeyStroke.getInstance(modifierKey, 0));
+			}
+		}
+		if (c != 0)
+			keys.addAll(Arrays.asList(Keystrokes.create(c)));
+		return keys.toArray(new KeyStroke[] {});
+	}
+
+	// FIXME: performance improvement: put in a hash of input and output values.
+	private static int[] sortModifierKeys(final int modifierKeys) {
+		final IKeyLookup lookup = KeyLookupFactory.getDefault();
+		final int[] sortedKeys = new int[4];
+		int index = 0;
+
+		if ((modifierKeys & lookup.getAlt()) != 0) {
+			sortedKeys[index++] = lookup.getAlt();
+		}
+		if ((modifierKeys & lookup.getCommand()) != 0) {
+			sortedKeys[index++] = lookup.getCommand();
+		}
+		if ((modifierKeys & lookup.getCtrl()) != 0) {
+			sortedKeys[index++] = lookup.getCtrl();
+		}
+		if ((modifierKeys & lookup.getShift()) != 0) {
+			sortedKeys[index++] = lookup.getShift();
+		}
+
+		return sortedKeys;
 	}
 
 }

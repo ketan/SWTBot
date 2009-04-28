@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
-import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertContains;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -36,11 +35,6 @@ public class SWTBotStyledTextTest extends AbstractSWTTestCase {
 
 	private SWTBot				bot;
 	private SWTBotStyledText	styledText;
-
-	@Test
-	public void findsStyledText() throws Exception {
-		assertTextContains("The quick brown fox", styledText.widget);
-	}
 
 	@Test
 	public void selectsRange() throws Exception {
@@ -84,23 +78,6 @@ public class SWTBotStyledTextTest extends AbstractSWTTestCase {
 	public void setsText() throws Exception {
 		styledText.setText("hello world");
 		assertTextContains("hello world", styledText.widget);
-	}
-
-	@Test
-	public void sends_CTRL_1_Notification() throws Exception {
-		try {
-			bot.checkBox("Listen").click();
-			SWTBotStyledText styledText = bot.styledTextInGroup("StyledText");
-			styledText.notifyKeyboardEvent(SWT.CTRL, '1');
-			String text = bot.textInGroup("Listeners").getText();
-			assertContains("KeyDown [1]: KeyEvent{StyledText {} ", text);
-			assertContains("character='1' keyCode=0 stateMask=262144 doit=true", text);
-			assertContains("KeyUp [2]: KeyEvent{StyledText {} ", text);
-
-		} finally {
-			// a hacked cleanup
-			bot.checkBox("Listen").click();
-		}
 	}
 
 	@Test
