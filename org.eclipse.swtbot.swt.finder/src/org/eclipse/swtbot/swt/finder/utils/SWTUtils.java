@@ -21,7 +21,6 @@ import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
@@ -324,13 +323,15 @@ public abstract class SWTUtils {
 		new ImageFormatConverter().imageTypeOf(fileName.substring(fileName.lastIndexOf('.') + 1));
 		return UIThreadRunnable.syncExec(new BoolResult() {
 			public Boolean run() {
-				Point p = control.toDisplay(0, 0);
+				Display display = control.getDisplay();
 				Rectangle bounds = control.getBounds();
-				return captureScreenshotInternal(fileName, new Rectangle(p.x, p.y, bounds.width, bounds.height));
+				Rectangle mappedToDisplay = display.map(control.getParent(), null, bounds);
+
+				return captureScreenshotInternal(fileName, mappedToDisplay);
 			}
 		});
 	}
-	
+
 	/**
 	 * This captures a screen shot of an area and saves it to the given file.
 	 * 
