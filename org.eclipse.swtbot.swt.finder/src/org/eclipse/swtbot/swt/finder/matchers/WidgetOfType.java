@@ -40,7 +40,7 @@ public class WidgetOfType<T extends Widget> extends AbstractMatcher<T> {
 	}
 
 	protected boolean doMatch(Object obj) {
-		return type.equals(obj.getClass());
+		return type.isInstance(obj);
 	}
 
 	public void describeTo(Description description) {
