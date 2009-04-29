@@ -35,7 +35,7 @@ public class SampleHandler extends AbstractHandler {
 	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
-		MessageDialog.openInformation(window.getShell(), "SWTBot Eclipse Control Finder Plug-in Test", "Hello, Eclipse world");
+		MessageDialog.openInformation(window.getShell(), "Simple Dialog", "Hello, Eclipse world");
 		return null;
 	}
 }

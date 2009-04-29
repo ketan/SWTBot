@@ -17,9 +17,10 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
-import org.eclipse.swtbot.eclipse.finder.SWTEclipseBot;
+import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotCommand;
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -32,7 +33,7 @@ import org.junit.runner.RunWith;
 @RunWith(SWTBotJunit4ClassRunner.class)
 public class CommandFinderTest {
 
-	private SWTEclipseBot bot = new SWTEclipseBot();
+	private static SWTWorkbenchBot bot = new SWTWorkbenchBot();
 
 	@Test
 	public void findCommandIMatcher() throws Exception {
@@ -47,6 +48,8 @@ public class CommandFinderTest {
 		assertEquals("Contribution Item Command", command.getText());
 
 		command.click();
+		
+		bot.shell("Simple Dialog").activate();
 
 		bot.button("OK").click();
 	}
@@ -59,5 +62,14 @@ public class CommandFinderTest {
 
 		assertNotNull(l);
 		assertEquals(0, l.size());
+	}
+	
+	@BeforeClass
+	public static void beforeClass(){
+		try {
+			bot.viewByTitle("Welcome").close();
+		} catch (Exception e) {
+			// do nothing, probably closed.
+		}
 	}
 }
