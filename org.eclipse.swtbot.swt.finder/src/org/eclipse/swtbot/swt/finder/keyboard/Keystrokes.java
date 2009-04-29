@@ -30,20 +30,23 @@ import org.eclipse.swt.SWT;
 class Keystrokes {
 
 	/** The SHIFT keystroke. */
-	public static final KeyStroke	SHIFT	= KeyStroke.getInstance(SWT.SHIFT, 0);
+	public static final KeyStroke	SHIFT					= KeyStroke.getInstance(SWT.SHIFT, 0);
 	/** The CTRL keystroke. */
-	public static final KeyStroke	CTRL	= KeyStroke.getInstance(SWT.CTRL, 0);
+	public static final KeyStroke	CTRL					= KeyStroke.getInstance(SWT.CTRL, 0);
 	/** The ALT keystroke. */
-	public static final KeyStroke	ALT		= KeyStroke.getInstance(SWT.ALT, 0);
+	public static final KeyStroke	ALT						= KeyStroke.getInstance(SWT.ALT, 0);
 	/** The COMMAND keystroke. */
-	public static final KeyStroke	COMMAND	= KeyStroke.getInstance(SWT.COMMAND, 0);
+	public static final KeyStroke	COMMAND					= KeyStroke.getInstance(SWT.COMMAND, 0);
+
+	/** The keyboard layout to use for mapping characters. */
+	private static KeyboardLayout	defaultKeyboardLayout	= KeyboardLayout.getDefaultKeyboardLayout();
 
 	/**
 	 * @param ch the character to convert to {@link KeyStroke}s.
 	 * @return the {@link KeyStroke}s corresponding to the character.
 	 */
 	static KeyStroke[] create(char ch) {
-		KeyStroke keyStroke = KeyboardLayout.getDefaultKeyboardLayout().keyStrokeFor(ch);
+		KeyStroke keyStroke = defaultKeyboardLayout.keyStrokeFor(ch);
 		if (keyStroke.getModifierKeys() == KeyStroke.NO_KEY)
 			return new KeyStroke[] { keyStroke };
 		KeyStroke modifier = KeyStroke.getInstance(keyStroke.getModifierKeys(), 0);
