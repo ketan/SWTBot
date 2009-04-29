@@ -132,8 +132,8 @@ public abstract class AbstractSWTTestCase {
 	}
 
 	protected void assertEventMatches(String listenersText, String expected) {
-		listenersText = listenersText.replaceAll("time=\\d+", "time=SOME_TIME_AGO");
-		expected = expected.replaceAll("time=\\d+", "time=SOME_TIME_AGO");
+		listenersText = listenersText.replaceAll("time=-?\\d+", "time=SOME_TIME_AGO");
+		expected = expected.replaceAll("time=-?\\d+", "time=SOME_TIME_AGO");
 		assertThat(listenersText, containsString(expected));
 	}
 
