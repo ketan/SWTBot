@@ -88,7 +88,7 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 	public void typeText(final String text, int interval) {
 		log.debug(MessageFormat.format("Inserting text:{0} into text {1}", text, this)); //$NON-NLS-1$
 		setFocus();
-		new Keyboard(display).typeText(text);
+		new Keyboard().typeText(text);
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 		log.debug(MessageFormat.format("Enquing keyboard notification: {0}", toString(modificationKey, c))); //$NON-NLS-1$
 		assertEnabled();
 		setFocus();
-		new Keyboard(display).pressShortcut(modificationKey, c);
+		new Keyboard().pressShortcut(modificationKey, c);
 	}
 
 	/**

@@ -10,6 +10,9 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.keyboard;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -46,62 +49,93 @@ import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
  */
 public class Keyboard {
 
-	private final Display	display;
+	static class SWTKeyboardStrategy implements KeyboardStrategy {
+
+		private final Display	display;
+
+		SWTKeyboardStrategy() {
+			this.display = SWTUtils.display();
+		}
+
+		public void pressKey(KeyStroke key) {
+			Assert.isTrue(display.post(keyEvent(key, SWT.KeyDown)), "Could not post keyevent.");
+			display.wake();
+		}
+
+		public void releaseKey(KeyStroke key) {
+			Assert.isTrue(display.post(keyEvent(key, SWT.KeyUp)), "Could not post keyevent.");
+			display.wake();
+		}
+
+		private Event keyEvent(KeyStroke modifier, int type) {
+			Event e = new Event();
+			e.type = type;
+			e.keyCode = modifier.getModifierKeys();
+			e.character = (char) modifier.getNaturalKey();
+			return e;
+		}
+
+	}
+
+	static class AWTKeyboardStrategy implements KeyboardStrategy {
+
+		private final Robot	robot;
+
+		AWTKeyboardStrategy() {
+			try {
+				this.robot = new Robot();
+			} catch (AWTException e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+		public void pressKey(KeyStroke key) {
+			robot.keyPress(key(key));
+		}
+
+		public void releaseKey(KeyStroke key) {
+			robot.keyRelease(key(key));
+
+		}
+
+		private int key(KeyStroke key) {
+			if (key.getNaturalKey() != 0)
+				return key.getNaturalKey();
+			else if (key.getModifierKeys() == SWT.CTRL)
+				return KeyEvent.VK_CONTROL;
+			else if (key.getModifierKeys() == SWT.SHIFT)
+				return KeyEvent.VK_SHIFT;
+			else if (key.getModifierKeys() == SWT.ALT)
+				return KeyEvent.VK_ALT;
+			else if (key.getModifierKeys() == SWT.COMMAND)
+				return KeyEvent.VK_WINDOWS;
+			throw new IllegalArgumentException("Could not understand keystroke " + key);
+		}
+
+	}
+
+	interface KeyboardStrategy {
+		void pressKey(KeyStroke key);
+
+		void releaseKey(KeyStroke key);
+	}
+
+	private final KeyboardStrategy	strategy;
 
 	/**
 	 * Creates a new keyboard.
-	 * 
-	 * @param display the display on which the keyboard will type.
 	 */
-	public Keyboard(Display display) {
-		this.display = display;
+	public Keyboard() {
+		this(new SWTKeyboardStrategy());
 	}
 
 	/**
-	 * Presses the shortcut specified by the given keys.
+	 * Creates a new keyboard that uses the specified strategy to type on the keyboard.
 	 * 
-	 * @param keys the keys to press
+	 * @param strategy the keyboard strategy.
 	 */
-	public void pressShortcut(KeyStroke... keys) {
-		pressShortcut(new ArrayList<KeyStroke>(Arrays.asList(keys)));
-	}
-
-	/**
-	 * Presses the shortcut specified by the given keys.
-	 * 
-	 * @param keys the keys to press
-	 */
-	public void pressShortcut(List<KeyStroke> keys) {
-		pressKeys(keys, SWT.KeyDown);
-		Collections.reverse(keys);
-		pressKeys(keys, SWT.KeyUp);
-	}
-
-	private void pressKeys(List<KeyStroke> keys, int type) {
-		for (KeyStroke key : keys) {
-			pressKey(key, type);
-		}
-	}
-
-	private void pressKey(KeyStroke key, int type) {
-		boolean hasNaturalKey = key.getNaturalKey() != KeyStroke.NO_KEY;
-		boolean hasModifiers = key.getModifierKeys() != KeyStroke.NO_KEY;
-
-		Assert.isTrue(hasNaturalKey ^ hasModifiers, "You just gave me a complex keystroke. Please split the keystroke into multiple keystrokes.");
-
-		Event e = keyEvent(key);
-		e.type = type;
-		display.post(e);
-		SWTUtils.sleep(10);
-		display.wake();
-		SWTUtils.sleep(10);
-	}
-
-	private Event keyEvent(KeyStroke modifier) {
-		Event e = new Event();
-		e.keyCode = modifier.getModifierKeys();
-		e.character = (char) modifier.getNaturalKey();
-		return e;
+	public Keyboard(KeyboardStrategy strategy) {
+		this.strategy = strategy;
 	}
 
 	/**
@@ -121,8 +155,7 @@ public class Keyboard {
 	 * @param ch the character to type on the keyboard.
 	 */
 	public void typeCharacter(char ch) {
-		KeyStroke[] keys = Keystrokes.create(ch);
-		pressShortcut(keys);
+		pressShortcut(Keystrokes.create(ch));
 	}
 
 	/**
@@ -134,6 +167,48 @@ public class Keyboard {
 	 */
 	public void pressShortcut(int modificationKeys, char c) {
 		pressShortcut(Keystrokes.toKeys(modificationKeys, c));
+	}
+
+	/**
+	 * Presses the shortcut specified by the given keys.
+	 * 
+	 * @param keys the keys to press
+	 */
+	public void pressShortcut(KeyStroke... keys) {
+		pressShortcut(new ArrayList<KeyStroke>(Arrays.asList(keys)));
+	}
+
+	/**
+	 * Presses the shortcut specified by the given keys.
+	 * 
+	 * @param keys the keys to press
+	 */
+	public void pressShortcut(List<KeyStroke> keys) {
+		pressKeys(keys);
+		Collections.reverse(keys);
+		releaseKeys(keys);
+	}
+
+	private void releaseKeys(List<KeyStroke> keys) {
+		for (KeyStroke key : keys) {
+			assertKey(key);
+			strategy.releaseKey(key);
+		}
+	}
+
+	private void pressKeys(List<KeyStroke> keys) {
+		for (KeyStroke key : keys) {
+			assertKey(key);
+			strategy.pressKey(key);
+		}
+	}
+
+	private void assertKey(KeyStroke key) {
+		boolean hasNaturalKey = key.getNaturalKey() != KeyStroke.NO_KEY;
+		boolean hasModifiers = key.getModifierKeys() != KeyStroke.NO_KEY;
+
+		Assert.isTrue(hasNaturalKey ^ hasModifiers,
+				"You just gave me a complex keystroke. Please split the keystroke into multiple keystrokes.");
 	}
 
 }
