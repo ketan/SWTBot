@@ -88,7 +88,6 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 	 * @see Event#stateMask
 	 */
 	public void notifyKeyboardEvent(int modificationKey, char c) {
-		setFocus();
 		notifyKeyboardEvent(modificationKey, c, 0);
 	}
 
@@ -105,7 +104,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 	public void notifyKeyboardEvent(int modificationKey, char c, int keyCode) {
 		log.debug(MessageFormat.format("Enquing keyboard notification: {0}", toString(modificationKey, c))); //$NON-NLS-1$
 		assertEnabled();
-		
+		setFocus();
 		new Keyboard(display).pressShortcut(modificationKey, c);
 	}
 
