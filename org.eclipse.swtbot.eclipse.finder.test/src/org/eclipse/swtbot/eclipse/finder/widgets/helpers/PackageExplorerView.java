@@ -15,7 +15,7 @@ import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widget
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Tree;
-import org.eclipse.swtbot.eclipse.finder.SWTEclipseBot;
+import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotView;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.waits.Conditions;
@@ -32,7 +32,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
  */
 public class PackageExplorerView {
 
-	private SWTEclipseBot	bot	= new SWTEclipseBot();
+	private SWTWorkbenchBot	bot	= new SWTWorkbenchBot();
 
 	public void deleteProject(String projectName) throws Exception {
 		SWTBotTree tree = tree();
@@ -73,7 +73,7 @@ public class PackageExplorerView {
 	 * @throws WidgetNotFoundException
 	 */
 	private SWTBotView view() throws WidgetNotFoundException {
-		return bot.view("Package Explorer");
+		return bot.viewByTitle("Package Explorer");
 	}
 
 }

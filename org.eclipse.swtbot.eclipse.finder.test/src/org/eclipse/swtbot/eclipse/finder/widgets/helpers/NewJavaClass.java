@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.finder.widgets.helpers;
 
-import org.eclipse.swtbot.eclipse.finder.SWTEclipseBot;
+import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.swt.finder.waits.Conditions;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 
@@ -22,9 +22,9 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
  */
 public class NewJavaClass {
 
-	private SWTEclipseBot	bot	= new SWTEclipseBot();
+	private SWTWorkbenchBot	bot	= new SWTWorkbenchBot();
 
-	public void createClass(String packageName, String className) throws Exception {
+	public void createClass(String packageName, String className) {
 		bot.menu("File").menu("New").menu("Class").click();
 		SWTBotShell shell = bot.shell("New Java Class");
 		shell.activate();

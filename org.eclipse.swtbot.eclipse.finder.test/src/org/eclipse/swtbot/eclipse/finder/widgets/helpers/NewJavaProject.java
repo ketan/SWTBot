@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.finder.widgets.helpers;
 
-import org.eclipse.swtbot.eclipse.finder.SWTEclipseBot;
+import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.swt.finder.waits.Conditions;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 
@@ -22,7 +22,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
  */
 public class NewJavaProject {
 
-	private SWTEclipseBot	bot	= new SWTEclipseBot();
+	private SWTWorkbenchBot	bot	= new SWTWorkbenchBot();
 
 	public void createProject(String projectName) throws Exception {
 		bot.menu("File").menu("New").menu("Java Project").click();

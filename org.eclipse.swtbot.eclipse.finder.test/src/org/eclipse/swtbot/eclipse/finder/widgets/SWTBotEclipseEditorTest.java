@@ -26,6 +26,7 @@ import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -36,16 +37,16 @@ import org.junit.runner.RunWith;
 @RunWith(SWTBotJunit4ClassRunner.class)
 public class SWTBotEclipseEditorTest {
 
-	private static final String	PROJECT_NAME		= "FooBarProject";
-	private static final String	PACKAGE_NAME		= "org.eclipse.swtbot.eclipse.test";
-	private static final String	CLASS_NAME			= "HelloWorld";
-	private static final String	CLASS_FILE_NAME		= CLASS_NAME + ".java";
+	private static final String		PROJECT_NAME		= "FooBarProject";
+	private static final String		PACKAGE_NAME		= "org.eclipse.swtbot.eclipse.test";
+	private static final String		CLASS_NAME			= "HelloWorld";
+	private static final String		CLASS_FILE_NAME		= CLASS_NAME + ".java";
 
-	private NewJavaClass		javaClass			= new NewJavaClass();
-	private NewJavaProject		javaProject			= new NewJavaProject();
-	private PackageExplorerView	packageExplorerView	= new PackageExplorerView();
-	private SWTWorkbenchBot		bot					= new SWTWorkbenchBot();
-	private SWTBotEclipseEditor	editor;
+	private NewJavaClass			javaClass			= new NewJavaClass();
+	private NewJavaProject			javaProject			= new NewJavaProject();
+	private PackageExplorerView		packageExplorerView	= new PackageExplorerView();
+	private static SWTWorkbenchBot	bot					= new SWTWorkbenchBot();
+	private SWTBotEclipseEditor		editor;
 
 	@Test
 	public void getsAutoCompleteProposals() throws Exception {
@@ -65,9 +66,13 @@ public class SWTBotEclipseEditorTest {
 		assertContains("public static void main", editor.getText());
 	}
 
+	@BeforeClass
+	public static void beforeClass() {
+		closeWelcomePage();
+	}
+
 	@Before
 	public void setUp() throws Exception {
-		closeWelcomePage();
 		javaProject.createProject(PROJECT_NAME);
 
 		javaClass.createClass(PACKAGE_NAME, CLASS_NAME);
@@ -75,7 +80,7 @@ public class SWTBotEclipseEditorTest {
 		editor.save();
 	}
 
-	private void closeWelcomePage() {
+	private static void closeWelcomePage() {
 		try {
 			bot.viewByTitle("Welcome").close();
 		} catch (WidgetNotFoundException e) {
@@ -92,7 +97,7 @@ public class SWTBotEclipseEditorTest {
 	/**
 	 * @throws WidgetNotFoundException
 	 */
-	private void saveAndCloseAllEditors() throws WidgetNotFoundException {
+	private void saveAndCloseAllEditors() {
 		List<? extends SWTBotEditor> editors = bot.editors();
 		for (SWTBotEditor editor : editors) {
 			editor.saveAndClose();
@@ -100,7 +105,7 @@ public class SWTBotEclipseEditorTest {
 	}
 
 	@Test
-	public void isActiveIsTrueForActiveEditor() throws Exception {
+	public void isActiveIsTrueForActiveEditor() {
 		javaClass.createClass("com.foo.example", "FooClass");
 		javaClass.createClass("com.foo.example", "BarClass");
 		javaClass.createClass("com.foo.example", "BazClass");
