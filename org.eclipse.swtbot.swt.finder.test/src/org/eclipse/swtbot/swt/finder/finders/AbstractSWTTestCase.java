@@ -45,6 +45,7 @@ public abstract class AbstractSWTTestCase {
 
 	static {
 		// System.setProperty(LogFactory.DIAGNOSTICS_DEST_PROPERTY, "STDOUT");
+		System.setProperty("org.eclipse.swt.internal.carbon.smallFonts", "");
 	}
 	public static final Display					display					= Controls.getInstance().display;
 	public static final Shell					controlShell			= Controls.getInstance().controlShell;
