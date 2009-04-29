@@ -267,7 +267,7 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	 */
 	public void autoCompleteProposal(String insertText, String proposalText) throws QuickFixNotFoundException {
 		styledText.typeText(insertText);
-
+		bot.sleep(1000);
 		autoComplete(proposalText);
 	}
 
