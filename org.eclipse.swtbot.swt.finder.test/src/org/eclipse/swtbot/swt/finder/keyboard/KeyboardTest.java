@@ -247,7 +247,7 @@ public class KeyboardTest extends AbstractSWTTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 		bot = new SWTBot();
-		keyboard = new Keyboard(display);
+		keyboard = new Keyboard();
 		bot.shell("SWT Custom Controls").activate();
 		bot.tabItem("StyledText").activate();
 		bot.checkBox("Horizontal Fill").select();
