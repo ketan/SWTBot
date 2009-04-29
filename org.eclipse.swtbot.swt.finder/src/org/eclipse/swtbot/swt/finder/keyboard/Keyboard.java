@@ -92,8 +92,9 @@ public class Keyboard {
 		Event e = keyEvent(key);
 		e.type = type;
 		display.post(e);
-		SWTUtils.sleep(50);
+		SWTUtils.sleep(10);
 		display.wake();
+		SWTUtils.sleep(10);
 	}
 
 	private Event keyEvent(KeyStroke modifier) {
