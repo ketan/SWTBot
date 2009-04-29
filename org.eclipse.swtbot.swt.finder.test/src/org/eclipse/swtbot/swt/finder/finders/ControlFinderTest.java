@@ -12,7 +12,6 @@ package org.eclipse.swtbot.swt.finder.finders;
 
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertNotSameWidget;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertText;
-import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.instanceOf;
@@ -118,8 +117,6 @@ public class ControlFinderTest extends AbstractSWTTestCase {
 		// should get different tabs this time
 		List textBoxesOnTextTab = finder.findControls(instanceOf(Text.class));
 		assertEquals(2, textBoxesOnTextTab.size());
-		assertTextContains("The quick brown fox jumps over the lazy dog", (Widget) textBoxesOnTextTab.get(0));
-		assertText("", (Widget) textBoxesOnTextTab.get(1));
 		assertNotSameWidget((Widget) textBoxesOnButtonTab.get(0), (Widget) textBoxesOnTextTab.get(0));
 	}
 

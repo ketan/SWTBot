@@ -111,6 +111,7 @@ public class SWTBot2Test extends AbstractSWTTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 		bot = new SWTBot();
+		bot.tabItem("Button").activate();
 	}
 
 	public void tearDown() throws Exception {
