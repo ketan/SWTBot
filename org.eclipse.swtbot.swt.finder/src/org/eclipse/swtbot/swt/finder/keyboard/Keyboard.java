@@ -10,9 +10,7 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.keyboard;
 
-import java.awt.AWTException;
 import java.awt.Robot;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,7 +20,7 @@ import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
-import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
+import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 
 /**
@@ -49,84 +47,13 @@ import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
  */
 public class Keyboard {
 
-	static class SWTKeyboardStrategy implements KeyboardStrategy {
-
-		private final Display	display;
-
-		SWTKeyboardStrategy() {
-			this.display = SWTUtils.display();
-		}
-
-		public void pressKey(KeyStroke key) {
-			Assert.isTrue(display.post(keyEvent(key, SWT.KeyDown)), "Could not post keyevent.");
-			display.wake();
-		}
-
-		public void releaseKey(KeyStroke key) {
-			Assert.isTrue(display.post(keyEvent(key, SWT.KeyUp)), "Could not post keyevent.");
-			display.wake();
-		}
-
-		private Event keyEvent(KeyStroke modifier, int type) {
-			Event e = new Event();
-			e.type = type;
-			e.keyCode = modifier.getModifierKeys();
-			e.character = (char) modifier.getNaturalKey();
-			return e;
-		}
-
-	}
-
-	static class AWTKeyboardStrategy implements KeyboardStrategy {
-
-		private final Robot	robot;
-
-		AWTKeyboardStrategy() {
-			try {
-				this.robot = new Robot();
-			} catch (AWTException e) {
-				throw new RuntimeException(e);
-			}
-		}
-
-		public void pressKey(KeyStroke key) {
-			robot.keyPress(key(key));
-		}
-
-		public void releaseKey(KeyStroke key) {
-			robot.keyRelease(key(key));
-
-		}
-
-		private int key(KeyStroke key) {
-			if (key.getNaturalKey() != 0)
-				return key.getNaturalKey();
-			else if (key.getModifierKeys() == SWT.CTRL)
-				return KeyEvent.VK_CONTROL;
-			else if (key.getModifierKeys() == SWT.SHIFT)
-				return KeyEvent.VK_SHIFT;
-			else if (key.getModifierKeys() == SWT.ALT)
-				return KeyEvent.VK_ALT;
-			else if (key.getModifierKeys() == SWT.COMMAND)
-				return KeyEvent.VK_WINDOWS;
-			throw new IllegalArgumentException("Could not understand keystroke " + key);
-		}
-
-	}
-
-	interface KeyboardStrategy {
-		void pressKey(KeyStroke key);
-
-		void releaseKey(KeyStroke key);
-	}
-
 	private final KeyboardStrategy	strategy;
 
 	/**
 	 * Creates a new keyboard.
 	 */
-	public Keyboard() {
-		this(new SWTKeyboardStrategy());
+	Keyboard() {
+		this(new AWTKeyboardStrategy());
 	}
 
 	/**
@@ -136,6 +63,34 @@ public class Keyboard {
 	 */
 	public Keyboard(KeyboardStrategy strategy) {
 		this.strategy = strategy;
+	}
+
+	/**
+	 * Creates a keyboard that uses {@link Display#post(Event)} to press keys.
+	 * 
+	 * @return a keyboard.
+	 */
+	public static Keyboard getSWTKeyboard() {
+		return new Keyboard(new SWTKeyboardStrategy());
+	}
+
+	/**
+	 * Creates a keyboard that uses AWT {@link Robot} to press keys.
+	 * 
+	 * @return a keyboard.
+	 */
+	public static Keyboard getAWTKeyboard() {
+		return new Keyboard(new AWTKeyboardStrategy());
+	}
+
+	/**
+	 * Creates a keyboard that creates mock events directly pumped to the widget.
+	 * 
+	 * @param widget the widget on which the mock events are typed.
+	 * @return a keyboard
+	 */
+	public static Keyboard getMockKeyboard(Widget widget) {
+		return new Keyboard(new MockKeyboardStrategy(widget));
 	}
 
 	/**
