@@ -4,7 +4,7 @@ package org.eclipse.swtbot.swt.finder.matchers;
 public abstract class WidgetMatcherFactory {
 
   /**
-   * Matches a widget that has the specified Label.
+   * Matches a widget that has the specified labelText.
    * 
    * @param labelText the label.
    * @return a matcher.
@@ -12,6 +12,18 @@ public abstract class WidgetMatcherFactory {
    */
   public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> withLabel(java.lang.String labelText) {
     return org.eclipse.swtbot.swt.finder.matchers.WithLabel.withLabel(labelText);
+  }
+
+  /**
+   * Matches a widget that has the specified labelText within the given parent.
+   * 
+   * @param labelText the label.
+   * @param parent the parent widget to which the matcher is scoped.
+   * @return a matcher.
+   * @since 2.0
+   */
+  public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> withLabel(java.lang.String labelText, org.eclipse.swt.widgets.Composite parent) {
+    return org.eclipse.swtbot.swt.finder.matchers.WithLabel.withLabel(labelText, parent);
   }
 
   /**
