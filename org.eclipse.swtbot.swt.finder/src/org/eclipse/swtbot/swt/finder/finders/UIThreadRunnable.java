@@ -69,7 +69,7 @@ public abstract class UIThreadRunnable implements Runnable {
 		if ((display == null) || display.isDisposed())
 			return;
 
-		if (!isUIThread()) {
+		if (!isUIThread(display)) {
 			if (async)
 				display.asyncExec(runnable());
 			else
