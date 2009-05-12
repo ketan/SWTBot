@@ -34,6 +34,10 @@ public class SWTBotPreferences {
 			}
 			
 			String country = InputContext.getInstance().getLocale().getCountry();
+			if (country.equals(""))
+				country = InputContext.getInstance().getLocale().getLanguage().toUpperCase();
+			if (country.equals(""))
+				throw new IllegalStateException("Could not determine keyboard layout.");
 			keyboardLayout += country;
 			
 			return keyboardLayout;
