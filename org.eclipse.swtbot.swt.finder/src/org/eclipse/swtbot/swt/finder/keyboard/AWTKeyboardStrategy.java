@@ -41,15 +41,26 @@ class AWTKeyboardStrategy implements KeyboardStrategy {
 	private int key(KeyStroke key) {
 		if (key.getNaturalKey() != 0)
 			return key.getNaturalKey();
-		else if (key.getModifierKeys() == SWT.CTRL)
+		switch (key.getModifierKeys()) {
+		case SWT.CTRL:
 			return KeyEvent.VK_CONTROL;
-		else if (key.getModifierKeys() == SWT.SHIFT)
+		case SWT.SHIFT:
 			return KeyEvent.VK_SHIFT;
-		else if (key.getModifierKeys() == SWT.ALT)
+		case SWT.ALT:
 			return KeyEvent.VK_ALT;
-		else if (key.getModifierKeys() == SWT.COMMAND)
+		case SWT.COMMAND:
 			return KeyEvent.VK_WINDOWS;
-		throw new IllegalArgumentException("Could not understand keystroke " + key);
+		case SWT.ARROW_RIGHT:
+			return KeyEvent.VK_RIGHT;
+		case SWT.ARROW_DOWN:
+			return KeyEvent.VK_DOWN;
+		case SWT.ARROW_LEFT:
+			return KeyEvent.VK_LEFT;
+		case SWT.ARROW_UP:
+			return KeyEvent.VK_UP;
+		default:
+			throw new IllegalArgumentException("Could not understand keystroke " + key);
+		}
 	}
 
 }
