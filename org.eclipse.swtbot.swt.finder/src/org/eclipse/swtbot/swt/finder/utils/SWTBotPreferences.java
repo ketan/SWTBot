@@ -13,13 +13,13 @@
 package org.eclipse.swtbot.swt.finder.utils;
 
 import java.awt.im.InputContext;
+import java.util.Locale;
 
 import org.eclipse.swt.SWT;
 
-
 /**
  * Holds the preferences for the SWT Bot.
- *
+ * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  * @since 1.1
@@ -29,34 +29,41 @@ public class SWTBotPreferences {
 	private static class Keyboard {
 		private static String detectKeyboard() {
 			String keyboardLayout = "";
-			if (isMac()){
+			if (isMac()) {
 				keyboardLayout += "MAC.";
 			}
-			
-			String country = InputContext.getInstance().getLocale().getCountry();
-			if (country.equals(""))
-				country = InputContext.getInstance().getLocale().getLanguage().toUpperCase();
-			if (country.equals(""))
+
+			Locale locale = InputContext.getInstance().getLocale();
+			String layout;
+			layout = locale.getVariant();
+			if (layout.equals(""))
+				layout = locale.getCountry();
+			if (layout.equals(""))
+				layout = locale.getLanguage();
+			if (layout.equals(""))
 				throw new IllegalStateException("Could not determine keyboard layout.");
-			keyboardLayout += country;
-			
+			keyboardLayout += layout.toUpperCase();
+
 			return keyboardLayout;
 		}
-	
+
 		private static boolean isMac() {
 			String swtPlatform = SWT.getPlatform();
 			return ("carbon".equals(swtPlatform) || "cocoa".equals(swtPlatform));
 		}
-	
+
 	}
 
-	/** The default key used to match SWT widgets.
-	 * @since 2.0*/
-	public static final String	DEFAULT_KEY	= "org.eclipse.swtbot.widget.key"; //$NON-NLS-1$
+	/**
+	 * The default key used to match SWT widgets.
+	 * 
+	 * @since 2.0
+	 */
+	public static final String	DEFAULT_KEY	= "org.eclipse.swtbot.widget.key";	//$NON-NLS-1$
 
 	/**
 	 * Gets the timeout. To set use the system property {@code org.eclipse.swtbot.search.timeout}.
-	 *
+	 * 
 	 * @return the timeout value.
 	 * @since 1.3
 	 */
@@ -66,7 +73,7 @@ public class SWTBotPreferences {
 
 	/**
 	 * Gets the recorder file name. To set use the system property {@code org.eclipse.swtbot.recorder.file.name}.
-	 *
+	 * 
 	 * @return the recorder file name.
 	 */
 	public static String recorderFileName() {
@@ -75,46 +82,50 @@ public class SWTBotPreferences {
 
 	/**
 	 * Gets the playback delay. This can be set using the system property {@code org.eclipse.swtbot.playback.delay}.
-	 *
+	 * 
 	 * @return the playback delay.
 	 */
 	public static long playbackDelay() {
 		return toLong(System.getProperty("org.eclipse.swtbot.playback.delay", "0")); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
-    /**
-     * Gets the maximum number of screenshots that SWTBot should capture. This can be set using the system property {@code org.eclipse.swtbot.maximum.screenshots}.
-     *
-     * @return the maximum screenshots.
-     * @since 1.3
-     */
+	/**
+	 * Gets the maximum number of screenshots that SWTBot should capture. This can be set using the system property
+	 * {@code org.eclipse.swtbot.maximum.screenshots}.
+	 * 
+	 * @return the maximum screenshots.
+	 * @since 1.3
+	 */
 	public static int getMaximumScreenshots() {
-	    return toInt(System.getProperty("org.eclipse.swtbot.maximum.screenshots", "100")); //$NON-NLS-1$ //$NON-NLS-2$
+		return toInt(System.getProperty("org.eclipse.swtbot.maximum.screenshots", "100")); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
-    /**
-     * Gets the screenshot image format to be used. This can be set using the system property {@code org.eclipse.swtbot.screenshot.format}.<br>
-     * It must be one these: BMP, GIF, ICO, JPEG, JPG, PNG or TIFF.<br>
-     * JPEG will be used as the default if this property is not set.
-     * @return the screenshot image format.
-     * @since 1.3
-     */
+	/**
+	 * Gets the screenshot image format to be used. This can be set using the system property {@code
+	 * org.eclipse.swtbot.screenshot.format}.<br>
+	 * It must be one these: BMP, GIF, ICO, JPEG, JPG, PNG or TIFF.<br>
+	 * JPEG will be used as the default if this property is not set.
+	 * 
+	 * @return the screenshot image format.
+	 * @since 1.3
+	 */
 	public static String getScreenshotFormat() {
-	    return System.getProperty("org.eclipse.swtbot.screenshot.format", "jpeg"); //$NON-NLS-1$ //$NON-NLS-2$
+		return System.getProperty("org.eclipse.swtbot.screenshot.format", "jpeg"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
-    /**
+	/**
 	 * Gets the keyboard layout. This can be set using the system property {@code org.eclipse.swtbot.keyboardLayout}.
 	 * <p>
-	 * <strong>Note:</strong> the layout must be of the form [MAC.][upper-case-two-character-country-code]. Eg: "MAC.EN" or "MAC.GB" or just "FR" or "DE".
+	 * <strong>Note:</strong> the layout must be of the form [MAC.][upper-case-two-character-country-code]. Eg: "MAC.EN"
+	 * or "MAC.GB" or just "FR" or "DE".
 	 * </p>
-	 *
+	 * 
 	 * @return the keyboard layout.
 	 */
 	public static String getKeyboardLayout() {
 		return System.getProperty("org.eclipse.swtbot.keyboardLayout", Keyboard.detectKeyboard());
 	}
-	
+
 	private static long toLong(String timeoutValue) {
 		try {
 			Long timeout = Long.valueOf(timeoutValue);
@@ -124,13 +135,13 @@ public class SWTBotPreferences {
 		}
 	}
 
-    private static int toInt(String value) {
-        try {
-            Integer integerValue = Integer.valueOf(value);
-            return integerValue.intValue();
-        } catch (Exception e) {
-            return 0;
-        }
-    }
+	private static int toInt(String value) {
+		try {
+			Integer integerValue = Integer.valueOf(value);
+			return integerValue.intValue();
+		} catch (Exception e) {
+			return 0;
+		}
+	}
 
 }
