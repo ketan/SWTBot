@@ -28,6 +28,7 @@ import org.eclipse.swtbot.swt.finder.results.Result;
 import org.eclipse.swtbot.swt.finder.results.StringResult;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.utils.Position;
+import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.hamcrest.SelfDescribing;
 
 /**
@@ -36,8 +37,6 @@ import org.hamcrest.SelfDescribing;
  */
 @SWTBotWidget(clasz = StyledText.class, preferredName = "styledText", referenceBy = { ReferenceBy.LABEL, ReferenceBy.TEXT })
 public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
-
-	private static final int	TYPE_INTERVAL	= 50;
 
 	/**
 	 * Constructs a new instance of this object.
@@ -250,7 +249,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 	 * @since 1.0
 	 */
 	public void typeText(final String text) {
-		typeText(text, TYPE_INTERVAL);
+		typeText(text, SWTBotPreferences.typeInterval());
 	}
 
 	/**

@@ -126,6 +126,16 @@ public class SWTBotPreferences {
 		return System.getProperty("org.eclipse.swtbot.keyboardLayout", Keyboard.detectKeyboard());
 	}
 
+	/**
+	 * Gets the the time interval in ms. between typing characters in a string. This can be set using the system
+	 * property {@code org.eclipse.swtbot.keyboard.interval}.<br>
+	 * 
+	 * @return the time interval between typing characters.
+	 */
+	public static int typeInterval() {
+		return toInt(System.getProperty("org.eclipse.swtbot.keyboard.interval", "50"));
+	}
+
 	private static long toLong(String timeoutValue) {
 		try {
 			Long timeout = Long.valueOf(timeoutValue);

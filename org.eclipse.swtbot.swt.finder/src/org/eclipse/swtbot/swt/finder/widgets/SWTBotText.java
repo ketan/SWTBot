@@ -20,6 +20,7 @@ import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.keyboard.Keyboard;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
+import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.hamcrest.SelfDescribing;
 
 /**
@@ -30,8 +31,6 @@ import org.hamcrest.SelfDescribing;
  */
 @SWTBotWidget(clasz = Text.class, preferredName = "text", referenceBy = { ReferenceBy.LABEL, ReferenceBy.TEXT, ReferenceBy.TOOLTIP })
 public class SWTBotText extends AbstractSWTBot<Text> {
-
-	private static final int	TYPE_INTERVAL	= 50;
 
 	/**
 	 * Constructs a new instance of this object.
@@ -75,7 +74,7 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 	 * @since 1.2
 	 */
 	public void typeText(final String text) {
-		typeText(text, TYPE_INTERVAL);
+		typeText(text, SWTBotPreferences.typeInterval());
 	}
 
 	/**

@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.keyboard;
 
+import static org.eclipse.swtbot.swt.finder.utils.SWTUtils.sleep;
+
 import java.awt.Robot;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +23,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Widget;
+import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 
 /**
@@ -99,8 +102,19 @@ public class Keyboard {
 	 * @param text the text to type on the keyboard.
 	 */
 	public void typeText(String text) {
+		typeText(text, SWTBotPreferences.typeInterval());
+	}
+
+	/**
+	 * Types the string on the keyboard.
+	 * 
+	 * @param text the text to type on the keyboard.
+	 * @param interval the interval between the keystrokes.
+	 */
+	public void typeText(String text, int interval) {
 		for (int i = 0; i < text.length(); i++) {
 			typeCharacter(text.charAt(i));
+			sleep(interval);
 		}
 	}
 
