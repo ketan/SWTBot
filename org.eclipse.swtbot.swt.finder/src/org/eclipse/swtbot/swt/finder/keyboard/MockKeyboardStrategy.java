@@ -45,6 +45,10 @@ class MockKeyboardStrategy extends AbstractKeyboardStrategy {
 		int modifiers = SWT.NONE;
 		int ch = 0;
 
+		for (KeyStroke key : keys) {
+			modifiers |= key.getModifierKeys();
+		}
+
 		Event e = new Event();
 		e.character = Keystrokes.toCharacter(keys);
 		e.widget = widget.widget;

@@ -61,7 +61,10 @@ class KeyboardLayout {
 	}
 
 	public char toCharacter(KeyStroke key) {
-		return keyStrokes.getKey(key);
+		Character ch = keyStrokes.getKey(key);
+		if (ch == null)
+			ch = (char) key.getNaturalKey();
+		return ch;
 	}
 
 	/**
