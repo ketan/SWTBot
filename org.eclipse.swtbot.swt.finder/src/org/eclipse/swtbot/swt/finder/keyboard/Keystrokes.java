@@ -38,9 +38,9 @@ public class Keystrokes {
 	/** The COMMAND keystroke. */
 	public static final KeyStroke	COMMAND					= KeyStroke.getInstance(SWT.COMMAND, 0);
 	/** The ESC keystroke. */
-	public static final KeyStroke	ESC						= KeyStroke.getInstance(SWT.ESC, 0);
+	public static final KeyStroke	ESC						= KeyStroke.getInstance(0, SWT.ESC);
 	/** The backspace keystroke. */
-	public static final KeyStroke	BS						= KeyStroke.getInstance(SWT.BS, 0);
+	public static final KeyStroke	BS						= KeyStroke.getInstance(0, SWT.BS);
 
 	/** The keyboard layout to use for mapping characters. */
 	private static KeyboardLayout	defaultKeyboardLayout	= KeyboardLayout.getDefaultKeyboardLayout();
