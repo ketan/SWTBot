@@ -99,6 +99,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 	 * @see Event#keyCode
 	 * @see Event#character
 	 * @see Event#stateMask
+	 * @deprecated use {@link #notifyKeyboardEvent(int, char)} instead. This api will be removed.
 	 */
 	public void notifyKeyboardEvent(int modificationKey, char c, int keyCode) {
 		log.debug(MessageFormat.format("Enquing keyboard notification: {0}", toString(modificationKey, c))); //$NON-NLS-1$
@@ -107,8 +108,6 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 		Keyboard.getMockKeyboard(widget, description).pressShortcut(modificationKey, c);
 	}
 
-
-	
 	/**
 	 * Converts the given data to a string.
 	 *
@@ -127,38 +126,6 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 			mod = mod.substring(0, mod.length() - 3) + " + "; //$NON-NLS-1$
 		mod = mod + c;
 		return mod;
-	}
-
-	/**
-	 * Gets the key event.
-	 *
-	 * @param c the character.
-	 * @param modificationKey the modification key.
-	 * @return a key event with the specified keys.
-	 * @see Event#character
-	 * @see Event#stateMask
-	 */
-	protected Event keyEvent(int modificationKey, char c) {
-		return keyEvent(modificationKey, c, c);
-	}
-
-	/**
-	 * Gets the key event.
-	 *
-	 * @param c the character.
-	 * @param modificationKey the modification key.
-	 * @param keyCode the keycode.
-	 * @return a key event with the specified keys.
-	 * @see Event#keyCode
-	 * @see Event#character
-	 * @see Event#stateMask
-	 */
-	protected Event keyEvent(int modificationKey, char c, int keyCode) {
-		Event keyEvent = createEvent();
-		keyEvent.stateMask = modificationKey;
-		keyEvent.character = c;
-		keyEvent.keyCode = keyCode;
-		return keyEvent;
 	}
 
 	/**

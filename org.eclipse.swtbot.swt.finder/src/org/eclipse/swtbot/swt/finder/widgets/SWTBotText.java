@@ -104,7 +104,6 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 	}
 
 	/**
-	 * @deprecated use {@link #notifyKeyboardEvent(int, char)} instead. This api will be removed.
 	 * @param modificationKey the modification key.
 	 * @param c the character.
 	 * @param keyCode the keycode (ignored)
@@ -112,6 +111,7 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 	 * @see Event#character
 	 * @see Event#stateMask
 	 * @since 1.2
+	 * @deprecated use {@link #notifyKeyboardEvent(int, char)} instead. This api will be removed.
 	 */
 	public void notifyKeyboardEvent(int modificationKey, char c, int keyCode) {
 		log.debug(MessageFormat.format("Enquing keyboard notification: {0}", toString(modificationKey, c))); //$NON-NLS-1$
