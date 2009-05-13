@@ -89,6 +89,7 @@ public class Keyboard {
 	 * Creates a keyboard that creates mock events directly pumped to the widget.
 	 * 
 	 * @param widget the widget on which the mock events are typed.
+	 * @param description the description of the widget.
 	 * @return a keyboard
 	 */
 	public static Keyboard getMockKeyboard(Widget widget, SelfDescribing description) {

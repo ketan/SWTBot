@@ -95,7 +95,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 	 *
 	 * @param modificationKey the modification key.
 	 * @param c the character.
-	 * @param keyCode the keycode.
+	 * @param keyCode the keycode -- not used.
 	 * @see Event#keyCode
 	 * @see Event#character
 	 * @see Event#stateMask
