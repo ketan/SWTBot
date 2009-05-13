@@ -20,3 +20,4 @@ Export-Package: org.eclipse.swtbot.eclipse.finder,
  org.eclipse.swtbot.eclipse.finder.widgets
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: .
+Import-Package: org.eclipse.ui.texteditor;resolution:=optional

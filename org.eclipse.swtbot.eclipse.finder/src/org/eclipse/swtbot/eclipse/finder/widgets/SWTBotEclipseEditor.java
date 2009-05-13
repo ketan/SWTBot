@@ -12,11 +12,15 @@
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.finder.widgets;
 
+import static org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable.syncExec;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widgetOfType;
+import static org.hamcrest.Matchers.anything;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import org.eclipse.jface.action.IAction;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.Bullet;
 import org.eclipse.swt.custom.StyleRange;
@@ -25,22 +29,27 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.exceptions.QuickFixNotFoundException;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
-import org.eclipse.swtbot.swt.finder.results.ListResult;
+import org.eclipse.swtbot.swt.finder.matchers.AbstractMatcher;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.eclipse.swtbot.swt.finder.results.WidgetResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.Position;
+import org.eclipse.swtbot.swt.finder.waits.WaitForObjectCondition;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotStyledText;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
 import org.eclipse.swtbot.swt.finder.widgets.TimeoutException;
 import org.eclipse.ui.IEditorReference;
+import org.eclipse.ui.texteditor.ITextEditor;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 
 /**
  * This represents an eclipse editor item.
@@ -86,55 +95,51 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	 * Applys a quick fix item at the given index.
 	 * 
 	 * @param quickFixIndex the index of the quickfix item to apply.
-	 * @throws QuickFixNotFoundException if the quickfix could not be found.
 	 * @throws WidgetNotFoundException if the quickfix could not be found.
 	 */
-	public void quickfix(int quickFixIndex) throws QuickFixNotFoundException, WidgetNotFoundException {
-		SWTBotShell quickFixShell = activateQuickFixShell();
-		SWTBotTable quickFixTable = getQuickFixTable(quickFixShell);
-		applyQuickFix(quickFixTable, quickFixIndex);
+	public void quickfix(int quickFixIndex) {
+		WaitForObjectCondition<SWTBotTable> quickFixTableCondition = quickFixAppears(anything());
+		waitUntil(quickFixTableCondition);
+		SWTBotTable quickFixTable = quickFixTableCondition.get(0);
+		selectProposal(quickFixTable, quickFixIndex);
 	}
 
 	/**
 	 * Applys a quick fix item with the given name.
 	 * 
 	 * @param quickFixName the name of the quick fix to apply.
-	 * @throws QuickFixNotFoundException if the quickfix could not be found.
 	 */
-	public void quickfix(String quickFixName) throws QuickFixNotFoundException {
-		int retries = 10;
-		SWTBotShell quickFixShell = activateQuickFixShell();
-		SWTBotTable quickFixTable = getQuickFixTable(quickFixShell);
-		applyQuickFix(quickFixTable, quickFixName, retries);
+	public void quickfix(String quickFixName) {
+		WaitForObjectCondition<SWTBotTable> quickFixTable = quickFixAppears(tableWithRow(quickFixName));
+		waitUntil(quickFixTable);
+		selectProposal(quickFixTable.get(0), quickFixName);
 	}
 
 	/**
 	 * Finds all the quickfixes in the quickfix list.
 	 * 
 	 * @return the list of all available quickfixes.
-	 * @throws QuickFixNotFoundException if the quickfix could not be found.
 	 * @since 1.2
 	 */
-	public List<String> getQuickFixes() throws QuickFixNotFoundException {
-		SWTBotShell quickFixShell = activateQuickFixShell();
-		SWTBotTable quickFixTable = getQuickFixTable(quickFixShell);
-		int rowCount = quickFixTable.rowCount();
-		List<String> result = new ArrayList<String>();
-		for (int i = 0; i < rowCount; i++)
-			result.add(quickFixTable.cell(i, 0));
-		return result;
+	public List<String> getQuickFixes() {
+		WaitForObjectCondition<SWTBotTable> quickFixTableCondition = quickFixAppears(anything());
+		waitUntil(quickFixTableCondition);
+		SWTBotTable quickFixTable = quickFixTableCondition.get(0);
+		List<String> proposals = getRows(quickFixTable);
+		makeProposalsDisappear();
+		return proposals;
 	}
 
 	/**
 	 * Gets the quick fix item count.
 	 * 
 	 * @return the number of quickfix items in the quickfix proposals.
-	 * @throws QuickFixNotFoundException if the quickfix could not be found.
 	 * @since 1.2
 	 */
-	public int getQuickfixListItemCount() throws QuickFixNotFoundException {
-		SWTBotShell quickFixShell = activateQuickFixShell();
-		SWTBotTable quickFixTable = getQuickFixTable(quickFixShell);
+	public int getQuickfixListItemCount() {
+		WaitForObjectCondition<SWTBotTable> quickFixTableCondition = quickFixAppears(anything());
+		waitUntil(quickFixTableCondition);
+		SWTBotTable quickFixTable = quickFixTableCondition.get(0);
 		return quickFixTable.rowCount();
 	}
 
@@ -144,87 +149,57 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	 * FIXME: this needs a lot of optimization.
 	 * </p>
 	 * 
-	 * @param quickFixTable the table containing the quickfix.
-	 * @param quickFixName the name of the quickfix to apply.
-	 * @param retries the number of retries, before giving up.
-	 * @throws QuickFixNotFoundException if the quickfix could not be found.
+	 * @param proposalTable the table containing the quickfix.
+	 * @param proposalText the name of the quickfix to apply.
 	 */
-	protected void applyQuickFix(SWTBotTable quickFixTable, String quickFixName, int retries) throws QuickFixNotFoundException {
-		log.debug("Trying to activate quickfix shell."); //$NON-NLS-1$
-		int quickFixIndex = quickFixTable.indexOf(quickFixName);
-		if (quickFixIndex >= 0) {
-			applyQuickFix(quickFixTable, quickFixIndex);
+	private void selectProposal(SWTBotTable proposalTable, String proposalText) {
+		log.debug(MessageFormat.format("Trying to select proposal {0}", proposalText)); //$NON-NLS-1$
+		if (proposalTable.containsItem(proposalText)) {
+			selectProposal(proposalTable, proposalTable.indexOf(proposalText));
 			return;
 		}
 		throw new QuickFixNotFoundException("Quickfix options not found. Giving up."); //$NON-NLS-1$
 	}
 
 	/**
-	 * Gets the quick fix table.
-	 * 
-	 * @param quickFixShell the shell containing the quickfixes.
-	 * @return the table containing the quickfix.
-	 * @throws QuickFixNotFoundException if the table could not be found.
-	 */
-	protected SWTBotTable getQuickFixTable(SWTBotShell quickFixShell) throws QuickFixNotFoundException {
-		try {
-			Table table = (Table) bot.widget(widgetOfType(Table.class), quickFixShell.widget);
-			return new SWTBotTable(table);
-		} catch (Exception e) {
-			throw new QuickFixNotFoundException("Quickfix options not found. Giving up.", e); //$NON-NLS-1$
-		}
-	}
-
-	/**
 	 * Applies the specified quickfix.
 	 * 
-	 * @param quickFixTable the table containing the quickfix
-	 * @param quickFixIndex the index of the quickfix.
+	 * @param proposalTable the table containing the quickfix.
+	 * @param proposalIndex the index of the quickfix.
 	 */
-	protected void applyQuickFix(final SWTBotTable quickFixTable, final int quickFixIndex) {
+	private void selectProposal(final SWTBotTable proposalTable, final int proposalIndex) {
+		log.debug(MessageFormat.format("Trying to select proposal with index {0}", proposalIndex)); //$NON-NLS-1$
 		UIThreadRunnable.asyncExec(new VoidResult() {
 			public void run() {
-				Table table = quickFixTable.widget;
-				log.debug(MessageFormat.format("Selecting row [{0}] {1} in {2}", quickFixIndex, table.getItem(quickFixIndex).getText(), //$NON-NLS-1$
+				Table table = proposalTable.widget;
+				log.debug(MessageFormat.format("Selecting row [{0}] {1} in {2}", proposalIndex, table.getItem(proposalIndex).getText(), //$NON-NLS-1$
 						table));
-				table.setSelection(quickFixIndex);
+				table.setSelection(proposalIndex);
 				Event event = new Event();
 				event.type = SWT.Selection;
 				event.widget = table;
-				event.item = table.getItem(quickFixIndex);
+				event.item = table.getItem(proposalIndex);
 				table.notifyListeners(SWT.Selection, event);
 				table.notifyListeners(SWT.DefaultSelection, event);
 			}
 		});
-		bot.sleep(1000);
-		// quickFixTable.select(quickFixIndex);
 	}
 
 	/**
-	 * Gets teh active quick fix shell.
+	 * Gets the quick fix table.
 	 * 
-	 * @return the quickfix shell.
-	 * @throws QuickFixNotFoundException if the quickfix shell is not found.
+	 * @param proposalShell the shell containing the quickfixes.
+	 * @return the table containing the quickfix.
 	 */
-	protected SWTBotShell activateQuickFixShell() throws QuickFixNotFoundException {
-		styledText.notifyKeyboardEvent(SWT.MOD1, '1');
-		return activatePopupShell();
-	}
-
-	/**
-	 * This activates the popup shell.
-	 * 
-	 * @return The shell.
-	 * @throws QuickFixNotFoundException Throw if a quick fix problem occurs.
-	 */
-	private SWTBotShell activatePopupShell() throws QuickFixNotFoundException {
+	private SWTBotTable getProposalTable() {
+		log.debug("Finding table containing proposals.");
 		try {
-			SWTBotShell shell = bot.shell("", bot.activeShell().widget); //$NON-NLS-1$
-			shell.activate();
-			log.debug("Activated quickfix shell."); //$NON-NLS-1$
-			return shell;
+			Table table = (Table) bot.widget(widgetOfType(Table.class), activatePopupShell().widget);
+			SWTBotTable swtBotTable = new SWTBotTable(table);
+			log.debug(MessageFormat.format("Found table containing proposals -- {0}", getRows(swtBotTable)));
+			return swtBotTable;
 		} catch (Exception e) {
-			throw new QuickFixNotFoundException("Quickfix popup not found. Giving up.", e); //$NON-NLS-1$
+			throw new QuickFixNotFoundException("Quickfix options not found. Giving up.", e); //$NON-NLS-1$
 		}
 	}
 
@@ -233,29 +208,18 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	 * 
 	 * @param insertText the proposal text to type before auto completing
 	 * @return the list of proposals
-	 * @throws QuickFixNotFoundException if the autocomplete proposal could not be found.
 	 * @throws TimeoutException if the autocomplete shell did not close in time.
 	 * @since 1.2
 	 */
-	public List<String> getAutoCompleteProposals(String insertText) throws QuickFixNotFoundException, TimeoutException {
-		styledText.typeText(insertText);
-		bot.sleep(1000);
-		SWTBotShell autoCompleteShell = activateAutoCompleteShell();
-		final SWTBotTable autoCompleteTable = getQuickFixTable(autoCompleteShell);
-		List<String> result = UIThreadRunnable.syncExec(new ListResult<String>() {
-			public List<String> run() {
-				TableItem[] items = autoCompleteTable.widget.getItems();
-				ArrayList<String> result = new ArrayList<String>();
-				for (int i = 0; i < items.length; i++) {
-					TableItem tableItem = items[i];
-					result.add(tableItem.getText());
-				}
-				return result;
-			}
-		});
-		// makeProposalsDisappear();
-		autoCompleteShell.close();
-		return result;
+	@SuppressWarnings("all")
+	public List<String> getAutoCompleteProposals(String insertText) {
+		typeText(insertText);
+		WaitForObjectCondition<SWTBotTable> autoCompleteAppears = autoCompleteAppears(tableWithRowIgnoringCase(insertText));
+		waitUntil(autoCompleteAppears);
+		final SWTBotTable autoCompleteTable = autoCompleteAppears.get(0);
+		List<String> proposals = getRows(autoCompleteTable);
+		makeProposalsDisappear();
+		return proposals;
 	}
 
 	/**
@@ -263,36 +227,12 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	 * 
 	 * @param insertText the text to be inserted before activating the auto-complete.
 	 * @param proposalText the auto-completion proposal to select from the list.
-	 * @throws QuickFixNotFoundException if the auto-complete proposal could not be found.
 	 */
-	public void autoCompleteProposal(String insertText, String proposalText) throws QuickFixNotFoundException {
-		styledText.typeText(insertText);
-		bot.sleep(1000);
-		autoComplete(proposalText);
-	}
-
-	/**
-	 * This performs the auto complete.
-	 * 
-	 * @param proposalText The text to propose.
-	 * @throws QuickFixNotFoundException Thrown if the quick fix error occurs.
-	 */
-	private void autoComplete(String proposalText) throws QuickFixNotFoundException {
-		int retries = 10;
-		SWTBotShell autoCompleteShell = activateAutoCompleteShell();
-		SWTBotTable autoCompleteTable = getQuickFixTable(autoCompleteShell);
-		applyQuickFix(autoCompleteTable, proposalText, retries);
-	}
-
-	/**
-	 * Gets the active auto complete shell.
-	 * 
-	 * @return The shell.
-	 * @throws QuickFixNotFoundException Thrown if a qaick fix error occurs.
-	 */
-	private SWTBotShell activateAutoCompleteShell() throws QuickFixNotFoundException {
-		styledText.notifyKeyboardEvent(SWT.CTRL, ' ');
-		return activatePopupShell();
+	public void autoCompleteProposal(String insertText, String proposalText) {
+		typeText(insertText);
+		WaitForObjectCondition<SWTBotTable> autoCompleteTable = autoCompleteAppears(tableWithRow(proposalText));
+		waitUntil(autoCompleteTable);
+		selectProposal(autoCompleteTable.get(0), proposalText);
 	}
 
 	/**
@@ -404,6 +344,15 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	 */
 	public void typeText(String text, int interval) {
 		styledText.typeText(text, interval);
+	}
+
+	/**
+	 * Sets the caret at the specified location.
+	 * 
+	 * @param position the position of the caret.
+	 */
+	public void navigateTo(Position position) {
+		styledText.navigateTo(position);
 	}
 
 	/**
@@ -533,10 +482,12 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	}
 
 	/**
+	 * Notifies of keyboard event.
+	 * 
 	 * @param modificationKey the modification key.
 	 * @param c the character.
-	 * @param keyCode the keycode.
-	 * @see SWTBotStyledText#notifyKeyboardEvent(int, char, int)
+	 * @param keyCode the keycode -- not used.
+	 * @deprecated use {@link #notifyKeyboardEvent(int, char)} instead. This api will be removed.
 	 */
 	public void notifyKeyboardEvent(int modificationKey, char c, int keyCode) {
 		styledText.notifyKeyboardEvent(modificationKey, c, keyCode);
@@ -587,6 +538,141 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	 */
 	public String getToolTipText() {
 		return styledText.getToolTipText();
+	}
+
+	private void makeProposalsDisappear() {
+		// clear away all content assists for next retry.
+		log.debug("Making proposals disappear.");
+		setFocus();
+	}
+
+	private Matcher<?> tableWithRow(final String itemText) {
+		return new AbstractMatcher<Object>() {
+
+			protected boolean doMatch(Object item) {
+				return ((SWTBotTable) item).containsItem(itemText);
+			}
+
+			public void describeTo(Description description) {
+				description.appendText("table with item (").appendText(itemText).appendText(")");
+			}
+		};
+	}
+
+	private Matcher<?> tableWithRowIgnoringCase(final String itemText) {
+		final String lowerCaseText = itemText.toLowerCase();
+		return new AbstractMatcher<Object>() {
+
+			protected boolean doMatch(Object item) {
+				List<String> rows = getRows((SWTBotTable) item);
+				for (String row : rows) {
+					if (row.toLowerCase().startsWith(lowerCaseText)) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			public void describeTo(Description description) {
+				description.appendText("table with item (").appendText(itemText).appendText(")");
+			}
+		};
+	}
+
+	private WaitForObjectCondition<SWTBotTable> quickFixAppears(Matcher<?> tableMatcher) {
+		return new WaitForObjectCondition<SWTBotTable>(tableMatcher) {
+			protected List<SWTBotTable> findMatches() {
+				try {
+					activateQuickFixShell();
+					SWTBotTable quickFixTable = getProposalTable();
+					if (matcher.matches(quickFixTable))
+						return Arrays.asList(quickFixTable);
+				} catch (Throwable e) {
+					makeProposalsDisappear();
+				}
+				return null;
+			}
+
+			public String getFailureMessage() {
+				return "Could not find auto complete proposal using matcher " + matcher;
+			}
+
+		};
+	}
+
+	/**
+	 * This activates the popup shell.
+	 * 
+	 * @return The shell.
+	 */
+	private SWTBotShell activatePopupShell() {
+		log.debug("Activating quickfix shell."); //$NON-NLS-1$
+		try {
+			Shell mainWindow = syncExec(new WidgetResult<Shell>() {
+				public Shell run() {
+					return styledText.widget.getShell();
+				}
+			});
+			SWTBotShell shell = bot.shell("", mainWindow); //$NON-NLS-1$
+			shell.activate();
+			log.debug("Activated quickfix shell."); //$NON-NLS-1$
+			return shell;
+		} catch (Exception e) {
+			throw new QuickFixNotFoundException("Quickfix popup not found. Giving up.", e); //$NON-NLS-1$
+		}
+	}
+
+	private WaitForObjectCondition<SWTBotTable> autoCompleteAppears(Matcher<?> tableMatcher) {
+		return new WaitForObjectCondition<SWTBotTable>(tableMatcher) {
+			protected List<SWTBotTable> findMatches() {
+				try {
+					activateAutoCompleteShell();
+					SWTBotTable autoCompleteTable = getProposalTable();
+					if (matcher.matches(autoCompleteTable)) {
+						SWTBotEclipseEditor.this.log.debug("matched table, returning");
+						return Arrays.asList(autoCompleteTable);
+					}
+				} catch (Throwable e) {
+					makeProposalsDisappear();
+				}
+				return null;
+			}
+
+			public String getFailureMessage() {
+				return "Could not find auto complete proposal using matcher " + matcher;
+			}
+
+		};
+	}
+
+	private void activateAutoCompleteShell() {
+		invokeAction("ContentAssistProposal");
+	}
+
+	private void invokeAction(final String actionId) {
+		final IAction action = ((ITextEditor) partReference.getEditor(false)).getAction(actionId);
+		syncExec(new VoidResult() {
+			public void run() {
+				log.debug(MessageFormat.format("Activating action with id {0}", actionId));
+				action.run();
+			}
+		});
+	}
+
+	private List<String> getRows(SWTBotTable table) {
+		int rowCount = table.rowCount();
+		List<String> result = new ArrayList<String>();
+		for (int i = 0; i < rowCount; i++)
+			result.add(table.cell(i, 0));
+		return result;
+	}
+
+	private void activateQuickFixShell() {
+		invokeAction("QuickAssist");
+	}
+
+	private void waitUntil(WaitForObjectCondition<SWTBotTable> table) {
+		bot.waitUntil(table, 10000);
 	}
 
 }
