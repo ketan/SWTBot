@@ -54,6 +54,17 @@ class Keystrokes {
 		return new KeyStroke[] { modifier, key };
 	}
 
+	static char toCharacter(KeyStroke... keys) {
+		int modifierKeys = 0;
+		int ch = 0;
+		for (KeyStroke keyStroke : keys) {
+			modifierKeys |= keyStroke.getModifierKeys();
+			ch |= keyStroke.getNaturalKey();
+		}
+
+		return defaultKeyboardLayout.toCharacter(KeyStroke.getInstance(modifierKeys, ch));
+	}
+
 	/**
 	 * @param modificationKeys a combination of.
 	 * @param c the character to type.

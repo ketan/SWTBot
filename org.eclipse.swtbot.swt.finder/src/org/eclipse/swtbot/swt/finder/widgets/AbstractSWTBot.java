@@ -66,7 +66,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	/** With great power comes great responsibility, use carefully. */
 	public final Display			display;
 	/** The description of the widget. */
-	private final SelfDescribing	description;
+	protected final SelfDescribing	description;
 
 	/**
 	 * Constructs a new instance with the given widget.

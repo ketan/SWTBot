@@ -236,12 +236,12 @@ public class KeyboardTest extends AbstractSWTTestCase {
 		assertEventMatches(listeners.getText(), "KeyUp [2]: KeyEvent{StyledText {} time=41518278 data=null character='\\0' keyCode=262144 stateMask=262144 doit=true}");
 	}
 
-	private List<KeyStroke> keys(KeyStroke ctrl, KeyStroke shift, KeyStroke[] keyStrokes) {
+	private KeyStroke[] keys(KeyStroke ctrl, KeyStroke shift, KeyStroke[] keyStrokes) {
 		List<KeyStroke> keys = new ArrayList<KeyStroke>();
 		keys.add(ctrl);
 		keys.add(shift);
 		keys.addAll(Arrays.asList(keyStrokes));
-		return keys;
+		return keys.toArray(new KeyStroke[0]);
 	}
 
 	public void setUp() throws Exception {

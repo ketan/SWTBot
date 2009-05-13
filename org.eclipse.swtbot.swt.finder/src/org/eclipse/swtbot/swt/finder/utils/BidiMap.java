@@ -23,12 +23,12 @@ import java.util.Map.Entry;
  * @noinstantiate This class is not intended to be instantiated by clients.
  * @noextend This class is not intended to be subclassed by clients.
  */
-class BidiMap<K, V> implements Iterable<Entry<K, V>> {
+public class BidiMap<K, V> implements Iterable<Entry<K, V>> {
 
 	private final HashMap<K, V>	forward;
 	private final HashMap<V, K>	reverse;
 
-	BidiMap() {
+	public BidiMap() {
 		forward = new HashMap<K, V>();
 		reverse = new HashMap<V, K>();
 	}

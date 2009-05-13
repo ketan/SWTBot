@@ -16,7 +16,6 @@ import java.awt.Robot;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.swt.SWT;
@@ -24,7 +23,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
-import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
+import org.hamcrest.SelfDescribing;
 
 /**
  * Represents a Keyboard. Allows for typing keys and pressing shortcuts. Pressing shortcuts is different from pressing
@@ -92,8 +91,8 @@ public class Keyboard {
 	 * @param widget the widget on which the mock events are typed.
 	 * @return a keyboard
 	 */
-	public static Keyboard getMockKeyboard(Widget widget) {
-		return new Keyboard(new MockKeyboardStrategy(widget));
+	public static Keyboard getMockKeyboard(Widget widget, SelfDescribing description) {
+		return new Keyboard(new MockKeyboardStrategy(widget, description));
 	}
 
 	/**
@@ -144,40 +143,22 @@ public class Keyboard {
 	 * @param keys the keys to press
 	 */
 	public void pressShortcut(KeyStroke... keys) {
-		pressShortcut(new ArrayList<KeyStroke>(Arrays.asList(keys)));
-	}
-
-	/**
-	 * Presses the shortcut specified by the given keys.
-	 * 
-	 * @param keys the keys to press
-	 */
-	public void pressShortcut(List<KeyStroke> keys) {
 		pressKeys(keys);
-		Collections.reverse(keys);
-		releaseKeys(keys);
+		releaseKeys(reverse(keys));
 	}
 
-	private void releaseKeys(List<KeyStroke> keys) {
-		for (KeyStroke key : keys) {
-			assertKey(key);
-			strategy.releaseKey(key);
-		}
+	private KeyStroke[] reverse(KeyStroke... keys) {
+		ArrayList<KeyStroke> copy = new ArrayList<KeyStroke>(Arrays.asList(keys));
+		Collections.reverse(copy);
+		return copy.toArray(new KeyStroke[0]);
 	}
 
-	private void pressKeys(List<KeyStroke> keys) {
-		for (KeyStroke key : keys) {
-			assertKey(key);
-			strategy.pressKey(key);
-		}
+	private void releaseKeys(KeyStroke... keys) {
+		strategy.releaseKeys(keys);
 	}
 
-	private void assertKey(KeyStroke key) {
-		boolean hasNaturalKey = key.getNaturalKey() != KeyStroke.NO_KEY;
-		boolean hasModifiers = key.getModifierKeys() != KeyStroke.NO_KEY;
-
-		Assert.isTrue(hasNaturalKey ^ hasModifiers,
-				"You just gave me a complex keystroke. Please split the keystroke into multiple keystrokes.");
+	private void pressKeys(KeyStroke... keys) {
+		strategy.pressKeys(keys);
 	}
 
 }

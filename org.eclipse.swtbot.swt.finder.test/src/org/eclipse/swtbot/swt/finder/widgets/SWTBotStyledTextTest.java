@@ -89,8 +89,14 @@ public class SWTBotStyledTextTest extends AbstractSWTTestCase {
 
 	@Test
 	public void typesTextAtALocation() throws Exception {
-		styledText.typeText(1, 0, "---typed text---\n");
-		assertTextContains("---typed text---", styledText.widget);
+		styledText.typeText(1, 0, "---typed Text---\n");
+		assertTextContains("---typed Text---", styledText.widget);
+	}
+
+	@Test
+	public void typesSpecialCharactersAtALocation() throws Exception {
+		styledText.typeText(1, 0, "---123 #@! :; {} [] ---\n");
+		assertTextContains("---123 #@! :; {} [] ---", styledText.widget);
 	}
 
 	@Test

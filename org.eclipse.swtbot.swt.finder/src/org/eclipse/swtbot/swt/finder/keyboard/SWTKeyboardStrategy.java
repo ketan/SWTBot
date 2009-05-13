@@ -17,7 +17,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 
-class SWTKeyboardStrategy implements KeyboardStrategy {
+class SWTKeyboardStrategy extends AbstractKeyboardStrategy {
 
 	private final Display	display;
 

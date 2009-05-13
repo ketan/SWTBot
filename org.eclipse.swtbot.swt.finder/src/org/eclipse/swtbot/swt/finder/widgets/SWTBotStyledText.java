@@ -104,7 +104,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 		log.debug(MessageFormat.format("Enquing keyboard notification: {0}", toString(modificationKey, c))); //$NON-NLS-1$
 		assertEnabled();
 		setFocus();
-		Keyboard.getMockKeyboard(widget).pressShortcut(modificationKey, c);
+		Keyboard.getMockKeyboard(widget, description).pressShortcut(modificationKey, c);
 	}
 
 
@@ -265,7 +265,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 	public void typeText(final String text, int interval) {
 		log.debug(MessageFormat.format("Inserting text:{0} into styledtext{1}", text, this)); //$NON-NLS-1$
 		setFocus();
-		Keyboard.getMockKeyboard(widget).typeText(text);
+		Keyboard.getMockKeyboard(widget, description).typeText(text);
 	}
 
 	/**

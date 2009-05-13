@@ -14,12 +14,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.net.URL;
-import java.util.Map;
-import java.util.TreeMap;
 
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.bindings.keys.ParseException;
 import org.eclipse.swt.SWT;
+import org.eclipse.swtbot.swt.finder.utils.BidiMap;
 import org.eclipse.swtbot.swt.finder.utils.FileUtils;
 import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 
@@ -30,8 +29,8 @@ import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
  * @version $Id$
  */
 class KeyboardLayout {
-	private final Map<Character, KeyStroke>	keyStrokes	= new TreeMap<Character, KeyStroke>();
-	private final String					layoutName;
+	private final BidiMap<Character, KeyStroke>	keyStrokes	= new BidiMap<Character, KeyStroke>();
+	private final String						layoutName;
 
 	private KeyboardLayout(String name, URL resource) throws IOException {
 		this.layoutName = name;
@@ -54,11 +53,15 @@ class KeyboardLayout {
 	 * @return the keystroke applicable corresponding to the character.
 	 */
 	public KeyStroke keyStrokeFor(char ch) {
-		KeyStroke keyStroke = keyStrokes.get(ch);
+		KeyStroke keyStroke = keyStrokes.getValue(ch);
 		if (keyStroke != null) {
 			return keyStroke;
 		}
 		throw new IllegalArgumentException("no stroke available for character '" + ch + "'");
+	}
+
+	public char toCharacter(KeyStroke key) {
+		return keyStrokes.getKey(key);
 	}
 
 	/**

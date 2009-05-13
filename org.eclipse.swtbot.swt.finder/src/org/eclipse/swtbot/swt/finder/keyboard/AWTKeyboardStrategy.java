@@ -17,7 +17,7 @@ import java.awt.event.KeyEvent;
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.swt.SWT;
 
-class AWTKeyboardStrategy implements KeyboardStrategy {
+class AWTKeyboardStrategy extends AbstractKeyboardStrategy {
 
 	private final Robot	robot;
 

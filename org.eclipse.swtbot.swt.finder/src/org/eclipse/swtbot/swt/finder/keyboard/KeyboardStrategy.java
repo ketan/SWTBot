@@ -19,17 +19,18 @@ import org.eclipse.jface.bindings.keys.KeyStroke;
  * @version $Id$
  */
 public interface KeyboardStrategy {
-	/**
-	 * Presses the specified key.
-	 * 
-	 * @param key the keystroke to press down
-	 */
-	void pressKey(KeyStroke key);
 
 	/**
-	 * Releases the specified key.
+	 * Presses the specified keys.
 	 * 
-	 * @param key the keystroke to release.
+	 * @param keys the keystrokes to press down
 	 */
-	void releaseKey(KeyStroke key);
+	void pressKeys(KeyStroke... keys);
+
+	/**
+	 * Presses the specified keys.
+	 * 
+	 * @param keys the keystrokes to press down
+	 */
+	void releaseKeys(KeyStroke... keys);
 }
