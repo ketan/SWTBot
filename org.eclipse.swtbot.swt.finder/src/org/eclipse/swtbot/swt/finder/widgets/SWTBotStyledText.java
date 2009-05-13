@@ -147,6 +147,15 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 	}
 
 	/**
+	 * Sets the caret at the specified location.
+	 *
+	 * @param position the position of the caret.
+	 */
+	public void navigateTo(Position position) {
+		navigateTo(position.line, position.column);
+	}
+
+	/**
 	 * Gets the current position of the cursor. The returned position will contain a 0-based line and column.
 	 *
 	 * @return the position of the cursor in the styled text.
