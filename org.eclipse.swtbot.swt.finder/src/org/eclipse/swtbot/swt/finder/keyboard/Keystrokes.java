@@ -27,7 +27,7 @@ import org.eclipse.swt.SWT;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-class Keystrokes {
+public class Keystrokes {
 
 	/** The SHIFT keystroke. */
 	public static final KeyStroke	SHIFT					= KeyStroke.getInstance(SWT.SHIFT, 0);
@@ -37,6 +37,10 @@ class Keystrokes {
 	public static final KeyStroke	ALT						= KeyStroke.getInstance(SWT.ALT, 0);
 	/** The COMMAND keystroke. */
 	public static final KeyStroke	COMMAND					= KeyStroke.getInstance(SWT.COMMAND, 0);
+	/** The ESC keystroke. */
+	public static final KeyStroke	ESC						= KeyStroke.getInstance(SWT.ESC, 0);
+	/** The backspace keystroke. */
+	public static final KeyStroke	BS						= KeyStroke.getInstance(SWT.BS, 0);
 
 	/** The keyboard layout to use for mapping characters. */
 	private static KeyboardLayout	defaultKeyboardLayout	= KeyboardLayout.getDefaultKeyboardLayout();
