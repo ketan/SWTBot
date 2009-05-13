@@ -37,6 +37,11 @@
 		<priority value="DEBUG" />
 	</category>
 	
+	<category name="org.eclipse.swtbot.swt.finder.keyboard">
+		<!-- set to a value higher than debug to turn on. -->
+		<priority value="DEBUG" />
+	</category>
+
 	<category name="org.eclipse.swtbot">
 		<priority value="ALL" />
 	</category>
