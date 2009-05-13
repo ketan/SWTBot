@@ -14,7 +14,7 @@ package org.eclipse.swtbot.eclipse.finder.exceptions;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class QuickFixNotFoundException extends Exception {
+public class QuickFixNotFoundException extends RuntimeException {
 	/**
 	 * The serialization version identifier.
 	 */
