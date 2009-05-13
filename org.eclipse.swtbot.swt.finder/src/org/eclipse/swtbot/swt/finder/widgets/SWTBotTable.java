@@ -260,9 +260,9 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 
 	/**
 	 * Gets the index of the item matching the given item.
-	 *
-	 * @param item the index of the item in the table, or -1 if the item does not exist in the table.
-	 * @return the index of the specified item in the table.
+	 * 
+	 * @param item the item in the table.
+	 * @return the index of the specified item in the table, or -1 if the item does not exist in the table.
 	 * @since 1.0
 	 */
 	public int indexOf(final String item) {
@@ -280,8 +280,16 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 	}
 
 	/**
+	 * @param item the item in the table.
+	 * @return <code>true</code> if the table contains the specified item, <code>false</code> otherwise.
+	 */
+	public boolean containsItem(final String item) {
+		return indexOf(item) != -1;
+	}
+
+	/**
 	 * Gets the index of the item matching the given item and the given column.
-	 *
+	 * 
 	 * @param item the index of the item in the table, or -1 if the item does not exist in the table.
 	 * @param column the column for which to get the index of.
 	 * @return the index of the specified item and of the specified column in the table.
