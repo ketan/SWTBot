@@ -25,8 +25,9 @@
 			 	org.eclipse.swtbot.eclipse.finder.widgets,
 
 				org.eclipse.swtbot.swt.finder,
-				org.eclipse.swtbot.swt.finder.collections,
+				org.eclipse.swtbot.swt.finder.exceptions,
 				org.eclipse.swtbot.swt.finder.finders,
+				org.eclipse.swtbot.swt.finder.keyboard,
 				org.eclipse.swtbot.swt.finder.matchers,
 				org.eclipse.swtbot.swt.finder.resolvers,
 				org.eclipse.swtbot.swt.finder.results,
