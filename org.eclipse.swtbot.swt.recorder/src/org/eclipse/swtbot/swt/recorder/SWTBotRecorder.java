@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.recorder;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -242,9 +243,9 @@ public class SWTBotRecorder {
 		UIThreadRunnable.syncExec(display, new VoidResult() {
 			public void run() {
 				display.addFilter(eventType, listener);
-				registeredListeners.add(new ListenerSet(eventType, listener));
 			}
 		});
+		registeredListeners.add(new ListenerSet(eventType, listener));
 	}
 
 	/**
@@ -260,7 +261,7 @@ public class SWTBotRecorder {
 	 * @see #unregister(int, Listener)
 	 */
 	protected void unregisterAllListeners() {
-		for (ListenerSet set : registeredListeners) {
+		for (ListenerSet set : new ArrayList<ListenerSet>(registeredListeners)) {
 			unregister(set.eventType, set.listener);
 		}
 	}
