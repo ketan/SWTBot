@@ -17,6 +17,12 @@ import java.awt.event.KeyEvent;
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.swt.SWT;
 
+/**
+ * Sends keyboard notifications using AWT {@link Robot}.
+ * 
+ * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
+ * @version $Id$
+ */
 class AWTKeyboardStrategy extends AbstractKeyboardStrategy {
 
 	private final Robot	robot;

@@ -22,7 +22,6 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swtbot.swt.finder.ReferenceBy;
 import org.eclipse.swtbot.swt.finder.SWTBotWidget;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
-import org.eclipse.swtbot.swt.finder.keyboard.Keyboard;
 import org.eclipse.swtbot.swt.finder.results.ArrayResult;
 import org.eclipse.swtbot.swt.finder.results.Result;
 import org.eclipse.swtbot.swt.finder.results.StringResult;
@@ -105,7 +104,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 		log.debug(MessageFormat.format("Enquing keyboard notification: {0}", toString(modificationKey, c))); //$NON-NLS-1$
 		assertEnabled();
 		setFocus();
-		Keyboard.getAWTKeyboard().pressShortcut(modificationKey, c);
+		keyboard().pressShortcut(modificationKey, c);
 	}
 
 	/**
@@ -241,7 +240,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 	public void typeText(final String text, int interval) {
 		log.debug(MessageFormat.format("Inserting text:{0} into styledtext{1}", text, this)); //$NON-NLS-1$
 		setFocus();
-		Keyboard.getAWTKeyboard().typeText(text);
+		keyboard().typeText(text);
 	}
 
 	/**

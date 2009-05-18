@@ -43,7 +43,7 @@ public class KeyboardLayoutGenerator {
 		System.setProperty("org.eclipse.swtbot.keyboardLayout", "empty");
 
 		Display display = new Display();
-		keyboard = Keyboard.getSWTKeyboard();
+		keyboard = KeyboardFactory.getSWTKeyboard();
 		Shell shell = new Shell(display);
 		shell.setLayout(new GridLayout(1, false));
 

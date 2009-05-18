@@ -11,13 +11,21 @@
 package org.eclipse.swtbot.swt.finder.keyboard;
 
 import org.eclipse.jface.bindings.keys.KeyStroke;
+import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
+import org.hamcrest.SelfDescribing;
 
 /**
+ * Implementors must have a default no-args constructor.
+ * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
 public abstract class AbstractKeyboardStrategy implements KeyboardStrategy {
+
+	public void init(Widget widget, SelfDescribing description) {
+		// do nothing
+	}
 
 	/**
 	 * Presses the specified key.

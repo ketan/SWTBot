@@ -16,6 +16,8 @@ import java.awt.im.InputContext;
 import java.util.Locale;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swtbot.swt.finder.keyboard.Keyboard;
+import org.eclipse.swtbot.swt.finder.keyboard.KeyboardStrategy;
 
 /**
  * Holds the preferences for the SWT Bot.
@@ -26,7 +28,7 @@ import org.eclipse.swt.SWT;
  */
 public class SWTBotPreferences {
 
-	private static class Keyboard {
+	private static class KeyboardLayoutDetector {
 		private static String detectKeyboard() {
 			String keyboardLayout = "";
 			if (isMac()) {
@@ -123,7 +125,7 @@ public class SWTBotPreferences {
 	 * @return the keyboard layout.
 	 */
 	public static String getKeyboardLayout() {
-		return System.getProperty("org.eclipse.swtbot.keyboardLayout", Keyboard.detectKeyboard());
+		return System.getProperty("org.eclipse.swtbot.keyboardLayout", KeyboardLayoutDetector.detectKeyboard());
 	}
 
 	/**
@@ -134,6 +136,18 @@ public class SWTBotPreferences {
 	 */
 	public static int typeInterval() {
 		return toInt(System.getProperty("org.eclipse.swtbot.keyboard.interval", "50"));
+	}
+
+	/**
+	 * Returns the default keyboard strategy. This can be configured using the system property {@code
+	 * org.eclipse.swtbot.keyboard.strategy}. This property must be set to a subclass of {@link KeyboardStrategy}.
+	 * 
+	 * @see KeyboardStrategy
+	 * @see Keyboard
+	 * @return the default keyboard strategy to be used while sending key events.
+	 */
+	public static String keyboardStrategy() {
+		return System.getProperty("org.eclipse.swtbot.keyboard.strategy", "org.eclipse.swtbot.swt.finder.keyboard.AWTKeyboardStrategy");
 	}
 
 	private static long toLong(String timeoutValue) {

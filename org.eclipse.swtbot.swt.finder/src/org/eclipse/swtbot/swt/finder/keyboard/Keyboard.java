@@ -12,7 +12,6 @@ package org.eclipse.swtbot.swt.finder.keyboard;
 
 import static org.eclipse.swtbot.swt.finder.utils.SWTUtils.sleep;
 
-import java.awt.Robot;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,12 +19,8 @@ import java.util.Collections;
 import org.apache.log4j.Logger;
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
-import org.hamcrest.SelfDescribing;
 
 /**
  * Represents a Keyboard. Allows for typing keys and pressing shortcuts. Pressing shortcuts is different from pressing
@@ -69,35 +64,6 @@ public class Keyboard {
 	 */
 	public Keyboard(KeyboardStrategy strategy) {
 		this.strategy = strategy;
-	}
-
-	/**
-	 * Creates a keyboard that uses {@link Display#post(Event)} to press keys.
-	 * 
-	 * @return a keyboard.
-	 */
-	public static Keyboard getSWTKeyboard() {
-		return new Keyboard(new SWTKeyboardStrategy());
-	}
-
-	/**
-	 * Creates a keyboard that uses AWT {@link Robot} to press keys.
-	 * 
-	 * @return a keyboard.
-	 */
-	public static Keyboard getAWTKeyboard() {
-		return new Keyboard(new AWTKeyboardStrategy());
-	}
-
-	/**
-	 * Creates a keyboard that creates mock events directly pumped to the widget.
-	 * 
-	 * @param widget the widget on which the mock events are typed.
-	 * @param description the description of the widget.
-	 * @return a keyboard
-	 */
-	public static Keyboard getMockKeyboard(Widget widget, SelfDescribing description) {
-		return new Keyboard(new MockKeyboardStrategy(widget, description));
 	}
 
 	/**

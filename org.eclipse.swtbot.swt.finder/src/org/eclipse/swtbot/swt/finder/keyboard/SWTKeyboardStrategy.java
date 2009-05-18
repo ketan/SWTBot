@@ -17,6 +17,12 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 
+/**
+ * Sends keyboard notifications using {@link Display#post(Event)}.
+ * 
+ * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
+ * @version $Id$
+ */
 class SWTKeyboardStrategy extends AbstractKeyboardStrategy {
 
 	private final Display	display;

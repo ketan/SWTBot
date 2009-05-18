@@ -29,6 +29,8 @@ import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.ContextMenuFinder;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
+import org.eclipse.swtbot.swt.finder.keyboard.Keyboard;
+import org.eclipse.swtbot.swt.finder.keyboard.KeyboardFactory;
 import org.eclipse.swtbot.swt.finder.results.ArrayResult;
 import org.eclipse.swtbot.swt.finder.results.BoolResult;
 import org.eclipse.swtbot.swt.finder.results.IntResult;
@@ -66,6 +68,8 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	public final Display			display;
 	/** The description of the widget. */
 	protected final SelfDescribing	description;
+	/** The keyboard to use to type on the widget. */
+	private Keyboard				keyboard;
 
 	/**
 	 * Constructs a new instance with the given widget.
@@ -775,5 +779,14 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 */
 	protected Rectangle absoluteLocation() {
 		throw new UnsupportedOperationException("This operation is not supported by this widget.");
+	}
+
+	/**
+	 * @return the keyboard to use to type on this widget.
+	 */
+	protected Keyboard keyboard() {
+		if (keyboard == null)
+			keyboard = KeyboardFactory.getDefaultKeyboard(widget, description);
+		return keyboard;
 	}
 }

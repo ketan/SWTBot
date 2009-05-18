@@ -20,6 +20,9 @@ import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBot;
 import org.hamcrest.SelfDescribing;
 
 /**
+ * Sends keyboard notifications using {@link Widget#notifyListeners(int, Event)}. Note that this may not work in all
+ * cases.
+ * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
@@ -27,7 +30,7 @@ class MockKeyboardStrategy extends AbstractKeyboardStrategy {
 
 	private MyWidget	widget;
 
-	public MockKeyboardStrategy(Widget widget, SelfDescribing description) {
+	public void init(Widget widget, SelfDescribing description) {
 		this.widget = new MyWidget(widget, description);
 	}
 
