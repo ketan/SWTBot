@@ -17,6 +17,7 @@ import java.lang.reflect.Method;
 import java.text.MessageFormat;
 
 import org.apache.log4j.Logger;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
@@ -179,6 +180,8 @@ public abstract class SWTUtils {
 	public static boolean hasStyle(final Widget w, final int style) {
 		if ((w == null) || w.isDisposed())
 			return false;
+		if (style == SWT.NONE)
+			return true;
 		return UIThreadRunnable.syncExec(w.getDisplay(), new BoolResult() {
 			public Boolean run() {
 				return (w.getStyle() & style) != 0;
