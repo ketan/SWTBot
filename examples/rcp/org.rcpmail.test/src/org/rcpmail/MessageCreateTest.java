@@ -11,50 +11,60 @@
 package org.rcpmail;
 
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widgetOfType;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.Widget;
-import org.eclipse.swtbot.eclipse.finder.SWTBotEclipseTestCase;
+import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.ChildrenControlFinder;
+import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem;
 import org.hamcrest.Matcher;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-public class MessageCreateTest extends SWTBotEclipseTestCase {
+@RunWith(SWTBotJunit4ClassRunner.class)
+public class MessageCreateTest {
+	private static SWTWorkbenchBot	bot	= new SWTWorkbenchBot();
 
-	@Test public void CreatesAnotherMessageWindow() throws Exception {
+	@Test
+	public void CreatesAnotherMessageWindow() throws Exception {
 		assertEquals(2, viewCount());
 		bot.menu("File").menu("Open Another Message View").click();
 
 		assertEquals(3, viewCount());
 	}
 
-	@Test public void ClosesAllMessageWindows() throws Exception {
-		bot.viewById("Message").close();
-		bot.viewById("Message").close();
+	@Test
+	public void ClosesAllMessageWindows() throws Exception {
+		bot.viewByTitle("Message").close();
+		bot.viewByTitle("Message").close();
 
 		assertEquals(1, viewCount());
 	}
 
-	@Test public void MyMailBoxContainsDrafts() throws Exception {
+	@Test
+	public void MyMailBoxContainsDrafts() throws Exception {
 		SWTBotTree mailbox = mailBox();
 		SWTBotTreeItem myMailBox = mailbox.expandNode("me@this.com");
 		assertTrue(myMailBox.getNodes().contains("Drafts"));
 	}
 
 	// oops this fails
-	@Test public void OtherMailBoxContainsDrafts() throws Exception {
+	@Test
+	public void OtherMailBoxContainsDrafts() throws Exception {
 		SWTBotTree mailbox = mailBox();
 		SWTBotTreeItem otherMailBox = mailbox.expandNode("other@aol.com");
 		assertTrue(otherMailBox.getNodes().contains("Drafts"));
 	}
 
 	private SWTBotTree mailBox() throws WidgetNotFoundException {
-		Widget widget = bot.viewById("Mailboxes").getWidget();
+		Widget widget = bot.viewByTitle("Mailboxes").getWidget();
 		// find the tree
 		ChildrenControlFinder finder = new ChildrenControlFinder(widget);
 		List findControls = finder.findControls(treeMatcher());

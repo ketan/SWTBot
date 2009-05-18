@@ -11,11 +11,13 @@
 package org.rcpmail;
 
 import org.eclipse.swtbot.eclipse.finder.SWTBotEclipseTestCase;
+import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-
+@RunWith(SWTBotJunit4ClassRunner.class)
 public class MyFirstTest extends SWTBotEclipseTestCase {
 
 	@Before

@@ -10,19 +10,12 @@
  *******************************************************************************/
 package org.rcpmail;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
+@RunWith(Suite.class)
+@SuiteClasses( { MessageCreateTest.class, MyFirstTest.class, MySecondTest.class })
 public class AllTests {
-
-	public static Test suite() {
-		TestSuite suite = new TestSuite("Test for org.rcpmail");
-		//$JUnit-BEGIN$
-		suite.addTestSuite(MessageCreateTest.class);
-		suite.addTestSuite(MyFirstTest.class);
-		suite.addTestSuite(MySecondTest.class);
-		//$JUnit-END$
-		return suite;
-	}
 
 }
