@@ -19,10 +19,10 @@ import javax.swing.text.View;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
-import org.eclipse.swtbot.eclipse.finder.exceptions.WorkbenchPartNotActiveException;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.ui.IViewReference;
+import org.hamcrest.SelfDescribing;
 
 /**
  * This represents the eclipse {@link View} item.
@@ -36,12 +36,25 @@ public class SWTBotView extends SWTBotWorkbenchPart<IViewReference> {
 	private Widget	widget;
 
 	/**
+	 * Creates an instance of a view part.
+	 * 
 	 * @param partReference the view reference representing this view.
 	 * @param bot the bot that's used to find controls within this view.
 	 * @since 2.0
 	 */
 	public SWTBotView(IViewReference partReference, SWTWorkbenchBot bot) {
 		super(partReference, bot);
+	}
+
+	/**
+	 * Creates an instance of a view part.
+	 * 
+	 * @param partReference the part reference.
+	 * @param bot the helper bot.
+	 * @param description the description of the workbench part.
+	 */
+	public SWTBotView(IViewReference partReference, SWTWorkbenchBot bot, SelfDescribing description) {
+		super(partReference, bot, description);
 	}
 
 	public void setFocus() {

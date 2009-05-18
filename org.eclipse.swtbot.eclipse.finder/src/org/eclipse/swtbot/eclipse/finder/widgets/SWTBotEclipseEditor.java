@@ -50,6 +50,7 @@ import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.SelfDescribing;
 
 /**
  * This represents an eclipse editor item.
@@ -80,6 +81,19 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	 */
 	public SWTBotEclipseEditor(IEditorReference editorReference, SWTWorkbenchBot bot) throws WidgetNotFoundException {
 		super(editorReference, bot);
+		this.styledText = new SWTBotStyledText((StyledText) findWidget(widgetOfType(StyledText.class)));
+		this.widget = this.styledText.widget;
+	}
+
+	/**
+	 * Constructs an instance for the given editorReference.
+	 * 
+	 * @param editorReference the part reference.
+	 * @param bot the helper bot.
+	 * @param description the description of the editor part.
+	 */
+	public SWTBotEclipseEditor(IEditorReference editorReference, SWTWorkbenchBot bot, SelfDescribing description) {
+		super(editorReference, bot, description);
 		this.styledText = new SWTBotStyledText((StyledText) findWidget(widgetOfType(StyledText.class)));
 		this.widget = this.styledText.widget;
 	}

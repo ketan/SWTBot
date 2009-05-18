@@ -18,21 +18,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
-import org.eclipse.swtbot.eclipse.finder.exceptions.WorkbenchPartNotActiveException;
 import org.eclipse.swtbot.eclipse.finder.finders.CommandFinder;
 import org.eclipse.swtbot.eclipse.finder.finders.ViewMenuFinder;
+import org.eclipse.swtbot.eclipse.finder.widgets.utils.PartLabelDescription;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.Finder;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.ListResult;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
+import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarButton;
 import org.eclipse.ui.IViewReference;
@@ -41,6 +42,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.internal.ViewPane;
 import org.eclipse.ui.internal.WorkbenchPartReference;
 import org.hamcrest.Matcher;
+import org.hamcrest.SelfDescribing;
 
 /**
  * This represents the eclipse {@link IWorkbenchPartReference} item, subclasses must extend this to implement support
@@ -60,6 +62,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 	/** A helper swtbot instance. */
 	protected final SWTWorkbenchBot	bot;
 	private final ViewMenuFinder	menuFinder;
+	private final SelfDescribing	description;
 
 	/**
 	 * Creates an instance of a workbench part.
@@ -68,7 +71,19 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 	 * @param bot the helper bot.
 	 */
 	public SWTBotWorkbenchPart(T partReference, SWTWorkbenchBot bot) {
+		this(partReference, bot, new PartLabelDescription<T>(partReference));
+	}
+
+	/**
+	 * Creates an instance of a workbench part.
+	 * 
+	 * @param partReference the part reference.
+	 * @param bot the helper bot.
+	 * @param description the description of the workbench part.
+	 */
+	public SWTBotWorkbenchPart(T partReference, SWTWorkbenchBot bot, SelfDescribing description) {
 		this.bot = bot;
+		this.description = description;
 		Assert.isNotNull(partReference, "The part reference cannot be null"); //$NON-NLS-1$
 		this.partReference = partReference;
 		this.menuFinder = new ViewMenuFinder();
@@ -250,8 +265,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 	 * @throws WorkbenchPartNotActiveException if the part is not currently active.
 	 */
 	protected void assertActive() {
-		if (!isActive())
-			throw new WorkbenchPartNotActiveException();
+		Assert.isLegal(isActive(), MessageFormat.format("The workbench part {0}is not active", description));
 	}
 
 	/**

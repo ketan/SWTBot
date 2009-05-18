@@ -19,6 +19,7 @@ import org.eclipse.swtbot.swt.finder.results.Result;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
+import org.hamcrest.SelfDescribing;
 
 /**
  * This represents an Eclipse workbench editor part.
@@ -40,6 +41,17 @@ public class SWTBotEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	 */
 	public SWTBotEditor(IEditorReference editorReference, SWTWorkbenchBot bot) throws WidgetNotFoundException {
 		super(editorReference, bot);
+	}
+
+	/**
+	 * Constructs an instance for the given editorReference.
+	 * 
+	 * @param editorReference the part reference.
+	 * @param bot the helper bot.
+	 * @param description the description of the editor part.
+	 */
+	public SWTBotEditor(IEditorReference editorReference, SWTWorkbenchBot bot, SelfDescribing description) {
+		super(editorReference, bot, description);
 	}
 
 	public boolean isActive() {

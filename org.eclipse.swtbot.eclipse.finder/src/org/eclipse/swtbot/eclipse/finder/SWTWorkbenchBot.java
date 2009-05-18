@@ -20,7 +20,6 @@ import static org.eclipse.swtbot.eclipse.finder.waits.Conditions.waitForView;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.swtbot.eclipse.finder.exceptions.ResultNotUniqueException;
 import org.eclipse.swtbot.eclipse.finder.finders.WorkbenchContentsFinder;
 import org.eclipse.swtbot.eclipse.finder.matchers.WidgetMatcherFactory;
 import org.eclipse.swtbot.eclipse.finder.waits.WaitForEditor;
@@ -64,10 +63,6 @@ public class SWTWorkbenchBot extends SWTBot {
 	 */
 	public SWTBotPerspective perspective(Matcher<?> matcher) {
 		List<IPerspectiveDescriptor> perspectives = workbenchContentsFinder.findPerspectives(matcher);
-
-		if (perspectives.size() > 1)
-			throw new ResultNotUniqueException(matcher, perspectives);
-
 		return new SWTBotPerspective(perspectives.get(0), this);
 	}
 
@@ -127,10 +122,6 @@ public class SWTWorkbenchBot extends SWTBot {
 	public SWTBotView view(Matcher<?> matcher) {
 		WaitForView waitForView = waitForView(matcher);
 		waitUntilWidgetAppears(waitForView);
-
-		if (waitForView.getAllMatches().size() > 1)
-			throw new ResultNotUniqueException(matcher, waitForView.getAllMatches());
-
 		return new SWTBotView(waitForView.get(0), this);
 	}
 
@@ -202,10 +193,6 @@ public class SWTWorkbenchBot extends SWTBot {
 	public SWTBotEditor editor(Matcher<?> matcher) {
 		WaitForEditor waitForEditor = waitForEditor(matcher);
 		waitUntilWidgetAppears(waitForEditor);
-
-		if (waitForEditor.getAllMatches().size() > 1)
-			throw new ResultNotUniqueException(matcher, waitForEditor.getAllMatches());
-
 		return new SWTBotEditor(waitForEditor.get(0), this);
 	}
 
