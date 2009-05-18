@@ -407,7 +407,7 @@ public abstract class SWTUtils {
 	/**
 	 * Waits until a display appears.
 	 * 
-	 * @throws TimeoutException if the condition does not evaluate to true after {@link SWTBotPreferences#getTimeout()}
+	 * @throws TimeoutException if the condition does not evaluate to true after {@link SWTBotPreferences#timeout()}
 	 *             milliseconds.
 	 */
 	public static void waitForDisplayToAppear() {
@@ -426,7 +426,7 @@ public abstract class SWTUtils {
 
 	private static long timeout() {
 		try {
-			long timeout = SWTBotPreferences.getTimeout();
+			long timeout = SWTBotPreferences.timeout();
 			return timeout <= 0 ? SWTBot.DEFAULT_TIMEOUT : timeout;
 		} catch (Exception e) {
 			// do nothing

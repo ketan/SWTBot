@@ -69,10 +69,10 @@ class KeyboardLayout {
 
 	/**
 	 * @return the default keyboard layout.
-	 * @see SWTBotPreferences#getKeyboardLayout()
+	 * @see SWTBotPreferences#keyboardLayout()
 	 */
 	public static KeyboardLayout getDefaultKeyboardLayout() {
-		return getKeyboardLayout(SWTBotPreferences.getKeyboardLayout());
+		return getKeyboardLayout(SWTBotPreferences.keyboardLayout());
 	}
 
 	/**

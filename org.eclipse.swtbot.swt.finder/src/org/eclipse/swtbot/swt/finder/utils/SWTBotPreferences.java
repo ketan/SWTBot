@@ -69,7 +69,7 @@ public class SWTBotPreferences {
 	 * @return the timeout value.
 	 * @since 1.3
 	 */
-	public static long getTimeout() {
+	public static long timeout() {
 		return toLong(System.getProperty("org.eclipse.swtbot.search.timeout", "5000")); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
@@ -98,7 +98,7 @@ public class SWTBotPreferences {
 	 * @return the maximum screenshots.
 	 * @since 1.3
 	 */
-	public static int getMaximumScreenshots() {
+	public static int maximumScreenshots() {
 		return toInt(System.getProperty("org.eclipse.swtbot.maximum.screenshots", "100")); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
@@ -111,7 +111,7 @@ public class SWTBotPreferences {
 	 * @return the screenshot image format.
 	 * @since 1.3
 	 */
-	public static String getScreenshotFormat() {
+	public static String screenshotFormat() {
 		return System.getProperty("org.eclipse.swtbot.screenshot.format", "jpeg"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
@@ -124,7 +124,7 @@ public class SWTBotPreferences {
 	 * 
 	 * @return the keyboard layout.
 	 */
-	public static String getKeyboardLayout() {
+	public static String keyboardLayout() {
 		return System.getProperty("org.eclipse.swtbot.keyboardLayout", KeyboardLayoutDetector.detectKeyboard());
 	}
 
