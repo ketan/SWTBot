@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.recorder.generators;
 
-
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 import org.eclipse.swtbot.swt.recorder.methodargs.NullArgument;
@@ -19,7 +18,14 @@ import org.eclipse.swtbot.swt.recorder.methodargs.StringArgument;
 import org.eclipse.swtbot.swt.recorder.methodargs.StringArrayArgument;
 
 /**
- * Represents an {@link Event} object as a method call that SWTBot can execute.
+ * Represents an {@link Event} object as a method invocation on an SWTBot widget. For e.g. a click event on a button
+ * 
+ * <pre>
+ * SWTBotButton button = ...;
+ * button.click();
+ * </pre>
+ * 
+ * is represented by <code>new SWTBotEvent("click")</code>
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$

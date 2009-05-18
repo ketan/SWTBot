@@ -11,7 +11,6 @@
 package org.eclipse.swtbot.swt.recorder;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.eclipse.swt.SWT;
@@ -39,7 +38,7 @@ public class SWTBotRecorder {
 	 * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
 	 * @version $Id$
 	 */
-	public static class ListenerSet {
+	private static class ListenerSet {
 
 		private final int		eventType;
 		private final Listener	listener;
@@ -82,7 +81,7 @@ public class SWTBotRecorder {
 	}
 
 	private final Display		display;
-	final Set					registeredListeners;
+	final Set<ListenerSet>		registeredListeners;
 
 	private final ActionList	eventList;
 
@@ -106,7 +105,7 @@ public class SWTBotRecorder {
 	 */
 	public SWTBotRecorder(Display display, SWTBot bot) {
 		this.display = display;
-		registeredListeners = new HashSet();
+		registeredListeners = new HashSet<ListenerSet>();
 		eventList = new ActionList();
 		shellEventListener = new ShellEventListener(eventList, bot);
 		// treeEventListener = new TreeEventListener(eventList, bot);
@@ -243,9 +242,9 @@ public class SWTBotRecorder {
 		UIThreadRunnable.syncExec(display, new VoidResult() {
 			public void run() {
 				display.addFilter(eventType, listener);
+				registeredListeners.add(new ListenerSet(eventType, listener));
 			}
 		});
-		registeredListeners.add(new ListenerSet(eventType, listener));
 	}
 
 	/**
@@ -261,11 +260,9 @@ public class SWTBotRecorder {
 	 * @see #unregister(int, Listener)
 	 */
 	protected void unregisterAllListeners() {
-		for (Iterator iterator = registeredListeners.iterator(); iterator.hasNext();) {
-			ListenerSet set = (ListenerSet) iterator.next();
+		for (ListenerSet set : registeredListeners) {
 			unregister(set.eventType, set.listener);
 		}
-		registeredListeners.clear();
 	}
 
 	/**
@@ -278,6 +275,7 @@ public class SWTBotRecorder {
 		UIThreadRunnable.syncExec(display, new VoidResult() {
 			public void run() {
 				display.removeFilter(eventType, listener);
+				registeredListeners.remove(new ListenerSet(eventType, listener));
 			}
 		});
 	}

@@ -18,6 +18,8 @@ import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 import org.eclipse.swtbot.swt.recorder.generators.SWTBotAction;
 import org.eclipse.swtbot.swt.recorder.listeners.ActionList;
+import org.junit.After;
+import org.junit.Before;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -26,13 +28,7 @@ import org.eclipse.swtbot.swt.recorder.listeners.ActionList;
 public abstract class AbstractSWTBotRecorderTest extends AbstractSWTTestCase {
 	protected SWTBotRecorder	recorder;
 
-	/**
-	 * 
-	 */
-	public AbstractSWTBotRecorderTest() {
-		super();
-	}
-
+	@Before
 	public void setUp() throws Exception {
 		super.setUp();
 		bot = new SWTBot();
@@ -46,6 +42,7 @@ public abstract class AbstractSWTBotRecorderTest extends AbstractSWTTestCase {
 		return "Button";
 	}
 
+	@After
 	public void tearDown() throws Exception {
 		recorder.stop();
 		super.tearDown();
