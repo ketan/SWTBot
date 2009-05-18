@@ -39,11 +39,7 @@ public class ShellEventListener extends AbstractTextBasedRecorderListener {
 	protected boolean doCanHandleEvent(Event event) {
 		return event.type == SWT.Activate;
 	}
-	
-	protected boolean matchesWidgetStyle(Widget widget) {
-		return true;
-	}
-	
+
 	protected List<? extends Widget> similarWidgets(Matcher<?> matcher, Widget widget) {
 		return bot.shells(SWTUtils.getText(widget));
 	}

@@ -10,9 +10,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.recorder.widgets.text;
 
-
-import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.allOf;
-
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabItem;
@@ -21,7 +18,6 @@ import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTabItem;
 import org.eclipse.swtbot.swt.recorder.generators.SWTBotEvent;
 import org.eclipse.swtbot.swt.recorder.listeners.ActionList;
-import org.hamcrest.Matcher;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
@@ -41,7 +37,7 @@ public class TabSelectionListener extends AbstractTextBasedRecorderListener {
 		return true;
 	}
 
-	protected Widget getWidget(Event event) {
+	public Widget getWidget(Event event) {
 		return event.item;
 	}
 
@@ -52,11 +48,4 @@ public class TabSelectionListener extends AbstractTextBasedRecorderListener {
 		return super.getShell(widget);
 	}
 
-	protected boolean matchesWidgetStyle(Widget widget) {
-		return true;
-	}
-
-	protected Matcher<? extends Widget> createMatcher(String text) {
-		return allOf(typeMatcher(), mnemonicTextMatcher(text));
-	}
 }

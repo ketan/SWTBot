@@ -10,13 +10,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.recorder.widgets.text;
 
-import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.allOf;
-import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widgetOfType;
-import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMnemonic;
-import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withStyle;
-
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
@@ -25,22 +18,20 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.SWTBotWidget;
-import org.eclipse.swtbot.swt.finder.Style;
 import org.eclipse.swtbot.swt.finder.utils.ClassUtils;
 import org.eclipse.swtbot.swt.finder.utils.SWTBotEvents;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
-import org.eclipse.swtbot.swt.finder.utils.StringUtils;
 import org.eclipse.swtbot.swt.recorder.generators.SWTBotAccessor;
 import org.eclipse.swtbot.swt.recorder.generators.SWTBotAction;
 import org.eclipse.swtbot.swt.recorder.generators.SWTBotEvent;
 import org.eclipse.swtbot.swt.recorder.listeners.ActionList;
-import org.hamcrest.Matcher;
+import org.eclipse.swtbot.swt.recorder.widgets.AccessorCreatorStrategy;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-abstract class AbstractTextBasedRecorderListener implements Listener {
+public abstract class AbstractTextBasedRecorderListener implements Listener {
 
 	private final ActionList	eventList;
 	protected final SWTBot		bot;
@@ -68,23 +59,11 @@ abstract class AbstractTextBasedRecorderListener implements Listener {
 
 	protected abstract SWTBotEvent createEvent(Event event);
 
-	protected final SWTBotAccessor createAccessor(Event event) {
-		Widget widget = getWidget(event);
-		String text = getText(widget);
-		if (!StringUtils.isEmptyOrNull(text)) {
-			Matcher<?> matcher = createMatcher(text);
-			List<? extends Widget> similarWidgets = similarWidgets(matcher, widget);
-			int index = similarWidgets.indexOf(widget);
-			return new SWTBotAccessor("bot", annotation.preferredName(), text, index); //$NON-NLS-1$
-		}
-		return null;
+	private final SWTBotAccessor createAccessor(Event event) {
+		return new AccessorCreatorStrategy(event, this, annotation, bot).create();
 	}
 
-	protected Matcher<? extends Widget> createMatcher(String text) {
-		return allOf(typeMatcher(), mnemonicTextMatcher(text), styleMatcher());
-	}
-
-	protected Widget getWidget(Event event) {
+	public Widget getWidget(Event event) {
 		return event.widget;
 	}
 
@@ -98,37 +77,16 @@ abstract class AbstractTextBasedRecorderListener implements Listener {
 	}
 
 	private final boolean canHandleWidget(Event event) {
-		return matchesWidgetType(getWidget(event)) && matchesWidgetStyle(getWidget(event)) && !SWTUtils.isEmptyOrNullText(getWidget(event))
-				&& doCanHandleEvent(event);
+		Widget widget = getWidget(event);
+		return matchesWidgetType(widget) && matchesWidgetStyle(widget) && !SWTUtils.isEmptyOrNullText(widget) && doCanHandleEvent(event);
 	}
 
 	protected abstract boolean doCanHandleEvent(Event event);
-
-	protected List<? extends Widget> similarWidgets(Matcher<?> matcher, Widget widget) {
-		return bot.widgets(matcher, getShell(widget));
-	}
-
-	private final String getText(Widget widget) {
-		return SWTUtils.getText(widget).replaceAll("&", ""); //$NON-NLS-1$ //$NON-NLS-2$
-	}
-
-	protected final Matcher<? extends Widget> mnemonicTextMatcher(String text) {
-		return withMnemonic(text);
-	}
-
-	protected final Matcher<? extends Widget> typeMatcher() {
-		return widgetOfType(this.annotation.clasz());
-	}
 
 	protected Shell getShell(Widget widget) {
 		if (widget instanceof Control)
 			return ((Control) widget).getShell();
 		throw new IllegalArgumentException("Cannot find the shell for widgets of type: " + ClassUtils.simpleClassName(widget)); //$NON-NLS-1$
-	}
-
-	private final Matcher<? extends Widget> styleMatcher() {
-		Style style = annotation.style();
-		return withStyle(style.value(), style.name());
 	}
 
 	protected boolean matchesWidgetStyle(Widget widget) {
