@@ -226,6 +226,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 	public void select(final int rowIndex) {
 		assertEnabled();
 		assertIsLegalRowIndex(rowIndex);
+		setFocus();
 		asyncExec(new VoidResult() {
 			public void run() {
 				TableItem item = widget.getItem(rowIndex);
@@ -249,6 +250,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 	 */
 	public void select(final String... items) {
 		assertEnabled();
+		setFocus();
 		int[] itemIndicies = new int[items.length];
 		for(int i = 0; i < items.length; i++) {
 			itemIndicies[i] = indexOf(items[i]);
@@ -326,6 +328,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 	 */
 	public void unselect() {
 		assertEnabled();
+		setFocus();
 		asyncExec(new VoidResult() {
 			public void run() {
 				log.debug(MessageFormat.format("Unselecting all in {0}", widget)); //$NON-NLS-1$
@@ -342,6 +345,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 	public void select(final int[] indices) {
 		assertEnabled();
 		assertMultiSelect();
+		setFocus();
 		log.debug(MessageFormat.format("Selecting rows {0} in table {1}", StringUtils.join(indices, ", "), this)); //$NON-NLS-1$ //$NON-NLS-2$
 		unselect();
 		for (int i = 0; i < indices.length; i++)
@@ -400,6 +404,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 	public void click(final int row, final int column) {
 		assertIsLegalCell(row, column);
 		// for some reason, it does not work without setting selection first
+		setFocus();
 		select(row);
 		asyncExec(new VoidResult() {
 			public void run() {
@@ -419,6 +424,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 	 */
 	public void doubleClick(final int row, final int column) {
 		assertIsLegalCell(row, column);
+		setFocus();
 		asyncExec(new VoidResult() {
 			public void run() {
 				TableItem item = widget.getItem(row);
