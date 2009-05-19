@@ -39,7 +39,7 @@ final class ScreenshotCaptureListener extends RunListener {
 	private void captureScreenshot(Failure failure) {
 		try {
 			int maximumScreenshots = SWTBotPreferences.maximumScreenshots();
-			String fileName = "screenshots/" + failure.getTestHeader() + "." + SWTBotPreferences.screenshotFormat().toLowerCase(); //$NON-NLS-1$
+			String fileName = SWTBotPreferences.screenshotsDir() + "/" + failure.getTestHeader() + "." + SWTBotPreferences.screenshotFormat().toLowerCase(); //$NON-NLS-1$
 			if (++screenshotCounter <= maximumScreenshots) {
 				new File("screenshots").mkdirs(); //$NON-NLS-1$ 
 				captureScreenshot(fileName);

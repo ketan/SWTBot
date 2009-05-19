@@ -93,13 +93,24 @@ public class SWTBotPreferences {
 
 	/**
 	 * Gets the maximum number of screenshots that SWTBot should capture. This can be set using the system property
-	 * {@code org.eclipse.swtbot.maximum.screenshots}.
+	 * {@code org.eclipse.swtbot.screenshots.maxcount}.
 	 * 
 	 * @return the maximum screenshots.
 	 * @since 1.3
 	 */
 	public static int maximumScreenshots() {
-		return toInt(System.getProperty("org.eclipse.swtbot.maximum.screenshots", "100")); //$NON-NLS-1$ //$NON-NLS-2$
+		return toInt(System.getProperty("org.eclipse.swtbot.screenshots.maxcount", "100")); //$NON-NLS-1$ //$NON-NLS-2$
+	}
+
+	/**
+	 * Gets the directory in which screenshots should be generated. This can be set using the system property {@code
+	 * org.eclipse.swtbot.screenshots.dir}.
+	 * 
+	 * @return the directory location of the folder, or the string <code>screenshots</code> if it is not set.
+	 * @since 1.3
+	 */
+	public static String screenshotsDir() {
+		return System.getProperty("org.eclipse.swtbot.screenshots.dir", "screenshots");
 	}
 
 	/**
