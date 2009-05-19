@@ -163,7 +163,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 			}
 		});
 
-		long playbackDelay = SWTBotPreferences.playbackDelay();
+		long playbackDelay = SWTBotPreferences.PLAYBACK_DELAY;
 		if (playbackDelay > 0)
 			sleep(playbackDelay);
 	}

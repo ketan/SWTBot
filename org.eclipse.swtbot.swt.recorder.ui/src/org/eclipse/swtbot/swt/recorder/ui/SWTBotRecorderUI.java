@@ -250,7 +250,7 @@ public class SWTBotRecorderUI {
 	}
 
 	protected String getSaveFileName() {
-		String recorderFileName = SWTBotPreferences.recorderFileName();
+		String recorderFileName = SWTBotPreferences.RECORDER_FILE_NAME;
 		if (isEmptyOrNull(recorderFileName))
 			return new FileDialog(saveButton.getShell(), SWT.SAVE).open();
 		return recorderFileName;

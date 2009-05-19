@@ -72,7 +72,7 @@ class KeyboardLayout {
 	 * @see SWTBotPreferences#keyboardLayout()
 	 */
 	public static KeyboardLayout getDefaultKeyboardLayout() {
-		return getKeyboardLayout(SWTBotPreferences.keyboardLayout());
+		return getKeyboardLayout(SWTBotPreferences.KEYBOARD_LAYOUT);
 	}
 
 	/**

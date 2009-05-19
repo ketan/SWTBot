@@ -28,6 +28,90 @@ import org.eclipse.swtbot.swt.finder.keyboard.KeyboardStrategy;
  */
 public class SWTBotPreferences {
 
+	/**
+	 * The default key used to match SWT widgets. Defaults to {@code org.eclipse.swtbot.widget.key}. To set another default use the system property {@code org.eclipse.swtbot.search.defaultKey}
+	 */
+	public static String	DEFAULT_KEY					= System.getProperty("org.eclipse.swtbot.search.defaultKey", "org.eclipse.swtbot.widget.key");	
+
+	/**
+	 * The timeout for finding widgets among other things. Defaults to 5000ms. To set another default use the system
+	 * property {@code org.eclipse.swtbot.search.timeout}.
+	 */
+	public static long		TIMEOUT						= toLong(System.getProperty("org.eclipse.swtbot.search.timeout", "5000"), 5000);
+	
+	/**
+	 * The name of the file in which the recorder records. Defaults to "swtbot.record.txt". To set another default, use
+	 * the system property {@code org.eclipse.swtbot.recorder.file.name}.
+	 */
+	public static String	RECORDER_FILE_NAME			= System.getProperty("org.eclipse.swtbot.recorder.file.name", "swtbot.record.txt");
+	
+	/**
+	 * The speed of playback in milliseconds. Defaults to 0. To set another default, use the system property {@code
+	 * org.eclipse.swtbot.playback.delay}.
+	 */
+	public static long		PLAYBACK_DELAY				= toLong(System.getProperty("org.eclipse.swtbot.playback.delay", "0"), 0);
+	
+	/**
+	 * The maximum number of screenshots that SWTBot should capture. Defaults to 100. To set another default use the
+	 * system property {@code org.eclipse.swtbot.screenshots.maxcount}.
+	 */
+	public static int		MAX_ERROR_SCREENSHOT_COUNT	= toInt(System.getProperty("org.eclipse.swtbot.screenshots.error.maxcount", "100"), 100);
+	
+	/**
+	 * The directory in which screenshots should be generated. Defaults to "screenshots". To set another default use the
+	 * system property {@code org.eclipse.swtbot.screenshots.dir}.
+	 */
+	public static String	SCREENSHOTS_DIR				= System.getProperty("org.eclipse.swtbot.screenshots.dir", "screenshots");
+	
+	/**
+	 * The screenshot image format to be used. Defaults to "jpeg". To set another default use the system property
+	 * {@code org.eclipse.swtbot.screenshot.format}. The value must be one these: BMP, GIF, ICO, JPEG, JPG, PNG or TIFF.
+	 */
+	public static String	SCREENSHOT_FORMAT			= System.getProperty("org.eclipse.swtbot.screenshot.format", "jpeg");
+	
+	/**
+	 * The keyboard layout. This value is autodetected at runtime. This can be set using the system property
+	 * {@code org.eclipse.swtbot.keyboardLayout}.
+	 * <p>
+	 * <strong>Note:</strong> the layout must be of the form [MAC.][upper-case-two-character-country-code]. Eg: "MAC.EN"
+	 * or "MAC.GB" or just "FR" or "DE".
+	 * </p>
+	 */
+	public static String	KEYBOARD_LAYOUT				= System.getProperty("org.eclipse.swtbot.keyboardLayout", KeyboardLayoutDetector .detectKeyboard());
+
+	/**
+	 * The the time interval in milliseconds between typing characters in a string. Defaults to 50ms. To set another default
+	 * use the system property {@code org.eclipse.swtbot.keyboard.interval}.
+	 */
+	public static int		TYPE_INTERVAL				= toInt(System.getProperty("org.eclipse.swtbot.keyboard.interval", "50"), 50);
+	/**
+	 * The default keyboard strategy. Defaults to org.eclipse.swtbot.swt.finder.keyboard.AWTKeyboardStrategy. To set
+	 * another default use the system property {@code org.eclipse.swtbot.keyboard.strategy}. This property must be set
+	 * to a subclass of {@link KeyboardStrategy}.
+	 * 
+	 * @see KeyboardStrategy
+	 * @see Keyboard
+	 */
+	public static String	KEYBOARD_STRATEGY			= System.getProperty("org.eclipse.swtbot.keyboard.strategy", "org.eclipse.swtbot.swt.finder.keyboard.AWTKeyboardStrategy");
+
+	private static long toLong(String timeoutValue, long defaultValue) {
+		try {
+			Long timeout = Long.valueOf(timeoutValue);
+			return timeout.longValue();
+		} catch (Exception e) {
+			return defaultValue;
+		}
+	}
+
+	private static int toInt(String value, int defaultValue) {
+		try {
+			Integer integerValue = Integer.valueOf(value);
+			return integerValue.intValue();
+		} catch (Exception e) {
+			return defaultValue;
+		}
+	}
+
 	private static class KeyboardLayoutDetector {
 		private static String detectKeyboard() {
 			String keyboardLayout = "";
@@ -55,128 +139,4 @@ public class SWTBotPreferences {
 		}
 
 	}
-
-	/**
-	 * The default key used to match SWT widgets.
-	 * 
-	 * @since 2.0
-	 */
-	public static final String	DEFAULT_KEY	= "org.eclipse.swtbot.widget.key";	//$NON-NLS-1$
-
-	/**
-	 * Gets the timeout. To set use the system property {@code org.eclipse.swtbot.search.timeout}.
-	 * 
-	 * @return the timeout value.
-	 * @since 1.3
-	 */
-	public static long timeout() {
-		return toLong(System.getProperty("org.eclipse.swtbot.search.timeout", "5000")); //$NON-NLS-1$ //$NON-NLS-2$
-	}
-
-	/**
-	 * Gets the recorder file name. To set use the system property {@code org.eclipse.swtbot.recorder.file.name}.
-	 * 
-	 * @return the recorder file name.
-	 */
-	public static String recorderFileName() {
-		return System.getProperty("org.eclipse.swtbot.recorder.file.name"); //$NON-NLS-1$
-	}
-
-	/**
-	 * Gets the playback delay. This can be set using the system property {@code org.eclipse.swtbot.playback.delay}.
-	 * 
-	 * @return the playback delay.
-	 */
-	public static long playbackDelay() {
-		return toLong(System.getProperty("org.eclipse.swtbot.playback.delay", "0")); //$NON-NLS-1$ //$NON-NLS-2$
-	}
-
-	/**
-	 * Gets the maximum number of screenshots that SWTBot should capture. This can be set using the system property
-	 * {@code org.eclipse.swtbot.screenshots.maxcount}.
-	 * 
-	 * @return the maximum screenshots.
-	 * @since 1.3
-	 */
-	public static int maximumScreenshots() {
-		return toInt(System.getProperty("org.eclipse.swtbot.screenshots.maxcount", "100")); //$NON-NLS-1$ //$NON-NLS-2$
-	}
-
-	/**
-	 * Gets the directory in which screenshots should be generated. This can be set using the system property {@code
-	 * org.eclipse.swtbot.screenshots.dir}.
-	 * 
-	 * @return the directory location of the folder, or the string <code>screenshots</code> if it is not set.
-	 * @since 1.3
-	 */
-	public static String screenshotsDir() {
-		return System.getProperty("org.eclipse.swtbot.screenshots.dir", "screenshots");
-	}
-
-	/**
-	 * Gets the screenshot image format to be used. This can be set using the system property {@code
-	 * org.eclipse.swtbot.screenshot.format}.<br>
-	 * It must be one these: BMP, GIF, ICO, JPEG, JPG, PNG or TIFF.<br>
-	 * JPEG will be used as the default if this property is not set.
-	 * 
-	 * @return the screenshot image format.
-	 * @since 1.3
-	 */
-	public static String screenshotFormat() {
-		return System.getProperty("org.eclipse.swtbot.screenshot.format", "jpeg"); //$NON-NLS-1$ //$NON-NLS-2$
-	}
-
-	/**
-	 * Gets the keyboard layout. This can be set using the system property {@code org.eclipse.swtbot.keyboardLayout}.
-	 * <p>
-	 * <strong>Note:</strong> the layout must be of the form [MAC.][upper-case-two-character-country-code]. Eg: "MAC.EN"
-	 * or "MAC.GB" or just "FR" or "DE".
-	 * </p>
-	 * 
-	 * @return the keyboard layout.
-	 */
-	public static String keyboardLayout() {
-		return System.getProperty("org.eclipse.swtbot.keyboardLayout", KeyboardLayoutDetector.detectKeyboard());
-	}
-
-	/**
-	 * Gets the the time interval in ms. between typing characters in a string. This can be set using the system
-	 * property {@code org.eclipse.swtbot.keyboard.interval}.<br>
-	 * 
-	 * @return the time interval between typing characters.
-	 */
-	public static int typeInterval() {
-		return toInt(System.getProperty("org.eclipse.swtbot.keyboard.interval", "50"));
-	}
-
-	/**
-	 * Returns the default keyboard strategy. This can be configured using the system property {@code
-	 * org.eclipse.swtbot.keyboard.strategy}. This property must be set to a subclass of {@link KeyboardStrategy}.
-	 * 
-	 * @see KeyboardStrategy
-	 * @see Keyboard
-	 * @return the default keyboard strategy to be used while sending key events.
-	 */
-	public static String keyboardStrategy() {
-		return System.getProperty("org.eclipse.swtbot.keyboard.strategy", "org.eclipse.swtbot.swt.finder.keyboard.AWTKeyboardStrategy");
-	}
-
-	private static long toLong(String timeoutValue) {
-		try {
-			Long timeout = Long.valueOf(timeoutValue);
-			return timeout.longValue();
-		} catch (Exception e) {
-			return 0;
-		}
-	}
-
-	private static int toInt(String value) {
-		try {
-			Integer integerValue = Integer.valueOf(value);
-			return integerValue.intValue();
-		} catch (Exception e) {
-			return 0;
-		}
-	}
-
 }

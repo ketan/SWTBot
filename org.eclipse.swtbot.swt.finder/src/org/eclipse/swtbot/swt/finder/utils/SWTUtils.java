@@ -429,7 +429,7 @@ public abstract class SWTUtils {
 
 	private static long timeout() {
 		try {
-			long timeout = SWTBotPreferences.timeout();
+			long timeout = SWTBotPreferences.TIMEOUT;
 			return timeout <= 0 ? SWTBot.DEFAULT_TIMEOUT : timeout;
 		} catch (Exception e) {
 			// do nothing

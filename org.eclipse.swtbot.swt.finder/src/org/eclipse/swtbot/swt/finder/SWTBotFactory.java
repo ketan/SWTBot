@@ -355,7 +355,7 @@ abstract class SWTBotFactory {
 	 */
 	protected long timeout() {
 		try {
-			long timeout = SWTBotPreferences.timeout();
+			long timeout = SWTBotPreferences.TIMEOUT;
 			return timeout <= 0 ? DEFAULT_TIMEOUT : timeout;
 		} catch (Exception e) {
 			// do nothing

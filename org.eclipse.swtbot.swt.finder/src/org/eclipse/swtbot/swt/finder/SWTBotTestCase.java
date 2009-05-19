@@ -241,9 +241,9 @@ public abstract class SWTBotTestCase extends TestCase {
 	 */
 	private void captureScreenshot() {
 		try {
-			int maximumScreenshots = SWTBotPreferences.maximumScreenshots();
+			int maximumScreenshots = SWTBotPreferences.MAX_ERROR_SCREENSHOT_COUNT;
 			String fileName = "screenshots/screenshot-" + ClassUtils.simpleClassName(getClass()) + "." + getName() + "." //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-					+ SWTBotPreferences.screenshotFormat().toLowerCase();
+					+ SWTBotPreferences.SCREENSHOT_FORMAT.toLowerCase();
 			if (++screenshotCounter <= maximumScreenshots) {
 				new File("screenshots").mkdirs(); //$NON-NLS-1$
 				SWTUtils.captureScreenshot(fileName);

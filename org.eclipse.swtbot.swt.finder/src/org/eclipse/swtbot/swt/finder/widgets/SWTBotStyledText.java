@@ -224,7 +224,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 	 * @since 1.0
 	 */
 	public void typeText(final String text) {
-		typeText(text, SWTBotPreferences.typeInterval());
+		typeText(text, SWTBotPreferences.TYPE_INTERVAL);
 	}
 
 	/**

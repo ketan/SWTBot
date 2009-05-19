@@ -72,7 +72,7 @@ public class Keyboard {
 	 * @param text the text to type on the keyboard.
 	 */
 	public void typeText(String text) {
-		typeText(text, SWTBotPreferences.typeInterval());
+		typeText(text, SWTBotPreferences.TYPE_INTERVAL);
 	}
 
 	/**

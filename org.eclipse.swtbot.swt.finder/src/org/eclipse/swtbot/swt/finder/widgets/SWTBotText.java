@@ -73,7 +73,7 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 	 * @since 1.2
 	 */
 	public void typeText(final String text) {
-		typeText(text, SWTBotPreferences.typeInterval());
+		typeText(text, SWTBotPreferences.TYPE_INTERVAL);
 	}
 
 	/**

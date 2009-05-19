@@ -75,7 +75,7 @@ public class KeyboardFactory {
 	 */
 	public static Keyboard getDefaultKeyboard(Widget widget, SelfDescribing description) {
 		try {
-			return new KeyboardFactory(SWTBotPreferences.keyboardStrategy()).keyboard(widget, description);
+			return new KeyboardFactory(SWTBotPreferences.KEYBOARD_STRATEGY).keyboard(widget, description);
 		} catch (Exception e) {
 			return getAWTKeyboard();
 		}
