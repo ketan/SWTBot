@@ -72,7 +72,7 @@ abstract class SWTBotFactory {
 	/**
 	 * the default timeout while waiting for a condition to become true.
 	 *
-	 * @see SWTBotPreferences#timeout() for overriding this.
+	 * @see SWTBotPreferences#TIMEOUT for overriding this.
 	 */
 	public static final long	DEFAULT_TIMEOUT		= 5000;
 	/** The display on which the bot operates on. */
@@ -350,7 +350,7 @@ abstract class SWTBotFactory {
 	/**
 	 * Gets the timeout as specified by the SWTBotFactory preferences.
 	 *
-	 * @return the value of {@link SWTBotPreferences#timeout()}, or {@value #DEFAULT_TIMEOUT} if that cannot be
+	 * @return the value of {@link SWTBotPreferences#TIMEOUT}, or {@value #DEFAULT_TIMEOUT} if that cannot be
 	 *         evaluated.
 	 */
 	protected long timeout() {

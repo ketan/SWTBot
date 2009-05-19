@@ -109,7 +109,7 @@ public enum ReferenceBy {
 		}
 
 		public String paramJavaDoc() {
-			return "@param value the value for the key {@value " + SWTBotPreferences.class.getName() + "#DEFAULT_KEY}.\n"; //$NON-NLS-1$ //$NON-NLS-2$
+			return "@param value the value for the key {@link " + SWTBotPreferences.class.getName() + "#DEFAULT_KEY}.\n"; //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		public String methodNameSuffix() {

@@ -202,7 +202,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @return a {@link SWTBotButton} with the specified <code>value</code>.
 	 */
 	public SWTBotButton buttonWithId(String value) {
@@ -210,7 +210,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotButton} with the specified <code>value</code>.
 	 */
@@ -398,7 +398,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @return a {@link SWTBotCheckBox} with the specified <code>value</code>.
 	 */
 	public SWTBotCheckBox checkBoxWithId(String value) {
@@ -406,7 +406,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCheckBox} with the specified <code>value</code>.
 	 */
@@ -594,7 +594,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @return a {@link SWTBotRadio} with the specified <code>value</code>.
 	 */
 	public SWTBotRadio radioWithId(String value) {
@@ -602,7 +602,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotRadio} with the specified <code>value</code>.
 	 */
@@ -790,7 +790,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @return a {@link SWTBotToggleButton} with the specified <code>value</code>.
 	 */
 	public SWTBotToggleButton toggleButtonWithId(String value) {
@@ -798,7 +798,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToggleButton} with the specified <code>value</code>.
 	 */
@@ -948,7 +948,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @return a {@link SWTBotTree} with the specified <code>value</code>.
 	 */
 	public SWTBotTree treeWithId(String value) {
@@ -956,7 +956,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotTree} with the specified <code>value</code>.
 	 */
@@ -1102,7 +1102,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @return a {@link SWTBotText} with the specified <code>value</code>.
 	 */
 	public SWTBotText textWithId(String value) {
@@ -1110,7 +1110,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotText} with the specified <code>value</code>.
 	 */
@@ -1279,7 +1279,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @return a {@link SWTBotCombo} with the specified <code>value</code>.
 	 */
 	public SWTBotCombo comboBoxWithId(String value) {
@@ -1287,7 +1287,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCombo} with the specified <code>value</code>.
 	 */
@@ -1435,7 +1435,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @return a {@link SWTBotCCombo} with the specified <code>value</code>.
 	 */
 	public SWTBotCCombo ccomboBoxWithId(String value) {
@@ -1443,7 +1443,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCCombo} with the specified <code>value</code>.
 	 */
@@ -1572,7 +1572,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @return a {@link SWTBotCLabel} with the specified <code>value</code>.
 	 */
 	public SWTBotCLabel clabelWithId(String value) {
@@ -1580,7 +1580,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCLabel} with the specified <code>value</code>.
 	 */
@@ -1688,7 +1688,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @return a {@link SWTBotLabel} with the specified <code>value</code>.
 	 */
 	public SWTBotLabel labelWithId(String value) {
@@ -1696,7 +1696,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotLabel} with the specified <code>value</code>.
 	 */
@@ -1804,7 +1804,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @return a {@link SWTBotList} with the specified <code>value</code>.
 	 */
 	public SWTBotList listWithId(String value) {
@@ -1812,7 +1812,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotList} with the specified <code>value</code>.
 	 */
@@ -1920,7 +1920,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @return a {@link SWTBotTable} with the specified <code>value</code>.
 	 */
 	public SWTBotTable tableWithId(String value) {
@@ -1928,7 +1928,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotTable} with the specified <code>value</code>.
 	 */
@@ -2036,7 +2036,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @return a {@link SWTBotTabItem} with the specified <code>value</code>.
 	 */
 	public SWTBotTabItem tabItemWithId(String value) {
@@ -2044,7 +2044,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotTabItem} with the specified <code>value</code>.
 	 */
@@ -2152,7 +2152,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @return a {@link SWTBotCTabItem} with the specified <code>value</code>.
 	 */
 	public SWTBotCTabItem cTabItemWithId(String value) {
@@ -2160,7 +2160,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCTabItem} with the specified <code>value</code>.
 	 */
@@ -2287,7 +2287,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @return a {@link SWTBotStyledText} with the specified <code>value</code>.
 	 */
 	public SWTBotStyledText styledTextWithId(String value) {
@@ -2295,7 +2295,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotStyledText} with the specified <code>value</code>.
 	 */
@@ -2424,7 +2424,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @return a {@link SWTBotDateTime} with the specified <code>value</code>.
 	 */
 	public SWTBotDateTime dateTimeWithId(String value) {
@@ -2432,7 +2432,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotDateTime} with the specified <code>value</code>.
 	 */
@@ -2559,7 +2559,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @return a {@link SWTBotToolbarButton} with the specified <code>value</code>.
 	 */
 	public SWTBotToolbarButton toolbarButtonWithId(String value) {
@@ -2567,7 +2567,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarButton} with the specified <code>value</code>.
 	 */
@@ -2715,7 +2715,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @return a {@link SWTBotToolbarDropDownButton} with the specified <code>value</code>.
 	 */
 	public SWTBotToolbarDropDownButton toolbarDropDownButtonWithId(String value) {
@@ -2723,7 +2723,7 @@ public class SWTBot extends SWTBotFactory {
 	}
 
 	/**
-	 * @param value the value for the key {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarDropDownButton} with the specified <code>value</code>.
 	 */

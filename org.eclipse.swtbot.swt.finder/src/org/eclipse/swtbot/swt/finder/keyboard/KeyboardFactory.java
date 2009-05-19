@@ -71,7 +71,7 @@ public class KeyboardFactory {
 	/**
 	 * @param widget the widget on which the mock events are typed.
 	 * @param description the description of the widget.
-	 * @return the default keyboard as defined by {@link SWTBotPreferences#keyboardStrategy()}.
+	 * @return the default keyboard as defined by {@link SWTBotPreferences#KEYBOARD_STRATEGY}.
 	 */
 	public static Keyboard getDefaultKeyboard(Widget widget, SelfDescribing description) {
 		try {

@@ -410,7 +410,7 @@ public abstract class SWTUtils {
 	/**
 	 * Waits until a display appears.
 	 * 
-	 * @throws TimeoutException if the condition does not evaluate to true after {@link SWTBotPreferences#timeout()}
+	 * @throws TimeoutException if the condition does not evaluate to true after {@link SWTBotPreferences#TIMEOUT}
 	 *             milliseconds.
 	 */
 	public static void waitForDisplayToAppear() {
