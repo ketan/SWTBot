@@ -67,6 +67,7 @@ public class AbstractSWTBotControl<T extends Control> extends AbstractSWTBot<T> 
 	 * @return itself.
 	 */
 	protected AbstractSWTBotControl<T> click(final boolean post) {
+		setFocus();
 		if (post) {
 			Rectangle location = absoluteLocation();
 			click(location.x + location.width / 2, location.y + location.height / 2, true);

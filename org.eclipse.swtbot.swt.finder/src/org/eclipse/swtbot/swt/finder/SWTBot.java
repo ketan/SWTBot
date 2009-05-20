@@ -11,6 +11,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
@@ -30,6 +31,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotCheckBox;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotCombo;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotDateTime;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotLabel;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotLink;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotList;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotRadio;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotStyledText;
@@ -2809,6 +2811,122 @@ public class SWTBot extends SWTBotFactory {
 	public SWTBotToolbarDropDownButton toolbarDropDownButtonWithTooltipInGroup(String tooltip, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN"));
 		return new SWTBotToolbarDropDownButton((ToolItem) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param mnemonicText the mnemonicText on the widget.
+	 * @return a {@link SWTBotLink} with the specified <code>mnemonicText</code>.
+	 */
+	public SWTBotLink link(String mnemonicText) {
+		return link(mnemonicText, 0);
+	}
+
+	/**
+	 * @param mnemonicText the mnemonicText on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotLink} with the specified <code>mnemonicText</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotLink link(String mnemonicText, int index) {
+		Matcher matcher = allOf(widgetOfType(Link.class), withMnemonic(mnemonicText));
+		return new SWTBotLink((Link) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param key the key set on the widget.
+	 * @param value the value for the key.
+	 * @return a {@link SWTBotLink} with the specified <code>key/value</code>.
+	 */
+	public SWTBotLink linkWithId(String key, String value) {
+		return linkWithId(key, value, 0);
+	}
+
+	/**
+	 * @param key the key set on the widget.
+	 * @param value the value for the key.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotLink} with the specified <code>key/value</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotLink linkWithId(String key, String value, int index) {
+		Matcher matcher = allOf(widgetOfType(Link.class), withId(key, value));
+		return new SWTBotLink((Link) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @return a {@link SWTBotLink} with the specified <code>value</code>.
+	 */
+	public SWTBotLink linkWithId(String value) {
+		return linkWithId(value, 0);
+	}
+
+	/**
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotLink} with the specified <code>value</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotLink linkWithId(String value, int index) {
+		Matcher matcher = allOf(widgetOfType(Link.class), withId(value));
+		return new SWTBotLink((Link) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotLink} with the specified <code>inGroup</code>.
+	 */
+	public SWTBotLink linkInGroup(String inGroup) {
+		return linkInGroup(inGroup, 0);
+	}
+
+	/**
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotLink} with the specified <code>inGroup</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotLink linkInGroup(String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Link.class), inGroup(inGroup));
+		return new SWTBotLink((Link) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @return a {@link SWTBotLink} with the specified <code>none</code>.
+	 */
+	public SWTBotLink link() {
+		return link(0);
+	}
+
+	/**
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotLink} with the specified <code>none</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotLink link(int index) {
+		Matcher matcher = allOf(widgetOfType(Link.class));
+		return new SWTBotLink((Link) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param mnemonicText the mnemonicText on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotLink} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
+	 */
+	public SWTBotLink linkInGroup(String mnemonicText, String inGroup) {
+		return linkInGroup(mnemonicText, inGroup, 0);
+	}
+
+	/**
+	 * @param mnemonicText the mnemonicText on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotLink} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotLink linkInGroup(String mnemonicText, String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Link.class), withMnemonic(mnemonicText), inGroup(inGroup));
+		return new SWTBotLink((Link) widget(matcher, index), matcher);
 	}
 
 }

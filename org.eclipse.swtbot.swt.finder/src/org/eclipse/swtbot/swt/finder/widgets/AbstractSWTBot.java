@@ -663,7 +663,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	}
 
 	/**
-	 * Empty method stub, since it should be overridden by subclass#click
+	 * Clicks on this widget.
 	 * 
 	 * @return itself.
 	 */
@@ -690,13 +690,14 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 */
 	protected AbstractSWTBot<T> click(final int x, final int y, final boolean post) {
 		if (post) {
-			syncExec(new VoidResult() {
+			asyncExec(new VoidResult() {
 				public void run() {
 					moveMouse(x, y);
 					mouseDown(x, y, 1);
 					mouseUp(x, y, 1);
 				}
 			});
+			sleep(500);
 		} else
 			clickXY(x, y);
 		return this;
@@ -730,8 +731,8 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 * @param x the x coordinate
 	 * @param y the y coordinate
 	 */
-	protected void moveMouse(final int x, final int y) {
-		syncExec(new VoidResult() {
+	void moveMouse(final int x, final int y) {
+		asyncExec(new VoidResult() {
 			public void run() {
 				Event event = createMouseEvent(x, y, 0, 0, 0);
 				event.type = SWT.MouseMove;
@@ -747,8 +748,8 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 * @param y the y coordinate
 	 * @param button the mouse button to be pressed
 	 */
-	protected void mouseDown(final int x, final int y, final int button) {
-		syncExec(new VoidResult() {
+	private void mouseDown(final int x, final int y, final int button) {
+		asyncExec(new VoidResult() {
 			public void run() {
 				Event event = createMouseEvent(x, y, button, 0, 0);
 				event.type = SWT.MouseDown;
@@ -764,8 +765,8 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 * @param y the y coordinate
 	 * @param button the mouse button to be pressed
 	 */
-	protected void mouseUp(final int x, final int y, final int button) {
-		syncExec(new VoidResult() {
+	private void mouseUp(final int x, final int y, final int button) {
+		asyncExec(new VoidResult() {
 			public void run() {
 				Event event = createMouseEvent(x, y, button, 0, 0);
 				event.type = SWT.MouseUp;
