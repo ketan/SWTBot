@@ -11,6 +11,7 @@
 package org.eclipse.swtbot.swt.finder.widgets;
 
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
