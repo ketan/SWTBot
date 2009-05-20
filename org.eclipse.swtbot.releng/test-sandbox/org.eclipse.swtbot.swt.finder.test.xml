@@ -79,7 +79,7 @@
 
 			<batchtest fork="yes" todir="${junit.reports.xml.dir}">
 				<fileset dir="${basedir}">
-					<include name="**/*Test.class" />
+					<include name="${test-classes}" />
 					<exclude name="**/AllTests.class" />
 					<exclude name="**/*Abstract*.class" />
 				</fileset>

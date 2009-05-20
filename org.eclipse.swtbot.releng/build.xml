@@ -226,6 +226,7 @@
 
 	<target name="run-core-tests" description="runs the core tests for the connector">
 		<property name="test-target" value="all" />
+		<property name="test-classes" value="**/*Test.class" />
 		<java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true" dir="${test-sandbox}">
 
 			<arg value="-Dos=${os}" />
@@ -260,6 +261,7 @@
 			<arg value="-file" />
 			<arg value="${test-sandbox}/test.xml" />
 			<arg value="${test-target}" />
+			<arg value="-Dtest-classes=${test-classes}" />
 
 			<jvmarg value="-Xmx512M" />
 			<classpath>
