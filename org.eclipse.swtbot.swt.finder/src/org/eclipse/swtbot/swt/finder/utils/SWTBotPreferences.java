@@ -27,63 +27,97 @@ import org.eclipse.swtbot.swt.finder.keyboard.KeyboardStrategy;
  * @since 1.1
  */
 public class SWTBotPreferences {
+	public static final String	KEY_DEFAULT_KEY					= "org.eclipse.swtbot.search.defaultKey";
+	public static final String	KEY_TIMEOUT						= "org.eclipse.swtbot.search.timeout";
+	public static final String	KEY_RECORER_FILE_NAME			= "org.eclipse.swtbot.recorder.file.name";
+	public static final String	KEY_PLAYBACK_DELAY				= "org.eclipse.swtbot.playback.delay";
+	public static final String	KEY_MAX_ERROR_SCREENSHOT_COUNT	= "org.eclipse.swtbot.screenshots.error.maxcount";
+	public static final String	KEY_SCREENSHOTS_DIR				= "org.eclipse.swtbot.screenshots.dir";
+	public static final String	KEY_SCREENSHOT_FORMAT			= "org.eclipse.swtbot.screenshot.format";
+	public static final String	KEY_KEYBOARD_LAYOUT				= "org.eclipse.swtbot.keyboardLayout";
+	public static final String	KEY_TYPE_INTERVAL				= "org.eclipse.swtbot.keyboard.interval";
+	public static final String	KEY_KEYBOARD_STRATEGY			= "org.eclipse.swtbot.keyboard.strategy";
 
 	/**
-	 * The default key used to match SWT widgets. Defaults to {@code org.eclipse.swtbot.widget.key}. To set another default use the system property {@code org.eclipse.swtbot.search.defaultKey}
+	 * The default key used to match SWT widgets. Defaults to {@code org.eclipse.swtbot.widget.key}. To set another
+	 * default use the system property {@value #KEY_DEFAULT_KEY}.
 	 */
-	public static String	DEFAULT_KEY					= System.getProperty("org.eclipse.swtbot.search.defaultKey", "org.eclipse.swtbot.widget.key");	
+	public static String		DEFAULT_KEY						= System.getProperty(KEY_DEFAULT_KEY, "org.eclipse.swtbot.widget.key");
 
 	/**
 	 * The timeout for finding widgets among other things. Defaults to 5000ms. To set another default use the system
-	 * property {@code org.eclipse.swtbot.search.timeout}.
+	 * property {@value #KEY_TIMEOUT}.
 	 */
-	public static long		TIMEOUT						= toLong(System.getProperty("org.eclipse.swtbot.search.timeout", "5000"), 5000);
-	
+	public static long			TIMEOUT							= toLong(System.getProperty(KEY_TIMEOUT, "5000"), 5000);
+
 	/**
 	 * The name of the file in which the recorder records. Defaults to "swtbot.record.txt". To set another default, use
-	 * the system property {@code org.eclipse.swtbot.recorder.file.name}.
+	 * the system property {@value #KEY_RECORER_FILE_NAME}.
 	 */
-	public static String	RECORDER_FILE_NAME			= System.getProperty("org.eclipse.swtbot.recorder.file.name", "swtbot.record.txt");
-	
+	public static String		RECORDER_FILE_NAME				= System.getProperty(KEY_RECORER_FILE_NAME, "swtbot.record.txt");
+
 	/**
 	 * The speed of playback in milliseconds. Defaults to 0. To set another default, use the system property {@code
 	 * org.eclipse.swtbot.playback.delay}.
 	 */
-	public static long		PLAYBACK_DELAY				= toLong(System.getProperty("org.eclipse.swtbot.playback.delay", "0"), 0);
-	
-	/**
-	 * The maximum number of screenshots that SWTBot should capture. Defaults to 100. To set another default use the
-	 * system property {@code org.eclipse.swtbot.screenshots.maxcount}.
-	 */
-	public static int		MAX_ERROR_SCREENSHOT_COUNT	= toInt(System.getProperty("org.eclipse.swtbot.screenshots.error.maxcount", "100"), 100);
-	
-	/**
-	 * The directory in which screenshots should be generated. Defaults to "screenshots". To set another default use the
-	 * system property {@code org.eclipse.swtbot.screenshots.dir}.
-	 */
-	public static String	SCREENSHOTS_DIR				= System.getProperty("org.eclipse.swtbot.screenshots.dir", "screenshots");
-	
-	/**
-	 * The screenshot image format to be used. Defaults to "jpeg". To set another default use the system property
-	 * {@code org.eclipse.swtbot.screenshot.format}. The value must be one these: BMP, GIF, ICO, JPEG, JPG, PNG or TIFF.
-	 */
-	public static String	SCREENSHOT_FORMAT			= System.getProperty("org.eclipse.swtbot.screenshot.format", "jpeg");
-	
-	/**
-	 * The keyboard layout. This value is autodetected at runtime. This can be set using the system property
-	 * {@code org.eclipse.swtbot.keyboardLayout}.
-	 * <p>
-	 * <strong>Note:</strong> the layout must be of the form [MAC.][upper-case-two-character-country-code]. Eg: "MAC.EN"
-	 * or "MAC.GB" or just "FR" or "DE".
-	 * </p>
-	 */
-	public static String	KEYBOARD_LAYOUT				= System.getProperty("org.eclipse.swtbot.keyboardLayout", KeyboardLayoutDetector .detectKeyboard());
+	public static long			PLAYBACK_DELAY					= toLong(System.getProperty(KEY_PLAYBACK_DELAY, "0"), 0);
 
 	/**
-	 * The the time interval in milliseconds between typing characters in a string. Defaults to 50ms. To set another default
-	 * use the system property {@code org.eclipse.swtbot.keyboard.interval}.
+	 * The maximum number of screenshots that SWTBot should capture. Defaults to 100. To set another default use the
+	 * system property {@value #MAX_ERROR_SCREENSHOT_COUNT}.
 	 */
-	public static int		TYPE_INTERVAL				= toInt(System.getProperty("org.eclipse.swtbot.keyboard.interval", "50"), 50);
+	public static int			MAX_ERROR_SCREENSHOT_COUNT		= toInt(System.getProperty(KEY_MAX_ERROR_SCREENSHOT_COUNT, "100"), 100);
+
+	/**
+	 * The directory in which screenshots should be generated. Defaults to "screenshots". To set another default use the
+	 * system property {@value #KEY_SCREENSHOTS_DIR}.
+	 */
+	public static String		SCREENSHOTS_DIR					= System.getProperty(KEY_SCREENSHOTS_DIR, "screenshots");
+
+	/**
+	 * The screenshot image format to be used. Defaults to "jpeg". To set another default use the system property
+	 * {@value #KEY_SCREENSHOT_FORMAT}. The value must be one these: BMP, GIF, ICO, JPEG, JPG, PNG or TIFF.
+	 */
+	public static String		SCREENSHOT_FORMAT				= System.getProperty(KEY_SCREENSHOT_FORMAT, "jpeg");
+
+	/**
+	 * The keyboard layout. This value is autodetected at runtime. This can be set using the system property
+	 * {@value #KEY_KEYBOARD_LAYOUT}.
+	 * <p>
+	 * <strong>Note:</strong> the layout must be of the form foo.bar.baz.[MAC.][upper-case-two-character-country-code].
+	 * This expects a file named "foo/bar/baz/[MAC.][upper-case-two-character-country-code].keyboard"
+	 * </p>
+	 * Eg:
+	 * <table border="1">
+	 * <tr>
+	 * <th align="left"><b>Layout Name</b></th>
+	 * <th align="left"><b>Configuration File</b></th>
+	 * </tr>
+	 * <tr>
+	 * <td>com.foo.bar.MAC.EN</td>
+	 * <td>com/foo/bar/MAC.EN.keyboard</td>
+	 * </tr>
+	 * <tr>
+	 * <td>com.foo.bar.MAC.GB</td>
+	 * <td>com/foo/bar/MAC.GB.keyboard</td>
+	 * </tr>
+	 * <tr>
+	 * <td>com.foo.bar.FR</td>
+	 * <td>com/foo/bar/FR.keyboard</td>
+	 * </tr>
+	 * <tr>
+	 * <td>com.foo.bar.DE</td>
+	 * <td>/com/foo/bar/DE.keyboard</td>
+	 * </tr>
+	 * </table>
+	 */
+	public static String		KEYBOARD_LAYOUT					= System.getProperty(KEY_KEYBOARD_LAYOUT, KeyboardLayoutDetector.detectKeyboard());
+
+	/**
+	 * The the time interval in milliseconds between typing characters in a string. Defaults to 50ms. To set another
+	 * default use the system property {@code org.eclipse.swtbot.keyboard.interval}.
+	 */
+	public static int			TYPE_INTERVAL					= toInt(System.getProperty(KEY_TYPE_INTERVAL, "50"), 50);
 	/**
 	 * The default keyboard strategy. Defaults to org.eclipse.swtbot.swt.finder.keyboard.AWTKeyboardStrategy. To set
 	 * another default use the system property {@code org.eclipse.swtbot.keyboard.strategy}. This property must be set
@@ -92,7 +126,7 @@ public class SWTBotPreferences {
 	 * @see KeyboardStrategy
 	 * @see Keyboard
 	 */
-	public static String	KEYBOARD_STRATEGY			= System.getProperty("org.eclipse.swtbot.keyboard.strategy", "org.eclipse.swtbot.swt.finder.keyboard.AWTKeyboardStrategy");
+	public static String		KEYBOARD_STRATEGY				= System.getProperty(KEY_KEYBOARD_STRATEGY, "org.eclipse.swtbot.swt.finder.keyboard.AWTKeyboardStrategy");
 
 	private static long toLong(String timeoutValue, long defaultValue) {
 		try {

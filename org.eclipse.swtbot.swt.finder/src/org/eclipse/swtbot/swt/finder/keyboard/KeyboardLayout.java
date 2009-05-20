@@ -69,7 +69,7 @@ class KeyboardLayout {
 
 	/**
 	 * @return the default keyboard layout.
-	 * @see SWTBotPreferences#keyboardLayout()
+	 * @see SWTBotPreferences#KEYBOARD_LAYOUT
 	 */
 	public static KeyboardLayout getDefaultKeyboardLayout() {
 		return getKeyboardLayout(SWTBotPreferences.KEYBOARD_LAYOUT);
@@ -80,17 +80,27 @@ class KeyboardLayout {
 	 * @return the keyboard layout corresponding to the specified layout.
 	 */
 	public static KeyboardLayout getKeyboardLayout(String layoutName) {
-		URL configURL = KeyboardLayout.class.getResource(layoutName + ".keyboard");
+		ClassLoader classLoader = KeyboardLayout.class.getClassLoader();
+		URL configURL = classLoader.getResource(toFolder(myPackage() + "." + layoutName) + ".keyboard");
 
-		if (configURL == null) {
+		if (configURL == null)
+			configURL = classLoader.getResource(toFolder(layoutName) + ".keyboard");
+		if (configURL == null)
 			throw new IllegalArgumentException("keyboard layout " + layoutName + " not available.");
-		}
 
 		try {
 			return new KeyboardLayout(layoutName, configURL);
 		} catch (IOException e) {
 			throw new IllegalStateException("could not parse " + layoutName + " keyboard layout properties");
 		}
+	}
+
+	private static String myPackage() {
+		return KeyboardLayout.class.getPackage().getName();
+	}
+
+	private static String toFolder(String layoutName) {
+		return layoutName.replaceAll("\\.", "/").replaceAll("/MAC/", "/MAC.");
 	}
 
 	private void initialiseDefaults() {
