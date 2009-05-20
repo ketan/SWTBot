@@ -14,13 +14,9 @@ import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widget
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.List;
-
 import org.eclipse.swt.widgets.Tree;
-import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
-import org.eclipse.swtbot.swt.finder.finders.ChildrenControlFinder;
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem;
@@ -64,11 +60,8 @@ public class MessageCreateTest {
 	}
 
 	private SWTBotTree mailBox() throws WidgetNotFoundException {
-		Widget widget = bot.viewByTitle("Mailboxes").getWidget();
 		// find the tree
-		ChildrenControlFinder finder = new ChildrenControlFinder(widget);
-		List findControls = finder.findControls(treeMatcher());
-		return new SWTBotTree((Tree) findControls.get(0));
+		return bot.viewByTitle("Mailboxes").bot().tree();
 	}
 
 	private Matcher treeMatcher() {
