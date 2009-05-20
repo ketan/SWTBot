@@ -27,16 +27,20 @@ import org.eclipse.swtbot.swt.finder.keyboard.KeyboardStrategy;
  * @since 1.1
  */
 public class SWTBotPreferences {
-	public static final String	KEY_DEFAULT_KEY					= "org.eclipse.swtbot.search.defaultKey";
-	public static final String	KEY_TIMEOUT						= "org.eclipse.swtbot.search.timeout";
-	public static final String	KEY_RECORER_FILE_NAME			= "org.eclipse.swtbot.recorder.file.name";
-	public static final String	KEY_PLAYBACK_DELAY				= "org.eclipse.swtbot.playback.delay";
-	public static final String	KEY_MAX_ERROR_SCREENSHOT_COUNT	= "org.eclipse.swtbot.screenshots.error.maxcount";
-	public static final String	KEY_SCREENSHOTS_DIR				= "org.eclipse.swtbot.screenshots.dir";
-	public static final String	KEY_SCREENSHOT_FORMAT			= "org.eclipse.swtbot.screenshot.format";
-	public static final String	KEY_KEYBOARD_LAYOUT				= "org.eclipse.swtbot.keyboardLayout";
-	public static final String	KEY_TYPE_INTERVAL				= "org.eclipse.swtbot.keyboard.interval";
-	public static final String	KEY_KEYBOARD_STRATEGY			= "org.eclipse.swtbot.keyboard.strategy";
+	private static final String	KEY_DEFAULT_KEY					= "org.eclipse.swtbot.search.defaultKey";
+	private static final String	KEY_TIMEOUT						= "org.eclipse.swtbot.search.timeout";
+	
+	private static final String	KEY_RECORER_FILE_NAME			= "org.eclipse.swtbot.recorder.file.name";
+	
+	private static final String	KEY_PLAYBACK_DELAY				= "org.eclipse.swtbot.playback.delay";
+	
+	private static final String	KEY_MAX_ERROR_SCREENSHOT_COUNT	= "org.eclipse.swtbot.screenshots.error.maxcount";
+	private static final String	KEY_SCREENSHOTS_DIR				= "org.eclipse.swtbot.screenshots.dir";
+	private static final String	KEY_SCREENSHOT_FORMAT			= "org.eclipse.swtbot.screenshots.format";
+	
+	private static final String	KEY_KEYBOARD_LAYOUT				= "org.eclipse.swtbot.keyboard.layout";
+	private static final String	KEY_TYPE_INTERVAL				= "org.eclipse.swtbot.keyboard.interval";
+	private static final String	KEY_KEYBOARD_STRATEGY			= "org.eclipse.swtbot.keyboard.strategy";
 
 	/**
 	 * The default key used to match SWT widgets. Defaults to {@code org.eclipse.swtbot.widget.key}. To set another
