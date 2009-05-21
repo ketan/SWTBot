@@ -262,7 +262,7 @@ abstract class SWTBotFactory {
 	 * @return a list of widgets that match the matcher.
 	 */
 	public java.util.List<? extends Widget> widgets(Matcher<?> matcher, Widget parentWidget) {
-		WaitForWidgetInParent waitForWidget = waitForWidget(matcher, parentWidget);
+		WaitForWidgetInParent<? extends Widget> waitForWidget = waitForWidget(matcher, parentWidget);
 		waitUntilWidgetAppears(waitForWidget);
 		return waitForWidget.getWidgets();
 	}
