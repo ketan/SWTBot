@@ -218,26 +218,6 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 		});
 	}
 
-	/**
-	 * Sets the selected item to the given index.
-	 *
-	 * @param rowIndex the zero-based index of the row to be selected.
-	 */
-	public void select(final int rowIndex) {
-		assertEnabled();
-		assertIsLegalRowIndex(rowIndex);
-		setFocus();
-		asyncExec(new VoidResult() {
-			public void run() {
-				TableItem item = widget.getItem(rowIndex);
-				log.debug(MessageFormat.format("Selecting row [{0}] {1} in {2}", rowIndex, item.getText(), widget)); //$NON-NLS-1$
-				lastSelectionItem = item;
-				widget.setSelection(rowIndex);
-			}
-		});
-		notifySelect();
-	}
-
 	private void assertIsLegalRowIndex(final int rowIndex) {
 		Assert.isLegal(rowIndex < rowCount(), "The row number: " + rowIndex + " does not exist in the table"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
@@ -342,9 +322,10 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 	 *
 	 * @param indices the row indices to select in the table.
 	 */
-	public void select(final int[] indices) {
+	public void select(final int... indices) {
 		assertEnabled();
-		assertMultiSelect();
+		if (indices.length > 1)
+			assertMultiSelect();
 		setFocus();
 		log.debug(MessageFormat.format("Selecting rows {0} in table {1}", StringUtils.join(indices, ", "), this)); //$NON-NLS-1$ //$NON-NLS-2$
 		unselect();
