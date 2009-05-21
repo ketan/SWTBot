@@ -76,14 +76,14 @@ public class SWTBotEclipseEditorTest {
 		javaProject.createProject(PROJECT_NAME);
 
 		javaClass.createClass(PACKAGE_NAME, CLASS_NAME);
-		editor = bot.editorByFileName(CLASS_FILE_NAME).toTextEditor();
+		editor = bot.editorByTitle(CLASS_FILE_NAME).toTextEditor();
 		editor.save();
 	}
 
 	private static void closeWelcomePage() {
 		try {
 			System.setProperty("org.eclipse.swtbot.search.timeout", "0");
-			bot.viewByLabel("Welcome").close();
+			bot.viewByTitle("Welcome").close();
 		} catch (WidgetNotFoundException e) {
 			// do nothing
 		}finally{
@@ -114,8 +114,8 @@ public class SWTBotEclipseEditorTest {
 		javaClass.createClass("com.foo.example", "BazClass");
 
 		assertTrue(bot.activeEditor().isActive());
-		assertFalse(bot.editorByFileName("FooClass.java").isActive());
-		assertFalse(bot.editorByFileName("BarClass.java").isActive());
-		assertTrue(bot.editorByFileName("BazClass.java").isActive());
+		assertFalse(bot.editorByTitle("FooClass.java").isActive());
+		assertFalse(bot.editorByTitle("BarClass.java").isActive());
+		assertTrue(bot.editorByTitle("BazClass.java").isActive());
 	}
 }

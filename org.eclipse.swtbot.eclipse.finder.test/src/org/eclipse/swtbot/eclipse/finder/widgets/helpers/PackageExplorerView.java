@@ -70,7 +70,7 @@ public class PackageExplorerView {
 	 * @throws WidgetNotFoundException
 	 */
 	private SWTBotView view() throws WidgetNotFoundException {
-		return bot.viewByLabel("Package Explorer");
+		return bot.viewByTitle("Package Explorer");
 	}
 
 }

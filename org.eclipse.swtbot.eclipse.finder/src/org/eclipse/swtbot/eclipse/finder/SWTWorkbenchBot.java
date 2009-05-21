@@ -130,7 +130,7 @@ public class SWTWorkbenchBot extends SWTBot {
 	 * @return the view with the specified title
 	 * @see WidgetMatcherFactory#withPartName(Matcher)
 	 */
-	public SWTBotView viewByLabel(String title) {
+	public SWTBotView viewByTitle(String title) {
 		return view(withPartName(title));
 	}
 
@@ -221,7 +221,7 @@ public class SWTWorkbenchBot extends SWTBot {
 	 * @return the editor with the specified title
 	 * @see #editor(Matcher)
 	 */
-	public SWTBotEditor editorByFileName(String fileName) {
+	public SWTBotEditor editorByTitle(String fileName) {
 		return editor(withPartName(fileName));
 	}
 

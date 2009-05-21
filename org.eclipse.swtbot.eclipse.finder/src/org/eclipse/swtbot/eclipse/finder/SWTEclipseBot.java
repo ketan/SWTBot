@@ -55,7 +55,7 @@ public class SWTEclipseBot extends SWTWorkbenchBot {
 	 * @param fileName the name of the file.
 	 * @return an editor for the specified fileName.
 	 * @throws WidgetNotFoundException if the editor is not found.
-	 * @deprecated use {@link SWTWorkbenchBot#editorByFileName(String)}
+	 * @deprecated use {@link SWTWorkbenchBot#editorByTitle(String)}
 	 */
 	public SWTBotEclipseEditor editor(String fileName) throws WidgetNotFoundException {
 		return editor(fileName, 0);
@@ -69,7 +69,7 @@ public class SWTEclipseBot extends SWTWorkbenchBot {
 	 * @param index in case of multiple views with the same fileName.
 	 * @return an editor for the specified fileName.
 	 * @throws WidgetNotFoundException if the editor is not found.
-	 * @deprecated use {@link SWTWorkbenchBot#editorByFileName(String)}
+	 * @deprecated use {@link SWTWorkbenchBot#editorByTitle(String)}
 	 * @since 2.0
 	 */
 	@SuppressWarnings("unchecked")
@@ -87,7 +87,7 @@ public class SWTEclipseBot extends SWTWorkbenchBot {
 	 * @param label the label of the view.
 	 * @return a view with the specified label.
 	 * @throws WidgetNotFoundException if the view is not found.
-	 * @deprecated use {@link SWTWorkbenchBot#viewByLabel(String)}
+	 * @deprecated use {@link SWTWorkbenchBot#viewByTitle(String)}
 	 */
 	public SWTBotView view(String label) throws WidgetNotFoundException {
 		return view(label, 0);
@@ -101,7 +101,7 @@ public class SWTEclipseBot extends SWTWorkbenchBot {
 	 * @param index in case of multiple views with the same label.
 	 * @return a view with the specified label.
 	 * @throws WidgetNotFoundException if the view is not found.
-	 * @deprecated use {@link SWTWorkbenchBot#viewByLabel(String)}
+	 * @deprecated use {@link SWTWorkbenchBot#viewByTitle(String)}
 	 * @since 2.0
 	 */
 	@SuppressWarnings("unchecked")
