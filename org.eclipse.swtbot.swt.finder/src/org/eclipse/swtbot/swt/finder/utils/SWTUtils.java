@@ -27,7 +27,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
-import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.BoolResult;
 import org.eclipse.swtbot.swt.finder.results.Result;
@@ -424,17 +423,7 @@ public abstract class SWTUtils {
 				return SWTUtils.display() != null;
 			}
 
-		}, timeout(), 500);
-	}
-
-	private static long timeout() {
-		try {
-			long timeout = SWTBotPreferences.TIMEOUT;
-			return timeout <= 0 ? SWTBot.DEFAULT_TIMEOUT : timeout;
-		} catch (Exception e) {
-			// do nothing
-		}
-		return SWTBot.DEFAULT_TIMEOUT;
+		}, SWTBotPreferences.TIMEOUT, 500);
 	}
 
 	private static void waitUntil(ICondition condition, long timeout, long interval) throws TimeoutException {

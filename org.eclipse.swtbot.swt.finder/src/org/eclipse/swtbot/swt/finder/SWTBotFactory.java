@@ -69,12 +69,6 @@ abstract class SWTBotFactory {
 
 	/** the delay between successive polling while waiting for a condition to be true. */
 	public static final long	DEFAULT_POLL_DELAY	= 500;
-	/**
-	 * the default timeout while waiting for a condition to become true.
-	 *
-	 * @see SWTBotPreferences#TIMEOUT for overriding this.
-	 */
-	public static final long	DEFAULT_TIMEOUT		= 5000;
 	/** The display on which the bot operates on. */
 	protected final Display		display;
 	/** The finder used by the bot to find controls. */
