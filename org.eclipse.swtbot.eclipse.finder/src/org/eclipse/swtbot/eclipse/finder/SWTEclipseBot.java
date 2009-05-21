@@ -55,7 +55,7 @@ public class SWTEclipseBot extends SWTWorkbenchBot {
 	 * @param fileName the name of the file.
 	 * @return an editor for the specified fileName.
 	 * @throws WidgetNotFoundException if the editor is not found.
-	 * @deprecated use {@link SWTWorkbenchBot#editorByTitle(String)}
+	 * @deprecated use {@link SWTWorkbenchBot#editorByFileName(String)}
 	 */
 	public SWTBotEclipseEditor editor(String fileName) throws WidgetNotFoundException {
 		return editor(fileName, 0);
@@ -69,7 +69,7 @@ public class SWTEclipseBot extends SWTWorkbenchBot {
 	 * @param index in case of multiple views with the same fileName.
 	 * @return an editor for the specified fileName.
 	 * @throws WidgetNotFoundException if the editor is not found.
-	 * @deprecated use {@link SWTWorkbenchBot#editorByTitle(String)}
+	 * @deprecated use {@link SWTWorkbenchBot#editorByFileName(String)}
 	 * @since 2.0
 	 */
 	@SuppressWarnings("unchecked")

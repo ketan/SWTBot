@@ -224,7 +224,7 @@ public class SWTWorkbenchBot extends SWTBot {
 	 * @return the editor with the specified title
 	 * @see #editor(Matcher)
 	 */
-	public SWTBotEditor editorByTitle(String fileName) {
+	public SWTBotEditor editorByFileName(String fileName) {
 		return editor(withPartName(fileName));
 	}
 
