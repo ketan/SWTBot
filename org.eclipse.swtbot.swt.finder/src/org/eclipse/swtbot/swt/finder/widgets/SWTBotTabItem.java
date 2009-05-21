@@ -55,7 +55,6 @@ public class SWTBotTabItem extends AbstractSWTBot<TabItem> {
 	 */
 	public SWTBotTabItem(TabItem w, SelfDescribing description) throws WidgetNotFoundException {
 		super(w, description);
-
 		this.parent = syncExec(new WidgetResult<TabFolder>() {
 			public TabFolder run() {
 				return widget.getParent();
@@ -66,9 +65,10 @@ public class SWTBotTabItem extends AbstractSWTBot<TabItem> {
 	/**
 	 * Activates the tabItem.
 	 * 
+	 * @return itself.
 	 * @throws TimeoutException if the tab does not activate
 	 */
-	public void activate() throws TimeoutException {
+	public SWTBotTabItem activate() throws TimeoutException {
 		log.trace(MessageFormat.format("Activating {0}", this)); //$NON-NLS-1$
 		assertEnabled();
 		// this runs in sync because tabFolder.setSelection() does not send a notification, and so should not block.
@@ -90,6 +90,7 @@ public class SWTBotTabItem extends AbstractSWTBot<TabItem> {
 				return "Timed out waiting for " + SWTUtils.toString(widget) + " to activate"; //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		});
+		return this;
 	}
 
 	protected Event createEvent() {
@@ -115,56 +116,4 @@ public class SWTBotTabItem extends AbstractSWTBot<TabItem> {
 		});
 	}
 
-	// private Rectangle absoluteLocation() {
-	// return syncExec(new Result<Rectangle>() {
-	// public Rectangle run() {
-	// return display.map(widget.getParent(), null, widget.getBounds());
-	// }
-	// });
-	// }
-	//
-	// /**
-	// * Click on the center of the widget.
-	// *
-	// * @param post
-	// * Whether or not {@link Display#post} should be used
-	// */
-	// private SWTBotTabItem click(final boolean post) {
-	// if (post) {
-	// Rectangle location = absoluteLocation();
-	// click(location.x, location.y, true);
-	// }
-	// else
-	// click();
-	// return this;
-	// }
-	//	
-	// /**
-	// * Right click on the center of the widget.
-	// *
-	// * @param post
-	// * Whether or not {@link Display#post} should be used
-	// */
-	// private SWTBotTabItem rightClick(final boolean post) {
-	// if (post) {
-	// Rectangle location = absoluteLocation();
-	// rightClick(location.x, location.y, true);
-	// }
-	// else
-	// rightClick();
-	// return this;
-	// }
-	//
-	// /**
-	// * Moves the cursor to the center of the widget
-	// */
-	// private SWTBotTabItem moveMouseToWidget() {
-	// syncExec(new VoidResult() {
-	// public void run() {
-	// Rectangle location = absoluteLocation();
-	// moveMouse(location.x, location.y);
-	// }
-	// });
-	// return this;
-	// }
 }

@@ -61,31 +61,6 @@ public class SWTBotCTabItem extends AbstractSWTBot<CTabItem> {
 		});
 	}
 
-	protected Event createEvent() {
-		Event event = super.createEvent();
-		event.widget = parent;
-		event.item = widget;
-		return event;
-	}
-
-	/**
-	 * @return <code>true</code> if the tab item is active, <code>false</code> otherwise.
-	 */
-	public boolean isActive() {
-		return syncExec(new BoolResult() {
-			public Boolean run() {
-				return parent.getSelection() == widget;
-			}
-		});
-	}
-
-	public boolean isEnabled() {
-		return syncExec(new BoolResult() {
-			public Boolean run() {
-				return widget.getParent().isEnabled();
-			}
-		});
-	}
 
 	/**
 	 * Shows the item. If the item is already showing in the receiver, this method simply returns. Otherwise, the items
@@ -109,13 +84,13 @@ public class SWTBotCTabItem extends AbstractSWTBot<CTabItem> {
 	 * @throws TimeoutException if the tab does not activate
 	 */
 	public SWTBotCTabItem activate() throws TimeoutException {
-		log.trace(MessageFormat.format("Activating {0}", this));
+		log.trace(MessageFormat.format("Activating {0}", this)); //$NON-NLS-1$
 		assertEnabled();
 		// this runs in sync because tabFolder.setSelection() does not send a notification, and so should not block.
 		asyncExec(new VoidResult() {
 			public void run() {
 				widget.getParent().setSelection(widget);
-				log.debug(MessageFormat.format("Activated {0}", this));
+				log.debug(MessageFormat.format("Activated {0}", this)); //$NON-NLS-1$
 			}
 		});
 
@@ -127,68 +102,34 @@ public class SWTBotCTabItem extends AbstractSWTBot<CTabItem> {
 			}
 
 			public String getFailureMessage() {
-				return "Timed out waiting for " + SWTUtils.toString(widget) + " to activate";
+				return "Timed out waiting for " + SWTUtils.toString(widget) + " to activate"; //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		});
 
 		return this;
 	}
 
-	// /**
-	// * Get the bounds of the Widget in relation to Display.
-	// *
-	// * @return the bounds of the Widget in relation to Display.
-	// */
-	// protected Rectangle absoluteLocation() {
-	// return syncExec(new Result<Rectangle>() {
-	// public Rectangle run() {
-	// return display.map(widget.getParent(), null, widget.getBounds());
-	// }
-	// });
-	// }
-	//
-	// /**
-	// * Click on the center of the widget.
-	// *
-	// * @param post Whether or not {@link Display#post} should be used.
-	// * @return itself.
-	// */
-	// private SWTBotCTabItem click(final boolean post) {
-	// if (post) {
-	// Rectangle location = absoluteLocation();
-	// click(location.x, location.y, true);
-	// } else
-	// click();
-	// return this;
-	// }
-	//
-	// /**
-	// * Right click on the center of the widget.
-	// *
-	// * @param post Whether or not {@link Display#post} should be used.
-	// * @return itself.
-	// */
-	// private SWTBotCTabItem rightClick(final boolean post) {
-	// if (post) {
-	// Rectangle location = absoluteLocation();
-	// rightClick(location.x, location.y, true);
-	// } else
-	// rightClick();
-	// return this;
-	// }
-	//
-	// /**
-	// * Moves the cursor to the center of the widget.
-	// *
-	// * @return itself.
-	// */
-	// private SWTBotCTabItem moveMouseToWidget() {
-	// syncExec(new VoidResult() {
-	// public void run() {
-	// Rectangle location = absoluteLocation();
-	// moveMouse(location.x, location.y);
-	// }
-	// });
-	// return this;
-	// }
+	protected Event createEvent() {
+		Event event = super.createEvent();
+		event.widget = parent;
+		event.item = widget;
+		return event;
+	}
+
+	public boolean isActive() {
+		return syncExec(new BoolResult() {
+			public Boolean run() {
+				return parent.getSelection() == widget;
+			}
+		});
+	}
+
+	public boolean isEnabled() {
+		return syncExec(new BoolResult() {
+			public Boolean run() {
+				return widget.getParent().isEnabled();
+			}
+		});
+	}
+	
 }
