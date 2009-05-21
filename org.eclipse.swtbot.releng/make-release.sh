@@ -1,43 +1,31 @@
 #!/bin/bash
 
-rm -rf to-upload
-
-rm -rf artifacts target
+rm -rf to-upload artifacts target
 
 mkdir to-upload
 
-# make the ganymede binaries
-ant materialize-workspace \
-	'-Dupdate.site.features.url=http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/ganymede/dev-build/update-site/features' \
-	'-Dupdate.site.plugins.url=http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/ganymede/dev-build/update-site/plugins' \
-	'-Declipse.sdk.archive=eclipse-SDK-3.4-macosx-carbon.tar.gz' \
-	'-Declipse.buildId=3.4' \
-	'-Dhas.archives=true'
+# usage: build_swtbot 3.5M6 galileo
+function build_swtbot(){
+	ant materialize-workspace \
+		"-Dupdate.site.features.url=http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/$2/dev-build/update-site/features" \
+		"-Dupdate.site.plugins.url=http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/$2/dev-build/update-site/plugins" \
+		"-Declipse.sdk.archive=eclipse-SDK-$1-macosx-carbon.tar.gz" \
+		"-Declipse.buildId=$1" \
+		"-Dhas.archives=true"
 
-ant cruise \
-	'-Dupdate.site.features.url=http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/ganymede/dev-build/update-site/features' \
-	'-Dupdate.site.plugins.url=http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/ganymede/dev-build/update-site/plugins' \
-	'-Declipse.sdk.archive=eclipse-SDK-3.4-macosx-carbon.tar.gz' \
-	'-Declipse.buildId=3.4' \
-	'-Dhas.archives=true'
-mv artifacts/to-upload to-upload/ganymede
+	ant cruise \
+		"-Dupdate.site.features.url=http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/$2/dev-build/update-site/features" \
+		"-Dupdate.site.plugins.url=http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/$2/dev-build/update-site/plugins" \
+		"-Declipse.sdk.archive=eclipse-SDK-$1-macosx-carbon.tar.gz" \
+		"-Declipse.buildId=$1" \
+		"-Dhas.archives=true"
 
-# make the galileo binaries
+	rm -rf to-upload/$2
+	mkdir to-upload/$2
+	mv artifacts/to-upload to-upload/$2/dev-build
+}
 
-rm -rf artifacts target
-ant materialize-workspace \
-	'-Dupdate.site.features.url=http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/galileo/dev-build/update-site/features' \
-	'-Dupdate.site.plugins.url=http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/galileo/dev-build/update-site/plugins' \
-	'-Declipse.sdk.archive=eclipse-SDK-3.5M6-macosx-carbon.tar.gz' \
-	'-Declipse.buildId=3.5M6' \
-	'-Dhas.archives=true'
-	
-ant cruise \
-	'-Dupdate.site.features.url=http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/galileo/dev-build/update-site/features' \
-	'-Dupdate.site.plugins.url=http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/galileo/dev-build/update-site/plugins' \
-	'-Declipse.sdk.archive=eclipse-SDK-3.5M6-macosx-carbon.tar.gz' \
-	'-Declipse.buildId=3.5M6' \
-	'-Dhas.archives=true'
-mv artifacts/to-upload to-upload/galileo
+build_swtbot 3.4.2 ganymede
+build_swtbot 3.5M6 galileo
 
 # rsync --delete-after --partial --progress --archive to-upload build.eclipse.org:
