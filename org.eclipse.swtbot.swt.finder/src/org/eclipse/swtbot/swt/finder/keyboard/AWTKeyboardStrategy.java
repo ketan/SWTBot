@@ -68,6 +68,30 @@ class AWTKeyboardStrategy extends AbstractKeyboardStrategy {
 			return KeyEvent.VK_ESCAPE;
 		case SWT.BS:
 			return KeyEvent.VK_BACK_SPACE;
+		case SWT.F1:
+			return KeyEvent.VK_F1;
+		case SWT.F2:
+			return KeyEvent.VK_F2;
+		case SWT.F3:
+			return KeyEvent.VK_F3;
+		case SWT.F4:
+			return KeyEvent.VK_F4;
+		case SWT.F5:
+			return KeyEvent.VK_F5;
+		case SWT.F6:
+			return KeyEvent.VK_F6;
+		case SWT.F7:
+			return KeyEvent.VK_F7;
+		case SWT.F8:
+			return KeyEvent.VK_F8;
+		case SWT.F9:
+			return KeyEvent.VK_F9;
+		case SWT.F10:
+			return KeyEvent.VK_F10;
+		case SWT.F11:
+			return KeyEvent.VK_F11;
+		case SWT.F12:
+			return KeyEvent.VK_F12;
 
 		default:
 			throw new IllegalArgumentException("Could not understand keystroke " + key);

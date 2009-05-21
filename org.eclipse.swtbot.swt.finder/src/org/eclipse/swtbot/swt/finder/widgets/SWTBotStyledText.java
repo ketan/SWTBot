@@ -12,6 +12,7 @@ package org.eclipse.swtbot.swt.finder.widgets;
 
 import java.text.MessageFormat;
 
+import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.Bullet;
 import org.eclipse.swt.custom.StyleRange;
@@ -22,6 +23,8 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swtbot.swt.finder.ReferenceBy;
 import org.eclipse.swtbot.swt.finder.SWTBotWidget;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
+import org.eclipse.swtbot.swt.finder.keyboard.Keyboard;
+import org.eclipse.swtbot.swt.finder.keyboard.Keystrokes;
 import org.eclipse.swtbot.swt.finder.results.ArrayResult;
 import org.eclipse.swtbot.swt.finder.results.Result;
 import org.eclipse.swtbot.swt.finder.results.StringResult;
@@ -84,9 +87,21 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 	 * @param c the character.
 	 * @see Event#character
 	 * @see Event#stateMask
+	 * @deprecated use {@link #pressShortcut(KeyStroke...)} instead. This api will be removed.
 	 */
 	public void notifyKeyboardEvent(int modificationKey, char c) {
 		notifyKeyboardEvent(modificationKey, c, 0);
+	}
+
+	/**
+	 * Presses the shortcut specified by the given keys.
+	 * 
+	 * @param keys the keys to press
+	 * @see Keyboard#pressShortcut(KeyStroke...)
+	 * @see Keystrokes#toKeys(int, char)
+	 */
+	public void pressShortcut(KeyStroke... keys){
+		keyboard().pressShortcut(keys);
 	}
 
 	/**
@@ -98,7 +113,7 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 	 * @see Event#keyCode
 	 * @see Event#character
 	 * @see Event#stateMask
-	 * @deprecated use {@link #notifyKeyboardEvent(int, char)} instead. This api will be removed.
+	 * @deprecated use {@link #pressShortcut(KeyStroke...)} instead. This api will be removed.
 	 */
 	public void notifyKeyboardEvent(int modificationKey, char c, int keyCode) {
 		log.debug(MessageFormat.format("Enquing keyboard notification: {0}", toString(modificationKey, c))); //$NON-NLS-1$

@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.Bullet;
 import org.eclipse.swt.custom.StyleRange;
@@ -35,6 +36,7 @@ import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.exceptions.QuickFixNotFoundException;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
+import org.eclipse.swtbot.swt.finder.keyboard.Keystrokes;
 import org.eclipse.swtbot.swt.finder.matchers.AbstractMatcher;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.results.WidgetResult;
@@ -383,10 +385,21 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	 * @param c the character.
 	 * @see Event#character
 	 * @see Event#stateMask
-	 * @see SWTBotStyledText#notifyKeyboardEvent(int, char)
+	 * @deprecated use {@link #pressShortcut(KeyStroke...)} instead. This api will be removed.
 	 */
 	public void notifyKeyboardEvent(int modificationKey, char c) {
 		styledText.notifyKeyboardEvent(modificationKey, c);
+	}
+
+	/**
+	 * Presses the shortcut specified by the given keys.
+	 * 
+	 * @param keys the keys to press
+	 * @see SWTBotStyledText#pressShortcut(KeyStroke...)
+	 * @see Keystrokes#toKeys(int, char)
+	 */
+	public void pressShortcut(KeyStroke... keys){
+		styledText.pressShortcut(keys);
 	}
 
 	/**
@@ -501,7 +514,7 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	 * @param modificationKey the modification key.
 	 * @param c the character.
 	 * @param keyCode the keycode -- not used.
-	 * @deprecated use {@link #notifyKeyboardEvent(int, char)} instead. This api will be removed.
+	 * @deprecated use {@link #pressShortcut(KeyStroke...)} instead. This api will be removed.
 	 */
 	public void notifyKeyboardEvent(int modificationKey, char c, int keyCode) {
 		styledText.notifyKeyboardEvent(modificationKey, c, keyCode);

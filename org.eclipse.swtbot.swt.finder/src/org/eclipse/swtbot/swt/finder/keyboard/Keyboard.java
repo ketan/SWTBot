@@ -43,6 +43,7 @@ import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
+ * @see Keystrokes#toKeys(int, char)
  */
 public class Keyboard {
 
@@ -104,6 +105,7 @@ public class Keyboard {
 	 * @param modificationKeys the combination of {@link SWT#ALT} | {@link SWT#CTRL} | {@link SWT#SHIFT} |
 	 *            {@link SWT#COMMAND}.
 	 * @param c the character
+	 * @see Keystrokes#toKeys(int, char)
 	 */
 	public void pressShortcut(int modificationKeys, char c) {
 		pressShortcut(Keystrokes.toKeys(modificationKeys, c));
@@ -113,6 +115,7 @@ public class Keyboard {
 	 * Presses the shortcut specified by the given keys.
 	 * 
 	 * @param keys the keys to press
+	 * @see Keystrokes#toKeys(int, char)
 	 */
 	public void pressShortcut(KeyStroke... keys) {
 		log.trace(MessageFormat.format("Pressing shortcut {0}", Arrays.asList(keys)));

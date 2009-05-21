@@ -41,6 +41,39 @@ public class Keystrokes {
 	public static final KeyStroke	ESC						= KeyStroke.getInstance(0, SWT.ESC);
 	/** The backspace keystroke. */
 	public static final KeyStroke	BS						= KeyStroke.getInstance(0, SWT.BS);
+	/** The F1 keystroke. */
+	public static final KeyStroke	F1						= KeyStroke.getInstance(SWT.F1, 0);
+	/** The F2 keystroke. */
+	public static final KeyStroke	F2						= KeyStroke.getInstance(SWT.F2, 0);
+	/** The F3 keystroke. */
+	public static final KeyStroke	F3						= KeyStroke.getInstance(SWT.F3, 0);
+	/** The F4 keystroke. */
+	public static final KeyStroke	F4						= KeyStroke.getInstance(SWT.F4, 0);
+	/** The F5 keystroke. */
+	public static final KeyStroke	F5						= KeyStroke.getInstance(SWT.F5, 0);
+	/** The F6 keystroke. */
+	public static final KeyStroke	F6						= KeyStroke.getInstance(SWT.F6, 0);
+	/** The F7 keystroke. */
+	public static final KeyStroke	F7						= KeyStroke.getInstance(SWT.F7, 0);
+	/** The F8 keystroke. */
+	public static final KeyStroke	F8						= KeyStroke.getInstance(SWT.F8, 0);
+	/** The F9 keystroke. */
+	public static final KeyStroke	F9						= KeyStroke.getInstance(SWT.F9, 0);
+	/** The F10 keystroke. */
+	public static final KeyStroke	F10						= KeyStroke.getInstance(SWT.F10, 0);
+	/** The F11 keystroke. */
+	public static final KeyStroke	F11						= KeyStroke.getInstance(SWT.F11, 0);
+	/** The F12 keystroke. */
+	public static final KeyStroke	F12						= KeyStroke.getInstance(SWT.F12, 0);
+
+	/** The up keystroke. */
+	public static final KeyStroke	UP						= KeyStroke.getInstance(SWT.ARROW_UP, 0);
+	/** The down keystroke. */
+	public static final KeyStroke	DOWN					= KeyStroke.getInstance(SWT.ARROW_DOWN, 0);
+	/** The left keystroke. */
+	public static final KeyStroke	LEFT					= KeyStroke.getInstance(SWT.ARROW_LEFT, 0);
+	/** The right keystroke. */
+	public static final KeyStroke	RIGHT					= KeyStroke.getInstance(SWT.ARROW_RIGHT, 0);
 
 	/** The keyboard layout to use for mapping characters. */
 	private static KeyboardLayout	defaultKeyboardLayout	= KeyboardLayout.getDefaultKeyboardLayout();
@@ -74,7 +107,7 @@ public class Keystrokes {
 	 * @param c the character to type.
 	 * @return the keystrokes corresponding to the modification keys and character.
 	 */
-	static KeyStroke[] toKeys(int modificationKeys, char c) {
+	public static KeyStroke[] toKeys(int modificationKeys, char c) {
 		LinkedHashSet<KeyStroke> keys = new LinkedHashSet<KeyStroke>();
 		if (modificationKeys != 0) {
 			int[] sortModifierKeys = sortModifierKeys(modificationKeys);

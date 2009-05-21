@@ -10,11 +10,7 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.keyboard;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import org.eclipse.jface.bindings.keys.KeyStroke;
+import org.eclipse.swt.SWT;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotStyledText;
@@ -190,7 +186,7 @@ public class KeyboardTest extends AbstractSWTTestCase {
 	@Test
 	public void canTypeCTRL_SHIFT_T() throws Exception {
 		styledText.setFocus();
-		keyboard.pressShortcut(keys(Keystrokes.CTRL, Keystrokes.SHIFT, Keystrokes.create('t')));
+		keyboard.pressShortcut(Keystrokes.toKeys(SWT.CTRL | SWT.SHIFT, 't'));
 		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=356391804 data=null character='\\0' keyCode=262144 stateMask=0 doit=true}");
 		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=356392194 data=null character='\\0' keyCode=131072 stateMask=262144 doit=true}");
 		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=356393156 data=null character='' keyCode=116 stateMask=393216 doit=true}");
@@ -236,12 +232,21 @@ public class KeyboardTest extends AbstractSWTTestCase {
 		assertEventMatches(listeners.getText(), "KeyUp [2]: KeyEvent{StyledText {} time=41518278 data=null character='\\0' keyCode=262144 stateMask=262144 doit=true}");
 	}
 
-	private KeyStroke[] keys(KeyStroke ctrl, KeyStroke shift, KeyStroke[] keyStrokes) {
-		List<KeyStroke> keys = new ArrayList<KeyStroke>();
-		keys.add(ctrl);
-		keys.add(shift);
-		keys.addAll(Arrays.asList(keyStrokes));
-		return keys.toArray(new KeyStroke[0]);
+	@Test
+	public void canTypeFunctionKeys() throws Exception {
+		styledText.setFocus();
+		keyboard.pressShortcut(Keystrokes.F2);
+		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=71024493 data=null character='\\0' keyCode=16777227 stateMask=0 doit=true}");
+		assertEventMatches(listeners.getText(), "KeyUp [2]: KeyEvent{StyledText {} time=71024597 data=null character='\\0' keyCode=16777227 stateMask=0 doit=true}");
+	}
+
+	@Test
+	public void canTypeArrowKeys() throws Exception {
+		styledText.setFocus();
+		keyboard.pressShortcut(Keystrokes.DOWN);
+		assertEventMatches(listeners.getText(), "Traverse [31]: TraverseEvent{StyledText {} time=72468446 data=null character='\\0' keyCode=16777218 stateMask=0 doit=false detail=64}");
+		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=72468446 data=null character='\\0' keyCode=16777218 stateMask=0 doit=true}");
+		assertEventMatches(listeners.getText(), "KeyUp [2]: KeyEvent{StyledText {} time=72468502 data=null character='\\0' keyCode=16777218 stateMask=0 doit=true}");
 	}
 
 	public void setUp() throws Exception {
