@@ -111,8 +111,8 @@ class KeyboardLayout {
 			keyStrokes.put(Character.toLowerCase(ch), KeyStroke.getInstance(0, ch));
 			keyStrokes.put(ch, KeyStroke.getInstance(SWT.SHIFT, ch));
 		}
-		keyStrokes.put('\n', KeyStroke.getInstance(0, '\r'));
-		keyStrokes.put('\r', KeyStroke.getInstance(0, '\r'));
+		keyStrokes.put('\n', KeyStroke.getInstance(0, '\n'));
+		keyStrokes.put('\r', KeyStroke.getInstance(0, '\n'));
 		keyStrokes.put('\t', KeyStroke.getInstance(0, '\t'));
 		keyStrokes.put('\b', KeyStroke.getInstance(0, '\b'));
 		keyStrokes.put(' ', KeyStroke.getInstance(0, ' '));
