@@ -37,19 +37,19 @@ public class SWTBotViewTest {
 	@Test
 	public void findsView() throws Exception {
 		bot.menu("Help").menu("Welcome").click();
-		bot.viewByTitle("Welcome");
+		bot.viewByLabel("Welcome");
 	}
 
 	@Test
 	public void getsViewTitle() throws Exception {
 		bot.menu("Help").menu("Welcome").click();
-		assertEquals("Welcome", bot.viewByTitle("Welcome").getTitle());
+		assertEquals("Welcome", bot.viewByLabel("Welcome").getTitle());
 	}
 
 	@Test
 	public void notFindingViewThrowsException() throws Exception {
 		try {
-			bot.viewByTitle("Non existent view");
+			bot.viewByLabel("Non existent view");
 			fail("Expecting WidgetNotFoundException");
 		} catch (WidgetNotFoundException expected) {
 			// pass
@@ -59,11 +59,11 @@ public class SWTBotViewTest {
 	@Test
 	public void closesAView() throws Exception {
 		bot.menu("Help").menu("Welcome").click();
-		SWTBotView view = bot.viewByTitle("Welcome");
+		SWTBotView view = bot.viewByLabel("Welcome");
 		view.close();
 
 		try {
-			bot.viewByTitle("Welcome");
+			bot.viewByLabel("Welcome");
 			fail("Expecting WidgetNotFoundException");
 		} catch (WidgetNotFoundException expected) {
 			// pass
@@ -83,14 +83,14 @@ public class SWTBotViewTest {
 		SWTBotTreeItem expandNode = tree.expandNode("SWTBot Test Category");
 		expandNode.select("SWTBot Test View").click();
 		bot.button("OK").click();
-		bot.viewByTitle("SWTBot Test View").show();
+		bot.viewByLabel("SWTBot Test View").show();
 	}
 
 	@Test
 	public void menu() throws Exception {
 		openSWTBotTestView();
 
-		SWTBotView view = bot.viewByTitle("SWTBot Test View");
+		SWTBotView view = bot.viewByLabel("SWTBot Test View");
 
 		// Runs an action that is an iAction and doesn't contain a contribution id
 		view.menu("IAction Type Command").click();
@@ -105,7 +105,7 @@ public class SWTBotViewTest {
 
 	@Test
 	public void getToolbarButtons() throws Exception {
-		SWTBotView view = bot.viewByTitle("SWTBot Test View");
+		SWTBotView view = bot.viewByLabel("SWTBot Test View");
 		List<SWTBotToolbarButton> l = view.getToolbarButtons();
 		assertNotNull(l);
 		assertEquals(1, l.size());
@@ -113,7 +113,7 @@ public class SWTBotViewTest {
 
 	@Test
 	public void toolbarButton() throws Exception {
-		SWTBotView view = bot.viewByTitle("SWTBot Test View");
+		SWTBotView view = bot.viewByLabel("SWTBot Test View");
 
 		SWTBotToolbarButton button = view.toolbarButton("This represents an IAction command.");
 		assertNotNull(button);
@@ -124,7 +124,7 @@ public class SWTBotViewTest {
 
 	@Test
 	public void toolbarButtonNotFound() throws Exception {
-		SWTBotView view = bot.viewByTitle("SWTBot Test View");
+		SWTBotView view = bot.viewByLabel("SWTBot Test View");
 
 		try {
 			view.toolbarButton("Tooltip can not exist");

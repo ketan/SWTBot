@@ -87,7 +87,7 @@ public class SWTEclipseBot extends SWTWorkbenchBot {
 	 * @param label the label of the view.
 	 * @return a view with the specified label.
 	 * @throws WidgetNotFoundException if the view is not found.
-	 * @deprecated use {@link SWTWorkbenchBot#viewByTitle(String)}
+	 * @deprecated use {@link SWTWorkbenchBot#viewByLabel(String)}
 	 */
 	public SWTBotView view(String label) throws WidgetNotFoundException {
 		return view(label, 0);
@@ -101,7 +101,7 @@ public class SWTEclipseBot extends SWTWorkbenchBot {
 	 * @param index in case of multiple views with the same label.
 	 * @return a view with the specified label.
 	 * @throws WidgetNotFoundException if the view is not found.
-	 * @deprecated use {@link SWTWorkbenchBot#viewByTitle(String)}
+	 * @deprecated use {@link SWTWorkbenchBot#viewByLabel(String)}
 	 * @since 2.0
 	 */
 	@SuppressWarnings("unchecked")

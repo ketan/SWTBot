@@ -38,8 +38,8 @@ public class MessageCreateTest {
 
 	@Test
 	public void ClosesAllMessageWindows() throws Exception {
-		bot.viewByTitle("Message").close();
-		bot.viewByTitle("Message").close();
+		bot.viewByLabel("Message").close();
+		bot.viewByLabel("Message").close();
 
 		assertEquals(1, viewCount());
 	}
@@ -61,7 +61,7 @@ public class MessageCreateTest {
 
 	private SWTBotTree mailBox() throws WidgetNotFoundException {
 		// find the tree
-		return bot.viewByTitle("Mailboxes").bot().tree();
+		return bot.viewByLabel("Mailboxes").bot().tree();
 	}
 
 	private Matcher treeMatcher() {

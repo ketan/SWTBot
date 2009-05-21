@@ -83,7 +83,7 @@ public class SWTBotEclipseEditorTest {
 	private static void closeWelcomePage() {
 		try {
 			System.setProperty("org.eclipse.swtbot.search.timeout", "0");
-			bot.viewByTitle("Welcome").close();
+			bot.viewByLabel("Welcome").close();
 		} catch (WidgetNotFoundException e) {
 			// do nothing
 		}finally{

@@ -59,7 +59,6 @@ public class SWTWorkbenchBot extends SWTBot {
 	 * @param matcher the matcher used to find the perspective
 	 * @return a perspective matching the matcher
 	 * @throws WidgetNotFoundException if the perspective is not found
-	 * @throws ResultNotUniqueException if more then one perspective matches
 	 */
 	public SWTBotPerspective perspective(Matcher<?> matcher) {
 		List<IPerspectiveDescriptor> perspectives = workbenchContentsFinder.findPerspectives(matcher);
@@ -117,7 +116,6 @@ public class SWTWorkbenchBot extends SWTBot {
 	 * @param matcher the matcher used to match views
 	 * @return views that match the matcher
 	 * @throws WidgetNotFoundException if the view is not found
-	 * @throws ResultNotUniqueException if more then one view matches
 	 */
 	public SWTBotView view(Matcher<?> matcher) {
 		WaitForView waitForView = waitForView(matcher);
@@ -132,7 +130,7 @@ public class SWTWorkbenchBot extends SWTBot {
 	 * @return the view with the specified title
 	 * @see WidgetMatcherFactory#withPartName(Matcher)
 	 */
-	public SWTBotView viewByTitle(String title) {
+	public SWTBotView viewByLabel(String title) {
 		return view(withPartName(title));
 	}
 
@@ -188,7 +186,6 @@ public class SWTWorkbenchBot extends SWTBot {
 	 * @param matcher the matcher used to find the editor
 	 * @return an editor that matches the matcher
 	 * @throws WidgetNotFoundException if the editor is not found
-	 * @throws ResultNotUniqueException if more then one editor matches
 	 */
 	public SWTBotEditor editor(Matcher<?> matcher) {
 		WaitForEditor waitForEditor = waitForEditor(matcher);

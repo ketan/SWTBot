@@ -67,7 +67,7 @@ public class CommandFinderTest {
 	@BeforeClass
 	public static void beforeClass(){
 		try {
-			bot.viewByTitle("Welcome").close();
+			bot.viewByLabel("Welcome").close();
 		} catch (Exception e) {
 			// do nothing, probably closed.
 		}
