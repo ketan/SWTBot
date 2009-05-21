@@ -348,30 +348,14 @@ abstract class SWTBotFactory {
 	}
 
 	/**
-	 * Gets the timeout as specified by the SWTBotFactory preferences.
-	 *
-	 * @return the value of {@link SWTBotPreferences#TIMEOUT}, or {@value #DEFAULT_TIMEOUT} if that cannot be
-	 *         evaluated.
-	 */
-	protected long timeout() {
-		try {
-			long timeout = SWTBotPreferences.TIMEOUT;
-			return timeout <= 0 ? DEFAULT_TIMEOUT : timeout;
-		} catch (Exception e) {
-			// do nothing
-		}
-		return DEFAULT_TIMEOUT;
-	}
-
-	/**
 	 * Waits until a specified condition evaluates to true.
 	 *
 	 * @param condition the {@link ICondition} to be evaluated.
-	 * @throws TimeoutException if the condition does not evaluate to true after {@link #timeout()} milliseconds.
+	 * @throws TimeoutException if the condition does not evaluate to true after {@link SWTBotPreferences#TIMEOUT} milliseconds.
 	 * @since 1.2
 	 */
 	public void waitUntil(ICondition condition) throws TimeoutException {
-		waitUntil(condition, timeout());
+		waitUntil(condition, SWTBotPreferences.TIMEOUT);
 	}
 
 	/**
@@ -395,7 +379,7 @@ abstract class SWTBotFactory {
 	 * @param interval The delay time.
 	 * @throws TimeoutException if the condition does not evaluate to true after timeout milliseconds.
 	 */
-	private void waitUntil(ICondition condition, long timeout, long interval) throws TimeoutException {
+	public void waitUntil(ICondition condition, long timeout, long interval) throws TimeoutException {
 		Assert.isTrue(interval >= 0, "interval value is negative"); //$NON-NLS-1$
 		Assert.isTrue(timeout >= 0, "timeout value is negative"); //$NON-NLS-1$
 		long limit = System.currentTimeMillis() + timeout;
@@ -417,11 +401,11 @@ abstract class SWTBotFactory {
 	 * Waits while the condition is true.
 	 *
 	 * @param condition the {@link ICondition} to be evaluated.
-	 * @throws TimeoutException if the condition does not evaluate to false after {@link #timeout()} milliseconds.
+	 * @throws TimeoutException if the condition does not evaluate to false after {@link SWTBotPreferences#TIMEOUT} milliseconds.
 	 * @since 2.0
 	 */
 	public void waitWhile(ICondition condition) throws TimeoutException {
-		waitWhile(condition, timeout());
+		waitWhile(condition, SWTBotPreferences.TIMEOUT);
 	}
 
 	/**
@@ -446,7 +430,7 @@ abstract class SWTBotFactory {
 	 * @throws TimeoutException if the condition does not evaluate to false after timeout milliseconds.
 	 * @since 2.0
 	 */
-	private void waitWhile(ICondition condition, long timeout, long interval) throws TimeoutException {
+	public void waitWhile(ICondition condition, long timeout, long interval) throws TimeoutException {
 		Assert.isTrue(interval >= 0, "interval value is negative"); //$NON-NLS-1$
 		Assert.isTrue(timeout >= 0, "timeout value is negative"); //$NON-NLS-1$
 		long limit = System.currentTimeMillis() + timeout;
