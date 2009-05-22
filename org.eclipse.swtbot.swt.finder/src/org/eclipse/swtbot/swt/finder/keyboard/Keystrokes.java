@@ -54,6 +54,15 @@ public class Keystrokes {
 	/** The delete keystroke. */
 	public static final KeyStroke	DELETE					= KeyStroke.getInstance(0, SWT.DEL);
 
+	/** The CR keystroke. */
+	public static final KeyStroke	CR						= KeyStroke.getInstance(0, SWT.CR);
+	/** The LF keystroke. */
+	public static final KeyStroke	LF						= KeyStroke.getInstance(0, SWT.LF);
+	/** The TAB keystroke. */
+	public static final KeyStroke	TAB						= KeyStroke.getInstance(0, SWT.TAB);
+	/** The SPACE keystroke. */
+	public static final KeyStroke	SPACE					= KeyStroke.getInstance(0, ' ');
+
 	/** The F1 keystroke. */
 	public static final KeyStroke	F1						= KeyStroke.getInstance(0, SWT.F1);
 	/** The F2 keystroke. */
