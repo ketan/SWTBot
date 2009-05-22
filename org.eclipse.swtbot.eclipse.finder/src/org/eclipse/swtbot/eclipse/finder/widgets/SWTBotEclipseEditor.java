@@ -438,6 +438,17 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	}
 
 	/**
+	 * Presses the shortcut specified by the given keys.
+	 * 
+	 * @param keys the keys to press
+	 * @see Keyboard#pressShortcut(KeyStroke...)
+	 * @see Keystrokes#toKeys(int, char)
+	 */
+	public void pressShortcut(KeyStroke... keys) {
+		styledText.pressShortcut(keys);
+	}
+
+	/**
 	 * @param line the line number, 0 based.
 	 * @param column the column number, 0 based.
 	 * @param length the length of the selection.

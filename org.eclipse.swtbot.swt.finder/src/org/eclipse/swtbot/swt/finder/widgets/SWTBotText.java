@@ -163,6 +163,17 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 	}
 
 	/**
+	 * Presses the shortcut specified by the given keys.
+	 *
+	 * @param keys the keys to press
+	 * @see Keyboard#pressShortcut(KeyStroke...)
+	 * @see Keystrokes#toKeys(int, char)
+	 */
+	public void pressShortcut(KeyStroke... keys) {
+		keyboard().pressShortcut(keys);
+	}
+
+	/**
 	 * @param c the character.
 	 * @param modificationKey the modification key.
 	 * @param keyCode the keycode.
