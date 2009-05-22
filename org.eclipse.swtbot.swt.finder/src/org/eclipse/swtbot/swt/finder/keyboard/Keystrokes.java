@@ -38,6 +38,15 @@ public class Keystrokes {
 	/** The COMMAND keystroke. */
 	public static final KeyStroke	COMMAND					= KeyStroke.getInstance(SWT.COMMAND, 0);
 
+	/** The MOD1 keystroke. */
+	public static final KeyStroke	MOD1					= KeyStroke.getInstance(SWT.MOD1, 0);
+	/** The MOD2 keystroke. */
+	public static final KeyStroke	MOD2					= KeyStroke.getInstance(SWT.MOD2, 0);
+	/** The MOD3 keystroke. */
+	public static final KeyStroke	MOD3					= KeyStroke.getInstance(SWT.MOD3, 0);
+	/** The MOD4 keystroke. */
+	public static final KeyStroke	MOD4					= KeyStroke.getInstance(SWT.MOD4, 0);
+
 	/** The ESC keystroke. */
 	public static final KeyStroke	ESC						= KeyStroke.getInstance(0, SWT.ESC);
 	/** The backspace keystroke. */
