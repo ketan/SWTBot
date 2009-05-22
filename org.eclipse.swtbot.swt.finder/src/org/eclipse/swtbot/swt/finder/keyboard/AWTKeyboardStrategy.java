@@ -13,6 +13,8 @@ package org.eclipse.swtbot.swt.finder.keyboard;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.swt.SWT;
@@ -25,7 +27,10 @@ import org.eclipse.swt.SWT;
  */
 class AWTKeyboardStrategy extends AbstractKeyboardStrategy {
 
-	private final Robot	robot;
+	private final Robot							robot;
+
+	private static final Map<Integer, Integer>	modifierKeyMapping		= new HashMap<Integer, Integer>();
+	private static final Map<Integer, Integer>	naturalKeyKeyMapping	= new HashMap<Integer, Integer>();
 
 	AWTKeyboardStrategy() {
 		try {
@@ -45,57 +50,68 @@ class AWTKeyboardStrategy extends AbstractKeyboardStrategy {
 	}
 
 	private int key(KeyStroke key) {
-		if (key.getNaturalKey() != 0)
-			return key.getNaturalKey();
-		switch (key.getModifierKeys()) {
-		case SWT.CTRL:
-			return KeyEvent.VK_CONTROL;
-		case SWT.SHIFT:
-			return KeyEvent.VK_SHIFT;
-		case SWT.ALT:
-			return KeyEvent.VK_ALT;
-		case SWT.COMMAND:
-			return KeyEvent.VK_WINDOWS;
-		case SWT.ARROW_RIGHT:
-			return KeyEvent.VK_RIGHT;
-		case SWT.ARROW_DOWN:
-			return KeyEvent.VK_DOWN;
-		case SWT.ARROW_LEFT:
-			return KeyEvent.VK_LEFT;
-		case SWT.ARROW_UP:
-			return KeyEvent.VK_UP;
-		case SWT.ESC:
-			return KeyEvent.VK_ESCAPE;
-		case SWT.BS:
-			return KeyEvent.VK_BACK_SPACE;
-		case SWT.F1:
-			return KeyEvent.VK_F1;
-		case SWT.F2:
-			return KeyEvent.VK_F2;
-		case SWT.F3:
-			return KeyEvent.VK_F3;
-		case SWT.F4:
-			return KeyEvent.VK_F4;
-		case SWT.F5:
-			return KeyEvent.VK_F5;
-		case SWT.F6:
-			return KeyEvent.VK_F6;
-		case SWT.F7:
-			return KeyEvent.VK_F7;
-		case SWT.F8:
-			return KeyEvent.VK_F8;
-		case SWT.F9:
-			return KeyEvent.VK_F9;
-		case SWT.F10:
-			return KeyEvent.VK_F10;
-		case SWT.F11:
-			return KeyEvent.VK_F11;
-		case SWT.F12:
-			return KeyEvent.VK_F12;
+		if (key.getModifierKeys() != KeyStroke.NO_KEY)
+			return sendModifierKeys(key);
+		if (key.getNaturalKey() != KeyStroke.NO_KEY)
+			return sendNaturalKey(key);
+		throw new IllegalArgumentException("Could not understand keystroke " + key);
+	}
 
-		default:
-			throw new IllegalArgumentException("Could not understand keystroke " + key);
-		}
+	private int sendNaturalKey(KeyStroke key) {
+		Integer awtKey = naturalKeyKeyMapping.get(key.getNaturalKey());
+		return awtKey != null ? awtKey : key.getNaturalKey();
+	}
+
+	private int sendModifierKeys(KeyStroke key) {
+		Integer awtKey = modifierKeyMapping.get(key.getModifierKeys());
+		if (awtKey != null)
+			return awtKey;
+		throw new IllegalArgumentException("Could not understand keystroke " + key);
+	}
+
+	static {
+		/* the modifier keys */
+		addModifierKeyMapping(SWT.CTRL, KeyEvent.VK_CONTROL);
+		addModifierKeyMapping(SWT.SHIFT, KeyEvent.VK_SHIFT);
+		addModifierKeyMapping(SWT.ALT, KeyEvent.VK_ALT);
+		addModifierKeyMapping(SWT.COMMAND, KeyEvent.VK_WINDOWS);
+
+		/* the natural keys */
+		addNaturalKeyMapping(SWT.ESC, KeyEvent.VK_ESCAPE);
+		/* function keys */
+		addNaturalKeyMapping(SWT.F1, KeyEvent.VK_F1);
+		addNaturalKeyMapping(SWT.F2, KeyEvent.VK_F2);
+		addNaturalKeyMapping(SWT.F3, KeyEvent.VK_F3);
+		addNaturalKeyMapping(SWT.F4, KeyEvent.VK_F4);
+		addNaturalKeyMapping(SWT.F5, KeyEvent.VK_F5);
+		addNaturalKeyMapping(SWT.F6, KeyEvent.VK_F6);
+		addNaturalKeyMapping(SWT.F7, KeyEvent.VK_F7);
+		addNaturalKeyMapping(SWT.F8, KeyEvent.VK_F8);
+		addNaturalKeyMapping(SWT.F9, KeyEvent.VK_F9);
+		addNaturalKeyMapping(SWT.F10, KeyEvent.VK_F10);
+		addNaturalKeyMapping(SWT.F11, KeyEvent.VK_F11);
+		addNaturalKeyMapping(SWT.F12, KeyEvent.VK_F12);
+
+		addNaturalKeyMapping(SWT.BS, KeyEvent.VK_BACK_SPACE);
+		addNaturalKeyMapping(SWT.DEL, KeyEvent.VK_DELETE);
+
+		/* direction and page navigation keys */
+		addNaturalKeyMapping(SWT.HOME, KeyEvent.VK_HOME);
+		addNaturalKeyMapping(SWT.END, KeyEvent.VK_END);
+		addNaturalKeyMapping(SWT.PAGE_UP, KeyEvent.VK_PAGE_UP);
+		addNaturalKeyMapping(SWT.PAGE_DOWN, KeyEvent.VK_PAGE_DOWN);
+		addNaturalKeyMapping(SWT.ARROW_RIGHT, KeyEvent.VK_RIGHT);
+		addNaturalKeyMapping(SWT.ARROW_DOWN, KeyEvent.VK_DOWN);
+		addNaturalKeyMapping(SWT.ARROW_LEFT, KeyEvent.VK_LEFT);
+		addNaturalKeyMapping(SWT.ARROW_UP, KeyEvent.VK_UP);
+	}
+
+	private static void addModifierKeyMapping(int swtKey, int awtKey) {
+		modifierKeyMapping.put(swtKey, awtKey);
+	}
+
+	private static void addNaturalKeyMapping(int swtKey, int awtKey) {
+		naturalKeyKeyMapping.put(swtKey, awtKey);
 	}
 
 }

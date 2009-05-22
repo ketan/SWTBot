@@ -36,6 +36,7 @@ import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.exceptions.QuickFixNotFoundException;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
+import org.eclipse.swtbot.swt.finder.keyboard.Keyboard;
 import org.eclipse.swtbot.swt.finder.keyboard.Keystrokes;
 import org.eclipse.swtbot.swt.finder.matchers.AbstractMatcher;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
@@ -381,25 +382,59 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	}
 
 	/**
-	 * @param modificationKey the modification key.
+	 * Notifies of the keyboard event.
+	 * <p>
+	 * FIXME need some work for CTRL|SHIFT + 1 the 1 is to be sent as '!' in this case.
+	 * </p>
+	 * 
+	 * @param modificationKeys the modification keys.
 	 * @param c the character.
 	 * @see Event#character
 	 * @see Event#stateMask
-	 * @deprecated use {@link #pressShortcut(KeyStroke...)} instead. This api will be removed.
+	 * @deprecated use {@link #pressShortcut(int, char)} instead. This api will be removed.
 	 */
-	public void notifyKeyboardEvent(int modificationKey, char c) {
-		styledText.notifyKeyboardEvent(modificationKey, c);
+	public void notifyKeyboardEvent(int modificationKeys, char c) {
+		styledText.notifyKeyboardEvent(modificationKeys, c);
+	}
+
+	/**
+	 * Notifies of keyboard event.
+	 * 
+	 * @param modificationKeys the modification key.
+	 * @param c the character.
+	 * @param keyCode any special keys (function keys, arrow or navigation keys etc.)
+	 * @see Event#keyCode
+	 * @see Event#character
+	 * @see Event#stateMask
+	 * @deprecated use {@link #pressShortcut(int, int, char)} instead. This api will be removed.
+	 */
+	public void notifyKeyboardEvent(int modificationKeys, char c, int keyCode) {
+		styledText.notifyKeyboardEvent(modificationKeys, c, keyCode);
 	}
 
 	/**
 	 * Presses the shortcut specified by the given keys.
 	 * 
-	 * @param keys the keys to press
-	 * @see SWTBotStyledText#pressShortcut(KeyStroke...)
+	 * @param modificationKeys the modification keys.
+	 * @param c the character.
+	 * @see Keyboard#pressShortcut(KeyStroke...)
 	 * @see Keystrokes#toKeys(int, char)
 	 */
-	public void pressShortcut(KeyStroke... keys){
-		styledText.pressShortcut(keys);
+	public void pressShortcut(int modificationKeys, char c) {
+		styledText.pressShortcut(modificationKeys, c);
+	}
+
+	/**
+	 * Presses the shortcut specified by the given keys.
+	 * 
+	 * @param modificationKeys the modification keys.
+	 * @param keyCode any special keys (function keys, arrow or navigation keys etc.)
+	 * @param c the character.
+	 * @see Keyboard#pressShortcut(KeyStroke...)
+	 * @see Keystrokes#toKeys(int, char)
+	 */
+	public void pressShortcut(int modificationKeys, int keyCode, char c) {
+		styledText.pressShortcut(modificationKeys, keyCode, c);
 	}
 
 	/**
@@ -506,18 +541,6 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	 */
 	public boolean hasBulletOnLine(int line) {
 		return styledText.hasBulletOnLine(line);
-	}
-
-	/**
-	 * Notifies of keyboard event.
-	 * 
-	 * @param modificationKey the modification key.
-	 * @param c the character.
-	 * @param keyCode the keycode -- not used.
-	 * @deprecated use {@link #pressShortcut(KeyStroke...)} instead. This api will be removed.
-	 */
-	public void notifyKeyboardEvent(int modificationKey, char c, int keyCode) {
-		styledText.notifyKeyboardEvent(modificationKey, c, keyCode);
 	}
 
 	/**

@@ -11,6 +11,10 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Event;
@@ -93,45 +97,69 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 	}
 
 	/**
+	 * Notifies of the keyboard event.
+	 * <p>
 	 * FIXME need some work for CTRL|SHIFT + 1 the 1 is to be sent as '!' in this case.
+	 * </p>
 	 * 
-	 * @param modificationKey the modification key.
+	 * @param modificationKeys the modification keys.
 	 * @param c the character.
 	 * @see Event#character
 	 * @see Event#stateMask
-	 * @since 1.2
-	 * @deprecated use {@link #pressShortcut(KeyStroke...)}
+	 * @deprecated use {@link #pressShortcut(int, char)} instead. This api will be removed.
 	 */
-	public void notifyKeyboardEvent(int modificationKey, char c) {
-		notifyKeyboardEvent(modificationKey, c, 0);
+	public void notifyKeyboardEvent(int modificationKeys, char c) {
+		keyboard().pressShortcut(modificationKeys, c);
+	}
+
+	/**
+	 * Notifies of keyboard event.
+	 * 
+	 * @param modificationKeys the modification key.
+	 * @param c the character.
+	 * @param keyCode any special keys (function keys, arrow or navigation keys etc.)
+	 * @see Event#keyCode
+	 * @see Event#character
+	 * @see Event#stateMask
+	 * @deprecated use {@link #pressShortcut(int, int, char)} instead. This api will be removed.
+	 */
+	public void notifyKeyboardEvent(int modificationKeys, char c, int keyCode) {
+		pressShortcut(modificationKeys, keyCode, c);
 	}
 
 	/**
 	 * Presses the shortcut specified by the given keys.
 	 * 
-	 * @param keys the keys to press
+	 * @param modificationKeys the modification keys.
+	 * @param c the character.
 	 * @see Keyboard#pressShortcut(KeyStroke...)
 	 * @see Keystrokes#toKeys(int, char)
 	 */
-	public void pressShortcut(KeyStroke... keys){
-		keyboard().pressShortcut(keys);
+	public void pressShortcut(int modificationKeys, char c) {
+		keyboard().pressShortcut(modificationKeys, c);
 	}
 
 	/**
-	 * @param modificationKey the modification key.
+	 * Presses the shortcut specified by the given keys.
+	 * 
+	 * @param modificationKeys the modification keys.
+	 * @param keyCode any special keys (function keys, arrow or navigation keys etc.)
 	 * @param c the character.
-	 * @param keyCode the keycode (ignored)
-	 * @see Event#keyCode
-	 * @see Event#character
-	 * @see Event#stateMask
-	 * @since 1.2
-	 * @deprecated use {@link #pressShortcut(KeyStroke...)} instead. This api will be removed.
+	 * @see Keyboard#pressShortcut(KeyStroke...)
+	 * @see Keystrokes#toKeys(int, char)
 	 */
-	public void notifyKeyboardEvent(int modificationKey, char c, int keyCode) {
-		log.debug(MessageFormat.format("Enquing keyboard notification: {0}", toString(modificationKey, c))); //$NON-NLS-1$
+	public void pressShortcut(int modificationKeys, int keyCode, char c) {
+		log.debug(MessageFormat.format("Enquing keyboard notification: {0}", toString(modificationKeys, c))); //$NON-NLS-1$
 		assertEnabled();
 		setFocus();
-		keyboard().pressShortcut(modificationKey, c);
+
+		List<KeyStroke> keys = new ArrayList<KeyStroke>(Arrays.asList(Keystrokes.toKeys(modificationKeys, c)));
+		if (c == 0)
+			keys.add(KeyStroke.getInstance(0, keyCode));
+		else
+			keys.add(keys.size() - 1, KeyStroke.getInstance(0, keyCode));
+
+		keyboard().pressShortcut(keys.toArray(new KeyStroke[0]));
 	}
 
 	/**

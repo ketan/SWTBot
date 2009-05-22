@@ -37,43 +37,56 @@ public class Keystrokes {
 	public static final KeyStroke	ALT						= KeyStroke.getInstance(SWT.ALT, 0);
 	/** The COMMAND keystroke. */
 	public static final KeyStroke	COMMAND					= KeyStroke.getInstance(SWT.COMMAND, 0);
+
 	/** The ESC keystroke. */
 	public static final KeyStroke	ESC						= KeyStroke.getInstance(0, SWT.ESC);
 	/** The backspace keystroke. */
 	public static final KeyStroke	BS						= KeyStroke.getInstance(0, SWT.BS);
+	/** The delete keystroke. */
+	public static final KeyStroke	DELETE					= KeyStroke.getInstance(0, SWT.DEL);
+
 	/** The F1 keystroke. */
-	public static final KeyStroke	F1						= KeyStroke.getInstance(SWT.F1, 0);
+	public static final KeyStroke	F1						= KeyStroke.getInstance(0, SWT.F1);
 	/** The F2 keystroke. */
-	public static final KeyStroke	F2						= KeyStroke.getInstance(SWT.F2, 0);
+	public static final KeyStroke	F2						= KeyStroke.getInstance(0, SWT.F2);
 	/** The F3 keystroke. */
-	public static final KeyStroke	F3						= KeyStroke.getInstance(SWT.F3, 0);
+	public static final KeyStroke	F3						= KeyStroke.getInstance(0, SWT.F3);
 	/** The F4 keystroke. */
-	public static final KeyStroke	F4						= KeyStroke.getInstance(SWT.F4, 0);
+	public static final KeyStroke	F4						= KeyStroke.getInstance(0, SWT.F4);
 	/** The F5 keystroke. */
-	public static final KeyStroke	F5						= KeyStroke.getInstance(SWT.F5, 0);
+	public static final KeyStroke	F5						= KeyStroke.getInstance(0, SWT.F5);
 	/** The F6 keystroke. */
-	public static final KeyStroke	F6						= KeyStroke.getInstance(SWT.F6, 0);
+	public static final KeyStroke	F6						= KeyStroke.getInstance(0, SWT.F6);
 	/** The F7 keystroke. */
-	public static final KeyStroke	F7						= KeyStroke.getInstance(SWT.F7, 0);
+	public static final KeyStroke	F7						= KeyStroke.getInstance(0, SWT.F7);
 	/** The F8 keystroke. */
-	public static final KeyStroke	F8						= KeyStroke.getInstance(SWT.F8, 0);
+	public static final KeyStroke	F8						= KeyStroke.getInstance(0, SWT.F8);
 	/** The F9 keystroke. */
-	public static final KeyStroke	F9						= KeyStroke.getInstance(SWT.F9, 0);
+	public static final KeyStroke	F9						= KeyStroke.getInstance(0, SWT.F9);
 	/** The F10 keystroke. */
-	public static final KeyStroke	F10						= KeyStroke.getInstance(SWT.F10, 0);
+	public static final KeyStroke	F10						= KeyStroke.getInstance(0, SWT.F10);
 	/** The F11 keystroke. */
-	public static final KeyStroke	F11						= KeyStroke.getInstance(SWT.F11, 0);
+	public static final KeyStroke	F11						= KeyStroke.getInstance(0, SWT.F11);
 	/** The F12 keystroke. */
-	public static final KeyStroke	F12						= KeyStroke.getInstance(SWT.F12, 0);
+	public static final KeyStroke	F12						= KeyStroke.getInstance(0, SWT.F12);
 
 	/** The up keystroke. */
-	public static final KeyStroke	UP						= KeyStroke.getInstance(SWT.ARROW_UP, 0);
+	public static final KeyStroke	UP						= KeyStroke.getInstance(0, SWT.ARROW_UP);
 	/** The down keystroke. */
-	public static final KeyStroke	DOWN					= KeyStroke.getInstance(SWT.ARROW_DOWN, 0);
+	public static final KeyStroke	DOWN					= KeyStroke.getInstance(0, SWT.ARROW_DOWN);
 	/** The left keystroke. */
-	public static final KeyStroke	LEFT					= KeyStroke.getInstance(SWT.ARROW_LEFT, 0);
+	public static final KeyStroke	LEFT					= KeyStroke.getInstance(0, SWT.ARROW_LEFT);
 	/** The right keystroke. */
-	public static final KeyStroke	RIGHT					= KeyStroke.getInstance(SWT.ARROW_RIGHT, 0);
+	public static final KeyStroke	RIGHT					= KeyStroke.getInstance(0, SWT.ARROW_RIGHT);
+
+	/** The END keystroke. */
+	public static final KeyStroke	END						= KeyStroke.getInstance(0, SWT.END);
+	/** The HOME keystroke. */
+	public static final KeyStroke	HOME					= KeyStroke.getInstance(0, SWT.HOME);
+	/** The PAGE_UP keystroke. */
+	public static final KeyStroke	PAGE_UP					= KeyStroke.getInstance(0, SWT.PAGE_UP);
+	/** The PAGE_DOWN keystroke. */
+	public static final KeyStroke	PAGE_DOWN				= KeyStroke.getInstance(0, SWT.PAGE_DOWN);
 
 	/** The keyboard layout to use for mapping characters. */
 	private static KeyboardLayout	defaultKeyboardLayout	= KeyboardLayout.getDefaultKeyboardLayout();
