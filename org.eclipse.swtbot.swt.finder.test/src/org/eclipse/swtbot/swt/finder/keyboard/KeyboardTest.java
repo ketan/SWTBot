@@ -262,13 +262,27 @@ public class KeyboardTest extends AbstractSWTTestCase {
 	@Test
 	public void canTypeModifierAndSpecialKeys() throws Exception {
 		styledText.setFocus();
-		styledText.notifyKeyboardEvent(SWT.ALT | SWT.SHIFT, '\0', SWT.F1);
+		styledText.pressShortcut(SWT.ALT | SWT.SHIFT, SWT.F1, '\0');
 		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=1734039746 data=null character='\\0' keyCode=65536 stateMask=0 doit=true}");
 		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=1734040242 data=null character='\\0' keyCode=131072 stateMask=65536 doit=true}");
 		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=1734040650 data=null character='\\0' keyCode=16777226 stateMask=196608 doit=true}");
 		assertEventMatches(listeners.getText(), "KeyUp [2]: KeyEvent{StyledText {} time=1734040730 data=null character='\\0' keyCode=16777226 stateMask=196608 doit=true}");
 		assertEventMatches(listeners.getText(), "KeyUp [2]: KeyEvent{StyledText {} time=1734041073 data=null character='\\0' keyCode=131072 stateMask=196608 doit=true}");
 		assertEventMatches(listeners.getText(), "KeyUp [2]: KeyEvent{StyledText {} time=1734041394 data=null character='\\0' keyCode=65536 stateMask=65536 doit=true}");
+	}
+
+	@Test
+	public void canTypeALT_SHIFT_C() throws Exception {
+		styledText.setFocus();
+		styledText.pressShortcut(SWT.ALT | SWT.SHIFT, 'c');
+		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=17898887 data=null character='\\0' keyCode=65536 stateMask=0 doit=true}");
+		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=17899215 data=null character='\\0' keyCode=131072 stateMask=65536 doit=true}");
+		assertEventMatches(listeners.getText(), "Verify [25]: VerifyEvent{StyledText {} time=17899783 data=null character='\\0' keyCode=0 stateMask=0 doit=true start=0 end=0 text=Ç}");
+		assertEventMatches(listeners.getText(), "Modify [24]: ModifyEvent{StyledText {} time=17899783 data=null}");
+		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=17899783 data=null character='Ç' keyCode=99 stateMask=196608 doit=true}");
+		assertEventMatches(listeners.getText(), "KeyUp [2]: KeyEvent{StyledText {} time=17899887 data=null character='Ç' keyCode=99 stateMask=196608 doit=true}");
+		assertEventMatches(listeners.getText(), "KeyUp [2]: KeyEvent{StyledText {} time=17900711 data=null character='\\0' keyCode=131072 stateMask=196608 doit=true}");
+		assertEventMatches(listeners.getText(), "KeyUp [2]: KeyEvent{StyledText {} time=17901071 data=null character='\\0' keyCode=65536 stateMask=65536 doit=true}");
 	}
 
 	public void setUp() throws Exception {

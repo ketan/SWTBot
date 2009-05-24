@@ -11,10 +11,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Event;
@@ -111,7 +107,7 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 	public void notifyKeyboardEvent(int modificationKeys, char c) {
 		keyboard().pressShortcut(modificationKeys, c);
 	}
-
+	
 	/**
 	 * Notifies of keyboard event.
 	 * 
@@ -130,46 +126,42 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 	/**
 	 * Presses the shortcut specified by the given keys.
 	 * 
-	 * @param modificationKeys the modification keys.
-	 * @param c the character.
-	 * @see Keyboard#pressShortcut(KeyStroke...)
+	 * @param modificationKeys the combination of {@link SWT#ALT} | {@link SWT#CTRL} | {@link SWT#SHIFT} |
+	 *            {@link SWT#COMMAND}.
+	 * @param c the character
 	 * @see Keystrokes#toKeys(int, char)
 	 */
 	public void pressShortcut(int modificationKeys, char c) {
+		assertEnabled();
+		setFocus();
 		keyboard().pressShortcut(modificationKeys, c);
 	}
 
 	/**
 	 * Presses the shortcut specified by the given keys.
 	 * 
-	 * @param modificationKeys the modification keys.
-	 * @param keyCode any special keys (function keys, arrow or navigation keys etc.)
-	 * @param c the character.
-	 * @see Keyboard#pressShortcut(KeyStroke...)
+	 * @param modificationKeys the combination of {@link SWT#ALT} | {@link SWT#CTRL} | {@link SWT#SHIFT} |
+	 *            {@link SWT#COMMAND}.
+	 * @param keyCode the keyCode, these may be special keys like F1-F12, or navigation keys like HOME, PAGE_UP
+	 * @param c the character
 	 * @see Keystrokes#toKeys(int, char)
 	 */
 	public void pressShortcut(int modificationKeys, int keyCode, char c) {
-		log.debug(MessageFormat.format("Enquing keyboard notification: {0}", toString(modificationKeys, c))); //$NON-NLS-1$
 		assertEnabled();
 		setFocus();
-
-		List<KeyStroke> keys = new ArrayList<KeyStroke>(Arrays.asList(Keystrokes.toKeys(modificationKeys, c)));
-		if (c == 0)
-			keys.add(KeyStroke.getInstance(0, keyCode));
-		else
-			keys.add(keys.size() - 1, KeyStroke.getInstance(0, keyCode));
-
-		keyboard().pressShortcut(keys.toArray(new KeyStroke[0]));
+		keyboard().pressShortcut(modificationKeys, keyCode, c);
 	}
 
 	/**
 	 * Presses the shortcut specified by the given keys.
-	 *
+	 * 
 	 * @param keys the keys to press
 	 * @see Keyboard#pressShortcut(KeyStroke...)
-	 * @see Keystrokes#toKeys(int, char)
+	 * @see Keystrokes
 	 */
 	public void pressShortcut(KeyStroke... keys) {
+		assertEnabled();
+		setFocus();
 		keyboard().pressShortcut(keys);
 	}
 

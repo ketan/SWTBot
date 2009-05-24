@@ -415,7 +415,8 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	/**
 	 * Presses the shortcut specified by the given keys.
 	 * 
-	 * @param modificationKeys the modification keys.
+	 * @param modificationKeys the combination of {@link SWT#ALT} | {@link SWT#CTRL} | {@link SWT#SHIFT} |
+	 *            {@link SWT#COMMAND}.
 	 * @param c the character.
 	 * @see Keyboard#pressShortcut(KeyStroke...)
 	 * @see Keystrokes#toKeys(int, char)
@@ -427,10 +428,10 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	/**
 	 * Presses the shortcut specified by the given keys.
 	 * 
-	 * @param modificationKeys the modification keys.
-	 * @param keyCode any special keys (function keys, arrow or navigation keys etc.)
-	 * @param c the character.
-	 * @see Keyboard#pressShortcut(KeyStroke...)
+	 * @param modificationKeys the combination of {@link SWT#ALT} | {@link SWT#CTRL} | {@link SWT#SHIFT} |
+	 *            {@link SWT#COMMAND}.
+	 * @param keyCode the keyCode, these may be special keys like F1-F12, or navigation keys like HOME, PAGE_UP
+	 * @param c the character
 	 * @see Keystrokes#toKeys(int, char)
 	 */
 	public void pressShortcut(int modificationKeys, int keyCode, char c) {
@@ -442,7 +443,7 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	 * 
 	 * @param keys the keys to press
 	 * @see Keyboard#pressShortcut(KeyStroke...)
-	 * @see Keystrokes#toKeys(int, char)
+	 * @see Keystrokes
 	 */
 	public void pressShortcut(KeyStroke... keys) {
 		styledText.pressShortcut(keys);

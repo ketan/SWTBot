@@ -15,6 +15,7 @@ import static org.eclipse.swtbot.swt.finder.utils.SWTUtils.sleep;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.bindings.keys.KeyStroke;
@@ -123,6 +124,25 @@ public class Keyboard {
 		releaseKeys(reverse(keys));
 	}
 
+	/**
+	 * Presses the shortcut specified by the given keys.
+	 * 
+	 * @param modificationKeys the combination of {@link SWT#ALT} | {@link SWT#CTRL} | {@link SWT#SHIFT} |
+	 *            {@link SWT#COMMAND}.
+	 * @param keyCode the keyCode, these may be special keys like F1-F12, or navigation keys like HOME, PAGE_UP
+	 * @param c the character
+	 * @see Keystrokes#toKeys(int, char)
+	 */
+	public void pressShortcut(int modificationKeys, int keyCode, char c) {
+
+		List<KeyStroke> keys = new ArrayList<KeyStroke>(Arrays.asList(Keystrokes.toKeys(modificationKeys, c)));
+		if (keyCode != 0)
+			addKeyCode(keyCode, c, keys);
+
+		pressShortcut(keys.toArray(new KeyStroke[0]));
+
+	}
+
 	private KeyStroke[] reverse(KeyStroke... keys) {
 		ArrayList<KeyStroke> copy = new ArrayList<KeyStroke>(Arrays.asList(keys));
 		Collections.reverse(copy);
@@ -135,6 +155,13 @@ public class Keyboard {
 
 	private void pressKeys(KeyStroke... keys) {
 		strategy.pressKeys(keys);
+	}
+
+	private void addKeyCode(int keyCode, char c, List<KeyStroke> keys) {
+		if (c == 0)
+			keys.add(KeyStroke.getInstance(0, keyCode));
+		else
+			keys.add(keys.size() - 1, KeyStroke.getInstance(0, keyCode));
 	}
 
 }
