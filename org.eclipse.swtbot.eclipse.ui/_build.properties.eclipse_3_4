@@ -8,7 +8,8 @@
 # Contributors:
 #     Ketan Padegaonkar - initial API and implementation
 ###############################################################################
-source.. = src/
+source.. = src/,\
+           src_eclipse_3.4/
 output.. = bin/
 bin.includes = META-INF/,\
                .,\
@@ -20,7 +21,8 @@ bin.includes = META-INF/,\
                intro/,\
                about.ini,\
                about.properties,\
-               icons/
+               icons/,\
+               src_eclipse_3.4/
 jars.compile.order = .
 src.includes = src/,\
                build.properties,\

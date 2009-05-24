@@ -1,7 +1,7 @@
 source.. = junit4_3/,\
            src/
 output.. = bin/
-bin.includes = META-INF/,\
+bin.includes = META-INF/MANIFEST.MF,\
                .,\
                junit4_3/,\
                about.html,\

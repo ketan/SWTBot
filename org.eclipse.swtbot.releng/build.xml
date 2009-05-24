@@ -89,12 +89,22 @@
 	</target>
 	
 	<target name="make-substitutions-4.5" if="isJunit4.5">
+		<!-- make substitutions in the eclipse-ui plugin. See https://bugs.eclipse.org/bugs/show_bug.cgi?id=274083#c5 -->
+		<copy file="../org.eclipse.swtbot.eclipse.ui/_build.properties.eclipse_3_5" tofile="../org.eclipse.swtbot.eclipse.ui/build.properties" overwrite="true" />
+		<copy file="../org.eclipse.swtbot.eclipse.ui/_classpath.eclipse_3_5" tofile="../org.eclipse.swtbot.eclipse.ui/.classpath" overwrite="true" />
+
+		<!-- make substitutions in the junit plugin -->
 		<copy file="../org.eclipse.swtbot.junit4_x/META-INF/MANIFEST.MF_junit4_5" tofile="../org.eclipse.swtbot.junit4_x/META-INF/MANIFEST.MF" overwrite="true" />
 		<copy file="../org.eclipse.swtbot.junit4_x/_build.properties.junit4_5" tofile="../org.eclipse.swtbot.junit4_x/build.properties" overwrite="true" />
 		<copy file="../org.eclipse.swtbot.junit4_x/_classpath.junit4_5" tofile="../org.eclipse.swtbot.junit4_x/.classpath" overwrite="true" />		
 	</target>
 	
 	<target name="make-substitutions-4.3" unless="isJunit4.5">
+		<!-- make substitutions in the eclipse-ui plugin. See https://bugs.eclipse.org/bugs/show_bug.cgi?id=274083#c5 -->
+		<copy file="../org.eclipse.swtbot.eclipse.ui/_build.properties.eclipse_3_4" tofile="../org.eclipse.swtbot.eclipse.ui/build.properties" overwrite="true" />
+		<copy file="../org.eclipse.swtbot.eclipse.ui/_classpath.eclipse_3_4" tofile="../org.eclipse.swtbot.eclipse.ui/.classpath" overwrite="true" />
+
+		<!-- make substitutions in the junit plugin -->
 		<copy file="../org.eclipse.swtbot.junit4_x/META-INF/MANIFEST.MF_junit4_3" tofile="../org.eclipse.swtbot.junit4_x/META-INF/MANIFEST.MF" overwrite="true" />
 		<copy file="../org.eclipse.swtbot.junit4_x/_build.properties.junit4_3" tofile="../org.eclipse.swtbot.junit4_x/build.properties" overwrite="true" />
 		<copy file="../org.eclipse.swtbot.junit4_x/_classpath.junit4_3" tofile="../org.eclipse.swtbot.junit4_x/.classpath" overwrite="true" />		
