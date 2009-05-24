@@ -42,16 +42,23 @@ public abstract class AbstractKeyboardStrategy implements KeyboardStrategy {
 	protected abstract void releaseKey(KeyStroke key);
 
 	public void pressKeys(KeyStroke... keys) {
+		assertKeys(keys);
 		for (KeyStroke key : keys) {
-			assertKey(key);
 			pressKey(key);
 		}
 	}
 
 	public void releaseKeys(KeyStroke... keys) {
+		assertKeys(keys);
 		for (KeyStroke key : keys) {
 			assertKey(key);
 			releaseKey(key);
+		}
+	}
+
+	private void assertKeys(KeyStroke... keys) {
+		for (KeyStroke key : keys) {
+			assertKey(key);
 		}
 	}
 
