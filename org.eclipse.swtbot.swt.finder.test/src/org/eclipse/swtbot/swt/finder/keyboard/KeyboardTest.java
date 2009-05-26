@@ -273,6 +273,9 @@ public class KeyboardTest extends AbstractSWTTestCase {
 
 	@Test
 	public void canTypeALT_SHIFT_C() throws Exception {
+		// don't execute on mac
+		if (!isMac())
+			return;
 		styledText.setFocus();
 		styledText.pressShortcut(SWT.ALT | SWT.SHIFT, 'c');
 		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=17898887 data=null character='\\0' keyCode=65536 stateMask=0 doit=true}");
@@ -299,6 +302,11 @@ public class KeyboardTest extends AbstractSWTTestCase {
 		styledText.setText("");
 		bot.button("Clear").click();
 		listeners = bot.textInGroup("Listeners");
+	}
+
+	private static boolean isMac() {
+		String swtPlatform = SWT.getPlatform();
+		return ("carbon".equals(swtPlatform) || "cocoa".equals(swtPlatform));
 	}
 
 }
