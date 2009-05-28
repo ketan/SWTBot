@@ -11,14 +11,12 @@
 package org.eclipse.swtbot.swt.finder.keyboard;
 
 import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTKeyboardTest extends KeyboardTest {
+public class SWTKeyboardTest extends AbstractKeyboardTest {
 
 	@BeforeClass
 	public static void beforeClass() {

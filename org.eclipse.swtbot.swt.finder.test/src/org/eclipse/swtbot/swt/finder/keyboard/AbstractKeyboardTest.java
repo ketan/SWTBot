@@ -10,18 +10,16 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.keyboard;
 
-import org.eclipse.swt.SWT;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotStyledText;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotText;
-import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public abstract class KeyboardTest extends AbstractSWTTestCase {
+public abstract class AbstractKeyboardTest extends AbstractSWTTestCase {
 
 	private SWTBotStyledText styledText;
 	private SWTBotText listeners;
