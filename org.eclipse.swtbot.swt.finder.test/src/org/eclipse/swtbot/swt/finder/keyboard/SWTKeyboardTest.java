@@ -11,6 +11,8 @@
 package org.eclipse.swtbot.swt.finder.keyboard;
 
 import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
