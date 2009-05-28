@@ -104,6 +104,9 @@ class AWTKeyboardStrategy extends AbstractKeyboardStrategy {
 		addNaturalKeyMapping(SWT.ARROW_DOWN, KeyEvent.VK_DOWN);
 		addNaturalKeyMapping(SWT.ARROW_LEFT, KeyEvent.VK_LEFT);
 		addNaturalKeyMapping(SWT.ARROW_UP, KeyEvent.VK_UP);
+
+		/* special characters that don't map to the ascii codes. */
+		addNaturalKeyMapping('`', KeyEvent.VK_BACK_QUOTE);
 	}
 
 	private static void addModifierKeyMapping(int swtKey, int awtKey) {

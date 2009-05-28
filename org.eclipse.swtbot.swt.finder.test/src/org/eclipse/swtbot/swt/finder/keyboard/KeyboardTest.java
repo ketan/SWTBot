@@ -28,6 +28,14 @@ public class KeyboardTest extends AbstractSWTTestCase {
 	private Keyboard keyboard;
 
 	@Test
+	public void canTypeBackquoteKey() throws Exception {
+		styledText.setFocus();
+		styledText.typeText("`");
+		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=332938450 data=null character='`' keyCode=96 stateMask=0 doit=true}");
+		assertEventMatches(listeners.getText(), "KeyUp [2]: KeyEvent{StyledText {} time=332938540 data=null character='`' keyCode=96 stateMask=0 doit=true}");
+	}
+
+	@Test
 	public void canTypeShiftKey() throws Exception {
 		styledText.setFocus();
 		styledText.pressShortcut(Keystrokes.SHIFT);
