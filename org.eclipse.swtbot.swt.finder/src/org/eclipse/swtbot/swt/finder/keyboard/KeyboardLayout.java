@@ -100,7 +100,7 @@ class KeyboardLayout {
 	}
 
 	private static String toFolder(String layoutName) {
-		return layoutName.replaceAll("\\.", "/").replaceAll("/MAC/", "/MAC.");
+		return layoutName.replaceAll("\\.", "/");
 	}
 
 	private void initialiseDefaults() {

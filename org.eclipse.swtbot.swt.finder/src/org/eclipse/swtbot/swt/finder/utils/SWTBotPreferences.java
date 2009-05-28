@@ -97,8 +97,9 @@ public class SWTBotPreferences {
 	 * The keyboard layout. This value is autodetected at runtime. This can be set using the system property
 	 * {@value #KEY_KEYBOARD_LAYOUT}.
 	 * <p>
-	 * <strong>Note:</strong> the layout must be of the form foo.bar.baz.[MAC.][upper-case-two-character-country-code].
-	 * This expects a file named "foo/bar/baz/[MAC.][upper-case-two-character-country-code].keyboard"
+	 * <strong>Note:</strong> the layout must be of the form foo.bar.baz.[MAC_][LANGUAGE_][COUNTRY_][VARIANT_]
+	 * This expects a file named "foo/bar/baz/[MAC_][LANGUAGE_][COUNTRY_][VARIANT_].keyboard"
+	 * @see Locale
 	 * </p>
 	 * Eg:
 	 * <table border="1">
@@ -107,16 +108,16 @@ public class SWTBotPreferences {
 	 * <th align="left"><b>Configuration File</b></th>
 	 * </tr>
 	 * <tr>
-	 * <td>com.foo.bar.MAC.EN</td>
-	 * <td>com/foo/bar/MAC.EN.keyboard</td>
+	 * <td>com.foo.bar.MAC.EN.US</td>
+	 * <td>com/foo/bar/MAC_EN_US.keyboard</td>
 	 * </tr>
 	 * <tr>
-	 * <td>com.foo.bar.MAC.GB</td>
-	 * <td>com/foo/bar/MAC.GB.keyboard</td>
+	 * <td>com.foo.bar.MAC.EN_GB</td>
+	 * <td>com/foo/bar/MAC_EN_GB.keyboard</td>
 	 * </tr>
 	 * <tr>
-	 * <td>com.foo.bar.FR</td>
-	 * <td>com/foo/bar/FR.keyboard</td>
+	 * <td>com.foo.bar.FR_FR</td>
+	 * <td>com/foo/bar/FR_FR.keyboard</td>
 	 * </tr>
 	 * <tr>
 	 * <td>com.foo.bar.DE</td>
@@ -159,22 +160,25 @@ public class SWTBotPreferences {
 		}
 	}
 
-	private static class KeyboardLayoutDetector {
-		private static String detectKeyboard() {
+	public static class KeyboardLayoutDetector {
+		public static String detectKeyboard() {
 			String keyboardLayout = "";
 			if (isMac()) {
-				keyboardLayout += "MAC.";
+				keyboardLayout += "MAC_";
 			}
 
 			Locale locale = InputContext.getInstance().getLocale();
-			String layout;
-			layout = locale.getVariant();
-			if (layout.equals(""))
-				layout = locale.getCountry();
-			if (layout.equals(""))
-				layout = locale.getLanguage();
+			if (locale == null)
+				locale = Locale.getDefault();
+
+			String layout = StringUtils.join(new String[] { locale.getLanguage(), locale.getCountry(), locale.getVariant() }, "_");
+
+			layout = layout.replaceAll("\\_\\_", "_");
+			layout = layout.replaceAll("\\_$", "");
+
 			if (layout.equals(""))
 				throw new IllegalStateException("Could not determine keyboard layout.");
+
 			keyboardLayout += layout.toUpperCase();
 
 			return keyboardLayout;

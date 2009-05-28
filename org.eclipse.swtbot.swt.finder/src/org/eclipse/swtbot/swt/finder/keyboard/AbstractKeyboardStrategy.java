@@ -10,8 +10,10 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.keyboard;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.swt.widgets.Widget;
+import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 import org.hamcrest.SelfDescribing;
 
@@ -22,6 +24,12 @@ import org.hamcrest.SelfDescribing;
  * @version $Id$
  */
 public abstract class AbstractKeyboardStrategy implements KeyboardStrategy {
+
+	protected final Logger	log;
+
+	protected AbstractKeyboardStrategy() {
+		this.log = Logger.getLogger(getClass());
+	}
 
 	public void init(Widget widget, SelfDescribing description) {
 		// do nothing
@@ -44,6 +52,7 @@ public abstract class AbstractKeyboardStrategy implements KeyboardStrategy {
 	public void pressKeys(KeyStroke... keys) {
 		assertKeys(keys);
 		for (KeyStroke key : keys) {
+			log.trace(MessageFormat.format("Pressing down key {0}", key));
 			pressKey(key);
 		}
 	}
@@ -51,7 +60,7 @@ public abstract class AbstractKeyboardStrategy implements KeyboardStrategy {
 	public void releaseKeys(KeyStroke... keys) {
 		assertKeys(keys);
 		for (KeyStroke key : keys) {
-			assertKey(key);
+			log.trace(MessageFormat.format("Releasing key {0}", key));
 			releaseKey(key);
 		}
 	}
