@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.finders;
 
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 
 import org.apache.log4j.Logger;
@@ -31,7 +30,12 @@ import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
 import org.eclipse.swtbot.swt.finder.results.WidgetResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
+import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotText;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.StringDescription;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -133,10 +137,25 @@ public abstract class AbstractSWTTestCase {
 		});
 	}
 
-	protected void assertEventMatches(String listenersText, String expected) {
-		listenersText = listenersText.replaceAll("time=-?\\d+", "time=SOME_TIME_AGO").replaceAll("x=\\d+", "x=X_CO_ORDINATE").replaceAll("y=\\d+", "y=Y_CO_ORDINATE");
+	protected void assertEventMatches(final SWTBotText listeners, String expected) {
 		expected = expected.replaceAll("time=-?\\d+", "time=SOME_TIME_AGO").replaceAll("x=\\d+", "x=X_CO_ORDINATE").replaceAll("y=\\d+", "y=Y_CO_ORDINATE");
-		assertThat(listenersText, containsString(expected));
+		final Matcher<String> matcher = containsString(expected);
+		bot.waitUntil(new DefaultCondition() {
+
+			private String	text;
+
+			public boolean test() throws Exception {
+				text = listeners.getText();
+				String listenersText = text.replaceAll("time=-?\\d+", "time=SOME_TIME_AGO").replaceAll("x=\\d+", "x=X_CO_ORDINATE").replaceAll("y=\\d+", "y=Y_CO_ORDINATE");
+				return matcher.matches(listenersText);
+			}
+
+			public String getFailureMessage() {
+				Description description = new StringDescription();
+				description.appendText("\nExpected:\n").appendDescriptionOf(matcher).appendText("\ngot:\n").appendValue(text).appendText("\n");
+				return description.toString();
+			}
+		});
 	}
 
 }
