@@ -67,8 +67,9 @@ import org.hamcrest.Matcher;
  */
 abstract class SWTBotFactory {
 
-	/** the delay between successive polling while waiting for a condition to be true. */
-	public static final long	DEFAULT_POLL_DELAY	= 500;
+	/** the delay between successive polling while waiting for a condition to be true. Use SWTBotPreferences#DEFAULT_POLL_DELAY */
+	@Deprecated
+	public static final long	DEFAULT_POLL_DELAY	= SWTBotPreferences.DEFAULT_POLL_DELAY;
 	/** The display on which the bot operates on. */
 	protected final Display		display;
 	/** The finder used by the bot to find controls. */
