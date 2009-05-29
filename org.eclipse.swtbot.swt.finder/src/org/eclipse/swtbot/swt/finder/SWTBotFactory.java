@@ -362,7 +362,7 @@ abstract class SWTBotFactory {
 	 * @since 1.2
 	 */
 	public void waitUntil(ICondition condition, long timeout) throws TimeoutException {
-		waitUntil(condition, timeout, DEFAULT_POLL_DELAY);
+		waitUntil(condition, timeout, SWTBotPreferences.DEFAULT_POLL_DELAY);
 	}
 
 	/**
@@ -412,7 +412,7 @@ abstract class SWTBotFactory {
 	 * @since 2.0
 	 */
 	public void waitWhile(ICondition condition, long timeout) throws TimeoutException {
-		waitWhile(condition, timeout, DEFAULT_POLL_DELAY);
+		waitWhile(condition, timeout, SWTBotPreferences.DEFAULT_POLL_DELAY);
 	}
 
 	/**
