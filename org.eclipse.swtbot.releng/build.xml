@@ -331,7 +331,6 @@
 				<include name="org.eclipse.swtbot-${all.buildId}.zip" />
 				<include name="org.eclipse.swtbot.eclipse-${all.buildId}.zip" />
 				<include name="org.eclipse.swtbot.eclipse.test-${all.buildId}.zip" />
-				<include name="swtbot-update-site-${all.buildId}.zip" />
 			</fileset>
 		</copy>
 
@@ -345,6 +344,10 @@
 
 		<zip destfile="artifacts/to-upload/swtbot-apidocs-${all.buildId}.zip">
 			<fileset dir="artifacts/to-upload/apidocs" />
+		</zip>
+
+		<zip destfile="artifacts/to-upload/swtbot-update-site-${all.buildId}.zip">
+			<fileset dir="artifacts/to-upload/update-site" />
 		</zip>
 
 		<copy-test-reports plugin.id="org.eclipse.swtbot.swt.finder.test" />
