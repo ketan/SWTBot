@@ -252,7 +252,7 @@ public abstract class AbstractKeyboardTest extends AbstractSWTTestCase {
 		styledText.setFocus();
 		styledText.pressShortcut(Keystrokes.CTRL, Keystrokes.create(' ')[0]);
 		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=41517702 data=null character='\\0' keyCode=262144 stateMask=0 doit=true}");
-		if (!isWin32()) // FIXME: bug 278162: Sending CTRL+SPACE does not work consistently across platforms
+		if (!isWin32() || isGtk()) // FIXME: bug 278162: Sending CTRL+SPACE does not work consistently across platforms
 			assertEventMatches(listeners.getText(), "Modify [24]: ModifyEvent{StyledText {} time=41517983 data=null}");
 		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=41517983 data=null character=' ' keyCode=32 stateMask=262144 doit=true}");
 		assertEventMatches(listeners.getText(), "KeyUp [2]: KeyEvent{StyledText {} time=41518070 data=null character=' ' keyCode=32 stateMask=262144 doit=true}");
@@ -278,6 +278,8 @@ public abstract class AbstractKeyboardTest extends AbstractSWTTestCase {
 
 	@Test
 	public void canTypeShiftEnd() throws Exception {
+		if (isWin32()) // FIXME: 278207: Display.post() cannot post SHIFT+END keystrokes.
+			return;
 		styledText.setFocus();
 		styledText.pressShortcut(Keystrokes.SHIFT, Keystrokes.END);
 		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=74720408 data=null character='\\0' keyCode=131072 stateMask=0 doit=true}");
@@ -339,6 +341,11 @@ public abstract class AbstractKeyboardTest extends AbstractSWTTestCase {
 	private static boolean isWin32() {
 		String swtPlatform = SWT.getPlatform();
 		return ("win32".equals(swtPlatform));
+	}
+
+	private static boolean isGtk() {
+		String swtPlatform = SWT.getPlatform();
+		return ("gtk".equals(swtPlatform));
 	}
 
 }
