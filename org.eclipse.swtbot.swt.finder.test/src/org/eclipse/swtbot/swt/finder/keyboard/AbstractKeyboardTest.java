@@ -11,6 +11,7 @@
 package org.eclipse.swtbot.swt.finder.keyboard;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotStyledText;
@@ -252,7 +253,7 @@ public abstract class AbstractKeyboardTest extends AbstractSWTTestCase {
 		styledText.setFocus();
 		styledText.pressShortcut(Keystrokes.CTRL, Keystrokes.create(' ')[0]);
 		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=41517702 data=null character='\\0' keyCode=262144 stateMask=0 doit=true}");
-		if (!isWin32() || isGtk()) // FIXME: bug 278162: Sending CTRL+SPACE does not work consistently across platforms
+		if (!isWin32() && !isGtk()) // FIXME: bug 278162: Sending CTRL+SPACE does not work consistently across platforms
 			assertEventMatches(listeners.getText(), "Modify [24]: ModifyEvent{StyledText {} time=41517983 data=null}");
 		assertEventMatches(listeners.getText(), "KeyDown [1]: KeyEvent{StyledText {} time=41517983 data=null character=' ' keyCode=32 stateMask=262144 doit=true}");
 		assertEventMatches(listeners.getText(), "KeyUp [2]: KeyEvent{StyledText {} time=41518070 data=null character=' ' keyCode=32 stateMask=262144 doit=true}");
@@ -321,7 +322,6 @@ public abstract class AbstractKeyboardTest extends AbstractSWTTestCase {
 		super.setUp();
 		bot = new SWTBot();
 		keyboard = new Keyboard();
-		bot.shell("SWT Custom Controls").activate();
 		bot.tabItem("StyledText").activate();
 		bot.checkBox("Horizontal Fill").select();
 		bot.checkBox("Vertical Fill").select();
@@ -331,6 +331,10 @@ public abstract class AbstractKeyboardTest extends AbstractSWTTestCase {
 		styledText.setText("");
 		bot.button("Clear").click();
 		listeners = bot.textInGroup("Listeners");
+	}
+
+	protected Shell getFocusShell() {
+		return customControlShell;
 	}
 
 	private static boolean isMac() {
