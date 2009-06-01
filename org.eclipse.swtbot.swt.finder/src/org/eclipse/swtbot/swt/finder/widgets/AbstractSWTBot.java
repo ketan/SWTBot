@@ -622,10 +622,16 @@ public abstract class AbstractSWTBot<T extends Widget> {
 			public void run() {
 				if (widget instanceof Control) {
 					Control control = (Control) widget;
+					if (hasFocus(control))
+						return;
 					control.getShell().forceActive();
 					control.getShell().forceFocus();
 					control.forceFocus();
 				}
+			}
+
+			private boolean hasFocus(Control control) {
+				return control.isFocusControl();
 			}
 		});
 	}
