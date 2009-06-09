@@ -22,6 +22,8 @@
 
 	<property name="eclipse-platform-properties" value="-Dosgi.ws=${ws} -Dosgi.os=${os} -Dosgi.arch=${arch} -Dws=${ws} -Dos=${os} -Darch=${arch}" />
 
+	<property name="eclipse.3.4.location" value="${basedir}/eclipse" />
+
 	<target name="clean" description="cleans the output folders">
 		<echo>Cleaning all in ${buildDirectory}</echo>
 		<delete failonerror="false" includeemptydirs="true">
@@ -36,7 +38,21 @@
 		<delete dir="test-sandbox/screenshots" />
 	</target>
 
-	<target name="copy-sources" depends="copy-features, copy-plugins" description="copies sources" />
+	<target name="copy-sources" depends="copy-features, copy-plugins, create-version-files" description="copies sources" />
+
+	<target name="create-version-files" description="create a java file containing the version number of swtbot and other information">
+		<copy filtering="true" overwrite="true" file="../org.eclipse.swtbot.swt.finder/src/org/eclipse/swtbot/swt/finder/SWTBotInfo.java" tofile="target/plugins/org.eclipse.swtbot.swt.finder/src/org/eclipse/swtbot/swt/finder/SWTBotInfo.java">
+			<filterset>
+				<filter token="svn.version" value="${all.buildId}"/>
+			</filterset>
+		</copy>
+
+		<copy filtering="true" overwrite="true" file="../org.eclipse.swtbot.eclipse.finder/src/org/eclipse/swtbot/eclipse/finder/SWTBotInfo.java"  tofile="target/plugins/org.eclipse.swtbot.eclipse.finder/src/org/eclipse/swtbot/eclipse/finder/SWTBotInfo.java">
+			<filterset>
+				<filter token="svn.version" value="${all.buildId}"/>
+			</filterset>
+		</copy>
+	</target>
 
 	<target name="copy-eclipse" description="copies an eclispse instance to a temporary location">
 		<echo>Sync eclipse from ${base} to ${eclipseLocation}</echo>
@@ -296,6 +312,7 @@
 		<property name="update.site.plugins.url" value="plugins" />
 		<property name="has.archives" value="false" />
 		<ant dir="../${plugin.prefix}.updatesite" inheritall="false">
+			<property name="eclipse.location" value="${eclipse.3.4.location}" />
 			<property name="buildId" value="${all.buildId}" />
 			<property name="plugin.prefix" value="${plugin.prefix}" />
 			<property name="feature.id" value="${feature.id}" />
