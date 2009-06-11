@@ -32,7 +32,6 @@ public class SWTBotInfo {
 		System.out.println("SWT Platform: " + SWT.getPlatform());
 		System.out.println("Operating System: " + System.getProperty("os.name") + "/" + System.getProperty("os.arch"));
 		System.out.println("Version " + System.getProperty("os.version"));
-		System.out.println("Operating System: " + System.getProperty("os.arch"));
 		System.out.println("--- End SWTBot Info ---");
 	}
 
