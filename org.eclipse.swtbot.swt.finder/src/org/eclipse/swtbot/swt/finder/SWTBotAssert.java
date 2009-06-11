@@ -12,11 +12,11 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder;
 
-import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.sameInstance;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.regex.Pattern;
@@ -30,7 +30,7 @@ import org.junit.Assert;
 
 /**
  * The SWTBotAssert provides extra capabilities for comparing widgets and other UI items. A set of assert methods.
- * Messages are only displayed when an assert fails. See {@link junit.framework.Assert}
+ * Messages are only displayed when an assert fails. See {@link Assert}
  * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
