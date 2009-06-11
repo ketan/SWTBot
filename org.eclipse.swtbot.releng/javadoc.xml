@@ -45,7 +45,7 @@
 				<fileset dir="../eclipse/plugins">
 					<include name="**/org.eclipse.swt*.jar" />
 					<include name="**/org.eclipse.jface_*.jar" />
-					<include name="**/org.hamcrest_*.jar" />
+					<include name="**/org.hamcrest*.jar" />
 					<include name="**/org.eclipse.ui*.jar" />
 					<include name="**/org.eclipse.equinox.common_*.jar" />
 					<include name="**/org.eclipse.core.runtime_*.jar" />

@@ -77,8 +77,34 @@
 			<fileset dir="${target}/plugins">
 				<include name="org.apache.log4j_*.jar" />
 			</fileset>
+
+			<!-- hamcrest jars -->
 			<fileset dir="${target}/plugins">
 				<include name="org.hamcrest_*.jar" />
+			</fileset>
+			<fileset dir="${target}/plugins">
+				<include name="org.hamcrest.core_*.jar" />
+			</fileset>
+			<fileset dir="${target}/plugins">
+				<include name="org.hamcrest.core.source*.jar" />
+			</fileset>
+			<fileset dir="${target}/plugins">
+				<include name="org.hamcrest.integration_*.jar" />
+			</fileset>
+			<fileset dir="${target}/plugins">
+				<include name="org.hamcrest.integration.source_*.jar" />
+			</fileset>
+			<fileset dir="${target}/plugins">
+				<include name="org.hamcrest.library_*.jar" />
+			</fileset>
+			<fileset dir="${target}/plugins">
+				<include name="org.hamcrest.library.source_*.jar" />
+			</fileset>
+			<fileset dir="${target}/plugins">
+				<include name="org.hamcrest.text_*.jar" />
+			</fileset>
+			<fileset dir="${target}/plugins">
+				<include name="org.hamcrest.text.source_*.jar" />
 			</fileset>
 
 			<!-- swt examples -->
