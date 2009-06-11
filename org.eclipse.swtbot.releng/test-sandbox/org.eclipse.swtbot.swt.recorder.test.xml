@@ -33,7 +33,7 @@
 			<include name="org.junit4_*/junit*.jar" />
 			<include name="org.eclipse.swtbot*" />
 			<include name="org.apache.log4j_1.2.*.jar" />
-			<include name="org.hamcrest_*.jar" />
+			<include name="org.hamcrest*.jar" />
 		</fileset>
 		<pathelement location="${eclipse-home}/plugins/org.eclipse.swtbot.swt.finder.test_${all.buildId}" />
 	</path>
