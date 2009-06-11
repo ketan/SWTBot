@@ -32,6 +32,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.exceptions.QuickFixNotFoundException;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
@@ -84,7 +85,7 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	 */
 	public SWTBotEclipseEditor(IEditorReference editorReference, SWTWorkbenchBot bot) throws WidgetNotFoundException {
 		super(editorReference, bot);
-		this.styledText = new SWTBotStyledText((StyledText) findWidget(widgetOfType(StyledText.class)));
+		this.styledText = new SWTBotStyledText(widget());
 		this.widget = this.styledText.widget;
 	}
 
@@ -97,8 +98,13 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	 */
 	public SWTBotEclipseEditor(IEditorReference editorReference, SWTWorkbenchBot bot, SelfDescribing description) {
 		super(editorReference, bot, description);
-		this.styledText = new SWTBotStyledText((StyledText) findWidget(widgetOfType(StyledText.class)));
+		this.styledText = new SWTBotStyledText(widget());
 		this.widget = this.styledText.widget;
+	}
+
+	private StyledText widget() {
+		List<? extends Widget> findWidgets = findWidgets(widgetOfType(StyledText.class));
+		return (StyledText) findWidgets.get(findWidgets.size() - 1);
 	}
 
 	/**

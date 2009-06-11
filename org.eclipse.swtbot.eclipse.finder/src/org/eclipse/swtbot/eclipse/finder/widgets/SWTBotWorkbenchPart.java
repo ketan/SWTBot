@@ -83,6 +83,8 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 	 */
 	public SWTBotWorkbenchPart(T partReference, SWTWorkbenchBot bot, SelfDescribing description) {
 		this.bot = bot;
+		if (description == null )
+			description = new PartLabelDescription<T>(partReference);
 		this.description = description;
 		Assert.isNotNull(partReference, "The part reference cannot be null"); //$NON-NLS-1$
 		this.partReference = partReference;
@@ -228,12 +230,21 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 	 * @throws WorkbenchPartNotActiveException if the part is not the active part.
 	 */
 	protected Widget findWidget(Matcher<?> matcher) {
+		return findWidgets(matcher).get(0);
+	}
+
+	/**
+	 * @param matcher a matcher.
+	 * @return a widget within the parent widget that matches the specified matcher.
+	 * @throws WorkbenchPartNotActiveException if the part is not the active part.
+	 */
+	protected List<? extends Widget> findWidgets(Matcher<?> matcher) {
 		Finder finder = bot.getFinder();
 		Control control = getControl();
 		boolean shouldFindInvisibleControls = finder.shouldFindInvisibleControls();
 		finder.setShouldFindInvisibleControls(true);
 		try {
-			return bot.widget(matcher, control);
+			return bot.widgets(matcher, control);
 		} catch (Exception e) {
 			throw new WidgetNotFoundException("Could not find any control inside the view " + partReference.getPartName(), e); //$NON-NLS-1$
 		} finally {
