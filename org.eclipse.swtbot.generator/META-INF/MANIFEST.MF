@@ -5,11 +5,9 @@ Bundle-SymbolicName: org.eclipse.swtbot.generator
 Bundle-Version: 2.0.0.qualifier
 Bundle-Vendor: Eclipse.org
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.swtbot.swt.finder,
- org.eclipse.ui,
- org.hamcrest,
- org.eclipse.swtbot.eclipse.finder,
- com.thoughtworks.qdox,
- org.eclipse.swt
 Bundle-ClassPath: .
 Export-Package: org.eclipse.swtbot.generator
+Import-Package: org.eclipse.swt.widgets,
+ org.eclipse.swtbot.swt.finder,
+ org.eclipse.swtbot.swt.finder.utils,
+ org.hamcrest.generator.config;version="1.1.0"

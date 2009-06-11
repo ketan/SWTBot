@@ -5,7 +5,9 @@ Bundle-SymbolicName: org.eclipse.swtbot.eclipse.core;singleton:=true
 Bundle-Version: 2.0.0.qualifier
 Bundle-Vendor: Eclipse.org
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.core.runtime,
+Import-Package: org.eclipse.core.runtime;version="3.4.0",
+ org.eclipse.equinox.app;version="1.0.0",
+ org.eclipse.jdt.internal.junit.runner,
  org.eclipse.ui,
- org.junit4,
- org.eclipse.jdt.junit.runtime
+ org.eclipse.ui.testing,
+ org.osgi.framework;version="1.4.0"

@@ -6,7 +6,9 @@ Bundle-Version: 2.0.0.qualifier
 Bundle-Vendor: Eclipse.org
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.swtbot.swt.finder.junit
-Require-Bundle: org.apache.log4j,
+Import-Package: org.apache.log4j,
+ org.eclipse.swt.widgets,
  org.eclipse.swtbot.swt.finder,
- org.eclipse.swt,
- org.junit4;bundle-version="4.5.0"
+ org.eclipse.swtbot.swt.finder.utils,
+ org.junit.runner.notification;version="4.5.0",
+ org.junit.runners;version="4.5.0"
