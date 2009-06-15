@@ -227,7 +227,6 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 	/**
 	 * @param matcher a matcher.
 	 * @return a widget within the parent widget that matches the specified matcher.
-	 * @throws WorkbenchPartNotActiveException if the part is not the active part.
 	 */
 	protected Widget findWidget(Matcher<?> matcher) {
 		return findWidgets(matcher).get(0);
@@ -236,7 +235,6 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 	/**
 	 * @param matcher a matcher.
 	 * @return a widget within the parent widget that matches the specified matcher.
-	 * @throws WorkbenchPartNotActiveException if the part is not the active part.
 	 */
 	protected List<? extends Widget> findWidgets(Matcher<?> matcher) {
 		Finder finder = bot.getFinder();
@@ -273,7 +271,6 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 	/**
 	 * Asserts that the viewpart is active.
 	 * 
-	 * @throws WorkbenchPartNotActiveException if the part is not currently active.
 	 */
 	protected void assertActive() {
 		Assert.isLegal(isActive(), MessageFormat.format("The workbench part {0}is not active", description));

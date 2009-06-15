@@ -81,7 +81,6 @@ public class SWTBotView extends SWTBotWorkbenchPart<IViewReference> {
 	 * </p>
 	 * 
 	 * @return the parent widget in the view.
-	 * @throws WorkbenchPartNotActiveException if the view was not active.
 	 * @see #findWidget(org.hamcrest.Matcher)
 	 * @see #assertActive()
 	 * @see #show()
