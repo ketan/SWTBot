@@ -1,8 +1,6 @@
 #!/bin/bash
 
-rm -rf to-upload artifacts target
-
-mkdir to-upload
+rm -rf artifacts target
 
 # usage: build_swtbot 3.5M6 galileo
 function build_swtbot(){
@@ -25,7 +23,7 @@ function build_swtbot(){
 	mv artifacts/to-upload to-upload/$2/dev-build
 }
 
-build_swtbot 3.4.2 ganymede
-build_swtbot 3.5M6 galileo
+# build_swtbot 3.4.2 ganymede
+build_swtbot 3.5RC4 galileo
 
 # rsync --delete-after --partial --progress --archive to-upload build.eclipse.org:
