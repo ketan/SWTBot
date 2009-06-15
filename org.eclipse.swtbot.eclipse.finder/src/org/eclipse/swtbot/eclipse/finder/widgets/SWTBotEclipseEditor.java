@@ -67,12 +67,8 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 
 	private final SWTBotStyledText	styledText;
 
-	/**
-	 * The StyledText widget inside the editor
-	 * 
-	 * @since 2.0
-	 */
-	public final StyledText			widget;
+	/** The widget inside the editor, this may not be a styledtext. */
+	private Widget	widget;
 
 	/**
 	 * Constructs an instance of the given object.
@@ -86,7 +82,6 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	public SWTBotEclipseEditor(IEditorReference editorReference, SWTWorkbenchBot bot) throws WidgetNotFoundException {
 		super(editorReference, bot);
 		this.styledText = new SWTBotStyledText(widget());
-		this.widget = this.styledText.widget;
 	}
 
 	/**
@@ -99,12 +94,38 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	public SWTBotEclipseEditor(IEditorReference editorReference, SWTWorkbenchBot bot, SelfDescribing description) {
 		super(editorReference, bot, description);
 		this.styledText = new SWTBotStyledText(widget());
-		this.widget = this.styledText.widget;
 	}
 
 	private StyledText widget() {
 		List<? extends Widget> findWidgets = findWidgets(widgetOfType(StyledText.class));
 		return (StyledText) findWidgets.get(findWidgets.size() - 1);
+	}
+
+	/**
+	 * The parent widget inside the partReference, that is the tabFolder for all controls within the view. If you want
+	 * to look for a particular widget within the part, this is a good place to start searching for the widget.
+	 * <p>
+	 * <b>NOTE:</b> Clients must ensure that the view is active at the time of making this call. If the view is not
+	 * active, then this method will throw a {@link WidgetNotFoundException}.
+	 * </p>
+	 * 
+	 * @return the parent widget in the view.
+	 * @see #findWidget(org.hamcrest.Matcher)
+	 * @see #assertActive()
+	 * @see #show()
+	 */
+	public Widget getWidget() {
+		show();
+		if (widget == null)
+			widget = findWidget(anything());
+		return widget;
+	}
+
+	/**
+	 * @return the styledText
+	 */
+	public SWTBotStyledText getStyledText() {
+		return styledText;
 	}
 
 	/**
