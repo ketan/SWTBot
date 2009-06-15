@@ -11,6 +11,8 @@
 package org.eclipse.swtbot.swt.finder.widgets;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.swt.SWT;
@@ -26,6 +28,8 @@ import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.keyboard.Keyboard;
 import org.eclipse.swtbot.swt.finder.keyboard.Keystrokes;
 import org.eclipse.swtbot.swt.finder.results.ArrayResult;
+import org.eclipse.swtbot.swt.finder.results.IntResult;
+import org.eclipse.swtbot.swt.finder.results.ListResult;
 import org.eclipse.swtbot.swt.finder.results.Result;
 import org.eclipse.swtbot.swt.finder.results.StringResult;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
@@ -467,6 +471,37 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 		return syncExec(new Result<RGB>() {
 			public RGB run() {
 				return widget.getLineBackground(line).getRGB();
+			}
+		});
+	}
+
+	/**
+	 * Gets the number of lines in the {@link StyledText}.
+	 * 
+	 * @return the number of lines in the {@link StyledText}.
+	 */
+	public int getLineCount(){
+		return syncExec(new IntResult() {
+			public Integer run() {
+				return widget.getLineCount();
+			}
+		});
+	}
+
+	/**
+	 * Gets all the lines in the editor.
+	 * 
+	 * @return the lines in the editor.
+	 */
+	public List<String> getLines() {
+		return syncExec(new ListResult<String>() {
+			public List<String> run() {
+				int lineCount = widget.getLineCount();
+				ArrayList<String> lines = new ArrayList<String>(lineCount);
+				for (int i = 0; i < lineCount; i++) {
+					lines.add(widget.getLine(i));
+				}
+				return lines;
 			}
 		});
 	}

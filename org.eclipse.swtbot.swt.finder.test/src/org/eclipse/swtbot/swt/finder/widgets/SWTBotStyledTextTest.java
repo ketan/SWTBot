@@ -15,6 +15,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.Bullet;
 import org.eclipse.swt.custom.StyleRange;
@@ -116,6 +118,30 @@ public class SWTBotStyledTextTest extends AbstractSWTTestCase {
 		styledText.setText("hello world\n" + "it is a very good day today\n" + "good bye world\n" + "it was nice to meet you");
 		styledText.navigateTo(1, 0);
 		assertEquals("it is a very good day today", styledText.getTextOnCurrentLine());
+	}
+
+	@Test
+	public void getsLineCountWithEOLAtEndOfText() throws Exception {
+		styledText.setText("1\n2\n3\n");
+		assertEquals(4, styledText.getLineCount());
+	}
+
+	@Test
+	public void getsLineCountWithNoEOLEndOfText() throws Exception {
+		styledText.setText("1\n2\n3");
+		assertEquals(3, styledText.getLineCount());
+	}
+
+	@Test
+	public void getsLinesWithEOLAtEndOfText() throws Exception {
+		styledText.setText("1\n2\n3\n");
+		assertEquals(Arrays.asList("1", "2", "3", ""), styledText.getLines());
+	}
+
+	@Test
+	public void getsLinesWithNoEOLEndOfText() throws Exception {
+		styledText.setText("1\n2\n3");
+		assertEquals(Arrays.asList("1", "2", "3"), styledText.getLines());
 	}
 
 	@Test

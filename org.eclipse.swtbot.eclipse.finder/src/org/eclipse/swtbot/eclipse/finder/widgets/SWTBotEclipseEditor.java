@@ -598,6 +598,24 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	}
 
 	/**
+	 * Gets the number of lines in the {@link StyledText}.
+	 * 
+	 * @return the number of lines in the {@link StyledText}.
+	 */
+	public int getLineCount(){
+		return styledText.getLineCount();
+	}
+
+	/**
+	 * Gets all the lines in the editor.
+	 * 
+	 * @return the lines in the editor.
+	 */
+	public List<String> getLines() {
+		return styledText.getLines();
+	}
+
+	/**
 	 * Gets the tooltip of this object's widget.
 	 * 
 	 * @return the tooltip on the widget.
