@@ -49,13 +49,12 @@ public class SWTBotTreeItemTest extends AbstractSWTTestCase {
 		assertText("Node 2.2", node.getNode("Node 2.2"));
 		assertText("Node 2.2", node.getNode("Node 2.2", 0));
 	}
-	
+
 	@Test
 	public void canCallGetItems() throws Exception {
 		SWTBotTreeItem node = tree.expandNode("Node 2");
-		// getItems() caused an InvalidThreadAccess exception before
 		SWTBotTreeItem[] items = node.getItems();
-		assertEquals(2,items.length);
+		assertEquals(2, items.length);
 	}
 
 	@Test

@@ -618,6 +618,11 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	// });
 	// }
 
+	/**
+	 * Gets all the items in this tree node.
+	 * 
+	 * @return all the items in this tree node.
+	 */
 	public SWTBotTreeItem[] getItems() {
 		return syncExec(new ArrayResult<SWTBotTreeItem>() {
 			public SWTBotTreeItem[] run() {
