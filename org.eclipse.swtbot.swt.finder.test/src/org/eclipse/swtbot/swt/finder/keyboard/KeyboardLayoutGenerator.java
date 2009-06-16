@@ -25,6 +25,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferenceConstants;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotText;
 
@@ -40,7 +41,7 @@ public class KeyboardLayoutGenerator {
 	private static CombinationGenerator<Integer>	generator;
 
 	public static void main(String[] args) {
-		System.setProperty("org.eclipse.swtbot.keyboardLayout", "empty");
+		System.setProperty(SWTBotPreferenceConstants.KEY_KEYBOARD_LAYOUT, "org.eclipse.swtbot.swt.finder.keyboard.empty");
 
 		Display display = new Display();
 		keyboard = KeyboardFactory.getSWTKeyboard();
