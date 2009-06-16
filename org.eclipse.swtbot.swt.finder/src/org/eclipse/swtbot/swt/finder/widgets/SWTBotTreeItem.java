@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
+import org.eclipse.swtbot.swt.finder.results.ArrayResult;
 import org.eclipse.swtbot.swt.finder.results.BoolResult;
 import org.eclipse.swtbot.swt.finder.results.IntResult;
 import org.eclipse.swtbot.swt.finder.results.ListResult;
@@ -618,11 +619,15 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	// }
 
 	public SWTBotTreeItem[] getItems() {
-		TreeItem[] items = widget.getItems();
-		SWTBotTreeItem[] children = new SWTBotTreeItem[items.length];
-		for (int i = 0; i < items.length; i++) {
-			children[i] = new SWTBotTreeItem(items[i]);
-		}
-		return children;
+		return syncExec(new ArrayResult<SWTBotTreeItem>() {
+			public SWTBotTreeItem[] run() {
+				TreeItem[] items = widget.getItems();
+				SWTBotTreeItem[] children = new SWTBotTreeItem[items.length];
+				for (int i = 0; i < items.length; i++) {
+					children[i] = new SWTBotTreeItem(items[i]);
+				}
+				return children;
+			}
+		});
 	}
 }
