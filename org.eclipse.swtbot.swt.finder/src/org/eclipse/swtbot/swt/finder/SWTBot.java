@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
@@ -34,6 +35,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotLabel;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotLink;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotList;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotRadio;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotSpinner;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotStyledText;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTabItem;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
@@ -2927,6 +2929,202 @@ public class SWTBot extends SWTBotFactory {
 	public SWTBotLink linkInGroup(String mnemonicText, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Link.class), withMnemonic(mnemonicText), inGroup(inGroup));
 		return new SWTBotLink((Link) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @return a {@link SWTBotSpinner} with the specified <code>label</code>.
+	 */
+	public SWTBotSpinner spinnerWithLabel(String label) {
+		return spinnerWithLabel(label, 0);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotSpinner} with the specified <code>label</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotSpinner spinnerWithLabel(String label, int index) {
+		Matcher matcher = allOf(widgetOfType(Spinner.class), withLabel(label));
+		return new SWTBotSpinner((Spinner) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param text the text on the widget.
+	 * @return a {@link SWTBotSpinner} with the specified <code>text</code>.
+	 */
+	public SWTBotSpinner spinner(String text) {
+		return spinner(text, 0);
+	}
+
+	/**
+	 * @param text the text on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotSpinner} with the specified <code>text</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotSpinner spinner(String text, int index) {
+		Matcher matcher = allOf(widgetOfType(Spinner.class), withText(text));
+		return new SWTBotSpinner((Spinner) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @return a {@link SWTBotSpinner} with the specified <code>tooltip</code>.
+	 */
+	public SWTBotSpinner spinnerWithTooltip(String tooltip) {
+		return spinnerWithTooltip(tooltip, 0);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotSpinner} with the specified <code>tooltip</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotSpinner spinnerWithTooltip(String tooltip, int index) {
+		Matcher matcher = allOf(widgetOfType(Spinner.class), withTooltip(tooltip));
+		return new SWTBotSpinner((Spinner) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param key the key set on the widget.
+	 * @param value the value for the key.
+	 * @return a {@link SWTBotSpinner} with the specified <code>key/value</code>.
+	 */
+	public SWTBotSpinner spinnerWithId(String key, String value) {
+		return spinnerWithId(key, value, 0);
+	}
+
+	/**
+	 * @param key the key set on the widget.
+	 * @param value the value for the key.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotSpinner} with the specified <code>key/value</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotSpinner spinnerWithId(String key, String value, int index) {
+		Matcher matcher = allOf(widgetOfType(Spinner.class), withId(key, value));
+		return new SWTBotSpinner((Spinner) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @return a {@link SWTBotSpinner} with the specified <code>value</code>.
+	 */
+	public SWTBotSpinner spinnerWithId(String value) {
+		return spinnerWithId(value, 0);
+	}
+
+	/**
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotSpinner} with the specified <code>value</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotSpinner spinnerWithId(String value, int index) {
+		Matcher matcher = allOf(widgetOfType(Spinner.class), withId(value));
+		return new SWTBotSpinner((Spinner) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotSpinner} with the specified <code>inGroup</code>.
+	 */
+	public SWTBotSpinner spinnerInGroup(String inGroup) {
+		return spinnerInGroup(inGroup, 0);
+	}
+
+	/**
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotSpinner} with the specified <code>inGroup</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotSpinner spinnerInGroup(String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Spinner.class), inGroup(inGroup));
+		return new SWTBotSpinner((Spinner) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @return a {@link SWTBotSpinner} with the specified <code>none</code>.
+	 */
+	public SWTBotSpinner spinner() {
+		return spinner(0);
+	}
+
+	/**
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotSpinner} with the specified <code>none</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotSpinner spinner(int index) {
+		Matcher matcher = allOf(widgetOfType(Spinner.class));
+		return new SWTBotSpinner((Spinner) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotSpinner} with the specified <code>label</code> with the specified <code>inGroup</code>.
+	 */
+	public SWTBotSpinner spinnerWithLabelInGroup(String label, String inGroup) {
+		return spinnerWithLabelInGroup(label, inGroup, 0);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotSpinner} with the specified <code>label</code> with the specified <code>inGroup</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotSpinner spinnerWithLabelInGroup(String label, String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Spinner.class), withLabel(label), inGroup(inGroup));
+		return new SWTBotSpinner((Spinner) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param text the text on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotSpinner} with the specified <code>text</code> with the specified <code>inGroup</code>.
+	 */
+	public SWTBotSpinner spinnerInGroup(String text, String inGroup) {
+		return spinnerInGroup(text, inGroup, 0);
+	}
+
+	/**
+	 * @param text the text on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotSpinner} with the specified <code>text</code> with the specified <code>inGroup</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotSpinner spinnerInGroup(String text, String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Spinner.class), withText(text), inGroup(inGroup));
+		return new SWTBotSpinner((Spinner) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotSpinner} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
+	 */
+	public SWTBotSpinner spinnerWithTooltipInGroup(String tooltip, String inGroup) {
+		return spinnerWithTooltipInGroup(tooltip, inGroup, 0);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotSpinner} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotSpinner spinnerWithTooltipInGroup(String tooltip, String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Spinner.class), withTooltip(tooltip), inGroup(inGroup));
+		return new SWTBotSpinner((Spinner) widget(matcher, index), matcher);
 	}
 
 }
