@@ -16,7 +16,7 @@ import org.eclipse.pde.ui.launcher.JUnitLaunchConfigurationDelegate;
 
 /**
  * A launch delegate for launching JUnit Plug-in tests.
- * 
+ *
  * @since 3.3
  */
 @SuppressWarnings("all")
@@ -24,6 +24,7 @@ public class SWTBotLaunchConfigurationDelegate extends JUnitLaunchConfigurationD
 
 	public static final String	LAUNCH_CONFIG_ID	= "org.eclipse.swtbot.eclipse.ui.launcher.JunitLaunchConfig";	//$NON-NLS-1$
 
+	@Override
 	protected String getApplication(ILaunchConfiguration configuration) {
 		return Activator.APPLICATION_ID;
 	}
