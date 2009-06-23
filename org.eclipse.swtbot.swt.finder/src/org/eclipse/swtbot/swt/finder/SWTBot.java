@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.Slider;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
@@ -35,6 +36,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotLabel;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotLink;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotList;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotRadio;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotSlider;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotSpinner;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotStyledText;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTabItem;
@@ -3125,6 +3127,202 @@ public class SWTBot extends SWTBotFactory {
 	public SWTBotSpinner spinnerWithTooltipInGroup(String tooltip, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Spinner.class), withTooltip(tooltip), inGroup(inGroup));
 		return new SWTBotSpinner((Spinner) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @return a {@link SWTBotSlider} with the specified <code>label</code>.
+	 */
+	public SWTBotSlider sliderWithLabel(String label) {
+		return sliderWithLabel(label, 0);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotSlider} with the specified <code>label</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotSlider sliderWithLabel(String label, int index) {
+		Matcher matcher = allOf(widgetOfType(Slider.class), withLabel(label));
+		return new SWTBotSlider((Slider) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param text the text on the widget.
+	 * @return a {@link SWTBotSlider} with the specified <code>text</code>.
+	 */
+	public SWTBotSlider slider(String text) {
+		return slider(text, 0);
+	}
+
+	/**
+	 * @param text the text on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotSlider} with the specified <code>text</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotSlider slider(String text, int index) {
+		Matcher matcher = allOf(widgetOfType(Slider.class), withText(text));
+		return new SWTBotSlider((Slider) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @return a {@link SWTBotSlider} with the specified <code>tooltip</code>.
+	 */
+	public SWTBotSlider sliderWithTooltip(String tooltip) {
+		return sliderWithTooltip(tooltip, 0);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotSlider} with the specified <code>tooltip</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotSlider sliderWithTooltip(String tooltip, int index) {
+		Matcher matcher = allOf(widgetOfType(Slider.class), withTooltip(tooltip));
+		return new SWTBotSlider((Slider) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param key the key set on the widget.
+	 * @param value the value for the key.
+	 * @return a {@link SWTBotSlider} with the specified <code>key/value</code>.
+	 */
+	public SWTBotSlider sliderWithId(String key, String value) {
+		return sliderWithId(key, value, 0);
+	}
+
+	/**
+	 * @param key the key set on the widget.
+	 * @param value the value for the key.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotSlider} with the specified <code>key/value</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotSlider sliderWithId(String key, String value, int index) {
+		Matcher matcher = allOf(widgetOfType(Slider.class), withId(key, value));
+		return new SWTBotSlider((Slider) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @return a {@link SWTBotSlider} with the specified <code>value</code>.
+	 */
+	public SWTBotSlider sliderWithId(String value) {
+		return sliderWithId(value, 0);
+	}
+
+	/**
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotSlider} with the specified <code>value</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotSlider sliderWithId(String value, int index) {
+		Matcher matcher = allOf(widgetOfType(Slider.class), withId(value));
+		return new SWTBotSlider((Slider) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotSlider} with the specified <code>inGroup</code>.
+	 */
+	public SWTBotSlider sliderInGroup(String inGroup) {
+		return sliderInGroup(inGroup, 0);
+	}
+
+	/**
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotSlider} with the specified <code>inGroup</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotSlider sliderInGroup(String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Slider.class), inGroup(inGroup));
+		return new SWTBotSlider((Slider) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @return a {@link SWTBotSlider} with the specified <code>none</code>.
+	 */
+	public SWTBotSlider slider() {
+		return slider(0);
+	}
+
+	/**
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotSlider} with the specified <code>none</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotSlider slider(int index) {
+		Matcher matcher = allOf(widgetOfType(Slider.class));
+		return new SWTBotSlider((Slider) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotSlider} with the specified <code>label</code> with the specified <code>inGroup</code>.
+	 */
+	public SWTBotSlider sliderWithLabelInGroup(String label, String inGroup) {
+		return sliderWithLabelInGroup(label, inGroup, 0);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotSlider} with the specified <code>label</code> with the specified <code>inGroup</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotSlider sliderWithLabelInGroup(String label, String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Slider.class), withLabel(label), inGroup(inGroup));
+		return new SWTBotSlider((Slider) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param text the text on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotSlider} with the specified <code>text</code> with the specified <code>inGroup</code>.
+	 */
+	public SWTBotSlider sliderInGroup(String text, String inGroup) {
+		return sliderInGroup(text, inGroup, 0);
+	}
+
+	/**
+	 * @param text the text on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotSlider} with the specified <code>text</code> with the specified <code>inGroup</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotSlider sliderInGroup(String text, String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Slider.class), withText(text), inGroup(inGroup));
+		return new SWTBotSlider((Slider) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotSlider} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
+	 */
+	public SWTBotSlider sliderWithTooltipInGroup(String tooltip, String inGroup) {
+		return sliderWithTooltipInGroup(tooltip, inGroup, 0);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotSlider} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotSlider sliderWithTooltipInGroup(String tooltip, String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Slider.class), withTooltip(tooltip), inGroup(inGroup));
+		return new SWTBotSlider((Slider) widget(matcher, index), matcher);
 	}
 
 }
