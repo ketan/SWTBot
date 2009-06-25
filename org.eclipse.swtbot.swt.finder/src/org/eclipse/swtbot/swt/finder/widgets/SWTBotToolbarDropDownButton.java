@@ -13,13 +13,13 @@ package org.eclipse.swtbot.swt.finder.widgets;
 
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMnemonic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.ToolItem;
-import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.ReferenceBy;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.SWTBotWidget;
@@ -68,13 +68,42 @@ public class SWTBotToolbarDropDownButton extends SWTBotToolbarButton {
 
 	/**
 	 * Finds the submenu inside this menu item.
+	 * <p>
+	 * <b>NOTE:</b>Invoking this keeps the menu open until you click on it.
+	 * </p>
 	 * 
 	 * @param menuItem the submenu to search
 	 * @return the menu item with the specified text
-	 * @throws WidgetNotFoundException if the menuItem could not be found
 	 * @since 1.0
 	 */
-	public SWTBotMenu menuItem(String menuItem) throws WidgetNotFoundException {
+	public SWTBotMenu menuItem(String menuItem) {
+		return menuItem(withMnemonic(menuItem));
+	}
+
+	/**
+	 * Finds all the submenu inside this menu item that match the given matcher.
+	 * <p>
+	 * <b>NOTE:</b>Invoking this keeps the menu open until you click on it.
+	 * </p>
+	 * 
+	 * @param matcher the matcher
+	 * @return the menu item with the specified text
+	 */
+	public SWTBotMenu menuItem(Matcher<?> matcher) {
+		return menuItems(matcher).get(0);
+	}
+
+	/**
+	 * Finds all the submenus inside this menu item that match the given matcher.
+	 * <p>
+	 * <b>NOTE:</b>Invoking this keeps the menu open until you click on it.
+	 * </p>
+	 * 
+	 * @param matcher the matcher
+	 * @return the menu items matching the matcher.
+	 * @throws WidgetNotFoundException if the menuItem could not be found
+	 */
+	public List<? extends SWTBotMenu> menuItems(Matcher<?> matcher) {
 		EventContextMenuFinder menuFinder = new EventContextMenuFinder();
 		try {
 			menuFinder.register();
@@ -93,16 +122,22 @@ public class SWTBotToolbarDropDownButton extends SWTBotToolbarButton {
 			notify(SWT.Deactivate);
 			notify(SWT.FocusOut);
 			log.debug(MessageFormat.format("Clicked on {0}", this)); //$NON-NLS-1$
-
-			Matcher<? extends Widget> matcher = withMnemonic(menuItem);
-			List<?> findMenus = menuFinder.findMenus(new SWTBot().activeShell().widget, matcher, true);
-			log.debug(findMenus);
-			if (findMenus.isEmpty())
-				throw new WidgetNotFoundException("Could not find a menu item"); //$NON-NLS-1$
-			return new SWTBotMenu((MenuItem) findMenus.get(0), matcher);
+			List<MenuItem> findMenus = menuFinder.findMenus(new SWTBot().activeShell().widget, matcher, true);
+			return toSWTBotMenuItems(matcher, findMenus);
 		} finally {
 			menuFinder.unregister();
 		}
+	}
+
+	private ArrayList<SWTBotMenu> toSWTBotMenuItems(Matcher<?> matcher, List<MenuItem> findMenus) {
+		ArrayList<SWTBotMenu> result = new ArrayList<SWTBotMenu>(findMenus.size());
+		for (MenuItem menuItem : findMenus) {
+			result.add(new SWTBotMenu(menuItem, matcher));
+		}
+
+		if (result.isEmpty())
+			throw new WidgetNotFoundException("Could not find a menu item"); //$NON-NLS-1$
+		return result;
 	}
 
 	/**
