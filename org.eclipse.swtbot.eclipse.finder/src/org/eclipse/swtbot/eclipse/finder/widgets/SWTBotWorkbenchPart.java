@@ -228,7 +228,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 	 * @param matcher a matcher.
 	 * @return a widget within the parent widget that matches the specified matcher.
 	 */
-	protected Widget findWidget(Matcher<?> matcher) {
+	protected <S extends Widget> S findWidget(Matcher<S> matcher) {
 		return findWidgets(matcher).get(0);
 	}
 
@@ -236,7 +236,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 	 * @param matcher a matcher.
 	 * @return a widget within the parent widget that matches the specified matcher.
 	 */
-	protected List<? extends Widget> findWidgets(Matcher<?> matcher) {
+	protected <S extends Widget> List<? extends S> findWidgets(Matcher<S> matcher) {
 		Finder finder = bot.getFinder();
 		Control control = getControl();
 		boolean shouldFindInvisibleControls = finder.shouldFindInvisibleControls();

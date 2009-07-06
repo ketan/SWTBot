@@ -25,6 +25,7 @@ import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 /**
  * Tells if a particular widget has a label with the specified text.
@@ -57,7 +58,7 @@ public class WithLabel<T extends Widget> extends AbstractMatcher<T> {
 	}
 
 	protected boolean doMatch(Object obj) {
-		List<? extends Widget> allWidgets = new SWTBot().widgets(anything(), parent(obj));
+		List<? extends Widget> allWidgets = new SWTBot().widgets(Matchers.<Widget>anything(), parent(obj));
 
 		int widgetIndex = allWidgets.indexOf(obj);
 

@@ -59,7 +59,7 @@ public class AccessorCreatorStrategy {
 		Widget widget = getWidget();
 		String text = getText(widget);
 		if (!StringUtils.isEmptyOrNull(text)) {
-			Matcher<?> matcher = createMatcher(text);
+			Matcher<Widget> matcher = createMatcher(text);
 			List<? extends Widget> similarWidgets = similarWidgets(matcher, widget);
 			int index = similarWidgets.indexOf(widget);
 			return new SWTBotAccessor("bot", annotation.preferredName(), text, index); //$NON-NLS-1$
@@ -87,7 +87,7 @@ public class AccessorCreatorStrategy {
 		return withMnemonic(text);
 	}
 
-	private List<? extends Widget> similarWidgets(Matcher<?> matcher, Widget widget) {
+	private <T extends Widget> List<? extends T> similarWidgets(Matcher<T> matcher, Widget widget) {
 		return bot.widgets(matcher);
 	}
 

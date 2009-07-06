@@ -68,8 +68,8 @@ public abstract class Conditions {
 	 * @return a condition that waits until the matcher evaluates to true.
 	 * @since 2.0
 	 */
-	public static WaitForWidget<Widget> waitForWidget(Matcher<?> matcher) {
-		return new WaitForWidget<Widget>(matcher);
+	public static <T extends Widget> WaitForWidget<T> waitForWidget(Matcher<T> matcher) {
+		return new WaitForWidget<T>(matcher);
 	}
 
 	/**
@@ -78,8 +78,8 @@ public abstract class Conditions {
 	 * @return a condition that waits until the matcher evaluates to true.
 	 * @since 2.0
 	 */
-	public static WaitForWidgetInParent<Widget> waitForWidget(Matcher<?> matcher, Widget parent) {
-		return new WaitForWidgetInParent<Widget>(matcher, parent);
+	public static <T extends Widget> WaitForWidgetInParent<T> waitForWidget(Matcher<T> matcher, Widget parent) {
+		return new WaitForWidgetInParent<T>(matcher, parent);
 	}
 
 	/**

@@ -14,6 +14,7 @@ package org.eclipse.swtbot.eclipse.finder.widgets;
 
 import static org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable.syncExec;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widgetOfType;
+import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.anything;
 
 import java.util.ArrayList;
@@ -117,7 +118,7 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	public Widget getWidget() {
 		show();
 		if (widget == null)
-			widget = findWidget(anything());
+			widget = findWidget(any(Widget.class));
 		return widget;
 	}
 
@@ -231,14 +232,14 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 
 	/**
 	 * Gets the quick fix table.
-	 * 
+	 *
 	 * @param proposalShell the shell containing the quickfixes.
 	 * @return the table containing the quickfix.
 	 */
 	private SWTBotTable getProposalTable() {
 		log.debug("Finding table containing proposals.");
 		try {
-			Table table = (Table) bot.widget(widgetOfType(Table.class), activatePopupShell().widget);
+			Table table = bot.widget(widgetOfType(Table.class), activatePopupShell().widget);
 			SWTBotTable swtBotTable = new SWTBotTable(table);
 			log.debug(MessageFormat.format("Found table containing proposals -- {0}", getRows(swtBotTable)));
 			return swtBotTable;

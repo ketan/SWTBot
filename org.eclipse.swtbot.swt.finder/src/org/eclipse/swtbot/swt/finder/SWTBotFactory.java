@@ -256,8 +256,8 @@ abstract class SWTBotFactory {
 	 * @param parentWidget the parent widget to search for a given widget.
 	 * @return a list of widgets that match the matcher.
 	 */
-	public java.util.List<? extends Widget> widgets(Matcher<?> matcher, Widget parentWidget) {
-		WaitForWidgetInParent<? extends Widget> waitForWidget = waitForWidget(matcher, parentWidget);
+	public <T extends Widget> List<? extends T> widgets(Matcher<T> matcher, Widget parentWidget) {
+		WaitForWidgetInParent<T> waitForWidget = waitForWidget(matcher, parentWidget);
 		waitUntilWidgetAppears(waitForWidget);
 		return waitForWidget.getWidgets();
 	}
@@ -266,7 +266,7 @@ abstract class SWTBotFactory {
 	 * @param matcher the matcher used to match widgets.
 	 * @return a list of widgets in the active shell that match the matcher.
 	 */
-	public List<? extends Widget> widgets(Matcher<?> matcher) {
+	public <T extends Widget> List<? extends T> widgets(Matcher<T> matcher) {
 		return widgets(matcher, activeShell().widget);
 	}
 
@@ -275,7 +275,7 @@ abstract class SWTBotFactory {
 	 * @param parentWidget the parent widget to search for a given widget.
 	 * @return the first widget that matchs the matcher.
 	 */
-	public Widget widget(Matcher<?> matcher, Widget parentWidget) {
+	public <T extends Widget> T widget(Matcher<T> matcher, Widget parentWidget) {
 		return widget(matcher, parentWidget, 0);
 	}
 
@@ -285,8 +285,8 @@ abstract class SWTBotFactory {
 	 * @param index the index of the widget, incase the matcher finds multiple widgets
 	 * @return the first widget that matchs the matcher.
 	 */
-	public Widget widget(Matcher<?> matcher, Widget parentWidget, int index) {
-		WaitForWidgetInParent<Widget> waitForWidget = waitForWidget(matcher, parentWidget);
+	public <T extends Widget> T widget(Matcher<T> matcher, Widget parentWidget, int index) {
+		WaitForWidgetInParent<T> waitForWidget = waitForWidget(matcher, parentWidget);
 		waitUntilWidgetAppears(waitForWidget);
 		return waitForWidget.get(index);
 	}
@@ -296,8 +296,8 @@ abstract class SWTBotFactory {
 	 * @param index the index of the widget in case there are multiple widgets.
 	 * @return the index'th widget matching the matcher.
 	 */
-	public Widget widget(Matcher<?> matcher, int index) {
-		WaitForWidget<Widget> waitForWidget = waitForWidget(matcher);
+	public <T extends Widget> T widget(Matcher<T> matcher, int index) {
+		WaitForWidget<T> waitForWidget = waitForWidget(matcher);
 		waitUntilWidgetAppears(waitForWidget);
 		return waitForWidget.get(index);
 	}
@@ -306,7 +306,7 @@ abstract class SWTBotFactory {
 	 * @param matcher the matcher used to match widgets.
 	 * @return the index'th widget matching the matcher.
 	 */
-	public Widget widget(Matcher<?> matcher) {
+	public <T extends Widget> T widget(Matcher<T> matcher) {
 		return widget(matcher, 0);
 	}
 

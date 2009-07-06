@@ -37,7 +37,7 @@ public class WaitForWidgetInParent<T extends Widget> extends WaitForObjectCondit
 		return (List<T>) bot.getFinder().findControls(parent, matcher, true);
 	}
 
-	public List<? extends Widget> getWidgets() {
+	public List<? extends T> getWidgets() {
 		return getAllMatches();
 	}
 

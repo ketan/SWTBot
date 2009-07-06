@@ -42,7 +42,7 @@ public class PackageExplorerView {
 		if (version.startsWith("3.3")) {
 			SWTBotShell shell = bot.shell("Confirm Project Delete");
 			shell.activate();
-			Button button = (Button) bot.widget(widgetOfType(Button.class), shell.widget);
+			Button button = bot.widget(widgetOfType(Button.class), shell.widget);
 			new SWTBotRadio(button).click();
 			bot.button("Yes").click();
 			bot.waitUntil(Conditions.shellCloses(shell));
@@ -50,7 +50,7 @@ public class PackageExplorerView {
 		if (version.startsWith("3.4") || version.startsWith("3.5")) {
 			SWTBotShell shell = bot.shell("Delete Resources");
 			shell.activate();
-			Button button = (Button) bot.widget(widgetOfType(Button.class), shell.widget);
+			Button button = bot.widget(widgetOfType(Button.class), shell.widget);
 			new SWTBotCheckBox(button).select();
 			bot.button("OK").click();
 			bot.waitUntil(Conditions.shellCloses(shell));

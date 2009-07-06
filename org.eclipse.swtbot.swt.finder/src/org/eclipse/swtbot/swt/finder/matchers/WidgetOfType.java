@@ -55,7 +55,7 @@ public class WidgetOfType<T extends Widget> extends AbstractMatcher<T> {
 	 * @since 2.0
 	 */
 	@Factory
-	public static <T extends Widget> Matcher<T> widgetOfType(Class<? extends Widget> type) {
+	public static <T extends Widget> Matcher<T> widgetOfType(Class<T> type) {
 		return new WidgetOfType<T>(type);
 	}
 

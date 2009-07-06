@@ -171,7 +171,7 @@ public abstract class WidgetMatcherFactory {
    * @return a matcher.
    * @since 2.0
    */
-  public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> widgetOfType(java.lang.Class<? extends org.eclipse.swt.widgets.Widget> type) {
+  public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> widgetOfType(java.lang.Class<T> type) {
     return org.eclipse.swtbot.swt.finder.matchers.WidgetOfType.widgetOfType(type);
   }
 

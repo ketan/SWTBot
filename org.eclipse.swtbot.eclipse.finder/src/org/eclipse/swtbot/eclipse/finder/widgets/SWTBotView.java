@@ -12,7 +12,7 @@
 package org.eclipse.swtbot.eclipse.finder.widgets;
 
 import static org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable.syncExec;
-import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.Matchers.any;
 
 import javax.swing.text.View;
 
@@ -88,7 +88,7 @@ public class SWTBotView extends SWTBotWorkbenchPart<IViewReference> {
 	public Widget getWidget() {
 		show();
 		if (widget == null)
-			widget = findWidget(anything());
+			widget = findWidget(any(Widget.class));
 		return widget;
 	}
 
