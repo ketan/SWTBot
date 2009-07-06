@@ -1,10 +1,10 @@
 
 	<!-- begin SWTBot feature list -->
-	<feature url="${update.site.features.url}/org.eclipse.swtbot_${all.buildId}.jar" id="org.eclipse.swtbot" version="${all.buildId}">
+	<feature url="${update.site.base.url}/features/org.eclipse.swtbot_${all.buildId}.jar" id="org.eclipse.swtbot" version="${all.buildId}">
 		<category name="SWTBot SWT Features (incubation)"/>
 	</feature>
 
-	<feature url="${update.site.features.url}/org.eclipse.swtbot.eclipse_${all.buildId}.jar" id="org.eclipse.swtbot.eclipse" version="${all.buildId}">
+	<feature url="${update.site.base.url}/features/org.eclipse.swtbot.eclipse_${all.buildId}.jar" id="org.eclipse.swtbot.eclipse" version="${all.buildId}">
 		<category name="SWTBot Eclipse Features (incubation)"/>
 	</feature>
 	<!-- end SWTBot feature list -->

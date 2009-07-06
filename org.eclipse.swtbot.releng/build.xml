@@ -310,8 +310,7 @@
 
 	<target name="create-update-site">
 		<delete dir="${basedir}/artifacts/update-site" />
-		<property name="update.site.features.url" value="features" />
-		<property name="update.site.plugins.url" value="plugins" />
+		<property name="update.site.base.url" value="" />
 		<property name="has.archives" value="false" />
 		<ant dir="../${plugin.prefix}.updatesite" inheritall="false">
 			<property name="eclipse.location" value="${eclipse.3.4.location}" />
@@ -321,8 +320,7 @@
 			<property name="feature.id.test" value="${feature.id.test}" />
 			<property name="update-site-location" value="${update-site-location}" />
 			<property name="has.archives" value="${has.archives}" />
-			<property name="update.site.features.url" value="${update.site.features.url}" />
-			<property name="update.site.plugins.url" value="${update.site.plugins.url}" />
+			<property name="update.site.base.url" value="${update.site.base.url}" />
 		</ant>
 	</target>
 

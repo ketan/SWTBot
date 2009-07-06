@@ -146,7 +146,7 @@
 		<basename file="${plugin.file.name}" property="file" />
 		<dirname file="${plugin.file.name}" property="file.dirname" />
 		<basename file="${file.dirname}" property="file.basedir" />
-		<echo>Adding plugin: ${file} in ${file.basedir}</echo>
+		<echo>Adding feature/plugin: ${file} in ${file.basedir}</echo>
 		<concat destfile="build/${destFile}" append="true">
 			<path path="${srcFile}" />
 			<filterchain>
@@ -159,8 +159,8 @@
 	<target name="create_plugins_archive_list" if="should.generate.archives">
 		<for param="plugin">
 			<path>
-				<fileset dir="${target}/plugins" includes="*.jar" />
 				<fileset dir="${target}/features" includes="*.jar" />
+				<fileset dir="${target}/plugins" includes="*.jar" />
 			</path>
 			<sequential>
 				<ant target="-create.plugins.template" inheritall="false">

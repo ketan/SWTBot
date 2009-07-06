@@ -32,13 +32,11 @@ eclipse.buildId = 3.4
 
 has.archives = true
 
-# either a relative or absolute location relative to the update site#update.site.plugins.url = http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/dev-build/update-site/plugins
+# either a relative or absolute location relative to the update site, *no trailing slash* please.
 
-update.site.features.url = http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/galileo/dev-build/update-site/features
-update.site.plugins.url = http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/galileo/dev-build/update-site/plugins
+update.site.base.url = http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/galileo/dev-build/update-site
 
-#update.site.features.url = http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/ganymede/dev-build/update-site/features
-#update.site.plugins.url = http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/ganymede/dev-build/update-site/plugins
+#update.site.base.url = http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/ganymede/dev-build/update-site
 
 
 rsync.opts = --delete-after
