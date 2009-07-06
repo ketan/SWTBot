@@ -20,15 +20,15 @@ For uploading update site:
 ==============================
 1. Set the ant property "remote.path" to a location where the build will be uploaded via rsync.
 2. Set the property "has.archives" to true
-3. Set the property "update.site.features.url" and "update.site.plugins.url" to http://downloads.eclipse.org/technology/swtbot/update-site
+3. Set the property "update.site.base.url" to http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/galileo/dev-build/update-site or http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/ganymede/dev-build/update-site depending on the build type.
 4. Set the property "remote.path" to "kpadegaonka@build.eclipse.org:/home/groups/s/sw/swtbot/htdocs/artifacts/X.Y.Z/"
 5. Run the "cruise-upload" ant target. This target will run the complete build, generate artifacts, update site etc. and upload the file via rsync
 
 For a local update site:
 ========================
 1. Set the property "has.archives" to false
-2. Set the property "update.site.features.url" to "features"
-3. Set the property "update.site.plugins.url" to "plugins"
+2. -removed-
+3. -removed-
 4. Run the ant target "create-update-site"
 5. Check in the following artifacts into svn+ssh://dev.eclipse.org/svnroot/technology/org.eclipse.swtbot/artifacts/X.Y.Z:
   a. coverage
@@ -49,17 +49,6 @@ Release Notes:
     v. The location to Code Coverage Reports http://eclipse.org/artifacts/X.Y.Z/coverage
 3. Navigate to http://eclipse.org/wiki/MediaWiki:Sidebar and edit the release notes link to "Release Notes - X.Y.Z"
 4. Update the news section on http://eclipse.org/wiki/Main_Page
-
-Make symlinks for build artifacts:
-==================================
-1. The general structure of the artifacts directory is:
-  a. http://eclipse.org/artifacts/X.Y.Z/apidocs/
-  b. http://eclipse.org/artifacts/X.Y.Z/coverage/
-  c. http://eclipse.org/artifacts/X.Y.Z/junit/
-  d. http://eclipse.org/artifacts/X.Y.Z/update-site/
-2. Create a symlink so that http://eclipse.org/latest points to http://eclipse.org/artifacts/X.Y.Z
-3. Create a symlink so that http://eclipse.org/update-site/ points to http://eclipse.org/latest/update-site. This is the update site that is used by clients.
-
 
 Make a blog entry:
 ==================
