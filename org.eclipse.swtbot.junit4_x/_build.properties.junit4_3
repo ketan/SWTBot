@@ -4,5 +4,6 @@ output.. = bin/
 bin.includes = META-INF/MANIFEST.MF,\
                .,\
                junit4_3/,\
+               src/,\
                about.html,\
                LICENSE.EPL
