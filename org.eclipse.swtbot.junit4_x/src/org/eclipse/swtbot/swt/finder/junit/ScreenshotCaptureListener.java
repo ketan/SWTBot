@@ -20,12 +20,12 @@ import org.junit.runner.notification.RunListener;
 
 /**
  * Captures screenshots on failure notifications.
- * 
+ *
  * @author Hans Schwaebli (Bug 259787)
  * @version $Id$
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
-final class ScreenshotCaptureListener extends RunListener {
+public final class ScreenshotCaptureListener extends RunListener {
 	/** The logger. */
 	private static Logger	log					= Logger.getLogger(SWTBotApplicationLauncherClassRunner.class);
 
