@@ -94,7 +94,7 @@ public class ControlFinder {
 	 * @return all controls in the active shell that the matcher matches.
 	 * @see Display#getActiveShell()
 	 */
-	public List<? extends Widget> findControls(Matcher<?> matcher) {
+	public <T extends Widget> List<T> findControls(Matcher<T> matcher) {
 		return findControls(activeShell(), matcher, true);
 	}
 
@@ -108,7 +108,7 @@ public class ControlFinder {
 	 * @return all visible widgets in the children that the matcher matches. If recursive is <code>true</code> then find
 	 *         the widgets within each of the widget.
 	 */
-	public List<? extends Widget> findControls(final List<Widget> widgets, final Matcher<?> matcher, final boolean recursive) {
+	public <T extends Widget> List<T> findControls(final List<Widget> widgets, final Matcher<T> matcher, final boolean recursive) {
 		return findControlsInternal(widgets, matcher, recursive);
 	}
 
@@ -145,9 +145,9 @@ public class ControlFinder {
 	 * @return all visible widgets in the parentWidget that the matcher matches. If recursive is <code>true</code> then
 	 *         find the widget within each of the parentWidget.
 	 */
-	public List<? extends Widget> findControls(final Widget parentWidget, final Matcher<?> matcher, final boolean recursive) {
-		return UIThreadRunnable.syncExec(display, new ListResult<Widget>() {
-			public List<Widget> run() {
+	public <T extends Widget> List<T> findControls(final Widget parentWidget, final Matcher<T> matcher, final boolean recursive) {
+		return UIThreadRunnable.syncExec(display, new ListResult<T>() {
+			public List<T> run() {
 				return findControlsInternal(parentWidget, matcher, recursive);
 			}
 		});
@@ -162,12 +162,12 @@ public class ControlFinder {
 	 *
 	 * @see #findControls(List, Matcher, boolean)
 	 */
-	private List<? extends Widget> findControlsInternal(final List<Widget> widgets, final Matcher<?> matcher, final boolean recursive) {
-		LinkedHashSet<Widget> list = new LinkedHashSet<Widget>();
+	private <T extends Widget> List<T> findControlsInternal(final List<Widget> widgets, final Matcher<T> matcher, final boolean recursive) {
+		LinkedHashSet<T> list = new LinkedHashSet<T>();
 		for (Widget w : widgets) {
 			list.addAll(findControlsInternal(w, matcher, recursive));
 		}
-		return new ArrayList<Widget>(list);
+		return new ArrayList<T>(list);
 	}
 
 	/**
@@ -178,23 +178,29 @@ public class ControlFinder {
 	 * </p>
 	 *
 	 * @see #findControlsInternal(Widget, Matcher, boolean)
+	 * @throws IllegalArgumentException if the matcher matches an object that is the wrong declared type. For example, a Matcher&lt;Table&gt; that would match a Tree
 	 */
-	private List<Widget> findControlsInternal(final Widget parentWidget, final Matcher<?> matcher, final boolean recursive) {
+	@SuppressWarnings("unchecked")
+	private <T extends Widget> List<T> findControlsInternal(final Widget parentWidget, final Matcher<T> matcher, final boolean recursive) {
 		if ((parentWidget == null) || parentWidget.isDisposed())
-			return new ArrayList<Widget>();
+			return new ArrayList<T>();
 		if (!visible(parentWidget)) {
 			if (!isComposite(parentWidget))
 				log.trace(MessageFormat.format("{0} is not visible, skipping.", parentWidget)); //$NON-NLS-1$
-			return new ArrayList<Widget>();
+			return new ArrayList<T>();
 		}
-		LinkedHashSet<Widget> controls = new LinkedHashSet<Widget>();
+		LinkedHashSet<T> controls = new LinkedHashSet<T>();
 		if (matcher.matches(parentWidget) && !controls.contains(parentWidget))
-			controls.add(parentWidget);
+			try {
+				controls.add((T) parentWidget);
+			} catch (ClassCastException exception) {
+				throw new IllegalArgumentException("The specified matcher should only match against is declared type.", exception);
+			}
 		if (recursive) {
 			List<Widget> children = getChildrenResolver().getChildren(parentWidget);
 			controls.addAll(findControlsInternal(children, matcher, recursive));
 		}
-		return new ArrayList<Widget>(controls);
+		return new ArrayList<T>(controls);
 	}
 
 	private boolean isComposite(Widget parentWidget) {

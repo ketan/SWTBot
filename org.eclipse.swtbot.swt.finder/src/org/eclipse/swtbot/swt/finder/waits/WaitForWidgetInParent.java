@@ -24,7 +24,7 @@ public class WaitForWidgetInParent<T extends Widget> extends WaitForObjectCondit
 
 	private final Widget			parent;
 
-	WaitForWidgetInParent(Matcher<?> matcher, Widget parent) {
+	WaitForWidgetInParent(Matcher<T> matcher, Widget parent) {
 		super(matcher);
 		this.parent = parent;
 	}
@@ -34,7 +34,7 @@ public class WaitForWidgetInParent<T extends Widget> extends WaitForObjectCondit
 	}
 
 	protected List<T> findMatches() {
-		return (List<T>) bot.getFinder().findControls(parent, matcher, true);
+		return bot.getFinder().findControls(parent, matcher, true);
 	}
 
 	public List<? extends T> getWidgets() {

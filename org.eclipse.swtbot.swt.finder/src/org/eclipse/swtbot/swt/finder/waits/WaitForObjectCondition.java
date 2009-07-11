@@ -24,7 +24,7 @@ import org.hamcrest.Matcher;
 public abstract class WaitForObjectCondition<T> extends DefaultCondition {
 
 	/** The matcher that is used to match widgets. */
-	protected final Matcher<?>	matcher;
+	protected final Matcher<T>	matcher;
 	private final List<T>		matches;
 
 	/**
@@ -32,7 +32,7 @@ public abstract class WaitForObjectCondition<T> extends DefaultCondition {
 	 *
 	 * @param matcher the matcher.
 	 */
-	public WaitForObjectCondition(Matcher<?> matcher) {
+	public WaitForObjectCondition(Matcher<T> matcher) {
 		this.matcher = matcher;
 		matches = new ArrayList<T>();
 	}

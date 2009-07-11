@@ -27,7 +27,7 @@ import org.hamcrest.Matcher;
 public class WaitForShellInParent extends WaitForShell {
 	private final Shell	parent;
 
-	WaitForShellInParent(Shell parent, Matcher<?> matcher) {
+	WaitForShellInParent(Shell parent, Matcher<Shell> matcher) {
 		super(matcher);
 		this.parent = parent;
 	}

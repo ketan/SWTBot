@@ -10,9 +10,9 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.finders;
 
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widgetOfType;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withText;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.utils.TreePath;
+import org.hamcrest.Matcher;
 import org.junit.Test;
 
 /**
@@ -36,15 +37,18 @@ public class ControlFinder2Test extends AbstractSWTTestCase {
 	@Test
 	public void findsAllTabItem() throws Exception {
 		selectCTabFolder();
-		List tabItems = finder.findControls(instanceOf(CTabItem.class));
+		List<CTabItem> tabItems = finder.findControls(widgetOfType(CTabItem.class));
 		assertEquals(3, tabItems.size());
 	}
 
+	@SuppressWarnings("unchecked")
+	// varargs and generics doesn't mix well!
 	@Test
 	public void getsControlPath() throws Exception {
 		selectCTabFolder();
-		List labels = finder.findControls(allOf(instanceOf(CTabItem.class), withText("CTabItem 1")));
-		Widget w = (Widget) labels.get(0);
+		Matcher<CTabItem> withText = withText("CTabItem 1");
+		List<CTabItem> labels = finder.findControls(allOf(widgetOfType(CTabItem.class), withText));
+		Widget w = labels.get(0);
 		TreePath path = finder.getPath(w);
 		assertEquals(8, path.getSegmentCount());
 	}
@@ -52,8 +56,8 @@ public class ControlFinder2Test extends AbstractSWTTestCase {
 	private void selectCTabFolder() {
 		UIThreadRunnable.syncExec(display, new VoidResult() {
 			public void run() {
-				List findControls = finder.findControls(instanceOf(TabFolder.class));
-				TabFolder folder = (TabFolder) findControls.get(0);
+				List<TabFolder> findControls = finder.findControls(widgetOfType(TabFolder.class));
+				TabFolder folder = findControls.get(0);
 				folder.setSelection(2);
 			}
 		});

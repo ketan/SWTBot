@@ -10,9 +10,9 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widgetOfType;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMnemonic;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.instanceOf;
 
 import java.util.List;
 
@@ -411,8 +411,11 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 * @throws WidgetNotFoundException if the widget is not found.
 	 * @since 2.0
 	 */
+	@SuppressWarnings("unchecked")
+	// varargs and generics doesn't mix well!
 	protected SWTBotMenu contextMenu(final Control control, final String text) {
-		final Matcher<?> matcher = allOf(instanceOf(MenuItem.class), withMnemonic(text));
+		Matcher<MenuItem> withMnemonic = withMnemonic(text);
+		final Matcher<MenuItem> matcher = allOf(widgetOfType(MenuItem.class), withMnemonic);
 		final ContextMenuFinder menuFinder = new ContextMenuFinder(control);
 
 		new SWTBot().waitUntil(new DefaultCondition() {

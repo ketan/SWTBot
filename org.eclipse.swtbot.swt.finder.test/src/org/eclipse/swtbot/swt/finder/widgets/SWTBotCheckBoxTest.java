@@ -12,7 +12,7 @@ package org.eclipse.swtbot.swt.finder.widgets;
 
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.pass;
-import static org.hamcrest.Matchers.instanceOf;
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widgetOfType;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -38,8 +38,8 @@ public class SWTBotCheckBoxTest extends AbstractSWTTestCase {
 	@Test
 	public void clicksCheckBox() throws Exception {
 		try {
-			List findControls = new ControlFinder().findControls(instanceOf(Text.class));
-			SWTBotText text = new SWTBotText((Text) findControls.get(0));
+			List<Text> findControls = new ControlFinder().findControls(widgetOfType(Text.class));
+			SWTBotText text = new SWTBotText(findControls.get(0));
 			text.setText("");
 			assertFalse(bot.checkBox("Listen").isChecked());
 			bot.checkBox("Listen").click();

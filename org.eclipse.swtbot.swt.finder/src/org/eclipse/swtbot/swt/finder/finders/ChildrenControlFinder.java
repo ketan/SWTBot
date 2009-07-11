@@ -63,7 +63,7 @@ public class ChildrenControlFinder extends ControlFinder {
 	 * @return all controls in the parent widget that the matcher matches.
 	 */
 	@Override
-	public List<? extends Widget> findControls(Matcher<?> matcher) {
+	public <T extends Widget> List<T> findControls(Matcher<T> matcher) {
 		return findControls(parentWidget, matcher, true);
 	}
 

@@ -82,7 +82,7 @@ public class Finder {
 	 * @return all controls in the active shell that the matcher matches.
 	 * @see ControlFinder#findControls(Matcher)
 	 */
-	public List<? extends Widget> findControls(Matcher<?> matcher) {
+	public <T extends Widget> List<T> findControls(Matcher<T> matcher) {
 		return controlFinder.findControls(matcher);
 	}
 
@@ -97,7 +97,7 @@ public class Finder {
 	 *         the widgets within each of the widget.
 	 * @see ControlFinder#findControls(List, Matcher, boolean)
 	 */
-	public List<? extends Widget> findControls(List<Widget> children, Matcher<?> matcher, boolean recursive) {
+	public <T extends Widget> List<T> findControls(List<Widget> children, Matcher<T> matcher, boolean recursive) {
 		return controlFinder.findControls(children, matcher, recursive);
 	}
 
@@ -115,7 +115,7 @@ public class Finder {
 	 *         find the widget within each of the parentWidget.
 	 * @see ControlFinder#findControls(Widget, Matcher, boolean)
 	 */
-	public List<? extends Widget> findControls(Widget widget, Matcher<?> matcher, boolean recursive) {
+	public <T extends Widget> List<T> findControls(Widget widget, Matcher<T> matcher, boolean recursive) {
 		return controlFinder.findControls(widget, matcher, recursive);
 	}
 
@@ -147,7 +147,7 @@ public class Finder {
 	 * @return all menus in all shells that match the matcher.
 	 * @see MenuFinder#findMenus(Matcher)
 	 */
-	public List<MenuItem> findMenus(Matcher<?> matcher) {
+	public List<MenuItem> findMenus(Matcher<MenuItem> matcher) {
 		return menuFinder.findMenus(matcher);
 	}
 
@@ -161,7 +161,7 @@ public class Finder {
 	 * @return all menus in the specified menubar that match the matcher.
 	 * @see MenuFinder#findMenus(Menu, Matcher, boolean)
 	 */
-	public List<MenuItem> findMenus(Menu bar, Matcher<?> matcher, boolean recursive) {
+	public List<MenuItem> findMenus(Menu bar, Matcher<MenuItem> matcher, boolean recursive) {
 		return menuFinder.findMenus(bar, matcher, recursive);
 	}
 
@@ -175,7 +175,7 @@ public class Finder {
 	 * @return all menus in the specified shell that match the matcher.
 	 * @see MenuFinder#findMenus(Shell, Matcher, boolean)
 	 */
-	public List<MenuItem> findMenus(Shell shell, Matcher<?> matcher, boolean recursive) {
+	public List<MenuItem> findMenus(Shell shell, Matcher<MenuItem> matcher, boolean recursive) {
 		return menuFinder.findMenus(shell, matcher, recursive);
 	}
 
@@ -189,7 +189,7 @@ public class Finder {
 	 * @return all menus in the specified shells that match the matcher.
 	 * @see MenuFinder#findMenus(Shell[], Matcher, boolean)
 	 */
-	public List<MenuItem> findMenus(Shell[] shells, Matcher<?> matcher, boolean recursive) {
+	public List<MenuItem> findMenus(Shell[] shells, Matcher<MenuItem> matcher, boolean recursive) {
 		return menuFinder.findMenus(shells, matcher, recursive);
 	}
 

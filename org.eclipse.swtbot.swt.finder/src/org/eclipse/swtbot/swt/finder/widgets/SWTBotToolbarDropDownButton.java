@@ -77,7 +77,8 @@ public class SWTBotToolbarDropDownButton extends SWTBotToolbarButton {
 	 * @since 1.0
 	 */
 	public SWTBotMenu menuItem(String menuItem) {
-		return menuItem(withMnemonic(menuItem));
+		Matcher<MenuItem> withMnemonic = withMnemonic(menuItem);
+		return menuItem(withMnemonic);
 	}
 
 	/**
@@ -89,7 +90,7 @@ public class SWTBotToolbarDropDownButton extends SWTBotToolbarButton {
 	 * @param matcher the matcher
 	 * @return the menu item with the specified text
 	 */
-	public SWTBotMenu menuItem(Matcher<?> matcher) {
+	public SWTBotMenu menuItem(Matcher<MenuItem> matcher) {
 		return menuItems(matcher).get(0);
 	}
 
@@ -103,7 +104,7 @@ public class SWTBotToolbarDropDownButton extends SWTBotToolbarButton {
 	 * @return the menu items matching the matcher.
 	 * @throws WidgetNotFoundException if the menuItem could not be found
 	 */
-	public List<? extends SWTBotMenu> menuItems(Matcher<?> matcher) {
+	public List<? extends SWTBotMenu> menuItems(Matcher<MenuItem> matcher) {
 		EventContextMenuFinder menuFinder = new EventContextMenuFinder();
 		try {
 			menuFinder.register();

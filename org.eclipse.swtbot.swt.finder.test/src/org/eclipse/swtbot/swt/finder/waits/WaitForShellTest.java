@@ -16,8 +16,10 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThan;
 
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.hamcrest.Matcher;
 import org.junit.Test;
 
 /**
@@ -36,7 +38,8 @@ public class WaitForShellTest extends AbstractSWTTestCase {
 		destroyShellAfter(600);
 
 		long start = System.currentTimeMillis();
-		new SWTBot().waitUntil(Conditions.waitForShell(withText(TEXT)));
+		Matcher<Shell> withText = withText(TEXT);
+		new SWTBot().waitUntil(Conditions.waitForShell(withText));
 		long end = System.currentTimeMillis();
 
 		int time = (int) (end - start);

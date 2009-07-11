@@ -14,12 +14,13 @@ package org.eclipse.swtbot.swt.finder.widgets;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertNotSameWidget;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.pass;
-import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.Matchers.any;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.List;
 
+import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
@@ -54,7 +55,7 @@ public class SWTBotToolbarDropDownButtonTest extends AbstractSWTTestCase {
 
 	@Test
 	public void getsAllMenuItems() throws Exception {
-		List<? extends SWTBotMenu> menuItems = bot.toolbarDropDownButton("Drop Down").menuItems(anything());
+		List<? extends SWTBotMenu> menuItems = bot.toolbarDropDownButton("Drop Down").menuItems(any(MenuItem.class));
 		menuItems.get(0).click();
 		assertEquals(7, menuItems.size());
 	}

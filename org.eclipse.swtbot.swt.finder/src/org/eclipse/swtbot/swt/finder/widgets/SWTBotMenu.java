@@ -86,7 +86,8 @@ public class SWTBotMenu extends AbstractSWTBot<MenuItem> {
 		MenuItem menuItem = syncExec(new WidgetResult<MenuItem>() {
 			public MenuItem run() {
 				Menu bar = widget.getMenu();
-				List<MenuItem> menus = new MenuFinder().findMenus(bar, withMnemonic(menuName), true);
+				Matcher<MenuItem> withMnemonic = withMnemonic(menuName);
+				List<MenuItem> menus = new MenuFinder().findMenus(bar, withMnemonic, true);
 				if (!menus.isEmpty())
 					return menus.get(0);
 				return null;

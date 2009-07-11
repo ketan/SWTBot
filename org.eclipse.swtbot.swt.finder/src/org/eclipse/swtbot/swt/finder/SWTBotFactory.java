@@ -32,6 +32,7 @@ import java.util.List;
 
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tray;
 import org.eclipse.swt.widgets.TrayItem;
@@ -107,7 +108,8 @@ abstract class SWTBotFactory {
 	 * @param text the text on the shell.
 	 */
 	public List<Shell> shells(String text) {
-		WaitForShell waitForShell = waitForShell(withText(text));
+		Matcher<Shell> withText = withText(text);
+		WaitForShell waitForShell = waitForShell(withText);
 		waitUntilWidgetAppears(waitForShell);
 		List<Shell> allShells = waitForShell.getAllMatches();
 		return allShells;
@@ -138,7 +140,8 @@ abstract class SWTBotFactory {
 	 * @param parent the parent under which a shell will be found.
 	 */
 	public List<Shell> shells(String text, Shell parent) {
-		WaitForShell waitForShell = waitForShell(withText(text), parent);
+		Matcher<Shell> withText = withText(text);
+		WaitForShell waitForShell = waitForShell(withText, parent);
 		waitUntilWidgetAppears(waitForShell);
 		List<Shell> allShells = waitForShell.getAllMatches();
 		return allShells;
@@ -169,7 +172,8 @@ abstract class SWTBotFactory {
 	 * @since 2.0
 	 */
 	public SWTBotShell shellWithId(String value, int index) {
-		WaitForShell waitForShell = waitForShell(withId(value));
+		Matcher<Shell> withId = withId(value);
+		WaitForShell waitForShell = waitForShell(withId);
 		waitUntilWidgetAppears(waitForShell);
 		return new SWTBotShell(waitForShell.get(index));
 	}
@@ -181,7 +185,8 @@ abstract class SWTBotFactory {
 	 * @return a wrapper around a @{link Shell} with the specified key/value pair for its id.
 	 */
 	public SWTBotShell shellWithId(String key, String value, int index) {
-		WaitForShell waitForShell = waitForShell(withId(key, value));
+		Matcher<Shell> withId = withId(key, value);
+		WaitForShell waitForShell = waitForShell(withId);
 		waitUntilWidgetAppears(waitForShell);
 		return new SWTBotShell(waitForShell.get(index));
 	}
@@ -200,7 +205,8 @@ abstract class SWTBotFactory {
 	 * @return a menu item that matches the specified text.
 	 */
 	public SWTBotMenu menu(String text, int index) {
-		return menu(activeShell(), withMnemonic(text), index);
+		Matcher<MenuItem> withMnemonic = withMnemonic(text);
+		return menu(activeShell(), withMnemonic, index);
 	}
 
 	/**
@@ -217,7 +223,8 @@ abstract class SWTBotFactory {
 	 * @return a wrapper around a @{link Menu} with the specified key/value pair for its id.
 	 */
 	public SWTBotMenu menuWithId(String value, int index) {
-		return menu(activeShell(), withId(value), index);
+		Matcher<MenuItem> withId = withId(value);
+		return menu(activeShell(), withId, index);
 	}
 
 	/**
@@ -236,7 +243,8 @@ abstract class SWTBotFactory {
 	 * @return a wrapper around a @{link Menu} with the specified key/value pair for its id.
 	 */
 	public SWTBotMenu menuWithId(String key, String value, int index) {
-		return menu(activeShell(), withId(key, value), index);
+		Matcher<MenuItem> withId = withId(key, value);
+		return menu(activeShell(), withId, index);
 	}
 
 	/**
@@ -245,7 +253,7 @@ abstract class SWTBotFactory {
 	 * @param index the index of the menu, in case there are multiple menus with the same text.
 	 * @return a menu item that matches the specified text.
 	 */
-	public SWTBotMenu menu(SWTBotShell shell, Matcher<? extends Widget> matcher, int index) {
+	public SWTBotMenu menu(SWTBotShell shell, Matcher<MenuItem> matcher, int index) {
 		WaitForMenu waitForMenu = waitForMenu(shell, matcher);
 		waitUntilWidgetAppears(waitForMenu);
 		return new SWTBotMenu(waitForMenu.get(index), matcher);

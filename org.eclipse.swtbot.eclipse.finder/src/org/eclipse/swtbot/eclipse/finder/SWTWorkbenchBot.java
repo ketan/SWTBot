@@ -117,7 +117,7 @@ public class SWTWorkbenchBot extends SWTBot {
 	 * @return views that match the matcher
 	 * @throws WidgetNotFoundException if the view is not found
 	 */
-	public SWTBotView view(Matcher<?> matcher) {
+	public SWTBotView view(Matcher<IViewReference> matcher) {
 		WaitForView waitForView = waitForView(matcher);
 		waitUntilWidgetAppears(waitForView);
 		return new SWTBotView(waitForView.get(0), this);
@@ -131,7 +131,8 @@ public class SWTWorkbenchBot extends SWTBot {
 	 * @see WidgetMatcherFactory#withPartName(Matcher)
 	 */
 	public SWTBotView viewByTitle(String title) {
-		return view(withPartName(title));
+		Matcher<IViewReference> withPartName = withPartName(title);
+		return view(withPartName);
 	}
 
 	/**
@@ -142,7 +143,8 @@ public class SWTWorkbenchBot extends SWTBot {
 	 * @see WidgetMatcherFactory#withPartId(String)
 	 */
 	public SWTBotView viewById(String id) {
-		return view(withPartId(id));
+		Matcher<IViewReference> withPartId = withPartId(id);
+		return view(withPartId);
 	}
 
 	/**
@@ -187,7 +189,7 @@ public class SWTWorkbenchBot extends SWTBot {
 	 * @return an editor that matches the matcher
 	 * @throws WidgetNotFoundException if the editor is not found
 	 */
-	public SWTBotEditor editor(Matcher<?> matcher) {
+	public SWTBotEditor editor(Matcher<IEditorReference> matcher) {
 		WaitForEditor waitForEditor = waitForEditor(matcher);
 		waitUntilWidgetAppears(waitForEditor);
 		return new SWTBotEditor(waitForEditor.get(0), this);
@@ -222,7 +224,8 @@ public class SWTWorkbenchBot extends SWTBot {
 	 * @see #editor(Matcher)
 	 */
 	public SWTBotEditor editorByTitle(String fileName) {
-		return editor(withPartName(fileName));
+		Matcher<IEditorReference> withPartName = withPartName(fileName);
+		return editor(withPartName);
 	}
 
 	/**
@@ -233,7 +236,8 @@ public class SWTWorkbenchBot extends SWTBot {
 	 * @see #editor(Matcher)
 	 */
 	public SWTBotEditor editorById(String id) {
-		return editor(withPartId(id));
+		Matcher<IEditorReference> withPartId = withPartId(id);
+		return editor(withPartId);
 	}
 
 	/**

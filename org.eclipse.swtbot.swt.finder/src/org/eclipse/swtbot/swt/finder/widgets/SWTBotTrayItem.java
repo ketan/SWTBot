@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.TrayItem;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.EventContextMenuFinder;
+import org.hamcrest.Matcher;
 
 /**
  * Represents a tray item.
@@ -43,7 +44,8 @@ public class SWTBotTrayItem extends AbstractSWTBot<TrayItem> {
 		try {
 			finder.register();
 			notify(SWT.MenuDetect);
-			List<MenuItem> menus = finder.findMenus(withMnemonic(label));
+			Matcher<MenuItem> withMnemonic = withMnemonic(label);
+			List<MenuItem> menus = finder.findMenus(withMnemonic);
 			if (menus.isEmpty())
 				throw new WidgetNotFoundException("Could not find a menu item");
 			return new SWTBotMenu(menus.get(0));

@@ -11,7 +11,7 @@
 package org.eclipse.swtbot.swt.finder.widgets;
 
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertText;
-import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.Matchers.any;
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
@@ -54,8 +54,8 @@ public class SWTBotMenuTest extends AbstractMenuExampleTest {
 			}
 		});
 
-		List findControls = menuFinder.findMenus(anything());
-		MenuItem menuItem = (MenuItem) findControls.get(14);
+		List<MenuItem> findControls = menuFinder.findMenus(any(MenuItem.class));
+		MenuItem menuItem = findControls.get(14);
 		assertText("Last Name", menuItem);
 
 		bot.menu("Last Name").click();

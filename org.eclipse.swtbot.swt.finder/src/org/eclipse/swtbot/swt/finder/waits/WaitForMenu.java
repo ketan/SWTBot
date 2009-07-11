@@ -13,7 +13,6 @@ package org.eclipse.swtbot.swt.finder.waits;
 import java.util.List;
 
 import org.eclipse.swt.widgets.MenuItem;
-import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.finders.MenuFinder;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.hamcrest.Matcher;
@@ -32,7 +31,7 @@ public class WaitForMenu extends WaitForObjectCondition<MenuItem> {
 	 * @param shell the shell to search for the menu.
 	 * @param matcher the matcher used for matching the menu items.
 	 */
-	public WaitForMenu(SWTBotShell shell, Matcher<? extends Widget> matcher) {
+	public WaitForMenu(SWTBotShell shell, Matcher<MenuItem> matcher) {
 		super(matcher);
 		this.shell = shell;
 	}

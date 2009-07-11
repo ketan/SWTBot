@@ -33,7 +33,7 @@ public class WaitForView extends WaitForObjectCondition<IViewReference> {
 	 * 
 	 * @param matcher the matcher
 	 */
-	WaitForView(Matcher<?> matcher) {
+	WaitForView(Matcher<IViewReference> matcher) {
 		super(matcher);
 	}
 

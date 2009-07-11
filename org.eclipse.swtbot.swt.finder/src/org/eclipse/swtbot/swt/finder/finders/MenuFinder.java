@@ -58,7 +58,7 @@ public class MenuFinder {
 	 * @param matcher the matcher that can match menus and menu items.
 	 * @return all menus in all shells that match the matcher.
 	 */
-	public List<MenuItem> findMenus(Matcher<?> matcher) {
+	public List<MenuItem> findMenus(Matcher<MenuItem> matcher) {
 		return findMenus(getShells(), matcher, true);
 	}
 
@@ -71,7 +71,7 @@ public class MenuFinder {
 	 * @param recursive if set to true, will find sub-menus as well.
 	 * @return all menus in the specified shells that match the matcher.
 	 */
-	public List<MenuItem> findMenus(Shell[] shells, Matcher<?> matcher, boolean recursive) {
+	public List<MenuItem> findMenus(Shell[] shells, Matcher<MenuItem> matcher, boolean recursive) {
 		LinkedHashSet<MenuItem> result = new LinkedHashSet<MenuItem>();
 		for (Shell shell : shells)
 			result.addAll(findMenus(shell, matcher, recursive));
@@ -87,7 +87,7 @@ public class MenuFinder {
 	 * @param recursive if set to true, will find sub-menus as well.
 	 * @return all menus in the specified shell that match the matcher.
 	 */
-	public List<MenuItem> findMenus(final Shell shell, Matcher<?> matcher, boolean recursive) {
+	public List<MenuItem> findMenus(final Shell shell, Matcher<MenuItem> matcher, boolean recursive) {
 		LinkedHashSet<MenuItem> result = new LinkedHashSet<MenuItem>();
 		result.addAll(findMenus(menuBar(shell), matcher, recursive));
 		return new ArrayList<MenuItem>(result);
@@ -118,7 +118,7 @@ public class MenuFinder {
 	 * @param recursive if set to true, will find sub-menus as well.
 	 * @return all menus in the specified menubar that match the matcher.
 	 */
-	public List<MenuItem> findMenus(final Menu bar, final Matcher<?> matcher, final boolean recursive) {
+	public List<MenuItem> findMenus(final Menu bar, final Matcher<MenuItem> matcher, final boolean recursive) {
 		return UIThreadRunnable.syncExec(display, new ListResult<MenuItem>() {
 			public List<MenuItem> run() {
 				return findMenusInternal(bar, matcher, recursive);
@@ -146,7 +146,7 @@ public class MenuFinder {
 	 * @param recursive
 	 * @return
 	 */
-	private List<MenuItem> findMenusInternal(final Menu bar, final Matcher<?> matcher, final boolean recursive) {
+	private List<MenuItem> findMenusInternal(final Menu bar, final Matcher<MenuItem> matcher, final boolean recursive) {
 		LinkedHashSet<MenuItem> result = new LinkedHashSet<MenuItem>();
 		if (bar != null) {
 			bar.notifyListeners(SWT.Show, new Event());

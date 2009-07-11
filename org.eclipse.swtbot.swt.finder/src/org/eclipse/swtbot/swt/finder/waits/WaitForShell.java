@@ -25,7 +25,7 @@ import org.hamcrest.Matcher;
  */
 public class WaitForShell extends WaitForObjectCondition<Shell> {
 
-	WaitForShell(Matcher<?> matcher) {
+	WaitForShell(Matcher<Shell> matcher) {
 		super(matcher);
 	}
 

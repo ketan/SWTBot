@@ -22,7 +22,7 @@ import org.hamcrest.Matcher;
  */
 public class WaitForWidget<T extends Widget> extends WaitForObjectCondition<T> {
 
-	WaitForWidget(Matcher<?> matcher) {
+	WaitForWidget(Matcher<T> matcher) {
 		super(matcher);
 	}
 
@@ -31,7 +31,7 @@ public class WaitForWidget<T extends Widget> extends WaitForObjectCondition<T> {
 	}
 
 	protected List<T> findMatches() {
-		return (List<T>) bot.getFinder().findControls(matcher);
+		return bot.getFinder().findControls(matcher);
 	}
 
 }

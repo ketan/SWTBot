@@ -35,7 +35,7 @@ public class WaitForEditor extends WaitForObjectCondition<IEditorReference> {
 	 * 
 	 * @param matcher the matcher
 	 */
-	WaitForEditor(Matcher<?> matcher) {
+	WaitForEditor(Matcher<IEditorReference> matcher) {
 		super(matcher);
 	}
 

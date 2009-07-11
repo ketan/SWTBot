@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.finder.waits;
 
+import org.eclipse.ui.IEditorReference;
+import org.eclipse.ui.IViewReference;
 import org.hamcrest.Matcher;
 
 /**
@@ -22,7 +24,7 @@ public class Conditions extends org.eclipse.swtbot.swt.finder.waits.Conditions {
 	 * @param matcher a matcher
 	 * @return a condition that waits until the matcher evaluates to true.
 	 */
-	public static WaitForView waitForView(Matcher<?> matcher) {
+	public static WaitForView waitForView(Matcher<IViewReference> matcher) {
 		return new WaitForView(matcher);
 	}
 
@@ -30,7 +32,7 @@ public class Conditions extends org.eclipse.swtbot.swt.finder.waits.Conditions {
 	 * @param matcher a matcher
 	 * @return a condition that waits until the matcher evaluates to true.
 	 */
-	public static WaitForEditor waitForEditor(Matcher<?> matcher) {
+	public static WaitForEditor waitForEditor(Matcher<IEditorReference> matcher) {
 		return new WaitForEditor(matcher);
 	}
 

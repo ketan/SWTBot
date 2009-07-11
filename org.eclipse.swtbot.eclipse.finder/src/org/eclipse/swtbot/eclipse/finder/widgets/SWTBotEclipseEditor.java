@@ -15,7 +15,6 @@ package org.eclipse.swtbot.eclipse.finder.widgets;
 import static org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable.syncExec;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widgetOfType;
 import static org.hamcrest.Matchers.any;
-import static org.hamcrest.Matchers.anything;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -143,7 +142,7 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	 * @throws WidgetNotFoundException if the quickfix could not be found.
 	 */
 	public void quickfix(int quickFixIndex) {
-		WaitForObjectCondition<SWTBotTable> quickFixTableCondition = quickFixAppears(anything());
+		WaitForObjectCondition<SWTBotTable> quickFixTableCondition = quickFixAppears(any(SWTBotTable.class));
 		waitUntil(quickFixTableCondition);
 		SWTBotTable quickFixTable = quickFixTableCondition.get(0);
 		selectProposal(quickFixTable, quickFixIndex);
@@ -167,7 +166,7 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	 * @since 1.2
 	 */
 	public List<String> getQuickFixes() {
-		WaitForObjectCondition<SWTBotTable> quickFixTableCondition = quickFixAppears(anything());
+		WaitForObjectCondition<SWTBotTable> quickFixTableCondition = quickFixAppears(any(SWTBotTable.class));
 		waitUntil(quickFixTableCondition);
 		SWTBotTable quickFixTable = quickFixTableCondition.get(0);
 		List<String> proposals = getRows(quickFixTable);
@@ -182,7 +181,7 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	 * @since 1.2
 	 */
 	public int getQuickfixListItemCount() {
-		WaitForObjectCondition<SWTBotTable> quickFixTableCondition = quickFixAppears(anything());
+		WaitForObjectCondition<SWTBotTable> quickFixTableCondition = quickFixAppears(any(SWTBotTable.class));
 		waitUntil(quickFixTableCondition);
 		SWTBotTable quickFixTable = quickFixTableCondition.get(0);
 		return quickFixTable.rowCount();
@@ -654,8 +653,8 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 		setFocus();
 	}
 
-	private Matcher<?> tableWithRow(final String itemText) {
-		return new AbstractMatcher<Object>() {
+	private Matcher<SWTBotTable> tableWithRow(final String itemText) {
+		return new AbstractMatcher<SWTBotTable>() {
 
 			protected boolean doMatch(Object item) {
 				return ((SWTBotTable) item).containsItem(itemText);
@@ -667,9 +666,9 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 		};
 	}
 
-	private Matcher<?> tableWithRowIgnoringCase(final String itemText) {
+	private Matcher<SWTBotTable> tableWithRowIgnoringCase(final String itemText) {
 		final String lowerCaseText = itemText.toLowerCase();
-		return new AbstractMatcher<Object>() {
+		return new AbstractMatcher<SWTBotTable>() {
 
 			protected boolean doMatch(Object item) {
 				List<String> rows = getRows((SWTBotTable) item);
@@ -687,7 +686,7 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 		};
 	}
 
-	private WaitForObjectCondition<SWTBotTable> quickFixAppears(Matcher<?> tableMatcher) {
+	private WaitForObjectCondition<SWTBotTable> quickFixAppears(Matcher<SWTBotTable> tableMatcher) {
 		return new WaitForObjectCondition<SWTBotTable>(tableMatcher) {
 			protected List<SWTBotTable> findMatches() {
 				try {
@@ -730,7 +729,7 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 		}
 	}
 
-	private WaitForObjectCondition<SWTBotTable> autoCompleteAppears(Matcher<?> tableMatcher) {
+	private WaitForObjectCondition<SWTBotTable> autoCompleteAppears(Matcher<SWTBotTable> tableMatcher) {
 		return new WaitForObjectCondition<SWTBotTable>(tableMatcher) {
 			protected List<SWTBotTable> findMatches() {
 				try {

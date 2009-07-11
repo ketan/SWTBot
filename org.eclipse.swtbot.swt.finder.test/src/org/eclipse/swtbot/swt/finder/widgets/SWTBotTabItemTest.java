@@ -11,18 +11,18 @@
 package org.eclipse.swtbot.swt.finder.widgets;
 
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertSameWidget;
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widgetOfType;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withText;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
 import org.eclipse.swt.widgets.TabItem;
-import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
+import org.hamcrest.Matcher;
 import org.junit.Test;
 
 /**
@@ -35,16 +35,19 @@ public class SWTBotTabItemTest extends AbstractSWTTestCase {
 	@Test
 	public void findsTabs() throws Exception {
 		bot.shell("SWT Controls").activate();
-		final AbstractSWTBot tabItem = bot.tabItem("Sash");
+		final SWTBotTabItem tabItem = bot.tabItem("Sash");
 		assertEquals("Sash", tabItem.getText());
 		bot.tabItem("Button").activate();
 	}
 
+	@SuppressWarnings("unchecked")
+	// varargs and generics doesn't mix well!
 	@Test
 	public void activatesTabItem() throws Exception {
 		bot.shell("SWT Controls").activate();
 		SWTBotTabItem tabItem = bot.tabItem("Sash");
-		List findControls = new ControlFinder().findControls(allOf(instanceOf(TabItem.class), withText("Sash")));
-		assertSameWidget((Widget) findControls.get(0), tabItem.widget);
+		Matcher<TabItem> withText = withText("Sash");
+		List<TabItem> findControls = new ControlFinder().findControls(allOf(widgetOfType(TabItem.class), withText));
+		assertSameWidget(findControls.get(0), tabItem.widget);
 	}
 }

@@ -12,7 +12,7 @@ package org.eclipse.swtbot.swt.finder.finders;
 
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertText;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.pass;
-import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.Matchers.any;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -21,7 +21,6 @@ import java.util.List;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTException;
 import org.eclipse.swt.widgets.MenuItem;
-import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.AbstractMenuExampleTest;
 import org.junit.Test;
 
@@ -33,8 +32,8 @@ public class MenuFinderTest extends AbstractMenuExampleTest {
 
 	@Test
 	public void clicksMenuItem() throws Exception {
-		List findControls = menuFinder.findMenus(anything());
-		MenuItem menuItem = (MenuItem) findControls.get(1);
+		List<MenuItem> findControls = menuFinder.findMenus(any(MenuItem.class));
+		MenuItem menuItem = findControls.get(1);
 		try {
 			menuItem.notifyListeners(SWT.Selection, null);
 			fail("Expecting an SWTException");
@@ -46,9 +45,9 @@ public class MenuFinderTest extends AbstractMenuExampleTest {
 
 	@Test
 	public void findsAllVisibleMenus() throws Exception {
-		List findControls = menuFinder.findMenus(anything());
+		List<MenuItem> findControls = menuFinder.findMenus(any(MenuItem.class));
 		assertEquals(25, findControls.size());
-		assertText("&Find...\tCtrl+F", (Widget) findControls.get(21));
+		assertText("&Find...\tCtrl+F", findControls.get(21));
 	}
 
 }
