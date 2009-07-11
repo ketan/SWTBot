@@ -1,12 +1,13 @@
 <project name="org.eclipse.swtbot.releng" default="all" basedir=".">
 
+	<property file="build.developer.properties" />
 	<import file="check-prerequisites.xml" />
 
 	<property name="plugin.version.primary" value="2.0.0" />
 
 	<!-- automagically generate build numbers from svn -->
 	<property name="svn.version" value="1" />
-	<property name="plugin.suffix" value="${svn.version}-dev" />
+	<property name="plugin.suffix" value="${svn.version}-dev-${eclipse.qualifier}" />
 	<property name="buildId" value="${plugin.suffix}" />
 
 	<property name="all.buildId" value="${plugin.version.primary}.${plugin.suffix}" />
@@ -15,8 +16,6 @@
 	<property name="feature.id" value="${plugin.prefix}" />
 	<property name="feature.id.test" value="${feature.id}.test" />
 
-	<property file="build.developer.properties" />
-	<property file="build.properties" />
 
 	<property name="test-sandbox" value="${basedir}/test-sandbox" />
 

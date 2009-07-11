@@ -5,39 +5,35 @@ arch = x86
 
 update-site-location = ${basedir}/artifacts/update-site
 
-#eclipse.sdk.archive = eclipse-SDK-3.5M6-macosx-carbon.tar.gz
-#eclipse.buildId = 3.5M6
+## uncomment one of the two below:
 
+##
+## to use eclipse 3.5 uncomment the lines below
+##
+#eclipse.sdk.archive = eclipse-SDK-3.5-macosx-carbon.tar.gz
+#eclipse.buildId = 3.5
+#eclipse.qualifier = e35
+
+##
+## to use eclipse 3.4 uncomment the lines below
+##
 #eclipse.buildId = 3.4.2
 #eclipse.sdk.archive = eclipse-SDK-3.4.2-macosx-carbon.tar.gz
+#eclipse.qualifier = e34
 
-eclipse.sdk.archive = eclipse-SDK-3.4-macosx-carbon.tar.gz
-eclipse.buildId = 3.4
+## The location from where eclipse SDK will be downloaded in case there's none in the releng/externals directory
+## Don't add the trailing file name, the file name is automatically appended based on eclipse.sdk.archive
+## for locations of the eclipse SDKs
+## see http://download.eclipse.org/eclipse/downloads/ and http://archive.eclipse.org/eclipse/downloads/index.php
 
-#eclipse.sdk.archive = eclipse-SDK-3.3-macosx-carbon.tar.gz
-#eclipse.buildId = 3.3
-
-# don't add the trailing file name, the file name is automatically appended based on eclipse.sdk.archive
-# for locations of the eclipse SDKs
-# see http://download.eclipse.org/eclipse/downloads/ and http://archive.eclipse.org/eclipse/downloads/index.php
-
-# for eclipse 3.4.2
-#eclipse.sdk.url = http://sunsite.informatik.rwth-aachen.de:3080/eclipse/downloads/drops/R-3.4.2-200902111700
-
-# for eclipse 3.4
 # eclipse.sdk.url = http://ftp.jaist.ac.jp/pub/eclipse/eclipse/downloads/drops/R-3.4-200806172000
 
-# for eclipse 3.3
-#eclipse.sdk.url = http://archive.eclipse.org/eclipse/downloads/drops/R-3.3-200706251500
 
 has.archives = true
 
 # either a relative or absolute location relative to the update site, *no trailing slash* please.
-
 update.site.base.url = http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/galileo/dev-build/update-site
-
 #update.site.base.url = http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/ganymede/dev-build/update-site
-
 
 rsync.opts = --delete-after
 remote.path = kpadegaonkar,swtbot@web.sf.net:/home/groups/s/sw/swtbot/htdocs/artifacts/2.0-eclipse
