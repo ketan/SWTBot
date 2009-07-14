@@ -3,7 +3,7 @@
     <property name="eclipse-home" value="${basedir}\..\.." />
     <property name="plugin-name" value="org.eclipse.swtbot.eclipse.finder.test" />
     <property name="library-file" value="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit4.headless_${all.buildId}/library.xml"/>
-	
+
     <target name="init">
         <tstamp />
         <delete>
@@ -12,22 +12,23 @@
     </target>
 
     <target name="suite">
-    	
+
 		<condition property="jvmOption" value="-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts">
 			<os family="mac"/>
 		</condition>
-		
+
 		<property name="jvmOption" value=""></property>
-			
+
     	<property name="temp-workspace" value="workspace" />
         <delete dir="${temp-workspace}" quiet="true" />
-    	
+
     	<!-- remove junit3 fragment -->
     	<delete dir="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit3.headless_${all.buildId}" />
     	<delete dir="${eclipse-home}/plugins" includes="org.eclipse.swtbot.ant.optional.junit3_${all.buildId}.jar"/>
-    		
+
     	<ant target="swtbot-test" antfile="${library-file}" dir="${eclipse-home}">
             <property name="data-dir" value="${temp-workspace}" />
+            <property name="testApplication" value="org.eclipse.ui.ide.workbench" />
             <property name="plugin-name" value="${plugin-name}" />
             <property name="classname" value="org.eclipse.swtbot.eclipse.finder.AllTests" />
             <property name="vmargs" value=" -Xms128M -Xmx368M -XX:MaxPermSize=256M ${jvmOption}" />

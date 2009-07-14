@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<!-- 
+<!--
 
 
 ======================================================================
-this has been copied from o.e.test plugin with some targets for SWTBot 
+this has been copied from o.e.test plugin with some targets for SWTBot
 ======================================================================
 
 
@@ -16,14 +16,16 @@ this has been copied from o.e.test plugin with some targets for SWTBot
 	</target>
 
 	<target name="init">
-		<!-- 
+		<!--
 			Parameters:
 				(Mandatory)
 				data-dir		- the directory for Eclipse to write its data
 				plugin-name		- the name of the plugin to test
 				classname		- the name of the test class
-				
+
 				(Optional - overrides defaults set in script)
+				testProduct		- a string containing the product id to test.
+				testApplication	- a string containing the application id to test.
 				vmargs			- a string containing arguments to pass to the VM.
 				extraVMargs		- allows separate setting of VM args from separate caller.
 				timeout			- overrides default test timeout value (in milliseconds).
@@ -43,6 +45,18 @@ this has been copied from o.e.test plugin with some targets for SWTBot
 		<!--default launch target for launching tests-->
 		<property name="launchTarget" value="java-test" />
 		<property name="formatter" value="org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter" />
+
+		<!-- default product/application to launch -->
+		<condition property="testproduct.if.available" value="-product ${testProduct}">
+			<isset property="testProduct" />
+		</condition>
+		<property name="testproduct.if.available" value=""/>
+
+		<condition property="testapplication.if.available" value="-testApplication ${testApplication}">
+			<isset property="testApplication" />
+		</condition>
+
+		<property name="testapplication.if.available" value=""/>
 
 		<!--default heap sizes when running performance tests-->
 		<condition property="vmargs" value=" -Xms256M -Xmx256M">
@@ -87,6 +101,8 @@ this has been copied from o.e.test plugin with some targets for SWTBot
 				</fileset>
 			</classpath>
 			<arg line="-application ${application}" />
+			<arg line="${testproduct.if.available}" />
+			<arg line="${testapplication.if.available}" />
 			<arg line="-data ${data-dir}" />
 		    <arg line="formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,${test-output} formatter=org.apache.tools.ant.taskdefs.optional.junit.PlainJUnitResultFormatter"/>
 			<arg line="-testPluginName ${plugin-name}" />
@@ -126,7 +142,7 @@ this has been copied from o.e.test plugin with some targets for SWTBot
 	<target name="collect">
 		<!--
 			This target can be used to aggragate test runs from multiple test suites into a single report.
-		
+
 			Parameters to this target:
 			includes		- the names of the files to include
 			output-file		- the name of the output file to produce

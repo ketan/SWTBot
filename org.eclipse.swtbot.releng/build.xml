@@ -9,6 +9,7 @@
 	<property name="svn.version" value="1" />
 	<property name="plugin.suffix" value="${svn.version}-dev-${eclipse.qualifier}" />
 	<property name="buildId" value="${plugin.suffix}" />
+	<property name="eclipse-target" value="${basedir}/../eclipse" />
 
 	<property name="all.buildId" value="${plugin.version.primary}.${plugin.suffix}" />
 
@@ -54,7 +55,7 @@
 	</target>
 
 	<target name="copy-eclipse" description="copies an eclispse instance to a temporary location">
-		<echo>Sync eclipse from ${base} to ${eclipseLocation}</echo>
+		<echo>Sync eclipse from ${base} to ${eclipse-target}</echo>
 		<sync todir="${eclipseLocation}" includeemptydirs="true">
 			<fileset dir="${base}" />
 			<!-- any other locations/plugins that you want to copy from, in addition to the eclipse "base install"
@@ -154,8 +155,6 @@
 	</target>
 
 	<target name="materialize-workspace" description="Materializes a workspace for eclipse" depends="download-dependencies">
-		<property name="eclipse-target" value="../eclipse" />
-
 		<delete dir="${eclipse-target}" />
 
 		<mkdir dir="${eclipse-target}" />
@@ -187,7 +186,7 @@
 			<arg value="-application" />
 			<arg value="org.eclipse.ant.core.antRunner" />
 			<arg value="-buildfile" />
-			<arg value="${eclipseLocation}/plugins/org.eclipse.pde.build_${pdeBuildPluginVersion}/scripts/build.xml" />
+			<arg value="${eclipse-target}/plugins/org.eclipse.pde.build_${pdeBuildPluginVersion}/scripts/build.xml" />
 			<arg value="-Dtimestamp=${timestamp}" />
 			<arg value="-DbuildId=${all.buildId}" />
 			<arg value="-DforceContextQualifier=${plugin.suffix}" />
@@ -200,7 +199,7 @@
 			<arg value="-Dbasedir=${basedir}" />
 			<arg value="-Dbuild_directory=${buildDirectory}" />
 			<classpath>
-				<fileset dir="${eclipseLocation}/plugins">
+				<fileset dir="${eclipse-target}/plugins">
 					<include name="org.eclipse.equinox.launcher_*.jar" />
 				</fileset>
 			</classpath>
@@ -292,7 +291,7 @@
 
 			<jvmarg value="-Xmx512M" />
 			<classpath>
-				<fileset dir="${eclipseLocation}/plugins">
+				<fileset dir="${eclipse-target}/plugins">
 					<include name="org.eclipse.equinox.launcher_*.jar" />
 				</fileset>
 			</classpath>
