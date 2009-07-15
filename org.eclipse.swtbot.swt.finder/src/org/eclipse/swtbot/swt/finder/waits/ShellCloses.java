@@ -18,7 +18,8 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 
 /**
  * A condition that waits until the specified shell is disposed/visible.
- * 
+ *
+ * @see Conditions
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  * @since 1.2

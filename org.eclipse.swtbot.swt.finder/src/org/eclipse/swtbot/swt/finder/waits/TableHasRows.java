@@ -4,12 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.waits;
-
 
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
@@ -17,6 +16,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
 /**
  * A condition that returns <code>false</code> until the table has the specified number of rows.
  *
+ * @see Conditions
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */

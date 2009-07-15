@@ -45,10 +45,7 @@ import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 import org.eclipse.swtbot.swt.finder.waits.ICondition;
-import org.eclipse.swtbot.swt.finder.waits.WaitForMenu;
-import org.eclipse.swtbot.swt.finder.waits.WaitForShell;
-import org.eclipse.swtbot.swt.finder.waits.WaitForWidget;
-import org.eclipse.swtbot.swt.finder.waits.WaitForWidgetInParent;
+import org.eclipse.swtbot.swt.finder.waits.WaitForObjectCondition;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTrayItem;
@@ -109,7 +106,7 @@ abstract class SWTBotFactory {
 	 */
 	public List<Shell> shells(String text) {
 		Matcher<Shell> withText = withText(text);
-		WaitForShell waitForShell = waitForShell(withText);
+		WaitForObjectCondition<Shell> waitForShell = waitForShell(withText);
 		waitUntilWidgetAppears(waitForShell);
 		List<Shell> allShells = waitForShell.getAllMatches();
 		return allShells;
@@ -141,7 +138,7 @@ abstract class SWTBotFactory {
 	 */
 	public List<Shell> shells(String text, Shell parent) {
 		Matcher<Shell> withText = withText(text);
-		WaitForShell waitForShell = waitForShell(withText, parent);
+		WaitForObjectCondition<Shell> waitForShell = waitForShell(withText, parent);
 		waitUntilWidgetAppears(waitForShell);
 		List<Shell> allShells = waitForShell.getAllMatches();
 		return allShells;
@@ -173,7 +170,7 @@ abstract class SWTBotFactory {
 	 */
 	public SWTBotShell shellWithId(String value, int index) {
 		Matcher<Shell> withId = withId(value);
-		WaitForShell waitForShell = waitForShell(withId);
+		WaitForObjectCondition<Shell> waitForShell = waitForShell(withId);
 		waitUntilWidgetAppears(waitForShell);
 		return new SWTBotShell(waitForShell.get(index));
 	}
@@ -186,7 +183,7 @@ abstract class SWTBotFactory {
 	 */
 	public SWTBotShell shellWithId(String key, String value, int index) {
 		Matcher<Shell> withId = withId(key, value);
-		WaitForShell waitForShell = waitForShell(withId);
+		WaitForObjectCondition<Shell> waitForShell = waitForShell(withId);
 		waitUntilWidgetAppears(waitForShell);
 		return new SWTBotShell(waitForShell.get(index));
 	}
@@ -254,7 +251,7 @@ abstract class SWTBotFactory {
 	 * @return a menu item that matches the specified text.
 	 */
 	public SWTBotMenu menu(SWTBotShell shell, Matcher<MenuItem> matcher, int index) {
-		WaitForMenu waitForMenu = waitForMenu(shell, matcher);
+		WaitForObjectCondition<MenuItem> waitForMenu = waitForMenu(shell, matcher);
 		waitUntilWidgetAppears(waitForMenu);
 		return new SWTBotMenu(waitForMenu.get(index), matcher);
 	}
@@ -265,9 +262,9 @@ abstract class SWTBotFactory {
 	 * @return a list of widgets that match the matcher.
 	 */
 	public <T extends Widget> List<? extends T> widgets(Matcher<T> matcher, Widget parentWidget) {
-		WaitForWidgetInParent<T> waitForWidget = waitForWidget(matcher, parentWidget);
+		WaitForObjectCondition<T> waitForWidget = waitForWidget(matcher, parentWidget);
 		waitUntilWidgetAppears(waitForWidget);
-		return waitForWidget.getWidgets();
+		return waitForWidget.getAllMatches();
 	}
 
 	/**
@@ -294,7 +291,7 @@ abstract class SWTBotFactory {
 	 * @return the first widget that matchs the matcher.
 	 */
 	public <T extends Widget> T widget(Matcher<T> matcher, Widget parentWidget, int index) {
-		WaitForWidgetInParent<T> waitForWidget = waitForWidget(matcher, parentWidget);
+		WaitForObjectCondition<T> waitForWidget = waitForWidget(matcher, parentWidget);
 		waitUntilWidgetAppears(waitForWidget);
 		return waitForWidget.get(index);
 	}
@@ -305,7 +302,7 @@ abstract class SWTBotFactory {
 	 * @return the index'th widget matching the matcher.
 	 */
 	public <T extends Widget> T widget(Matcher<T> matcher, int index) {
-		WaitForWidget<T> waitForWidget = waitForWidget(matcher);
+		WaitForObjectCondition<T> waitForWidget = waitForWidget(matcher);
 		waitUntilWidgetAppears(waitForWidget);
 		return waitForWidget.get(index);
 	}
@@ -553,7 +550,7 @@ abstract class SWTBotFactory {
 	 */
 	public List<SWTBotTrayItem> trayItems(Matcher<?> matcher) {
 		WithItem<TrayItem> itemMatcher = WithItem.withItem(matcher);
-		WaitForWidgetInParent<?> waitForWidget = waitForWidget(itemMatcher, systemTray());
+		WaitForObjectCondition<?> waitForWidget = waitForWidget(itemMatcher, systemTray());
 		waitUntilWidgetAppears(waitForWidget);
 		List<SWTBotTrayItem> items = new ArrayList<SWTBotTrayItem>();
 		for (TrayItem item : itemMatcher.getAllMatches())

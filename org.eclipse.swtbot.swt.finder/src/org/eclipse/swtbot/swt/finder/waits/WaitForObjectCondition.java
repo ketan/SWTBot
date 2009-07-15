@@ -18,6 +18,7 @@ import org.hamcrest.Matcher;
 /**
  * Waits for objects to appear until the matcher evaluates to true.
  *
+ * @see Conditions
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */

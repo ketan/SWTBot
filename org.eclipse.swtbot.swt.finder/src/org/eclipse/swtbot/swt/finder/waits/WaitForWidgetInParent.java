@@ -17,12 +17,13 @@ import org.hamcrest.Matcher;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
+ * @see Conditions
  * @version $Id$
  * @since 2.0
  */
-public class WaitForWidgetInParent<T extends Widget> extends WaitForObjectCondition<T>{
+class WaitForWidgetInParent<T extends Widget> extends WaitForObjectCondition<T> {
 
-	private final Widget			parent;
+	private final Widget	parent;
 
 	WaitForWidgetInParent(Matcher<T> matcher, Widget parent) {
 		super(matcher);
@@ -35,10 +36,6 @@ public class WaitForWidgetInParent<T extends Widget> extends WaitForObjectCondit
 
 	protected List<T> findMatches() {
 		return bot.getFinder().findControls(parent, matcher, true);
-	}
-
-	public List<? extends T> getWidgets() {
-		return getAllMatches();
 	}
 
 }

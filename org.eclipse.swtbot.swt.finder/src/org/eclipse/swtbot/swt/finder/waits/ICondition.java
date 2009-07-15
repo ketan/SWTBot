@@ -14,6 +14,7 @@ import org.eclipse.swtbot.swt.finder.SWTBot;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
+ * @see Conditions
  * @version $Id$
  * @since 1.2
  */

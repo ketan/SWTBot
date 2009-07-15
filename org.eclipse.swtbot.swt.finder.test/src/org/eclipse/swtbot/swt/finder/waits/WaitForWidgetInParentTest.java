@@ -32,13 +32,13 @@ public class WaitForWidgetInParentTest extends AbstractSWTTestCase {
 	public void waitsForWidgetToAppearInParent() throws Exception {
 		long start = System.currentTimeMillis();
 
-		WaitForWidgetInParent condition = Conditions.waitForWidget(new EvaluateTrueAfterAWhile(500), getFocusShell());
+		WaitForObjectCondition condition = Conditions.waitForWidget(new EvaluateTrueAfterAWhile(500), getFocusShell());
 		new SWTBot().waitUntil(condition);
 		long end = System.currentTimeMillis();
 
 		int time = (int) (end - start);
 		assertThat(time, allOf(lessThan(1000), greaterThanOrEqualTo(500)));
-		assertFalse(condition.getWidgets().isEmpty());
+		assertFalse(condition.getAllMatches().isEmpty());
 	}
 
 	private final class EvaluateTrueAfterAWhile extends BaseMatcher {

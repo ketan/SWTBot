@@ -20,11 +20,12 @@ import org.hamcrest.Matcher;
 /**
  * A contdition that waits until a shell matching the matcher appears in the parent shell.
  *
+ * @see Conditions
  * @author Ketan Patel &lt;ktp420@live.com&gt;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class WaitForShellInParent extends WaitForShell {
+class WaitForShellInParent extends WaitForShell {
 	private final Shell	parent;
 
 	WaitForShellInParent(Shell parent, Matcher<Shell> matcher) {

@@ -20,10 +20,11 @@ import org.hamcrest.Matcher;
 /**
  * Condition that waits for a shell with the specified text to appear.
  *
+ * @see Conditions
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class WaitForMenu extends WaitForObjectCondition<MenuItem> {
+class WaitForMenu extends WaitForObjectCondition<MenuItem> {
 
 	private final SWTBotShell	shell;
 

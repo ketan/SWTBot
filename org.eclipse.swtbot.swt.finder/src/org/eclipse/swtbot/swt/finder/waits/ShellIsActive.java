@@ -11,7 +11,6 @@
 
 package org.eclipse.swtbot.swt.finder.waits;
 
-
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.BoolResult;
@@ -22,6 +21,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 /**
  * A condition that waits until the specified shell is the active shell.
  *
+ * @see Conditions
  * @since 1.3
  * @author Vincent MAHE &lt;vmahe [at] free[dot]fr&gt;
  * @version $Id$

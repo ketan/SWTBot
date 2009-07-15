@@ -19,11 +19,12 @@ import org.hamcrest.Matcher;
 /**
  * Condiion that waits for a shell with the specified text to appear.
  *
+ * @see Conditions
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  * @since 2.0
  */
-public class WaitForShell extends WaitForObjectCondition<Shell> {
+class WaitForShell extends WaitForObjectCondition<Shell> {
 
 	WaitForShell(Matcher<Shell> matcher) {
 		super(matcher);
@@ -47,7 +48,7 @@ public class WaitForShell extends WaitForObjectCondition<Shell> {
 	/**
 	 * Subclasses may override to find other shells.
 	 */
-	protected Shell[] findShells() {
+	Shell[] findShells() {
 		return bot.getFinder().getShells();
 	}
 

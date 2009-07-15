@@ -17,10 +17,11 @@ import org.hamcrest.Matcher;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
+ * @see Conditions
  * @version $Id$
  * @since 2.0
  */
-public class WaitForWidget<T extends Widget> extends WaitForObjectCondition<T> {
+class WaitForWidget<T extends Widget> extends WaitForObjectCondition<T> {
 
 	WaitForWidget(Matcher<T> matcher) {
 		super(matcher);
