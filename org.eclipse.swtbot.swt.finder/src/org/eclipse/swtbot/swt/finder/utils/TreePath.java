@@ -58,20 +58,8 @@ public final class TreePath {
 	}
 
 	/**
-	 * Returns the first element in this path, or <code>null</code> if this path has no segments.
-	 * 
-	 * @return the first element in this path
-	 */
-	public Object getFirstSegment() {
-		if (segments.length == 0) {
-			return null;
-		}
-		return segments[0];
-	}
-
-	/**
 	 * Returns the last element in this path, or <code>null</code> if this path has no segments.
-	 * 
+	 *
 	 * @return the last element in this path
 	 */
 	public Object getLastSegment() {
@@ -122,19 +110,4 @@ public final class TreePath {
 		return new TreePath(parentSegments);
 	}
 
-	/**
-	 * Returns a copy of this tree path with the given segment added at the end.
-	 * 
-	 * @param newSegment
-	 * @return a tree path
-	 */
-	public TreePath createChildPath(Object newSegment) {
-		int segmentCount = getSegmentCount();
-		Object[] childSegments = new Object[segmentCount + 1];
-		if (segmentCount > 0) {
-			System.arraycopy(segments, 0, childSegments, 0, segmentCount);
-		}
-		childSegments[segmentCount] = newSegment;
-		return new TreePath(childSegments);
-	}
 }
