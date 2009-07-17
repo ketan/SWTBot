@@ -13,6 +13,7 @@ package org.eclipse.swtbot.swt.finder;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertContains;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertDoesNotContain;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertEnabled;
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertMatchesRegex;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertNotEnabled;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -113,6 +114,26 @@ public class SWTBotTestCaseTest extends AbstractSWTBotTest {
 		} catch (Throwable e) {
 			assertTrue(new File("screenshots/screenshot-DummyTestDoNotExecuteInAnt.null.jpeg").exists());
 		}
+	}
+
+	@Test
+	public void assertRegexMatchesThrowsExceptionWhenRegexDoesNotMatch() throws Exception {
+		try {
+			assertMatchesRegex("foo", bot.button("One"));
+			fail("Expecting an exception");
+		} catch (AssertionError e) {
+			assertEquals("\nExpected: matching regex (<([\r\n]|.)*foo([\r\n]|.)*>)\n     got: \"One\"\n", e.getMessage());
+		}
+	}
+
+	@Test
+	public void assertRegexMatchesDoesNotThrowExceptionWhenRegexMatches() throws Exception {
+		assertMatchesRegex("One", bot.button("One"));
+	}
+
+	@Test
+	public void assertRegexMatchesDoesNotThrowExceptionWhenRegexMatches2() throws Exception {
+		assertMatchesRegex("n", bot.button("One"));
 	}
 
 	public void setUp() throws Exception {
