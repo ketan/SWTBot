@@ -63,6 +63,7 @@ public class SWTBotToolbarCheckboxButton extends SWTBotToolbarButton {
 	public SWTBotToolbarCheckboxButton toggle() {
 		log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
 		assertEnabled();
+		internalToggle();
 		notify(SWT.MouseEnter);
 		notify(SWT.MouseMove);
 		notify(SWT.Activate);
@@ -74,7 +75,6 @@ public class SWTBotToolbarCheckboxButton extends SWTBotToolbarButton {
 		notify(SWT.MouseExit);
 		notify(SWT.Deactivate);
 		notify(SWT.FocusOut);
-		internalToggle();
 		log.debug(MessageFormat.format("Clicked on {0}", this)); //$NON-NLS-1$
 		return this;
 	}
