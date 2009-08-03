@@ -25,6 +25,7 @@ import org.eclipse.swt.graphics.ImageLoader;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
@@ -325,6 +326,8 @@ public abstract class SWTUtils {
 		new ImageFormatConverter().imageTypeOf(fileName.substring(fileName.lastIndexOf('.') + 1));
 		return UIThreadRunnable.syncExec(new BoolResult() {
 			public Boolean run() {
+				if (control instanceof Shell)
+					return captureScreenshotInternal(fileName, control.getBounds());
 				Display display = control.getDisplay();
 				Rectangle bounds = control.getBounds();
 				Rectangle mappedToDisplay = display.map(control.getParent(), null, bounds);
