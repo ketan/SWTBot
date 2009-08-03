@@ -89,7 +89,7 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 	public void typeText(final String text, int interval) {
 		log.debug(MessageFormat.format("Inserting text:{0} into text {1}", text, this)); //$NON-NLS-1$
 		setFocus();
-		keyboard().typeText(text);
+		keyboard().typeText(text, interval);
 	}
 
 	/**
