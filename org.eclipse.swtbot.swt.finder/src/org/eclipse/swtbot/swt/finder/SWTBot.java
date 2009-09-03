@@ -44,7 +44,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotText;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToggleButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarButton;
-import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarCheckboxButton;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarToggleButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarDropDownButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarRadioButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
@@ -2665,48 +2665,48 @@ public class SWTBot extends SWTBotFactory {
 
 	/**
 	 * @param mnemonicText the mnemonicText on the widget.
-	 * @return a {@link SWTBotToolbarCheckboxButton} with the specified <code>mnemonicText</code>.
+	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>mnemonicText</code>.
 	 */
-	public SWTBotToolbarCheckboxButton toolbarToggleButton(String mnemonicText) {
+	public SWTBotToolbarToggleButton toolbarToggleButton(String mnemonicText) {
 		return toolbarToggleButton(mnemonicText, 0);
 	}
 
 	/**
 	 * @param mnemonicText the mnemonicText on the widget.
 	 * @param index the index of the widget.
-	 * @return a {@link SWTBotToolbarCheckboxButton} with the specified <code>mnemonicText</code>.
+	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>mnemonicText</code>.
 	 */
 	@SuppressWarnings("unchecked")
-	public SWTBotToolbarCheckboxButton toolbarToggleButton(String mnemonicText, int index) {
+	public SWTBotToolbarToggleButton toolbarToggleButton(String mnemonicText, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withMnemonic(mnemonicText), withStyle(SWT.CHECK, "SWT.CHECK"));
-		return new SWTBotToolbarCheckboxButton((ToolItem) widget(matcher, index), matcher);
+		return new SWTBotToolbarToggleButton((ToolItem) widget(matcher, index), matcher);
 	}
 
 	/**
 	 * @param tooltip the tooltip on the widget.
-	 * @return a {@link SWTBotToolbarCheckboxButton} with the specified <code>tooltip</code>.
+	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>tooltip</code>.
 	 */
-	public SWTBotToolbarCheckboxButton toolbarToggleButtonWithTooltip(String tooltip) {
+	public SWTBotToolbarToggleButton toolbarToggleButtonWithTooltip(String tooltip) {
 		return toolbarToggleButtonWithTooltip(tooltip, 0);
 	}
 
 	/**
 	 * @param tooltip the tooltip on the widget.
 	 * @param index the index of the widget.
-	 * @return a {@link SWTBotToolbarCheckboxButton} with the specified <code>tooltip</code>.
+	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>tooltip</code>.
 	 */
 	@SuppressWarnings("unchecked")
-	public SWTBotToolbarCheckboxButton toolbarToggleButtonWithTooltip(String tooltip, int index) {
+	public SWTBotToolbarToggleButton toolbarToggleButtonWithTooltip(String tooltip, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withTooltip(tooltip), withStyle(SWT.CHECK, "SWT.CHECK"));
-		return new SWTBotToolbarCheckboxButton((ToolItem) widget(matcher, index), matcher);
+		return new SWTBotToolbarToggleButton((ToolItem) widget(matcher, index), matcher);
 	}
 
 	/**
 	 * @param key the key set on the widget.
 	 * @param value the value for the key.
-	 * @return a {@link SWTBotToolbarCheckboxButton} with the specified <code>key/value</code>.
+	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>key/value</code>.
 	 */
-	public SWTBotToolbarCheckboxButton toolbarToggleButtonWithId(String key, String value) {
+	public SWTBotToolbarToggleButton toolbarToggleButtonWithId(String key, String value) {
 		return toolbarToggleButtonWithId(key, value, 0);
 	}
 
@@ -2714,75 +2714,75 @@ public class SWTBot extends SWTBotFactory {
 	 * @param key the key set on the widget.
 	 * @param value the value for the key.
 	 * @param index the index of the widget.
-	 * @return a {@link SWTBotToolbarCheckboxButton} with the specified <code>key/value</code>.
+	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>key/value</code>.
 	 */
 	@SuppressWarnings("unchecked")
-	public SWTBotToolbarCheckboxButton toolbarToggleButtonWithId(String key, String value, int index) {
+	public SWTBotToolbarToggleButton toolbarToggleButtonWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withId(key, value), withStyle(SWT.CHECK, "SWT.CHECK"));
-		return new SWTBotToolbarCheckboxButton((ToolItem) widget(matcher, index), matcher);
+		return new SWTBotToolbarToggleButton((ToolItem) widget(matcher, index), matcher);
 	}
 
 	/**
 	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
-	 * @return a {@link SWTBotToolbarCheckboxButton} with the specified <code>value</code>.
+	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>value</code>.
 	 */
-	public SWTBotToolbarCheckboxButton toolbarToggleButtonWithId(String value) {
+	public SWTBotToolbarToggleButton toolbarToggleButtonWithId(String value) {
 		return toolbarToggleButtonWithId(value, 0);
 	}
 
 	/**
 	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @param index the index of the widget.
-	 * @return a {@link SWTBotToolbarCheckboxButton} with the specified <code>value</code>.
+	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>value</code>.
 	 */
 	@SuppressWarnings("unchecked")
-	public SWTBotToolbarCheckboxButton toolbarToggleButtonWithId(String value, int index) {
+	public SWTBotToolbarToggleButton toolbarToggleButtonWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withId(value), withStyle(SWT.CHECK, "SWT.CHECK"));
-		return new SWTBotToolbarCheckboxButton((ToolItem) widget(matcher, index), matcher);
+		return new SWTBotToolbarToggleButton((ToolItem) widget(matcher, index), matcher);
 	}
 
 	/**
 	 * @param inGroup the inGroup on the widget.
-	 * @return a {@link SWTBotToolbarCheckboxButton} with the specified <code>inGroup</code>.
+	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>inGroup</code>.
 	 */
-	public SWTBotToolbarCheckboxButton toolbarToggleButtonInGroup(String inGroup) {
+	public SWTBotToolbarToggleButton toolbarToggleButtonInGroup(String inGroup) {
 		return toolbarToggleButtonInGroup(inGroup, 0);
 	}
 
 	/**
 	 * @param inGroup the inGroup on the widget.
 	 * @param index the index of the widget.
-	 * @return a {@link SWTBotToolbarCheckboxButton} with the specified <code>inGroup</code>.
+	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>inGroup</code>.
 	 */
 	@SuppressWarnings("unchecked")
-	public SWTBotToolbarCheckboxButton toolbarToggleButtonInGroup(String inGroup, int index) {
+	public SWTBotToolbarToggleButton toolbarToggleButtonInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), inGroup(inGroup), withStyle(SWT.CHECK, "SWT.CHECK"));
-		return new SWTBotToolbarCheckboxButton((ToolItem) widget(matcher, index), matcher);
+		return new SWTBotToolbarToggleButton((ToolItem) widget(matcher, index), matcher);
 	}
 
 	/**
-	 * @return a {@link SWTBotToolbarCheckboxButton} with the specified <code>none</code>.
+	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>none</code>.
 	 */
-	public SWTBotToolbarCheckboxButton toolbarToggleButton() {
+	public SWTBotToolbarToggleButton toolbarToggleButton() {
 		return toolbarToggleButton(0);
 	}
 
 	/**
 	 * @param index the index of the widget.
-	 * @return a {@link SWTBotToolbarCheckboxButton} with the specified <code>none</code>.
+	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>none</code>.
 	 */
 	@SuppressWarnings("unchecked")
-	public SWTBotToolbarCheckboxButton toolbarToggleButton(int index) {
+	public SWTBotToolbarToggleButton toolbarToggleButton(int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withStyle(SWT.CHECK, "SWT.CHECK"));
-		return new SWTBotToolbarCheckboxButton((ToolItem) widget(matcher, index), matcher);
+		return new SWTBotToolbarToggleButton((ToolItem) widget(matcher, index), matcher);
 	}
 
 	/**
 	 * @param mnemonicText the mnemonicText on the widget.
 	 * @param inGroup the inGroup on the widget.
-	 * @return a {@link SWTBotToolbarCheckboxButton} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
+	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
 	 */
-	public SWTBotToolbarCheckboxButton toolbarToggleButtonInGroup(String mnemonicText, String inGroup) {
+	public SWTBotToolbarToggleButton toolbarToggleButtonInGroup(String mnemonicText, String inGroup) {
 		return toolbarToggleButtonInGroup(mnemonicText, inGroup, 0);
 	}
 
@@ -2790,20 +2790,20 @@ public class SWTBot extends SWTBotFactory {
 	 * @param mnemonicText the mnemonicText on the widget.
 	 * @param inGroup the inGroup on the widget.
 	 * @param index the index of the widget.
-	 * @return a {@link SWTBotToolbarCheckboxButton} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
+	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
 	 */
 	@SuppressWarnings("unchecked")
-	public SWTBotToolbarCheckboxButton toolbarToggleButtonInGroup(String mnemonicText, String inGroup, int index) {
+	public SWTBotToolbarToggleButton toolbarToggleButtonInGroup(String mnemonicText, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withMnemonic(mnemonicText), inGroup(inGroup), withStyle(SWT.CHECK, "SWT.CHECK"));
-		return new SWTBotToolbarCheckboxButton((ToolItem) widget(matcher, index), matcher);
+		return new SWTBotToolbarToggleButton((ToolItem) widget(matcher, index), matcher);
 	}
 
 	/**
 	 * @param tooltip the tooltip on the widget.
 	 * @param inGroup the inGroup on the widget.
-	 * @return a {@link SWTBotToolbarCheckboxButton} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
+	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
 	 */
-	public SWTBotToolbarCheckboxButton toolbarToggleButtonWithTooltipInGroup(String tooltip, String inGroup) {
+	public SWTBotToolbarToggleButton toolbarToggleButtonWithTooltipInGroup(String tooltip, String inGroup) {
 		return toolbarToggleButtonWithTooltipInGroup(tooltip, inGroup, 0);
 	}
 
@@ -2811,12 +2811,12 @@ public class SWTBot extends SWTBotFactory {
 	 * @param tooltip the tooltip on the widget.
 	 * @param inGroup the inGroup on the widget.
 	 * @param index the index of the widget.
-	 * @return a {@link SWTBotToolbarCheckboxButton} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
+	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
 	 */
 	@SuppressWarnings("unchecked")
-	public SWTBotToolbarCheckboxButton toolbarToggleButtonWithTooltipInGroup(String tooltip, String inGroup, int index) {
+	public SWTBotToolbarToggleButton toolbarToggleButtonWithTooltipInGroup(String tooltip, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.CHECK, "SWT.CHECK"));
-		return new SWTBotToolbarCheckboxButton((ToolItem) widget(matcher, index), matcher);
+		return new SWTBotToolbarToggleButton((ToolItem) widget(matcher, index), matcher);
 	}
 
 	/**

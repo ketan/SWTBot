@@ -31,7 +31,7 @@ import org.hamcrest.SelfDescribing;
  */
 @SWTBotWidget(clasz = ToolItem.class, preferredName = "toolbarToggleButton", style = @Style(name = "SWT.CHECK", value = SWT.CHECK), referenceBy = {
 		ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })
-public class SWTBotToolbarCheckboxButton extends AbstractSWTBot<ToolItem> {
+public class SWTBotToolbarToggleButton extends AbstractSWTBot<ToolItem> {
 
 	/**
 	 * Constructs an new instance of this item.
@@ -39,7 +39,7 @@ public class SWTBotToolbarCheckboxButton extends AbstractSWTBot<ToolItem> {
 	 * @param w the tool item.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 */
-	public SWTBotToolbarCheckboxButton(ToolItem w) throws WidgetNotFoundException {
+	public SWTBotToolbarToggleButton(ToolItem w) throws WidgetNotFoundException {
 		this(w, null);
 	}
 
@@ -50,7 +50,7 @@ public class SWTBotToolbarCheckboxButton extends AbstractSWTBot<ToolItem> {
 	 * @param description the description of the widget, this will be reported by {@link #toString()}
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 */
-	public SWTBotToolbarCheckboxButton(ToolItem w, SelfDescribing description) throws WidgetNotFoundException {
+	public SWTBotToolbarToggleButton(ToolItem w, SelfDescribing description) throws WidgetNotFoundException {
 		super(w, description);
 		Assert.isTrue(SWTUtils.hasStyle(w, SWT.CHECK), "Expecting a checkbox."); //$NON-NLS-1$
 	}
@@ -60,7 +60,7 @@ public class SWTBotToolbarCheckboxButton extends AbstractSWTBot<ToolItem> {
 	 *
 	 * @return itself
 	 */
-	public SWTBotToolbarCheckboxButton toggle() {
+	public SWTBotToolbarToggleButton toggle() {
 		log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
 		assertEnabled();
 		internalToggle();
@@ -79,7 +79,7 @@ public class SWTBotToolbarCheckboxButton extends AbstractSWTBot<ToolItem> {
 		return this;
 	}
 
-	public SWTBotToolbarCheckboxButton click() {
+	public SWTBotToolbarToggleButton click() {
 		return toggle();
 	}
 
