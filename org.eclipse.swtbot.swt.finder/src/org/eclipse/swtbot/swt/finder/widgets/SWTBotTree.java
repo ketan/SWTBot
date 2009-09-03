@@ -287,6 +287,18 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 	}
 
 	/**
+	 * Collapses the node matching the node information.
+	 *
+	 * @param nodeText the text on the node.
+	 * @return the Tree item that was expanded.
+	 * @throws WidgetNotFoundException if the node is not found.
+	 */
+	public SWTBotTreeItem collapseNode(final String nodeText) throws WidgetNotFoundException {
+		assertEnabled();
+		return getTreeItem(nodeText).collapse();
+	}
+
+	/**
 	 * Gets the visible row count.
 	 *
 	 * @return the number of visible rows

@@ -172,20 +172,41 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	}
 
 	/**
-	 * Send the {@link SWT#Expand} event to build the child items of the tree item that we are expanding.
-	 * 
-	 * @since 1.2
+	 * Collapses the tree item to simulate click the plus sign.
+	 *
+	 * @return the tree item, after collapsing it.
 	 */
+	public SWTBotTreeItem collapse() {
+		assertEnabled();
+		preCollapseNotify();
+		asyncExec(new VoidResult() {
+			public void run() {
+				widget.setExpanded(false);
+			}
+		});
+		postCollapseNotify();
+		return this;
+	}
+
 	private void preExpandNotify() {
 		notifyTree(SWT.Expand, createEvent());
 	}
 
-	/**
-	 * Notifies the item of expansion.
-	 * 
-	 * @since 1.2
-	 */
 	private void postExpandNotify() {
+		notifyTree(SWT.MouseMove);
+		notifyTree(SWT.Activate);
+		notifyTree(SWT.FocusIn);
+		notifyTree(SWT.MouseDown);
+		notifyTree(SWT.MeasureItem);
+		notifyTree(SWT.Deactivate);
+		notifyTree(SWT.FocusOut);
+	}
+
+	private void preCollapseNotify() {
+		notifyTree(SWT.Collapse, createEvent());
+	}
+
+	private void postCollapseNotify() {
 		notifyTree(SWT.MouseMove);
 		notifyTree(SWT.Activate);
 		notifyTree(SWT.FocusIn);
@@ -237,6 +258,17 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	public SWTBotTreeItem expandNode(final String nodeText) {
 		assertEnabled();
 		return getNode(nodeText).expand();
+	}
+
+	/**
+	 * Collapses the node matching the given node text.
+	 *
+	 * @param nodeText the text on the node.
+	 * @return the node that was collapsed or <code>null</code> if not match exists.
+	 */
+	public SWTBotTreeItem collapseNode(final String nodeText) {
+		assertEnabled();
+		return getNode(nodeText).collapse();
 	}
 
 	// /**
