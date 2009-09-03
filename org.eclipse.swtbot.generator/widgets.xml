@@ -18,6 +18,7 @@
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarButton" />
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarCheckboxButton" />
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarDropDownButton" />
+	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarRadioButton" />
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotLink" />
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotSpinner" />
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotSlider" />

@@ -46,6 +46,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotToggleButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarCheckboxButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarDropDownButton;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarRadioButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.hamcrest.Matcher;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.allOf;
@@ -2972,6 +2973,162 @@ public class SWTBot extends SWTBotFactory {
 	public SWTBotToolbarDropDownButton toolbarDropDownButtonWithTooltipInGroup(String tooltip, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN"));
 		return new SWTBotToolbarDropDownButton((ToolItem) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param mnemonicText the mnemonicText on the widget.
+	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>mnemonicText</code>.
+	 */
+	public SWTBotToolbarRadioButton toolbarRadioButton(String mnemonicText) {
+		return toolbarRadioButton(mnemonicText, 0);
+	}
+
+	/**
+	 * @param mnemonicText the mnemonicText on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>mnemonicText</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotToolbarRadioButton toolbarRadioButton(String mnemonicText, int index) {
+		Matcher matcher = allOf(widgetOfType(ToolItem.class), withMnemonic(mnemonicText), withStyle(SWT.RADIO, "SWT.RADIO"));
+		return new SWTBotToolbarRadioButton((ToolItem) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>tooltip</code>.
+	 */
+	public SWTBotToolbarRadioButton toolbarRadioButtonWithTooltip(String tooltip) {
+		return toolbarRadioButtonWithTooltip(tooltip, 0);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>tooltip</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotToolbarRadioButton toolbarRadioButtonWithTooltip(String tooltip, int index) {
+		Matcher matcher = allOf(widgetOfType(ToolItem.class), withTooltip(tooltip), withStyle(SWT.RADIO, "SWT.RADIO"));
+		return new SWTBotToolbarRadioButton((ToolItem) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param key the key set on the widget.
+	 * @param value the value for the key.
+	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>key/value</code>.
+	 */
+	public SWTBotToolbarRadioButton toolbarRadioButtonWithId(String key, String value) {
+		return toolbarRadioButtonWithId(key, value, 0);
+	}
+
+	/**
+	 * @param key the key set on the widget.
+	 * @param value the value for the key.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>key/value</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotToolbarRadioButton toolbarRadioButtonWithId(String key, String value, int index) {
+		Matcher matcher = allOf(widgetOfType(ToolItem.class), withId(key, value), withStyle(SWT.RADIO, "SWT.RADIO"));
+		return new SWTBotToolbarRadioButton((ToolItem) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>value</code>.
+	 */
+	public SWTBotToolbarRadioButton toolbarRadioButtonWithId(String value) {
+		return toolbarRadioButtonWithId(value, 0);
+	}
+
+	/**
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>value</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotToolbarRadioButton toolbarRadioButtonWithId(String value, int index) {
+		Matcher matcher = allOf(widgetOfType(ToolItem.class), withId(value), withStyle(SWT.RADIO, "SWT.RADIO"));
+		return new SWTBotToolbarRadioButton((ToolItem) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>inGroup</code>.
+	 */
+	public SWTBotToolbarRadioButton toolbarRadioButtonInGroup(String inGroup) {
+		return toolbarRadioButtonInGroup(inGroup, 0);
+	}
+
+	/**
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>inGroup</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotToolbarRadioButton toolbarRadioButtonInGroup(String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(ToolItem.class), inGroup(inGroup), withStyle(SWT.RADIO, "SWT.RADIO"));
+		return new SWTBotToolbarRadioButton((ToolItem) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>none</code>.
+	 */
+	public SWTBotToolbarRadioButton toolbarRadioButton() {
+		return toolbarRadioButton(0);
+	}
+
+	/**
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>none</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotToolbarRadioButton toolbarRadioButton(int index) {
+		Matcher matcher = allOf(widgetOfType(ToolItem.class), withStyle(SWT.RADIO, "SWT.RADIO"));
+		return new SWTBotToolbarRadioButton((ToolItem) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param mnemonicText the mnemonicText on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
+	 */
+	public SWTBotToolbarRadioButton toolbarRadioButtonInGroup(String mnemonicText, String inGroup) {
+		return toolbarRadioButtonInGroup(mnemonicText, inGroup, 0);
+	}
+
+	/**
+	 * @param mnemonicText the mnemonicText on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotToolbarRadioButton toolbarRadioButtonInGroup(String mnemonicText, String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(ToolItem.class), withMnemonic(mnemonicText), inGroup(inGroup), withStyle(SWT.RADIO, "SWT.RADIO"));
+		return new SWTBotToolbarRadioButton((ToolItem) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
+	 */
+	public SWTBotToolbarRadioButton toolbarRadioButtonWithTooltipInGroup(String tooltip, String inGroup) {
+		return toolbarRadioButtonWithTooltipInGroup(tooltip, inGroup, 0);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotToolbarRadioButton toolbarRadioButtonWithTooltipInGroup(String tooltip, String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(ToolItem.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.RADIO, "SWT.RADIO"));
+		return new SWTBotToolbarRadioButton((ToolItem) widget(matcher, index), matcher);
 	}
 
 	/**
