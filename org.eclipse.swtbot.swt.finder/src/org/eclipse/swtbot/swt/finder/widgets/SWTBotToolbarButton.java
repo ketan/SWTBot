@@ -14,6 +14,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swtbot.swt.finder.ReferenceBy;
 import org.eclipse.swtbot.swt.finder.SWTBotWidget;
+import org.eclipse.swtbot.swt.finder.Style;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.results.BoolResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
@@ -25,12 +26,12 @@ import org.hamcrest.SelfDescribing;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-@SWTBotWidget(clasz = ToolItem.class, preferredName = "toolbarButton", referenceBy = { ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })
+@SWTBotWidget(clasz = ToolItem.class, style = @Style(name="SWT.PUSH", value=SWT.PUSH), preferredName = "toolbarButton", referenceBy = { ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })
 public class SWTBotToolbarButton extends AbstractSWTBot<ToolItem> {
 
 	/**
 	 * Construcst an new instance of this item.
-	 * 
+	 *
 	 * @param w the tool item.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 */

@@ -27,14 +27,14 @@ public class SWTBotToolbarCheckboxButtonTest extends AbstractSWTTestCase {
 
 	@Test
 	public void findsToolBarButtonWithIndex() throws Exception {
-		SWTBotToolbarButton button0 = bot.toolbarToggleButton("Check");
-		SWTBotToolbarButton button1 = bot.toolbarToggleButton("Check", 1);
+		SWTBotToolbarCheckboxButton button0 = bot.toolbarToggleButton("Check");
+		SWTBotToolbarCheckboxButton button1 = bot.toolbarToggleButton("Check", 1);
 		assertNotSameWidget(button0.widget, button1.widget);
 	}
 
 	@Test
 	public void clicksCheckboxButton() throws Exception {
-		SWTBotToolbarButton button = bot.toolbarToggleButton("Check");
+		SWTBotToolbarCheckboxButton button = bot.toolbarToggleButton("Check");
 		button.click();
 		assertEventMatches(bot.textInGroup("Listeners"), "Selection [13]: SelectionEvent{ToolItem {Check} time=280949700 data=null item=null detail=0 x=0 y=0 width=0 height=0 stateMask=0 text=null doit=true}\n");
 	}

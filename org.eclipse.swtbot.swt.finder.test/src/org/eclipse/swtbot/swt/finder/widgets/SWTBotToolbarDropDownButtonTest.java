@@ -36,8 +36,8 @@ public class SWTBotToolbarDropDownButtonTest extends AbstractSWTTestCase {
 
 	@Test
 	public void findsToolBarButtonWithIndex() throws Exception {
-		SWTBotToolbarButton button0 = bot.toolbarDropDownButton("Drop Down");
-		SWTBotToolbarButton button1 = bot.toolbarDropDownButton("Drop Down", 1);
+		SWTBotToolbarDropDownButton button0 = bot.toolbarDropDownButton("Drop Down");
+		SWTBotToolbarDropDownButton button1 = bot.toolbarDropDownButton("Drop Down", 1);
 		assertNotSameWidget(button0.widget, button1.widget);
 	}
 
@@ -45,7 +45,7 @@ public class SWTBotToolbarDropDownButtonTest extends AbstractSWTTestCase {
 	public void clicksToolBarButton() throws Exception {
 		try {
 			bot.checkBox("Listen").select();
-			SWTBotToolbarButton button = bot.toolbarDropDownButton("Drop Down");
+			SWTBotToolbarDropDownButton button = bot.toolbarDropDownButton("Drop Down");
 			button.click();
 			assertTextContains("Selection [13]: SelectionEvent{ToolItem ", bot.textInGroup("Listeners").widget);
 		} finally {

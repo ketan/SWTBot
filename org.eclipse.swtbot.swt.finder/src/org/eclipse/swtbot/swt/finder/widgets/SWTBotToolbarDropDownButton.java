@@ -26,6 +26,7 @@ import org.eclipse.swtbot.swt.finder.SWTBotWidget;
 import org.eclipse.swtbot.swt.finder.Style;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.EventContextMenuFinder;
+import org.eclipse.swtbot.swt.finder.results.BoolResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
@@ -173,5 +174,14 @@ public class SWTBotToolbarDropDownButton extends AbstractSWTBot<ToolItem> {
 		Event event = createEvent();
 		event.detail = SWT.ARROW;
 		return event;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return syncExec(new BoolResult() {
+			public Boolean run() {
+				return widget.isEnabled();
+			}
+		});
 	}
 }

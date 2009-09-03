@@ -12,10 +12,13 @@ package org.eclipse.swtbot.swt.finder.widgets;
 
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertNotSameWidget;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
+import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.pass;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.eclipse.swtbot.swt.finder.SWTBot;
+import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
@@ -42,13 +45,23 @@ public class SWTBotToolbarButtonTest extends AbstractSWTTestCase {
 	}
 
 	@Test
-	public void findsToolBarRadioButtons() throws Exception {
-		bot.toolbarButton("Radio");
+	public void doesNotFindToolBarRadioButtons() throws Exception {
+		try {
+			bot.toolbarButton("Radio");
+			fail("Expecting an exception");
+		} catch (WidgetNotFoundException e) {
+			pass();
+		}
 	}
 
 	@Test
-	public void findsToolBarCheckButtons() throws Exception {
-		bot.toolbarButton("Check");
+	public void doesNotFindToolBarCheckButtons() throws Exception {
+		try {
+			bot.toolbarButton("Check");
+			fail("Expecting an exception");
+		} catch (WidgetNotFoundException e) {
+			pass();
+		}
 	}
 
 	@Test
@@ -65,7 +78,7 @@ public class SWTBotToolbarButtonTest extends AbstractSWTTestCase {
 
 	@Test
 	public void isEnabled() throws Exception {
-		final SWTBotToolbarButton button = bot.toolbarButton("Radio");
+		final SWTBotToolbarButton button = bot.toolbarButton("Push");
 		assertTrue(button.isEnabled());
 		try {
 			UIThreadRunnable.syncExec(display, new VoidResult() {

@@ -45,13 +45,13 @@ public class SWTBotToolbarButtonWithToolTipTest extends AbstractSWTTestCase {
 	@Test
 	public void findsToolBarButtonWithToolTip2() throws Exception {
 		for (int i = 0; i < 6; i++) {
-			bot.toolbarButtonWithTooltip("SWT.RADIO", i);
+			bot.toolbarRadioButtonWithTooltip("SWT.RADIO", i);
 		}
 	}
 
 	@Test
 	public void getsTooltipOnButton() throws Exception {
-		SWTBotToolbarButton button = bot.toolbarButtonWithTooltip("SWT.RADIO");
+		SWTBotToolbarRadioButton button = bot.toolbarRadioButtonWithTooltip("SWT.RADIO");
 		String toolTipText = button.getToolTipText();
 		assertEquals("SWT.RADIO", toolTipText);
 	}
