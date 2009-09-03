@@ -30,7 +30,7 @@ import org.hamcrest.SelfDescribing;
 public class SWTBotToolbarButton extends AbstractSWTBot<ToolItem> {
 
 	/**
-	 * Construcst an new instance of this item.
+	 * Constructs an new instance of this item.
 	 *
 	 * @param w the tool item.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
@@ -40,7 +40,7 @@ public class SWTBotToolbarButton extends AbstractSWTBot<ToolItem> {
 	}
 
 	/**
-	 * Construcst an new instance of this item.
+	 * Constructs an new instance of this item.
 	 *
 	 * @param w the tool item.
 	 * @param description the description of the widget, this will be reported by {@link #toString()}
