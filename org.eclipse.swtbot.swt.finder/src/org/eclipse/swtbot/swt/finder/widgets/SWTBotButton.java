@@ -18,6 +18,7 @@ import org.eclipse.swtbot.swt.finder.Style;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
+import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 import org.hamcrest.SelfDescribing;
 
 /**
@@ -53,6 +54,7 @@ public class SWTBotButton extends AbstractSWTBotControl<Button> {
 	 */
 	public SWTBotButton(Button button, SelfDescribing description) {
 		super(button, description);
+		Assert.isTrue(SWTUtils.hasStyle(button, SWT.PUSH), "Expecting a push button."); //$NON-NLS-1$
 	}
 
 	/**
