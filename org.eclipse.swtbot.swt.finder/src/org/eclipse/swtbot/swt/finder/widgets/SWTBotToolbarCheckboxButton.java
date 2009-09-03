@@ -29,7 +29,7 @@ import org.hamcrest.SelfDescribing;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-@SWTBotWidget(clasz = ToolItem.class, preferredName = "toolbarToggleButton", style = @Style(name = "SWT.CHECK", value = SWT.CHECK), referenceBy = {
+@SWTBotWidget(clasz = ToolItem.class, preferredName = "toolbarCheckboxButton", style = @Style(name = "SWT.CHECK", value = SWT.CHECK), referenceBy = {
 		ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })
 public class SWTBotToolbarCheckboxButton extends SWTBotToolbarButton {
 
