@@ -31,7 +31,7 @@ import org.hamcrest.SelfDescribing;
  */
 @SWTBotWidget(clasz = ToolItem.class, preferredName = "toolbarCheckboxButton", style = @Style(name = "SWT.CHECK", value = SWT.CHECK), referenceBy = {
 		ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })
-public class SWTBotToolbarCheckboxButton extends SWTBotToolbarButton {
+public class SWTBotToolbarCheckboxButton extends AbstractSWTBot<ToolItem> {
 
 	/**
 	 * Construcst an new instance of this item.

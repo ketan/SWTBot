@@ -17,6 +17,8 @@ import org.eclipse.swtbot.swt.finder.SWTBotWidget;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.results.BoolResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
+import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
+import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 import org.hamcrest.SelfDescribing;
 
 /**
@@ -38,18 +40,19 @@ public class SWTBotToolbarButton extends AbstractSWTBot<ToolItem> {
 
 	/**
 	 * Construcst an new instance of this item.
-	 * 
+	 *
 	 * @param w the tool item.
 	 * @param description the description of the widget, this will be reported by {@link #toString()}
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 */
 	public SWTBotToolbarButton(ToolItem w, SelfDescribing description) throws WidgetNotFoundException {
 		super(w, description);
+		Assert.isTrue(SWTUtils.hasStyle(w, SWT.PUSH), "Expecting a push button."); //$NON-NLS-1$
 	}
 
 	/**
 	 * Click on the tool item.
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public SWTBotToolbarButton click() {

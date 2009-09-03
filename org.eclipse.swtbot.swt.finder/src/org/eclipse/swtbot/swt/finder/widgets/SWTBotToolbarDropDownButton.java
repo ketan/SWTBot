@@ -34,18 +34,18 @@ import org.hamcrest.SelfDescribing;
 
 /**
  * This represents a toolbar item that is a drop down button.
- * 
+ *
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  * @since 1.2
  */
 @SWTBotWidget(clasz = ToolItem.class, preferredName = "toolbarDropDownButton", style = @Style(name = "SWT.DROP_DOWN", value = SWT.DROP_DOWN), referenceBy = {
 		ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })
-public class SWTBotToolbarDropDownButton extends SWTBotToolbarButton {
+public class SWTBotToolbarDropDownButton extends AbstractSWTBot<ToolItem> {
 
 	/**
 	 * Construcst an new instance of this item.
-	 * 
+	 *
 	 * @param w the tool item.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 */
@@ -128,6 +128,29 @@ public class SWTBotToolbarDropDownButton extends SWTBotToolbarButton {
 		} finally {
 			menuFinder.unregister();
 		}
+	}
+
+	/**
+	 * Click on the tool item.
+	 *
+	 * @since 1.0
+	 */
+	public SWTBotToolbarDropDownButton click() {
+		log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
+		assertEnabled();
+		notify(SWT.MouseEnter);
+		notify(SWT.MouseMove);
+		notify(SWT.Activate);
+		notify(SWT.MouseDown);
+		notify(SWT.MouseUp);
+		notify(SWT.Selection);
+		notify(SWT.MouseHover);
+		notify(SWT.MouseMove);
+		notify(SWT.MouseExit);
+		notify(SWT.Deactivate);
+		notify(SWT.FocusOut);
+		log.debug(MessageFormat.format("Clicked on {0}", this)); //$NON-NLS-1$
+		return this;
 	}
 
 	private ArrayList<SWTBotMenu> toSWTBotMenuItems(Matcher<?> matcher, List<MenuItem> findMenus) {
