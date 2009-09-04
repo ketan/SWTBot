@@ -57,39 +57,44 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 
 	/**
 	 * Sets the text of the widget.
-	 * 
+	 *
 	 * @param text the text to be set.
+	 * @return the same instance.
 	 */
-	public void setText(final String text) {
+	public SWTBotText setText(final String text) {
 		assertEnabled();
 		asyncExec(new VoidResult() {
 			public void run() {
 				widget.setText(text);
 			}
 		});
+		return this;
 	}
 
 	/**
 	 * Types the string in the text box.
-	 * 
+	 *
 	 * @param text the text to be typed.
+	 * @return the same instance.
 	 * @since 1.2
 	 */
-	public void typeText(final String text) {
-		typeText(text, SWTBotPreferences.TYPE_INTERVAL);
+	public SWTBotText typeText(final String text) {
+		return typeText(text, SWTBotPreferences.TYPE_INTERVAL);
 	}
 
 	/**
 	 * Types the string in the text box.
-	 * 
+	 *
 	 * @param text the text to be typed.
 	 * @param interval the interval between consecutive key strokes.
+	 * @return the same instance.
 	 * @since 1.2
 	 */
-	public void typeText(final String text, int interval) {
+	public SWTBotText typeText(final String text, int interval) {
 		log.debug(MessageFormat.format("Inserting text:{0} into text {1}", text, this)); //$NON-NLS-1$
 		setFocus();
 		keyboard().typeText(text, interval);
+		return this;
 	}
 
 	/**
@@ -125,44 +130,50 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 
 	/**
 	 * Presses the shortcut specified by the given keys.
-	 * 
+	 *
 	 * @param modificationKeys the combination of {@link SWT#ALT} | {@link SWT#CTRL} | {@link SWT#SHIFT} |
 	 *            {@link SWT#COMMAND}.
 	 * @param c the character
+	 * @return the same instance.
 	 * @see Keystrokes#toKeys(int, char)
 	 */
-	public void pressShortcut(int modificationKeys, char c) {
+	public SWTBotText pressShortcut(int modificationKeys, char c) {
 		assertEnabled();
 		setFocus();
 		keyboard().pressShortcut(modificationKeys, c);
+		return this;
 	}
 
 	/**
 	 * Presses the shortcut specified by the given keys.
-	 * 
+	 *
 	 * @param modificationKeys the combination of {@link SWT#ALT} | {@link SWT#CTRL} | {@link SWT#SHIFT} |
 	 *            {@link SWT#COMMAND}.
 	 * @param keyCode the keyCode, these may be special keys like F1-F12, or navigation keys like HOME, PAGE_UP
 	 * @param c the character
+	 * @return the same instance.
 	 * @see Keystrokes#toKeys(int, char)
 	 */
-	public void pressShortcut(int modificationKeys, int keyCode, char c) {
+	public SWTBotText pressShortcut(int modificationKeys, int keyCode, char c) {
 		assertEnabled();
 		setFocus();
 		keyboard().pressShortcut(modificationKeys, keyCode, c);
+		return this;
 	}
 
 	/**
 	 * Presses the shortcut specified by the given keys.
-	 * 
+	 *
 	 * @param keys the keys to press
+	 * @return the same instance.
 	 * @see Keyboard#pressShortcut(KeyStroke...)
 	 * @see Keystrokes
 	 */
-	public void pressShortcut(KeyStroke... keys) {
+	public SWTBotText pressShortcut(KeyStroke... keys) {
 		assertEnabled();
 		setFocus();
 		keyboard().pressShortcut(keys);
+		return this;
 	}
 
 	/**
@@ -186,13 +197,15 @@ public class SWTBotText extends AbstractSWTBot<Text> {
 
 	/**
 	 * Select the contents of the entire widget.
+	 * @return the same instance.
 	 */
-	public void selectAll() {
+	public SWTBotText selectAll() {
 		syncExec(new VoidResult() {
 			public void run() {
 				widget.selectAll();
 			}
 		});
+		return this;
 	}
 
 	private String toString(int modificationKey, char c) {
