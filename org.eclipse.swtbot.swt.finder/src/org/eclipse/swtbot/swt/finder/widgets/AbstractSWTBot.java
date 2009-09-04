@@ -17,6 +17,7 @@ import static org.hamcrest.Matchers.allOf;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Rectangle;
@@ -31,6 +32,7 @@ import org.eclipse.swtbot.swt.finder.finders.ContextMenuFinder;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.keyboard.Keyboard;
 import org.eclipse.swtbot.swt.finder.keyboard.KeyboardFactory;
+import org.eclipse.swtbot.swt.finder.keyboard.Keystrokes;
 import org.eclipse.swtbot.swt.finder.results.ArrayResult;
 import org.eclipse.swtbot.swt.finder.results.BoolResult;
 import org.eclipse.swtbot.swt.finder.results.IntResult;
@@ -798,5 +800,52 @@ public abstract class AbstractSWTBot<T extends Widget> {
 		if (keyboard == null)
 			keyboard = KeyboardFactory.getDefaultKeyboard(widget, description);
 		return keyboard;
+	}
+
+	/**
+	 * Presses the shortcut specified by the given keys.
+	 *
+	 * @param modificationKeys the combination of {@link SWT#ALT} | {@link SWT#CTRL} | {@link SWT#SHIFT} |
+	 *            {@link SWT#COMMAND}.
+	 * @param c the character
+	 * @return the same instance
+	 * @see Keystrokes#toKeys(int, char)
+	 */
+	public AbstractSWTBot<T> pressShortcut(int modificationKeys, char c) {
+		assertEnabled();
+		setFocus();
+		keyboard().pressShortcut(modificationKeys, c);
+		return this;
+	}
+
+	/**
+	 * Presses the shortcut specified by the given keys.
+	 *
+	 * @param modificationKeys the combination of {@link SWT#ALT} | {@link SWT#CTRL} | {@link SWT#SHIFT} | {@link SWT#COMMAND}.
+	 * @param keyCode the keyCode, these may be special keys like F1-F12, or navigation keys like HOME, PAGE_UP
+	 * @param c the character
+	 * @return the same instance
+	 * @see Keystrokes#toKeys(int, char)
+	 */
+	public AbstractSWTBot<T> pressShortcut(int modificationKeys, int keyCode, char c) {
+		assertEnabled();
+		setFocus();
+		keyboard().pressShortcut(modificationKeys, keyCode, c);
+		return this;
+	}
+
+	/**
+	 * Presses the shortcut specified by the given keys.
+	 *
+	 * @param keys the keys to press
+	 * @return the same instance
+	 * @see Keyboard#pressShortcut(KeyStroke...)
+	 * @see Keystrokes
+	 */
+	public AbstractSWTBot<T> pressShortcut(KeyStroke... keys) {
+		assertEnabled();
+		setFocus();
+		keyboard().pressShortcut(keys);
+		return this;
 	}
 }

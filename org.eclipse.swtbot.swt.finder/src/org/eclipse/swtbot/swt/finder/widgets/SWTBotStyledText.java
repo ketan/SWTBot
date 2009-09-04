@@ -14,7 +14,6 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.Bullet;
 import org.eclipse.swt.custom.StyleRange;
@@ -25,8 +24,6 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swtbot.swt.finder.ReferenceBy;
 import org.eclipse.swtbot.swt.finder.SWTBotWidget;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
-import org.eclipse.swtbot.swt.finder.keyboard.Keyboard;
-import org.eclipse.swtbot.swt.finder.keyboard.Keystrokes;
 import org.eclipse.swtbot.swt.finder.results.ArrayResult;
 import org.eclipse.swtbot.swt.finder.results.IntResult;
 import org.eclipse.swtbot.swt.finder.results.ListResult;
@@ -93,13 +90,14 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 	 * @see Event#stateMask
 	 * @deprecated use {@link #pressShortcut(int, char)} instead. This api will be removed.
 	 */
+	@Deprecated
 	public void notifyKeyboardEvent(int modificationKeys, char c) {
 		keyboard().pressShortcut(modificationKeys, c);
 	}
-	
+
 	/**
 	 * Notifies of keyboard event.
-	 * 
+	 *
 	 * @param modificationKeys the modification key.
 	 * @param c the character.
 	 * @param keyCode any special keys (function keys, arrow or navigation keys etc.)
@@ -108,70 +106,9 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 	 * @see Event#stateMask
 	 * @deprecated use {@link #pressShortcut(int, int, char)} instead. This api will be removed.
 	 */
+	@Deprecated
 	public void notifyKeyboardEvent(int modificationKeys, char c, int keyCode) {
 		pressShortcut(modificationKeys, keyCode, c);
-	}
-
-	/**
-	 * Presses the shortcut specified by the given keys.
-	 * 
-	 * @param modificationKeys the combination of {@link SWT#ALT} | {@link SWT#CTRL} | {@link SWT#SHIFT} |
-	 *            {@link SWT#COMMAND}.
-	 * @param c the character
-	 * @see Keystrokes#toKeys(int, char)
-	 */
-	public void pressShortcut(int modificationKeys, char c) {
-		assertEnabled();
-		setFocus();
-		keyboard().pressShortcut(modificationKeys, c);
-	}
-
-	/**
-	 * Presses the shortcut specified by the given keys.
-	 * 
-	 * @param modificationKeys the combination of {@link SWT#ALT} | {@link SWT#CTRL} | {@link SWT#SHIFT} |
-	 *            {@link SWT#COMMAND}.
-	 * @param keyCode the keyCode, these may be special keys like F1-F12, or navigation keys like HOME, PAGE_UP
-	 * @param c the character
-	 * @see Keystrokes#toKeys(int, char)
-	 */
-	public void pressShortcut(int modificationKeys, int keyCode, char c) {
-		assertEnabled();
-		setFocus();
-		keyboard().pressShortcut(modificationKeys, keyCode, c);
-	}
-
-	/**
-	 * Presses the shortcut specified by the given keys.
-	 * 
-	 * @param keys the keys to press
-	 * @see Keyboard#pressShortcut(KeyStroke...)
-	 * @see Keystrokes
-	 */
-	public void pressShortcut(KeyStroke... keys) {
-		assertEnabled();
-		setFocus();
-		keyboard().pressShortcut(keys);
-	}
-
-	/**
-	 * Converts the given data to a string.
-	 * 
-	 * @param modificationKey The modification key.
-	 * @param c The character.
-	 * @return The string.
-	 */
-	private String toString(int modificationKey, char c) {
-		String mod = ""; //$NON-NLS-1$
-		if ((modificationKey & SWT.CTRL) != 0)
-			mod += "SWT.CTRL + "; //$NON-NLS-1$
-		if ((modificationKey & SWT.SHIFT) != 0)
-			mod += "SWT.SHIFT + "; //$NON-NLS-1$
-		int lastPlus = mod.lastIndexOf(" + "); //$NON-NLS-1$
-		if (lastPlus == (mod.length() - 3))
-			mod = mod.substring(0, mod.length() - 3) + " + "; //$NON-NLS-1$
-		mod = mod + c;
-		return mod;
 	}
 
 	/**
