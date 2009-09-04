@@ -11,7 +11,7 @@ Export-Package: org.eclipse.swtbot.swt.recorder,
  org.eclipse.swtbot.swt.recorder.methodargs,
  org.eclipse.swtbot.swt.recorder.widgets,
  org.eclipse.swtbot.swt.recorder.widgets.text
-Import-Package: org.apache.log4j,
+Import-Package: org.apache.log4j;version="1.2.12",
  org.eclipse.swt,
  org.eclipse.swt.widgets,
  org.eclipse.swtbot.swt.finder,
