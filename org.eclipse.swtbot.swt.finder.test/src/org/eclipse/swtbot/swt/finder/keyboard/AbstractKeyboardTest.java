@@ -29,6 +29,16 @@ public abstract class AbstractKeyboardTest extends AbstractSWTTestCase {
 	private Keyboard keyboard;
 
 	@Test
+	public void canTypeSingleQuote() throws Exception {
+		styledText.setFocus();
+		styledText.typeText("'");
+		assertEventMatches(listeners, "Verify [25]: VerifyEvent{StyledText {} time=2009363 data=null character='\\0' keyCode=0 stateMask=0 doit=true start=0 end=0 text='}");
+		assertEventMatches(listeners, "Modify [24]: ModifyEvent{StyledText {} time=2009363 data=null}");
+		assertEventMatches(listeners, "KeyDown [1]: KeyEvent{StyledText {} time=1951427 data=null character=''' keyCode=39 stateMask=0 doit=true}");
+		assertEventMatches(listeners, "KeyUp [2]: KeyEvent{StyledText {} time=1951515 data=null character=''' keyCode=39 stateMask=0 doit=true}");
+	}
+
+	@Test
 	public void canTypeAltUpKey() throws Exception {
 		styledText.setFocus();
 		styledText.pressShortcut(Keystrokes.MOD3, Keystrokes.UP);
