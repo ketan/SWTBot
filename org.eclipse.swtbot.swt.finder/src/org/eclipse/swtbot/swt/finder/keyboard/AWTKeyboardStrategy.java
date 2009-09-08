@@ -74,7 +74,7 @@ class AWTKeyboardStrategy extends AbstractKeyboardStrategy {
 		addModifierKeyMapping(SWT.CTRL, KeyEvent.VK_CONTROL);
 		addModifierKeyMapping(SWT.SHIFT, KeyEvent.VK_SHIFT);
 		addModifierKeyMapping(SWT.ALT, KeyEvent.VK_ALT);
-		addModifierKeyMapping(SWT.COMMAND, KeyEvent.VK_WINDOWS);
+		addModifierKeyMapping(SWT.COMMAND, KeyEvent.VK_META);
 
 		/* the natural keys */
 		addNaturalKeyMapping(SWT.ESC, KeyEvent.VK_ESCAPE);
