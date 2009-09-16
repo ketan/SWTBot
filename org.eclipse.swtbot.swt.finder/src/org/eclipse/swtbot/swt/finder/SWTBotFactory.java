@@ -40,6 +40,8 @@ import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.Finder;
 import org.eclipse.swtbot.swt.finder.matchers.WithItem;
+import org.eclipse.swtbot.swt.finder.results.Result;
+import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.results.WidgetResult;
 import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
@@ -571,5 +573,64 @@ abstract class SWTBotFactory {
 			throw new WidgetNotFoundException("no system tray found");
 		}
 		return tray;
+	}
+
+	/**
+	 * Performs an operation with a timeout and return a result.
+	 * <p>
+	 * This is a convenience api for performing a particular operation with a different timeout:
+	 * </p>
+	 *
+	 * <pre>
+	 * long timeout = ...;
+	 * long old = SWTBotPreferences.TIMEOUT;
+	 * SWTBotPreferences.TIMEOUT = timeout;
+	 * try {
+	 * 	// do something that takes very long
+	 * 	return aNumber;
+	 * } finally {
+	 * 	SWTBotPreferences.TIMEOUT = old;
+	 * }
+	 * </pre>
+	 * <p>
+	 * The above can now be written as:
+	 * </p>
+	 *
+	 * <pre>
+	 * performWithTimeout(new Result<Integer>() {
+	 * 	public Integer run() {
+	 *		// do something that takes very long
+	 * 	}
+	 * }, timeout);
+	 *</pre>
+	 *
+	 * @param runnable the runnable to execute.
+	 * @param timeout the timeout for performing the operation.
+	 * @return the result of executing the runnable.
+	 */
+	public <T> T performWithTimeout(Result<T> runnable, long timeout){
+		long old = SWTBotPreferences.TIMEOUT;
+		SWTBotPreferences.TIMEOUT = timeout;
+        try {
+        	return runnable.run();
+        } finally {
+        	SWTBotPreferences.TIMEOUT = old;
+        }
+
+	}
+
+	/**
+	 * @see #performWithTimeout(Result, long) for more information.
+	 * @param runnable the runnable to execute.
+	 * @param timeout the timeout for performing the operation.
+	 */
+	public void performWithTimeout(VoidResult runnable, long timeout) {
+		long old = SWTBotPreferences.TIMEOUT;
+		SWTBotPreferences.TIMEOUT = timeout;
+        try {
+        	runnable.run();
+        } finally {
+        	SWTBotPreferences.TIMEOUT = old;
+        }
 	}
 }
