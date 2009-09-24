@@ -9,7 +9,7 @@
  *    MAKE Technologies Inc - initial API and implementation
  *    Mariot Chauvin <mariot.chauvin@obeo.fr> - refactoring
  *    Steve Monnier <steve.monnier@obeo.fr> - add mouseMoveDoubleClick action
- *    Nathalie Lépine <nathalie.lepine@obeo.fr> - add mouseMoveDoubleClick action
+ *    Nathalie Lï¿½pine <nathalie.lepine@obeo.fr> - add mouseMoveDoubleClick action
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.gef.finder.widgets;
 
@@ -310,7 +310,7 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
      * @return a collection of {@link SWTBotGefEditPart}
      * @throws WidgetNotFoundException
      */
-    public List<SWTBotGefEditPart> editParts(Matcher<SWTBotGefEditPart> matcher) throws WidgetNotFoundException {
+	public List<SWTBotGefEditPart> editParts(Matcher<? extends EditPart> matcher) throws WidgetNotFoundException {
         return rootEditPart().ancestors(matcher);
     }
 

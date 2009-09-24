@@ -77,7 +77,7 @@ public class SWTBotGefEditPart {
 	 * @return a list of matches or an empty list if there are none
 	 */
 	@SuppressWarnings("unchecked")
-	public List<SWTBotGefEditPart> ancestors(final Matcher<SWTBotGefEditPart> matcher) {
+	public List<SWTBotGefEditPart> ancestors(final Matcher<? extends EditPart> matcher) {
 		return  UIThreadRunnable.syncExec(new Result<List<SWTBotGefEditPart>>() {
 			public List<SWTBotGefEditPart> run() {
 				List<SWTBotGefEditPart> ancestors = new ArrayList<SWTBotGefEditPart>();

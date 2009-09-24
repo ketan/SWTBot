@@ -15,6 +15,7 @@ package org.eclipse.swtbot.eclipse.gef.finder.widgets;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.gef.EditPart;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.Result;
 import org.hamcrest.Matcher;
@@ -76,7 +77,7 @@ public class SwtBotGefConnectionEditPart extends SWTBotGefEditPart {
 	 * @see net.sf.swtbot.eclipse.gef.EditPart#ancestors(org.hamcrest.Matcher)
 	 */
 	@Override
-	public List<SWTBotGefEditPart> ancestors(Matcher<SWTBotGefEditPart> matcher) {
+	public List<SWTBotGefEditPart> ancestors(Matcher<? extends EditPart> matcher) {
 		return Collections.emptyList();
 	}
 	
