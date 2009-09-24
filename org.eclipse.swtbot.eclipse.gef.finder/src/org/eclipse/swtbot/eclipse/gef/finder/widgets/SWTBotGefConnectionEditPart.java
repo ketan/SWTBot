@@ -28,17 +28,15 @@ import org.hamcrest.Matcher;
  * @see SWTBotGefEditPart
  * @see SWTBotGefEditor
  */
-public class SwtBotGefConnectionEditPart extends SWTBotGefEditPart {
+public class SWTBotGefConnectionEditPart extends SWTBotGefEditPart {
 
-    //TODO comment
     /**
-     * 
-     * @param graphicalEditor
-     * @param parent
-     * @param part
+     * Construct a new {@link SWTBotGefConnectionEditPart} instance.
+     * @param graphicalEditor the graphical editor
+     * @param part the {@link ConnectionEditPart} to wrap 
      */
-	SwtBotGefConnectionEditPart(SWTBotGefEditor graphicalEditor, SWTBotGefEditPart parent, org.eclipse.gef.ConnectionEditPart part) {
-		super(graphicalEditor, parent, part);
+	SWTBotGefConnectionEditPart(SWTBotGefEditor graphicalEditor, org.eclipse.gef.ConnectionEditPart part) {
+		super(graphicalEditor, part);
 	}
 
 	/*
@@ -97,7 +95,7 @@ public class SwtBotGefConnectionEditPart extends SWTBotGefEditPart {
 	 * @see net.sf.swtbot.eclipse.gef.EditPart#sourceConnections()
 	 */
 	@Override
-	public List<SwtBotGefConnectionEditPart> sourceConnections() {
+	public List<SWTBotGefConnectionEditPart> sourceConnections() {
 		return Collections.emptyList();
 	}
 	
@@ -107,7 +105,7 @@ public class SwtBotGefConnectionEditPart extends SWTBotGefEditPart {
 	 * @see net.sf.swtbot.eclipse.gef.EditPart#targetConnections()
 	 */
 	@Override
-	public List<SwtBotGefConnectionEditPart> targetConnections() {
+	public List<SWTBotGefConnectionEditPart> targetConnections() {
 		return Collections.emptyList();
 	}
 }

@@ -38,19 +38,16 @@ import org.hamcrest.Matcher;
  */
 public class SWTBotGefEditPart {
 	protected final EditPart part;
-	protected final SWTBotGefEditPart parent;
 	protected final SWTBotGefEditor graphicalEditor;
 	
 	/**
 	 * 
-	 * @param graphicalViewer 
 	 * @param graphicalEditor 
 	 * @param parent the parent, or null if this is the root edit part
 	 * @param part the GEF part
 	 */
-	SWTBotGefEditPart(final SWTBotGefEditor graphicalEditor, final SWTBotGefEditPart parent, final EditPart part) {
+	SWTBotGefEditPart(final SWTBotGefEditor graphicalEditor, final EditPart part) {
 		this.graphicalEditor = graphicalEditor;
-		this.parent = parent;
 		this.part = part;
 	}
 
@@ -62,7 +59,7 @@ public class SWTBotGefEditPart {
 			public List<SWTBotGefEditPart> run() {
 				List<SWTBotGefEditPart> children = new ArrayList<SWTBotGefEditPart>();
 				for (org.eclipse.gef.EditPart child: ((List<org.eclipse.gef.EditPart>)part.getChildren())) {
-					children.add(graphicalEditor.createEditPart(SWTBotGefEditPart.this,child));
+					children.add(graphicalEditor.createEditPart(child));
 				}
 				return children;
 			}
@@ -86,7 +83,7 @@ public class SWTBotGefEditPart {
 				while (!parts.isEmpty()) {
 					SWTBotGefEditPart part = parts.pop();
 					for (org.eclipse.gef.EditPart child: ((List<org.eclipse.gef.EditPart>) part.part.getChildren())) {
-						SWTBotGefEditPart childPart = graphicalEditor.createEditPart(part,child);
+						SWTBotGefEditPart childPart = graphicalEditor.createEditPart(child);
 						if (matcher.matches(child)) {
 							ancestors.add(childPart);
 						}
@@ -98,7 +95,10 @@ public class SWTBotGefEditPart {
 		});
 	}
 	
-	//TODO comment
+	/**
+	 * get the underlying wrapped {@link EditPart} instance
+	 * @return the wrapped {@link EditPart}. 
+	 */
 	public EditPart part() {
 		return part;
 	}
@@ -168,7 +168,11 @@ public class SWTBotGefEditPart {
 	 * get the parent, or null if this is the root edit part.
 	 */
 	public SWTBotGefEditPart parent() {
-		return parent; 
+		return UIThreadRunnable.syncExec(new Result<SWTBotGefEditPart>() {
+			public SWTBotGefEditPart run() {
+				return graphicalEditor.createEditPart(part.getParent());
+			}
+		});
 	}
 	
 	/**
@@ -208,10 +212,10 @@ public class SWTBotGefEditPart {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<SwtBotGefConnectionEditPart> sourceConnections() {
-		return UIThreadRunnable.syncExec(new Result<List<SwtBotGefConnectionEditPart>>() {
-			public List<SwtBotGefConnectionEditPart> run() {
-				List<SwtBotGefConnectionEditPart> connections = new ArrayList<SwtBotGefConnectionEditPart>();
+	public List<SWTBotGefConnectionEditPart> sourceConnections() {
+		return UIThreadRunnable.syncExec(new Result<List<SWTBotGefConnectionEditPart>>() {
+			public List<SWTBotGefConnectionEditPart> run() {
+				List<SWTBotGefConnectionEditPart> connections = new ArrayList<SWTBotGefConnectionEditPart>();
 				List<org.eclipse.gef.ConnectionEditPart> sourceConnections = ((GraphicalEditPart)part).getSourceConnections();
 				for (org.eclipse.gef.ConnectionEditPart c: sourceConnections) {
 					connections.add(graphicalEditor.createEditPart(c));
@@ -222,10 +226,10 @@ public class SWTBotGefEditPart {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<SwtBotGefConnectionEditPart> targetConnections() {
-		return UIThreadRunnable.syncExec(new Result<List<SwtBotGefConnectionEditPart>>() {
-			public List<SwtBotGefConnectionEditPart> run() {
-				List<SwtBotGefConnectionEditPart> connections = new ArrayList<SwtBotGefConnectionEditPart>();
+	public List<SWTBotGefConnectionEditPart> targetConnections() {
+		return UIThreadRunnable.syncExec(new Result<List<SWTBotGefConnectionEditPart>>() {
+			public List<SWTBotGefConnectionEditPart> run() {
+				List<SWTBotGefConnectionEditPart> connections = new ArrayList<SWTBotGefConnectionEditPart>();
 				List<org.eclipse.gef.ConnectionEditPart> targetConnections = ((GraphicalEditPart)part).getTargetConnections();
 				for (org.eclipse.gef.ConnectionEditPart c: targetConnections) {
 					connections.add(graphicalEditor.createEditPart(c));

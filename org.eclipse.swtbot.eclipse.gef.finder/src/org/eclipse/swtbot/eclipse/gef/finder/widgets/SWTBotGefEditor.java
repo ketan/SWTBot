@@ -128,10 +128,16 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
         return children.get(0);
     }
 
+     /**
+     * retrieve the root edit part.
+     * @return the root edit part
+     * @throws WidgetNotFoundException if root edit part could not be found
+     * @see {@link GraphicalViewer#getRootEditPart()}
+     */
     public SWTBotGefEditPart rootEditPart() throws WidgetNotFoundException {
         Object o = UIThreadRunnable.syncExec(new Result<Object>() {
             public Object run() {
-                return createEditPart(null, graphicalViewer.getRootEditPart());
+                return createEditPart(graphicalViewer.getRootEditPart());
             }
         });
         if (o instanceof WidgetNotFoundException) {
@@ -140,32 +146,34 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
         return (SWTBotGefEditPart) o;
     }
 
-    protected SWTBotGefEditPart createEditPart(SWTBotGefEditPart parent, EditPart part) {
+   /**
+    * lazily creates a {@link SWTBotGefEditPart} if this edit part does not exist yet. If an instance encapsulating the specified edit part has been created before, that instance is returned. 
+     * @param part the edit part to create a {@link SWTBotGefEditPart} for
+     * @return the created {@link SWTBotGefEditPart}
+    */
+    protected SWTBotGefEditPart createEditPart(final EditPart part) {
         SWTBotGefEditPart editPart = editPartMapping.get(part);
         if (editPart == null) {
             if (part instanceof ConnectionEditPart) {
-                editPart = new SwtBotGefConnectionEditPart(this, null, (ConnectionEditPart) part);
+                editPart = new SWTBotGefConnectionEditPart(this, (ConnectionEditPart) part);
             } else {
-                editPart = new SWTBotGefEditPart(this, parent, part);
+                editPart = new SWTBotGefEditPart(this, part);
             }
             editPartMapping.put(part, editPart);
         }
         return editPart;
     }
 
-    protected SwtBotGefConnectionEditPart createEditPart(ConnectionEditPart part) {
-        return (SwtBotGefConnectionEditPart) createEditPart((EditPart) part);
+    /**
+     *  lazily creates a {@link SWTBotGefConnectionEditPart} if this edit part does not exist yet. If an instance encapsulating the specified edit part has been created before, that instance is returned. 
+     * @param part a connection edit part connecting graphical nodes
+     * @return a {@link SWTBotGefConnectionEditPart} encapsulating the connection edit part
+     */
+    protected SWTBotGefConnectionEditPart createEditPart(ConnectionEditPart part) {
+    	return (SWTBotGefConnectionEditPart) createEditPart((EditPart) part);
     }
 
-    protected SWTBotGefEditPart createEditPart(final EditPart part) {
-        final EditPart parent = part.getParent();
-        SWTBotGefEditPart parentEditPart = null;
-        if (parent != null) {
-            parentEditPart = createEditPart(parent);
-        }
-        return createEditPart(parentEditPart, part);
-    }
-
+    
     public void activateDefaultTool() {
         UIThreadRunnable.syncExec(new VoidResult() {
             public void run() {
