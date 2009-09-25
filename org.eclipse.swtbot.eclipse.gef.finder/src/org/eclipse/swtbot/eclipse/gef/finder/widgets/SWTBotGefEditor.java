@@ -65,7 +65,7 @@ import org.hamcrest.Matcher;
  * 
  * Unlike most of SWTBot, this editor uses {@link org.eclipse.gef.EditPart edit
  * parts} to target UI events instead of SWT widgets. This is due to the fact
- * that GEF editors paint on a canvas and rarely use widgets at all.
+ * that GEF editors paint on a canvas and rarely use widgets at all. 
  * 
  * @author David Green
  */
