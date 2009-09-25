@@ -9,7 +9,7 @@
  *    MAKE Technologies Inc - initial API and implementation
  *    Mariot Chauvin <mariot.chauvin@obeo.fr> - refactoring
  *    Steve Monnier <steve.monnier@obeo.fr> - add mouseMoveDoubleClick action
- *    Nathalie L�pine <nathalie.lepine@obeo.fr> - add mouseMoveDoubleClick action
+ *    Nathalie Lepine <nathalie.lepine@obeo.fr> - add mouseMoveDoubleClick action
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.gef.finder.widgets;
 
@@ -27,11 +27,15 @@ import java.util.regex.Pattern;
 
 import org.eclipse.draw2d.EventDispatcher;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.LightweightSystem;
 import org.eclipse.draw2d.MouseEvent;
+import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.draw2d.text.TextFlow;
 import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.palette.PaletteEntry;
 import org.eclipse.gef.palette.ToolEntry;
@@ -457,4 +461,153 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
 		return new org.eclipse.swt.events.MouseEvent(event);
 	}
 
+	 /** 
+	    * this method emits mouse events that handle a mouse move and left click to the specified position within the editor.<br>
+	    * Note that a move is required before left clicking in order to update the mouse cursor with the target editpart.  
+	    *  
+	    * @param label the label 
+	    */
+	   public void mouseMoveLeftClick(String label) {
+	       SWTBotGefEditPart selectedEP = getEditPart(label);
+	       if (selectedEP==null) {
+	    	   throw new WidgetNotFoundException(String.format("Expected to find widget %s",label)); 
+	       }
+	       Rectangle bounds = ((GraphicalEditPart) selectedEP.part()).getFigure().getBounds();
+           mouseMoveLeftClick(bounds.x, bounds.y); 
+	   }
+	   
+	   /**
+	    * this method emits mouse events that handle a mouse move and double click to the specified position within the editor.<br>
+	    * Note that a move is required before double clicking in order to update the mouse cursor with the target editpart.  
+	    * As we can not double click on the corner, we move the double click position
+	    * @param label the label 
+	    */
+	   public void mouseMoveDoubleClick(final String label) {
+	       SWTBotGefEditPart selectedEP = getEditPart(label);
+	       if (selectedEP==null) {
+	    	   throw new WidgetNotFoundException(String.format("Expected to find widget %s",label)); 
+	       }
+	       Rectangle bounds = ((GraphicalEditPart) selectedEP.part()).getFigure().getBounds();
+           mouseMoveDoubleClick(bounds.x, bounds.y+MOVE);
+	   }
+	   
+	   private static final int MOVE = 3;
+	   
+	   /**
+	    * this method emits mouse events that handle drags within the editor
+	    * 
+	    * @param label the label 
+	    * @param toXPosition the relative x position within the graphical viewer to drag to
+	    * @param toYPosition the relative y position within the graphical viewer to drag to
+	    */
+	   public void mouseDrag(final String label, final int toXPosition, final int toYPosition) {
+	       SWTBotGefEditPart selectedEP = getEditPart(label);
+	       if (selectedEP==null) {
+	    	   throw new WidgetNotFoundException(String.format("Expected to find widget %s",label));  
+	       }
+           Rectangle bounds = ((GraphicalEditPart) selectedEP.part()).getFigure().getBounds();
+           mouseDrag(bounds.x, bounds.y, toXPosition, toYPosition);
+	   }
+	    
+	    /**
+	     * select the edit part with the label as a single selection
+	     */
+	   public SWTBotGefEditor select(String label)
+	   {
+	       SWTBotGefEditPart selectedEP = getEditPart(label);
+	       if (selectedEP == null) {
+	    	   throw new WidgetNotFoundException(String.format("Expected to find widget %s",label));  
+	       }
+	       List<SWTBotGefEditPart> editParts = new ArrayList<SWTBotGefEditPart>();
+	       editParts.add(selectedEP);
+	       return select(selectedEP);
+	   }
+
+	   /**
+	    * get this edit part with the label as a single selection
+	    */
+	   public SWTBotGefEditPart getEditPart(String label)
+	   {  
+	       List<SWTBotGefEditPart> allEditParts = mainEditPart().children();
+	       allEditParts.addAll(mainEditPart().sourceConnections());
+	       return getEditpart(label, allEditParts);
+	   }
+
+	   /**
+        * get this edit part with the label as a single selection
+        */
+	   public SWTBotGefEditPart getEditpart(String label, List<SWTBotGefEditPart> allEditParts)
+	   {
+	       for (SWTBotGefEditPart child : allEditParts) {
+	           IFigure figure = ((GraphicalEditPart) child.part()).getFigure();
+	           
+	           if (isLabel(figure, label)) {
+	                return child;
+	            }
+	           
+	           // find label in children
+	           if (findLabelFigure(figure, label))  {
+	               SWTBotGefEditPart childEditPart = getEditPart(child, label);
+	               if (childEditPart!=null) {
+	                   return childEditPart;
+	               }
+	               return child;
+	           }
+	           
+	           // find label in connections
+	           SWTBotGefEditPart childEditPart = getEditPart(child, label);
+	           if (childEditPart != null) {
+	               return childEditPart;
+	           }
+	       }
+	       return null;
+	   }
+        
+        /**
+         * get this edit part with the label as a single selection
+         */
+        private SWTBotGefEditPart getEditPart(SWTBotGefEditPart editPart, String label)
+        {
+            if (editPart.children().isEmpty() && findLabelFigure(((GraphicalEditPart) editPart.part()).getFigure(), label)) {
+                return editPart;
+            }
+    
+            List<SWTBotGefEditPart> allEditParts = editPart.children();
+            allEditParts.addAll(editPart.sourceConnections());
+            return getEditpart(label, allEditParts);
+        }
+
+        /**
+         * @return if the figure is a label
+         */
+        private boolean isLabel(IFigure figure, String label)
+        {
+            // case 1 : gef label
+            if ((figure instanceof Label && ((Label)figure).getText().equals(label)))
+            {
+                return true;
+            }
+
+            // case 2 : no gef label
+            if ((figure instanceof TextFlow && ((TextFlow)figure).getText().equals(label)))
+            {
+                return true;
+            }
+            return false;
+        }
+        
+        /**
+         * @return if the figure or all its children contain the label 
+         */
+        private boolean findLabelFigure(IFigure figure, String label) {
+            if (isLabel(figure, label)) {
+                return true;
+            }
+            for (Object figureChild : figure.getChildren()) {
+                if (isLabel((IFigure) figureChild, label) || findLabelFigure((IFigure) figureChild, label)) {
+                    return true;
+                }
+            }
+            return false;
+        }
 }
