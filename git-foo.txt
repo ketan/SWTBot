@@ -1,0 +1,6 @@
+Copy a range of commits from svn to master. Useful when someone checks in into svn and those changes are pulled into the svn branch via 'git svn rebase'.
+$ git format-patch from..to --stdout --full-index -k | grep -v 'git-svn-id: svn+ssh://dev.eclipse.org/svnroot/technology/' | git am -k -3
+
+Check in changes into svn.
+$ git branch -D svn; git co -b svn; git svn rebase; git svn dcommit
+
