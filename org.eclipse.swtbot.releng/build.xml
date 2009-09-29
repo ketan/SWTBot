@@ -74,6 +74,7 @@
 				<include name="org.eclipse.swtbot.eclipse/**" />
 				<include name="org.eclipse.swtbot.eclipse.test/**" />
 				<include name="org.eclipse.swtbot.recording/**" />
+				<include name="org.eclipse.swtbot.eclipse.gef/**" />
 			</fileset>
 		</sync>
 	</target>
@@ -96,6 +97,7 @@
 				<exclude name="org.eclipse.swtbot.eclipse/**" />
 				<include name="org.eclipse.swtbot.eclipse.test/**" />
 				<exclude name="org.eclipse.swtbot.recording/**" />
+				<exclude name="org.eclipse.swtbot.eclipse.gef/**" />
 				<!-- the update site -->
 				<exclude name="org.eclipse.swtbot.updatesite/**" />
 				<!-- also exclude the generated class files -->
@@ -164,6 +166,10 @@
 		</copy>
 
 		<antcall target="extract-eclipse" />
+
+		<unzip dest="${eclipse-target}" src="externals/${eclipse.gef.sdk.archive}">
+			<mapper type="glob" from="eclipse/*" to="${eclipse-target}/*" />
+		</unzip>
 
 		<antcall target="initialize-environment" />
 		<antcall target="make-substitutions" />

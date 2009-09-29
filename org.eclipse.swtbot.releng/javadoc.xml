@@ -17,6 +17,12 @@
 	<target name="javadoc" depends="check-package-list,fetch-package-list">
 		<delete dir="artifacts/apidocs" />
 		<javadoc destdir="artifacts/apidocs" access="protected" author="true" splitindex="true" use="true" version="true" source="1.5" doctitle="SWTBot API Documentation" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" useexternalfile="true" packagenames="
+
+				org.eclipse.swtbot.eclipse.gef,
+				org.eclipse.swtbot.eclipse.gef.finders,
+				org.eclipse.swtbot.eclipse.gef.matchers,
+				org.eclipse.swtbot.eclipse.gef.widgets,
+
 				org.eclipse.swtbot.eclipse.finder,
 			 	org.eclipse.swtbot.eclipse.finder.exceptions,
 			 	org.eclipse.swtbot.eclipse.finder.finders,

@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: SWTBot Gef Plug-in
+Bundle-Name: SWTBot Gef Plug-in (incubation)
 Bundle-SymbolicName: org.eclipse.swtbot.eclipse.gef.finder;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 2.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.junit;bundle-version="3.7.0",
  org.eclipse.core.resources;bundle-version="3.3.0";visibility:=reexport,
@@ -19,3 +19,4 @@ Export-Package: org.eclipse.swtbot.eclipse.gef.finder,
  org.eclipse.swtbot.eclipse.gef.finder.finders,
  org.eclipse.swtbot.eclipse.gef.finder.matchers,
  org.eclipse.swtbot.eclipse.gef.finder.widgets
+Bundle-Vendor: Eclipse.org

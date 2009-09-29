@@ -3,44 +3,49 @@
 		<mkdir dir="externals/plugins" />
 		<mkdir dir="externals/libs" />
 		<available file="externals/${eclipse.sdk.archive}" property="eclipse-sdk-available" />
+		<available file="externals/${eclipse.gef.sdk.archive}" property="gef-sdk-available" />
 
 		<available file="externals/libs/purge.jar" property="ant-purge-lib-available" />
 		<available file="externals/libs/ant-contrib-1.0b3.jar" property="ant-contrib-lib-available" />
 		<available file="externals/libs/cobertura-1.9" property="ant-cobertura-lib-available" />
 	</target>
-	
+
 	<target name="download-purge-task" unless="ant-purge-lib-available">
 			<get dest="externals/libs/purge.jar" src="http://www.dallaway.com/ant/purge.jar" verbose="true" usetimestamp="true" />
 	</target>
-	
+
 	<target name="download-ant-contrib-task" unless="ant-contrib-lib-available">
 		<get dest="externals/libs/ant-contrib-1.0b3-bin.tar.gz" src="http://downloads.sourceforge.net/sourceforge/ant-contrib/ant-contrib-1.0b3-bin.tar.gz" verbose="true" usetimestamp="true" />
-		
+
 		<untar src="externals/libs/ant-contrib-1.0b3-bin.tar.gz" dest="externals/libs" compression="gzip"/>
 		<move file="externals/libs/ant-contrib/ant-contrib-1.0b3.jar" tofile="externals/libs/ant-contrib-1.0b3.jar"/>
 		<delete file="externals/libs/ant-contrib-1.0b3-bin.tar.gz"/>
 		<delete dir="externals/libs/ant-contrib"/>
 	</target>
-	
-	
+
+
 	<target name="download-ant-cobertura-task" unless="ant-cobertura-lib-available">
 		<get dest="externals/libs/cobertura-1.9-bin.tar.gz" src="http://downloads.sourceforge.net/sourceforge/cobertura/cobertura-1.9-bin.tar.gz" verbose="true" usetimestamp="true" />
-		
+
 		<untar src="externals/libs/cobertura-1.9-bin.tar.gz" dest="externals/libs" compression="gzip"/>
 		<delete file="externals/libs/cobertura-1.9-bin.tar.gz"/>
 	</target>
-	
-	<target name="download-ant-libs" depends="download-purge-task, download-ant-contrib-task, download-ant-cobertura-task" />		
+
+	<target name="download-ant-libs" depends="download-purge-task, download-ant-contrib-task, download-ant-cobertura-task" />
 
 	<target name="download-eclipse-sdk" unless="eclipse-sdk-available">
 		<get dest="externals/${eclipse.sdk.archive}" src="${eclipse.sdk.url}/${eclipse.sdk.archive}" verbose="true" usetimestamp="true" />
 	</target>
 
-	<target name="download-dependencies" depends="check-dependencies, download-eclipse-sdk, download-ant-libs" />
+	<target name="download-gef-sdk" unless="gef-sdk-available">
+		<get dest="externals/${eclipse.gef.sdk.archive}" src="${eclipse.gef.sdk.url}/${eclipse.gef.sdk.archive}" verbose="true" usetimestamp="true" />
+	</target>
+
+	<target name="download-dependencies" depends="check-dependencies, download-eclipse-sdk, download-gef-sdk, download-ant-libs" />
 </project>
 
 <!--
- 	http://downloads.sourceforge.net/sourceforge/cobertura/cobertura-1.9-bin.tar.gz 
+ 	http://downloads.sourceforge.net/sourceforge/cobertura/cobertura-1.9-bin.tar.gz
 	http://www.dallaway.com/ant/purge.jar
 	http://downloads.sourceforge.net/sourceforge/ant-contrib/ant-contrib-1.0b3-bin.tar.gz
 	-->

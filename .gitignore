@@ -6,13 +6,14 @@
 /*/bin
 
 examples/rcp/*/bin/
+examples/gef/*/bin/
 
 /*/screenshots
 
 org.eclipse.swtbot.releng/externals/eclipse-SDK-*
 org.eclipse.swtbot.releng/externals/libs
 org.eclipse.swtbot.releng/externals/eclipse-test-framework-3.3.zip
-
+org.eclipse.swtbot.releng/externals/GEF-runtime-3.4.2.zip
 
 org.eclipse.swtbot.releng/target/
 org.eclipse.swtbot.releng/build.developer.properties
