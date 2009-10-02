@@ -89,30 +89,30 @@
 
 	<target name="initialize-environment" depends="guess-junit-version, guess-pde-build-version, create-build-properties-from-template" />
 
-	<delete file="${java.io.tmpdir}/git.svn.properties" />
-	<touch file="${java.io.tmpdir}/git.svn.properties" />
+	<delete file=".git.svn.properties" />
+	<touch file=".git.svn.properties" />
 	<!-- guess svn revision -->
-	<exec executable="git" output="${java.io.tmpdir}/git.svn.properties" dir=".." failifexecutionfails="false" failonerror="false">
+	<exec executable="git" output=".git.svn.properties" dir=".." failifexecutionfails="false" failonerror="false">
 		<arg line="svn info" />
 	</exec>
 
 	<!-- prefix all properties with "svn." and replace spaces to make the keys unique -->
-	<loadproperties srcfile="${java.io.tmpdir}/git.svn.properties">
+	<loadproperties srcfile=".git.svn.properties">
 		<filterchain>
 			<prefixlines prefix="svn." />
 			<deletecharacters chars="\ " />
 		</filterchain>
 	</loadproperties>
 
-	<delete file="${java.io.tmpdir}/svn.properties" />
-	<touch file="${java.io.tmpdir}/svn.properties" />
+	<delete file=".svn.properties" />
+	<touch file=".svn.properties" />
 	<!-- guess svn revision -->
-	<exec executable="svn" output="${java.io.tmpdir}/svn.properties" dir=".." failifexecutionfails="false" failonerror="false">
+	<exec executable="svn" output=".svn.properties" dir=".." failifexecutionfails="false" failonerror="false">
 		<arg value="info" />
 	</exec>
 
 	<!-- prefix all properties with "svn." and replace spaces to make the keys unique -->
-	<loadproperties srcfile="${java.io.tmpdir}/svn.properties">
+	<loadproperties srcfile=".svn.properties">
 		<filterchain>
 			<prefixlines prefix="svn." />
 			<deletecharacters chars="\ " />
