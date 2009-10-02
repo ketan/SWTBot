@@ -119,7 +119,7 @@ protected Wire getWire() {
  * @return  Figure of this.
  */
 protected IFigure getWireFigure() {
-	return (PolylineConnection) getFigure();
+	return getFigure();
 }
 
 /**
