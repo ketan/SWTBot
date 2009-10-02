@@ -3,8 +3,6 @@ os = macosx
 ws = carbon
 arch = x86
 
-update-site-location = ${basedir}/artifacts/update-site
-
 ## uncomment one of the two below:
 
 ##
@@ -20,9 +18,6 @@ update-site-location = ${basedir}/artifacts/update-site
 #eclipse.buildId = 3.4.2
 #eclipse.sdk.archive = eclipse-SDK-3.4.2-macosx-carbon.tar.gz
 #eclipse.qualifier = e34
-#eclipse.gef.sdk.url = http://eclipse.ialto.org/tools/gef/downloads/drops/3.4.2/R200902171642/
-#eclipse.gef.sdk.archive = GEF-runtime-3.4.2.zip
-
 
 ## The location from where eclipse SDK will be downloaded in case there's none in the releng/externals directory
 ## Don't add the trailing file name, the file name is automatically appended based on eclipse.sdk.archive

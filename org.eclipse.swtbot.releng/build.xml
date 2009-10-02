@@ -1,6 +1,7 @@
 <project name="org.eclipse.swtbot.releng" default="all" basedir=".">
 
 	<property file="build.developer.properties" />
+	<property file="build.default.properties" />
 	<import file="check-prerequisites.xml" />
 
 	<property name="plugin.version.primary" value="2.0.0" />
