@@ -130,6 +130,14 @@ public class SWTBotTableItem extends AbstractSWTBot<TableItem> {
 		});
 	}
 
+	public String getText(final int index) {
+		return syncExec(new StringResult() {
+			public String run() {
+				return widget.getText(index);
+			}
+		});
+	}
+	
 	public SWTBotMenu contextMenu(String text) throws WidgetNotFoundException {
 		new SWTBotTable(table).assertEnabled();
 		select();
