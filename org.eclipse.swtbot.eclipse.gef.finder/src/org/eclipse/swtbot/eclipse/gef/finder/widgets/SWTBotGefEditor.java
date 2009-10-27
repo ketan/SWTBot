@@ -13,10 +13,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.gef.finder.widgets;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -25,11 +21,9 @@ import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.regex.Pattern;
 
-import org.eclipse.draw2d.EventDispatcher;
+import org.eclipse.draw2d.FigureCanvas;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
-import org.eclipse.draw2d.LightweightSystem;
-import org.eclipse.draw2d.MouseEvent;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.text.TextFlow;
 import org.eclipse.gef.ConnectionEditPart;
@@ -54,7 +48,9 @@ import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.Result;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
+import org.eclipse.ui.part.MultiPageEditorPart;
 import org.hamcrest.Matcher;
 
 /**
@@ -75,10 +71,10 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
 
     protected GraphicalViewer graphicalViewer;
 
-    protected EventDispatcher eventDispatcher;
-
     protected EditDomain editDomain;
 
+    protected SWTBotGefFigureCanvas canvas;
+    
     private Map<EditPart, SWTBotGefEditPart> editPartMapping = new WeakHashMap<EditPart, SWTBotGefEditPart>();
 
     //TODO comment.
@@ -94,36 +90,44 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
         editPartMapping.clear();
     }
 
-    private void init() throws WidgetNotFoundException {
-        final Exception[] exception = new Exception[1];
+    protected void init() throws WidgetNotFoundException {
         UIThreadRunnable.syncExec(new VoidResult() {
-            public void run() {
-                try {
-                    graphicalEditor = (GraphicalEditor) reference.getEditor(true);
-                    graphicalViewer = (GraphicalViewer) getGraphicalEditor().getAdapter(GraphicalViewer.class);
-                    LightweightSystem lightweightSystem = (LightweightSystem) invoke(GraphicalViewerImpl.class.getDeclaredMethod("getLightweightSystem"), graphicalViewer);
-                    eventDispatcher = (EventDispatcher) invoke(LightweightSystem.class.getDeclaredMethod("getEventDispatcher"), lightweightSystem);
-                    editDomain = (EditDomain) invoke(GraphicalEditor.class.getDeclaredMethod("getEditDomain"), graphicalEditor);
-                } catch (Exception e) {
-                    exception[0] = e;
-                }
-            }
+        	public void run() {
+
+        		setGraphicalEditor();
+        		graphicalViewer = (GraphicalViewer) getGraphicalEditor().getAdapter(GraphicalViewer.class);
+        		final Control control = graphicalViewer.getControl();
+        		if (control instanceof FigureCanvas) {
+        			canvas = new SWTBotGefFigureCanvas((FigureCanvas) control);
+        		}
+        		editDomain = graphicalViewer.getEditDomain();
+        	}
         });
-        if (exception[0] != null) {
-            throw new IllegalStateException(exception[0]);
-        }
+
         if (graphicalViewer == null) {
             throw new WidgetNotFoundException("Editor does not adapt to a GraphicalViewer");
         }
     }
 
-    private Object invoke(Method method, Object target, Object... args) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
-        if (!Modifier.isPublic(method.getModifiers())) {
-            method.setAccessible(true);
-        }
-        return method.invoke(target, args);
+    private void setGraphicalEditor() {
+    	IEditorPart editor = reference.getEditor(true);
+    	/*
+    	 * Support for multi page editors.
+    	 * Will not be necessary when #260088 will be fixed
+    	 */
+    	if (editor instanceof MultiPageEditorPart) {
+    		MultiPageEditorPart multiEditor = (MultiPageEditorPart) editor;
+    		IEditorPart[] innerEditors = multiEditor.findEditors(multiEditor.getEditorInput());
+    		for (IEditorPart editorPart : innerEditors) {
+    			if (editorPart instanceof GraphicalEditor) {
+    				editor = editorPart;
+    				break;
+    			}
+    		}
+    	}
+    	graphicalEditor = (GraphicalEditor) editor;
     }
-
+    
     public SWTBotGefEditPart mainEditPart() throws WidgetNotFoundException {
         List<SWTBotGefEditPart> children = rootEditPart().children();
         if (children.size() != 1) {
@@ -230,16 +234,7 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
         return graphicalEditor;
     }
 
-    MouseEvent createMouseEvent(IFigure figure, int x, int y, int button, int stateMask) {
-        try {
-            final Constructor<MouseEvent> constructor = MouseEvent.class.getDeclaredConstructor(int.class, int.class, EventDispatcher.class, IFigure.class, int.class, int.class);
-            constructor.setAccessible(true);
-            return constructor.newInstance(x, y, eventDispatcher, figure, button, stateMask);
-        } catch (final Exception e) {
-            throw new IllegalStateException(e);
-        }
-    }
-
+    //TODO should be in a separate class
     /**
      * type the given text into the graphical editor, presuming that it is
      * already in 'direct edit' mode.
@@ -326,6 +321,10 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
         return rootEditPart().ancestors(matcher);
     }
 
+	protected SWTBotGefFigureCanvas getCanvas() {
+        return canvas;
+    }
+	
     protected Control getControl() {
         return graphicalViewer.getControl();
     }
@@ -382,12 +381,7 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
     public void mouseMoveDoubleClick(final int xPosition, final int yPosition) {
     	UIThreadRunnable.asyncExec(new VoidResult() {
     		public void run() {
-    			org.eclipse.swt.events.MouseEvent meMove = createMouseEvent(xPosition, yPosition, 0, 0, 0);
-    			eventDispatcher.dispatchMouseMoved(meMove);
-    			org.eclipse.swt.events.MouseEvent meDown = createMouseEvent(xPosition, yPosition, 1, SWT.BUTTON1, 1);
-    			eventDispatcher.dispatchMousePressed(meDown);
-    			org.eclipse.swt.events.MouseEvent meDoubleClick = createMouseEvent(xPosition, yPosition, 1, SWT.BUTTON1, 1);
-    			eventDispatcher.dispatchMouseDoubleClicked(meDoubleClick);
+    			canvas.mouseMoveDoubleClick(xPosition, yPosition);
     		}
     	});
     }
@@ -402,16 +396,12 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
     public void mouseMoveLeftClick(final int xPosition, final int yPosition) {
         UIThreadRunnable.syncExec(new VoidResult() {
             public void run() {
-        		org.eclipse.swt.events.MouseEvent meMove = createMouseEvent(xPosition, yPosition, 0, 0, 0);
-        		eventDispatcher.dispatchMouseMoved(meMove);
-        		org.eclipse.swt.events.MouseEvent meDown = createMouseEvent(xPosition, yPosition, 1, SWT.BUTTON1, 1);
-        		eventDispatcher.dispatchMousePressed(meDown);
-        		org.eclipse.swt.events.MouseEvent meUp = createMouseEvent(xPosition, yPosition, 1 , SWT.BUTTON1, 1);
-        		eventDispatcher.dispatchMouseReleased(meUp);
+        		canvas.mouseMoveLeftClick(xPosition, yPosition);
             }
         });
     }
 
+    //TODO should be commented
     /**
      * this method emits mouse events that handle drags within the editor
      * 
@@ -423,44 +413,13 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
     public void mouseDrag(final int fromXPosition, final int fromYPosition, final int toXPosition, final int toYPosition) {
         UIThreadRunnable.syncExec(new VoidResult() {
             public void run() {
-        		org.eclipse.swt.events.MouseEvent meMove = createMouseEvent(fromXPosition, fromYPosition, 0, 0, 0);
-        		eventDispatcher.dispatchMouseMoved(meMove);
-            	org.eclipse.swt.events.MouseEvent meDown = createMouseEvent(fromXPosition, fromYPosition, 1, SWT.BUTTON1, 1);
-            	eventDispatcher.dispatchMousePressed(meDown);
-        		org.eclipse.swt.events.MouseEvent meMoveTarget = createMouseEvent(toXPosition, toYPosition, 1, SWT.BUTTON1, 0);
-        		eventDispatcher.dispatchMouseMoved(meMoveTarget);
-        		org.eclipse.swt.events.MouseEvent meUp = createMouseEvent(toXPosition, toYPosition, 1 , SWT.BUTTON1, 1);
-        		eventDispatcher.dispatchMouseReleased(meUp);
+                canvas.mouseDrag(fromXPosition, fromYPosition, toXPosition, toYPosition);
             }
         });
     }
+	
 
-	/**
-	 * Create a mouse event
-	 * <br>
-	 * FIXME: this method is a duplicate of taken from SWTBOT
-	 * 
-	 * @param x the x coordinate of the mouse event.
-	 * @param y the y coordinate of the mouse event.
-	 * @param button the mouse button that was clicked.
-	 * @param stateMask the state of the keyboard modifier keys.
-	 * @param count the number of times the mouse was clicked.
-	 * @return an event that encapsulates {@link #widget} and {@link #display}
-	 * @since 1.2
-	 */
-	protected org.eclipse.swt.events.MouseEvent createMouseEvent(int x, int y, int button, int stateMask, int count) {
-		Event event = new Event();
-		event.time = (int) System.currentTimeMillis();
-		event.widget = widget;
-		event.display = bot.getDisplay();
-		event.x = x;
-		event.y = y;
-		event.button = button;
-		event.stateMask = stateMask;
-		event.count = count;
-		return new org.eclipse.swt.events.MouseEvent(event);
-	}
-
+	//TODO should be commented
 	 /** 
 	    * this method emits mouse events that handle a mouse move and left click to the specified position within the editor.<br>
 	    * Note that a move is required before left clicking in order to update the mouse cursor with the target editpart.  
@@ -533,6 +492,8 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
 	       return getEditpart(label, allEditParts);
 	   }
 
+	   //FIXME should moved in a finder
+	   @Deprecated
 	   /**
         * get this edit part with the label as a single selection
         */
@@ -577,6 +538,7 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
             return getEditpart(label, allEditParts);
         }
 
+        //FIXME should moved in a finder
         /**
          * @return if the figure is a label
          */
@@ -596,6 +558,7 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
             return false;
         }
         
+        //FIXME should moved in a finder
         /**
          * @return if the figure or all its children contain the label 
          */

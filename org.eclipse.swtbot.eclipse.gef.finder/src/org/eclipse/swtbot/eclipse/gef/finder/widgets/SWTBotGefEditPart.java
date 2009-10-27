@@ -18,12 +18,9 @@ import java.util.List;
 import java.util.Stack;
 
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Event;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.Result;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
@@ -131,38 +128,11 @@ public class SWTBotGefEditPart {
 				IFigure figure = ((GraphicalEditPart) part).getFigure();
 				Rectangle bounds = figure.getBounds().getCopy();
 				figure.translateToAbsolute(bounds);
-				graphicalEditor.eventDispatcher.dispatchMouseEntered(createMouseEvent(0, 0, bounds.x, bounds.y));
-				graphicalEditor.eventDispatcher.dispatchMouseMoved(createMouseEvent(0, 0, bounds.x, bounds.y));
-				graphicalEditor.eventDispatcher.dispatchMousePressed(createMouseEvent(1, 1, bounds.x, bounds.y));
-				graphicalEditor.eventDispatcher.dispatchMouseReleased(createMouseEvent(1, 1, bounds.x, bounds.y));
-				graphicalEditor.eventDispatcher.dispatchMouseExited(createMouseEvent(0, 0, bounds.x, bounds.y));
+				graphicalEditor.getCanvas().mouseEnterLeftClickAndExit(bounds.x, bounds.y);
 			}		
 		});
 		return this;
 	}
-
-	private org.eclipse.swt.events.MouseEvent createMouseEvent(int button,int count,int x, int y) {
-		Event e = createEvent();
-		e.button = button;
-		e.count = count;
-		e.x = x;
-		e.y = y;
-		org.eclipse.swt.events.MouseEvent event = new org.eclipse.swt.events.MouseEvent(e);
-		return event; 
-	}
-
-	private Event createEvent() {
-		IFigure figure = ((GraphicalEditPart)part).getFigure();
-		Point point = new Point(0,0);
-		figure.translateToAbsolute(point);
-		Event e = new Event();
-		e.display = Display.getCurrent();
-		e.time = (int) System.currentTimeMillis();
-		e.widget = graphicalEditor.graphicalViewer.getControl();
-		return e;
-	}
-
-	
 	
 	/**
 	 * get the parent, or null if this is the root edit part.
