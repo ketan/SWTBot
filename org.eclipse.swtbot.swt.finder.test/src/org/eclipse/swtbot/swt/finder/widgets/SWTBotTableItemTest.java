@@ -52,6 +52,12 @@ public class SWTBotTableItemTest extends AbstractSWTTestCase {
 	}
 
 	@Test
+	public void canGetTableItemText() throws Exception {
+		SWTBotTableItem line = table.getTableItem("Index:0");
+		assertEquals("classes", line.getText(1));
+	}
+	
+	@Test
 	public void checkingATableThatDoesNotHaveCheckStyleBitsThrowsException() throws Exception {
 		try {
 			table.getTableItem("Index:2").check();
