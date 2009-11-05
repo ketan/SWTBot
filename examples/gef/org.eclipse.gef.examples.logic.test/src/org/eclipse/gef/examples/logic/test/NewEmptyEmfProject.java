@@ -14,6 +14,7 @@ package org.eclipse.gef.examples.logic.test;
 
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.swt.finder.waits.Conditions;
+import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 
@@ -28,7 +29,17 @@ public class NewEmptyEmfProject {
 		shell.activate();
 		
 	    SWTBotTree projectSelectionTree = bot.tree();
-	    projectSelectionTree.expandNode("Eclipse Modeling Framework").select("Empty EMF Project");
+	    projectSelectionTree.expandNode("Eclipse Modeling Framework").expandNode("Empty EMF Project").select();
+	    bot.waitUntil(new DefaultCondition() {
+			public String getFailureMessage() {
+				return "unable to select";
+			}
+			
+			public boolean test() throws Exception {
+				return bot.button("Next >").isEnabled();
+			}	
+	    	
+	    });
 	    bot.button("Next >").click();
 		bot.textWithLabel("Project name:").setText(projectName);
 		bot.button("Finish").click();

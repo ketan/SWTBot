@@ -21,6 +21,25 @@ public class CreateLogicDiagram {
 
 	private SWTWorkbenchBot	bot	= new SWTWorkbenchBot();
 	
+	public void createMFile(final String projectName, final String fileName) throws Exception {
+		bot.menu("File").menu("New").menu("Other...").click();
+	    bot.waitUntil(Conditions.shellIsActive("New"));
+		SWTBotShell shell = bot.shell("New");
+		shell.activate();
+		
+		
+	    SWTBotTree wizardTree = bot.tree();
+	    wizardTree.expandNode("Examples").expandNode("GEF (Graphical Editing Framework)").expandNode("Logic M Diagram").select();
+	    bot.button("Next >").click();
+		
+	    SWTBotTree projectSelectionTree = bot.tree();
+	    projectSelectionTree.select(projectName); 
+	    
+	    bot.textWithLabel("File name:").setText(fileName);
+	    bot.button("Finish").click();
+		bot.waitUntil(Conditions.shellCloses(shell));
+	}
+	
 	public void createFile(final String projectName, final String fileName) throws Exception {
 		bot.menu("File").menu("New").menu("Other...").click();
 	    bot.waitUntil(Conditions.shellIsActive("New"));
