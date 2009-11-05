@@ -33,7 +33,6 @@ import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.palette.PaletteEntry;
 import org.eclipse.gef.palette.ToolEntry;
-import org.eclipse.gef.ui.parts.GraphicalEditor;
 import org.eclipse.gef.ui.parts.GraphicalViewerImpl;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
@@ -50,7 +49,6 @@ import org.eclipse.swtbot.swt.finder.results.Result;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
-import org.eclipse.ui.part.MultiPageEditorPart;
 import org.hamcrest.Matcher;
 
 /**
@@ -66,8 +64,6 @@ import org.hamcrest.Matcher;
  * @author David Green
  */
 public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
-
-    protected GraphicalEditor graphicalEditor;
 
     protected GraphicalViewer graphicalViewer;
 
@@ -93,9 +89,8 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
     protected void init() throws WidgetNotFoundException {
         UIThreadRunnable.syncExec(new VoidResult() {
         	public void run() {
-
-        		setGraphicalEditor();
-        		graphicalViewer = (GraphicalViewer) getGraphicalEditor().getAdapter(GraphicalViewer.class);
+        		final IEditorPart editor = reference.getEditor(true);
+        		graphicalViewer = (GraphicalViewer) editor.getAdapter(GraphicalViewer.class);
         		final Control control = graphicalViewer.getControl();
         		if (control instanceof FigureCanvas) {
         			canvas = new SWTBotGefFigureCanvas((FigureCanvas) control);
@@ -107,25 +102,6 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
         if (graphicalViewer == null) {
             throw new WidgetNotFoundException("Editor does not adapt to a GraphicalViewer");
         }
-    }
-
-    private void setGraphicalEditor() {
-    	IEditorPart editor = reference.getEditor(true);
-    	/*
-    	 * Support for multi page editors.
-    	 * Will not be necessary when #260088 will be fixed
-    	 */
-    	if (editor instanceof MultiPageEditorPart) {
-    		MultiPageEditorPart multiEditor = (MultiPageEditorPart) editor;
-    		IEditorPart[] innerEditors = multiEditor.findEditors(multiEditor.getEditorInput());
-    		for (IEditorPart editorPart : innerEditors) {
-    			if (editorPart instanceof GraphicalEditor) {
-    				editor = editorPart;
-    				break;
-    			}
-    		}
-    	}
-    	graphicalEditor = (GraphicalEditor) editor;
     }
     
     public SWTBotGefEditPart mainEditPart() throws WidgetNotFoundException {
@@ -228,10 +204,6 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
      */
     private EditDomain getEditDomain() {
         return editDomain;
-    }
-
-    private GraphicalEditor getGraphicalEditor() {
-        return graphicalEditor;
     }
 
     //TODO should be in a separate class
