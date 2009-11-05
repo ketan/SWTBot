@@ -181,7 +181,7 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
     	return (SWTBotGefConnectionEditPart) createEditPart((EditPart) part);
     }
 
-    
+    //TODO comment
     public void activateDefaultTool() {
         UIThreadRunnable.syncExec(new VoidResult() {
             public void run() {
@@ -293,6 +293,7 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
      * @see Event#stateMask
      * @since 1.2
      */
+    @Deprecated
     protected Event keyEvent(int modificationKey, char c, int keyCode) {
         Event keyEvent = createEvent();
         keyEvent.stateMask = modificationKey;
@@ -302,6 +303,7 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
         return keyEvent;
     }
 
+    @Deprecated
     protected Event createEvent() {
         Event event = new Event();
         event.time = (int) System.currentTimeMillis();
