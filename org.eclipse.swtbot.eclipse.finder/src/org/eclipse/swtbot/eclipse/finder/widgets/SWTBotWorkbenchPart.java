@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
@@ -33,9 +34,14 @@ import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.ListResult;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
+import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarButton;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarDropDownButton;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarPushButton;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarRadioButton;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarToggleButton;
 import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.IWorkbenchPartReference;
 import org.eclipse.ui.PartInitException;
@@ -184,15 +190,23 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 			public List<SWTBotToolbarButton> run() {
 				ViewPane obj = (ViewPane) ((WorkbenchPartReference) partReference).getPane();
 				ToolBar toolbar = (ToolBar) obj.getToolBar();
-				List<SWTBotToolbarButton> l = new ArrayList<SWTBotToolbarButton>();
+				final List<SWTBotToolbarButton> l = new ArrayList<SWTBotToolbarButton>();
 
 				if (toolbar == null)
 					return l;
 
 				ToolItem[] items = toolbar.getItems();
+				log.debug("number of items : " + items.length);
 				for (int i = 0; i < items.length; i++) {
 					try {
-						l.add(new SWTBotToolbarButton(items[i]));
+						if (SWTUtils.hasStyle(items[i], SWT.PUSH))
+							l.add(new SWTBotToolbarPushButton(items[i]));
+						else if(SWTUtils.hasStyle(items[i], SWT.CHECK))
+							l.add(new SWTBotToolbarToggleButton(items[i]));
+						else if(SWTUtils.hasStyle(items[i], SWT.RADIO))
+							l.add(new SWTBotToolbarRadioButton(items[i]));
+						else if(SWTUtils.hasStyle(items[i], SWT.DROP_DOWN))
+							l.add(new SWTBotToolbarDropDownButton(items[i]));
 					} catch (WidgetNotFoundException e) {
 						log.warn("Failed to find widget " + items[i].getText(), e); //$NON-NLS-1$
 					}
@@ -202,6 +216,66 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 
 			}
 		});
+	}
+
+	/**
+	 * Gets the toolbar drop down button matching the given toolbar button.
+	 *
+	 * @param tooltip The tooltip to use to find the button to return.
+	 * @return The toolbar button.
+	 * @throws WidgetNotFoundException Thrown if the widget was not found matching the given tooltip.
+	 */
+	public SWTBotToolbarDropDownButton toolbarDropDownButton(String tooltip) throws WidgetNotFoundException {
+		SWTBotToolbarButton abstractButton = toolbarButton(tooltip);
+		if (abstractButton instanceof SWTBotToolbarDropDownButton)
+			return (SWTBotToolbarDropDownButton) abstractButton;
+
+		throw new WidgetNotFoundException("Unable to find toolitem with the given tooltip '" + tooltip + "'"); //$NON-NLS-1$ //$NON-NLS-2$
+	}
+
+	/**
+	 * Gets the toolbar radio button matching the given toolbar button.
+	 *
+	 * @param tooltip The tooltip to use to find the button to return.
+	 * @return The toolbar button.
+	 * @throws WidgetNotFoundException Thrown if the widget was not found matching the given tooltip.
+	 */
+	public SWTBotToolbarRadioButton toolbarRadioButton(String tooltip) throws WidgetNotFoundException {
+		SWTBotToolbarButton abstractButton = toolbarButton(tooltip);
+		if (abstractButton instanceof SWTBotToolbarRadioButton)
+			return (SWTBotToolbarRadioButton) abstractButton;
+
+		throw new WidgetNotFoundException("Unable to find toolitem with the given tooltip '" + tooltip + "'"); //$NON-NLS-1$ //$NON-NLS-2$
+	}
+
+	/**
+	 * Gets the toolbar push button matching the given toolbar button.
+	 *
+	 * @param tooltip The tooltip to use to find the button to return.
+	 * @return The toolbar button.
+	 * @throws WidgetNotFoundException Thrown if the widget was not found matching the given tooltip.
+	 */
+	public SWTBotToolbarPushButton toolbarPushButton(String tooltip) throws WidgetNotFoundException {
+		SWTBotToolbarButton abstractButton = toolbarButton(tooltip);
+		if (abstractButton instanceof SWTBotToolbarPushButton)
+			return (SWTBotToolbarPushButton) abstractButton;
+
+		throw new WidgetNotFoundException("Unable to find toolitem with the given tooltip '" + tooltip + "'"); //$NON-NLS-1$ //$NON-NLS-2$
+	}
+
+	/**
+	 * Gets the toggle toolbar button matching the given toolbar button.
+	 *
+	 * @param tooltip The tooltip to use to find the button to return.
+	 * @return The toolbar button.
+	 * @throws WidgetNotFoundException Thrown if the widget was not found matching the given tooltip.
+	 */
+	public SWTBotToolbarToggleButton toolbarToggleButton(String tooltip) throws WidgetNotFoundException {
+		SWTBotToolbarButton abstractButton = toolbarButton(tooltip);
+		if (abstractButton instanceof SWTBotToolbarToggleButton)
+			return (SWTBotToolbarToggleButton) abstractButton;
+
+		throw new WidgetNotFoundException("Unable to find toolitem with the given tooltip '" + tooltip + "'"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Ketan Padegaonkar and others.
+ * Copyright (c) 2008, 2009 Ketan Padegaonkar and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -58,6 +58,9 @@ public class SWTBotTestView extends ViewPart {
 	private TableViewer		viewer;
 	private Action			iActionTypeAction;
 	private Action			doubleClickAction;
+	private Action			iToggleTypeAction;
+	private Action			iRadioTypeAction;
+	private Action			iDropDownTypeAction;
 
 	/**
 	 * The constructor.
@@ -106,6 +109,9 @@ public class SWTBotTestView extends ViewPart {
 
 	private void fillLocalPullDown(IMenuManager manager) {
 		manager.add(iActionTypeAction);
+		manager.add(iToggleTypeAction);
+		manager.add(iRadioTypeAction);
+		manager.add(iDropDownTypeAction);
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
 
@@ -117,6 +123,9 @@ public class SWTBotTestView extends ViewPart {
 
 	private void fillLocalToolBar(IToolBarManager manager) {
 		manager.add(iActionTypeAction);
+		manager.add(iToggleTypeAction);
+		manager.add(iRadioTypeAction);
+		manager.add(iDropDownTypeAction);
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
 
@@ -138,6 +147,27 @@ public class SWTBotTestView extends ViewPart {
 				showMessage("Double-click detected on " + obj.toString());
 			}
 		};
+		
+		iToggleTypeAction = new Action("Toggle", Action.AS_CHECK_BOX) {
+			public void run() {
+				showMessage("iAction executed.");
+			}
+		};
+		iToggleTypeAction.setToolTipText("This represents a toggle IAction command.");
+		
+		iRadioTypeAction = new Action("Radio", Action.AS_RADIO_BUTTON) {
+			public void run() {
+				showMessage("iAction executed.");
+			}
+		};
+		iRadioTypeAction.setToolTipText("This represents a radio IAction command.");
+		
+		iDropDownTypeAction = new Action("DropDown", Action.AS_DROP_DOWN_MENU) {
+			public void run() {
+				showMessage("iAction executed.");
+			}
+		};
+		iDropDownTypeAction.setToolTipText("This represents a drop down IAction command.");
 	}
 
 	private void hookDoubleClickAction() {

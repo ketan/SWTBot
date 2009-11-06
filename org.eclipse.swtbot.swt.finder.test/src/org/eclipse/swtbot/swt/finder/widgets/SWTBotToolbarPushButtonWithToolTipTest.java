@@ -16,7 +16,7 @@ import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.junit.Test;
 
-public class SWTBotToolbarButtonWithToolTipTest extends AbstractSWTTestCase {
+public class SWTBotToolbarPushButtonWithToolTipTest extends AbstractSWTTestCase {
 
 	private SWTBot	bot;
 

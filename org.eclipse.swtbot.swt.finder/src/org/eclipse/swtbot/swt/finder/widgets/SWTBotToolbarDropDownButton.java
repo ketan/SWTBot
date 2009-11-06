@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Ketan Padegaonkar and others.
+ * Copyright (c) 2008, 2009 Ketan Padegaonkar and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -26,7 +26,6 @@ import org.eclipse.swtbot.swt.finder.SWTBotWidget;
 import org.eclipse.swtbot.swt.finder.Style;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.EventContextMenuFinder;
-import org.eclipse.swtbot.swt.finder.results.BoolResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
@@ -42,7 +41,7 @@ import org.hamcrest.SelfDescribing;
  */
 @SWTBotWidget(clasz = ToolItem.class, preferredName = "toolbarDropDownButton", style = @Style(name = "SWT.DROP_DOWN", value = SWT.DROP_DOWN), referenceBy = {
 		ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })
-public class SWTBotToolbarDropDownButton extends AbstractSWTBot<ToolItem> {
+public class SWTBotToolbarDropDownButton extends SWTBotToolbarButton {
 
 	/**
 	 * Constructs an new instance of this item.
@@ -139,17 +138,7 @@ public class SWTBotToolbarDropDownButton extends AbstractSWTBot<ToolItem> {
 	public SWTBotToolbarDropDownButton click() {
 		log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
 		assertEnabled();
-		notify(SWT.MouseEnter);
-		notify(SWT.MouseMove);
-		notify(SWT.Activate);
-		notify(SWT.MouseDown);
-		notify(SWT.MouseUp);
-		notify(SWT.Selection);
-		notify(SWT.MouseHover);
-		notify(SWT.MouseMove);
-		notify(SWT.MouseExit);
-		notify(SWT.Deactivate);
-		notify(SWT.FocusOut);
+		sendNotifications();
 		log.debug(MessageFormat.format("Clicked on {0}", this)); //$NON-NLS-1$
 		return this;
 	}
@@ -174,14 +163,5 @@ public class SWTBotToolbarDropDownButton extends AbstractSWTBot<ToolItem> {
 		Event event = createEvent();
 		event.detail = SWT.ARROW;
 		return event;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return syncExec(new BoolResult() {
-			public Boolean run() {
-				return widget.isEnabled();
-			}
-		});
 	}
 }

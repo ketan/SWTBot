@@ -28,7 +28,7 @@ import org.junit.Test;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotToolbarButtonTest extends AbstractSWTTestCase {
+public class SWTBotToolbarPushButtonTest extends AbstractSWTTestCase {
 
 	private SWTBot	bot;
 

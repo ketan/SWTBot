@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Ketan Padegaonkar and others.
+ * Copyright (c) 2008, 2009 Ketan Padegaonkar and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -20,6 +20,9 @@ import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarButton;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarDropDownButton;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarRadioButton;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarToggleButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem;
 import org.junit.Test;
@@ -106,13 +109,13 @@ public class SWTBotViewTest {
 	@Test
 	public void getToolbarButtons() throws Exception {
 		SWTBotView view = bot.viewByTitle("SWTBot Test View");
-		List<SWTBotToolbarButton> l = view.getToolbarButtons();
-		assertNotNull(l);
-		assertEquals(1, l.size());
+		List<SWTBotToolbarButton> items = view.getToolbarButtons();
+		assertNotNull(items);
+		assertEquals(4, items.size());
 	}
 
 	@Test
-	public void toolbarButton() throws Exception {
+	public void toolbarPushButton() throws Exception {
 		SWTBotView view = bot.viewByTitle("SWTBot Test View");
 
 		SWTBotToolbarButton button = view.toolbarButton("This represents an IAction command.");
@@ -121,7 +124,40 @@ public class SWTBotViewTest {
 		button.click();
 		bot.button("OK").click();
 	}
+	
+	@Test
+	public void toolbarToogleButton() throws Exception {
+		SWTBotView view = bot.viewByTitle("SWTBot Test View");
 
+		SWTBotToolbarToggleButton button = view.toolbarToggleButton("This represents a toggle IAction command.");
+		assertNotNull(button);
+
+		button.click();
+		bot.button("OK").click();
+	}
+
+	@Test
+	public void toolbarRadioButton() throws Exception {
+		SWTBotView view = bot.viewByTitle("SWTBot Test View");
+
+		SWTBotToolbarRadioButton button = view.toolbarRadioButton("This represents a radio IAction command.");
+		assertNotNull(button);
+
+		button.click();
+		bot.button("OK").click();
+	}
+	
+	@Test
+	public void toolbarDropDownButton() throws Exception {
+		SWTBotView view = bot.viewByTitle("SWTBot Test View");
+
+		SWTBotToolbarDropDownButton button = view.toolbarDropDownButton("This represents a drop down IAction command.");
+		assertNotNull(button);
+
+		button.click();
+		bot.button("OK").click();
+	}
+	
 	@Test
 	public void toolbarButtonNotFound() throws Exception {
 		SWTBotView view = bot.viewByTitle("SWTBot Test View");

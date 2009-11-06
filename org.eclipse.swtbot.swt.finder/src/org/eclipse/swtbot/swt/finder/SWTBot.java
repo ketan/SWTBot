@@ -44,6 +44,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotText;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToggleButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarButton;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarPushButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarToggleButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarDropDownButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarRadioButton;
@@ -2523,7 +2524,7 @@ public class SWTBot extends SWTBotFactory {
 	@SuppressWarnings("unchecked")
 	public SWTBotToolbarButton toolbarButton(String mnemonicText, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withMnemonic(mnemonicText), withStyle(SWT.PUSH, "SWT.PUSH"));
-		return new SWTBotToolbarButton((ToolItem) widget(matcher, index), matcher);
+		return new SWTBotToolbarPushButton((ToolItem) widget(matcher, index), matcher);
 	}
 
 	/**
@@ -2542,7 +2543,7 @@ public class SWTBot extends SWTBotFactory {
 	@SuppressWarnings("unchecked")
 	public SWTBotToolbarButton toolbarButtonWithTooltip(String tooltip, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withTooltip(tooltip), withStyle(SWT.PUSH, "SWT.PUSH"));
-		return new SWTBotToolbarButton((ToolItem) widget(matcher, index), matcher);
+		return new SWTBotToolbarPushButton((ToolItem) widget(matcher, index), matcher);
 	}
 
 	/**
@@ -2563,7 +2564,7 @@ public class SWTBot extends SWTBotFactory {
 	@SuppressWarnings("unchecked")
 	public SWTBotToolbarButton toolbarButtonWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withId(key, value), withStyle(SWT.PUSH, "SWT.PUSH"));
-		return new SWTBotToolbarButton((ToolItem) widget(matcher, index), matcher);
+		return new SWTBotToolbarPushButton((ToolItem) widget(matcher, index), matcher);
 	}
 
 	/**
@@ -2582,7 +2583,7 @@ public class SWTBot extends SWTBotFactory {
 	@SuppressWarnings("unchecked")
 	public SWTBotToolbarButton toolbarButtonWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withId(value), withStyle(SWT.PUSH, "SWT.PUSH"));
-		return new SWTBotToolbarButton((ToolItem) widget(matcher, index), matcher);
+		return new SWTBotToolbarPushButton((ToolItem) widget(matcher, index), matcher);
 	}
 
 	/**
@@ -2601,7 +2602,7 @@ public class SWTBot extends SWTBotFactory {
 	@SuppressWarnings("unchecked")
 	public SWTBotToolbarButton toolbarButtonInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), inGroup(inGroup), withStyle(SWT.PUSH, "SWT.PUSH"));
-		return new SWTBotToolbarButton((ToolItem) widget(matcher, index), matcher);
+		return new SWTBotToolbarPushButton((ToolItem) widget(matcher, index), matcher);
 	}
 
 	/**
@@ -2618,7 +2619,7 @@ public class SWTBot extends SWTBotFactory {
 	@SuppressWarnings("unchecked")
 	public SWTBotToolbarButton toolbarButton(int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withStyle(SWT.PUSH, "SWT.PUSH"));
-		return new SWTBotToolbarButton((ToolItem) widget(matcher, index), matcher);
+		return new SWTBotToolbarPushButton((ToolItem) widget(matcher, index), matcher);
 	}
 
 	/**
@@ -2639,7 +2640,7 @@ public class SWTBot extends SWTBotFactory {
 	@SuppressWarnings("unchecked")
 	public SWTBotToolbarButton toolbarButtonInGroup(String mnemonicText, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withMnemonic(mnemonicText), inGroup(inGroup), withStyle(SWT.PUSH, "SWT.PUSH"));
-		return new SWTBotToolbarButton((ToolItem) widget(matcher, index), matcher);
+		return new SWTBotToolbarPushButton((ToolItem) widget(matcher, index), matcher);
 	}
 
 	/**
@@ -2660,7 +2661,7 @@ public class SWTBot extends SWTBotFactory {
 	@SuppressWarnings("unchecked")
 	public SWTBotToolbarButton toolbarButtonWithTooltipInGroup(String tooltip, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.PUSH, "SWT.PUSH"));
-		return new SWTBotToolbarButton((ToolItem) widget(matcher, index), matcher);
+		return new SWTBotToolbarPushButton((ToolItem) widget(matcher, index), matcher);
 	}
 
 	/**

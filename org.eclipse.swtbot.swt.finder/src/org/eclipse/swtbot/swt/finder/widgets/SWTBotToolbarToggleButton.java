@@ -31,7 +31,7 @@ import org.hamcrest.SelfDescribing;
  */
 @SWTBotWidget(clasz = ToolItem.class, preferredName = "toolbarToggleButton", style = @Style(name = "SWT.CHECK", value = SWT.CHECK), referenceBy = {
 		ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })
-public class SWTBotToolbarToggleButton extends AbstractSWTBot<ToolItem> {
+public class SWTBotToolbarToggleButton extends SWTBotToolbarButton {
 
 	/**
 	 * Constructs an new instance of this item.
@@ -64,17 +64,7 @@ public class SWTBotToolbarToggleButton extends AbstractSWTBot<ToolItem> {
 		log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
 		assertEnabled();
 		internalToggle();
-		notify(SWT.MouseEnter);
-		notify(SWT.MouseMove);
-		notify(SWT.Activate);
-		notify(SWT.MouseDown);
-		notify(SWT.MouseUp);
-		notify(SWT.Selection);
-		notify(SWT.MouseHover);
-		notify(SWT.MouseMove);
-		notify(SWT.MouseExit);
-		notify(SWT.Deactivate);
-		notify(SWT.FocusOut);
+		sendNotifications();
 		log.debug(MessageFormat.format("Clicked on {0}", this)); //$NON-NLS-1$
 		return this;
 	}
@@ -114,15 +104,6 @@ public class SWTBotToolbarToggleButton extends AbstractSWTBot<ToolItem> {
 		return syncExec(new BoolResult() {
 			public Boolean run() {
 				return widget.getSelection();
-			}
-		});
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return syncExec(new BoolResult() {
-			public Boolean run() {
-				return widget.isEnabled();
 			}
 		});
 	}
