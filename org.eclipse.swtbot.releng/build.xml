@@ -353,6 +353,7 @@
 				<include name="org.eclipse.swtbot-${all.buildId}.zip" />
 				<include name="org.eclipse.swtbot.eclipse-${all.buildId}.zip" />
 				<include name="org.eclipse.swtbot.eclipse.test-${all.buildId}.zip" />
+				<include name="org.eclipse.swtbot.eclipse.gef-${all.buildId}.zip" />
 			</fileset>
 		</copy>
 

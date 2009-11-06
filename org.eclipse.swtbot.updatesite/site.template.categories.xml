@@ -12,5 +12,12 @@
 		</description>
 	</category-def>
 	
+
+	<category-def name="SWTBot GEF Features (incubation)" label="SWTBot GEF Features (incubation)">
+		<description>
+			This feature contains the SWTBot drivers for GEF. This is useful for testing GEF based applications.
+		</description>
+	</category-def>
+
 	<!-- end the categories -->
 

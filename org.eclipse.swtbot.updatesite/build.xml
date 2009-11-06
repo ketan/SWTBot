@@ -22,6 +22,9 @@
 			<fileset dir="${target}/features">
 				<include name="org.eclipse.swtbot.eclipse_*.jar" />
 			</fileset>
+			<fileset dir="${target}/features">
+				<include name="org.eclipse.swtbot.eclipse.gef*.jar" />
+			</fileset>
 		</purge>
 
 		<echo>Purging plugins</echo>
@@ -30,6 +33,11 @@
 			<!-- demo -->
 			<fileset dir="${target}/plugins">
 				<include name="org.eclipse.swtbot.swt.demo_*.jar" />
+			</fileset>
+
+			<!-- gef finder -->
+			<fileset dir="${target}/plugins">
+				<include name="org.eclipse.swtbot.eclipse.gef.finder_*.jar" />
 			</fileset>
 
 			<!-- eclipse finder -->
@@ -216,6 +224,7 @@
 
 		<unzip dest="${target}">
 			<fileset dir="../${plugin.prefix}.releng/artifacts" includes="org.eclipse.swtbot.eclipse-*" />
+			<fileset dir="../${plugin.prefix}.releng/artifacts" includes="org.eclipse.swtbot.eclipse.gef-*" />
 		</unzip>
 
 		<antcall target="-create.jars" inheritall="false" />
