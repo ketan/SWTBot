@@ -101,6 +101,14 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 	}
 
 	/**
+	 * @return the reference for this part.
+	 */
+	public T getReference() {
+		return partReference;
+	}
+
+	
+	/**
 	 * Close the partReference.
 	 */
 	public void close() {

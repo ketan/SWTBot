@@ -107,9 +107,10 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 
 	/**
 	 * @return the editor reference for this view.
+	 * @deprecated use {@link SWTBotWorkbenchPart#getReference()} instead
 	 */
 	public IEditorReference getEditorReference() {
-		return partReference;
+		return getReference();
 	}
 
 	/**
