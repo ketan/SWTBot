@@ -11,6 +11,7 @@
 package org.eclipse.swtbot.eclipse.finder.widgets;
 
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMnemonic;
+import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -69,6 +70,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 	protected final SWTWorkbenchBot	bot;
 	private final ViewMenuFinder	menuFinder;
 	private final SelfDescribing	description;
+	private Widget widget;
 
 	/**
 	 * Creates an instance of a workbench part.
@@ -360,4 +362,24 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 	 */
 	public abstract void setFocus();
 
+	/**
+	 * The parent widget inside the partReference. If you want to look for a particular widget within the part, this is
+	 * a good place to start searching for the widget.
+	 * <p>
+	 * <b>NOTE:</b> Clients must ensure that the part is active at the time of making this call. If the part is not
+	 * active, then this method will throw a {@link WidgetNotFoundException}.
+	 * </p>
+	 * 
+	 * @return the parent widget in the part.
+	 * @see #findWidget(org.hamcrest.Matcher)
+	 * @see #assertActive()
+	 * @see #show()
+	 */
+	public Widget getWidget() {
+		show();
+		if (widget == null)
+			widget = findWidget(any(Widget.class));
+		return widget;
+	}
+	
 }

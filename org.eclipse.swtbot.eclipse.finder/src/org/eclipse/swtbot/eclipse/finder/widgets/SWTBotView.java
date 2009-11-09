@@ -12,14 +12,11 @@
 package org.eclipse.swtbot.eclipse.finder.widgets;
 
 import static org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable.syncExec;
-import static org.hamcrest.Matchers.any;
 
 import javax.swing.text.View;
 
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
-import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.ui.IViewReference;
 import org.hamcrest.SelfDescribing;
@@ -32,8 +29,6 @@ import org.hamcrest.SelfDescribing;
  * @version $Id$
  */
 public class SWTBotView extends SWTBotWorkbenchPart<IViewReference> {
-
-	private Widget	widget;
 
 	/**
 	 * Creates an instance of a view part.
@@ -70,26 +65,6 @@ public class SWTBotView extends SWTBotWorkbenchPart<IViewReference> {
 	 */
 	public IViewReference getViewReference() {
 		return partReference;
-	}
-
-	/**
-	 * The parent widget inside the partReference, that is the tabFolder for all controls within the view. If you want
-	 * to look for a particular widget within the part, this is a good place to start searching for the widget.
-	 * <p>
-	 * <b>NOTE:</b> Clients must ensure that the view is active at the time of making this call. If the view is not
-	 * active, then this method will throw a {@link WidgetNotFoundException}.
-	 * </p>
-	 * 
-	 * @return the parent widget in the view.
-	 * @see #findWidget(org.hamcrest.Matcher)
-	 * @see #assertActive()
-	 * @see #show()
-	 */
-	public Widget getWidget() {
-		show();
-		if (widget == null)
-			widget = findWidget(any(Widget.class));
-		return widget;
 	}
 
 	public boolean isActive() {
