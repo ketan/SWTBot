@@ -40,6 +40,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
+import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEditor;
 import org.eclipse.swtbot.eclipse.gef.finder.finders.PaletteFinder;
 import org.eclipse.swtbot.eclipse.gef.finder.matchers.IsInstanceOf;
 import org.eclipse.swtbot.eclipse.gef.finder.matchers.ToolEntryLabelMatcher;
@@ -63,7 +64,7 @@ import org.hamcrest.Matcher;
  * 
  * @author David Green
  */
-public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
+public class SWTBotGefEditor extends SWTBotEditor {
 
     protected GraphicalViewer graphicalViewer;
 
@@ -89,7 +90,7 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
     protected void init() throws WidgetNotFoundException {
         UIThreadRunnable.syncExec(new VoidResult() {
         	public void run() {
-        		final IEditorPart editor = reference.getEditor(true);
+        		final IEditorPart editor = partReference.getEditor(true);
         		graphicalViewer = (GraphicalViewer) editor.getAdapter(GraphicalViewer.class);
         		final Control control = graphicalViewer.getControl();
         		if (control instanceof FigureCanvas) {
@@ -216,7 +217,7 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
      * @throws WidgetNotFoundException
      */
     public void directEditType(String text) throws WidgetNotFoundException {
-        List<Text> controls = finder.findControls(widget, new IsInstanceOf<Text>(Text.class), true);
+        List<Text> controls = bot.getFinder().findControls(getWidget(), new IsInstanceOf<Text>(Text.class), true);
         if (controls.size() == 1) {
             final Text textControl = controls.get(0);
             UIThreadRunnable.syncExec(new VoidResult() {
@@ -279,7 +280,7 @@ public class SWTBotGefEditor extends AbstractSWTBotEclipseEditor {
     protected Event createEvent() {
         Event event = new Event();
         event.time = (int) System.currentTimeMillis();
-        event.widget = widget;
+        event.widget = getWidget();
         event.display = bot.getDisplay();
         return event;
     }
