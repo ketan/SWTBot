@@ -53,7 +53,7 @@ public class EclipseSpy {
 	private void createActionMonitor() {
 		actionMonitor = new Action("Monitor", IAction.AS_CHECK_BOX) { //$NON-NLS-1$
 			public void run() {
-				if (actionMonitor.isChecked()) {
+				if (actionMonitor.isChecked() && !output.isDisposed()) {
 					Display display = output.getDisplay();
 					display.timerExec(100, trackWidgets);
 				}
