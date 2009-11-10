@@ -46,7 +46,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarToggleButton;
 import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.IWorkbenchPartReference;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.internal.ViewPane;
+import org.eclipse.ui.internal.PartPane;
 import org.eclipse.ui.internal.WorkbenchPartReference;
 import org.hamcrest.Matcher;
 import org.hamcrest.SelfDescribing;
@@ -198,7 +198,7 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 		return UIThreadRunnable.syncExec(new ListResult<SWTBotToolbarButton>() {
 
 			public List<SWTBotToolbarButton> run() {
-				ViewPane obj = (ViewPane) ((WorkbenchPartReference) partReference).getPane();
+				PartPane obj = ((WorkbenchPartReference) partReference).getPane();
 				ToolBar toolbar = (ToolBar) obj.getToolBar();
 				final List<SWTBotToolbarButton> l = new ArrayList<SWTBotToolbarButton>();
 
