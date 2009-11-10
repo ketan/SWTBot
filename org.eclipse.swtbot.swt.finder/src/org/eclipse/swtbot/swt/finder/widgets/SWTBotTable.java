@@ -315,6 +315,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 				widget.deselectAll();
 			}
 		});
+		notifySelect();
 	}
 
 	/**
