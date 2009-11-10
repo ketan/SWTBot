@@ -54,11 +54,10 @@ public class DefaultWorkbench extends Workbench {
 	public Workbench switchToPerspective(final String perspectiveName) {
 		Boolean result = UIThreadRunnable.syncExec(new Result<Boolean>() {
 			public Boolean run() {
-				IPerspectiveDescriptor[] perspectives = PlatformUI.getWorkbench().getPerspectiveRegistry().getPerspectives();
+				IPerspectiveDescriptor[] perspectives = perspectives();
 				for (IPerspectiveDescriptor perspective : perspectives) {
 					if (perspectiveNameMatches(perspective, perspectiveName)) {
-						IWorkbenchPage activePage = getActiveWorkbenchWindow().getActivePage();
-						activePage.setPerspective(perspective);
+						activePage().setPerspective(perspective);
 						return true;
 					}
 				}
@@ -68,7 +67,7 @@ public class DefaultWorkbench extends Workbench {
 		if (result) {
 			return this;
 		}
-		String availablePerspectives = StringUtils.join(PlatformUI.getWorkbench().getPerspectiveRegistry().getPerspectives(), ", ", new StringConverter() {
+		String availablePerspectives = StringUtils.join(perspectives(), ", ", new StringConverter() {
 			public String toString(Object object) {
 				return ((IPerspectiveDescriptor) object).getLabel();
 			}
@@ -81,7 +80,7 @@ public class DefaultWorkbench extends Workbench {
 	public Workbench resetPerspective() {
 		UIThreadRunnable.syncExec(new VoidResult() {
 			public void run() {
-				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().resetPerspective();
+				activePage().resetPerspective();
 			}
 		});
 		return this;
@@ -136,6 +135,14 @@ public class DefaultWorkbench extends Workbench {
 
 	private Widget getActiveWorkbenchWindowShell() {
 		return getActiveWorkbenchWindow().getShell();
+	}
+
+	private IWorkbenchPage activePage() {
+		return getActiveWorkbenchWindow().getActivePage();
+	}
+
+	private IPerspectiveDescriptor[] perspectives() {
+		return PlatformUI.getWorkbench().getPerspectiveRegistry().getPerspectives();
 	}
 
 }
