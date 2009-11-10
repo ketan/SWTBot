@@ -14,10 +14,11 @@ import java.text.MessageFormat;
 import java.util.List;
 
 import org.eclipse.swt.widgets.Widget;
-import org.eclipse.swtbot.eclipse.finder.SWTEclipseBot;
-import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEclipseEditor;
+import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
+import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEditor;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.Result;
+import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.utils.StringConverter;
 import org.eclipse.swtbot.swt.finder.utils.StringUtils;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
@@ -39,28 +40,35 @@ import org.eclipse.ui.PlatformUI;
 public class DefaultWorkbench extends Workbench {
 
 	/** The bot that may be used to drive the workbench. */
-	protected SWTEclipseBot	bot;
+	protected SWTWorkbenchBot	bot;
 
 	/**
 	 * Creates an instance of the default workbench.
 	 * 
 	 * @param bot the bot that can drive the workbench.
 	 */
-	public DefaultWorkbench(SWTEclipseBot bot) {
+	public DefaultWorkbench(SWTWorkbenchBot bot) {
 		this.bot = bot;
 	}
 
-	public Workbench switchToPerspective(String perspectiveName) {
-		IPerspectiveDescriptor[] perspectives = PlatformUI.getWorkbench().getPerspectiveRegistry().getPerspectives();
-		for (IPerspectiveDescriptor perspective : perspectives) {
-			if (perspectiveNameMatches(perspective, perspectiveName)) {
-				IWorkbenchPage activePage = getActiveWorkbenchWindow().getActivePage();
-				activePage.setPerspective(perspective);
-				return this;
+	public Workbench switchToPerspective(final String perspectiveName) {
+		Boolean result = UIThreadRunnable.syncExec(new Result<Boolean>() {
+			public Boolean run() {
+				IPerspectiveDescriptor[] perspectives = PlatformUI.getWorkbench().getPerspectiveRegistry().getPerspectives();
+				for (IPerspectiveDescriptor perspective : perspectives) {
+					if (perspectiveNameMatches(perspective, perspectiveName)) {
+						IWorkbenchPage activePage = getActiveWorkbenchWindow().getActivePage();
+						activePage.setPerspective(perspective);
+						return true;
+					}
+				}
+				return false;
 			}
+		});
+		if (result) {
+			return this;
 		}
-
-		String availablePerspectives = StringUtils.join(perspectives, ", ", new StringConverter() {
+		String availablePerspectives = StringUtils.join(PlatformUI.getWorkbench().getPerspectiveRegistry().getPerspectives(), ", ", new StringConverter() {
 			public String toString(Object object) {
 				return ((IPerspectiveDescriptor) object).getLabel();
 			}
@@ -71,9 +79,11 @@ public class DefaultWorkbench extends Workbench {
 	}
 
 	public Workbench resetPerspective() {
-		bot.menu("Window").menu("Reset Perspective...").click();
-		bot.shell("Reset Perspective").activate();
-		bot.button("OK").click();
+		UIThreadRunnable.syncExec(new VoidResult() {
+			public void run() {
+				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().resetPerspective();
+			}
+		});
 		return this;
 	}
 
@@ -92,16 +102,16 @@ public class DefaultWorkbench extends Workbench {
 	}
 
 	public Workbench saveAllEditors() {
-		List<SWTBotEclipseEditor> editors = bot.editors();
-		for (SWTBotEclipseEditor editor : editors) {
+		List<? extends SWTBotEditor> editors = bot.editors();
+		for (SWTBotEditor editor : editors) {
 			editor.save();
 		}
 		return this;
 	}
 
 	public Workbench closeAllEditors() {
-		List<SWTBotEclipseEditor> editors = bot.editors();
-		for (SWTBotEclipseEditor editor : editors) {
+		List<? extends SWTBotEditor> editors = bot.editors();
+		for (SWTBotEditor editor : editors) {
 			editor.close();
 		}
 		return this;
