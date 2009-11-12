@@ -30,7 +30,7 @@ public class SWTBotShell extends AbstractSWTBotControl<Shell> {
 
 	/**
 	 * Constructs an instance of this with the given shell.
-	 * 
+	 *
 	 * @param shell the widget.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 */
@@ -40,7 +40,7 @@ public class SWTBotShell extends AbstractSWTBotControl<Shell> {
 
 	/**
 	 * Constructs an instance of this with the given shell.
-	 * 
+	 *
 	 * @param shell the widget.
 	 * @param description the description of the widget, this will be reported by {@link #toString()}
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
@@ -63,10 +63,11 @@ public class SWTBotShell extends AbstractSWTBotControl<Shell> {
 
 	/**
 	 * Activates the shell.
-	 * 
+	 * @return itself.
+	 *
 	 * @throws TimeoutException if the shell could not be activated
 	 */
-	public void activate() throws TimeoutException {
+	public SWTBotShell activate() throws TimeoutException {
 		new SWTBot().waitUntil(new DefaultCondition() {
 			public String getFailureMessage() {
 				return "Timed out waiting for " + SWTUtils.toString(widget) + " to get activated"; //$NON-NLS-1$ //$NON-NLS-2$
@@ -83,11 +84,12 @@ public class SWTBotShell extends AbstractSWTBotControl<Shell> {
 			}
 		});
 		notify(SWT.Activate);
+		return this;
 	}
 
 	/**
 	 * Closes the shell
-	 * 
+	 *
 	 * @throws TimeoutException if the shell does not close.
 	 */
 	public void close() throws TimeoutException {
@@ -112,7 +114,7 @@ public class SWTBotShell extends AbstractSWTBotControl<Shell> {
 
 	/**
 	 * Checks if the shell is open.
-	 * 
+	 *
 	 * @return <code>true</code> if the shell is visible, <code>false</code> otherwise.
 	 */
 	public boolean isOpen() {
@@ -125,7 +127,7 @@ public class SWTBotShell extends AbstractSWTBotControl<Shell> {
 
 	/**
 	 * Checks if the shell is active.
-	 * 
+	 *
 	 * @return <code>true</code> if the shell is active, <code>false</code> otherwise.
 	 */
 	public boolean isActive() {
