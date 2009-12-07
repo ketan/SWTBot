@@ -158,7 +158,9 @@ public class SWTBotGefEditor extends SWTBotEditor {
     	return (SWTBotGefConnectionEditPart) createEditPart((EditPart) part);
     }
 
-    //TODO comment
+    /**
+     * Activate the default tool.
+     */
     public void activateDefaultTool() {
         UIThreadRunnable.syncExec(new VoidResult() {
             public void run() {
@@ -168,27 +170,43 @@ public class SWTBotGefEditor extends SWTBotEditor {
         });
     }
 
-    //TODO comment
+    /**
+     * Activate the tool with the specified label. If there is many tools with the same label the first one will be used. See {@link SWTBotGefEditor#activateTool(String, int)}
+     * @param label the label of the tool to activate
+     * @return the editor bot
+     * @throws WidgetNotFoundException if the tool with label specified could not be found
+     */
     public SWTBotGefEditor activateTool(final String label) throws WidgetNotFoundException {
-        activateTool(Pattern.compile(Pattern.quote(label)));
+        activateTool(Pattern.compile(Pattern.quote(label)), 0);
         return this;
     }
 
-    private SWTBotGefEditor activateTool(final Pattern labelMatcher) throws WidgetNotFoundException {
+    /**
+     * Activate the tool with the specified label and the specified index. This method should be used only if there is many tools with the same label. See {@link SWTBotGefEditor#activateTool(String)}
+     * @param label the label of the tool to activate
+     * @param index the index to use in order to make the selection. 
+     * @return the editor bot
+     * @throws WidgetNotFoundException if the tool with label specified could not be found
+     */
+    public SWTBotGefEditor activateTool(final String label, int index) throws WidgetNotFoundException {
+        activateTool(Pattern.compile(Pattern.quote(label)), index);
+        return this;
+    }
+
+    
+    private SWTBotGefEditor activateTool(final Pattern labelMatcher, final int index) throws WidgetNotFoundException {
         final WidgetNotFoundException[] exception = new WidgetNotFoundException[1];
         UIThreadRunnable.syncExec(new VoidResult() {
             public void run() {
                 final EditDomain editDomain = getEditDomain();
                 final List<PaletteEntry> entries = new PaletteFinder(editDomain).findEntries(new ToolEntryLabelMatcher(labelMatcher));
-                if (entries.size() == 1) {
-                    final PaletteEntry paletteEntry = entries.get(0);
+                if (entries.size() > 0) {
+                    final PaletteEntry paletteEntry = entries.get(index);
                     if (paletteEntry instanceof ToolEntry) {
                         editDomain.setActiveTool(((ToolEntry) paletteEntry).createTool());
                     } else {
                         exception[0] = new WidgetNotFoundException(String.format("%s is not a tool entry, it's a %s", labelMatcher.toString(), paletteEntry.getClass().getName()));
                     }
-                } else if (entries.size() > 1) {
-                    exception[0] = new WidgetNotFoundException(String.format("%s is ambiguous; %s tool entries found", labelMatcher.toString(), entries.size()));
                 } else {
                     exception[0] = new WidgetNotFoundException(labelMatcher.toString());
                 }
