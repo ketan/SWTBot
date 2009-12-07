@@ -65,11 +65,11 @@ public class SWTBotGefFigureCanvas extends AbstractSWTBotControl<FigureCanvas>{
     }
     
     public void mouseEnterLeftClickAndExit(int xPosition, int yPosition) {
-        eventDispatcher.dispatchMouseEntered(wrapMouseEvent(xPosition, yPosition, 0, SWT.BUTTON1, 0));
-        eventDispatcher.dispatchMouseMoved(wrapMouseEvent(xPosition, yPosition, 0, SWT.BUTTON1, 0));
+        eventDispatcher.dispatchMouseEntered(wrapMouseEvent(xPosition, yPosition, 0, 0, 0));
+        eventDispatcher.dispatchMouseMoved(wrapMouseEvent(xPosition, yPosition, 0, 0, 0));
         eventDispatcher.dispatchMousePressed(wrapMouseEvent(xPosition, yPosition, 1, SWT.BUTTON1, 1));
         eventDispatcher.dispatchMouseReleased(wrapMouseEvent(xPosition, yPosition, 1, SWT.BUTTON1, 1));
-        eventDispatcher.dispatchMouseExited(wrapMouseEvent(xPosition, yPosition, 0, SWT.BUTTON1, 0));
+        eventDispatcher.dispatchMouseExited(wrapMouseEvent(xPosition, yPosition, 0, 0, 0));
     }
     
 }
