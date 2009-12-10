@@ -120,7 +120,7 @@ public class SWTBotGefEditPart {
 	}
 	
 	/**
-	 * click on the edit part
+	 * click on the edit part.
 	 */
 	public SWTBotGefEditPart click() {
 		UIThreadRunnable.asyncExec(new VoidResult() {
@@ -129,6 +129,21 @@ public class SWTBotGefEditPart {
 				Rectangle bounds = figure.getBounds().getCopy();
 				figure.translateToAbsolute(bounds);
 				graphicalEditor.getCanvas().mouseEnterLeftClickAndExit(bounds.x, bounds.y);
+			}		
+		});
+		return this;
+	}
+	
+	/**
+	 * double click on the edit part.
+	 */
+	public SWTBotGefEditPart doubleClick() {
+		UIThreadRunnable.asyncExec(new VoidResult() {
+			public void run() {
+				IFigure figure = ((GraphicalEditPart) part).getFigure();
+				Rectangle bounds = figure.getBounds().getCopy();
+				figure.translateToAbsolute(bounds);
+				graphicalEditor.getCanvas().mouseMoveDoubleClick(bounds.x, bounds.y);
 			}		
 		});
 		return this;
