@@ -12,13 +12,9 @@
 package org.eclipse.swtbot.eclipse.gef.finder.widgets;
 
 
-import java.util.Collections;
-import java.util.List;
-
-import org.eclipse.gef.EditPart;
+import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.Result;
-import org.hamcrest.Matcher;
 
 /**
  * represent a connection edit part of a graphical viewer.
@@ -41,15 +37,17 @@ public class SWTBotGefConnectionEditPart extends SWTBotGefEditPart {
 
 	/*
 	 * {@inheritDoc}
-	 *
-	 * @see net.sf.swtbot.eclipse.gef.EditPart#part()
+	 * @see SWTBotGefEditPart#part()
 	 */
 	@Override
 	public org.eclipse.gef.ConnectionEditPart part() {
 		return (org.eclipse.gef.ConnectionEditPart) super.part();
 	}
 
-	//TODO comment
+	/*
+	 * {@inheritDoc}
+	 *@see ConnectionEditPart#getSource()
+	 */
 	public SWTBotGefEditPart source() {
 		return UIThreadRunnable.syncExec(new Result<SWTBotGefEditPart>() {
 			public SWTBotGefEditPart run() {
@@ -59,7 +57,10 @@ public class SWTBotGefConnectionEditPart extends SWTBotGefEditPart {
 		});
 	}
 	
-	//TODO comment
+	/*
+	 * {@inheritDoc}
+	 *@see ConnectionEditPart#getTarget()
+	 */
 	public SWTBotGefEditPart target() {
 		return UIThreadRunnable.syncExec(new Result<SWTBotGefEditPart>() {
 			public SWTBotGefEditPart run() {
@@ -67,45 +68,5 @@ public class SWTBotGefConnectionEditPart extends SWTBotGefEditPart {
 				return graphicalEditor.createEditPart(target);
 			}
 		});
-	}
-
-	/*
-	 * {@inheritDoc}
-	 *
-	 * @see net.sf.swtbot.eclipse.gef.EditPart#ancestors(org.hamcrest.Matcher)
-	 */
-	@Override
-	public List<SWTBotGefEditPart> ancestors(Matcher<? extends EditPart> matcher) {
-		return Collections.emptyList();
-	}
-	
-	/*
-	 * {@inheritDoc}
-	 *
-	 * @see net.sf.swtbot.eclipse.gef.EditPart#children()
-	 */
-	@Override
-	public List<SWTBotGefEditPart> children() {
-		return Collections.emptyList();
-	}
-
-	/* 
-	 * {@inheritDoc}
-	 *
-	 * @see net.sf.swtbot.eclipse.gef.EditPart#sourceConnections()
-	 */
-	@Override
-	public List<SWTBotGefConnectionEditPart> sourceConnections() {
-		return Collections.emptyList();
-	}
-	
-	/* 
-	 * {@inheritDoc}
-	 *
-	 * @see net.sf.swtbot.eclipse.gef.EditPart#targetConnections()
-	 */
-	@Override
-	public List<SWTBotGefConnectionEditPart> targetConnections() {
-		return Collections.emptyList();
 	}
 }
