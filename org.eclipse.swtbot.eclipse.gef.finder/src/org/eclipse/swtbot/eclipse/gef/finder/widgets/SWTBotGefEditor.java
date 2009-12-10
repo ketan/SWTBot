@@ -311,7 +311,7 @@ public class SWTBotGefEditor extends SWTBotEditor {
      * @throws WidgetNotFoundException
      */
 	public List<SWTBotGefEditPart> editParts(Matcher<? extends EditPart> matcher) throws WidgetNotFoundException {
-        return rootEditPart().ancestors(matcher);
+        return rootEditPart().descendants(matcher);
     }
 
 	protected SWTBotGefFigureCanvas getCanvas() {

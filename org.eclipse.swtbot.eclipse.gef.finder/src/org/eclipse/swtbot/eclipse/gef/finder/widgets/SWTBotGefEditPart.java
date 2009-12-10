@@ -64,17 +64,17 @@ public class SWTBotGefEditPart {
 	}
 
 	/**
-	 * find ancestors that match
+	 * find descendants that match
 	 * 
 	 * @param matcher the matcher that matches against {@link org.eclipse.gef.EditPart}
 	 * 
 	 * @return a list of matches or an empty list if there are none
 	 */
 	@SuppressWarnings("unchecked")
-	public List<SWTBotGefEditPart> ancestors(final Matcher<? extends EditPart> matcher) {
+	public List<SWTBotGefEditPart> descendants(final Matcher<? extends EditPart> matcher) {
 		return  UIThreadRunnable.syncExec(new Result<List<SWTBotGefEditPart>>() {
 			public List<SWTBotGefEditPart> run() {
-				List<SWTBotGefEditPart> ancestors = new ArrayList<SWTBotGefEditPart>();
+				List<SWTBotGefEditPart> descendants = new ArrayList<SWTBotGefEditPart>();
 				Stack<SWTBotGefEditPart> parts = new Stack<SWTBotGefEditPart>();
 				parts.push(SWTBotGefEditPart.this);
 				while (!parts.isEmpty()) {
@@ -82,12 +82,12 @@ public class SWTBotGefEditPart {
 					for (org.eclipse.gef.EditPart child: ((List<org.eclipse.gef.EditPart>) part.part.getChildren())) {
 						SWTBotGefEditPart childPart = graphicalEditor.createEditPart(child);
 						if (matcher.matches(child)) {
-							ancestors.add(childPart);
+							descendants.add(childPart);
 						}
 						parts.push(childPart);
 					}	
 				}
-				return ancestors;
+				return descendants;
 			}
 		});
 	}
