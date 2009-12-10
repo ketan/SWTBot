@@ -387,7 +387,7 @@ public class SWTBotGefEditor extends SWTBotEditor {
      * @param yPosition the relative y position within the graphical viewer
      */
     public void mouseMoveLeftClick(final int xPosition, final int yPosition) {
-        UIThreadRunnable.syncExec(new VoidResult() {
+        UIThreadRunnable.asyncExec(new VoidResult() {
             public void run() {
         		canvas.mouseMoveLeftClick(xPosition, yPosition);
             }
@@ -404,7 +404,7 @@ public class SWTBotGefEditor extends SWTBotEditor {
      * @param toYPosition the relative y position within the graphical viewer to drag to
      */
     public void mouseDrag(final int fromXPosition, final int fromYPosition, final int toXPosition, final int toYPosition) {
-        UIThreadRunnable.syncExec(new VoidResult() {
+        UIThreadRunnable.asyncExec(new VoidResult() {
             public void run() {
                 canvas.mouseDrag(fromXPosition, fromYPosition, toXPosition, toYPosition);
             }

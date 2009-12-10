@@ -123,7 +123,7 @@ public class SWTBotGefEditPart {
 	 * click on the edit part
 	 */
 	public SWTBotGefEditPart click() {
-		UIThreadRunnable.syncExec(new VoidResult() {
+		UIThreadRunnable.asyncExec(new VoidResult() {
 			public void run() {
 				IFigure figure = ((GraphicalEditPart) part).getFigure();
 				Rectangle bounds = figure.getBounds().getCopy();
