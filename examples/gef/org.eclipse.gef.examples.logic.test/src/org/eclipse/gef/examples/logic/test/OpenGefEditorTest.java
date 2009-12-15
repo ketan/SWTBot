@@ -11,9 +11,16 @@
 
 package org.eclipse.gef.examples.logic.test;
 
+import java.util.List;
+
+import org.eclipse.gef.examples.logicdesigner.edit.LogicLabelEditPart;
+import org.eclipse.gef.examples.logicdesigner.model.LogicLabel;
 import org.eclipse.swtbot.eclipse.gef.finder.SWTBotGefTestCase;
+import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefEditPart;
 import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefEditor;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
+import org.eclipse.swtbot.swt.finder.matchers.AbstractMatcher;
+import org.hamcrest.Description;
 
 public class OpenGefEditorTest extends SWTBotGefTestCase {
 
@@ -42,16 +49,6 @@ public class OpenGefEditorTest extends SWTBotGefTestCase {
 		bot.menu("File").menu("Save").click();
 	}
 
-
-	public void testCreateMFile() throws Exception {
-		emfProject.createProject("testM");
-		logicDiagram.createMFile("testM", "test.logicm");
-		final SWTBotGefEditor editor = bot.gefEditor("Logic M Graphical Editor");	
-		createContents(editor);
-		saveCurrentEditor();
-		bot.sleep(3000);	
-	}
-
 	public void testCreateFile() throws Exception {
 
 		emfProject.createProject("test");
@@ -61,6 +58,15 @@ public class OpenGefEditorTest extends SWTBotGefTestCase {
 		saveCurrentEditor();
 		bot.sleep(3000);	
 	}
+
+//	public void testCreateMFile() throws Exception {
+//		emfProject.createProject("testM");
+//		logicDiagram.createMFile("testM", "test.logicm");
+//		final SWTBotGefEditor editor = bot.gefEditor("Logic M Graphical Editor");	
+//		createContents(editor);
+//		saveCurrentEditor();
+//		bot.sleep(3000);	
+//	}
 
 	private void createContents(final SWTBotGefEditor editor) {
 
@@ -89,6 +95,26 @@ public class OpenGefEditorTest extends SWTBotGefTestCase {
 
 		editor.mouseMoveLeftClick(200, 200);
 		editor.mouseMoveLeftClick(230, 230);
+		
+		editor.activateTool("Label");
+		editor.mouseMoveLeftClick(300, 300);
+		List<SWTBotGefEditPart> editParts = editor.editParts(new AbstractMatcher<LogicLabelEditPart>() {
+			@Override
+			protected boolean doMatch(Object item) {
+				if (!(item instanceof LogicLabelEditPart)) {
+					return false;
+				}
+				LogicLabelEditPart editPart = (LogicLabelEditPart) item;
+				LogicLabel label = (LogicLabel) editPart.getModel();
+				return label.getLabelContents().equals("Label");
+			}
+			public void describeTo(Description description) {
+			}
+		});
+
+		editParts.get(0).activateDirectEdit();
+		bot.text();
+		editor.directEditType("123456789=&é(-è_çà");
 
 	}
 }

@@ -35,9 +35,7 @@ import org.eclipse.gef.palette.PaletteEntry;
 import org.eclipse.gef.palette.ToolEntry;
 import org.eclipse.gef.ui.parts.GraphicalViewerImpl;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEditor;
@@ -225,7 +223,6 @@ public class SWTBotGefEditor extends SWTBotEditor {
         return editDomain;
     }
 
-    //TODO should be in a separate class
     /**
      * type the given text into the graphical editor, presuming that it is
      * already in 'direct edit' mode.
@@ -237,70 +234,11 @@ public class SWTBotGefEditor extends SWTBotEditor {
     public void directEditType(String text) throws WidgetNotFoundException {
         List<Text> controls = bot.getFinder().findControls(getWidget(), new IsInstanceOf<Text>(Text.class), true);
         if (controls.size() == 1) {
-            final Text textControl = controls.get(0);
-            UIThreadRunnable.syncExec(new VoidResult() {
-                public void run() {
-                    textControl.setText("");
-                }
-            });
-            for (int x = 0; x < text.length(); ++x) {
-                final char c = text.charAt(x);
-                UIThreadRunnable.syncExec(new VoidResult() {
-                    public void run() {
-                        textControl.setFocus();
-                        textControl.notifyListeners(SWT.KeyDown, keyEvent(SWT.NONE, c, 0));
-                        textControl.notifyListeners(SWT.KeyUp, keyEvent(SWT.NONE, c, 0));
-                        textControl.setText(textControl.getText() + c);
-                    }
-                });
-                try {
-                    Thread.sleep(50L);
-                } catch (InterruptedException e) {
-                }
-            }
-
-            // apply the value with a default selection event
-            UIThreadRunnable.syncExec(new VoidResult() {
-                public void run() {
-                    textControl.setFocus();
-                    textControl.notifyListeners(SWT.DefaultSelection, createEvent());
-                }
-            });
+            final Text textControl = controls.get(0);	
+            canvas.typeText(textControl, text);
         } else {
             throw new WidgetNotFoundException(String.format("Expected to find one text control, but found %s.  Is the editor in direct-edit mode?", controls.size()));
         }
-    }
-
-    /**
-     * @param c
-     *            the character.
-     * @param modificationKey
-     *            the modification key.
-     * @param keyCode
-     *            the keycode.
-     * @return a key event with the specified keys.
-     * @see Event#keyCode
-     * @see Event#character
-     * @see Event#stateMask
-     * @since 1.2
-     */
-    @Deprecated
-    protected Event keyEvent(int modificationKey, char c, int keyCode) {
-        Event keyEvent = createEvent();
-        keyEvent.stateMask = modificationKey;
-        keyEvent.character = c;
-        keyEvent.keyCode = keyCode;
-
-        return keyEvent;
-    }
-
-    @Deprecated
-    protected Event createEvent() {
-        Event event = new Event();
-        event.time = (int) System.currentTimeMillis();
-        event.widget = getWidget();
-        event.display = bot.getDisplay();
-        return event;
     }
 
     /**
@@ -499,20 +437,14 @@ public class SWTBotGefEditor extends SWTBotEditor {
 	                return child;
 	            }
 	           
-	           // find label in children
-	           if (findLabelFigure(figure, label))  {
 	               SWTBotGefEditPart childEditPart = getEditPart(child, label);
 	               if (childEditPart!=null) {
 	                   return childEditPart;
 	               }
-	               return child;
-	           }
-	           
-	           // find label in connections
-	           SWTBotGefEditPart childEditPart = getEditPart(child, label);
-	           if (childEditPart != null) {
-	               return childEditPart;
-	           }
+	               
+	               if (findLabelFigure(figure, label))
+	            	   return child;
+	               return null;
 	       }
 	       return null;
 	   }

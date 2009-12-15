@@ -21,6 +21,7 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
+import org.eclipse.gef.requests.DirectEditRequest;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.Result;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
@@ -48,8 +49,21 @@ public class SWTBotGefEditPart {
 		this.part = part;
 	}
 
-	
+	/**
+	 * get the parent, or null if this is the root edit part.
+	 */
+	public SWTBotGefEditPart parent() {
+		return UIThreadRunnable.syncExec(new Result<SWTBotGefEditPart>() {
+			public SWTBotGefEditPart run() {
+				return graphicalEditor.createEditPart(part.getParent());
+			}
+		});
+	}
 
+	/**
+	 * Get the children of this edit part.
+	 * @return the edit part's children
+	 */
 	@SuppressWarnings("unchecked")
 	public List<SWTBotGefEditPart> children() {
 		return UIThreadRunnable.syncExec(new Result<List<SWTBotGefEditPart>>() {
@@ -64,7 +78,7 @@ public class SWTBotGefEditPart {
 	}
 
 	/**
-	 * find descendants that match
+	 * find descendants that match.
 	 * 
 	 * @param matcher the matcher that matches against {@link org.eclipse.gef.EditPart}
 	 * 
@@ -148,17 +162,25 @@ public class SWTBotGefEditPart {
 		});
 		return this;
 	}
+
+	public SWTBotGefEditPart activateDirectEdit() {
+		return activateDirectEdit(null);
+	}
 	
-	/**
-	 * get the parent, or null if this is the root edit part.
-	 */
-	public SWTBotGefEditPart parent() {
-		return UIThreadRunnable.syncExec(new Result<SWTBotGefEditPart>() {
-			public SWTBotGefEditPart run() {
-				return graphicalEditor.createEditPart(part.getParent());
+	
+	public SWTBotGefEditPart activateDirectEdit(final Object feature) {
+		UIThreadRunnable.asyncExec(new VoidResult() {
+			public void run() {
+				DirectEditRequest request = new DirectEditRequest();
+				if (feature != null)
+					request.setDirectEditFeature(feature);
+				part().performRequest(request);
 			}
 		});
+		return this;
 	}
+
+
 	
 	/**
 	 * provide a description of this edit part that is useful for debugging purposes.
