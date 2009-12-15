@@ -113,7 +113,6 @@ public class OpenGefEditorTest extends SWTBotGefTestCase {
 		});
 
 		editParts.get(0).activateDirectEdit();
-		bot.text();
 		editor.directEditType("123456789=&é(-è_çà");
 
 	}

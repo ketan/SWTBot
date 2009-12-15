@@ -232,6 +232,9 @@ public class SWTBotGefEditor extends SWTBotEditor {
      * @throws WidgetNotFoundException
      */
     public void directEditType(String text) throws WidgetNotFoundException {
+    	/* wait until text widget appears */ 
+    	bot.text();
+    	/* find it now */
         List<Text> controls = bot.getFinder().findControls(getWidget(), new IsInstanceOf<Text>(Text.class), true);
         if (controls.size() == 1) {
             final Text textControl = controls.get(0);	
