@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Stack;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
@@ -132,37 +133,47 @@ public class SWTBotGefEditPart {
 		graphicalEditor.select(this);
 		return this;
 	}
-	
+
 	/**
 	 * click on the edit part.
 	 */
 	public SWTBotGefEditPart click() {
+		final Rectangle bounds = getBounds();
+		return click(bounds.getTopLeft());
+	}
+	
+	/**
+	 * click on the edit part at the specified location
+	 */
+	public SWTBotGefEditPart click(final Point location) {
 		UIThreadRunnable.asyncExec(new VoidResult() {
 			public void run() {
-				IFigure figure = ((GraphicalEditPart) part).getFigure();
-				Rectangle bounds = figure.getBounds().getCopy();
-				figure.translateToAbsolute(bounds);
-				graphicalEditor.getCanvas().mouseEnterLeftClickAndExit(bounds.x, bounds.y);
+				graphicalEditor.getCanvas().mouseEnterLeftClickAndExit(location.x, location.y);
 			}		
 		});
 		return this;
 	}
-	
+
 	/**
 	 * double click on the edit part.
 	 */
 	public SWTBotGefEditPart doubleClick() {
+		final Rectangle bounds = getBounds();
 		UIThreadRunnable.asyncExec(new VoidResult() {
 			public void run() {
-				IFigure figure = ((GraphicalEditPart) part).getFigure();
-				Rectangle bounds = figure.getBounds().getCopy();
-				figure.translateToAbsolute(bounds);
 				graphicalEditor.getCanvas().mouseMoveDoubleClick(bounds.x, bounds.y);
 			}		
 		});
 		return this;
 	}
 
+	private Rectangle getBounds() {
+		final IFigure figure = ((GraphicalEditPart) part).getFigure();
+		final Rectangle bounds = figure.getBounds().getCopy();
+		figure.translateToAbsolute(bounds);
+		return bounds;
+	}
+	
 	public SWTBotGefEditPart activateDirectEdit() {
 		return activateDirectEdit(null);
 	}
