@@ -42,6 +42,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarDropDownButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarPushButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarRadioButton;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarSeparatorButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarToggleButton;
 import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.IWorkbenchPartReference;
@@ -217,6 +218,8 @@ public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
 							l.add(new SWTBotToolbarRadioButton(items[i]));
 						else if(SWTUtils.hasStyle(items[i], SWT.DROP_DOWN))
 							l.add(new SWTBotToolbarDropDownButton(items[i]));
+						else if(SWTUtils.hasStyle(items[i], SWT.SEPARATOR))
+							l.add(new SWTBotToolbarSeparatorButton(items[i]));
 					} catch (WidgetNotFoundException e) {
 						log.warn("Failed to find widget " + items[i].getText(), e); //$NON-NLS-1$
 					}
