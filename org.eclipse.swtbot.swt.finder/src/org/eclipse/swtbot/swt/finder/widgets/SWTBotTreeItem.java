@@ -589,7 +589,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	}
 
 	/**
-	 * @return <code>true</code> if the item is selected, false otherwise.
+	 * @return <code>true</code> if the item is selected, <code>false</code> otherwise.
 	 * @since 2.0
 	 */
 	public boolean isSelected() {
@@ -599,6 +599,22 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 			}
 		});
 	}
+	
+	 /**
+     * Gets if the item is expanded.
+     * 
+     * @return <code>true</code> if the item is expanded,
+     *         <code>false</code> otherwise.
+     * @since 2.0
+     */
+    public boolean isExpanded() {
+        assertEnabled();
+        return UIThreadRunnable.syncExec(new BoolResult() {
+            public Boolean run() {
+                return widget.getExpanded();
+            }
+        });
+    }
 
 	// protected Rectangle absoluteLocation() {
 	// return syncExec(new Result<Rectangle>() {
