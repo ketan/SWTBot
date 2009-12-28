@@ -74,7 +74,6 @@
 				<include name="${feature.id.test}/**" />
 				<include name="org.eclipse.swtbot.eclipse/**" />
 				<include name="org.eclipse.swtbot.eclipse.test/**" />
-				<include name="org.eclipse.swtbot.recording/**" />
 				<include name="org.eclipse.swtbot.eclipse.gef/**" />
 			</fileset>
 		</sync>
@@ -97,7 +96,6 @@
 				<exclude name="${feature.id.test}/**" />
 				<exclude name="org.eclipse.swtbot.eclipse/**" />
 				<include name="org.eclipse.swtbot.eclipse.test/**" />
-				<exclude name="org.eclipse.swtbot.recording/**" />
 				<exclude name="org.eclipse.swtbot.eclipse.gef/**" />
 				<!-- the update site -->
 				<exclude name="org.eclipse.swtbot.updatesite/**" />
@@ -278,8 +276,6 @@
 
 			<!-- properties containing the plugin directory name including version number -->
 			<arg value="-Dorg.eclipse.swtbot.swt.finder.test=org.eclipse.swtbot.swt.finder.test_${all.buildId}" />
-			<arg value="-Dorg.eclipse.swtbot.swt.recorder.test=org.eclipse.swtbot.swt.recorder.test_${all.buildId}" />
-			<arg value="-Dorg.eclipse.swtbot.swt.recorder.ui.test=org.eclipse.swtbot.swt.recorder.ui.test_${all.buildId}" />
 			<arg value="-Dorg.eclipse.swtbot.eclipse.finder.test=org.eclipse.swtbot.eclipse.finder.test_${all.buildId}" />
 			<!-- <arg value="-Danother.plugin.test=another.plugin.test_1.0.0" /> -->
 
@@ -376,8 +372,6 @@
 		<copy-test-reports plugin.id="org.eclipse.swtbot.swt.finder.test" />
 		<copy-test-reports plugin.id="org.eclipse.swtbot.generator.test" />
 		<copy-test-reports plugin.id="org.eclipse.swtbot.eclipse.finder.test" />
-		<copy-test-reports plugin.id="org.eclipse.swtbot.swt.recorder.test" />
-		<copy-test-reports plugin.id="org.eclipse.swtbot.swt.recorder.ui.test" />
 
 	</target>
 

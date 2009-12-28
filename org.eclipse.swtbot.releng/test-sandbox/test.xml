@@ -308,18 +308,6 @@
 		</antcall>
 	</target>
 
-	<target name="test-recorder" depends="setup">
-		<antcall target="core-tests">
-			<param name="testPlugin" value="org.eclipse.swtbot.swt.recorder.test" />
-		</antcall>
-	</target>
-
-	<target name="test-recorder-ui" depends="setup">
-		<antcall target="core-tests">
-			<param name="testPlugin" value="org.eclipse.swtbot.swt.recorder.ui.test" />
-		</antcall>
-	</target>
-
 	<target name="test-generator" depends="setup">
 		<antcall target="core-tests">
 			<param name="testPlugin" value="org.eclipse.swtbot.generator.test" />
@@ -334,7 +322,7 @@
 		<runTests testPlugin="org.eclipse.swtbot.eclipse.ui.test" />
 	</target>
 
-	<target name="all" depends="test-finder, test-recorder-ui, test-recorder, test-generator, test-eclipse-finder, test-eclipse-ui" />
+	<target name="all" depends="test-finder, test-generator, test-eclipse-finder, test-eclipse-ui" />
 
 </project>
 
