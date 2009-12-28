@@ -416,6 +416,16 @@ public abstract class SWTUtils {
 	 *             milliseconds.
 	 */
 	public static void waitForDisplayToAppear() {
+		waitForDisplayToAppear(SWTBotPreferences.TIMEOUT);
+	}
+
+	/**
+	 * Waits until a display appears.
+	 * 
+	 * @param timeout the timeout in ms.
+	 * @throws TimeoutException if the condition does not evaluate to true after {@code timeout}ms milliseconds.
+	 */
+	public static void waitForDisplayToAppear(long timeout) {
 		waitUntil(new DefaultCondition() {
 
 			public String getFailureMessage() {
@@ -426,7 +436,7 @@ public abstract class SWTUtils {
 				return SWTUtils.display() != null;
 			}
 
-		}, SWTBotPreferences.TIMEOUT, 500);
+		}, timeout, 500);
 	}
 
 	private static void waitUntil(ICondition condition, long timeout, long interval) throws TimeoutException {
