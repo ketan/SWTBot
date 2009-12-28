@@ -46,3 +46,5 @@ org.eclipse.swtbot.eclipse.ui/build.properties
 /eclipse-3.4/
 /eclipse-3.5/
 /eclipse/
+
+*recorder*
