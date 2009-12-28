@@ -20,14 +20,14 @@ import org.eclipse.swt.widgets.Button;
  */
 public class ClearButtonSelectionListener implements SelectionListener {
 
-	private final SWTBotRecorderUI	recorderUI;
+	private final SWTBotRecorderWindow	recorderUI;
 	private final Button			clearButton;
 
 	/**
 	 * @param clearButton the clear button
 	 * @param recorderUI the ui to be invoked when the button is clicked.
 	 */
-	public ClearButtonSelectionListener(SWTBotRecorderUI recorderUI, Button clearButton) {
+	public ClearButtonSelectionListener(SWTBotRecorderWindow recorderUI, Button clearButton) {
 		this.recorderUI = recorderUI;
 		this.clearButton = clearButton;
 	}

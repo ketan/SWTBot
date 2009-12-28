@@ -21,14 +21,6 @@ import org.junit.Test;
  */
 public class MainTest {
 
-	public static class MyMain {
-		private static String[]	args;
-
-		public static void main(String[] args) {
-			MyMain.args = args;
-		}
-	}
-
 	@Test
 	public void noArgumentsThrowsException() throws Exception {
 		try {
@@ -37,18 +29,6 @@ public class MainTest {
 		} catch (IllegalArgumentException e) {
 			assertEquals("Usage: java org.eclipse.swtbot.swt.recorder.ui.Main com.your.MainClass [arguments to your main...]", e
 					.getMessage());
-		}
-	}
-
-	@Test
-	public void invokesMain() throws Exception {
-		try {
-			new Main(new String[] { "org.eclipse.swtbot.swt.recorder.ui.MainTest$MyMain", "my", "args" }).start();
-		} catch (IllegalStateException e) {
-			assertEquals("Could not find a display", e.getMessage());
-			assertEquals(2, MyMain.args.length);
-			assertEquals("my", MyMain.args[0]);
-			assertEquals("args", MyMain.args[1]);
 		}
 	}
 

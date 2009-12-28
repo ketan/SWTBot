@@ -13,7 +13,6 @@ package org.eclipse.swtbot.swt.recorder.ui;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.Iterator;
 
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.SWT;
@@ -29,22 +28,23 @@ import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.BoolResult;
 import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
+import org.eclipse.swtbot.swt.finder.utils.StringUtils;
 import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 import org.eclipse.swtbot.swt.recorder.SWTBotRecorder;
 import org.eclipse.swtbot.swt.recorder.generators.SWTBotAction;
-
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotRecorderUI {
+public class SWTBotRecorderWindow {
 
-	public static final String	CLEAR	= "clear"; //$NON-NLS-1$
-	public static final String	STOP	= "stop"; //$NON-NLS-1$
-	public static final String	SAVE	= "save"; //$NON-NLS-1$
-	public static final String	START	= "start"; //$NON-NLS-1$
-	public static final String	PAUSE	= "pause"; //$NON-NLS-1$
+	public static long			DISPLAY_WAIT_TIMEOUT	= 30 * 1000;
+	public static final String	CLEAR					= "clear";
+	public static final String	STOP					= "stop";
+	public static final String	SAVE					= "save";
+	public static final String	START					= "start";
+	public static final String	PAUSE					= "pause";
 
 	public static ImageRegistry	imageRegistry;
 	private Display				display;
@@ -56,17 +56,18 @@ public class SWTBotRecorderUI {
 	private Button				clearButton;
 	private Button				stopRecorderButton;
 
-	public SWTBotRecorderUI() {
+	public SWTBotRecorderWindow() {
 	}
 
-	public void initialize() throws Exception {
-		record(waitForDisplayToAppear(5000));
+	public void createWindow() {
+		waitForDisplayToAppear(DISPLAY_WAIT_TIMEOUT);
+		record(SWTUtils.display());
 	}
 
-	protected void createShell() {
+	private void createShell() {
 		shell = new Shell(display, SWT.TITLE | SWT.ON_TOP);
 		shell.setLayout(new GridLayout(4, false));
-		shell.setText("SWTBot Recorder"); //$NON-NLS-1$
+		shell.setText("SWTBot Recorder");
 
 		createStartPauseButton();
 		createStopRecorderButton();
@@ -98,13 +99,13 @@ public class SWTBotRecorderUI {
 		clearButton.setImage(imageRegistry.get(CLEAR));
 	}
 
-	protected void createSaveButton() {
+	private void createSaveButton() {
 		saveButton = new Button(shell, SWT.TOGGLE);
 		saveButton.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false));
 		saveButton.setImage(imageRegistry.get(SAVE));
 	}
 
-	protected void createStartPauseButton() {
+	private void createStartPauseButton() {
 		startPauseButton = new Button(shell, SWT.TOGGLE);
 		startPauseButton.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false));
 		startPauseButton.setImage(imageRegistry.get(START));
@@ -133,21 +134,19 @@ public class SWTBotRecorderUI {
 		startPauseButton.addSelectionListener(new StartPauseButtonToggleListener(this, startPauseButton));
 	}
 
-	protected void loadImages() {
+	private void loadImages() {
 		imageRegistry = new ImageRegistry();
-		loadImage(START);
-		loadImage(PAUSE);
-		loadImage(SAVE);
-		loadImage(STOP);
-		loadImage(CLEAR);
+		loadImage(START, PAUSE, SAVE, STOP, CLEAR);
 	}
 
-	private void loadImage(String imageName) {
-		InputStream record = getClass().getClassLoader().getResourceAsStream("icons/" + imageName + ".gif"); //$NON-NLS-1$ //$NON-NLS-2$
-		imageRegistry.put(imageName, new Image(display, record));
+	private void loadImage(String... imageNames) {
+		for (String imageName : imageNames) {
+			InputStream record = getClass().getClassLoader().getResourceAsStream("icons/" + imageName + ".gif");
+			imageRegistry.put(imageName, new Image(display, record));
+		}
 	}
 
-	protected void record(final Display display) {
+	private void record(final Display display) {
 		new SWTBot().waitUntil(new DefaultCondition() {
 			public String getFailureMessage() {
 				return null;
@@ -175,25 +174,18 @@ public class SWTBotRecorderUI {
 		};
 	}
 
-	protected void init() {
+	private void init() {
 		display = Display.getCurrent();
 		loadImages();
 	}
 
-	protected void hookRecorderListeners() {
+	private void hookRecorderListeners() {
 		bot = new SWTBot();
 		recorder = new SWTBotRecorder(display, bot);
 	}
 
-	private Display waitForDisplayToAppear(long timeOut) {
-		long endTime = System.currentTimeMillis() + timeOut;
-		while (System.currentTimeMillis() < endTime) {
-			Display display = SWTUtils.display();
-			if (display != null)
-				return display;
-			SWTUtils.sleep(100);
-		}
-		throw new IllegalStateException("Was expecting a display to appear."); //$NON-NLS-1$
+	private void waitForDisplayToAppear(long timeout) {
+		SWTUtils.waitForDisplayToAppear(timeout);
 	}
 
 	/**
@@ -232,8 +224,7 @@ public class SWTBotRecorderUI {
 		PrintWriter printWriter = null;
 		try {
 			printWriter = new PrintWriter(new FileOutputStream(fileName));
-			for (Iterator iterator = recorder.getEvents().getActions().iterator(); iterator.hasNext();) {
-				SWTBotAction action = (SWTBotAction) iterator.next();
+			for (SWTBotAction action : recorder.getEvents().getActions()) {
 				printWriter.println(action);
 			}
 			printWriter.close();
@@ -249,15 +240,11 @@ public class SWTBotRecorderUI {
 		return recorder.isRunning();
 	}
 
-	protected String getSaveFileName() {
+	private String getSaveFileName() {
 		String recorderFileName = SWTBotPreferences.RECORDER_FILE_NAME;
-		if (isEmptyOrNull(recorderFileName))
+		if (StringUtils.isEmptyOrNull(recorderFileName))
 			return new FileDialog(saveButton.getShell(), SWT.SAVE).open();
 		return recorderFileName;
-	}
-
-	protected boolean isEmptyOrNull(String recorderFileName) {
-		return (recorderFileName == null) || recorderFileName.trim().equals(""); //$NON-NLS-1$
 	}
 
 }

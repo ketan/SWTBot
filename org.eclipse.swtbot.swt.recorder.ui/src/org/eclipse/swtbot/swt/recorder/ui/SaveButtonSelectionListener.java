@@ -21,14 +21,14 @@ import org.eclipse.swt.widgets.Button;
 public class SaveButtonSelectionListener implements SelectionListener {
 
 	private final Button			saveButton;
-	private final SWTBotRecorderUI	recorderUI;
+	private final SWTBotRecorderWindow	recorderUI;
 
 	/**
 	 * @param saveButton the button to listen
 	 * @param recorderUI the ui to be invoked when the button is clicked.
 	 * @see SWTBotRecorderUI#save()
 	 */
-	public SaveButtonSelectionListener(SWTBotRecorderUI recorderUI, Button saveButton) {
+	public SaveButtonSelectionListener(SWTBotRecorderWindow recorderUI, Button saveButton) {
 		this.recorderUI = recorderUI;
 		this.saveButton = saveButton;
 	}

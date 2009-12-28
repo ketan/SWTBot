@@ -18,19 +18,19 @@ import org.eclipse.swt.widgets.Button;
 public class StartPauseButtonToggleListener implements SelectionListener {
 
 	private final Button			recordButton;
-	private final SWTBotRecorderUI	recorderUI;
+	private final SWTBotRecorderWindow	recorderUI;
 
-	public StartPauseButtonToggleListener(SWTBotRecorderUI recorderUI, Button recordButton) {
+	public StartPauseButtonToggleListener(SWTBotRecorderWindow recorderUI, Button recordButton) {
 		this.recorderUI = recorderUI;
 		this.recordButton = recordButton;
 	}
 
 	public void widgetDefaultSelected(SelectionEvent e) {
 		if (recorderUI.isRunning()) {
-			recordButton.setImage(SWTBotRecorderUI.imageRegistry.get(SWTBotRecorderUI.START));
+			recordButton.setImage(SWTBotRecorderWindow.imageRegistry.get(SWTBotRecorderWindow.START));
 			recorderUI.stop();
 		} else {
-			recordButton.setImage(SWTBotRecorderUI.imageRegistry.get(SWTBotRecorderUI.PAUSE));
+			recordButton.setImage(SWTBotRecorderWindow.imageRegistry.get(SWTBotRecorderWindow.PAUSE));
 			recorderUI.unPause();
 		}
 		recorderUI.setButtonStates();

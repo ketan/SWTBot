@@ -22,3 +22,4 @@ Import-Package: org.eclipse.jface.resource,
  org.eclipse.swtbot.swt.recorder,
  org.eclipse.swtbot.swt.recorder.generators,
  org.eclipse.swtbot.swt.recorder.listeners
+Require-Bundle: org.eclipse.swt.examples

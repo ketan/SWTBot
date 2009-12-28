@@ -20,18 +20,18 @@ import org.eclipse.swt.widgets.Button;
  */
 final class StopRecorderListener implements SelectionListener {
 
-	private final SWTBotRecorderUI	recorderUI;
+	private final SWTBotRecorderWindow	recorderUI;
 	private final Button			startPauseButton;
 	private final Button			stopRecorderButton;
 
-	public StopRecorderListener(SWTBotRecorderUI recorderUI, Button startPauseButton, Button stopRecorderButton) {
+	public StopRecorderListener(SWTBotRecorderWindow recorderUI, Button startPauseButton, Button stopRecorderButton) {
 		this.recorderUI = recorderUI;
 		this.startPauseButton = startPauseButton;
 		this.stopRecorderButton = stopRecorderButton;
 	}
 
 	public void widgetDefaultSelected(SelectionEvent e) {
-		startPauseButton.setImage(SWTBotRecorderUI.imageRegistry.get(SWTBotRecorderUI.START));
+		startPauseButton.setImage(SWTBotRecorderWindow.imageRegistry.get(SWTBotRecorderWindow.START));
 		startPauseButton.setSelection(false);
 		recorderUI.stop();
 		recorderUI.setButtonStates();
