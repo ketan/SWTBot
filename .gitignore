@@ -10,6 +10,9 @@ examples/gef/*/bin/
 
 /*/screenshots
 
+org.eclipse.swtbot.releng/.git.svn.properties
+org.eclipse.swtbot.releng/.svn.properties
+
 org.eclipse.swtbot.releng/externals/eclipse-SDK-*
 org.eclipse.swtbot.releng/externals/libs
 org.eclipse.swtbot.releng/externals/eclipse-test-framework-3.3.zip
