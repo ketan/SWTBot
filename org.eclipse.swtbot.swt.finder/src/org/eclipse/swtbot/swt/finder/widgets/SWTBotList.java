@@ -60,7 +60,7 @@ public class SWTBotList extends AbstractSWTBotControl<List> {
 	 */
 	public void select(final String item) {
 		log.debug(MessageFormat.format("Set selection {0} to text {1}", this, item)); //$NON-NLS-1$
-		assertEnabled();
+		waitForEnabled();
 		final int indexOf = indexOf(item);
 		Assert.isTrue(indexOf != -1, "Item `" + item + "' not found in list."); //$NON-NLS-1$ //$NON-NLS-2$
 		asyncExec(new VoidResult() {
@@ -78,7 +78,7 @@ public class SWTBotList extends AbstractSWTBotControl<List> {
 	 */
 	public void select(final int index) {
 		log.debug(MessageFormat.format("Set selection {0} to index {1}", this, index)); //$NON-NLS-1$
-		assertEnabled();
+		waitForEnabled();
 		int itemCount = itemCount();
 		Assert.isTrue(index <= itemCount, java.text.MessageFormat.format(
 				"The index ({0}) is more than the number of items ({1}) in the list.", index, itemCount)); //$NON-NLS-1$
@@ -136,7 +136,7 @@ public class SWTBotList extends AbstractSWTBotControl<List> {
 	 */
 	public void select(final int[] indices) {
 		log.debug(MessageFormat.format("Set selection {0} to indices {1}]", this, StringUtils.join(indices, ", "))); //$NON-NLS-1$ //$NON-NLS-2$
-		assertEnabled();
+		waitForEnabled();
 		asyncExec(new VoidResult() {
 			public void run() {
 				widget.setSelection(indices);
@@ -153,7 +153,7 @@ public class SWTBotList extends AbstractSWTBotControl<List> {
 	 */
 	public void select(final String[] items) {
 		log.debug(MessageFormat.format("Set selection {0} to items [{1}]", this, StringUtils.join(items, ", "))); //$NON-NLS-1$ //$NON-NLS-2$
-		assertEnabled();
+		waitForEnabled();
 		asyncExec(new VoidResult() {
 			public void run() {
 				widget.deselectAll();

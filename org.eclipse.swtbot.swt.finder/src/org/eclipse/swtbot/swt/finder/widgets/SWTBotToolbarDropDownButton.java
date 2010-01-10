@@ -109,7 +109,7 @@ public class SWTBotToolbarDropDownButton extends SWTBotToolbarButton {
 		try {
 			menuFinder.register();
 			log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
-			assertEnabled();
+			waitForEnabled();
 			notify(SWT.MouseEnter);
 			notify(SWT.MouseMove);
 			notify(SWT.Activate);
@@ -137,7 +137,7 @@ public class SWTBotToolbarDropDownButton extends SWTBotToolbarButton {
 	 */
 	public SWTBotToolbarDropDownButton click() {
 		log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
-		assertEnabled();
+		waitForEnabled();
 		sendNotifications();
 		log.debug(MessageFormat.format("Clicked on {0}", this)); //$NON-NLS-1$
 		return this;

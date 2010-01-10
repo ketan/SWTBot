@@ -66,7 +66,7 @@ public class SWTBotRadio extends AbstractSWTBotControl<Button> {
 			log.debug(MessageFormat.format("Widget {0} is already selected, not clicking again.", this)); //$NON-NLS-1$
 			return this;
 		}
-		assertEnabled();
+		waitForEnabled();
 		log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
 		asyncExec(new VoidResult() {
 			public void run() {

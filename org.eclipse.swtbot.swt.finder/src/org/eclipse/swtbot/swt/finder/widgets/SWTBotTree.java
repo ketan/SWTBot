@@ -194,7 +194,7 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 	 * @return this same instance.
 	 */
 	public SWTBotTree select(final String... items) {
-		assertEnabled();
+		waitForEnabled();
 		setFocus();
 		asyncExec(new VoidResult() {
 			public void run() {
@@ -221,7 +221,7 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 	 * @return this same instance.
 	 */
 	public SWTBotTree unselect() {
-		assertEnabled();
+		waitForEnabled();
 		asyncExec(new VoidResult() {
 			public void run() {
 				log.debug(MessageFormat.format("Unselecting all in {0}", widget)); //$NON-NLS-1$
@@ -239,7 +239,7 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 	 * @return this same instance.
 	 */
 	public SWTBotTree select(final int... indices) {
-		assertEnabled();
+		waitForEnabled();
 		setFocus();
 		asyncExec(new VoidResult() {
 			public void run() {
@@ -282,7 +282,7 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 	 * @throws WidgetNotFoundException if the node is not found.
 	 */
 	public SWTBotTreeItem expandNode(final String nodeText) throws WidgetNotFoundException {
-		assertEnabled();
+		waitForEnabled();
 		return getTreeItem(nodeText).expand();
 	}
 
@@ -294,7 +294,7 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 	 * @throws WidgetNotFoundException if the node is not found.
 	 */
 	public SWTBotTreeItem collapseNode(final String nodeText) throws WidgetNotFoundException {
-		assertEnabled();
+		waitForEnabled();
 		return getTreeItem(nodeText).collapse();
 	}
 
@@ -337,7 +337,7 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 	 * @throws WidgetNotFoundException if the node is not found.
 	 */
 	public SWTBotTreeItem expandNode(final String nodeText, final boolean recursive) throws WidgetNotFoundException {
-		assertEnabled();
+		waitForEnabled();
 		return syncExec(new Result<SWTBotTreeItem>() {
 			public SWTBotTreeItem run() {
 				SWTBotTreeItem item;

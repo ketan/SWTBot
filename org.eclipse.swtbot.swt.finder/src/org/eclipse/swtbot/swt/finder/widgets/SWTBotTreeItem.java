@@ -493,7 +493,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 	@Override
 	public SWTBotMenu contextMenu(String text) {
-		new SWTBotTree(tree).assertEnabled();
+		new SWTBotTree(tree).waitForEnabled();
 		select();
 		notifyTree(SWT.MenuDetect);
 		return super.contextMenu(tree, text);

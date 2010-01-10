@@ -62,7 +62,7 @@ public class SWTBotToolbarSeparatorButton extends SWTBotToolbarButton {
 	 */
 	public SWTBotToolbarSeparatorButton click() {
 		log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
-		assertEnabled();
+		waitForEnabled();
 		sendNotifications();
 		log.debug(MessageFormat.format("Clicked on {0}", this)); //$NON-NLS-1$
 		return this;

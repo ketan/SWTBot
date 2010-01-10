@@ -12,6 +12,7 @@ package org.eclipse.swtbot.swt.finder.widgets;
 
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widgetOfType;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMnemonic;
+import static org.eclipse.swtbot.swt.finder.waits.Conditions.widgetIsEnabled;
 import static org.hamcrest.Matchers.allOf;
 
 import java.util.List;
@@ -48,6 +49,7 @@ import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.utils.Traverse;
 import org.eclipse.swtbot.swt.finder.utils.WidgetTextDescription;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
+import org.eclipse.swtbot.swt.finder.waits.Conditions;
 import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 import org.hamcrest.Matcher;
 import org.hamcrest.SelfDescribing;
@@ -596,7 +598,15 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 */
 	protected void assertEnabled() {
 		Assert.isTrue(isEnabled(), MessageFormat.format("Widget {0} is not enabled.", this)); //$NON-NLS-1$ //$NON-NLS-2$
-
+	}
+	
+	/**
+	 * Wait until the widget is enabled.
+	 * 
+	 * @since 2.0
+	 */
+	protected void waitForEnabled() {
+		new SWTBot().waitUntil(widgetIsEnabled(this));
 	}
 
 	/**
@@ -621,7 +631,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 * @since 1.2
 	 */
 	public void setFocus() {
-		assertEnabled();
+		waitForEnabled();
 		log.debug(MessageFormat.format("Attempting to set focus on {0}", this));
 		syncExec(new VoidResult() {
 			public void run() {
@@ -647,7 +657,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 * @see Control#traverse(int)
 	 */
 	public boolean traverse(final Traverse traverse) {
-		assertEnabled();
+		waitForEnabled();
 		setFocus();
 
 		if (!(widget instanceof Control))
@@ -812,7 +822,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 * @see Keystrokes#toKeys(int, char)
 	 */
 	public AbstractSWTBot<T> pressShortcut(int modificationKeys, char c) {
-		assertEnabled();
+		waitForEnabled();
 		setFocus();
 		keyboard().pressShortcut(modificationKeys, c);
 		return this;
@@ -828,7 +838,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 * @see Keystrokes#toKeys(int, char)
 	 */
 	public AbstractSWTBot<T> pressShortcut(int modificationKeys, int keyCode, char c) {
-		assertEnabled();
+		waitForEnabled();
 		setFocus();
 		keyboard().pressShortcut(modificationKeys, keyCode, c);
 		return this;
@@ -843,7 +853,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 * @see Keystrokes
 	 */
 	public AbstractSWTBot<T> pressShortcut(KeyStroke... keys) {
-		assertEnabled();
+		waitForEnabled();
 		setFocus();
 		keyboard().pressShortcut(keys);
 		return this;

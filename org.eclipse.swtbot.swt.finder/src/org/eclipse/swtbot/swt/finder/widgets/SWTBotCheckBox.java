@@ -74,7 +74,7 @@ public class SWTBotCheckBox extends AbstractSWTBotControl<Button> {
 	 */
 	public void deselect() {
 		log.debug(MessageFormat.format("Deselecting {0}", this)); //$NON-NLS-1$
-		assertEnabled();
+		waitForEnabled();
 		if (!isChecked()) {
 			log.debug(MessageFormat.format("Widget {0} already deselected, not deselecting again.", this)); //$NON-NLS-1$
 			return;
@@ -93,7 +93,7 @@ public class SWTBotCheckBox extends AbstractSWTBotControl<Button> {
 	 */
 	public void select() {
 		log.debug(MessageFormat.format("Selecting {0}", this)); //$NON-NLS-1$
-		assertEnabled();
+		waitForEnabled();
 		if (isChecked()) {
 			log.debug(MessageFormat.format("Widget {0} already selected, not selecting again.", this)); //$NON-NLS-1$
 			return;
@@ -111,7 +111,7 @@ public class SWTBotCheckBox extends AbstractSWTBotControl<Button> {
 	 * Toggle the checkbox.
 	 */
 	protected void toggle() {
-		assertEnabled();
+		waitForEnabled();
 		asyncExec(new VoidResult() {
 			public void run() {
 				log.debug(MessageFormat.format("Toggling state on {0}. Setting state to {1}", widget, (!widget.getSelection() ? "selected" //$NON-NLS-1$ //$NON-NLS-2$

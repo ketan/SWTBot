@@ -70,7 +70,7 @@ public class SWTBotSlider extends AbstractSWTBot<Slider> {
 	 */
 	public void setSelection(final int value) {
 		log.debug(MessageFormat.format("Setting selection on {0} to {1}", this, value)); //$NON-NLS-1$
-		assertEnabled();
+		waitForEnabled();
 		asyncExec(new VoidResult() {
 			public void run() {
 				widget.setSelection(value);

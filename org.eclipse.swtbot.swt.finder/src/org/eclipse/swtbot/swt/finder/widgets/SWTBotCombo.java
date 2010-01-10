@@ -63,7 +63,7 @@ public class SWTBotCombo extends AbstractSWTBotControl<Combo> {
 	 */
 	public void setSelection(final String text) {
 		log.debug(MessageFormat.format("Setting selection on {0} to {1}", this, text)); //$NON-NLS-1$
-		assertEnabled();
+		waitForEnabled();
 		_setSelection(text);
 		notify(SWT.Selection);
 		log.debug(MessageFormat.format("Set selection on {0} to {1}", this, text)); //$NON-NLS-1$
@@ -122,7 +122,7 @@ public class SWTBotCombo extends AbstractSWTBotControl<Combo> {
 	 * @param index the zero based index.
 	 */
 	public void setSelection(final int index) {
-		assertEnabled();
+		waitForEnabled();
 		int itemCount = itemCount();
 		if (index > itemCount)
 			throw new RuntimeException("The index (" + index + ") is more than the number of items (" + itemCount + ") in the combo."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -170,7 +170,7 @@ public class SWTBotCombo extends AbstractSWTBotControl<Combo> {
 	 */
 	public void setText(final String text) {
 		log.debug(MessageFormat.format("Setting text on {0} to {1}", this, text)); //$NON-NLS-1$
-		assertEnabled();
+		waitForEnabled();
 
 		if (hasStyle(widget, SWT.READ_ONLY))
 			throw new RuntimeException("This combo box is read-only."); //$NON-NLS-1$

@@ -55,7 +55,7 @@ public class SWTBotMenu extends AbstractSWTBot<MenuItem> {
 	 */
 	public SWTBotMenu click() {
 		log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
-		assertEnabled();
+		waitForEnabled();
 		toggleSelection();
 		notify(SWT.Selection);
 		log.debug(MessageFormat.format("Clicked on {0}", this)); //$NON-NLS-1$

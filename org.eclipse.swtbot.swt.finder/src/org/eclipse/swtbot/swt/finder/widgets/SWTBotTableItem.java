@@ -139,7 +139,7 @@ public class SWTBotTableItem extends AbstractSWTBot<TableItem> {
 	}
 	
 	public SWTBotMenu contextMenu(String text) throws WidgetNotFoundException {
-		new SWTBotTable(table).assertEnabled();
+		new SWTBotTable(table).waitForEnabled();
 		select();
 		notifyTable(SWT.MenuDetect);
 		return super.contextMenu(table, text);

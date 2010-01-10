@@ -89,7 +89,7 @@ public class SWTBotCTabItem extends AbstractSWTBot<CTabItem> {
 	 */
 	public SWTBotCTabItem activate() throws TimeoutException {
 		log.trace(MessageFormat.format("Activating {0}", this)); //$NON-NLS-1$
-		assertEnabled();
+		waitForEnabled();
 		// this runs in sync because tabFolder.setSelection() does not send a notification, and so should not block.
 		asyncExec(new VoidResult() {
 			public void run() {
@@ -142,7 +142,7 @@ public class SWTBotCTabItem extends AbstractSWTBot<CTabItem> {
 	 * @return this CTabItem.
 	 */
 	public SWTBotCTabItem close() {
-		assertEnabled();
+		waitForEnabled();
 		Rectangle rectangleCloseBox = syncExec(new Result<Rectangle>() {
 			public Rectangle run() {
 				try {

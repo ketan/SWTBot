@@ -54,7 +54,7 @@ public class SWTBotTableColumn extends AbstractSWTBot<TableColumn> {
 	 * Clicks the item.
 	 */
 	public SWTBotTableColumn click() {
-		assertEnabled();
+		waitForEnabled();
 		notify(SWT.Selection);
 		notify(SWT.MouseUp, createMouseEvent(0, 0, 1, SWT.BUTTON1, 1), parent);
 		return this;

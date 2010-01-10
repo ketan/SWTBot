@@ -84,7 +84,7 @@ public class SWTBotDateTime extends AbstractSWTBotControl<DateTime> {
 	 */
 	public void setDate(final Date toSet) {
 		log.debug(MessageFormat.format("Setting date on control: {0} to {1}", this, toSet)); //$NON-NLS-1$
-		assertEnabled();
+		waitForEnabled();
 		syncExec(new VoidResult() {
 			@SuppressWarnings("deprecation")
 			public void run() {

@@ -10,9 +10,11 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.utils;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -43,7 +45,7 @@ public class MultiValueMap<K, V> {
 	public Collection<V> getCollection(K k) {
 		return map.get(k);
 	}
-
+	
 	public Set<K> keySet() {
 		return map.keySet();
 	}

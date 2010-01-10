@@ -15,6 +15,8 @@ package org.eclipse.swtbot.swt.finder.waits;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Widget;
+import org.eclipse.swtbot.swt.finder.SWTBotWidget;
+import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBot;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
 import org.hamcrest.Matcher;
@@ -112,4 +114,12 @@ public abstract class Conditions {
 		return new WaitForMenu(shell, matcher);
 	}
 
+	/**
+	 * @param widget the widget 
+	 * @return a condition that waits until the widget is enabled.
+	 * @since 2.0
+	 */
+	public static ICondition widgetIsEnabled(AbstractSWTBot<? extends Widget> widget){
+		return new WidgetIsEnabledCondition(widget);
+	}
 }

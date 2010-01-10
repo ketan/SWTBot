@@ -70,7 +70,7 @@ public class SWTBotTabItem extends AbstractSWTBot<TabItem> {
 	 */
 	public SWTBotTabItem activate() throws TimeoutException {
 		log.trace(MessageFormat.format("Activating {0}", this)); //$NON-NLS-1$
-		assertEnabled();
+		waitForEnabled();
 		// this runs in sync because tabFolder.setSelection() does not send a notification, and so should not block.
 		asyncExec(new VoidResult() {
 			public void run() {

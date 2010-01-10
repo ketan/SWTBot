@@ -229,7 +229,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 	 * @since 1.0
 	 */
 	public void select(final String... items) {
-		assertEnabled();
+		waitForEnabled();
 		setFocus();
 		int[] itemIndicies = new int[items.length];
 		for(int i = 0; i < items.length; i++) {
@@ -307,7 +307,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 	 * Unselect all selections.
 	 */
 	public void unselect() {
-		assertEnabled();
+		waitForEnabled();
 		setFocus();
 		asyncExec(new VoidResult() {
 			public void run() {
@@ -324,7 +324,7 @@ public class SWTBotTable extends AbstractSWTBot<Table> {
 	 * @param indices the row indices to select in the table.
 	 */
 	public void select(final int... indices) {
-		assertEnabled();
+		waitForEnabled();
 		if (indices.length > 1)
 			assertMultiSelect();
 		setFocus();

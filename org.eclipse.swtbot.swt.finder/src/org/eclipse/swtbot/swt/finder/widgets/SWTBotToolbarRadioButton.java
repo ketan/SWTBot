@@ -62,7 +62,7 @@ public class SWTBotToolbarRadioButton extends SWTBotToolbarButton {
 	 */
 	public SWTBotToolbarRadioButton toggle() {
 		log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
-		assertEnabled();
+		waitForEnabled();
 		internalToggle();
 		sendNotifications();
 		log.debug(MessageFormat.format("Clicked on {0}", this)); //$NON-NLS-1$
