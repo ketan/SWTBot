@@ -138,4 +138,13 @@ public class SWTBotShell extends AbstractSWTBotControl<Shell> {
 		});
 	}
 
+	/**
+	 * Returns a SWTBot instance that matches the contents of this shell.
+	 * 
+	 * @return SWTBot
+	 */
+	public SWTBot bot() {
+		return new SWTBot(widget);
+	}
+
 }
