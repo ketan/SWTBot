@@ -362,53 +362,6 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 		});
 	}
 
-
-	// /**
-	// * Expand the node using the keyboard
-	// *
-	// * @param node the node to be expanded.
-	// * @param recursive if the expansion should be recursive.
-	// * @return the tree item that was expanded.
-	// * @throws WidgetNotFoundException if the node is not found.
-	// */
-	// public SWTBotTreeItem expandNode(final SWTBotTreeItem node, final boolean recursive) throws
-	// WidgetNotFoundException {
-	// assertEnabled();
-	// return syncExec(new Result<SWTBotTreeItem>() {
-	// public SWTBotTreeItem run() {
-	// try {
-	// expandNode(node);
-	// } catch (WidgetNotFoundException e) {
-	// throw new RuntimeException(e);
-	// }
-	// return node;
-	// }
-	//
-	// private void expandNode(SWTBotTreeItem node) throws WidgetNotFoundException {
-	// if(node.getItems().length != 0) {
-	// node.expandWithKeys();
-	//
-	// node.keyPress(SWT.ARROW_DOWN, true);
-	//
-	// if (recursive) {
-	// expandTreeItem(node);
-	// }
-	// }
-	// else {
-	// keyPress(SWT.ARROW_DOWN, true);
-	// return;
-	// }
-	// }
-	//
-	// private void expandTreeItem(SWTBotTreeItem node) throws WidgetNotFoundException {
-	// SWTBotTreeItem[] items = node.getItems();
-	// for (SWTBotTreeItem item : items) {
-	// expandNode(item);
-	// }
-	// }
-	// });
-	// }
-
 	/**
 	 * Gets the tree item matching the given name.
 	 *
