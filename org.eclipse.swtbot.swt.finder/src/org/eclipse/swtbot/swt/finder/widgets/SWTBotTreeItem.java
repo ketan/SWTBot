@@ -439,12 +439,11 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 
 		syncExec(new VoidResult() {
 			public void run() {
-				TreeItem[] treeItems = widget.getItems();
 				ArrayList<TreeItem> selection = new ArrayList<TreeItem>();
 
-				for (TreeItem treeItem : treeItems) {
-					if (nodes.contains(treeItem.getText()))
-						selection.add(treeItem);
+				for (String item : items) {
+					SWTBotTreeItem si = getTreeItem(item);
+					selection.add(si.widget);
 				}
 				tree.setFocus();
 				tree.setSelection(selection.toArray(new TreeItem[] {}));

@@ -198,13 +198,10 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 		setFocus();
 		asyncExec(new VoidResult() {
 			public void run() {
-				TreeItem[] treeItems = widget.getItems();
 				List<TreeItem> selection = new ArrayList<TreeItem>();
-				for (TreeItem treeItem : treeItems) {
-					for (String item : items) {
-						if (treeItem.getText().equals(item))
-							selection.add(treeItem);
-					}
+				for (String item : items) {
+					SWTBotTreeItem si = getTreeItem(item);
+					selection.add(si.widget);
 				}
 				if (hasStyle(widget, SWT.MULTI) && items.length > 1)
 					log.warn("Tree does not support SWT.MULTI, cannot make multiple selections"); //$NON-NLS-1$
