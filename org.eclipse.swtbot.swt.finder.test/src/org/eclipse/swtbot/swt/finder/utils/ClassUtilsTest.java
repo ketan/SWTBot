@@ -30,6 +30,11 @@ public class ClassUtilsTest {
 		assertEquals("ClassUtilsTest", ClassUtils.simpleClassName(this));
 		assertEquals("ClassUtilsTest$MyClass", ClassUtils.simpleClassName(MyClass.class));
 		assertEquals("ClassUtilsTest$MyClass", ClassUtils.simpleClassName(new MyClass()));
+		assertEquals("FooClass", ClassUtils.simpleClassName("com.example.FooClass"));
+		assertEquals("FooClass$InnerClass", ClassUtils.simpleClassName("com.example.FooClass$InnerClass"));
 		assertEquals("", ClassUtils.simpleClassName((Object) null));
+		assertEquals("", ClassUtils.simpleClassName(""));
+		assertEquals("", ClassUtils.simpleClassName((Class) null));
 	}
+
 }
