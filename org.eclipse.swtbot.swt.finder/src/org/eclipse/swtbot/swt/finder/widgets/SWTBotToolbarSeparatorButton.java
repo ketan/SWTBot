@@ -29,7 +29,7 @@ import org.hamcrest.SelfDescribing;
  * @since 2.0
  */
 @SWTBotWidget(clasz = ToolItem.class, preferredName = "toolbarSeparatorButton", style = @Style(name = "SWT.SEPARATOR", value = SWT.SEPARATOR), referenceBy = {
-		ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })
+		ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP }, returnType = SWTBotToolbarButton.class)
 public class SWTBotToolbarSeparatorButton extends SWTBotToolbarButton {
 
 	/**

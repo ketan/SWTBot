@@ -40,7 +40,7 @@ import org.hamcrest.SelfDescribing;
  * @since 1.2
  */
 @SWTBotWidget(clasz = ToolItem.class, preferredName = "toolbarDropDownButton", style = @Style(name = "SWT.DROP_DOWN", value = SWT.DROP_DOWN), referenceBy = {
-		ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })
+		ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP}, returnType = SWTBotToolbarDropDownButton.class )
 public class SWTBotToolbarDropDownButton extends SWTBotToolbarButton {
 
 	/**

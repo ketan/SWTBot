@@ -16,7 +16,8 @@
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotStyledText" />
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotDateTime" />
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarButton" />
-	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarCheckboxButton" />
+	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarPushButton" />
+	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarToggleButton" />
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarDropDownButton" />
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarRadioButton" />
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotLink" />

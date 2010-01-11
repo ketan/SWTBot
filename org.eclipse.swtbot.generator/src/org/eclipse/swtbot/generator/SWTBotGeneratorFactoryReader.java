@@ -36,7 +36,14 @@ public class SWTBotGeneratorFactoryReader {
 		if (annotation == null)
 			return new ArrayList<String>();
 
-		return MethodFactory.methods(annotation, constructor.getDeclaringClass(), annotation.clasz(), annotation.preferredName());
+		Class<?> returnType;
+
+		returnType = annotation.returnType();
+		if (returnType == Object.class)
+			returnType = constructor.getDeclaringClass();
+
+		Class<?> creationType = constructor.getDeclaringClass();
+		return MethodFactory.methods(annotation, returnType, creationType, annotation.clasz(), annotation.preferredName());
 	}
 
 	public Collection<? extends String> getImports() {

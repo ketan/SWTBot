@@ -26,6 +26,7 @@ import java.lang.annotation.Target;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Widget;
+import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBot;
 
 /**
  * Marks a SWTBot widget so tools recognise them. This anotation is primarily used to describe the convinience API that
@@ -94,4 +95,6 @@ public @interface SWTBotWidget {
 
 	/** Default reference by */
 	ReferenceBy[] defaultReferenceBy() default { ReferenceBy.ID_KEY_VALUE, ReferenceBy.ID_VALUE, ReferenceBy.IN_GROUP, ReferenceBy.NONE };
+
+	Class<?> returnType() default Object.class;
 }

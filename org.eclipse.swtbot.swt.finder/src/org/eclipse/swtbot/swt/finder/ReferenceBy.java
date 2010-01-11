@@ -24,7 +24,7 @@ import org.eclipse.swtbot.swt.finder.utils.StringUtils;
 public enum ReferenceBy {
 	TEXT(100) {
 		protected boolean isCompatibleWith(ReferenceBy other) {
-			return other != LABEL && other != TOOLTIP && other != MNEMONIC;
+			return other != LABEL && other != TOOLTIP && other != MNEMONIC && other != MESSAGE;
 		}
 
 		public String matcherMethod() {
@@ -37,7 +37,7 @@ public enum ReferenceBy {
 	},
 	MNEMONIC(100) {
 		protected boolean isCompatibleWith(ReferenceBy other) {
-			return other != LABEL && other != TOOLTIP && other != TEXT;
+			return other != LABEL && other != TOOLTIP && other != TEXT && other != MESSAGE;
 		}
 
 		public String matcherMethod() {
@@ -54,7 +54,7 @@ public enum ReferenceBy {
 	},
 	LABEL(100) {
 		protected boolean isCompatibleWith(ReferenceBy other) {
-			return other != TEXT && other != TOOLTIP && other != MNEMONIC;
+			return other != TEXT && other != TOOLTIP && other != MNEMONIC && other != MESSAGE;
 		}
 
 		public String matcherMethod() {
@@ -63,11 +63,20 @@ public enum ReferenceBy {
 	},
 	TOOLTIP(90) {
 		protected boolean isCompatibleWith(ReferenceBy other) {
-			return other != TEXT && other != LABEL && other != MNEMONIC;
+			return other != TEXT && other != LABEL && other != MNEMONIC  && other != MESSAGE;
 		}
 
 		public String matcherMethod() {
 			return "withTooltip(" + argumentName() + ")"; //$NON-NLS-1$ //$NON-NLS-2$
+		}
+	},
+	MESSAGE(90) {
+		protected boolean isCompatibleWith(ReferenceBy other) {
+			return other != TEXT && other != LABEL && other != MNEMONIC && other != TOOLTIP && other != IN_GROUP;
+		}
+
+		public String matcherMethod() {
+			return "withMessage(" + argumentName() + ")"; //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	},
 	ID_KEY_VALUE(100) {

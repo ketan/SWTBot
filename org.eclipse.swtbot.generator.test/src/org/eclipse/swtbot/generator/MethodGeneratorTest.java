@@ -17,9 +17,12 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.junit.Assert.assertEquals;
 
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swtbot.swt.finder.ReferenceBy;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarButton;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarPushButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,6 +37,7 @@ public class MethodGeneratorTest {
 	private MethodGenerator	withTextInGroup;
 	private MethodGenerator	withStyleWithTextInGroup;
 	private MethodGenerator	withStyle;
+	private MethodGenerator	withSubclassedWidgets;
 
 	@Test
 	public void generatesMethodArgumentsGivenASingleReference() throws Exception {
@@ -89,6 +93,16 @@ public class MethodGeneratorTest {
 		assertEquals("	public SWTBotButton buttonInGroup(String text, String inGroup) {\n" + "		return buttonInGroup(text, inGroup, 0);\n"
 				+ "	}\n", withTextInGroup.methodContents());
 	}
+	
+	@Test
+	public void generatesMethodContentsWithSubclassedTypes() throws Exception {
+		assertEquals("	@SuppressWarnings(\"unchecked\")\n" + 
+				"	public SWTBotToolbarButton toolbarToggleButtonInGroup(String text, String inGroup, int index) {\n" + 
+				"		Matcher matcher = allOf(widgetOfType(ToolItem.class), withText(text), inGroup(inGroup), withStyle(SWT.FOO_STYLE, \"SWT.FOO_STYLE\"));\n" + 
+				"		return new SWTBotToolbarPushButton((ToolItem) widget(matcher, index), matcher);\n" + 
+				"	}\n" + 
+				"", withSubclassedWidgets.methodContentsWithIndex());
+	}
 
 	@Test
 	public void generatesImports() throws Exception {
@@ -98,11 +112,14 @@ public class MethodGeneratorTest {
 
 	@Before
 	public void setUp() throws Exception {
-		inGroup = new MethodGenerator(SWTBotButton.class, Button.class, "button", "SWT.NONE", ReferenceBy.IN_GROUP);
-		withTextInGroup = new MethodGenerator(SWTBotButton.class, Button.class, "button", "SWT.NONE", ReferenceBy.TEXT,
+		inGroup = new MethodGenerator(SWTBotButton.class, SWTBotButton.class, Button.class, "button", "SWT.NONE", ReferenceBy.IN_GROUP);
+		withTextInGroup = new MethodGenerator(SWTBotButton.class, SWTBotButton.class, Button.class, "button", "SWT.NONE", ReferenceBy.TEXT,
 				ReferenceBy.IN_GROUP);
-		withStyle = new MethodGenerator(SWTBotTree.class, Tree.class, "tree", "SWT.FOO_STYLE", ReferenceBy.NONE);
-		withStyleWithTextInGroup = new MethodGenerator(SWTBotTree.class, Tree.class, "tree", "SWT.FOO_STYLE", ReferenceBy.TEXT,
+		withStyle = new MethodGenerator(SWTBotTree.class, SWTBotTree.class, Tree.class, "tree", "SWT.FOO_STYLE", ReferenceBy.NONE);
+		withStyleWithTextInGroup = new MethodGenerator(SWTBotTree.class, SWTBotTree.class, Tree.class, "tree", "SWT.FOO_STYLE", ReferenceBy.TEXT,
+				ReferenceBy.IN_GROUP);
+		
+		withSubclassedWidgets = new MethodGenerator(SWTBotToolbarButton.class, SWTBotToolbarPushButton.class, ToolItem.class, "toolbarToggleButton", "SWT.FOO_STYLE", ReferenceBy.TEXT,
 				ReferenceBy.IN_GROUP);
 	}
 

@@ -30,7 +30,7 @@ import org.hamcrest.SelfDescribing;
  * @version $Id$
  */
 @SWTBotWidget(clasz = ToolItem.class, preferredName = "toolbarRadioButton", style = @Style(name = "SWT.RADIO", value = SWT.RADIO), referenceBy = {
-		ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })
+		ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP }, returnType = SWTBotToolbarRadioButton.class)
 public class SWTBotToolbarRadioButton extends SWTBotToolbarButton {
 
 	/**

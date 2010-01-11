@@ -112,6 +112,7 @@ public class HamcrestFactoryWriter implements HamcrestWriter {
 		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withId"); //$NON-NLS-1$
 		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withLabel"); //$NON-NLS-1$
 		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withText"); //$NON-NLS-1$
+		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMessage"); //$NON-NLS-1$
 		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.inGroup"); //$NON-NLS-1$
 		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withStyle"); //$NON-NLS-1$
 		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withTooltip"); //$NON-NLS-1$
@@ -121,6 +122,7 @@ public class HamcrestFactoryWriter implements HamcrestWriter {
 		imports.add("import org.eclipse.swtbot.swt.finder.finders.ChildrenControlFinder"); //$NON-NLS-1$
 		imports.add("import org.eclipse.swtbot.swt.finder.finders.Finder"); //$NON-NLS-1$
 		imports.add("import org.eclipse.swtbot.swt.finder.finders.MenuFinder"); //$NON-NLS-1$
+		imports.add("import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarButton"); //$NON-NLS-1$
 		imports.add("import org.eclipse.swt.widgets.Widget"); //$NON-NLS-1$
 
 		imports.add("import org.hamcrest.Matcher"); //$NON-NLS-1$

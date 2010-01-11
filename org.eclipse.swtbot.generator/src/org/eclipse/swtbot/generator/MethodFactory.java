@@ -25,15 +25,15 @@ import org.eclipse.swtbot.swt.finder.SWTBotWidget;
  */
 public class MethodFactory {
 
-	public static ArrayList<String> methods(SWTBotWidget annotation, Class<?> returnType, Class<? extends Widget> widgetType, String methodPrefix) {
+	public static ArrayList<String> methods(SWTBotWidget annotation, Class<?> returnType, Class<?> creationType, Class<? extends Widget> widgetType, String methodPrefix) {
 		ArrayList<String> result = new ArrayList<String>();
 
 		List<List<ReferenceBy>> references = getReferenceCombinations(annotation);
 		for (List<ReferenceBy> list : references) {
-			result.add(new MethodGenerator(returnType, widgetType, methodPrefix, annotation.style().name(), list).commentContents());
-			result.add(new MethodGenerator(returnType, widgetType, methodPrefix, annotation.style().name(), list).methodContents());
-			result.add(new MethodGenerator(returnType, widgetType, methodPrefix, annotation.style().name(), list).commentContentsWithIndex());
-			result.add(new MethodGenerator(returnType, widgetType, methodPrefix, annotation.style().name(), list).methodContentsWithIndex());
+			result.add(new MethodGenerator(returnType, creationType, widgetType, methodPrefix, annotation.style().name(), list).commentContents());
+			result.add(new MethodGenerator(returnType, creationType, widgetType, methodPrefix, annotation.style().name(), list).methodContents());
+			result.add(new MethodGenerator(returnType, creationType, widgetType, methodPrefix, annotation.style().name(), list).commentContentsWithIndex());
+			result.add(new MethodGenerator(returnType, creationType, widgetType, methodPrefix, annotation.style().name(), list).methodContentsWithIndex());
 		}
 		return result;
 	}
@@ -49,7 +49,7 @@ public class MethodFactory {
 		ArrayList<String> result = new ArrayList<String>();
 		List<List<ReferenceBy>> references = getReferenceCombinations(annotation);
 		for (List<ReferenceBy> list : references) {
-			result.addAll(new MethodGenerator(returnType, widgetType, methodPrefix, annotation.style().name(), list).imports());
+			result.addAll(new MethodGenerator(returnType, null, widgetType, methodPrefix, annotation.style().name(), list).imports());
 		}
 		return result;
 	}

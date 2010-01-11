@@ -24,7 +24,8 @@ import org.hamcrest.SelfDescribing;
 /**
  * @author Mariot Chauvin &lt;mariot [dot] chauvin [at] obeo [dot] fr&gt;
  */
-@SWTBotWidget(clasz = ToolItem.class, style = @Style(name="SWT.PUSH", value=SWT.PUSH), preferredName = "toolbarButton", referenceBy = { ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP })
+@SWTBotWidget(clasz = ToolItem.class, style = @Style(name = "SWT.PUSH", value = SWT.PUSH), preferredName = "toolbarButton", referenceBy = {
+		ReferenceBy.MNEMONIC, ReferenceBy.TOOLTIP }, returnType = SWTBotToolbarButton.class)
 public class SWTBotToolbarPushButton extends SWTBotToolbarButton {
 
 	/**

@@ -13,6 +13,7 @@ package org.eclipse.swtbot.generator;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.ReferenceBy;
 import org.eclipse.swtbot.swt.finder.utils.ClassUtils;
 
@@ -29,17 +30,20 @@ public class MethodGenerator {
 	private final String		methodNamePrefix;
 	private final Class<?>		widgetType;
 	private final String		style;
+	private final Class<?>	creationType;
 
-	public MethodGenerator(Class<?> returnType, Class<?> widgetType, String methodNamePrefix, String style, List<ReferenceBy> list) {
+	public MethodGenerator(Class<?> returnType, Class<?> creationType, Class<?> widgetType, String methodNamePrefix, String style, List<ReferenceBy> list) {
 		this.returnType = returnType;
+		this.creationType = creationType;
 		this.widgetType = widgetType;
 		this.methodNamePrefix = methodNamePrefix;
 		this.style = style;
 		this.list = list.toArray(new ReferenceBy[] {});
 	}
 
-	public MethodGenerator(Class<?> returnType, Class<?> widgetType, String methodNamePrefix, String style, ReferenceBy... list) {
+	public MethodGenerator(Class<?> returnType, Class<?> creationType, Class<?> widgetType, String methodNamePrefix, String style, ReferenceBy... list) {
 		this.returnType = returnType;
+		this.creationType = creationType;
 		this.widgetType = widgetType;
 		this.methodNamePrefix = methodNamePrefix;
 		this.style = style;
@@ -63,7 +67,7 @@ public class MethodGenerator {
 		String result = "	@SuppressWarnings(\"unchecked\")\n"; //$NON-NLS-1$
 		result += "	public " + ClassUtils.simpleClassName(returnType) + " " + methodName() + methodArgsWithIndex() + " {\n"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		result += "		Matcher matcher = allOf(" + instanceOf() + (otherMatchers().length() > 0 ? ", " : "") + otherMatchers() + ");\n"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		result += "		return new " + ClassUtils.simpleClassName(returnType) + "((" + ClassUtils.simpleClassName(widgetType) //$NON-NLS-1$ //$NON-NLS-2$
+		result += "		return new " + ClassUtils.simpleClassName(creationType) + "((" + ClassUtils.simpleClassName(widgetType) //$NON-NLS-1$ //$NON-NLS-2$
 				+ ") widget(matcher, index), matcher);\n"; //$NON-NLS-1$
 		result += "	}\n"; //$NON-NLS-1$
 		return result;
