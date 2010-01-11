@@ -163,6 +163,12 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	 */
 	public SWTBotTreeItem expand() {
 		assertEnabled();
+
+		if (isExpanded()){
+			log.warn(MessageFormat.format("Tree item {0} is already expanded. Won''t expand it again.", this));
+			return this;
+		}
+
 		preExpandNotify();
 		asyncExec(new VoidResult() {
 			public void run() {
@@ -180,6 +186,12 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	 */
 	public SWTBotTreeItem collapse() {
 		assertEnabled();
+
+		if (!isExpanded()){
+			log.warn(MessageFormat.format("Tree item {0} is already collapsed. Won''t collapse it again.", this));
+			return this;
+		}
+
 		preCollapseNotify();
 		asyncExec(new VoidResult() {
 			public void run() {
