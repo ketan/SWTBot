@@ -71,6 +71,17 @@ public abstract class WidgetMatcherFactory {
   }
 
   /**
+   * Matches a widget that has the specified exact message.
+   * 
+   * @param message the message.
+   * @return a matcher.
+   * @since 2.0
+   */
+  public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> withMessage(java.lang.String message) {
+    return org.eclipse.swtbot.swt.finder.matchers.WithMessage.withMessage(message);
+  }
+
+  /**
    * Matches a widget that has the specified style bit set.
    * 
    * @param style the style bits.

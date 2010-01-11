@@ -44,10 +44,10 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotText;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToggleButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarButton;
-import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarPushButton;
-import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarToggleButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarDropDownButton;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarPushButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarRadioButton;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarToggleButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.hamcrest.Matcher;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.allOf;
@@ -55,6 +55,7 @@ import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.inGrou
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widgetOfType;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withId;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withLabel;
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMessage;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMnemonic;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withStyle;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withText;
@@ -1086,6 +1087,25 @@ public class SWTBot extends SWTBotFactory {
 	@SuppressWarnings("unchecked")
 	public SWTBotText textWithTooltip(String tooltip, int index) {
 		Matcher matcher = allOf(widgetOfType(Text.class), withTooltip(tooltip));
+		return new SWTBotText((Text) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param message the message on the widget.
+	 * @return a {@link SWTBotText} with the specified <code>message</code>.
+	 */
+	public SWTBotText textWithMessage(String message) {
+		return textWithMessage(message, 0);
+	}
+
+	/**
+	 * @param message the message on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotText} with the specified <code>message</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	public SWTBotText textWithMessage(String message, int index) {
+		Matcher matcher = allOf(widgetOfType(Text.class), withMessage(message));
 		return new SWTBotText((Text) widget(matcher, index), matcher);
 	}
 
