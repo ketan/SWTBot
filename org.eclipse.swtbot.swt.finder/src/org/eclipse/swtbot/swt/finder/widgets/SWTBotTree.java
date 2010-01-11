@@ -203,7 +203,32 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 					SWTBotTreeItem si = getTreeItem(item);
 					selection.add(si.widget);
 				}
-				if (hasStyle(widget, SWT.MULTI) && items.length > 1)
+				if (!hasStyle(widget, SWT.MULTI) && items.length > 1)
+					log.warn("Tree does not support SWT.MULTI, cannot make multiple selections"); //$NON-NLS-1$
+				widget.setSelection(selection.toArray(new TreeItem[] {}));
+			}
+		});
+		notifySelect();
+		return this;
+	}
+	
+	/**
+	 * Selects the items in the array. Useful for cases where you're selecting items whose names are not unique, or
+	 * items you've exposed one at a time while traversing the tree.
+	 * 
+	 * @param items the items to select.
+	 * @return this same instance.
+	 */
+	public SWTBotTree select(final SWTBotTreeItem... items) {
+		assertEnabled();
+		setFocus();
+		asyncExec(new VoidResult() {
+			public void run() {
+				List<TreeItem> selection = new ArrayList<TreeItem>();
+				for (SWTBotTreeItem treeItem : items) {
+					selection.add(treeItem.widget);
+				}
+				if (!hasStyle(widget, SWT.MULTI) && items.length > 1)
 					log.warn("Tree does not support SWT.MULTI, cannot make multiple selections"); //$NON-NLS-1$
 				widget.setSelection(selection.toArray(new TreeItem[] {}));
 			}
@@ -241,7 +266,7 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 		asyncExec(new VoidResult() {
 			public void run() {
 				log.debug(MessageFormat.format("Selecting rows [{0}] in tree{1}", StringUtils.join(indices, ", "), this)); //$NON-NLS-1$ //$NON-NLS-2$
-				if (hasStyle(widget, SWT.MULTI) && indices.length > 1)
+				if (!hasStyle(widget, SWT.MULTI) && indices.length > 1)
 					log.warn("Tree does not support SWT.MULTI, cannot make multiple selections"); //$NON-NLS-1$
 				TreeItem items[] = new TreeItem[indices.length];
 				for (int i = 0; i < indices.length; i++)
@@ -442,31 +467,4 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 		});
 	}
 
-	// /**
-	// * Expands all of the nodes in the tree
-	// */
-	// public void expandNodes() {
-	// SWTBotTreeItem[] children = getAllItems();
-	// for (SWTBotTreeItem node : children) {
-	// expandNode(node, true);
-	// }
-	// }
-	//
-	// /**
-	// * Collapses all of the nodes in the tree
-	// */
-	// public void collapseNodes() {
-	// SWTBotTreeItem[] children = getAllItems();
-	// for (SWTBotTreeItem node : children) {
-	// System.out.println("Pressing left key");
-	// node.keyPress(SWT.ARROW_LEFT, true);
-	// try {
-	// Thread.sleep(500);
-	// } catch (InterruptedException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// node.keyPress(SWT.ARROW_DOWN, true);
-	// }
-	// }
 }
