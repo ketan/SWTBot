@@ -4,29 +4,25 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
-package org.eclipse.swtbot.swt.finder.waits;
+package org.eclipse.swtbot.swt.finder.matchers;
 
-import org.eclipse.swt.widgets.Widget;
-import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBot;
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withText;
+import static org.junit.Assert.assertEquals;
 
-class WidgetIsEnabledCondition extends DefaultCondition {
+import org.eclipse.swt.widgets.Item;
+import org.hamcrest.StringDescription;
+import org.junit.Test;
 
-	private final AbstractSWTBot<? extends Widget>	widget;
+public class WithItemTest {
 
-	WidgetIsEnabledCondition(AbstractSWTBot<? extends Widget> widget) {
-		this.widget = widget;
+	@Test
+	public void testDescription() throws Exception {
+		WithItem<Item> withItem = WithItem.withItem(withText("foo"));
+		assertEquals("with item matching (with text 'foo')", StringDescription.toString(withItem));
+
 	}
-
-	public boolean test() throws Exception {
-		return widget.isEnabled();
-	}
-
-	public String getFailureMessage() {
-		return "The widget " + widget + " was not enabled.";
-	}
-
 }

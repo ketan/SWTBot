@@ -39,8 +39,9 @@ public class WithItem<T extends Item> extends AbstractMatcher<T> {
 	}
 
 	public void describeTo(Description description) {
-		description.appendText("with item");
+		description.appendText("with item matching (");
 		this.itemMatcher.describeTo(description);
+		description.appendText(")");
 	}
 
 	protected boolean doMatch(Object obj) {
@@ -81,7 +82,8 @@ public class WithItem<T extends Item> extends AbstractMatcher<T> {
 	 * @return a matcher.
 	 */
 	@Factory
-	public static <T extends Item> WithItem<T> withItem(Matcher<?> matcher) {
+	public
+	static <T extends Item> WithItem<T> withItem(Matcher<?> matcher) {
 		return new WithItem<T>(matcher);
 	}
 }

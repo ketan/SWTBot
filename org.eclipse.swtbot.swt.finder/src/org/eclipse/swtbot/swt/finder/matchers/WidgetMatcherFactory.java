@@ -192,6 +192,7 @@ public abstract class WidgetMatcherFactory {
    * @param matcher the matcher
    * @return a matcher.
    * @since 2.0
+   * @deprecated this has been deprecated and will be removed in future releases of swtbot.
    */
   public static <T extends org.eclipse.swt.widgets.Widget> org.hamcrest.Matcher<T> inUIThread(org.hamcrest.Matcher<?> matcher) {
     return org.eclipse.swtbot.swt.finder.matchers.InUIThread.inUIThread(matcher);

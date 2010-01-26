@@ -24,6 +24,7 @@ import org.hamcrest.Matcher;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  * @since 2.0
+ * @deprecated this has been deprecated and will be removed in future releases of swtbot
  */
 public class InUIThread<T extends Widget> extends AbstractMatcher<T> {
 
@@ -54,6 +55,7 @@ public class InUIThread<T extends Widget> extends AbstractMatcher<T> {
 	 * @param matcher the matcher
 	 * @return a matcher.
 	 * @since 2.0
+	 * @deprecated this has been deprecated and will be removed in future releases of swtbot.
 	 */
 	@Factory
 	public static <T extends Widget> Matcher<T> inUIThread(Matcher<?> matcher) {
