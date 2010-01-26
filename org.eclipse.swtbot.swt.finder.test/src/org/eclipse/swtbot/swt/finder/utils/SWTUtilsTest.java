@@ -11,8 +11,11 @@
 package org.eclipse.swtbot.swt.finder.utils;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.junit.Test;
@@ -49,6 +52,16 @@ public class SWTUtilsTest extends AbstractSWTTestCase {
 	@Test
 	public void findsPreviousWidget() throws Exception {
 		assertSame(getChildren()[2], SWTUtils.previousWidget(getChildren()[3]));
+	}
+
+	@Test
+	public void getsCorrectStyle() throws Exception {
+		assertTrue(SWTUtils.hasStyle(bot.button("One").widget, SWT.PUSH));
+		assertTrue(SWTUtils.hasStyle(bot.radio("SWT.RADIO").widget, SWT.RADIO));
+		assertTrue(SWTUtils.hasStyle(bot.checkBox("SWT.FLAT").widget, SWT.CHECK));
+
+		assertTrue(SWTUtils.hasStyle(bot.checkBox("SWT.FLAT").widget, SWT.NONE));
+		assertFalse(SWTUtils.hasStyle(null, SWT.CHECK));
 	}
 
 	@Test
