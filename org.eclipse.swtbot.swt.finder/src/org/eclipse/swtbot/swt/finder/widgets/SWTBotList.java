@@ -134,7 +134,7 @@ public class SWTBotList extends AbstractSWTBotControl<List> {
 	 * 
 	 * @param indices the indices to select in the list.
 	 */
-	public void select(final int[] indices) {
+	public void select(final int... indices) {
 		log.debug(MessageFormat.format("Set selection {0} to indices {1}]", this, StringUtils.join(indices, ", "))); //$NON-NLS-1$ //$NON-NLS-2$
 		waitForEnabled();
 		asyncExec(new VoidResult() {
@@ -151,7 +151,7 @@ public class SWTBotList extends AbstractSWTBotControl<List> {
 	 * 
 	 * @param items the items to select in the list.
 	 */
-	public void select(final String[] items) {
+	public void select(final String... items) {
 		log.debug(MessageFormat.format("Set selection {0} to items [{1}]", this, StringUtils.join(items, ", "))); //$NON-NLS-1$ //$NON-NLS-2$
 		waitForEnabled();
 		asyncExec(new VoidResult() {
