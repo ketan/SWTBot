@@ -79,8 +79,14 @@
 				<propertyregex property="junit4-build-version" input="@{junit-version-file}" regexp="org.junit4_(.*)" select="\1" />
 			</sequential>
 		</for>
+		<condition property="isJunit4.7">
+			<contains string="${junit4-build-version}" substring="4.7" />
+		</condition>
 		<condition property="isJunit4.5">
 			<contains string="${junit4-build-version}" substring="4.5" />
+		</condition>
+		<condition property="isJunit4.3">
+			<contains string="${junit4-build-version}" substring="4.3" />
 		</condition>
 		<fail unless="junit4-build-version" message="Could not find org.junit4 in target eclipse" />
 		<echo>Plugin version of org.junit is "${junit4-build-version}"</echo>

@@ -31,6 +31,8 @@
 			<include name="org.eclipse.jface_*.jar" />
 			<include name="org.eclipse.core.commands_*.jar" />
 			<include name="org.junit4_*/junit*.jar" />
+			<!-- org.junit4_4.x.y was renamed to org.junit_4.x.y -->
+			<include name="org.junit_4*/junit*.jar" />
 			<include name="org.eclipse.swtbot*" />
 			<include name="org.apache.log4j_1.2.*.jar" />
 			<include name="org.hamcrest*.jar" />
