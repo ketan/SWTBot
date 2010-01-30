@@ -15,9 +15,15 @@
 	</target>
 
 	<target name="javadoc" depends="check-package-list,fetch-package-list">
+		<condition property="junit.dir" value="junit4_3">
+			<isset property="isJunit4.3" />
+		</condition>
+		<property name="junit.dir" value="junit4_5"/>
+		
 		<delete dir="artifacts/apidocs" />
 		<javadoc destdir="artifacts/apidocs" access="protected" author="true" splitindex="true" use="true" version="true" source="1.5" doctitle="SWTBot API Documentation" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" useexternalfile="true" packagenames="
-
+				org.eclipse.swtbot.swt.finder.junit,
+			
 				org.eclipse.swtbot.eclipse.gef.finder,
 				org.eclipse.swtbot.eclipse.gef.finder.finders,
 				org.eclipse.swtbot.eclipse.gef.finder.matchers,
@@ -46,6 +52,8 @@
 					<include name="org.eclipse.swtbot.swt.finder/src" />
 					<include name="org.eclipse.swtbot.eclipse.finder/src" />
 					<include name="org.eclipse.swtbot.eclipse.gef.finder/src" />
+					<include name="org.eclipse.swtbot.junit4_x/src" />
+					<include name="org.eclipse.swtbot.junit4_x/${junit.dir}" />
 				</dirset>
 			</sourcepath>
 			<classpath>
