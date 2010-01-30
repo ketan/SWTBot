@@ -14,6 +14,7 @@ import static org.eclipse.swtbot.swt.finder.ReferenceBy.ID_KEY_VALUE;
 import static org.eclipse.swtbot.swt.finder.ReferenceBy.ID_VALUE;
 import static org.eclipse.swtbot.swt.finder.ReferenceBy.IN_GROUP;
 import static org.eclipse.swtbot.swt.finder.ReferenceBy.LABEL;
+import static org.eclipse.swtbot.swt.finder.ReferenceBy.MESSAGE;
 import static org.eclipse.swtbot.swt.finder.ReferenceBy.MNEMONIC;
 import static org.eclipse.swtbot.swt.finder.ReferenceBy.NONE;
 import static org.eclipse.swtbot.swt.finder.ReferenceBy.TEXT;
@@ -104,10 +105,11 @@ public class ReferenceByTest {
 	@Test
 	public void generatesCombinations() throws Exception {
 		List<List<ReferenceBy>> combinations = ReferenceBy.getCombinations(ReferenceBy.values());
-		assertEquals(12, combinations.size());
+		assertEquals(13, combinations.size());
 		assertTrue(combinations.contains(Arrays.asList(TEXT)));
 		assertTrue(combinations.contains(Arrays.asList(LABEL)));
 		assertTrue(combinations.contains(Arrays.asList(TOOLTIP)));
+		assertTrue(combinations.contains(Arrays.asList(MESSAGE)));
 		assertTrue(combinations.contains(Arrays.asList(IN_GROUP)));
 		assertTrue(combinations.contains(Arrays.asList(MNEMONIC)));
 		assertTrue(combinations.contains(Arrays.asList(NONE)));
