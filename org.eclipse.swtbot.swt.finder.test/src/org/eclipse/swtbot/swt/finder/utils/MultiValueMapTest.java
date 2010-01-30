@@ -13,7 +13,7 @@ package org.eclipse.swtbot.swt.finder.utils;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.is;
 
 import org.junit.Test;
 
@@ -27,7 +27,7 @@ public class MultiValueMapTest {
 
 	@Test
 	public void mapsMultipleValuesToAKey() throws Exception {
-		assertThat(map.getCollection("key"), nullValue());
+		assertThat(map.getCollection("key").size(), is(0));
 		map.put("key", "value1");
 		assertThat(map.getCollection("key"), hasItems("value1"));
 		map.put("key", "value2");
