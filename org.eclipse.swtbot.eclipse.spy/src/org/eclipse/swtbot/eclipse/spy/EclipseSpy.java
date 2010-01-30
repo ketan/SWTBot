@@ -67,7 +67,11 @@ public class EclipseSpy {
 	private void createOutputText() {
 		output = new StyledText(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.READ_ONLY);
 		output.setLayoutData(new GridData(GridData.FILL_HORIZONTAL, GridData.FILL_VERTICAL, true, true));
-		output.setFont(new Font(Display.getCurrent(), "Courier New", 10, SWT.NONE)); //$NON-NLS-1$
+		output.setText("To toggle, or freeze info on a particular control, press CTRL+SHIFT: \n");
+		if (isMac()){
+			output.setFont(new Font(Display.getCurrent(), "Monaco", 11, SWT.NONE)); //$NON-NLS-1$
+		}else
+			output.setFont(new Font(Display.getCurrent(), "Courier New", 10, SWT.NONE)); //$NON-NLS-1$
 	}
 
 	private void hookAccelerator() {
@@ -84,6 +88,11 @@ public class EclipseSpy {
 		});
 
 		// parent.getDisplay().addFilter(SWT.KeyDown, new SWTBotExecutionListener());
+	}
+
+	private static boolean isMac() {
+		String swtPlatform = SWT.getPlatform();
+		return ("carbon".equals(swtPlatform) || "cocoa".equals(swtPlatform));
 	}
 
 	private void initialize(Display display) {

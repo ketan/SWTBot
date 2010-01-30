@@ -190,6 +190,8 @@ class EclipseWidgetTracker implements Runnable {
 
 	private void getInformation(Control control, StringBuffer buf) {
 
+		getToggleInformation(control, buf);
+		
 		getLocationInformation(control, buf);
 
 		getLayoutInformation(control, buf);
@@ -200,6 +202,10 @@ class EclipseWidgetTracker implements Runnable {
 
 		getParentInformation(control, buf);
 
+	}
+
+	private void getToggleInformation(Control control, StringBuffer buf) {
+		buf.append("To toggle, or freeze info on a particular control, press CTRL+SHIFT: \n").append("\n\n"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	String getStyle(Widget w) {
