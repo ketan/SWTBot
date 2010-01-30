@@ -27,5 +27,6 @@ function build_swtbot(){
 
 build_swtbot 3.4.2 e34 ganymede
 build_swtbot 3.5 e35 galileo
+build_swtbot 3.6M4 e36 helios
 
 # rsync --delete-after --partial --progress --archive to-upload build.eclipse.org:
