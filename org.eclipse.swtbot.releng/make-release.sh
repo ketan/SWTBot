@@ -18,15 +18,9 @@ function build_swtbot(){
 		"-Declipse.sdk.archive=eclipse-SDK-$1-macosx-carbon.tar.gz" \
 		"-Declipse.buildId=$1" \
 		"-Dhas.archives=true" \
-		"-Declipse.qualifier=$2"
-
-	rm -rf to-upload/$3
-	mkdir to-upload/$3
-	mv artifacts/to-upload to-upload/$3/dev-build
+		"-Declipse.qualifier=$2" && rm -rf to-upload/$3 && mkdir to-upload/$3 && mv artifacts/to-upload to-upload/$3/dev-build
 }
 
-build_swtbot 3.4.2 e34 ganymede
-build_swtbot 3.5 e35 galileo
-build_swtbot 3.6M4 e36 helios
+build_swtbot 3.4.2 e34 ganymede && build_swtbot 3.5 e35 galileo && build_swtbot 3.6M4 e36 helios
 
 # rsync --delete-after --partial --progress --archive to-upload build.eclipse.org:
