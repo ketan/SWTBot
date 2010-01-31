@@ -146,7 +146,8 @@ public abstract class AbstractSWTTestCase {
 
 			public boolean test() throws Exception {
 				text = listeners.getText();
-				String listenersText = text.replaceAll("time=-?\\d+", "time=SOME_TIME_AGO").replaceAll("x=\\d+", "x=X_CO_ORDINATE").replaceAll("y=\\d+", "y=Y_CO_ORDINATE");
+				// keyLocation was added in 3.6, we don't care about it for the tests
+				String listenersText = text.replaceAll("time=-?\\d+", "time=SOME_TIME_AGO").replaceAll("x=\\d+", "x=X_CO_ORDINATE").replaceAll("y=\\d+", "y=Y_CO_ORDINATE").replaceAll("keyLocation=\\d+ ", "");
 				return matcher.matches(listenersText);
 			}
 

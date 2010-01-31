@@ -69,6 +69,12 @@ public class SWTUtilsTest extends AbstractSWTTestCase {
 		assertSame(null, SWTUtils.previousWidget(getChildren()[0]));
 	}
 
+	@Override
+	public void setUp() throws Exception {
+		super.setUp();
+		bot.tabItem("Button").activate();
+	}
+
 	@Test
 	public void getsToString() throws Exception {
 		assertEquals("TabFolder {}", SWTUtils.toString(controlExample.getTabFolder()));

@@ -13,7 +13,6 @@ package org.eclipse.swtbot.swt.finder;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertEnabled;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertNotEnabled;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertSameWidget;
-import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -100,11 +99,9 @@ public class SWTBot2Test extends AbstractSWTTestCase {
 		bot.button("One").traverse(Traverse.TAB_NEXT);
 
 		SWTBotText textInGroup = bot.textInGroup("Listeners");
-
-		assertTextContains("Traverse [31]: TraverseEvent{Button {One} ", textInGroup);
-		assertTextContains("data=null character='\\0' keyCode=0 stateMask=0 doit=true detail=16}", textInGroup);
-		assertTextContains("FocusOut [16]: FocusEvent{Button {One} time=", textInGroup);
-		assertTextContains("FocusIn [15]: FocusEvent{Button {Two} time=", textInGroup);
+		assertEventMatches(textInGroup, "Traverse [31]: TraverseEvent{Button {One} time=60232779 data=null character='\\0' keyCode=0 stateMask=0 doit=true detail=16}");
+		assertEventMatches(textInGroup, "FocusOut [16]: FocusEvent{Button {One} time=60232779 data=null}");
+		assertEventMatches(textInGroup, "FocusIn [15]: FocusEvent{Button {Two} time=60232779 data=null}");
 		assertTrue(bot.button("Two").isActive());
 	}
 
