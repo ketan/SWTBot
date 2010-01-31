@@ -23,7 +23,7 @@
 				<include name="org.eclipse.swtbot.eclipse_*.jar" />
 			</fileset>
 			<fileset dir="${target}/features">
-				<include name="org.eclipse.swtbot.eclipse.gef*.jar" />
+				<include name="org.eclipse.swtbot.eclipse.gef_*.jar" />
 			</fileset>
 		</purge>
 
