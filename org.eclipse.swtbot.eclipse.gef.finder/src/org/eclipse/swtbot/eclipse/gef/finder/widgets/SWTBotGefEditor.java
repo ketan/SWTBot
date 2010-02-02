@@ -293,10 +293,20 @@ public class SWTBotGefEditor extends SWTBotEditor {
         return false;
     }
 
+    /*
+     * (non-Javadoc)
+     * @see org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEditor#setFocus()
+     */
     @Override
     public void setFocus() {
-        // TODO Auto-generated method stub
-        
+        UIThreadRunnable.syncExec(new VoidResult() {
+             public void run() {
+                IEditorPart editor = partReference.getEditor(false);
+                if (editor != null) {
+                   editor.setFocus();
+                }
+             }
+        });
     }
     
     public SWTBotGefEditor clickContextMenu(String text) throws WidgetNotFoundException {
