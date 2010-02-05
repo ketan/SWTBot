@@ -457,7 +457,6 @@ public class SWTBotGefEditor extends SWTBotEditor {
 	               
 	               if (findLabelFigure(figure, label))
 	            	   return child;
-	               return null;
 	       }
 	       return null;
 	   }
