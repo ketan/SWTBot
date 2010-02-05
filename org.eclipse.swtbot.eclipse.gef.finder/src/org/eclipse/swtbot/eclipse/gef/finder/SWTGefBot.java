@@ -52,9 +52,17 @@ public class SWTGefBot extends SWTWorkbenchBot {
 		Matcher<IEditorReference> matcher = allOf(IsInstanceOf.instanceOf(IEditorReference.class), withPartName);
 		WaitForEditor waitForEditor = waitForEditor(matcher);
 		waitUntilWidgetAppears(waitForEditor);
-		return new SWTBotGefEditor(waitForEditor.get(index), this);
+		return createEditor(waitForEditor.get(index), this);
 	}
 	
-	
+	/**
+	 * Create the editor. Subclass if necessary to instance your own GEF editor.
+	 * @param reference the editor reference
+	 * @param bot the bot
+	 * @return the created editor instance
+	 */
+	protected SWTBotGefEditor createEditor(final IEditorReference reference, final SWTWorkbenchBot bot) {
+		return new SWTBotGefEditor(reference, bot);
+	}
 	
 }
