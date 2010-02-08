@@ -25,7 +25,7 @@ public class SWTGefForUnitTestsBot extends SWTGefBot {
 	}
 	
 	public SWTBotGefForUnitTestsEditor gefEditor(String fileName) throws WidgetNotFoundException {
-		return (SWTBotGefForUnitTestsEditor) gefEditor(fileName);
+		return (SWTBotGefForUnitTestsEditor) super.gefEditor(fileName);
 	}
 	
 }
