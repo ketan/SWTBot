@@ -16,4 +16,5 @@ Require-Bundle: org.eclipse.gef.examples.logic,
  org.hamcrest,
  org.eclipse.gef,
  org.eclipse.core.runtime,
- org.apache.log4j
+ org.apache.log4j,
+ org.eclipse.core.resources
