@@ -201,7 +201,7 @@ public class SWTBotGefEditor extends SWTBotEditor {
                 if (entries.size() > 0) {
                     final PaletteEntry paletteEntry = entries.get(index);
                     if (paletteEntry instanceof ToolEntry) {
-                        editDomain.setActiveTool(((ToolEntry) paletteEntry).createTool());
+                    	editDomain.getPaletteViewer().setActiveTool((ToolEntry) paletteEntry);
                     } else {
                         exception[0] = new WidgetNotFoundException(String.format("%s is not a tool entry, it's a %s", labelMatcher.toString(), paletteEntry.getClass().getName()));
                     }
@@ -355,7 +355,7 @@ public class SWTBotGefEditor extends SWTBotEditor {
      * @param toYPosition the relative y position within the graphical viewer to drag to
      */
     public void mouseDrag(final int fromXPosition, final int fromYPosition, final int toXPosition, final int toYPosition) {
-        UIThreadRunnable.asyncExec(new VoidResult() {
+        UIThreadRunnable.syncExec(new VoidResult() {
             public void run() {
                 canvas.mouseDrag(fromXPosition, fromYPosition, toXPosition, toYPosition);
             }
@@ -447,16 +447,16 @@ public class SWTBotGefEditor extends SWTBotEditor {
 	           IFigure figure = ((GraphicalEditPart) child.part()).getFigure();
 	           
 	           if (isLabel(figure, label)) {
-	                return child;
-	            }
+	        	   return child;
+	           }
 	           
-	               SWTBotGefEditPart childEditPart = getEditPart(child, label);
-	               if (childEditPart!=null) {
-	                   return childEditPart;
-	               }
-	               
-	               if (findLabelFigure(figure, label))
-	            	   return child;
+	           SWTBotGefEditPart childEditPart = getEditPart(child, label);
+	           if (childEditPart!=null) {
+	        	   return childEditPart;
+	           }
+	           
+	           if (findLabelFigure(figure, label))
+	        	   return child;
 	       }
 	       return null;
 	   }
