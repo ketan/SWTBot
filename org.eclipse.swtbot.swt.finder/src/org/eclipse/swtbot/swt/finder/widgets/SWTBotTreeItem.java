@@ -670,7 +670,11 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	}
 
 	public boolean isEnabled() {
-		return tree.isEnabled();
+		return syncExec(new BoolResult() {
+			public Boolean run() {
+				return tree.isEnabled();
+			}
+		});
 	}
 
 }

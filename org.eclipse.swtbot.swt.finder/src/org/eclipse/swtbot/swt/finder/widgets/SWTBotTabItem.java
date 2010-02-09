@@ -111,7 +111,7 @@ public class SWTBotTabItem extends AbstractSWTBot<TabItem> {
 	public boolean isEnabled() {
 		return syncExec(new BoolResult() {
 			public Boolean run() {
-				return widget.getParent().isEnabled();
+				return parent.isEnabled();
 			}
 		});
 	}

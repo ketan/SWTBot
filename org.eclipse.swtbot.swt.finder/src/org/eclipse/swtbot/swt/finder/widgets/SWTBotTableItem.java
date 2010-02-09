@@ -260,6 +260,14 @@ public class SWTBotTableItem extends AbstractSWTBot<TableItem> {
 		event.widget = table;
 		return event;
 	}
+	
+	public boolean isEnabled() {
+		return syncExec(new BoolResult() {
+			public Boolean run() {
+				return table.isEnabled();
+			}
+		});
+	}
 
 //	protected Rectangle absoluteLocation() {
 //		return syncExec(new Result<Rectangle>() {
