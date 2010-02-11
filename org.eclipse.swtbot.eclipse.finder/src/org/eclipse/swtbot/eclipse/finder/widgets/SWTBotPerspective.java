@@ -68,6 +68,13 @@ public class SWTBotPerspective {
 		return bot.activePerspective().perspectiveDescriptor.getId().equals(this.perspectiveDescriptor.getId());
 	}
 
+	/**
+	 * @return the perspective label
+	 */
+	public String getLabel() {
+		return this.perspectiveDescriptor.getLabel();
+	}
+	
 	public String toString() {
 		return "SWTBotEclipsePerspective[id=\"" + perspectiveDescriptor.getLabel() + "\", label=\"" + perspectiveDescriptor.getLabel()
 				+ "\"]";
