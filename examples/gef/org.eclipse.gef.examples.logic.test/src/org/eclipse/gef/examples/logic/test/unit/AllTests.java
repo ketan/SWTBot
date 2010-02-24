@@ -81,8 +81,45 @@ public class AllTests extends SWTBotGefForUnitTestsTestCase {
 		return  editor.forTestGetEditDomain().getPaletteViewer().getActiveTool().getLabel();
 	}
 	
-	
 	public void testGetEditPartWithLabelOnCanvas() throws Exception {
+		editor.activateTool("Label");
+		editor.click(10, 10);
+		SWTBotGefEditPart botPart = editor.getEditPart("Label");
+		assertNotNull(botPart);
+		assertTrue(botPart.part() instanceof LogicLabelEditPart);
+	}
+	
+
+	public void testGetEditPartWithLabelInsideNode() throws Exception {	
+		editor.activateTool("Circuit");
+		editor.click(10, 10);		
+		editor.activateTool("Label");
+		editor.click(10 + 3, 10 + 3);
+		
+		SWTBotGefEditPart botPart = editor.getEditPart("Label");
+		assertNotNull(botPart);
+		assertTrue(botPart.part() instanceof LogicLabelEditPart);
+	}	
+	
+
+	public void testDrag() throws Exception {
+		editor.activateTool("Label");
+		editor.click(10, 10);				
+		editor.drag("Label", 100, 110);
+		
+		Rectangle bounds = ((GraphicalEditPart) editor.getEditPart("Label").part()).getFigure().getBounds();
+		assertEquals(100, bounds.x);
+		assertEquals(110, bounds.y);
+	}
+
+	
+	public void testDirectEdit() throws Exception {
+		//TODO
+	}
+	
+	/* Deprecated methods */
+	
+	public void testDeprecatedGetEditPartWithLabelOnCanvas() throws Exception {
 		editor.activateTool("Label");
 		editor.mouseMoveLeftClick(10, 10);
 		SWTBotGefEditPart botPart = editor.getEditPart("Label");
@@ -91,7 +128,7 @@ public class AllTests extends SWTBotGefForUnitTestsTestCase {
 	}
 	
 
-	public void testGetEditPartWithLabelInsideNode() throws Exception {	
+	public void testDeprecatedGetEditPartWithLabelInsideNode() throws Exception {	
 		editor.activateTool("Circuit");
 		editor.mouseMoveLeftClick(10, 10);		
 		editor.activateTool("Label");
@@ -103,7 +140,7 @@ public class AllTests extends SWTBotGefForUnitTestsTestCase {
 	}	
 	
 
-	public void testDrag() throws Exception {
+	public void testDeprecatedDrag() throws Exception {
 		editor.activateTool("Label");
 		editor.mouseMoveLeftClick(10, 10);				
 		editor.mouseDrag("Label", 100, 110);
@@ -112,10 +149,11 @@ public class AllTests extends SWTBotGefForUnitTestsTestCase {
 		assertEquals(100, bounds.x);
 		assertEquals(110, bounds.y);
 	}
+
 	
-	public void testDirectEdit() throws Exception {
-		//TODO
-	}
+	
+	
+
 
 	
 	

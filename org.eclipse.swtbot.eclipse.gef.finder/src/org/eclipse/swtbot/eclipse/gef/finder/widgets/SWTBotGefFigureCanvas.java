@@ -35,45 +35,75 @@ public class SWTBotGefFigureCanvas extends AbstractSWTBotControl<FigureCanvas>{
         eventDispatcher = w.getLightweightSystem().getRootFigure().internalGetEventDispatcher();
     }
 
-    public void mouseMoveDoubleClick(int xPosition, int yPosition) {
-        org.eclipse.swt.events.MouseEvent meMove = wrapMouseEvent(xPosition, yPosition, 0, 0, 0);
-        eventDispatcher.dispatchMouseMoved(meMove);
-        org.eclipse.swt.events.MouseEvent meDown = wrapMouseEvent(xPosition, yPosition, 1, SWT.BUTTON1, 1);
-        eventDispatcher.dispatchMousePressed(meDown);
-        org.eclipse.swt.events.MouseEvent meDoubleClick = wrapMouseEvent(xPosition, yPosition, 1, SWT.BUTTON1, 1);
-        eventDispatcher.dispatchMouseDoubleClicked(meDoubleClick);
+    /**
+     * this method emits mouse events that handle a mouse move and double click to the specified position within the canvas.
+     * @param xPosition the relative x position
+     * @param yPosition the relative y position
+     */
+    public void mouseMoveDoubleClick(final int xPosition, final int yPosition) {
+    UIThreadRunnable.asyncExec(new VoidResult() {
+    		public void run() {
+    	        org.eclipse.swt.events.MouseEvent meMove = wrapMouseEvent(xPosition, yPosition, 0, 0, 0);
+    	        eventDispatcher.dispatchMouseMoved(meMove);
+    	        org.eclipse.swt.events.MouseEvent meDown = wrapMouseEvent(xPosition, yPosition, 1, SWT.BUTTON1, 1);
+    	        eventDispatcher.dispatchMousePressed(meDown);
+    	        org.eclipse.swt.events.MouseEvent meDoubleClick = wrapMouseEvent(xPosition, yPosition, 1, SWT.BUTTON1, 1);
+    	        eventDispatcher.dispatchMouseDoubleClicked(meDoubleClick);
+    		}
+    	});
     }
     
     private org.eclipse.swt.events.MouseEvent wrapMouseEvent(int x, int y, int button, int stateMask, int count) {
         return new org.eclipse.swt.events.MouseEvent(createMouseEvent(x, y, button, stateMask, count));
     }
 
-    public void mouseDrag(int fromXPosition, int fromYPosition, int toXPosition, int toYPosition) {
-        org.eclipse.swt.events.MouseEvent meMove = wrapMouseEvent(fromXPosition, fromYPosition, 0, 0, 0);
-        eventDispatcher.dispatchMouseMoved(meMove);
-        org.eclipse.swt.events.MouseEvent meDown = wrapMouseEvent(fromXPosition, fromYPosition, 1, SWT.BUTTON1, 1);
-        eventDispatcher.dispatchMousePressed(meDown);
-        org.eclipse.swt.events.MouseEvent meMoveTarget = wrapMouseEvent(toXPosition, toYPosition, 1, SWT.BUTTON1, 0);
-        eventDispatcher.dispatchMouseMoved(meMoveTarget);
-        org.eclipse.swt.events.MouseEvent meUp = wrapMouseEvent(toXPosition, toYPosition, 1 , SWT.BUTTON1, 1);
-        eventDispatcher.dispatchMouseReleased(meUp);
+    
+    /**
+     * this method emits mouse events that handle drags within the canvas
+     * 
+     * @param fromXPosition the relative x position within the canvas to drag from
+     * @param fromYPosition the relative y position within the canvas to drag from
+     * @param toXPosition the relative x position within the canvas to drag to
+     * @param toYPosition the relative y position within the canvas to drag to
+     */
+    public void mouseDrag(final int fromXPosition, final int fromYPosition, final int toXPosition, final int toYPosition) {
+        UIThreadRunnable.syncExec(new VoidResult() {
+            public void run() {
+            	org.eclipse.swt.events.MouseEvent meMove = wrapMouseEvent(fromXPosition, fromYPosition, 0, 0, 0);
+            	eventDispatcher.dispatchMouseMoved(meMove);
+            	org.eclipse.swt.events.MouseEvent meDown = wrapMouseEvent(fromXPosition, fromYPosition, 1, SWT.BUTTON1, 1);
+            	eventDispatcher.dispatchMousePressed(meDown);
+            	org.eclipse.swt.events.MouseEvent meMoveTarget = wrapMouseEvent(toXPosition, toYPosition, 1, SWT.BUTTON1, 0);
+            	eventDispatcher.dispatchMouseMoved(meMoveTarget);
+            	org.eclipse.swt.events.MouseEvent meUp = wrapMouseEvent(toXPosition, toYPosition, 1 , SWT.BUTTON1, 1);
+            	eventDispatcher.dispatchMouseReleased(meUp);
+            }
+        });
     }
     
     public void mouseMoveLeftClick(final int xPosition, final int yPosition) {
-        org.eclipse.swt.events.MouseEvent meMove = wrapMouseEvent(xPosition, yPosition, 0, 0, 0);
-        eventDispatcher.dispatchMouseMoved(meMove);
-        org.eclipse.swt.events.MouseEvent meDown = wrapMouseEvent(xPosition, yPosition, 1, SWT.BUTTON1, 1);
-        eventDispatcher.dispatchMousePressed(meDown);
-        org.eclipse.swt.events.MouseEvent meUp = wrapMouseEvent(xPosition, yPosition, 1 , SWT.BUTTON1, 1);
-        eventDispatcher.dispatchMouseReleased(meUp);
+        UIThreadRunnable.asyncExec(new VoidResult() {
+            public void run() {
+            	org.eclipse.swt.events.MouseEvent meMove = wrapMouseEvent(xPosition, yPosition, 0, 0, 0);
+            	eventDispatcher.dispatchMouseMoved(meMove);
+            	org.eclipse.swt.events.MouseEvent meDown = wrapMouseEvent(xPosition, yPosition, 1, SWT.BUTTON1, 1);
+            	eventDispatcher.dispatchMousePressed(meDown);
+            	org.eclipse.swt.events.MouseEvent meUp = wrapMouseEvent(xPosition, yPosition, 1 , SWT.BUTTON1, 1);
+            	eventDispatcher.dispatchMouseReleased(meUp);
+            }
+        });
     }
     
-    public void mouseEnterLeftClickAndExit(int xPosition, int yPosition) {
-        eventDispatcher.dispatchMouseEntered(wrapMouseEvent(xPosition, yPosition, 0, 0, 0));
-        eventDispatcher.dispatchMouseMoved(wrapMouseEvent(xPosition, yPosition, 0, 0, 0));
-        eventDispatcher.dispatchMousePressed(wrapMouseEvent(xPosition, yPosition, 1, SWT.BUTTON1, 1));
-        eventDispatcher.dispatchMouseReleased(wrapMouseEvent(xPosition, yPosition, 1, SWT.BUTTON1, 1));
-        eventDispatcher.dispatchMouseExited(wrapMouseEvent(xPosition, yPosition, 0, 0, 0));
+    public void mouseEnterLeftClickAndExit(final int xPosition, final int yPosition) {
+		UIThreadRunnable.asyncExec(new VoidResult() {
+			public void run() {
+				eventDispatcher.dispatchMouseEntered(wrapMouseEvent(xPosition, yPosition, 0, 0, 0));
+				eventDispatcher.dispatchMouseMoved(wrapMouseEvent(xPosition, yPosition, 0, 0, 0));
+				eventDispatcher.dispatchMousePressed(wrapMouseEvent(xPosition, yPosition, 1, SWT.BUTTON1, 1));
+				eventDispatcher.dispatchMouseReleased(wrapMouseEvent(xPosition, yPosition, 1, SWT.BUTTON1, 1));
+				eventDispatcher.dispatchMouseExited(wrapMouseEvent(xPosition, yPosition, 0, 0, 0));
+			}
+		});
     }
     
     public void typeText(final Text textControl, final String text) {

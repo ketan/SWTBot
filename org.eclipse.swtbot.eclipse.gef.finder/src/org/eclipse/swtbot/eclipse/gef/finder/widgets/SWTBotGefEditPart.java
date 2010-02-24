@@ -146,11 +146,7 @@ public class SWTBotGefEditPart {
 	 * click on the edit part at the specified location
 	 */
 	public SWTBotGefEditPart click(final Point location) {
-		UIThreadRunnable.asyncExec(new VoidResult() {
-			public void run() {
-				graphicalEditor.getCanvas().mouseEnterLeftClickAndExit(location.x, location.y);
-			}		
-		});
+		graphicalEditor.getCanvas().mouseEnterLeftClickAndExit(location.x, location.y);
 		return this;
 	}
 
@@ -159,11 +155,7 @@ public class SWTBotGefEditPart {
 	 */
 	public SWTBotGefEditPart doubleClick() {
 		final Rectangle bounds = getBounds();
-		UIThreadRunnable.asyncExec(new VoidResult() {
-			public void run() {
-				graphicalEditor.getCanvas().mouseMoveDoubleClick(bounds.x, bounds.y);
-			}		
-		});
+		graphicalEditor.getCanvas().mouseMoveDoubleClick(bounds.x, bounds.y);
 		return this;
 	}
 
