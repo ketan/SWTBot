@@ -47,8 +47,14 @@ public class SWTBotGefFigureCanvas extends AbstractSWTBotControl<FigureCanvas>{
     	        eventDispatcher.dispatchMouseMoved(meMove);
     	        org.eclipse.swt.events.MouseEvent meDown = wrapMouseEvent(xPosition, yPosition, 1, SWT.BUTTON1, 1);
     	        eventDispatcher.dispatchMousePressed(meDown);
-    	        org.eclipse.swt.events.MouseEvent meDoubleClick = wrapMouseEvent(xPosition, yPosition, 1, SWT.BUTTON1, 1);
+    	        org.eclipse.swt.events.MouseEvent meUp = wrapMouseEvent(xPosition, yPosition, 1 , SWT.BUTTON1, 1);
+    	        eventDispatcher.dispatchMouseReleased(meUp);
+    	        org.eclipse.swt.events.MouseEvent meDown2 = wrapMouseEvent(xPosition, yPosition, 1, SWT.BUTTON1, 2);
+    	        eventDispatcher.dispatchMousePressed(meDown2);
+    	        org.eclipse.swt.events.MouseEvent meDoubleClick = wrapMouseEvent(xPosition, yPosition, 1, SWT.BUTTON1, 2);
     	        eventDispatcher.dispatchMouseDoubleClicked(meDoubleClick);
+    	        org.eclipse.swt.events.MouseEvent meUp2 = wrapMouseEvent(xPosition, yPosition, 1 , SWT.BUTTON1, 2);
+    	        eventDispatcher.dispatchMouseReleased(meUp2);
     		}
     	});
     }
@@ -67,7 +73,7 @@ public class SWTBotGefFigureCanvas extends AbstractSWTBotControl<FigureCanvas>{
      * @param toYPosition the relative y position within the canvas to drag to
      */
     public void mouseDrag(final int fromXPosition, final int fromYPosition, final int toXPosition, final int toYPosition) {
-        UIThreadRunnable.syncExec(new VoidResult() {
+        UIThreadRunnable.asyncExec(new VoidResult() {
             public void run() {
             	org.eclipse.swt.events.MouseEvent meMove = wrapMouseEvent(fromXPosition, fromYPosition, 0, 0, 0);
             	eventDispatcher.dispatchMouseMoved(meMove);
