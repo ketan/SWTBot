@@ -24,6 +24,7 @@ import org.eclipse.swtbot.swt.finder.results.IntResult;
 import org.eclipse.swtbot.swt.finder.results.StringResult;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
+import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.hamcrest.SelfDescribing;
 
 /**
@@ -54,6 +55,30 @@ public class SWTBotCombo extends AbstractSWTBotControl<Combo> {
 	 */
 	public SWTBotCombo(Combo w, SelfDescribing description) throws WidgetNotFoundException {
 		super(w, description);
+	}
+
+	/**
+	 * Types the string in the combo box.
+	 *
+	 * @param text the text to be typed.
+	 * @return the same instance.
+	 */
+	public SWTBotCombo typeText(final String text) {
+		return typeText(text, SWTBotPreferences.TYPE_INTERVAL);
+	}
+
+	/**
+	 * Types the string in the combo box.
+	 *
+	 * @param text the text to be typed.
+	 * @param interval the interval between consecutive key strokes.
+	 * @return the same instance.
+	 */
+	public SWTBotCombo typeText(final String text, int interval) {
+		log.debug(MessageFormat.format("Inserting text:{0} into text {1}", text, this)); //$NON-NLS-1$
+		setFocus();
+		keyboard().typeText(text, interval);
+		return this;
 	}
 
 	/**

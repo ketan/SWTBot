@@ -96,6 +96,25 @@ public class SWTBotComboTest extends AbstractSWTTestCase {
 	}
 
 	@Test
+	public void typeAndVerifiesTextInCombo() throws Exception {
+		bot.checkBox("SWT.READ_ONLY").deselect();
+
+		bot.checkBox("Listen").select();
+		bot.button("Clear").click();
+
+		SWTBotCombo comboBox = bot.comboBoxInGroup("Combo");
+		comboBox.setText("");
+		comboBox.typeText("New typed Text");
+		assertEquals("New typed Text", comboBox.getText());
+
+		assertEventMatches(bot.textInGroup("Listeners"), "KeyDown [1]: KeyEvent{Combo {} time=490981104 data=null character='\\0' keyCode=131072 stateMask=0 doit=true}");
+		assertEventMatches(bot.textInGroup("Listeners"), "KeyDown [1]: KeyEvent{Combo {} time=490981272 data=null character='N' keyCode=110 stateMask=131072 doit=true}");
+		assertEventMatches(bot.textInGroup("Listeners"), "Verify [25]: VerifyEvent{Combo {} time=490981272 data=null character='N' keyCode=110 stateMask=131072 doit=true start=0 end=0 text=N}");
+		assertEventMatches(bot.textInGroup("Listeners"), "KeyUp [2]: KeyEvent{Combo {N} time=490981352 data=null character='N' keyCode=110 stateMask=131072 doit=true}");
+		assertEventMatches(bot.textInGroup("Listeners"), "KeyUp [2]: KeyEvent{Combo {N} time=490981457 data=null character='\\0' keyCode=131072 stateMask=131072 doit=true}");
+	}
+
+	@Test
 	public void throwsExceptionInCaseOfChangeTextOfReadOnlyCombo() throws Exception {
 		bot.checkBox("SWT.READ_ONLY").select();
 		SWTBotCombo comboBox = bot.comboBoxInGroup("Combo");
