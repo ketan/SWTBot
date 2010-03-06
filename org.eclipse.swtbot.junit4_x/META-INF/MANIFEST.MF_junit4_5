@@ -11,4 +11,5 @@ Import-Package: org.apache.log4j;version="1.2.12",
  org.eclipse.swtbot.swt.finder,
  org.eclipse.swtbot.swt.finder.utils,
  org.junit.runner.notification;version="4.5.0",
- org.junit.runners;version="4.5.0"
+ org.junit.runners;version="4.5.0",
+ org.junit.runners.model;version="4.5.0"

@@ -31,6 +31,10 @@ import org.junit.runners.Suite;
  */
 public final class SWTBotJUnit4Suite extends Suite {
 	
+	public SWTBotJUnit4Suite(Class<?> klass) throws Exception {
+		super(klass);
+	}
+
 	public SWTBotJUnit4Suite(Class<?> klass, Class<?>[] annotatedClasses) throws Exception {
 		super(klass, annotatedClasses);
 	}

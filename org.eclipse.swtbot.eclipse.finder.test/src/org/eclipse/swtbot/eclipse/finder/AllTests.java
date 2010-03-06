@@ -14,15 +14,15 @@ import org.eclipse.swtbot.eclipse.finder.exceptions.QuickFixNotFoundExceptionTes
 import org.eclipse.swtbot.eclipse.finder.finders.CommandFinderTest;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEclipseEditorTest;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotViewTest;
+import org.eclipse.swtbot.swt.finder.junit.SWTBotJUnit4Suite;
 import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-@RunWith(Suite.class)
+@RunWith(SWTBotJUnit4Suite.class)
 @SuiteClasses( { QuickFixNotFoundExceptionTest.class, CommandFinderTest.class, SWTBotEclipseEditorTest.class, SWTBotViewTest.class })
 public class AllTests {
 }
