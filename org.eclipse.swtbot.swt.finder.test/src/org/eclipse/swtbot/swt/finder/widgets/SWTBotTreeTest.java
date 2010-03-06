@@ -215,6 +215,19 @@ public class SWTBotTreeTest extends AbstractSWTTestCase {
 		assertTextContains("MouseDoubleClick [8]: MouseEvent{Tree {} ", listener);
 	}
 
+	@Test
+	public void expandANodePath() throws Exception {
+		SWTBotTree tree = bot.treeInGroup("Tree");
+
+		tree.expandNode("Node 3", "Node 3.1");
+		assertEquals(5, tree.visibleRowCount());
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void expandEmptyPath() throws Exception {
+		bot.tree().expandNode();
+	}
+
 	public void setUp() throws Exception {
 		super.setUp();
 		bot = new SWTBot();
