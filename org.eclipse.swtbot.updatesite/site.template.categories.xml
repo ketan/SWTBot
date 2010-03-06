@@ -19,5 +19,17 @@
 		</description>
 	</category-def>
 
+	<category-def name="SWTBot JUnit 3.x Headless Execution (incubation)" label="SWTBot JUnit 3.x Headless Execution (incubation)">
+		<description>
+			This feature contains the SWTBot drivers running SWTBot JUnit 3.x based tests from ant.
+		</description>
+	</category-def>
+
+	<category-def name="SWTBot JUnit 4.x Headless Execution (incubation)" label="SWTBot JUnit 4.x Headless Execution (incubation)">
+		<description>
+			This feature contains the SWTBot drivers running SWTBot JUnit 4.x based tests from ant.
+		</description>
+	</category-def>
+
 	<!-- end the categories -->
 

@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.swtbot.test"
-      label="SWTBot Tests Feature (incubation)"
+      id="org.eclipse.swtbot.eclipse.test.junit4"
+      label="SWTBot JUnit 4.x Headless launchers for Eclipse (incubation)"
       version="2.0.0.qualifier"
       provider-name="Eclipse.org">
 
    <description url="http://eclipse.org/">
-      Tests for SWTBot (incubation)
+      SWTBot Eclipse Headless Launchers to launch tests from within ant (incubation)
    </description>
 
    <copyright url="http://eclipse.org/">
       Copyright (c) 2007, 2008 Ketan Padegaonkar and others.
 All rights reserved. This program and the accompanying materials
-are made available under the terms of the Eclipse Public License
-v1.0
+are made available under the terms of the Eclipse Public License v1.0
 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html
+
 Contributors:
-Ketan Padegaonkar - initial API and implementation
+    Ketan Padegaonkar - initial API and implementation
    </copyright>
 
    <license url="license.html">
@@ -88,83 +88,14 @@ possession, or use, and re-export of encryption software, to see if this is perm
 Java and all Java-based trademarks are trademarks of Sun Microsystems, Inc. in the United States, other countries, or both.
    </license>
 
-   <url>
-      <update label="SWTBot update site" url="http://download.eclipse.org/technology/swtbot/update-site"/>
-   </url>
-
-   <includes
-         id="org.eclipse.swtbot"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.swtbot.eclipse"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.swtbot.eclipse.test.junit3"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.swtbot.eclipse.test.junit4"
-         version="0.0.0"/>
-
    <requires>
-      <import plugin="org.eclipse.swt"/>
-      <import plugin="org.eclipse.swtbot.swt.finder"/>
-      <import plugin="org.apache.log4j"/>
-      <import plugin="org.junit4"/>
-      <import plugin="org.hamcrest"/>
-      <import plugin="org.eclipse.swtbot.junit4_x"/>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.jface.text"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.eclipse.ui.editors"/>
-      <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.swtbot.eclipse.finder"/>
-      <import plugin="org.eclipse.swtbot.eclipse.ui"/>
       <import plugin="org.eclipse.core.runtime.compatibility"/>
+      <import plugin="org.junit4"/>
       <import plugin="org.apache.ant"/>
-      <import plugin="org.junit"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.equinox.app"/>
+      <import plugin="org.eclipse.ui"/>
    </requires>
-
-   <plugin
-         id="org.eclipse.swtbot.swt.finder.test"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.eclipse.swtbot.eclipse.finder.test"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.eclipse.swtbot.swt.demo"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.swt.examples"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.swtbot.generator.test"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.eclipse.swtbot.eclipse.ui.test"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
 
    <plugin
          id="org.eclipse.swtbot.ant.optional.junit4"
@@ -175,32 +106,9 @@ Java and all Java-based trademarks are trademarks of Sun Microsystems, Inc. in t
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.swtbot.ant.optional.junit3"
+         id="org.eclipse.swtbot.eclipse.junit4.headless"
          download-size="0"
          install-size="0"
-         version="0.0.0"
-         fragment="true"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.swtbot.generator"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.hamcrest.generator"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.hamcrest.generator.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
 </feature>

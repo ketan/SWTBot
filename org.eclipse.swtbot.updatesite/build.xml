@@ -25,6 +25,12 @@
 			<fileset dir="${target}/features">
 				<include name="org.eclipse.swtbot.eclipse.gef_*.jar" />
 			</fileset>
+			<fileset dir="${target}/features">
+				<include name="org.eclipse.swtbot.eclipse.test.junit3_*.jar" />
+			</fileset>
+			<fileset dir="${target}/features">
+				<include name="org.eclipse.swtbot.eclipse.test.junit4_*.jar" />
+			</fileset>
 		</purge>
 
 		<echo>Purging plugins</echo>
@@ -118,6 +124,14 @@
 			<!-- swt examples -->
 			<fileset dir="${target}/plugins">
 				<include name="org.eclipse.swt.examples_*.jar" />
+			</fileset>
+			
+			<!-- headless jars -->
+			<fileset dir="${target}/plugins">
+				<include name="org.eclipse.swtbot.ant.optional.junit4_*.jar" />
+			</fileset>
+			<fileset dir="${target}/plugins">
+				<include name="org.eclipse.swtbot.eclipse.junit4.headless_*.jar" />
 			</fileset>
 		</purge>
 	</target>
@@ -224,6 +238,8 @@
 
 		<unzip dest="${target}">
 			<fileset dir="../${plugin.prefix}.releng/artifacts" includes="org.eclipse.swtbot.eclipse-*" />
+			<fileset dir="../${plugin.prefix}.releng/artifacts" includes="org.eclipse.swtbot.eclipse.test.junit3-*" />
+			<fileset dir="../${plugin.prefix}.releng/artifacts" includes="org.eclipse.swtbot.eclipse.test.junit4-*" />
 			<fileset dir="../${plugin.prefix}.releng/artifacts" includes="org.eclipse.swtbot.eclipse.gef-*" />
 		</unzip>
 
