@@ -29,15 +29,18 @@ import org.junit.runners.model.RunnerBuilder;
  * @version $Id:
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
+ * @deprecated Please use {@link Suite} instead. <code>@RunWith(Suite.class)</code>
  */
 public final class SWTBotJUnit4Suite extends Suite {
 	
 	public SWTBotJUnit4Suite(Class<?> klass, RunnerBuilder builder) throws Exception {
 		super(klass, builder);
+		System.err.println("This class has been deprecated, please use org.junit.runners.Suite.class instead.");
 	}
 
 	public SWTBotJUnit4Suite(Class<?> klass, Class<?>[] annotatedClasses) throws Exception {
 		super(klass, annotatedClasses);
+		System.err.println("This class has been deprecated, please use org.junit.runners.Suite.class instead.");
 	}
 
 	/**
