@@ -297,26 +297,24 @@ public class SWTBotTree extends AbstractSWTBot<Tree> {
 	}
 
 	/**
-	 * Attempts to expand all nodes along the path specified by the node array parameter..
+	 * Attempts to expand all nodes along the path specified by the node array parameter.
 	 * 
 	 * @param nodes node path to expand
 	 * @return the last Tree item that was expanded.
 	 * @throws WidgetNotFoundException if any of the nodes on the path do not exist
 	 */
 	public SWTBotTreeItem expandNode(String... nodes) throws WidgetNotFoundException {
-		if (nodes == null || nodes.length == 0) {
-			throw new IllegalArgumentException("Node path must be supplied");
-		}
+		Assert.isNotEmpty((Object[])nodes);
 
 		log.debug(MessageFormat.format("Expanding nodes {0} in tree {1}", StringUtils.join(nodes, ">"), this));
 
 		waitForEnabled();
-		SWTBotTreeItem item = getTreeItem(nodes[0]);
-		item.expand();
-
-		for (int i = 1; i < nodes.length; i++) {
-			item = item.getNode(nodes[i]).expand();
-		}
+		SWTBotTreeItem item = getTreeItem(nodes[0]).expand();
+		
+		List<String> asList = new ArrayList<String>(Arrays.asList(nodes));
+		asList.remove(0);
+		if (!asList.isEmpty())
+			item = item.expandNode(asList.toArray(new String[0]));
 
 		return item;
 	}

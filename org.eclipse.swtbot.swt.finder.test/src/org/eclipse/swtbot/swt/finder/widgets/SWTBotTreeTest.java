@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.SWTBot;
+import org.eclipse.swtbot.swt.finder.exceptions.AssertionFailedException;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.utils.TableCollection;
 import org.eclipse.swtbot.swt.finder.utils.TableRow;
@@ -219,11 +220,11 @@ public class SWTBotTreeTest extends AbstractSWTTestCase {
 	public void expandANodePath() throws Exception {
 		SWTBotTree tree = bot.treeInGroup("Tree");
 
-		tree.expandNode("Node 3", "Node 3.1");
-		assertEquals(5, tree.visibleRowCount());
+		tree.expandNode("Node 2", "Node 2.2", "Node 2.2.1");
+		assertEquals(7, tree.visibleRowCount());
 	}
 
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=AssertionFailedException.class)
 	public void expandEmptyPath() throws Exception {
 		bot.tree().expandNode();
 	}

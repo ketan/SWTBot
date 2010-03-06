@@ -94,4 +94,18 @@ public final class Assert {
 		if (!expression)
 			throw new AssertionFailedException("assertion failed: " + message); //$NON-NLS-1$
 	}
+
+	/**
+	 * Asserts that the given list is not empty or null. If this is not the case, some kind of unchecked exception is
+	 * thrown. The given message is included in that exception, to aid debugging.
+	 * 
+	 * @param expression the outcode of the check
+	 * @param message the message to include in the exception
+	 */
+	public static void isNotEmpty(Object... toCheck) {
+		Assert.isNotNull(toCheck);
+		if (toCheck.length == 0) {
+			throw new AssertionFailedException("List cannot be empty or null.");
+		}
+	}
 }

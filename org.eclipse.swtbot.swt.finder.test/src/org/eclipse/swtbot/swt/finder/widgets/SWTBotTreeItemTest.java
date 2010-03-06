@@ -14,6 +14,7 @@ package org.eclipse.swtbot.swt.finder.widgets;
 import static junit.framework.Assert.assertEquals;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertText;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -233,6 +234,14 @@ public class SWTBotTreeItemTest extends AbstractSWTTestCase {
 		assertTextContains("MouseDoubleClick [8]: MouseEvent{Tree {} ", listeners);
 		assertTextContains("DefaultSelection [14]: SelectionEvent{Tree {} ", listeners);
 		assertTextContains("MouseUp [4]: MouseEvent{Tree {} ", listeners);
+	}
+	
+	@Test
+	public void canExpandANodeUsingVarArgs() throws Exception {
+		SWTBotTreeItem node = tree.getTreeItem("Node 2").expand();
+		node = node.expandNode("Node 2.2", "Node 2.2.1");
+
+		assertEquals(7, tree.visibleRowCount());
 	}
 
 	public void setUp() throws Exception {

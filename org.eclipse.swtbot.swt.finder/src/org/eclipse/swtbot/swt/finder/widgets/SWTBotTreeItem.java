@@ -264,14 +264,21 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	}
 
 	/**
-	 * Expands the node matching the given node text.
+	 * Expands the node matching the given node texts.
 	 * 
-	 * @param nodeText the text on the node.
-	 * @return the node that was expanded or <code>null</code> if not match exists.
+	 * @param nodes the text on the node.
+	 * @return the last tree node that was expanded or <code>null</code> if none exists.
+	 * @throws WidgetNotFoundException if any of the nodes on the path do not exist
 	 */
-	public SWTBotTreeItem expandNode(final String nodeText) {
+	public SWTBotTreeItem expandNode(final String... nodes) {
+		Assert.isNotEmpty((Object[]) nodes);
 		assertEnabled();
-		return getTreeItem(nodeText).expand();
+
+		SWTBotTreeItem item = this;
+		for (String node : nodes)
+			item = item.getNode(node).expand();
+
+		return item;
 	}
 
 	/**
