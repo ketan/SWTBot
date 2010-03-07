@@ -1,9 +1,5 @@
 <project>
 
-	<!-- load up the properties for cruise agents based on their hostnames, if available -->
-	<exec executable="hostname" outputproperty="hostname" />
-	<property file="host-conf/build.${hostname}.properties" />
-
 	<import file="download-dependencies.xml" />
 
 	<taskdef resource="net/sf/antcontrib/antlib.xml">

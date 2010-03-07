@@ -1,5 +1,9 @@
 <project name="org.eclipse.swtbot.releng" default="all" basedir=".">
 
+	<!-- load up the properties for cruise agents based on their hostnames, if available -->
+	<exec executable="hostname" outputproperty="hostname" />
+	<property file="host-conf/build.${hostname}.properties" />
+
 	<!-- Load up the basic properties -->
 	<property file="build.developer.properties" />
 
