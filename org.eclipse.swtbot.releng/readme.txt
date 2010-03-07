@@ -9,7 +9,7 @@ Checkout code:
 
 Edit some properties file for your platform:
  $ cp build.developer.properties.sample build.developer.properties
- $ vi build.developer.properties (Change the os, ws arch parameters)
+ $ vi build.developer.properties (Change the os, ws, arch and eclipse.version parameters)
 
 Copy the Eclipse SDK archive which you want to use into: /org.eclipse.swtbot.releng/externals
 

@@ -1,6 +1,23 @@
 <project name="org.eclipse.swtbot.releng" default="all" basedir=".">
 
+	<!-- Load up the basic properties -->
 	<property file="build.developer.properties" />
+
+	<!-- Load up the eclipse version specific properties -->
+	<available file="build-conf/e${eclipse.version}.properties" property="eclipse-conf-available" />
+	<fail unless="eclipse-conf-available" message="Could not find file 'build-conf/e${eclipse.version}.properties'" />
+	<property file="build-conf/e${eclipse.version}.properties" />
+
+	<!-- Load up the platform specific properties -->
+	<available file="build-conf/${os}.${ws}.${arch}.properties" property="build-conf-available" />
+	<fail unless="build-conf-available" message="Could not find file 'build-conf/${os}.${ws}.${arch}.properties'" />
+	<property file="build-conf/${os}.${ws}.${arch}.properties" />
+
+	<!-- Load up the gef specific properties -->
+	<available file="build-conf/gef.properties" property="gef-conf-available" />
+	<fail unless="gef-conf-available" message="Could not find file 'build-conf/gef.properties'" />
+	<property file="build-conf/gef.properties" />
+
 	<property file="build.default.properties" />
 	<import file="check-prerequisites.xml" />
 

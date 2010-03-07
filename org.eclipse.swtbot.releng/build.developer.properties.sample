@@ -1,38 +1,8 @@
 # see http://archive.eclipse.org/eclipse/downloads/drops/R-3.3-200706251500/srcIncludedBuildInstructions.html#build_platforms for valid values
+
 os = macosx
 ws = carbon
 arch = x86
 
-## uncomment one of the two below:
-
-##
-## to use eclipse 3.5 uncomment the lines below
-##
-#eclipse.sdk.archive = eclipse-SDK-3.5-macosx-carbon.tar.gz
-#eclipse.buildId = 3.5
-#eclipse.qualifier = e35
-
-##
-## to use eclipse 3.4 uncomment the lines below
-##
-#eclipse.buildId = 3.4.2
-#eclipse.sdk.archive = eclipse-SDK-3.4.2-macosx-carbon.tar.gz
-#eclipse.qualifier = e34
-
-## The location from where eclipse SDK will be downloaded in case there's none in the releng/externals directory
-## Don't add the trailing file name, the file name is automatically appended based on eclipse.sdk.archive
-## for locations of the eclipse SDKs
-## see http://download.eclipse.org/eclipse/downloads/ and http://archive.eclipse.org/eclipse/downloads/index.php
-
-# eclipse.sdk.url = http://ftp.jaist.ac.jp/pub/eclipse/eclipse/downloads/drops/R-3.4-200806172000
-
-
-has.archives = true
-
-# either a relative or absolute location relative to the update site, *no trailing slash* please.
-update.site.base.url = http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/galileo/dev-build/update-site
-#update.site.base.url = http://www.eclipse.org/downloads/download.php?r=1&amp;file=/technology/swtbot/ganymede/dev-build/update-site
-
-rsync.opts = --delete-after
-remote.path = kpadegaonkar,swtbot@web.sf.net:/home/groups/s/sw/swtbot/htdocs/artifacts/2.0-eclipse
-
+# provide 34, 35 or 36
+eclipse.version = 35
