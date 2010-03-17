@@ -8,7 +8,7 @@
 		<category name="SWTBot Eclipse Features (incubation)"/>
 	</feature>
 
-	<feature url="${update.site.base.url}/features/org.eclipse.swtbot.gef_${all.buildId}.jar" id="org.eclipse.swtbot.eclipse.gef" version="${all.buildId}">
+	<feature url="${update.site.base.url}/features/org.eclipse.swtbot.eclipse.gef_${all.buildId}.jar" id="org.eclipse.swtbot.eclipse.gef" version="${all.buildId}">
 		<category name="SWTBot GEF Features (incubation)"/>
 	</feature>
 
