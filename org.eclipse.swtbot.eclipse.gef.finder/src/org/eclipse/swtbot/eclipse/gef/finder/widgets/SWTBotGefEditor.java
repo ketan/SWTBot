@@ -399,6 +399,16 @@ public class SWTBotGefEditor extends SWTBotEditor {
 	}
 
 	/**
+	 * Drag and drop from the specified to the specified location. 
+	 *  
+	 * @param toXPosition the x relative location
+	 * @param toYPosition the y relative location
+	 */
+	public void drag(final int fromXPosition, final int fromYPosition, final int toXPosition, final int toYPosition) {
+		canvas.mouseDrag(fromXPosition, fromYPosition, toXPosition, toYPosition);
+	}
+	
+	/**
 	 * Drag and drop the specified edit part to the specified location. 
 	 * @param editPart the edit part to drag and drop 
 	 * @param toXPosition the x relative location
@@ -406,7 +416,7 @@ public class SWTBotGefEditor extends SWTBotEditor {
 	 */
 	public void drag(final SWTBotGefEditPart editPart, final int toXPosition, final int toYPosition) {
 		Rectangle bounds = ((GraphicalEditPart) editPart.part()).getFigure().getBounds();
-		canvas.mouseDrag(bounds.x, bounds.y, toXPosition, toYPosition);
+		drag(bounds.x, bounds.y, toXPosition, toYPosition);
 	}
 
 	/**
@@ -519,7 +529,7 @@ public class SWTBotGefEditor extends SWTBotEditor {
 
 	@Deprecated
 	public void mouseDrag(final int fromXPosition, final int fromYPosition, final int toXPosition, final int toYPosition) {
-		canvas.mouseDrag(fromXPosition, fromYPosition, toXPosition, toYPosition);
+		drag(fromXPosition, fromYPosition, toXPosition, toYPosition);
 	}
 
 	@Deprecated
