@@ -131,7 +131,13 @@
 				<include name="org.eclipse.swtbot.ant.optional.junit4_*.jar" />
 			</fileset>
 			<fileset dir="${target}/plugins">
+				<include name="org.eclipse.swtbot.ant.optional.junit3_*.jar" />
+			</fileset>
+			<fileset dir="${target}/plugins">
 				<include name="org.eclipse.swtbot.eclipse.junit4.headless_*.jar" />
+			</fileset>
+			<fileset dir="${target}/plugins">
+				<include name="org.eclipse.swtbot.eclipse.junit3.headless_*.jar" />
 			</fileset>
 		</purge>
 	</target>
