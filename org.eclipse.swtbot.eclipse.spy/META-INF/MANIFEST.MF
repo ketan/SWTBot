@@ -29,7 +29,7 @@ Import-Package: org.apache.log4j;version="1.2.12",
  org.eclipse.swtbot.swt.finder.utils,
  org.eclipse.swtbot.swt.finder.waits,
  org.eclipse.swtbot.swt.finder.widgets,
- org.eclipse.ui.part,
+ org.eclipse.ui.part;ui.workbench=split,
  org.eclipse.ui.plugin,
  org.hamcrest;version="1.1.0",
  org.osgi.framework;version="1.4.0"
