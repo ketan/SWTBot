@@ -262,4 +262,46 @@ public class SWTWorkbenchBot extends SWTBot {
 			throw new WidgetNotFoundException("There is no active perspective"); //$NON-NLS-1$
 		return new SWTBotPerspective(perspective, this);
 	}
+
+	/**
+	 * Does a <em>best effort</em> to reset the workbench. This method attempts to:
+	 * <ul>
+	 * <li>close all non-workbench windows</li>
+	 * <li>save and close all open editors</li>
+	 * <li>reset the <em>active</em> perspective</li>
+	 * <li>switch to the default perspective for the workbench</li>
+	 * <li>reset the <em>default</em> perspective for the workbench</li>
+	 * <ul>
+	 */
+	public void resetWorkbench() {
+		closeAllShells();
+		saveAllEditors();
+		closeAllEditors();
+		resetActivePerspective();
+
+		defaultPerspective().activate();
+		resetActivePerspective();
+	}
+
+	private SWTBotPerspective defaultPerspective() {
+		return null;
+	}
+
+	public void closeAllEditors() {
+		new DefaultWorkbench(this).closeAllEditors();
+	}
+
+	public void saveAllEditors() {
+		new DefaultWorkbench(this).saveAllEditors();
+	}
+
+	public SWTBotPerspective resetActivePerspective() {
+		new DefaultWorkbench(this).resetActivePerspective();
+		return activePerspective();
+	}
+
+	public void closeAllShells() {
+		new DefaultWorkbench(this).closeAllShells();
+	}
+
 }
