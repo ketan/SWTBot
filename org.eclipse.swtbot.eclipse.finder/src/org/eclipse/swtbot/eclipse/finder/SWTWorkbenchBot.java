@@ -16,6 +16,7 @@ import static org.eclipse.swtbot.eclipse.finder.matchers.WidgetMatcherFactory.wi
 import static org.eclipse.swtbot.eclipse.finder.matchers.WidgetMatcherFactory.withPerspectiveLabel;
 import static org.eclipse.swtbot.eclipse.finder.waits.Conditions.waitForEditor;
 import static org.eclipse.swtbot.eclipse.finder.waits.Conditions.waitForView;
+import static org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable.syncExec;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +30,12 @@ import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotPerspective;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotView;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
+import org.eclipse.swtbot.swt.finder.results.Result;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IViewReference;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.PlatformUI;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
@@ -284,7 +288,13 @@ public class SWTWorkbenchBot extends SWTBot {
 	}
 
 	private SWTBotPerspective defaultPerspective() {
-		return null;
+		return syncExec(new Result<SWTBotPerspective>(){
+
+			public SWTBotPerspective run() {
+				IWorkbench workbench = PlatformUI.getWorkbench();
+				return perspectiveById(workbench.getPerspectiveRegistry().getDefaultPerspective());
+			}
+		});
 	}
 
 	public void closeAllEditors() {
