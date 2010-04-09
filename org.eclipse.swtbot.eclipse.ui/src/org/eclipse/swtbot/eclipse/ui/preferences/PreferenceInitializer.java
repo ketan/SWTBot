@@ -11,6 +11,7 @@
 package org.eclipse.swtbot.eclipse.ui.preferences;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -20,20 +21,12 @@ import org.eclipse.jdt.ui.PreferenceConstants;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
-import org.eclipse.swtbot.eclipse.finder.matchers.WidgetMatcherFactory;
-import org.eclipse.swtbot.eclipse.finder.waits.Conditions;
 import org.eclipse.swtbot.eclipse.ui.Activator;
-import org.eclipse.swtbot.swt.finder.SWTBotAssert;
-import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
-import org.eclipse.swtbot.swt.finder.utils.StringUtils;
 import org.eclipse.ui.IStartup;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Assert;
 
 /**
  * Initializes the default preferences if none exist.
- *
+ * 
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
@@ -55,7 +48,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer impleme
 
 	/**
 	 * Create a preference initializer with the two preference stores.
-	 *
+	 * 
 	 * @param swtbotPreferenceStore used by swtbot.
 	 * @param jdtPreferenceStore used by JDT.
 	 */
@@ -83,7 +76,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer impleme
 			if (imports.containsAll(getDefaultFavorites()))
 				imports.removeAll(getDefaultFavorites());
 		}
-		String join = StringUtils.join(imports, SEMI_COLON);
+		String join = join(imports, SEMI_COLON);
 		jdtPreferenceStore.setValue(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, join);
 	}
 
@@ -101,23 +94,37 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer impleme
 
 	private LinkedHashSet<String> getDefaultFavorites() {
 		LinkedHashSet<String> orderedSet = new LinkedHashSet<String>();
-		orderedSet.add(importStatement(org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.class));
-		orderedSet.add(importStatement(Matchers.class));
-		orderedSet.add(importStatement(MatcherAssert.class));
-		orderedSet.add(importStatement(Assert.class));
-		orderedSet.add(importStatement(WidgetMatcherFactory.class));
-		orderedSet.add(importStatement(UIThreadRunnable.class));
-		orderedSet.add(importStatement(SWTBotAssert.class));
-		orderedSet.add(importStatement(Conditions.class));
-		orderedSet.add(importStatement(org.eclipse.swtbot.swt.finder.waits.Conditions.class));
+		orderedSet.add(importStatement("org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory"));
+		orderedSet.add(importStatement("org.hamcrest.Matchers"));
+		orderedSet.add(importStatement("org.hamcrest.MatcherAssert"));
+		orderedSet.add(importStatement("org.eclipse.swtbot.swt.finder.SWTBotAssert"));
+		orderedSet.add(importStatement("org.eclipse.swtbot.eclipse.finder.matchers.WidgetMatcherFactory"));
+		orderedSet.add(importStatement("org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable"));
+		orderedSet.add(importStatement("org.eclipse.swtbot.swt.finder.SWTBotAssert"));
+		orderedSet.add(importStatement("org.eclipse.swtbot.eclipse.finder.waits.Conditions"));
+		orderedSet.add(importStatement("org.eclipse.swtbot.swt.finder.waits.Conditions"));
 		return orderedSet;
-	}
-
-	private String importStatement(Class<?> clazz) {
-		return clazz.getName() + ".*"; //$NON-NLS-1$
 	}
 
 	public void propertyChange(PropertyChangeEvent event) {
 		initializeFavorites();
 	}
+
+	private String importStatement(String clazz) {
+		return clazz + ".*"; //$NON-NLS-1$;
+	}
+
+	private String join(Collection<?> toJoin, String delimiter) {
+		StringBuffer result = new StringBuffer();
+
+		for (Object object : toJoin) {
+			result.append(object);
+			result.append(delimiter);
+		}
+
+		result.lastIndexOf(delimiter);
+		result.replace(result.length() - delimiter.length(), result.length(), ""); //$NON-NLS-1$
+		return result.toString();
+	}
+
 }
