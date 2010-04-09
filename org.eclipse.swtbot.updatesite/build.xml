@@ -254,6 +254,7 @@
 			<fileset dir="../org.eclipse.swtbot.releng/artifacts" includes="org.eclipse.swtbot.eclipse.test.junit3-*" />
 			<fileset dir="../org.eclipse.swtbot.releng/artifacts" includes="org.eclipse.swtbot.eclipse.test.junit4-*" />
 			<fileset dir="../org.eclipse.swtbot.releng/artifacts" includes="org.eclipse.swtbot.eclipse.gef-*" />
+			<fileset dir="../org.eclipse.swtbot.releng/artifacts" includes="org.eclipse.swtbot.ide-*" />
 		</unzip>
 
 		<antcall target="-create.jars" inheritall="false" />

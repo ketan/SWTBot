@@ -389,6 +389,7 @@
 				<include name="org.eclipse.swtbot.eclipse.test.junit3-${all.buildId}.zip" />
 				<include name="org.eclipse.swtbot.eclipse.test.junit4-${all.buildId}.zip" />
 				<include name="org.eclipse.swtbot.eclipse.gef-${all.buildId}.zip" />
+				<include name="org.eclipse.swtbot.eclipse.ide-${all.buildId}.zip" />
 			</fileset>
 		</copy>
 
