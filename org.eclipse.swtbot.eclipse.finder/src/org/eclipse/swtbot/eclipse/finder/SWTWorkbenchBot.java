@@ -287,8 +287,11 @@ public class SWTWorkbenchBot extends SWTBot {
 		resetActivePerspective();
 	}
 
-	private SWTBotPerspective defaultPerspective() {
-		return syncExec(new Result<SWTBotPerspective>(){
+	/**
+	 * Returns the default perspective as defined in the WorkbenchAdvisor of the application.
+	 */
+	public SWTBotPerspective defaultPerspective() {
+		return syncExec(new Result<SWTBotPerspective>() {
 
 			public SWTBotPerspective run() {
 				IWorkbench workbench = PlatformUI.getWorkbench();
