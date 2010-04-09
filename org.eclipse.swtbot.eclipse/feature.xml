@@ -104,16 +104,12 @@ Java and all Java-based trademarks are trademarks of Sun Microsystems, Inc. in t
       <import plugin="org.hamcrest"/>
       <import plugin="org.junit4"/>
       <import plugin="org.apache.log4j"/>
-      <import plugin="org.eclipse.pde.junit.runtime"/>
-      <import plugin="org.eclipse.jdt.junit"/>
-      <import plugin="org.eclipse.pde.ui"/>
-      <import plugin="org.eclipse.jdt.core"/>
-      <import plugin="org.eclipse.jdt.launching"/>
-      <import plugin="org.eclipse.debug.ui"/>
-      <import plugin="org.eclipse.jdt.junit.runtime"/>
-      <import plugin="org.eclipse.jdt.ui"/>
-      <import plugin="org.eclipse.ui.intro"/>
-      <import plugin="org.eclipse.ui.intro.universal"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import plugin="org.eclipse.core.commands"/>
+      <import plugin="org.eclipse.jface"/>
+      <import plugin="org.eclipse.swt"/>
+      <import plugin="org.eclipse.ui.workbench"/>
+      <import plugin="org.eclipse.ui.editors"/>
    </requires>
 
    <plugin
@@ -124,21 +120,7 @@ Java and all Java-based trademarks are trademarks of Sun Microsystems, Inc. in t
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.swtbot.eclipse.spy"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.swtbot.eclipse.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.swtbot.eclipse.core"
+         id="org.eclipse.swtbot.go"
          download-size="0"
          install-size="0"
          version="0.0.0"
