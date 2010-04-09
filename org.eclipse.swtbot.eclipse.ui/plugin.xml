@@ -19,7 +19,7 @@
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
       <launchConfigurationTabGroup
             type="org.eclipse.swtbot.eclipse.ui.launcher.JunitLaunchConfig"
-            class="org.eclipse.pde.ui.launcher.JUnitTabGroup"
+            class="org.eclipse.swtbot.eclipse.ui.launcher.SWTBotJUnitTabGroup"
             id="org.eclipse.swtbot.eclipse.ui.launcher.JUnitTabGroup">
          <launchMode
                description="Create a configuration that will launch a SWTBot test in debug mode."
