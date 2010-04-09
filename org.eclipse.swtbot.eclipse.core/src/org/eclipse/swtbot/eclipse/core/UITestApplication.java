@@ -72,10 +72,12 @@ public class UITestApplication implements IApplication, ITestHarness {
 		// Find the name of the application as specified by the PDE JUnit launcher.
 		// If no application is specified, the 3.0 default workbench application
 		// is returned.
+		String applicationToRun = getApplicationToRun(args);
+		
 		IExtension extension = Platform.getExtensionRegistry().getExtension(Platform.PI_RUNTIME, Platform.PT_APPLICATIONS,
-				getApplicationToRun(args));
+				applicationToRun);
 
-		Assert.isNotNull(extension);
+		Assert.isNotNull(extension, "Could not find IExtension for application: " + applicationToRun);
 
 		// If the extension does not have the correct grammar, return null.
 		// Otherwise, return the application object.
