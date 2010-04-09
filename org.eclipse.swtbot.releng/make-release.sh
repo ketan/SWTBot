@@ -2,9 +2,10 @@
 
 rm -rf artifacts target
 
-# usage: build_swtbot [34 | 35 | 36]
-# e.g.: build_swtbot 35
-# e.g.: build_swtbot 34
+# usage: build_swtbot [34 ganymede | 35 galileo | 36 helios] 
+# e.g.: build_swtbot 36 helios
+# e.g.: build_swtbot 35 galileo
+# e.g.: build_swtbot 34 ganymede
 function build_swtbot(){
 	ant materialize-workspace \
 		"-Declipse.version=$1" \
@@ -12,9 +13,9 @@ function build_swtbot(){
 
 	ant cruise \
 		"-Declipse.version=$1" \
-		"-Dhas.archives=true" && rm -rf to-upload/$3 && mkdir to-upload/$3 && mv artifacts/to-upload to-upload/$3/dev-build
+		"-Dhas.archives=true" && rm -rf to-upload/$2 && mkdir -p to-upload/$2 && mv artifacts/to-upload to-upload/$2/dev-build
 }
 
-build_swtbot 34 && build_swtbot 35 && build_swtbot 36
+build_swtbot 34 ganymede && build_swtbot 35 galileo && build_swtbot 36 helios
 
 # rsync --delete-after --partial --progress --archive to-upload build.eclipse.org:
