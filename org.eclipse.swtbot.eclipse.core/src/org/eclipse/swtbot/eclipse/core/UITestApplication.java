@@ -11,8 +11,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.core;
 
-import java.util.Arrays;
-
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
