@@ -19,4 +19,8 @@
 	<feature url="${update.site.base.url}/features/org.eclipse.swtbot.eclipse.test.junit4_${all.buildId}.jar" id="org.eclipse.swtbot.eclipse.test.junit4" version="${all.buildId}">
 		<category name="SWTBot JUnit 4.x Headless Execution (incubation)"/>
 	</feature>
+
+	<feature url="${update.site.base.url}/features/org.eclipse.swtbot.ide_${all.buildId}.jar" id="org.eclipse.swtbot.ide" version="${all.buildId}">
+		<category name="SWTBot IDE Support (incubation)"/>
+	</feature>
 	<!-- end SWTBot feature list -->

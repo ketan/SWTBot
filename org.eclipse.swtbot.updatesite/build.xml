@@ -31,6 +31,9 @@
 			<fileset dir="${target}/features">
 				<include name="org.eclipse.swtbot.eclipse.test.junit4_*.jar" />
 			</fileset>
+			<fileset dir="${target}/features">
+				<include name="org.eclipse.swtbot.ide_*.jar" />
+			</fileset>
 		</purge>
 
 		<echo>Purging plugins</echo>
@@ -125,7 +128,7 @@
 			<fileset dir="${target}/plugins">
 				<include name="org.eclipse.swt.examples_*.jar" />
 			</fileset>
-			
+
 			<!-- headless jars -->
 			<fileset dir="${target}/plugins">
 				<include name="org.eclipse.swtbot.ant.optional.junit4_*.jar" />
@@ -138,6 +141,11 @@
 			</fileset>
 			<fileset dir="${target}/plugins">
 				<include name="org.eclipse.swtbot.eclipse.junit3.headless_*.jar" />
+			</fileset>
+
+			<!-- convenience plugin -->
+			<fileset dir="${target}/plugins">
+				<include name="org.eclipse.swtbot.go_*.jar" />
 			</fileset>
 		</purge>
 	</target>
@@ -157,14 +165,14 @@
 	<target name="create_features_list" depends="purge_old_files">
 		<for param="file">
 			<path>
-				<fileset dir="${target}/features" includes="${plugin.prefix}_*.jar" />
+				<fileset dir="${target}/features" includes="org.eclipse.swtbot_*.jar" />
 			</path>
 			<sequential>
 				<ant target="-create.features.template" inheritall="false">
 					<property name="file" value="@{file}" />
-					<property name="featureId" value="${plugin.prefix}" />
-					<property name="destFile" value="${plugin.prefix}.featurelist.xml" />
-					<property name="srcFile" value="site.template.${plugin.prefix}.featurelist.xml" />
+					<property name="featureId" value="org.eclipse.swtbot" />
+					<property name="destFile" value="org.eclipse.swtbot.featurelist.xml" />
+					<property name="srcFile" value="site.template.org.eclipse.swtbot.featurelist.xml" />
 				</ant>
 			</sequential>
 		</for>
@@ -183,7 +191,6 @@
 		</concat>
 	</target>
 
-
 	<target name="create_plugins_archive_list" if="should.generate.archives">
 		<for param="plugin">
 			<path>
@@ -193,9 +200,9 @@
 			<sequential>
 				<ant target="-create.plugins.template" inheritall="false">
 					<property name="plugin.file.name" value="@{plugin}" />
-					<property name="featureId" value="${plugin.prefix}" />
-					<property name="destFile" value="${plugin.prefix}.pluginarchivelist.xml" />
-					<property name="srcFile" value="site.template.${plugin.prefix}.pluginarchivelist.xml" />
+					<property name="featureId" value="org.eclipse.swtbot" />
+					<property name="destFile" value="org.eclipse.swtbot.pluginarchivelist.xml" />
+					<property name="srcFile" value="site.template.org.eclipse.swtbot.pluginarchivelist.xml" />
 				</ant>
 			</sequential>
 		</for>
@@ -204,8 +211,8 @@
 	<target name="create_site_xml" depends="create_features_list">
 		<concat destfile="${target}/site.xml.tokenize" fixlastline="true" eol="unix">
 			<header file="site.template.header.xml" />
-			<fileset file="build/${plugin.prefix}.featurelist.xml" />
-			<fileset file="build/${plugin.prefix}.pluginarchivelist.xml" />
+			<fileset file="build/org.eclipse.swtbot.featurelist.xml" />
+			<fileset file="build/org.eclipse.swtbot.pluginarchivelist.xml" />
 			<fileset file="site.template.categories.xml" />
 			<footer file="site.template.footer.xml" />
 		</concat>
@@ -243,10 +250,10 @@
 		<mkdir dir="${target}" />
 
 		<unzip dest="${target}">
-			<fileset dir="../${plugin.prefix}.releng/artifacts" includes="org.eclipse.swtbot.eclipse-*" />
-			<fileset dir="../${plugin.prefix}.releng/artifacts" includes="org.eclipse.swtbot.eclipse.test.junit3-*" />
-			<fileset dir="../${plugin.prefix}.releng/artifacts" includes="org.eclipse.swtbot.eclipse.test.junit4-*" />
-			<fileset dir="../${plugin.prefix}.releng/artifacts" includes="org.eclipse.swtbot.eclipse.gef-*" />
+			<fileset dir="../org.eclipse.swtbot.releng/artifacts" includes="org.eclipse.swtbot.eclipse-*" />
+			<fileset dir="../org.eclipse.swtbot.releng/artifacts" includes="org.eclipse.swtbot.eclipse.test.junit3-*" />
+			<fileset dir="../org.eclipse.swtbot.releng/artifacts" includes="org.eclipse.swtbot.eclipse.test.junit4-*" />
+			<fileset dir="../org.eclipse.swtbot.releng/artifacts" includes="org.eclipse.swtbot.eclipse.gef-*" />
 		</unzip>
 
 		<antcall target="-create.jars" inheritall="false" />

@@ -16,7 +16,7 @@
 
 		<ant antfile="${genericTargets}" target="${target}">
 			<property name="type" value="feature" />
-			<property name="id" value="org.eclipse.swtbot.test" />
+			<property name="id" value="org.eclipse.swtbot.ide" />
 		</ant>
 
 		<ant antfile="${genericTargets}" target="${target}">
@@ -38,6 +38,12 @@
 			<property name="type" value="feature" />
 			<property name="id" value="org.eclipse.swtbot.eclipse.test.junit4" />
 		</ant>
+
+		<ant antfile="${genericTargets}" target="${target}">
+			<property name="type" value="feature" />
+			<property name="id" value="org.eclipse.swtbot.test" />
+		</ant>
+
 	</target>
 
 	<!-- ===================================================================== -->
@@ -68,6 +74,10 @@
 	</target>
 
 	<target name="assemble.org.eclipse.swtbot.eclipse.test.junit4">
+		<ant antfile="${assembleScriptName}" dir="${buildDirectory}" />
+	</target>
+
+	<target name="assemble.org.eclipse.swtbot.ide">
 		<ant antfile="${assembleScriptName}" dir="${buildDirectory}" />
 	</target>
 </project>

@@ -97,6 +97,7 @@
 				<include name="org.eclipse.swtbot.eclipse.test.junit3/**" />
 				<include name="org.eclipse.swtbot.eclipse.test.junit4/**" />
 				<include name="org.eclipse.swtbot.eclipse.gef/**" />
+				<include name="org.eclipse.swtbot.ide/**" />
 			</fileset>
 		</sync>
 	</target>
@@ -120,6 +121,7 @@
 				<exclude name="org.eclipse.swtbot.eclipse.gef/**" />
 				<exclude name="org.eclipse.swtbot.eclipse.test.junit3/**" />
 				<exclude name="org.eclipse.swtbot.eclipse.test.junit4/**" />
+				<exclude name="org.eclipse.swtbot.ide/**" />
 				<!-- the update site -->
 				<exclude name="org.eclipse.swtbot.updatesite/**" />
 				<!-- also exclude the generated class files -->
@@ -355,9 +357,6 @@
 		<ant dir="../${plugin.prefix}.updatesite" inheritall="false">
 			<property name="eclipse.location" value="${eclipse.3.4.location}" />
 			<property name="buildId" value="${all.buildId}" />
-			<property name="plugin.prefix" value="${plugin.prefix}" />
-			<property name="feature.id" value="${feature.id}" />
-			<property name="feature.id.test" value="${feature.id.test}" />
 			<property name="update-site-location" value="${update-site-location}" />
 			<property name="has.archives" value="${has.archives}" />
 			<property name="update.site.base.url" value="${update.site.base.url}" />

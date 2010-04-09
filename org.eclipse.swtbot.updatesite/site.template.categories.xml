@@ -2,17 +2,22 @@
 	<!-- begin the categories -->
 	<category-def name="SWTBot SWT Features (incubation)" label="SWTBot SWT Features (incubation)">
 		<description>
-			This feature contains the basic SWTBot with drivers for SWT. This is useful for testing plain SWT applications.
+			This feature contains the basic SWTBot with drivers for SWT. Install this in your target. This is useful for testing plain SWT applications. 
 		</description>
 	</category-def>
 	
 	<category-def name="SWTBot Eclipse Features (incubation)" label="SWTBot Eclipse Features (incubation)">
 		<description>
-			This feature contains the SWTBot drivers for Eclipse, and some tooling for launching SWTBot tests for eclipse plugins. This is useful for testing Eclipse plugins and applications.
+			This feature contains the SWTBot drivers for Eclipse. Install this in your target. This is useful for testing Eclipse plugins and applications.
+		</description>
+	</category-def>
+
+	<category-def name="SWTBot IDE Support (incubation)" label="SWTBot IDE Support (incubation)">
+		<description>
+			This feature contains SWTBot support that should be installed in the IDE. It contains support to execute SWTBot tests from the IDE.
 		</description>
 	</category-def>
 	
-
 	<category-def name="SWTBot GEF Features (incubation)" label="SWTBot GEF Features (incubation)">
 		<description>
 			This feature contains the SWTBot drivers for GEF. This is useful for testing GEF based applications.
