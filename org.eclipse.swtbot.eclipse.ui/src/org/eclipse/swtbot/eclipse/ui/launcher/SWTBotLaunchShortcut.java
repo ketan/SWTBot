@@ -8,9 +8,10 @@
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *******************************************************************************/
-package org.eclipse.swtbot.eclipse.ui;
+package org.eclipse.swtbot.eclipse.ui.launcher;
 
 import org.eclipse.pde.ui.launcher.JUnitWorkbenchLaunchShortcut;
+import org.eclipse.swtbot.eclipse.ui.SWTBotLaunchConfigurationDelegate;
 
 /**
  * Enhances the {@link JUnitWorkbenchLaunchShortcut} to launch SWTBot's launch configuration.

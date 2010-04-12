@@ -7,7 +7,8 @@ Bundle-Activator: org.eclipse.swtbot.eclipse.ui.Activator
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: Eclipse.org
 Export-Package: org.eclipse.swtbot.eclipse.ui,
- org.eclipse.swtbot.eclipse.ui.preferences
+ org.eclipse.swtbot.eclipse.ui.preferences,
+ org.eclipse.swtbot.eclipse.ui.wizards
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Import-Package: org.eclipse.core.resources,
  org.eclipse.core.runtime,

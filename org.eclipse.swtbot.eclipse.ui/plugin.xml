@@ -76,7 +76,7 @@
    <extension
          point="org.eclipse.debug.ui.launchShortcuts">
       <shortcut
-            class="org.eclipse.swtbot.eclipse.ui.SWTBotLaunchShortcut"
+            class="org.eclipse.swtbot.eclipse.ui.launcher.SWTBotLaunchShortcut"
             description="Launch an SWTBot Test"
             icon="icons/swtbot_runner.png"
             id="org.eclipse.swtbot.eclipse.ui.junitShortcut"
@@ -125,5 +125,16 @@
             configId="org.eclipse.ui.intro.universalConfig"
             content="intro/tutorialsExtensionContent.xml">
       </configExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            class="org.eclipse.swtbot.eclipse.ui.wizards.NewSWTBotTestPluginWizard"
+            finalPerspective="org.eclipse.jdt.ui.JavaPerspective"
+            icon="icons/swtbot_runner.png"
+            id="org.eclipse.swtbot.eclipse.ui.wizards.NewSWTBotTestPluginWizard"
+            name="New SWTBot Test Plugin"
+            project="true">
+      </wizard>
    </extension>
 </plugin>
