@@ -97,9 +97,10 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer impleme
 		orderedSet.add(importStatement("org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory"));
 		orderedSet.add(importStatement("org.hamcrest.Matchers"));
 		orderedSet.add(importStatement("org.hamcrest.MatcherAssert"));
-		orderedSet.add(importStatement("org.eclipse.swtbot.swt.finder.SWTBotAssert"));
+		orderedSet.add(importStatement("org.junit.Assert"));
 		orderedSet.add(importStatement("org.eclipse.swtbot.eclipse.finder.matchers.WidgetMatcherFactory"));
 		orderedSet.add(importStatement("org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable"));
+		orderedSet.add(importStatement("org.eclipse.swtbot.swt.finder.SWTBotAssert"));
 		orderedSet.add(importStatement("org.eclipse.swtbot.swt.finder.SWTBotAssert"));
 		orderedSet.add(importStatement("org.eclipse.swtbot.eclipse.finder.waits.Conditions"));
 		orderedSet.add(importStatement("org.eclipse.swtbot.swt.finder.waits.Conditions"));
@@ -115,6 +116,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer impleme
 	}
 
 	private String join(Collection<?> toJoin, String delimiter) {
+		if ((toJoin == null) || (toJoin.size() == 0))
+			return ""; 
 		StringBuffer result = new StringBuffer();
 
 		for (Object object : toJoin) {
