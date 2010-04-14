@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2010 Ketan Padegaonkar and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Ketan Padegaonkar - initial API and implementation
+ *******************************************************************************/
 package org.eclipse.swtbot.eclipse.ui.wizards;
 
 import java.util.ArrayList;
@@ -20,9 +30,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.osgi.framework.Version;
 
-public class NewPluginProjectWizardPage extends WizardPage {
+public class NewPluginProjectWizardPage extends WizardPage implements WizardPageSettings {
 
 	private Button	productIdButton;
 	private Button	applicationIdButton;
@@ -109,41 +118,11 @@ public class NewPluginProjectWizardPage extends WizardPage {
 
 		ModifyListener listener = new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
-				setPageComplete(true);
-				setErrorMessage(null);
-
-				String pluginName = NewPluginProjectWizardPage.this.pluginName.getText();
-				if (pluginName.trim().length() == 0) {
-					setErrorMessage("Plugin name cannot be empty!");
-					setPageComplete(false);
-					return;
-				}
-
-				if (getProjects().contains(pluginName)) {
-					setErrorMessage("A project by that name already exists!");
-					setPageComplete(false);
-					return;
-				}
-
-				if (pluginId.getText().trim().length() == 0) {
-					setErrorMessage("You did not set the plugin id!");
-					setPageComplete(false);
-					return;
-				}
-
-				if (!isValidCompositeID3_0(pluginId.getText())) {
-					setErrorMessage("Invalid plugin id! Legal characters are A-Z a-z 0-9 . _ -");
-					setPageComplete(false);
-					return;
-				}
-
-				try {
-					new Version(pluginVersion.getText());
-				} catch (IllegalArgumentException ex) {
-					setErrorMessage("The specified version does not have the correct format (major.minor.micro.qualifier) or contains invalid characters!");
-					setPageComplete(false);
-					return;
-				}
+				
+				ProjectSettingValidator validator = new ProjectSettingValidator(pluginId.getText(), pluginVersion.getText(), pluginName.getText(), getProjects(), NewPluginProjectWizardPage.this);
+				validator.validate();
+				
+				
 			}
 		};
 
@@ -164,21 +143,6 @@ public class NewPluginProjectWizardPage extends WizardPage {
 		return result;
 	}
 
-	// copied from IdUtil from PDE.
-	private boolean isValidCompositeID3_0(String name) {
-		if (name.length() <= 0) {
-			return false;
-		}
-		for (int i = 0; i < name.length(); i++) {
-			char c = name.charAt(i);
-			if ((c < 'A' || 'Z' < c) && (c < 'a' || 'z' < c) && (c < '0' || '9' < c) && c != '_' && c != '-') {
-				if (i == 0 || i == name.length() - 1 || c != '.') {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
 
 	private void productAndApplication(Composite parent) {
 		Group group = new Group(parent, SWT.NONE);
