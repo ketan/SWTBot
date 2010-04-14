@@ -380,6 +380,7 @@ public abstract class SWTUtils {
 	private static boolean captureScreenshotInternal(final String fileName, Rectangle bounds) {
 		GC gc = new GC(display);
 		Image image = null;
+		new File(fileName).getParentFile().mkdirs();
 		try {
 			log.debug(MessageFormat.format("Capturing screenshot ''{0}''", fileName)); //$NON-NLS-1$
 
