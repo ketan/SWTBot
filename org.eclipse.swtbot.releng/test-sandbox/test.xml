@@ -24,8 +24,6 @@
 			<contains string="${runtimeArchive}" substring=".tar.gz" />
 		</condition>
 		<antcall target="${setupTarget}" />
-		<antcall target="configureTeamTest" />
-		<antcall target="configureDeltaPack" />
 	</target>
 
 	<!--setup for zip archives-->
@@ -188,55 +186,6 @@
 			</and>
 		</condition>
 	</target>
-
-	<target name="setJVMProperties" depends="setJVMfromUserSpecified">
-		<!--enable tests requiring 1.5 or 1.6 vms to run if running vm level detected matches required execution environment-->
-		<condition property="J2SE-5.0" value="${java.home}/bin/java">
-			<or>
-				<equals arg1="${ant.java.version}" arg2="1.5" />
-				<equals arg1="${ant.java.version}" arg2="1.6" />
-			</or>
-		</condition>
-		<condition property="J2SE-6.0" value="${java.home}/bin/java">
-			<equals arg1="${ant.java.version}" arg2="1.6" />
-		</condition>
-	</target>
-
-	<target name="setJVMfromUserSpecified" if="jvm">
-		<exec executable="${jvm}" outputproperty="javaversion">
-			<arg line="-version" />
-		</exec>
-		<echo message="java version of ${jvm} is ${javaversion}" />
-		<condition property="J2SE-6.0" value="${jvm}">
-			<contains string="${javaversion}" substring="java version &quot;1.6" />
-		</condition>
-		<condition property="J2SE-5.0" value="${jvm}">
-			<or>
-				<contains string="${javaversion}" substring="java version &quot;1.6" />
-				<contains string="${javaversion}" substring="java version &quot;1.5" />
-			</or>
-		</condition>
-		<echo message="J2SE-6.0:  ${J2SE-6.0}" />
-		<echo message="J2SE-5.0:  ${J2SE-5.0}" />
-	</target>
-
-	<target name="configureTeamTest" if="teamcvs">
-		<!-- Fill in cvs repository information -->
-		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@user@" value="${cvs_user}" />
-		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@password@" value="${cvs_password}" />
-		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@host@" value="${cvs_host}" />
-		<replace file="${eclipse-home}/plugins/${org.eclipse.team.tests.cvs.core}/repository.properties" token="@root@" value="${cvs_root}" />
-	</target>
-
-	<target name="configureDeltaPack" if="pdebuild">
-		<property name="deltapackArchive" value="eclipse-RCP-${buildId}-delta-pack.zip" />
-		<property name="installDeltapack" value="${install}/deltapack" />
-		<mkdir dir="${installDeltapack}" />
-		<exec dir="." executable="unzip">
-			<arg line="-o -qq ${deltapackArchive} -d ${installDeltapack}" />
-		</exec>
-	</target>
-
 
 	<macrodef name="runTests">
 		<attribute name="testPlugin" />
