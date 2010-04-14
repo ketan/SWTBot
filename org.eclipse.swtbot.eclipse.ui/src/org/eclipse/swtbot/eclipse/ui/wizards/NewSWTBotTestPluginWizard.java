@@ -12,16 +12,10 @@ import org.eclipse.ui.IWorkbench;
 public class NewSWTBotTestPluginWizard extends Wizard implements INewWizard {
 
 	private NewPluginProjectWizardPage	wizardPage;
-	private final IWorkspaceRoot		root;
 
 	public NewSWTBotTestPluginWizard() {
-		this(new DefaultPlatformInfoProvider(), ResourcesPlugin.getWorkspace().getRoot());
-	}
-
-	public NewSWTBotTestPluginWizard(PlatformInfoProvider provider, IWorkspaceRoot root) {
-		this.root = root;
 		setWindowTitle("New SWTBot Test Plugin");
-		wizardPage = new NewPluginProjectWizardPage(provider);
+		wizardPage = new NewPluginProjectWizardPage();
 	}
 
 	public void addPages() {
@@ -35,6 +29,7 @@ public class NewSWTBotTestPluginWizard extends Wizard implements INewWizard {
 		String pluginVersion = wizardPage.pluginVersion();
 		String pluginProvider = wizardPage.pluginProvider();
 
+		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		ProjectCreator projectCreator = new ProjectCreator(pluginId, pluginName, pluginVersion, pluginProvider, root);
 		try {
 			projectCreator.create();

@@ -1,6 +1,12 @@
 package org.eclipse.swtbot.eclipse.ui.wizards;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.wizard.WizardPage;
+import org.eclipse.pde.core.plugin.TargetPlatform;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -17,21 +23,19 @@ import org.eclipse.swt.widgets.Text;
 import org.osgi.framework.Version;
 
 public class NewPluginProjectWizardPage extends WizardPage {
-	private final PlatformInfoProvider	provider;
 
-	private Button						productIdButton;
-	private Button						applicationIdButton;
-	private Combo						productId;
-	private Combo						applicationId;
+	private Button	productIdButton;
+	private Button	applicationIdButton;
+	private Combo	productId;
+	private Combo	applicationId;
 
-	private Text						pluginId;
-	private Text						pluginName;
-	private Text						pluginVersion;
-	private Text						pluginProvider;
+	private Text	pluginId;
+	private Text	pluginName;
+	private Text	pluginVersion;
+	private Text	pluginProvider;
 
-	protected NewPluginProjectWizardPage(PlatformInfoProvider provider) {
+	protected NewPluginProjectWizardPage() {
 		super("New SWTBot Test Plugin");
-		this.provider = provider;
 	}
 
 	public void createControl(Composite parent) {
@@ -115,7 +119,7 @@ public class NewPluginProjectWizardPage extends WizardPage {
 					return;
 				}
 
-				if (provider.getProjects().contains(pluginName)) {
+				if (getProjects().contains(pluginName)) {
 					setErrorMessage("A project by that name already exists!");
 					setPageComplete(false);
 					return;
@@ -149,6 +153,17 @@ public class NewPluginProjectWizardPage extends WizardPage {
 		pluginProvider.addModifyListener(listener);
 	}
 
+	private List<String> getProjects() {
+		IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+
+		ArrayList<String> result = new ArrayList<String>();
+
+		for (IProject project : projects) {
+			result.add(project.getName());
+		}
+		return result;
+	}
+
 	// copied from IdUtil from PDE.
 	private boolean isValidCompositeID3_0(String name) {
 		if (name.length() <= 0) {
@@ -180,8 +195,8 @@ public class NewPluginProjectWizardPage extends WizardPage {
 
 		productId = new Combo(group, SWT.DROP_DOWN);
 		productId.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-		productId.setItems(provider.getProducts());
-		productId.setText(provider.getDefaultProduct());
+		productId.setItems(TargetPlatform.getProducts());
+		productId.setText(TargetPlatform.getDefaultProduct());
 
 		applicationIdButton = new Button(group, SWT.RADIO);
 		applicationIdButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
@@ -189,8 +204,8 @@ public class NewPluginProjectWizardPage extends WizardPage {
 
 		applicationId = new Combo(group, SWT.READ_ONLY | SWT.SINGLE);
 		applicationId.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-		applicationId.setItems(provider.getApplications());
-		applicationId.setText(provider.getDefaultApplication());
+		applicationId.setItems(TargetPlatform.getApplications());
+		applicationId.setText(TargetPlatform.getDefaultApplication());
 		applicationId.setEnabled(false);
 	}
 

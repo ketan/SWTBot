@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.ui.test;
 
+import org.eclipse.swtbot.eclipse.ui.launcher.SWTBotJUnitTabGroupTest;
 import org.eclipse.swtbot.eclipse.ui.preferences.PreferenceInitializerTest;
 import org.eclipse.swtbot.eclipse.ui.project.ProjectCreatorTest;
 import org.eclipse.swtbot.eclipse.ui.project.TemplatizerTest;
@@ -22,7 +23,7 @@ import org.junit.runners.Suite.SuiteClasses;
  * @version $Id$
  */
 @RunWith(Suite.class)
-@SuiteClasses({PreferenceInitializerTest.class, ProjectCreatorTest.class, TemplatizerTest.class})
+@SuiteClasses({PreferenceInitializerTest.class, ProjectCreatorTest.class, TemplatizerTest.class, SWTBotJUnitTabGroupTest.class})
 public class AllTests {
 
 }

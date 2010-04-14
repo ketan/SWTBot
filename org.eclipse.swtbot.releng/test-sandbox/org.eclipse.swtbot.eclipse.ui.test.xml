@@ -1,47 +1,73 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="testsuite" default="run" basedir=".">
-    <property name="eclipse-home" value="${basedir}\..\.." />
-    <property name="plugin-name" value="org.eclipse.swtbot.eclipse.ui.test" />
+	<property name="eclipse-home" value="${basedir}\..\.." />
+	<property name="plugin-name" value="org.eclipse.swtbot.eclipse.ui.test" />
 	<!--property name="library-file" value="../../library.xml" /-->
-    <property name="library-file" value="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit4.headless_${all.buildId}/library.xml"/>
-	
-    <target name="init">
-        <tstamp />
-        <delete>
-            <fileset dir="${eclipse-home}" includes="org*.xml" />
-        </delete>
-    </target>
+	<property name="library-file" value="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit4.headless_${all.buildId}/library.xml" />
 
-    <target name="suite">
-    	
-		<condition property="jvmOption" value="-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts">
-			<os family="mac"/>
+	<property name="build.instrumentation.reports.dir" value="${results.dir}/${plugin-name}/coverage/html" />
+	<property name="build.instrumentation.reports.xml.dir" value="${results.dir}/${plugin-name}/coverage/xml" />
+
+	<property name="cobertura.data.file" value="${basedir}/cobertura.eclipse.ui.ser" />
+	<target name="init">
+		<tstamp />
+		<delete>
+			<fileset dir="${eclipse-home}" includes="org*.xml" />
+		</delete>
+	</target>
+
+	<path id="cobertura.classpath">
+		<fileset dir="${build.base}/../externals/libs/cobertura-1.9">
+			<include name="cobertura.jar" />
+			<include name="lib/**/*.jar" />
+		</fileset>
+	</path>
+
+	<taskdef classpathref="cobertura.classpath" resource="tasks.properties" />
+
+	<target name="instrument">
+		<delete file="${cobertura.data.file}" />
+
+		<cobertura-instrument datafile="${cobertura.data.file}">
+			<fileset dir="${eclipse-home}/plugins">
+				<include name="org.eclipse.swtbot.eclipse.ui_${all.buildId}.jar" />
+			</fileset>
+		</cobertura-instrument>
+	</target>
+
+	<target name="suite">
+
+		<condition property="jvmOption" value="-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts -Dnet.sourceforge.cobertura.datafile=${cobertura.data.file} -Xbootclasspath/p:${build.base}/../externals/libs/cobertura-1.9/cobertura.jar">
+			<os family="mac" />
 		</condition>
-		
-		<property name="jvmOption" value=""></property>
-		
-    	<property name="temp-workspace" value="workspace" />
-        <delete dir="${temp-workspace}" quiet="true" />
-    	
-    	<!-- remove junit3 fragment -->
-    	<delete dir="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit3.headless_${all.buildId}" />
-    	<delete dir="${eclipse-home}/plugins" includes="org.eclipse.swtbot.ant.optional.junit3_${all.buildId}.jar"/>
 
-    	<ant target="swtbot-test" antfile="${library-file}" dir="${eclipse-home}">
-            <property name="data-dir" value="${temp-workspace}" />
-            <property name="plugin-name" value="${plugin-name}" />
-            <property name="classname" value="org.eclipse.swtbot.eclipse.ui.test.AllTests" />
-            <property name="vmargs" value=" -Xms128M -Xmx368M -XX:MaxPermSize=256M ${jvmOption}" />
-        </ant>
-    </target>
+		<property name="jvmOption" value="-Dnet.sourceforge.cobertura.datafile=${cobertura.data.file} -Xbootclasspath/p:${build.base}/../externals/libs/cobertura-1.9/cobertura.jar" />
 
-    <target name="cleanup" />
+		<property name="temp-workspace" value="workspace" />
+		<delete dir="${temp-workspace}" quiet="true" />
 
-    <target name="run" depends="init,suite,cleanup">
-        <ant target="collect" antfile="${library-file}" dir="${eclipse-home}">
-            <property name="includes" value="*.xml" />
-            <property name="output-file" value="${plugin-name}.xml" />
-        </ant>
-    </target>
+		<!-- remove junit3 fragment -->
+		<delete dir="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit3.headless_${all.buildId}" />
+		<delete dir="${eclipse-home}/plugins" includes="org.eclipse.swtbot.ant.optional.junit3_${all.buildId}.jar" />
+
+		<ant target="swtbot-test" antfile="${library-file}" dir="${eclipse-home}">
+			<property name="data-dir" value="${temp-workspace}" />
+			<property name="plugin-name" value="${plugin-name}" />
+			<property name="classname" value="org.eclipse.swtbot.eclipse.ui.test.AllTests" />
+			<property name="vmargs" value=" -Xms128M -Xmx368M -XX:MaxPermSize=256M ${jvmOption}" />
+		</ant>
+	</target>
+
+	<target name="test-coverage">
+		<cobertura-report format="html" destdir="${build.instrumentation.reports.dir}" srcdir="${build.base}/plugins/org.eclipse.swtbot.eclipse.ui/src" datafile="${cobertura.data.file}" />
+		<cobertura-report format="xml" destdir="${build.instrumentation.reports.xml.dir}" srcdir="${build.base}/plugins/org.eclipse.swtbot.eclipse.ui/src" datafile="${cobertura.data.file}" />
+	</target>
+
+	<target name="run" depends="init, instrument, suite, test-coverage">
+		<ant target="collect" antfile="${library-file}" dir="${eclipse-home}">
+			<property name="includes" value="*.xml" />
+			<property name="output-file" value="${plugin-name}.xml" />
+		</ant>
+	</target>
 
 </project>
