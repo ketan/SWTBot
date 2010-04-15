@@ -1,23 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="testsuite" default="run" basedir=".">
     <property name="eclipse-home" value="${basedir}\..\.." />
+    <property name="plugin-under-test" value="org.eclipse.swtbot.eclipse.finder" />
     <property name="plugin-name" value="org.eclipse.swtbot.eclipse.finder.test" />
     <property name="library-file" value="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit4.headless_${all.buildId}/library.xml"/>
 
-    <target name="init">
-        <tstamp />
-        <delete>
-            <fileset dir="${eclipse-home}" includes="org*.xml" />
-        </delete>
-    </target>
+	<property name="build.instrumentation.reports.dir" value="${results.dir}/${plugin-name}/coverage/html" />
+	<property name="build.instrumentation.reports.xml.dir" value="${results.dir}/${plugin-name}/coverage/xml" />
+
+	<property name="cobertura.data.file" value="${basedir}/${plugin-name}.ser" />
+	
+	<target name="init">
+		<tstamp />
+		<delete>
+			<fileset dir="${eclipse-home}" includes="org*.xml" />
+		</delete>
+	</target>
+
+	<path id="cobertura.classpath">
+		<fileset dir="${build.base}/../externals/libs/cobertura-1.9">
+			<include name="cobertura.jar" />
+			<include name="lib/**/*.jar" />
+		</fileset>
+	</path>
+
+	<taskdef classpathref="cobertura.classpath" resource="tasks.properties" />
+
+	<target name="instrument">
+		<delete file="${cobertura.data.file}" />
+
+		<cobertura-instrument datafile="${cobertura.data.file}">
+			<fileset dir="${eclipse-home}/plugins">
+				<include name="${plugin-under-test}_${all.buildId}.jar" />
+			</fileset>
+		</cobertura-instrument>
+	</target>
 
     <target name="suite">
 
-		<condition property="jvmOption" value="-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts">
-			<os family="mac"/>
+    	<condition property="jvmOption" value="-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts -Dnet.sourceforge.cobertura.datafile=${cobertura.data.file} -Xbootclasspath/p:${build.base}/../externals/libs/cobertura-1.9/cobertura.jar">
+			<os family="mac" />
 		</condition>
 
-		<property name="jvmOption" value=""></property>
+		<property name="jvmOption" value="-Dnet.sourceforge.cobertura.datafile=${cobertura.data.file} -Xbootclasspath/p:${build.base}/../externals/libs/cobertura-1.9/cobertura.jar" />
+
 
     	<property name="temp-workspace" value="workspace" />
         <delete dir="${temp-workspace}" quiet="true" />
@@ -35,9 +61,12 @@
         </ant>
     </target>
 
-    <target name="cleanup" />
+	<target name="test-coverage">
+		<cobertura-report format="html" destdir="${build.instrumentation.reports.dir}" srcdir="${build.base}/plugins/${plugin-under-test}/src" datafile="${cobertura.data.file}" />
+		<cobertura-report format="xml" destdir="${build.instrumentation.reports.xml.dir}" srcdir="${build.base}/plugins/${plugin-under-test}/src" datafile="${cobertura.data.file}" />
+	</target>
 
-    <target name="run" depends="init,suite,cleanup">
+	<target name="run" depends="init, instrument, suite, test-coverage">
         <ant target="collect" antfile="${library-file}" dir="${eclipse-home}">
             <property name="includes" value="*.xml" />
             <property name="output-file" value="${plugin-name}.xml" />

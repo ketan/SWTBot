@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="testsuite" default="run" basedir=".">
 	<property name="eclipse-home" value="${basedir}\..\.." />
+    <property name="plugin-under-test" value="org.eclipse.swtbot.eclipse.ui" />
 	<property name="plugin-name" value="org.eclipse.swtbot.eclipse.ui.test" />
 	<!--property name="library-file" value="../../library.xml" /-->
 	<property name="library-file" value="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit4.headless_${all.buildId}/library.xml" />
@@ -8,7 +9,7 @@
 	<property name="build.instrumentation.reports.dir" value="${results.dir}/${plugin-name}/coverage/html" />
 	<property name="build.instrumentation.reports.xml.dir" value="${results.dir}/${plugin-name}/coverage/xml" />
 
-	<property name="cobertura.data.file" value="${basedir}/cobertura.eclipse.ui.ser" />
+	<property name="cobertura.data.file" value="${basedir}/${plugin-name}.ser" />
 	<target name="init">
 		<tstamp />
 		<delete>
@@ -30,7 +31,7 @@
 
 		<cobertura-instrument datafile="${cobertura.data.file}">
 			<fileset dir="${eclipse-home}/plugins">
-				<include name="org.eclipse.swtbot.eclipse.ui_${all.buildId}.jar" />
+				<include name="${plugin-under-test}_${all.buildId}.jar" />
 			</fileset>
 		</cobertura-instrument>
 	</target>
@@ -59,8 +60,8 @@
 	</target>
 
 	<target name="test-coverage">
-		<cobertura-report format="html" destdir="${build.instrumentation.reports.dir}" srcdir="${build.base}/plugins/org.eclipse.swtbot.eclipse.ui/src" datafile="${cobertura.data.file}" />
-		<cobertura-report format="xml" destdir="${build.instrumentation.reports.xml.dir}" srcdir="${build.base}/plugins/org.eclipse.swtbot.eclipse.ui/src" datafile="${cobertura.data.file}" />
+		<cobertura-report format="html" destdir="${build.instrumentation.reports.dir}" srcdir="${build.base}/plugins/${plugin-under-test}/src" datafile="${cobertura.data.file}" />
+		<cobertura-report format="xml" destdir="${build.instrumentation.reports.xml.dir}" srcdir="${build.base}/plugins/${plugin-under-test}/src" datafile="${cobertura.data.file}" />
 	</target>
 
 	<target name="run" depends="init, instrument, suite, test-coverage">
