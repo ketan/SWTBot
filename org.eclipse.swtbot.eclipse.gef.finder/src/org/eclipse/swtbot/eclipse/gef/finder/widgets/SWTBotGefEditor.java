@@ -242,10 +242,16 @@ public class SWTBotGefEditor extends SWTBotEditor {
 	 * @throws WidgetNotFoundException
 	 */
 	public void directEditType(String text) throws WidgetNotFoundException {
+		
+		/*
+		 * we use 'bot()' and not 'bot' to scope the widget search to the editor. Otherwise if another widget of the
+		 * same type is present in the workspace and is found first, the code after will fail.
+		 */
+		
 		/* wait until text widget appears */
-		bot.text();
+		bot().text();
 		/* find it now */
-		List<Text> controls = bot.getFinder().findControls(getWidget(), new IsInstanceOf<Text>(Text.class), true);
+		List<Text> controls = bot().getFinder().findControls(getWidget(), new IsInstanceOf<Text>(Text.class), true);
 		if (controls.size() == 1) {
 			final Text textControl = controls.get(0);
 			canvas.typeText(textControl, text);
