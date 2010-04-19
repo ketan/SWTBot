@@ -372,7 +372,9 @@ public class SWTBotGefEditor extends SWTBotEditor {
 	}
 
 	/**
-	 *  Double click on the edit part which owns the specified label at the top left hand corner (with an offset) of its bounds.
+	 * Double click on the edit part which owns the specified label at the top left hand corner (with an offset) of its
+	 * bounds.
+	 * 
 	 * @param editPart the edit part to double click on
 	 */
 	public void doubleClick(final SWTBotGefEditPart editPart) {
@@ -386,7 +388,8 @@ public class SWTBotGefEditor extends SWTBotEditor {
 	}
 
 	/**
-	 * Double click on the edit part which owns the specified label at the top left hand corner (with an offset) of its bounds.
+	 * Double click on the edit part which owns the specified label at the top left hand corner (with an offset) of its
+	 * bounds.
 	 * 
 	 * @param label the label to retrieve edit part to double click on
 	 */
@@ -399,28 +402,35 @@ public class SWTBotGefEditor extends SWTBotEditor {
 	}
 
 	/**
-	 * Drag and drop from the specified to the specified location. 
-	 *  
+	 * Drag and drop from the specified to the specified location.
+	 * 
 	 * @param toXPosition the x relative location
 	 * @param toYPosition the y relative location
 	 */
 	public void drag(final int fromXPosition, final int fromYPosition, final int toXPosition, final int toYPosition) {
 		canvas.mouseDrag(fromXPosition, fromYPosition, toXPosition, toYPosition);
 	}
-	
+
 	/**
-	 * Drag and drop the specified edit part to the specified location. 
-	 * @param editPart the edit part to drag and drop 
+	 * Drag and drop the specified edit part to the specified location.
+	 * 
+	 * @param editPart the edit part to drag and drop
 	 * @param toXPosition the x relative location
 	 * @param toYPosition the y relative location
 	 */
 	public void drag(final SWTBotGefEditPart editPart, final int toXPosition, final int toYPosition) {
 		Rectangle bounds = ((GraphicalEditPart) editPart.part()).getFigure().getBounds();
-		drag(bounds.x, bounds.y, toXPosition, toYPosition);
+		/*
+		 * We should increment drag location to avoid a resize. 7 comes from SquareHandle#DEFAULT_HANDLE_SIZE and we
+		 * divided by 2 as AbstractHandle#getAccessibleLocation do that by default
+		 */
+		int offset = 7 / 2 + 1;
+		drag(bounds.x + offset, bounds.y + offset, toXPosition + offset, toYPosition + offset);
 	}
 
 	/**
 	 * Drag and drop the edit part which owns the specified label to the specified location
+	 * 
 	 * @param label the label to retrieve the edit part to drag and drop
 	 * @param toXPosition the x relative position
 	 * @param toYPosition the y relative position
