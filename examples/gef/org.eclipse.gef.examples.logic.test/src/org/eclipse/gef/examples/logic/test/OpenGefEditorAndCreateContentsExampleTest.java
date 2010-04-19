@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 Obeo
+ * Copyright (c) 2009, 2010 Obeo
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -61,33 +61,33 @@ public class OpenGefEditorAndCreateContentsExampleTest extends SWTBotGefTestCase
 	private void createContents(final SWTBotGefEditor editor) {
 
 		editor.activateTool("Circuit");
-		editor.mouseDrag(55, 55, 150, 100);
+		editor.drag(55, 55, 150, 100);
 
 		editor.activateTool("Circuit");
-		editor.mouseMoveLeftClick(150, 150);
+		editor.click(150, 150);
 
 		editor.activateTool("Connection");
-		editor.mouseMoveLeftClick(150, 150);
-		editor.mouseMoveLeftClick(55, 55);
+		editor.click(150, 150);
+		editor.click(55, 55);
 
 
 		editor.activateTool("Or Gate");
-		editor.mouseMoveLeftClick(200, 200);
+		editor.click(200, 200);
 
 		editor.activateTool("Connection");
-		editor.mouseMoveLeftClick(150, 150);
-		editor.mouseMoveLeftClick(200, 200);
+		editor.click(150, 150);
+		editor.click(200, 200);
 
 
-		editor.mouseMoveLeftClick(200, 150);
-		editor.mouseMoveLeftClick(210, 200);
+		editor.click(200, 150);
+		editor.click(210, 200);
 
 
-		editor.mouseMoveLeftClick(200, 200);
-		editor.mouseMoveLeftClick(230, 230);
+		editor.click(200, 200);
+		editor.click(230, 230);
 		
 		editor.activateTool("Label");
-		editor.mouseMoveLeftClick(300, 300);
+		editor.click(300, 300);
 		List<SWTBotGefEditPart> editParts = editor.editParts(new AbstractMatcher<LogicLabelEditPart>() {
 			@Override
 			protected boolean doMatch(Object item) {
