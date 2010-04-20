@@ -118,11 +118,8 @@ public class NewPluginProjectWizardPage extends WizardPage implements WizardPage
 
 		ModifyListener listener = new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
-				
-				ProjectSettingValidator validator = new ProjectSettingValidator(pluginId.getText(), pluginVersion.getText(), pluginName.getText(), getProjects(), NewPluginProjectWizardPage.this);
+				ProjectSettingValidator validator = new ProjectSettingValidator(pluginId.getText(), pluginName.getText(), pluginVersion.getText(), getProjects(), NewPluginProjectWizardPage.this);
 				validator.validate();
-				
-				
 			}
 		};
 
