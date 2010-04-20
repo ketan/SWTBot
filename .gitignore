@@ -51,3 +51,4 @@ org.eclipse.swtbot.eclipse.ui/build.properties
 /eclipse/
 
 *recorder*
+External Plug-in Libraries
