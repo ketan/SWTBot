@@ -86,7 +86,7 @@ class KeyboardLayout {
 		if (configURL == null)
 			configURL = classLoader.getResource(toFolder(layoutName) + ".keyboard");
 		if (configURL == null)
-			throw new IllegalArgumentException("keyboard layout " + layoutName + " not available.");
+			throw new IllegalArgumentException(layoutName + ".keyboard not found, see http://wiki.eclipse.org/SWTBot/Keyboard_Layouts for more information.");
 
 		try {
 			return new KeyboardLayout(layoutName, configURL);
