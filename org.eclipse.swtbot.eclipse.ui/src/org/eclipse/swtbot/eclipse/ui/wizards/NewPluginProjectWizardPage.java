@@ -45,6 +45,7 @@ public class NewPluginProjectWizardPage extends WizardPage implements WizardPage
 
 	protected NewPluginProjectWizardPage() {
 		super("New SWTBot Test Plugin");
+		setTitle("SWTBot plugin project");
 	}
 
 	public void createControl(Composite parent) {
@@ -147,7 +148,7 @@ public class NewPluginProjectWizardPage extends WizardPage implements WizardPage
 		layoutData.horizontalSpan = 2;
 		group.setLayoutData(layoutData);
 		group.setLayout(new GridLayout(2, false));
-		group.setText("Program to run");
+		group.setText("Program to test");
 
 		productIdButton = new Button(group, SWT.RADIO);
 		productIdButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
