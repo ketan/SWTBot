@@ -69,9 +69,6 @@
 
 			<!-- spy -->
 			<fileset dir="${target}/plugins">
-				<include name="org.eclipse.swtbot.swt.spy_*.jar" />
-			</fileset>
-			<fileset dir="${target}/plugins">
 				<include name="org.eclipse.swtbot.eclipse.spy_*.jar" />
 			</fileset>
 
