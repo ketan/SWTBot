@@ -21,23 +21,26 @@ import org.eclipse.ui.IWorkbench;
 
 public class NewSWTBotTestPluginWizard extends Wizard implements INewWizard {
 
-	private NewPluginProjectWizardPage	wizardPage;
+	private final NewPluginProjectWizardPage			projectWizardPage;
+//	private final LaunchConfigPropertiesWizardPage	launchConfigWizardPage;
 
 	public NewSWTBotTestPluginWizard() {
 		setWindowTitle("New SWTBot Test Plugin");
-		wizardPage = new NewPluginProjectWizardPage();
+		projectWizardPage = new NewPluginProjectWizardPage();
+//		launchConfigWizardPage = new LaunchConfigPropertiesWizardPage();
 	}
 
 	public void addPages() {
-		addPage(wizardPage);
+		addPage(projectWizardPage);
+//		addPage(launchConfigWizardPage);
 	}
 
 	@Override
 	public boolean performFinish() {
-		String pluginName = wizardPage.pluginName();
-		String pluginId = wizardPage.pluginId();
-		String pluginVersion = wizardPage.pluginVersion();
-		String pluginProvider = wizardPage.pluginProvider();
+		String pluginName = projectWizardPage.pluginName();
+		String pluginId = projectWizardPage.pluginId();
+		String pluginVersion = projectWizardPage.pluginVersion();
+		String pluginProvider = projectWizardPage.pluginProvider();
 
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		ProjectCreator projectCreator = new ProjectCreator(pluginId, pluginName, pluginVersion, pluginProvider, root);
