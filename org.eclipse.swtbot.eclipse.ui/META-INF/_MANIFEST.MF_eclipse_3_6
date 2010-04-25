@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.eclipse.swtbot.eclipse.ui;singleton:=true
 Bundle-Version: 2.0.0.qualifier
 Bundle-Activator: org.eclipse.swtbot.eclipse.ui.Activator
 Bundle-ActivationPolicy: lazy
-Bundle-Vendor: Eclipse.org
+Bundle-Vendor: Eclipse.org - SWTBot
 Export-Package: org.eclipse.swtbot.eclipse.ui,
  org.eclipse.swtbot.eclipse.ui.preferences,
  org.eclipse.swtbot.eclipse.ui.project,

@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName
+Bundle-Name: Headless Ant support for JUnit4
 Bundle-SymbolicName: org.eclipse.swtbot.ant.optional.junit4
 Bundle-Version: 2.0.0.qualifier
 Fragment-Host: org.apache.ant
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime.compatibility,
  org.junit4
-Bundle-Vendor: %providerName
+Bundle-Vendor: Eclipse.org - SWTBot

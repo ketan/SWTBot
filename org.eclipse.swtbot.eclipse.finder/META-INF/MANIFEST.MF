@@ -4,7 +4,7 @@ Bundle-Name: SWTBot Eclipse Control Finder Plug-in (incubation)
 Bundle-SymbolicName: org.eclipse.swtbot.eclipse.finder;singleton:=true
 Bundle-Version: 2.0.0.qualifier
 Bundle-ActivationPolicy: lazy
-Bundle-Vendor: Eclipse.org
+Bundle-Vendor: Eclipse.org - SWTBot
 Export-Package: org.eclipse.swtbot.eclipse.finder,
  org.eclipse.swtbot.eclipse.finder.exceptions,
  org.eclipse.swtbot.eclipse.finder.finders,

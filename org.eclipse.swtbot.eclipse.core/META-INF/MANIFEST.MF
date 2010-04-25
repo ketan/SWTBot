@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: SWTBot Test Launcher Application Plug-in
 Bundle-SymbolicName: org.eclipse.swtbot.eclipse.core;singleton:=true
 Bundle-Version: 2.0.0.qualifier
-Bundle-Vendor: Eclipse.org
+Bundle-Vendor: Eclipse.org - SWTBot
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Import-Package: org.eclipse.core.runtime;version="3.4.0",
  org.eclipse.equinox.app;version="1.0.0",

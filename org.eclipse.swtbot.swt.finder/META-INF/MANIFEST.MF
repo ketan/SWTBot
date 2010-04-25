@@ -16,7 +16,7 @@ Export-Package: org.eclipse.swtbot.swt.finder,
  org.eclipse.swtbot.swt.finder.utils.internal,
  org.eclipse.swtbot.swt.finder.waits,
  org.eclipse.swtbot.swt.finder.widgets
-Bundle-Vendor: Eclipse.org
+Bundle-Vendor: Eclipse.org - SWTBot
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Eclipse-BuddyPolicy: registered
 Import-Package: junit.framework;version="4.3.0",

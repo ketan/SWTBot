@@ -19,7 +19,7 @@ Export-Package: org.eclipse.swt.examples.addressbook,
  org.eclipse.swt.examples.layoutexample,
  org.eclipse.swt.examples.paint,
  org.eclipse.swt.examples.texteditor
-Bundle-Vendor: Eclipse.org
+Bundle-Vendor: Eclipse.org - SWTBot
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Import-Package: org.eclipse.core.commands.common,
  org.eclipse.core.runtime,

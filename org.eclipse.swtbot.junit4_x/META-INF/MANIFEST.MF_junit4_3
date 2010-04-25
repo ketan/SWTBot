@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: SWTBot JUnit 4.x Runners (incubation)
 Bundle-SymbolicName: org.eclipse.swtbot.junit4_x
 Bundle-Version: 2.0.0.qualifier
-Bundle-Vendor: Eclipse.org
+Bundle-Vendor: Eclipse.org - SWTBot
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.swtbot.swt.finder.junit
 Import-Package: org.apache.log4j;version="1.2.12",

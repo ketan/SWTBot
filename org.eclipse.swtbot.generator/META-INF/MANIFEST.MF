@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: SWTBot Code Generator Plug-in (incubation)
 Bundle-SymbolicName: org.eclipse.swtbot.generator
 Bundle-Version: 2.0.0.qualifier
-Bundle-Vendor: Eclipse.org
+Bundle-Vendor: Eclipse.org - SWTBot
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: .
 Export-Package: org.eclipse.swtbot.generator

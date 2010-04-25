@@ -4,7 +4,7 @@ Bundle-Name: SWTBot Dsl for Eclipse IDE (incubation)
 Bundle-SymbolicName: org.eclipse.swtbot.eclipse.dsl
 Bundle-Version: 2.0.0.qualifier
 Bundle-Activator: org.eclipse.swtbot.eclipse.dsl.Activator
-Bundle-Vendor: Eclipse.org
+Bundle-Vendor: Eclipse.org - SWTBot
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j;version="1.2.12",
