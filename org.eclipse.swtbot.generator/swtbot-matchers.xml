@@ -14,4 +14,5 @@
 	<factory class="org.eclipse.swtbot.swt.finder.matchers.WidgetOfType" />
 	<factory class="org.eclipse.swtbot.swt.finder.matchers.InUIThread" />
 	<factory class="org.eclipse.swtbot.swt.finder.matchers.AllOf" />
+	<factory class="org.eclipse.swtbot.swt.finder.matchers.AnyOf" />
 </matchers>
