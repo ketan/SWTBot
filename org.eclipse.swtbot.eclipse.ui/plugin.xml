@@ -46,7 +46,7 @@
             configTypeID="org.eclipse.swtbot.eclipse.ui.launcher.JunitLaunchConfig">
       </launchConfigType>
    </extension>
- 
+
    <extension
          point="org.eclipse.ui.commands">
       <command
@@ -61,7 +61,7 @@
             categoryId="org.eclipse.debug.ui.category.run"
             id="org.eclipse.swtbot.eclipse.ui.junitShortcut.debug">
       </command>
-   </extension>   
+   </extension>
    <extension
          point="org.eclipse.ui.bindings">
       <key
@@ -133,7 +133,7 @@
             finalPerspective="org.eclipse.jdt.ui.JavaPerspective"
             icon="icons/swtbot_runner.png"
             id="org.eclipse.swtbot.eclipse.ui.wizards.NewSWTBotTestPluginWizard"
-            name="New SWTBot Test Plugin"
+            name="New SWTBot Test Plug-in"
             project="true">
       </wizard>
    </extension>

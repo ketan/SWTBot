@@ -56,7 +56,7 @@ public class NewPluginProjectWizardPage extends WizardPage implements WizardPage
 		Label label;
 		label = new Label(composite, SWT.NONE);
 		label.setLayoutData(new GridData(SWT.END, SWT.CENTER, false, false));
-		label.setText("Plugin &Name:");
+		label.setText("Plug-in &Name:");
 
 		// name, id, version, providers
 
@@ -66,7 +66,7 @@ public class NewPluginProjectWizardPage extends WizardPage implements WizardPage
 
 		label = new Label(composite, SWT.NONE);
 		label.setLayoutData(new GridData(SWT.END, SWT.CENTER, false, false));
-		label.setText("&Plugin id:");
+		label.setText("&Plug-in id:");
 
 		pluginId = new Text(composite, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
 		pluginId.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
