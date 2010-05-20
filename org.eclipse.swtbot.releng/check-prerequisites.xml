@@ -86,7 +86,9 @@
 		</condition>
 		<fail unless="junit4-build-version" message="Could not find org.junit4 in target eclipse" />
 		<echo>Plugin version of org.junit is "${junit4-build-version}"</echo>
-		<echo>isJunit4.5: ${isJunit4.5}</echo>
+		<echo>isJunit4.3: ${isJunit4.5}</echo>
+		<echo>isJunit4.5: ${isJunit4.3}</echo>
+		<echo>isJunit4.8: ${isJunit4.8}</echo>
 	</target>
 
 	<target name="initialize-environment" depends="guess-junit-version, guess-pde-build-version, create-build-properties-from-template" />
