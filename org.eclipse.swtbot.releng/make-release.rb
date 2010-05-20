@@ -12,13 +12,7 @@ class Release
     uri = URI.parse("http://download.eclipse.org/technology/swtbot/ganymede/dev-build/RELEASE_NOTES.txt")
     puts "Reading #{uri}"
 
-    open(uri) do |f|
-      f.each_line do |line|
-        if line =~ /Revision:/
-          @available_revision = line.gsub(/Revision:\s*/, '').strip
-        end
-      end
-    end
+    @available_revision = open(uri).readlines.grep(/Revision: (.){40}/).first.gsub(/Revision: /, '').strip
 
     @current_head = `git log --pretty='%H' -1`.strip
 
@@ -29,13 +23,16 @@ class Release
     
     @revision_log.gsub!(/.*git-svn-id:.*@(\d+).*/, '  svn-revision: \1')
     @revision_log = @revision_log.gsub(/\t/,"     ").gsub(/.{1,72}(?:\s|\Z)/){($& + 5.chr).gsub(/\n\005/,"\n  ").gsub(/\005/,"\n  ")}
+    
+    @revision_log += "\n\n"
+    @revision_log += open(uri).read
 
     FileUtils.rm_rf('to-upload')
     FileUtils.rm_rf('target')
 
     build_swtbot(34, 'ganymede')
-    build_swtbot(35, 'ganymede')
-    build_swtbot(36, 'ganymede')
+    build_swtbot(36, 'helios')
+    build_swtbot(35, 'galileo')
   end
 
   def self.release_notes(dir)
