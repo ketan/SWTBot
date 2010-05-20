@@ -10,7 +10,7 @@
 	<property name="build.instrumentation.reports.xml.dir" value="${results.dir}/${plugin-name}/coverage/xml" />
 
 	<path id="cobertura.classpath">
-		<fileset dir="${build.base}/../externals/libs/cobertura-1.9">
+		<fileset dir="${build.base}/../externals/libs/cobertura-1.9.4.1">
 			<include name="cobertura.jar" />
 			<include name="lib/**/*.jar" />
 		</fileset>

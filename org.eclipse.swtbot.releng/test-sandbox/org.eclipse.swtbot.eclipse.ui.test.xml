@@ -18,7 +18,7 @@
 	</target>
 
 	<path id="cobertura.classpath">
-		<fileset dir="${build.base}/../externals/libs/cobertura-1.9">
+		<fileset dir="${build.base}/../externals/libs/cobertura-1.9.4.1">
 			<include name="cobertura.jar" />
 			<include name="lib/**/*.jar" />
 		</fileset>
@@ -38,11 +38,11 @@
 
 	<target name="suite">
 
-		<condition property="jvmOption" value="-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts -Dnet.sourceforge.cobertura.datafile=${cobertura.data.file} -Xbootclasspath/p:${build.base}/../externals/libs/cobertura-1.9/cobertura.jar">
+		<condition property="jvmOption" value="-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts -Dnet.sourceforge.cobertura.datafile=${cobertura.data.file} -Xbootclasspath/p:${build.base}/../externals/libs/cobertura-1.9.4.1/cobertura.jar">
 			<os family="mac" />
 		</condition>
 
-		<property name="jvmOption" value="-Dnet.sourceforge.cobertura.datafile=${cobertura.data.file} -Xbootclasspath/p:${build.base}/../externals/libs/cobertura-1.9/cobertura.jar" />
+		<property name="jvmOption" value="-Dnet.sourceforge.cobertura.datafile=${cobertura.data.file} -Xbootclasspath/p:${build.base}/../externals/libs/cobertura-1.9.4.1/cobertura.jar" />
 
 		<property name="temp-workspace" value="workspace" />
 		<delete dir="${temp-workspace}" quiet="true" />
