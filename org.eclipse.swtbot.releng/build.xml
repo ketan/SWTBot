@@ -142,7 +142,7 @@
 		<copy file="../org.eclipse.swtbot.junit4_x/_classpath.junit4_5" tofile="../org.eclipse.swtbot.junit4_x/.classpath" overwrite="true" />
 	</target>
 	
-	<target name="make-substitutions-4.7" if="isJunit4.7">
+	<target name="make-substitutions-4.8" if="isJunit4.8">
 		<!-- make substitutions in the eclipse-ui plugin. See https://bugs.eclipse.org/bugs/show_bug.cgi?id=274083#c5 -->
 		<copy file="../org.eclipse.swtbot.eclipse.ui/META-INF/_MANIFEST.MF_eclipse_3_6" tofile="../org.eclipse.swtbot.eclipse.ui/META-INF/MANIFEST.MF" overwrite="true" />
 		
@@ -170,7 +170,7 @@
 	
 	
 
-	<target name="make-substitutions" depends="guess-junit-version, make-substitutions-4.5, make-substitutions-4.7, make-substitutions-4.3" />
+	<target name="make-substitutions" depends="guess-junit-version, make-substitutions-4.5, make-substitutions-4.8, make-substitutions-4.3" />
 
 	<target name="extract-eclipse">
 		<condition property="setupTarget" value="setup-zip">

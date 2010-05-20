@@ -75,8 +75,8 @@
 				<propertyregex property="junit4-build-version" input="@{junit-version-file}" regexp="org.junit4_(.*)" select="\1" />
 			</sequential>
 		</for>
-		<condition property="isJunit4.7">
-			<contains string="${junit4-build-version}" substring="4.7" />
+		<condition property="isJunit4.8">
+			<contains string="${junit4-build-version}" substring="4.8" />
 		</condition>
 		<condition property="isJunit4.5">
 			<contains string="${junit4-build-version}" substring="4.5" />
