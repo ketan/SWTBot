@@ -31,8 +31,8 @@ class Release
     FileUtils.rm_rf('target')
 
     build_swtbot(34, 'ganymede')
-    build_swtbot(36, 'helios')
     build_swtbot(35, 'galileo')
+    build_swtbot(36, 'helios')
   end
 
   def self.release_notes(dir)
