@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2009 MAKE Technologies Inc and others.
+ * Copyright (c) 2004, 2010 MAKE Technologies Inc and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,10 @@
 package org.eclipse.swtbot.eclipse.gef.finder.widgets;
 
 
+import org.eclipse.draw2d.Connection;
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.ConnectionEditPart;
+import org.eclipse.swtbot.eclipse.gef.finder.waits.WaitForEditPartSelection;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.Result;
 
@@ -35,6 +38,20 @@ public class SWTBotGefConnectionEditPart extends SWTBotGefEditPart {
 		super(graphicalEditor, part);
 	}
 
+	/**
+	 * Create a new bendpoint for this connection to the given location,
+	 * @param toXPosition x position of the bendpoint location
+	 * @param toYPosition y position for the bendpoint location
+	 */
+	public void createBenpoint(final int toXPosition, final int toYPosition) {
+		Point startMove = ((Connection) part().getFigure()).getPoints().getMidpoint().getCopy();
+		graphicalEditor.click(startMove.x, startMove.y);		
+		/* we need to wait element selection before proceed or drag will fail */
+		graphicalEditor.bot().waitUntil(new WaitForEditPartSelection(this, graphicalEditor.graphicalViewer));
+		
+		graphicalEditor.drag(startMove.x, startMove.y, toXPosition, 250);
+	}
+	
 	/*
 	 * {@inheritDoc}
 	 * @see SWTBotGefEditPart#part()

@@ -15,13 +15,18 @@ import static org.eclipse.swtbot.eclipse.gef.finder.matchers.IsInstanceOf.instan
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.draw2d.Connection;
 import org.eclipse.draw2d.PositionConstants;
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.examples.logic.test.CreateLogicDiagram;
 import org.eclipse.gef.examples.logic.test.NewEmptyEmfProject;
 import org.eclipse.gef.examples.logicdesigner.edit.CircuitEditPart;
 import org.eclipse.gef.examples.logicdesigner.edit.LogicLabelEditPart;
+import org.eclipse.gef.examples.logicdesigner.model.Wire;
+import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefConnectionEditPart;
 import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefEditPart;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
@@ -69,7 +74,7 @@ public class AllTests extends SWTBotGefForUnitTestsTestCase implements LogicMode
 	public void saveCurrentEditor() throws Exception {
 		bot.menu("File").menu("Save").click();
 	}
-	
+		
 	public void testActivateTool() {	
 		editor.activateTool(TOOL_CIRCUIT);
 		assertEquals(TOOL_CIRCUIT, getActiveToolLabel());
@@ -164,6 +169,64 @@ public class AllTests extends SWTBotGefForUnitTestsTestCase implements LogicMode
 		
 	}
 	
+	public void testCreateBendpointFromEditor() throws Exception {
+		editor.activateTool(TOOL_CIRCUIT);
+		editor.click(10, 10);	
+		editor.activateTool(TOOL_CIRCUIT);
+		editor.click(120, 10);	
+		editor.activateTool(TOOL_CONNECTION);
+		editor.drag(100, 20, 130, 20);
+		editor.click(130, 20);
+		
+		final SWTBotGefEditPart circuitPart = editor.editParts(instanceOf(CircuitEditPart.class)).get(0);
+		final ConnectionEditPart wirePart = circuitPart.sourceConnections().get(0).part();
+		final Wire wire = (Wire) wirePart.getModel();
+		final Connection connection = (Connection) wirePart.getFigure();
+		
+		editor.activateTool("Select");
+		assertEquals("Select", getActiveToolLabel());
+	
+		Point startMove = connection.getPoints().getMidpoint().getCopy();
+		editor.click(startMove.x, startMove.y);
+		
+		/* we need to wait element selection before proceed or drag will fail */
+		syncWithUIThread();
+		assertTrue(editor.forTestGetViewer().getSelectedEditParts().contains(wirePart));
+		
+		assertEquals(0, wire.getBendpoints().size());
+		
+		editor.drag(startMove.x, startMove.y, 130, 250);
+		/* we need to wait the drag operates */
+		syncWithUIThread();
+		
+		assertEquals(1, wire.getBendpoints().size());
+		/* we do not check the location, as WireBendpoint overrides getLocation to return null */
+	}
+	
+	
+	public void testCreateBendpointFromEditPart() throws Exception {
+		editor.activateTool(TOOL_CIRCUIT);
+		editor.click(10, 10);	
+		editor.activateTool(TOOL_CIRCUIT);
+		editor.click(120, 10);	
+		editor.activateTool(TOOL_CONNECTION);
+		editor.drag(100, 20, 130, 20);
+		editor.click(130, 20);
+		
+		editor.activateTool("Select");
+		assertEquals("Select", getActiveToolLabel());
+		
+		final SWTBotGefEditPart circuitPart = editor.editParts(instanceOf(CircuitEditPart.class)).get(0);
+		final SWTBotGefConnectionEditPart wirePart =  circuitPart.sourceConnections().get(0);
+		final Wire wire = (Wire) wirePart.part().getModel();
+		
+		assertEquals(0, wire.getBendpoints().size());
+		wirePart.createBenpoint(130, 250);
+		/* we need to wait the drag operates */
+		syncWithUIThread();
+		assertEquals(1, wire.getBendpoints().size());
+	}
+	
 	public void testDirectEdit() throws Exception {
 		//TODO
 	}
@@ -213,7 +276,7 @@ public class AllTests extends SWTBotGefForUnitTestsTestCase implements LogicMode
 	private Rectangle getBounds (SWTBotGefEditPart editPart) throws Exception {
 		return ((GraphicalEditPart) editPart.part()).getFigure().getBounds().getCopy();
 	}
-
+	
 	private void checkLocation(final Rectangle bounds , int x, int y) throws Exception {
 		assertEquals(x, bounds.x);
 		assertEquals(y, bounds.y);
