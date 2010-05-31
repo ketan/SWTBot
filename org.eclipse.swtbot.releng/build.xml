@@ -4,6 +4,8 @@
 	<exec executable="hostname" outputproperty="hostname" />
 	<property file="host-conf/build.${hostname}.properties" />
 
+  <!-- in case users provide an eclipse.version, load it before anything else! -->
+	<property file="build-conf/e${eclipse.version}.properties" />
 	<!-- Load up the basic properties -->
 	<property file="build.developer.properties" />
 
