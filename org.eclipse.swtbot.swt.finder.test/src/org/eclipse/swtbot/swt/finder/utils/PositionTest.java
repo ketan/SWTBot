@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Ketan Padegaonkar and others.
+ * Copyright (c) 2008-2010 Ketan Padegaonkar and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -33,7 +33,17 @@ public class PositionTest {
 		assertFalse(position.equals(""));
 	}
 
+	@Test
+	public void equalsAndHashCodeNegative() throws Exception {
+		assertFalse(new Position(1, 10).equals(new Position(2, 10)));
+		assertFalse(new Position(1, 10).equals(new Position(1, 20)));
+
+		assertFalse(new Position(1, 10).hashCode() == new Position(2, 10).hashCode());
+		assertFalse(new Position(1, 10).hashCode() == new Position(1, 20).hashCode());
+	}
+
 	private Position position() {
 		return new Position(1, 10);
 	}
+
 }
