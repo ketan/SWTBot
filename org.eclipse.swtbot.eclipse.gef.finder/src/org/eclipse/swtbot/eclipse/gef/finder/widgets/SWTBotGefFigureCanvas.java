@@ -13,7 +13,9 @@ package org.eclipse.swtbot.eclipse.gef.finder.widgets;
 
 import org.eclipse.draw2d.EventDispatcher;
 import org.eclipse.draw2d.FigureCanvas;
+import org.eclipse.draw2d.LightweightSystem;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
@@ -22,19 +24,33 @@ import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBotControl;
 
 /**
- * TODO comment
+ * A bot  which wraps the swt canvas control.
  * @author mchauvin
  */
-public class SWTBotGefFigureCanvas extends AbstractSWTBotControl<FigureCanvas>{
+public class SWTBotGefFigureCanvas extends AbstractSWTBotControl<Canvas>{
 
     protected EventDispatcher eventDispatcher;
-
-    //TODO should be documented
-    public SWTBotGefFigureCanvas(FigureCanvas w) throws WidgetNotFoundException {
-        super(w);
-        eventDispatcher = w.getLightweightSystem().getRootFigure().internalGetEventDispatcher();
+    
+    /**
+     * Constructs a new instance from a {@link FigureCanvas}.
+     * @param canvas the canvas to wrap
+     * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
+     */
+    public SWTBotGefFigureCanvas(FigureCanvas canvas) throws WidgetNotFoundException {
+        this(canvas, canvas.getLightweightSystem());
     }
 
+    /**
+     * Constructs a new instance from a {@link Canvas} and a {@link LightweightSystem}. If the canvas is an instance of {@link FigureCanvas}, use {@link SWTBotGefFigureCanvas#SWTBotGefFigureCanvas(FigureCanvas)} instead.
+     * @param canvas the canvas to wrap
+     * @param lightweightSystem the lightweight system to use 
+     * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
+     */
+    public SWTBotGefFigureCanvas(Canvas canvas, LightweightSystem lightweightSystem) throws WidgetNotFoundException {
+        super(canvas);
+        eventDispatcher = lightweightSystem.getRootFigure().internalGetEventDispatcher();
+    }
+    
     /**
      * this method emits mouse events that handle a mouse move and double click to the specified position within the canvas.
      * @param xPosition the relative x position
