@@ -51,14 +51,14 @@ public class MethodGeneratorTest {
 
 	@Test
 	public void generatesMethodContentsWithIndexGivenASingleReference() throws Exception {
-		assertEquals("	@SuppressWarnings(\"unchecked\")\n" + "	public SWTBotButton buttonInGroup(String inGroup, int index) {\n"
+		assertEquals("	@SuppressWarnings({\"unchecked\", \"rawtypes\"})\n" + "	public SWTBotButton buttonInGroup(String inGroup, int index) {\n"
 				+ "		Matcher matcher = allOf(widgetOfType(Button.class), inGroup(inGroup));\n"
 				+ "		return new SWTBotButton((Button) widget(matcher, index), matcher);\n" + "	}\n", inGroup.methodContentsWithIndex());
 	}
 
 	@Test
 	public void generatesMethodContentsWithIndexGivenTwoReferences() throws Exception {
-		assertEquals("	@SuppressWarnings(\"unchecked\")\n"
+		assertEquals("	@SuppressWarnings({\"unchecked\", \"rawtypes\"})\n"
 				+ "	public SWTBotButton buttonInGroup(String text, String inGroup, int index) {\n"
 				+ "		Matcher matcher = allOf(widgetOfType(Button.class), withText(text), inGroup(inGroup));\n"
 				+ "		return new SWTBotButton((Button) widget(matcher, index), matcher);\n" + "	}\n", withTextInGroup
@@ -68,7 +68,7 @@ public class MethodGeneratorTest {
 	@Test
 	public void generatesMethodContentsWithIndexAndStyleGivenTwoReferences() throws Exception {
 		assertEquals(
-				"	@SuppressWarnings(\"unchecked\")\n"
+				"	@SuppressWarnings({\"unchecked\", \"rawtypes\"})\n"
 						+ "	public SWTBotTree treeInGroup(String text, String inGroup, int index) {\n"
 						+ "		Matcher matcher = allOf(widgetOfType(Tree.class), withText(text), inGroup(inGroup), withStyle(SWT.FOO_STYLE, \"SWT.FOO_STYLE\"));\n"
 						+ "		return new SWTBotTree((Tree) widget(matcher, index), matcher);\n" + "	}\n", withStyleWithTextInGroup
@@ -77,7 +77,7 @@ public class MethodGeneratorTest {
 
 	@Test
 	public void generatesMethodContentsWithStyleWithNoReferences() throws Exception {
-		assertEquals("	@SuppressWarnings(\"unchecked\")\n" + "	public SWTBotTree tree(int index) {\n"
+		assertEquals("	@SuppressWarnings({\"unchecked\", \"rawtypes\"})\n" + "	public SWTBotTree tree(int index) {\n"
 				+ "		Matcher matcher = allOf(widgetOfType(Tree.class), withStyle(SWT.FOO_STYLE, \"SWT.FOO_STYLE\"));\n"
 				+ "		return new SWTBotTree((Tree) widget(matcher, index), matcher);\n" + "	}\n", withStyle.methodContentsWithIndex());
 	}
@@ -96,7 +96,7 @@ public class MethodGeneratorTest {
 	
 	@Test
 	public void generatesMethodContentsWithSubclassedTypes() throws Exception {
-		assertEquals("	@SuppressWarnings(\"unchecked\")\n" + 
+		assertEquals("	@SuppressWarnings({\"unchecked\", \"rawtypes\"})\n" + 
 				"	public SWTBotToolbarButton toolbarToggleButtonInGroup(String text, String inGroup, int index) {\n" + 
 				"		Matcher matcher = allOf(widgetOfType(ToolItem.class), withText(text), inGroup(inGroup), withStyle(SWT.FOO_STYLE, \"SWT.FOO_STYLE\"));\n" + 
 				"		return new SWTBotToolbarPushButton((ToolItem) widget(matcher, index), matcher);\n" + 
