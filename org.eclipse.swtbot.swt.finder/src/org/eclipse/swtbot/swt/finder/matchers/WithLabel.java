@@ -11,8 +11,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.matchers;
 
-import static org.hamcrest.Matchers.anything;
-
 import java.util.List;
 import java.util.ListIterator;
 

@@ -26,7 +26,6 @@ import java.lang.annotation.Target;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Widget;
-import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBot;
 
 /**
  * Marks a SWTBot widget so tools recognise them. This anotation is primarily used to describe the convinience API that
