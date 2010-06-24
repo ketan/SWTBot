@@ -146,7 +146,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotButton} with the specified <code>label</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotButton buttonWithLabel(String label, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), withStyle(SWT.PUSH, "SWT.PUSH"));
 		return new SWTBotButton((Button) widget(matcher, index), matcher);
@@ -165,7 +165,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotButton} with the specified <code>mnemonicText</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotButton button(String mnemonicText, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withMnemonic(mnemonicText), withStyle(SWT.PUSH, "SWT.PUSH"));
 		return new SWTBotButton((Button) widget(matcher, index), matcher);
@@ -184,7 +184,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotButton} with the specified <code>tooltip</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotButton buttonWithTooltip(String tooltip, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), withStyle(SWT.PUSH, "SWT.PUSH"));
 		return new SWTBotButton((Button) widget(matcher, index), matcher);
@@ -205,7 +205,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotButton} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotButton buttonWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withId(key, value), withStyle(SWT.PUSH, "SWT.PUSH"));
 		return new SWTBotButton((Button) widget(matcher, index), matcher);
@@ -224,7 +224,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotButton} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotButton buttonWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withId(value), withStyle(SWT.PUSH, "SWT.PUSH"));
 		return new SWTBotButton((Button) widget(matcher, index), matcher);
@@ -243,7 +243,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotButton} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotButton buttonInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), inGroup(inGroup), withStyle(SWT.PUSH, "SWT.PUSH"));
 		return new SWTBotButton((Button) widget(matcher, index), matcher);
@@ -260,7 +260,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotButton} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotButton button(int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withStyle(SWT.PUSH, "SWT.PUSH"));
 		return new SWTBotButton((Button) widget(matcher, index), matcher);
@@ -281,7 +281,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotButton} with the specified <code>label</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotButton buttonWithLabelInGroup(String label, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), inGroup(inGroup), withStyle(SWT.PUSH, "SWT.PUSH"));
 		return new SWTBotButton((Button) widget(matcher, index), matcher);
@@ -302,7 +302,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotButton} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotButton buttonInGroup(String mnemonicText, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withMnemonic(mnemonicText), inGroup(inGroup), withStyle(SWT.PUSH, "SWT.PUSH"));
 		return new SWTBotButton((Button) widget(matcher, index), matcher);
@@ -323,7 +323,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotButton} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotButton buttonWithTooltipInGroup(String tooltip, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.PUSH, "SWT.PUSH"));
 		return new SWTBotButton((Button) widget(matcher, index), matcher);
@@ -342,7 +342,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCheckBox} with the specified <code>label</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCheckBox checkBoxWithLabel(String label, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), withStyle(SWT.CHECK, "SWT.CHECK"));
 		return new SWTBotCheckBox((Button) widget(matcher, index), matcher);
@@ -361,7 +361,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCheckBox} with the specified <code>mnemonicText</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCheckBox checkBox(String mnemonicText, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withMnemonic(mnemonicText), withStyle(SWT.CHECK, "SWT.CHECK"));
 		return new SWTBotCheckBox((Button) widget(matcher, index), matcher);
@@ -380,7 +380,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCheckBox} with the specified <code>tooltip</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCheckBox checkBoxWithTooltip(String tooltip, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), withStyle(SWT.CHECK, "SWT.CHECK"));
 		return new SWTBotCheckBox((Button) widget(matcher, index), matcher);
@@ -401,7 +401,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCheckBox} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCheckBox checkBoxWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withId(key, value), withStyle(SWT.CHECK, "SWT.CHECK"));
 		return new SWTBotCheckBox((Button) widget(matcher, index), matcher);
@@ -420,7 +420,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCheckBox} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCheckBox checkBoxWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withId(value), withStyle(SWT.CHECK, "SWT.CHECK"));
 		return new SWTBotCheckBox((Button) widget(matcher, index), matcher);
@@ -439,7 +439,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCheckBox} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCheckBox checkBoxInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), inGroup(inGroup), withStyle(SWT.CHECK, "SWT.CHECK"));
 		return new SWTBotCheckBox((Button) widget(matcher, index), matcher);
@@ -456,7 +456,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCheckBox} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCheckBox checkBox(int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withStyle(SWT.CHECK, "SWT.CHECK"));
 		return new SWTBotCheckBox((Button) widget(matcher, index), matcher);
@@ -477,7 +477,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCheckBox} with the specified <code>label</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCheckBox checkBoxWithLabelInGroup(String label, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), inGroup(inGroup), withStyle(SWT.CHECK, "SWT.CHECK"));
 		return new SWTBotCheckBox((Button) widget(matcher, index), matcher);
@@ -498,7 +498,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCheckBox} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCheckBox checkBoxInGroup(String mnemonicText, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withMnemonic(mnemonicText), inGroup(inGroup), withStyle(SWT.CHECK, "SWT.CHECK"));
 		return new SWTBotCheckBox((Button) widget(matcher, index), matcher);
@@ -519,7 +519,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCheckBox} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCheckBox checkBoxWithTooltipInGroup(String tooltip, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.CHECK, "SWT.CHECK"));
 		return new SWTBotCheckBox((Button) widget(matcher, index), matcher);
@@ -538,7 +538,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotRadio} with the specified <code>label</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotRadio radioWithLabel(String label, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), withStyle(SWT.RADIO, "SWT.RADIO"));
 		return new SWTBotRadio((Button) widget(matcher, index), matcher);
@@ -557,7 +557,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotRadio} with the specified <code>mnemonicText</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotRadio radio(String mnemonicText, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withMnemonic(mnemonicText), withStyle(SWT.RADIO, "SWT.RADIO"));
 		return new SWTBotRadio((Button) widget(matcher, index), matcher);
@@ -576,7 +576,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotRadio} with the specified <code>tooltip</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotRadio radioWithTooltip(String tooltip, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), withStyle(SWT.RADIO, "SWT.RADIO"));
 		return new SWTBotRadio((Button) widget(matcher, index), matcher);
@@ -597,7 +597,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotRadio} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotRadio radioWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withId(key, value), withStyle(SWT.RADIO, "SWT.RADIO"));
 		return new SWTBotRadio((Button) widget(matcher, index), matcher);
@@ -616,7 +616,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotRadio} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotRadio radioWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withId(value), withStyle(SWT.RADIO, "SWT.RADIO"));
 		return new SWTBotRadio((Button) widget(matcher, index), matcher);
@@ -635,7 +635,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotRadio} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotRadio radioInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), inGroup(inGroup), withStyle(SWT.RADIO, "SWT.RADIO"));
 		return new SWTBotRadio((Button) widget(matcher, index), matcher);
@@ -652,7 +652,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotRadio} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotRadio radio(int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withStyle(SWT.RADIO, "SWT.RADIO"));
 		return new SWTBotRadio((Button) widget(matcher, index), matcher);
@@ -673,7 +673,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotRadio} with the specified <code>label</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotRadio radioWithLabelInGroup(String label, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), inGroup(inGroup), withStyle(SWT.RADIO, "SWT.RADIO"));
 		return new SWTBotRadio((Button) widget(matcher, index), matcher);
@@ -694,7 +694,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotRadio} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotRadio radioInGroup(String mnemonicText, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withMnemonic(mnemonicText), inGroup(inGroup), withStyle(SWT.RADIO, "SWT.RADIO"));
 		return new SWTBotRadio((Button) widget(matcher, index), matcher);
@@ -715,7 +715,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotRadio} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotRadio radioWithTooltipInGroup(String tooltip, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.RADIO, "SWT.RADIO"));
 		return new SWTBotRadio((Button) widget(matcher, index), matcher);
@@ -734,7 +734,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToggleButton} with the specified <code>label</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToggleButton toggleButtonWithLabel(String label, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), withStyle(SWT.TOGGLE, "SWT.TOGGLE"));
 		return new SWTBotToggleButton((Button) widget(matcher, index), matcher);
@@ -753,7 +753,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToggleButton} with the specified <code>mnemonicText</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToggleButton toggleButton(String mnemonicText, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withMnemonic(mnemonicText), withStyle(SWT.TOGGLE, "SWT.TOGGLE"));
 		return new SWTBotToggleButton((Button) widget(matcher, index), matcher);
@@ -772,7 +772,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToggleButton} with the specified <code>tooltip</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToggleButton toggleButtonWithTooltip(String tooltip, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), withStyle(SWT.TOGGLE, "SWT.TOGGLE"));
 		return new SWTBotToggleButton((Button) widget(matcher, index), matcher);
@@ -793,7 +793,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToggleButton} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToggleButton toggleButtonWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withId(key, value), withStyle(SWT.TOGGLE, "SWT.TOGGLE"));
 		return new SWTBotToggleButton((Button) widget(matcher, index), matcher);
@@ -812,7 +812,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToggleButton} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToggleButton toggleButtonWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withId(value), withStyle(SWT.TOGGLE, "SWT.TOGGLE"));
 		return new SWTBotToggleButton((Button) widget(matcher, index), matcher);
@@ -831,7 +831,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToggleButton} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToggleButton toggleButtonInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), inGroup(inGroup), withStyle(SWT.TOGGLE, "SWT.TOGGLE"));
 		return new SWTBotToggleButton((Button) widget(matcher, index), matcher);
@@ -848,7 +848,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToggleButton} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToggleButton toggleButton(int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withStyle(SWT.TOGGLE, "SWT.TOGGLE"));
 		return new SWTBotToggleButton((Button) widget(matcher, index), matcher);
@@ -869,7 +869,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToggleButton} with the specified <code>label</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToggleButton toggleButtonWithLabelInGroup(String label, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), inGroup(inGroup), withStyle(SWT.TOGGLE, "SWT.TOGGLE"));
 		return new SWTBotToggleButton((Button) widget(matcher, index), matcher);
@@ -890,7 +890,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToggleButton} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToggleButton toggleButtonInGroup(String mnemonicText, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withMnemonic(mnemonicText), inGroup(inGroup), withStyle(SWT.TOGGLE, "SWT.TOGGLE"));
 		return new SWTBotToggleButton((Button) widget(matcher, index), matcher);
@@ -911,7 +911,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToggleButton} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToggleButton toggleButtonWithTooltipInGroup(String tooltip, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.TOGGLE, "SWT.TOGGLE"));
 		return new SWTBotToggleButton((Button) widget(matcher, index), matcher);
@@ -930,7 +930,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotTree} with the specified <code>label</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotTree treeWithLabel(String label, int index) {
 		Matcher matcher = allOf(widgetOfType(Tree.class), withLabel(label));
 		return new SWTBotTree((Tree) widget(matcher, index), matcher);
@@ -951,7 +951,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotTree} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotTree treeWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Tree.class), withId(key, value));
 		return new SWTBotTree((Tree) widget(matcher, index), matcher);
@@ -970,7 +970,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotTree} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotTree treeWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Tree.class), withId(value));
 		return new SWTBotTree((Tree) widget(matcher, index), matcher);
@@ -989,7 +989,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotTree} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotTree treeInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Tree.class), inGroup(inGroup));
 		return new SWTBotTree((Tree) widget(matcher, index), matcher);
@@ -1006,7 +1006,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotTree} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotTree tree(int index) {
 		Matcher matcher = allOf(widgetOfType(Tree.class));
 		return new SWTBotTree((Tree) widget(matcher, index), matcher);
@@ -1027,7 +1027,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotTree} with the specified <code>label</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotTree treeWithLabelInGroup(String label, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Tree.class), withLabel(label), inGroup(inGroup));
 		return new SWTBotTree((Tree) widget(matcher, index), matcher);
@@ -1046,7 +1046,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotText} with the specified <code>label</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotText textWithLabel(String label, int index) {
 		Matcher matcher = allOf(widgetOfType(Text.class), withLabel(label));
 		return new SWTBotText((Text) widget(matcher, index), matcher);
@@ -1065,7 +1065,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotText} with the specified <code>text</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotText text(String text, int index) {
 		Matcher matcher = allOf(widgetOfType(Text.class), withText(text));
 		return new SWTBotText((Text) widget(matcher, index), matcher);
@@ -1084,7 +1084,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotText} with the specified <code>tooltip</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotText textWithTooltip(String tooltip, int index) {
 		Matcher matcher = allOf(widgetOfType(Text.class), withTooltip(tooltip));
 		return new SWTBotText((Text) widget(matcher, index), matcher);
@@ -1103,7 +1103,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotText} with the specified <code>message</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotText textWithMessage(String message, int index) {
 		Matcher matcher = allOf(widgetOfType(Text.class), withMessage(message));
 		return new SWTBotText((Text) widget(matcher, index), matcher);
@@ -1124,7 +1124,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotText} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotText textWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Text.class), withId(key, value));
 		return new SWTBotText((Text) widget(matcher, index), matcher);
@@ -1143,7 +1143,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotText} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotText textWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Text.class), withId(value));
 		return new SWTBotText((Text) widget(matcher, index), matcher);
@@ -1162,7 +1162,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotText} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotText textInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Text.class), inGroup(inGroup));
 		return new SWTBotText((Text) widget(matcher, index), matcher);
@@ -1179,7 +1179,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotText} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotText text(int index) {
 		Matcher matcher = allOf(widgetOfType(Text.class));
 		return new SWTBotText((Text) widget(matcher, index), matcher);
@@ -1200,7 +1200,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotText} with the specified <code>label</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotText textWithLabelInGroup(String label, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Text.class), withLabel(label), inGroup(inGroup));
 		return new SWTBotText((Text) widget(matcher, index), matcher);
@@ -1221,7 +1221,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotText} with the specified <code>text</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotText textInGroup(String text, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Text.class), withText(text), inGroup(inGroup));
 		return new SWTBotText((Text) widget(matcher, index), matcher);
@@ -1242,7 +1242,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotText} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotText textWithTooltipInGroup(String tooltip, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Text.class), withTooltip(tooltip), inGroup(inGroup));
 		return new SWTBotText((Text) widget(matcher, index), matcher);
@@ -1261,7 +1261,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCombo} with the specified <code>label</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCombo comboBoxWithLabel(String label, int index) {
 		Matcher matcher = allOf(widgetOfType(Combo.class), withLabel(label));
 		return new SWTBotCombo((Combo) widget(matcher, index), matcher);
@@ -1280,7 +1280,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCombo} with the specified <code>text</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCombo comboBox(String text, int index) {
 		Matcher matcher = allOf(widgetOfType(Combo.class), withText(text));
 		return new SWTBotCombo((Combo) widget(matcher, index), matcher);
@@ -1301,7 +1301,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCombo} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCombo comboBoxWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Combo.class), withId(key, value));
 		return new SWTBotCombo((Combo) widget(matcher, index), matcher);
@@ -1320,7 +1320,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCombo} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCombo comboBoxWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Combo.class), withId(value));
 		return new SWTBotCombo((Combo) widget(matcher, index), matcher);
@@ -1339,7 +1339,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCombo} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCombo comboBoxInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Combo.class), inGroup(inGroup));
 		return new SWTBotCombo((Combo) widget(matcher, index), matcher);
@@ -1356,7 +1356,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCombo} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCombo comboBox(int index) {
 		Matcher matcher = allOf(widgetOfType(Combo.class));
 		return new SWTBotCombo((Combo) widget(matcher, index), matcher);
@@ -1377,7 +1377,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCombo} with the specified <code>label</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCombo comboBoxWithLabelInGroup(String label, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Combo.class), withLabel(label), inGroup(inGroup));
 		return new SWTBotCombo((Combo) widget(matcher, index), matcher);
@@ -1398,7 +1398,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCombo} with the specified <code>text</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCombo comboBoxInGroup(String text, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Combo.class), withText(text), inGroup(inGroup));
 		return new SWTBotCombo((Combo) widget(matcher, index), matcher);
@@ -1417,7 +1417,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCCombo} with the specified <code>text</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCCombo ccomboBox(String text, int index) {
 		Matcher matcher = allOf(widgetOfType(CCombo.class), withText(text));
 		return new SWTBotCCombo((CCombo) widget(matcher, index), matcher);
@@ -1436,7 +1436,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCCombo} with the specified <code>label</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCCombo ccomboBoxWithLabel(String label, int index) {
 		Matcher matcher = allOf(widgetOfType(CCombo.class), withLabel(label));
 		return new SWTBotCCombo((CCombo) widget(matcher, index), matcher);
@@ -1457,7 +1457,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCCombo} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCCombo ccomboBoxWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(CCombo.class), withId(key, value));
 		return new SWTBotCCombo((CCombo) widget(matcher, index), matcher);
@@ -1476,7 +1476,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCCombo} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCCombo ccomboBoxWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(CCombo.class), withId(value));
 		return new SWTBotCCombo((CCombo) widget(matcher, index), matcher);
@@ -1495,7 +1495,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCCombo} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCCombo ccomboBoxInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(CCombo.class), inGroup(inGroup));
 		return new SWTBotCCombo((CCombo) widget(matcher, index), matcher);
@@ -1512,7 +1512,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCCombo} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCCombo ccomboBox(int index) {
 		Matcher matcher = allOf(widgetOfType(CCombo.class));
 		return new SWTBotCCombo((CCombo) widget(matcher, index), matcher);
@@ -1533,7 +1533,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCCombo} with the specified <code>text</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCCombo ccomboBoxInGroup(String text, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(CCombo.class), withText(text), inGroup(inGroup));
 		return new SWTBotCCombo((CCombo) widget(matcher, index), matcher);
@@ -1554,7 +1554,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCCombo} with the specified <code>label</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCCombo ccomboBoxWithLabelInGroup(String label, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(CCombo.class), withLabel(label), inGroup(inGroup));
 		return new SWTBotCCombo((CCombo) widget(matcher, index), matcher);
@@ -1573,7 +1573,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCLabel} with the specified <code>mnemonicText</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCLabel clabel(String mnemonicText, int index) {
 		Matcher matcher = allOf(widgetOfType(CLabel.class), withMnemonic(mnemonicText));
 		return new SWTBotCLabel((CLabel) widget(matcher, index), matcher);
@@ -1594,7 +1594,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCLabel} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCLabel clabelWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(CLabel.class), withId(key, value));
 		return new SWTBotCLabel((CLabel) widget(matcher, index), matcher);
@@ -1613,7 +1613,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCLabel} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCLabel clabelWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(CLabel.class), withId(value));
 		return new SWTBotCLabel((CLabel) widget(matcher, index), matcher);
@@ -1632,7 +1632,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCLabel} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCLabel clabelInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(CLabel.class), inGroup(inGroup));
 		return new SWTBotCLabel((CLabel) widget(matcher, index), matcher);
@@ -1649,7 +1649,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCLabel} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCLabel clabel(int index) {
 		Matcher matcher = allOf(widgetOfType(CLabel.class));
 		return new SWTBotCLabel((CLabel) widget(matcher, index), matcher);
@@ -1670,7 +1670,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCLabel} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCLabel clabelInGroup(String mnemonicText, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(CLabel.class), withMnemonic(mnemonicText), inGroup(inGroup));
 		return new SWTBotCLabel((CLabel) widget(matcher, index), matcher);
@@ -1689,7 +1689,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotLabel} with the specified <code>mnemonicText</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotLabel label(String mnemonicText, int index) {
 		Matcher matcher = allOf(widgetOfType(Label.class), withMnemonic(mnemonicText));
 		return new SWTBotLabel((Label) widget(matcher, index), matcher);
@@ -1710,7 +1710,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotLabel} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotLabel labelWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Label.class), withId(key, value));
 		return new SWTBotLabel((Label) widget(matcher, index), matcher);
@@ -1729,7 +1729,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotLabel} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotLabel labelWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Label.class), withId(value));
 		return new SWTBotLabel((Label) widget(matcher, index), matcher);
@@ -1748,7 +1748,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotLabel} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotLabel labelInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Label.class), inGroup(inGroup));
 		return new SWTBotLabel((Label) widget(matcher, index), matcher);
@@ -1765,7 +1765,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotLabel} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotLabel label(int index) {
 		Matcher matcher = allOf(widgetOfType(Label.class));
 		return new SWTBotLabel((Label) widget(matcher, index), matcher);
@@ -1786,7 +1786,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotLabel} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotLabel labelInGroup(String mnemonicText, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Label.class), withMnemonic(mnemonicText), inGroup(inGroup));
 		return new SWTBotLabel((Label) widget(matcher, index), matcher);
@@ -1805,7 +1805,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotList} with the specified <code>label</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotList listWithLabel(String label, int index) {
 		Matcher matcher = allOf(widgetOfType(List.class), withLabel(label));
 		return new SWTBotList((List) widget(matcher, index), matcher);
@@ -1826,7 +1826,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotList} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotList listWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(List.class), withId(key, value));
 		return new SWTBotList((List) widget(matcher, index), matcher);
@@ -1845,7 +1845,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotList} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotList listWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(List.class), withId(value));
 		return new SWTBotList((List) widget(matcher, index), matcher);
@@ -1864,7 +1864,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotList} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotList listInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(List.class), inGroup(inGroup));
 		return new SWTBotList((List) widget(matcher, index), matcher);
@@ -1881,7 +1881,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotList} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotList list(int index) {
 		Matcher matcher = allOf(widgetOfType(List.class));
 		return new SWTBotList((List) widget(matcher, index), matcher);
@@ -1902,7 +1902,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotList} with the specified <code>label</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotList listWithLabelInGroup(String label, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(List.class), withLabel(label), inGroup(inGroup));
 		return new SWTBotList((List) widget(matcher, index), matcher);
@@ -1921,7 +1921,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotTable} with the specified <code>label</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotTable tableWithLabel(String label, int index) {
 		Matcher matcher = allOf(widgetOfType(Table.class), withLabel(label));
 		return new SWTBotTable((Table) widget(matcher, index), matcher);
@@ -1942,7 +1942,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotTable} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotTable tableWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Table.class), withId(key, value));
 		return new SWTBotTable((Table) widget(matcher, index), matcher);
@@ -1961,7 +1961,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotTable} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotTable tableWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Table.class), withId(value));
 		return new SWTBotTable((Table) widget(matcher, index), matcher);
@@ -1980,7 +1980,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotTable} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotTable tableInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Table.class), inGroup(inGroup));
 		return new SWTBotTable((Table) widget(matcher, index), matcher);
@@ -1997,7 +1997,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotTable} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotTable table(int index) {
 		Matcher matcher = allOf(widgetOfType(Table.class));
 		return new SWTBotTable((Table) widget(matcher, index), matcher);
@@ -2018,7 +2018,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotTable} with the specified <code>label</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotTable tableWithLabelInGroup(String label, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Table.class), withLabel(label), inGroup(inGroup));
 		return new SWTBotTable((Table) widget(matcher, index), matcher);
@@ -2037,7 +2037,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotTabItem} with the specified <code>mnemonicText</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotTabItem tabItem(String mnemonicText, int index) {
 		Matcher matcher = allOf(widgetOfType(TabItem.class), withMnemonic(mnemonicText));
 		return new SWTBotTabItem((TabItem) widget(matcher, index), matcher);
@@ -2058,7 +2058,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotTabItem} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotTabItem tabItemWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(TabItem.class), withId(key, value));
 		return new SWTBotTabItem((TabItem) widget(matcher, index), matcher);
@@ -2077,7 +2077,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotTabItem} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotTabItem tabItemWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(TabItem.class), withId(value));
 		return new SWTBotTabItem((TabItem) widget(matcher, index), matcher);
@@ -2096,7 +2096,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotTabItem} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotTabItem tabItemInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(TabItem.class), inGroup(inGroup));
 		return new SWTBotTabItem((TabItem) widget(matcher, index), matcher);
@@ -2113,7 +2113,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotTabItem} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotTabItem tabItem(int index) {
 		Matcher matcher = allOf(widgetOfType(TabItem.class));
 		return new SWTBotTabItem((TabItem) widget(matcher, index), matcher);
@@ -2134,7 +2134,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotTabItem} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotTabItem tabItemInGroup(String mnemonicText, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(TabItem.class), withMnemonic(mnemonicText), inGroup(inGroup));
 		return new SWTBotTabItem((TabItem) widget(matcher, index), matcher);
@@ -2153,7 +2153,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCTabItem} with the specified <code>mnemonicText</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCTabItem cTabItem(String mnemonicText, int index) {
 		Matcher matcher = allOf(widgetOfType(CTabItem.class), withMnemonic(mnemonicText));
 		return new SWTBotCTabItem((CTabItem) widget(matcher, index), matcher);
@@ -2174,7 +2174,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCTabItem} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCTabItem cTabItemWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(CTabItem.class), withId(key, value));
 		return new SWTBotCTabItem((CTabItem) widget(matcher, index), matcher);
@@ -2193,7 +2193,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCTabItem} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCTabItem cTabItemWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(CTabItem.class), withId(value));
 		return new SWTBotCTabItem((CTabItem) widget(matcher, index), matcher);
@@ -2212,7 +2212,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCTabItem} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCTabItem cTabItemInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(CTabItem.class), inGroup(inGroup));
 		return new SWTBotCTabItem((CTabItem) widget(matcher, index), matcher);
@@ -2229,7 +2229,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCTabItem} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCTabItem cTabItem(int index) {
 		Matcher matcher = allOf(widgetOfType(CTabItem.class));
 		return new SWTBotCTabItem((CTabItem) widget(matcher, index), matcher);
@@ -2250,7 +2250,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotCTabItem} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotCTabItem cTabItemInGroup(String mnemonicText, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(CTabItem.class), withMnemonic(mnemonicText), inGroup(inGroup));
 		return new SWTBotCTabItem((CTabItem) widget(matcher, index), matcher);
@@ -2269,7 +2269,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotStyledText} with the specified <code>label</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotStyledText styledTextWithLabel(String label, int index) {
 		Matcher matcher = allOf(widgetOfType(StyledText.class), withLabel(label));
 		return new SWTBotStyledText((StyledText) widget(matcher, index), matcher);
@@ -2288,7 +2288,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotStyledText} with the specified <code>text</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotStyledText styledText(String text, int index) {
 		Matcher matcher = allOf(widgetOfType(StyledText.class), withText(text));
 		return new SWTBotStyledText((StyledText) widget(matcher, index), matcher);
@@ -2309,7 +2309,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotStyledText} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotStyledText styledTextWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(StyledText.class), withId(key, value));
 		return new SWTBotStyledText((StyledText) widget(matcher, index), matcher);
@@ -2328,7 +2328,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotStyledText} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotStyledText styledTextWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(StyledText.class), withId(value));
 		return new SWTBotStyledText((StyledText) widget(matcher, index), matcher);
@@ -2347,7 +2347,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotStyledText} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotStyledText styledTextInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(StyledText.class), inGroup(inGroup));
 		return new SWTBotStyledText((StyledText) widget(matcher, index), matcher);
@@ -2364,7 +2364,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotStyledText} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotStyledText styledText(int index) {
 		Matcher matcher = allOf(widgetOfType(StyledText.class));
 		return new SWTBotStyledText((StyledText) widget(matcher, index), matcher);
@@ -2385,7 +2385,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotStyledText} with the specified <code>label</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotStyledText styledTextWithLabelInGroup(String label, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(StyledText.class), withLabel(label), inGroup(inGroup));
 		return new SWTBotStyledText((StyledText) widget(matcher, index), matcher);
@@ -2406,7 +2406,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotStyledText} with the specified <code>text</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotStyledText styledTextInGroup(String text, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(StyledText.class), withText(text), inGroup(inGroup));
 		return new SWTBotStyledText((StyledText) widget(matcher, index), matcher);
@@ -2425,7 +2425,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotDateTime} with the specified <code>label</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotDateTime dateTimeWithLabel(String label, int index) {
 		Matcher matcher = allOf(widgetOfType(DateTime.class), withLabel(label));
 		return new SWTBotDateTime((DateTime) widget(matcher, index), matcher);
@@ -2446,7 +2446,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotDateTime} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotDateTime dateTimeWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(DateTime.class), withId(key, value));
 		return new SWTBotDateTime((DateTime) widget(matcher, index), matcher);
@@ -2465,7 +2465,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotDateTime} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotDateTime dateTimeWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(DateTime.class), withId(value));
 		return new SWTBotDateTime((DateTime) widget(matcher, index), matcher);
@@ -2484,7 +2484,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotDateTime} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotDateTime dateTimeInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(DateTime.class), inGroup(inGroup));
 		return new SWTBotDateTime((DateTime) widget(matcher, index), matcher);
@@ -2501,7 +2501,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotDateTime} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotDateTime dateTime(int index) {
 		Matcher matcher = allOf(widgetOfType(DateTime.class));
 		return new SWTBotDateTime((DateTime) widget(matcher, index), matcher);
@@ -2522,7 +2522,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotDateTime} with the specified <code>label</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotDateTime dateTimeWithLabelInGroup(String label, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(DateTime.class), withLabel(label), inGroup(inGroup));
 		return new SWTBotDateTime((DateTime) widget(matcher, index), matcher);
@@ -2541,7 +2541,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarButton} with the specified <code>mnemonicText</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarButton toolbarButton(String mnemonicText, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withMnemonic(mnemonicText), withStyle(SWT.PUSH, "SWT.PUSH"));
 		return new SWTBotToolbarPushButton((ToolItem) widget(matcher, index), matcher);
@@ -2560,7 +2560,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarButton} with the specified <code>tooltip</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarButton toolbarButtonWithTooltip(String tooltip, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withTooltip(tooltip), withStyle(SWT.PUSH, "SWT.PUSH"));
 		return new SWTBotToolbarPushButton((ToolItem) widget(matcher, index), matcher);
@@ -2581,7 +2581,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarButton} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarButton toolbarButtonWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withId(key, value), withStyle(SWT.PUSH, "SWT.PUSH"));
 		return new SWTBotToolbarPushButton((ToolItem) widget(matcher, index), matcher);
@@ -2600,7 +2600,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarButton} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarButton toolbarButtonWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withId(value), withStyle(SWT.PUSH, "SWT.PUSH"));
 		return new SWTBotToolbarPushButton((ToolItem) widget(matcher, index), matcher);
@@ -2619,7 +2619,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarButton} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarButton toolbarButtonInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), inGroup(inGroup), withStyle(SWT.PUSH, "SWT.PUSH"));
 		return new SWTBotToolbarPushButton((ToolItem) widget(matcher, index), matcher);
@@ -2636,7 +2636,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarButton} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarButton toolbarButton(int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withStyle(SWT.PUSH, "SWT.PUSH"));
 		return new SWTBotToolbarPushButton((ToolItem) widget(matcher, index), matcher);
@@ -2657,7 +2657,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarButton} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarButton toolbarButtonInGroup(String mnemonicText, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withMnemonic(mnemonicText), inGroup(inGroup), withStyle(SWT.PUSH, "SWT.PUSH"));
 		return new SWTBotToolbarPushButton((ToolItem) widget(matcher, index), matcher);
@@ -2678,7 +2678,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarButton} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarButton toolbarButtonWithTooltipInGroup(String tooltip, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.PUSH, "SWT.PUSH"));
 		return new SWTBotToolbarPushButton((ToolItem) widget(matcher, index), matcher);
@@ -2697,7 +2697,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>mnemonicText</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarToggleButton toolbarToggleButton(String mnemonicText, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withMnemonic(mnemonicText), withStyle(SWT.CHECK, "SWT.CHECK"));
 		return new SWTBotToolbarToggleButton((ToolItem) widget(matcher, index), matcher);
@@ -2716,7 +2716,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>tooltip</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarToggleButton toolbarToggleButtonWithTooltip(String tooltip, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withTooltip(tooltip), withStyle(SWT.CHECK, "SWT.CHECK"));
 		return new SWTBotToolbarToggleButton((ToolItem) widget(matcher, index), matcher);
@@ -2737,7 +2737,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarToggleButton toolbarToggleButtonWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withId(key, value), withStyle(SWT.CHECK, "SWT.CHECK"));
 		return new SWTBotToolbarToggleButton((ToolItem) widget(matcher, index), matcher);
@@ -2756,7 +2756,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarToggleButton toolbarToggleButtonWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withId(value), withStyle(SWT.CHECK, "SWT.CHECK"));
 		return new SWTBotToolbarToggleButton((ToolItem) widget(matcher, index), matcher);
@@ -2775,7 +2775,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarToggleButton toolbarToggleButtonInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), inGroup(inGroup), withStyle(SWT.CHECK, "SWT.CHECK"));
 		return new SWTBotToolbarToggleButton((ToolItem) widget(matcher, index), matcher);
@@ -2792,7 +2792,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarToggleButton toolbarToggleButton(int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withStyle(SWT.CHECK, "SWT.CHECK"));
 		return new SWTBotToolbarToggleButton((ToolItem) widget(matcher, index), matcher);
@@ -2813,7 +2813,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarToggleButton toolbarToggleButtonInGroup(String mnemonicText, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withMnemonic(mnemonicText), inGroup(inGroup), withStyle(SWT.CHECK, "SWT.CHECK"));
 		return new SWTBotToolbarToggleButton((ToolItem) widget(matcher, index), matcher);
@@ -2834,7 +2834,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarToggleButton} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarToggleButton toolbarToggleButtonWithTooltipInGroup(String tooltip, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.CHECK, "SWT.CHECK"));
 		return new SWTBotToolbarToggleButton((ToolItem) widget(matcher, index), matcher);
@@ -2853,7 +2853,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarDropDownButton} with the specified <code>mnemonicText</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarDropDownButton toolbarDropDownButton(String mnemonicText, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withMnemonic(mnemonicText), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN"));
 		return new SWTBotToolbarDropDownButton((ToolItem) widget(matcher, index), matcher);
@@ -2872,7 +2872,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarDropDownButton} with the specified <code>tooltip</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarDropDownButton toolbarDropDownButtonWithTooltip(String tooltip, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withTooltip(tooltip), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN"));
 		return new SWTBotToolbarDropDownButton((ToolItem) widget(matcher, index), matcher);
@@ -2893,7 +2893,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarDropDownButton} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarDropDownButton toolbarDropDownButtonWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withId(key, value), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN"));
 		return new SWTBotToolbarDropDownButton((ToolItem) widget(matcher, index), matcher);
@@ -2912,7 +2912,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarDropDownButton} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarDropDownButton toolbarDropDownButtonWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withId(value), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN"));
 		return new SWTBotToolbarDropDownButton((ToolItem) widget(matcher, index), matcher);
@@ -2931,7 +2931,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarDropDownButton} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarDropDownButton toolbarDropDownButtonInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), inGroup(inGroup), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN"));
 		return new SWTBotToolbarDropDownButton((ToolItem) widget(matcher, index), matcher);
@@ -2948,7 +2948,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarDropDownButton} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarDropDownButton toolbarDropDownButton(int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN"));
 		return new SWTBotToolbarDropDownButton((ToolItem) widget(matcher, index), matcher);
@@ -2969,7 +2969,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarDropDownButton} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarDropDownButton toolbarDropDownButtonInGroup(String mnemonicText, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withMnemonic(mnemonicText), inGroup(inGroup), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN"));
 		return new SWTBotToolbarDropDownButton((ToolItem) widget(matcher, index), matcher);
@@ -2990,7 +2990,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarDropDownButton} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarDropDownButton toolbarDropDownButtonWithTooltipInGroup(String tooltip, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.DROP_DOWN, "SWT.DROP_DOWN"));
 		return new SWTBotToolbarDropDownButton((ToolItem) widget(matcher, index), matcher);
@@ -3009,7 +3009,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>mnemonicText</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarRadioButton toolbarRadioButton(String mnemonicText, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withMnemonic(mnemonicText), withStyle(SWT.RADIO, "SWT.RADIO"));
 		return new SWTBotToolbarRadioButton((ToolItem) widget(matcher, index), matcher);
@@ -3028,7 +3028,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>tooltip</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarRadioButton toolbarRadioButtonWithTooltip(String tooltip, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withTooltip(tooltip), withStyle(SWT.RADIO, "SWT.RADIO"));
 		return new SWTBotToolbarRadioButton((ToolItem) widget(matcher, index), matcher);
@@ -3049,7 +3049,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarRadioButton toolbarRadioButtonWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withId(key, value), withStyle(SWT.RADIO, "SWT.RADIO"));
 		return new SWTBotToolbarRadioButton((ToolItem) widget(matcher, index), matcher);
@@ -3068,7 +3068,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarRadioButton toolbarRadioButtonWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withId(value), withStyle(SWT.RADIO, "SWT.RADIO"));
 		return new SWTBotToolbarRadioButton((ToolItem) widget(matcher, index), matcher);
@@ -3087,7 +3087,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarRadioButton toolbarRadioButtonInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), inGroup(inGroup), withStyle(SWT.RADIO, "SWT.RADIO"));
 		return new SWTBotToolbarRadioButton((ToolItem) widget(matcher, index), matcher);
@@ -3104,7 +3104,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarRadioButton toolbarRadioButton(int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withStyle(SWT.RADIO, "SWT.RADIO"));
 		return new SWTBotToolbarRadioButton((ToolItem) widget(matcher, index), matcher);
@@ -3125,7 +3125,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarRadioButton toolbarRadioButtonInGroup(String mnemonicText, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withMnemonic(mnemonicText), inGroup(inGroup), withStyle(SWT.RADIO, "SWT.RADIO"));
 		return new SWTBotToolbarRadioButton((ToolItem) widget(matcher, index), matcher);
@@ -3146,7 +3146,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotToolbarRadioButton} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotToolbarRadioButton toolbarRadioButtonWithTooltipInGroup(String tooltip, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(ToolItem.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.RADIO, "SWT.RADIO"));
 		return new SWTBotToolbarRadioButton((ToolItem) widget(matcher, index), matcher);
@@ -3165,7 +3165,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotLink} with the specified <code>mnemonicText</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotLink link(String mnemonicText, int index) {
 		Matcher matcher = allOf(widgetOfType(Link.class), withMnemonic(mnemonicText));
 		return new SWTBotLink((Link) widget(matcher, index), matcher);
@@ -3186,7 +3186,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotLink} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotLink linkWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Link.class), withId(key, value));
 		return new SWTBotLink((Link) widget(matcher, index), matcher);
@@ -3205,7 +3205,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotLink} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotLink linkWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Link.class), withId(value));
 		return new SWTBotLink((Link) widget(matcher, index), matcher);
@@ -3224,7 +3224,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotLink} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotLink linkInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Link.class), inGroup(inGroup));
 		return new SWTBotLink((Link) widget(matcher, index), matcher);
@@ -3241,7 +3241,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotLink} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotLink link(int index) {
 		Matcher matcher = allOf(widgetOfType(Link.class));
 		return new SWTBotLink((Link) widget(matcher, index), matcher);
@@ -3262,7 +3262,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotLink} with the specified <code>mnemonicText</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotLink linkInGroup(String mnemonicText, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Link.class), withMnemonic(mnemonicText), inGroup(inGroup));
 		return new SWTBotLink((Link) widget(matcher, index), matcher);
@@ -3281,7 +3281,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotSpinner} with the specified <code>label</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotSpinner spinnerWithLabel(String label, int index) {
 		Matcher matcher = allOf(widgetOfType(Spinner.class), withLabel(label));
 		return new SWTBotSpinner((Spinner) widget(matcher, index), matcher);
@@ -3300,7 +3300,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotSpinner} with the specified <code>text</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotSpinner spinner(String text, int index) {
 		Matcher matcher = allOf(widgetOfType(Spinner.class), withText(text));
 		return new SWTBotSpinner((Spinner) widget(matcher, index), matcher);
@@ -3319,7 +3319,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotSpinner} with the specified <code>tooltip</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotSpinner spinnerWithTooltip(String tooltip, int index) {
 		Matcher matcher = allOf(widgetOfType(Spinner.class), withTooltip(tooltip));
 		return new SWTBotSpinner((Spinner) widget(matcher, index), matcher);
@@ -3340,7 +3340,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotSpinner} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotSpinner spinnerWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Spinner.class), withId(key, value));
 		return new SWTBotSpinner((Spinner) widget(matcher, index), matcher);
@@ -3359,7 +3359,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotSpinner} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotSpinner spinnerWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Spinner.class), withId(value));
 		return new SWTBotSpinner((Spinner) widget(matcher, index), matcher);
@@ -3378,7 +3378,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotSpinner} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotSpinner spinnerInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Spinner.class), inGroup(inGroup));
 		return new SWTBotSpinner((Spinner) widget(matcher, index), matcher);
@@ -3395,7 +3395,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotSpinner} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotSpinner spinner(int index) {
 		Matcher matcher = allOf(widgetOfType(Spinner.class));
 		return new SWTBotSpinner((Spinner) widget(matcher, index), matcher);
@@ -3416,7 +3416,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotSpinner} with the specified <code>label</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotSpinner spinnerWithLabelInGroup(String label, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Spinner.class), withLabel(label), inGroup(inGroup));
 		return new SWTBotSpinner((Spinner) widget(matcher, index), matcher);
@@ -3437,7 +3437,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotSpinner} with the specified <code>text</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotSpinner spinnerInGroup(String text, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Spinner.class), withText(text), inGroup(inGroup));
 		return new SWTBotSpinner((Spinner) widget(matcher, index), matcher);
@@ -3458,7 +3458,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotSpinner} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotSpinner spinnerWithTooltipInGroup(String tooltip, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Spinner.class), withTooltip(tooltip), inGroup(inGroup));
 		return new SWTBotSpinner((Spinner) widget(matcher, index), matcher);
@@ -3477,7 +3477,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotSlider} with the specified <code>label</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotSlider sliderWithLabel(String label, int index) {
 		Matcher matcher = allOf(widgetOfType(Slider.class), withLabel(label));
 		return new SWTBotSlider((Slider) widget(matcher, index), matcher);
@@ -3496,7 +3496,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotSlider} with the specified <code>text</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotSlider slider(String text, int index) {
 		Matcher matcher = allOf(widgetOfType(Slider.class), withText(text));
 		return new SWTBotSlider((Slider) widget(matcher, index), matcher);
@@ -3515,7 +3515,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotSlider} with the specified <code>tooltip</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotSlider sliderWithTooltip(String tooltip, int index) {
 		Matcher matcher = allOf(widgetOfType(Slider.class), withTooltip(tooltip));
 		return new SWTBotSlider((Slider) widget(matcher, index), matcher);
@@ -3536,7 +3536,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotSlider} with the specified <code>key/value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotSlider sliderWithId(String key, String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Slider.class), withId(key, value));
 		return new SWTBotSlider((Slider) widget(matcher, index), matcher);
@@ -3555,7 +3555,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotSlider} with the specified <code>value</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotSlider sliderWithId(String value, int index) {
 		Matcher matcher = allOf(widgetOfType(Slider.class), withId(value));
 		return new SWTBotSlider((Slider) widget(matcher, index), matcher);
@@ -3574,7 +3574,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotSlider} with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotSlider sliderInGroup(String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Slider.class), inGroup(inGroup));
 		return new SWTBotSlider((Slider) widget(matcher, index), matcher);
@@ -3591,7 +3591,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotSlider} with the specified <code>none</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotSlider slider(int index) {
 		Matcher matcher = allOf(widgetOfType(Slider.class));
 		return new SWTBotSlider((Slider) widget(matcher, index), matcher);
@@ -3612,7 +3612,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotSlider} with the specified <code>label</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotSlider sliderWithLabelInGroup(String label, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Slider.class), withLabel(label), inGroup(inGroup));
 		return new SWTBotSlider((Slider) widget(matcher, index), matcher);
@@ -3633,7 +3633,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotSlider} with the specified <code>text</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotSlider sliderInGroup(String text, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Slider.class), withText(text), inGroup(inGroup));
 		return new SWTBotSlider((Slider) widget(matcher, index), matcher);
@@ -3654,7 +3654,7 @@ public class SWTBot extends SWTBotFactory {
 	 * @param index the index of the widget.
 	 * @return a {@link SWTBotSlider} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public SWTBotSlider sliderWithTooltipInGroup(String tooltip, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Slider.class), withTooltip(tooltip), inGroup(inGroup));
 		return new SWTBotSlider((Slider) widget(matcher, index), matcher);

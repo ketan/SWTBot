@@ -63,7 +63,7 @@ public class MethodGenerator {
 	}
 
 	public String methodContentsWithIndex() {
-		String result = "	@SuppressWarnings(\"unchecked\")\n"; //$NON-NLS-1$
+		String result = "	@SuppressWarnings({\"unchecked\", \"rawtypes\"})\n"; //$NON-NLS-1$
 		result += "	public " + ClassUtils.simpleClassName(returnType) + " " + methodName() + methodArgsWithIndex() + " {\n"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		result += "		Matcher matcher = allOf(" + instanceOf() + (otherMatchers().length() > 0 ? ", " : "") + otherMatchers() + ");\n"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		result += "		return new " + ClassUtils.simpleClassName(creationType) + "((" + ClassUtils.simpleClassName(widgetType) //$NON-NLS-1$ //$NON-NLS-2$
