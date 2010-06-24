@@ -57,6 +57,13 @@
 			<property name="classname" value="org.eclipse.swtbot.eclipse.ui.test.AllTests" />
 			<property name="vmargs" value=" -Xms128M -Xmx368M -XX:MaxPermSize=256M ${jvmOption}" />
 		</ant>
+		
+		<ant target="swtbot-test" antfile="${library-file}" dir="${eclipse-home}">
+			<property name="data-dir" value="${temp-workspace}" />
+			<property name="plugin-name" value="${plugin-name}" />
+			<property name="classname" value="org.eclipse.swtbot.eclipse.ui.functional.AllTests" />
+			<property name="vmargs" value=" -Xms128M -Xmx368M -XX:MaxPermSize=256M ${jvmOption}" />
+		</ant>
 	</target>
 
 	<target name="test-coverage">
