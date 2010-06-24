@@ -8,6 +8,7 @@ require 'open-uri'
 
 class Release
   def self.run(args)
+    @now = Time.now.strftime('%b %d, %Y')
     puts "Fetching revision available on the download site..."
     uri = URI.parse("http://download.eclipse.org/technology/swtbot/ganymede/dev-build/RELEASE_NOTES.txt")
     puts "Reading #{uri}"
@@ -15,6 +16,7 @@ class Release
     @available_revision = open(uri).readlines.grep(/Revision: (.){40}/).first.gsub(/Revision: /, '').strip
 
     @current_head = `git log --pretty='%H' -1`.strip
+    @current_head_svn = `git log -1`.gsub(/.*git-svn-id:.*@(\d+).*/m, '\1')
 
     puts "Revision on the download site: #{@available_revision}"
     puts "Generating revision log since  #{@available_revision} to HEAD(#{@current_head})"
@@ -37,12 +39,14 @@ class Release
 
   def self.release_notes(dir)
     File.open("#{dir}/RELEASE_NOTES.txt", 'w') do |f|
-      f.puts("RELEASE NOTES")
-      f.puts("=============")
+      title = "RELEASE NOTES v#{@current_head_svn} (#{@now})"
+      f.puts(title)
+      f.puts("=" * title.length)
       f.puts("")
-      f.puts("="*"Revision: #{@current_head}".length)
-      f.puts("Revision: #{@current_head}")
-      f.puts("="*"Revision: #{@current_head}".length)
+      rev = "Revision: #{@current_head}"
+      f.puts("=" * rev.length)
+      f.puts(rev)
+      f.puts("=" * rev.length)
       f.puts("")
       f.puts(@revision_log)
     end
