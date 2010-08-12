@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 Ketan Padegaonkar and others.
+ * Copyright (c) 2008,2009,2010 Ketan Padegaonkar and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,8 +10,11 @@
  *     Ketan Patel - https://bugs.eclipse.org/bugs/show_bug.cgi?id=259837
  *     Ralf Ebert www.ralfebert.de - (bug 271630) SWTBot Improved RCP / Workbench support
  *     Ralf Ebert - (bug 294452) - SWTBotEditor does not pass an IProgressMonitor when saving an editor
+ *     Ketan Padegaonkar - (bug 260088) Support for MultiPageEditorPart
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.finder.widgets;
+
+import static org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable.syncExec;
 
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
@@ -60,6 +63,12 @@ public class SWTBotEditor extends SWTBotWorkbenchPart<IEditorReference> {
 	}
 
 	public void setFocus() {
+		syncExec(new VoidResult() {
+			public void run() {
+				IEditorPart editor = partReference.getEditor(true);
+				editor.setFocus();
+			}
+		});
 	}
 
 	/**

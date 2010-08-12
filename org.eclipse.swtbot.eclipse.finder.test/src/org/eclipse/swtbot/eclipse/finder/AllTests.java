@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Ketan Padegaonkar and others.
+ * Copyright (c) 2008,2009,2010 Ketan Padegaonkar and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13,6 +13,7 @@ package org.eclipse.swtbot.eclipse.finder;
 import org.eclipse.swtbot.eclipse.finder.exceptions.QuickFixNotFoundExceptionTest;
 import org.eclipse.swtbot.eclipse.finder.finders.CommandFinderTest;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEclipseEditorTest;
+import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotMultiPageEditorTest;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotViewTest;
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJUnit4Suite;
 import org.junit.runner.RunWith;
@@ -23,6 +24,11 @@ import org.junit.runners.Suite.SuiteClasses;
  * @version $Id$
  */
 @RunWith(SWTBotJUnit4Suite.class)
-@SuiteClasses( { QuickFixNotFoundExceptionTest.class, CommandFinderTest.class, SWTBotEclipseEditorTest.class, SWTBotViewTest.class })
+@SuiteClasses({
+		QuickFixNotFoundExceptionTest.class,
+		CommandFinderTest.class,
+		SWTBotEclipseEditorTest.class,
+		SWTBotViewTest.class,
+		SWTBotMultiPageEditorTest.class })
 public class AllTests {
 }

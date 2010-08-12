@@ -57,5 +57,16 @@
             name="Contribution Item Command">
       </command>
    </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.eclipse.swtbot.eclipse.finder.test.ui.editors.MultiPageEditor"
+            contributorClass="org.eclipse.swtbot.eclipse.finder.test.ui.editors.MultiPageEditorContributor"
+            extensions="mpe"
+            icon="icons/sample.gif"
+            id="org.eclipse.swtbot.eclipse.finder.test.ui.editors.MultiPageEditor"
+            name="Sample Multi-page Editor">
+      </editor>
+   </extension>
 
 </plugin>

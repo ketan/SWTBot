@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 SWTBot Committers and others
+ * Copyright (c) 2009,2010 SWTBot Committers and others
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,6 +7,7 @@
  * 
  * Contributors:
  *     Ralf Ebert www.ralfebert.de - (bug 271630) SWTBot Improved RCP / Workbench support
+ *     Ketan Padegaonkar - (bug 260088) Support for MultiPageEditorPart
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.finder;
 
@@ -26,6 +27,7 @@ import org.eclipse.swtbot.eclipse.finder.matchers.WidgetMatcherFactory;
 import org.eclipse.swtbot.eclipse.finder.waits.WaitForEditor;
 import org.eclipse.swtbot.eclipse.finder.waits.WaitForView;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEditor;
+import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotMultiPageEditor;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotPerspective;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotView;
 import org.eclipse.swtbot.swt.finder.SWTBot;
@@ -256,7 +258,65 @@ public class SWTWorkbenchBot extends SWTBot {
 			throw new WidgetNotFoundException("There is no active editor"); //$NON-NLS-1$
 		return new SWTBotEditor(editor, this);
 	}
+	
+	/**
+	 * Waits for a multipage editor matching the given matcher to appear in the active workbench page and returns it
+	 * 
+	 * @param matcher the matcher used to find the editor
+	 * @return an editor that matches the matcher
+	 * @throws WidgetNotFoundException if the editor is not found
+	 */
+	public SWTBotMultiPageEditor multipageEditor(Matcher<IEditorReference> matcher) {
+		WaitForEditor waitForEditor = waitForEditor(matcher);
+		waitUntilWidgetAppears(waitForEditor);
+		return new SWTBotMultiPageEditor(waitForEditor.get(0), this);
+	}
 
+	/**
+	 * @return all multipage editors which are opened currently (no waiting!) which match the given matcher
+	 * @param matcher the matcher used to find all editors
+	 */
+	public List<SWTBotMultiPageEditor> multipageEditors(Matcher<?> matcher) {
+		List<IEditorReference> editors = workbenchContentsFinder.findEditors(matcher);
+
+		List<SWTBotMultiPageEditor> editorBots = new ArrayList<SWTBotMultiPageEditor>();
+		for (IEditorReference editorReference : editors)
+			editorBots.add(new SWTBotMultiPageEditor(editorReference, this));
+
+		return editorBots;
+	}
+
+	/**
+	 * @return all editors which are opened currently
+	 */
+	public List<? extends SWTBotMultiPageEditor> multipageEditors() {
+		return multipageEditors(Matchers.anything());
+	}
+
+	/**
+	 * Shortcut for multipageEditor(withPartName(title))
+	 * 
+	 * @param fileName the the filename on the editor tab
+	 * @return the editor with the specified title
+	 * @see #editor(Matcher)
+	 */
+	public SWTBotMultiPageEditor multipageEditorByTitle(String fileName) {
+		Matcher<IEditorReference> withPartName = withPartName(fileName);
+		return multipageEditor(withPartName);
+	}
+
+	/**
+	 * Shortcut for multipageEditor(withPartId(id))
+	 * 
+	 * @param id the the id on the editor tab
+	 * @return the editor with the specified title
+	 * @see #editor(Matcher)
+	 */
+	public SWTBotMultiPageEditor multipageEditorById(String id) {
+		Matcher<IEditorReference> withPartId = withPartId(id);
+		return multipageEditor(withPartId);
+	}
+	
 	/**
 	 * @return the active perspective in the active workbench page
 	 */

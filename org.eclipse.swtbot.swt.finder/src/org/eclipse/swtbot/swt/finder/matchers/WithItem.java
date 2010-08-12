@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 SWTBot Committers and others.
+ * Copyright (c) 2009,2010 SWTBot Committers and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -68,7 +68,7 @@ public class WithItem<T extends Item> extends AbstractMatcher<T> {
 		return this.matches;
 	}
 
-	public Object get(int index) {
+	public T get(int index) {
 		return this.matches.get(index);
 	}
 
@@ -82,8 +82,7 @@ public class WithItem<T extends Item> extends AbstractMatcher<T> {
 	 * @return a matcher.
 	 */
 	@Factory
-	public
-	static <T extends Item> WithItem<T> withItem(Matcher<?> matcher) {
+	public static <T extends Item> WithItem<T> withItem(Matcher<?> matcher) {
 		return new WithItem<T>(matcher);
 	}
 }
