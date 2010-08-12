@@ -37,6 +37,9 @@ import org.hamcrest.Matcher;
  * <p>
  * <b>Note:</b> It is recommend that clients decorate this class with their own custom wrappers.
  * </p>
+ * <p>
+ * <b>Note:</b> This API is very new, experimental and subject to change.
+ * </p>
  * 
  * <pre>
  * public class PDEManifestEditor extends SWTBotMultiPageEditor {
