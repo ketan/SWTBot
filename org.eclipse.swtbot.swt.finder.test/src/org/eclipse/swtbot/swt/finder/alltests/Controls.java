@@ -12,6 +12,7 @@
 package org.eclipse.swtbot.swt.finder.alltests;
 
 import org.eclipse.swt.examples.addressbook.AddressBook;
+import org.eclipse.swt.examples.browserexample.BrowserExample;
 import org.eclipse.swt.examples.clipboard.ClipboardExample;
 import org.eclipse.swt.examples.controlexample.ControlExample;
 import org.eclipse.swt.examples.controlexample.CustomControlExample;
@@ -38,6 +39,8 @@ public class Controls {
 	public Shell				clipboardExampleShell;
 	public Shell				dndShell;
 	public DNDExample			dndExample;
+	public BrowserExample		browserExample;
+	public Shell 				browserShell;
 
 	public static Controls getInstance() {
 		if (instance == null) {

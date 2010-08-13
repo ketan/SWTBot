@@ -13,6 +13,7 @@ package org.eclipse.swtbot.swt.finder.alltests;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.examples.addressbook.AddressBook;
+import org.eclipse.swt.examples.browserexample.BrowserExample;
 import org.eclipse.swt.examples.clipboard.ClipboardExample;
 import org.eclipse.swt.examples.controlexample.ControlExample;
 import org.eclipse.swt.examples.controlexample.CustomControlExample;
@@ -74,6 +75,7 @@ public class Setup {
 		controls.customControlShell.open();
 		controls.menuShell.open();
 		controls.dndShell.open();
+		controls.browserShell.open();
 	}
 
 	protected boolean shouldRunInSeparateThread() {
@@ -112,6 +114,11 @@ public class Setup {
 			controls.dndShell = new Shell(controls.display, SWT.SHELL_TRIM);
 			controls.dndShell.setText("DND shell");
 			controls.dndShell.setLayout(new FillLayout());
+		}
+		if ((controls.browserShell == null) || controls.browserShell.isDisposed()) {
+			controls.browserShell = new Shell(controls.display, SWT.SHELL_TRIM);
+			controls.browserShell.setText("Browser shell");
+			controls.browserShell.setLayout(new FillLayout());
 		}
 
 	}
@@ -153,6 +160,10 @@ public class Setup {
 
 		if ((controls.dndExample == null) || controls.dndExample.defaultParent.isDisposed()) {
 			controls.dndExample = new DNDExample();
+			controls.dndExample.open(controls.dndShell);
+		}
+		if ((controls.browserExample == null)) {
+			controls.browserExample = new BrowserExample(controls.browserShell,false);
 			controls.dndExample.open(controls.dndShell);
 		}
 

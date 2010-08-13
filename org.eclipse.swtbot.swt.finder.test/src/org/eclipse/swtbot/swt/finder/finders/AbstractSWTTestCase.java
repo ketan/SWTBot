@@ -15,6 +15,7 @@ import static org.hamcrest.Matchers.containsString;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.examples.addressbook.AddressBook;
+import org.eclipse.swt.examples.browserexample.BrowserExample;
 import org.eclipse.swt.examples.clipboard.ClipboardExample;
 import org.eclipse.swt.examples.controlexample.ControlExample;
 import org.eclipse.swt.examples.controlexample.CustomControlExample;
@@ -67,6 +68,9 @@ public abstract class AbstractSWTTestCase {
 
 	public static final Shell					dndShell				= Controls.getInstance().dndShell;
 	public static final DNDExample				dndExample				= Controls.getInstance().dndExample;
+
+	public static final Shell					browserShell				= Controls.getInstance().browserShell;
+	public static final BrowserExample			browserExample				= Controls.getInstance().browserExample;
 
 	public static final Thread					UIThread				= Controls.getInstance().UIThread;
 

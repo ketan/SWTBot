@@ -3,6 +3,7 @@ package org.eclipse.swtbot.swt.finder;
 
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.custom.CTabItem;
@@ -25,6 +26,7 @@ import org.eclipse.swtbot.swt.finder.finders.ChildrenControlFinder;
 import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
 import org.eclipse.swtbot.swt.finder.finders.Finder;
 import org.eclipse.swtbot.swt.finder.finders.MenuFinder;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotBrowser;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotCCombo;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotCLabel;
@@ -3658,6 +3660,122 @@ public class SWTBot extends SWTBotFactory {
 	public SWTBotSlider sliderWithTooltipInGroup(String tooltip, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Slider.class), withTooltip(tooltip), inGroup(inGroup));
 		return new SWTBotSlider((Slider) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @return a {@link SWTBotBrowser} with the specified <code>label</code>.
+	 */
+	public SWTBotBrowser browserWithLabel(String label) {
+		return browserWithLabel(label, 0);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotBrowser} with the specified <code>label</code>.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotBrowser browserWithLabel(String label, int index) {
+		Matcher matcher = allOf(widgetOfType(Browser.class), withLabel(label));
+		return new SWTBotBrowser((Browser) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param key the key set on the widget.
+	 * @param value the value for the key.
+	 * @return a {@link SWTBotBrowser} with the specified <code>key/value</code>.
+	 */
+	public SWTBotBrowser browserWithId(String key, String value) {
+		return browserWithId(key, value, 0);
+	}
+
+	/**
+	 * @param key the key set on the widget.
+	 * @param value the value for the key.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotBrowser} with the specified <code>key/value</code>.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotBrowser browserWithId(String key, String value, int index) {
+		Matcher matcher = allOf(widgetOfType(Browser.class), withId(key, value));
+		return new SWTBotBrowser((Browser) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @return a {@link SWTBotBrowser} with the specified <code>value</code>.
+	 */
+	public SWTBotBrowser browserWithId(String value) {
+		return browserWithId(value, 0);
+	}
+
+	/**
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotBrowser} with the specified <code>value</code>.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotBrowser browserWithId(String value, int index) {
+		Matcher matcher = allOf(widgetOfType(Browser.class), withId(value));
+		return new SWTBotBrowser((Browser) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotBrowser} with the specified <code>inGroup</code>.
+	 */
+	public SWTBotBrowser browserInGroup(String inGroup) {
+		return browserInGroup(inGroup, 0);
+	}
+
+	/**
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotBrowser} with the specified <code>inGroup</code>.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotBrowser browserInGroup(String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Browser.class), inGroup(inGroup));
+		return new SWTBotBrowser((Browser) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @return a {@link SWTBotBrowser} with the specified <code>none</code>.
+	 */
+	public SWTBotBrowser browser() {
+		return browser(0);
+	}
+
+	/**
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotBrowser} with the specified <code>none</code>.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotBrowser browser(int index) {
+		Matcher matcher = allOf(widgetOfType(Browser.class));
+		return new SWTBotBrowser((Browser) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotBrowser} with the specified <code>label</code> with the specified <code>inGroup</code>.
+	 */
+	public SWTBotBrowser browserWithLabelInGroup(String label, String inGroup) {
+		return browserWithLabelInGroup(label, inGroup, 0);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotBrowser} with the specified <code>label</code> with the specified <code>inGroup</code>.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotBrowser browserWithLabelInGroup(String label, String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Browser.class), withLabel(label), inGroup(inGroup));
+		return new SWTBotBrowser((Browser) widget(matcher, index), matcher);
 	}
 
 }
