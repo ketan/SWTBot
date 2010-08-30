@@ -135,6 +135,33 @@ public class AllTests extends SWTBotGefForUnitTestsTestCase implements LogicMode
 		checkSize(getBounds(circuitEditPart), boundsBeforeDrag.width, boundsBeforeDrag.height);
 	}
 	
+	public void testDragAndDropWithRelativeCoodinatesFigure() throws Exception {
+		
+		int offset = 30;
+		int circuitFigureSize = 100;
+		
+		editor.activateTool(TOOL_CIRCUIT);
+		editor.click(offset, offset);
+		
+		editor.activateTool(TOOL_CIRCUIT);
+		editor.click(circuitFigureSize*2 +offset, offset);
+		
+		
+		SWTBotGefEditPart circuitEditPart1 = editor.editParts(instanceOf(CircuitEditPart.class)).get(0);
+		SWTBotGefEditPart circuitEditPart2 = editor.editParts(instanceOf(CircuitEditPart.class)).get(1);
+		
+		/* create a child of circuitEditPart1 */
+		editor.activateTool(TOOL_CIRCUIT);
+		editor.click(circuitFigureSize/2 + offset, circuitFigureSize/2 + offset);
+		
+		SWTBotGefEditPart circuitEditPart1child = circuitEditPart1.children().get(0);
+		
+		editor.drag(circuitEditPart1child, 5*(circuitFigureSize/2) + offset, circuitFigureSize/2 + offset);
+		syncWithUIThread();
+		assertFalse(circuitEditPart2.children().isEmpty());
+	}
+	
+	
 	public void testResize() throws Exception {
 		editor.activateTool(TOOL_CIRCUIT);
 		editor.click(30, 30);

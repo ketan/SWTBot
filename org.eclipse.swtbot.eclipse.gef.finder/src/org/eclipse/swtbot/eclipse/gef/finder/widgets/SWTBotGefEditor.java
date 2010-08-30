@@ -7,9 +7,11 @@
  * 
  * Contributors:
  *    MAKE Technologies Inc - initial API and implementation
- *    Mariot Chauvin <mariot.chauvin@obeo.fr> - refactoring
- *    Steve Monnier <steve.monnier@obeo.fr> - add mouseMoveDoubleClick action
- *    Nathalie Lepine <nathalie.lepine@obeo.fr> - add mouseMoveDoubleClick action
+ *    Mariot Chauvin <mariot.chauvin@obeo.fr> - Improvements and bug fixes
+ *    Steve Monnier <steve.monnier@obeo.fr> - Improvements and bug fixes
+ *    Nathalie Lepine <nathalie.lepine@obeo.fr> - Improvements and bug fixes
+ *    Pascal Gelinas <pascal gelinas @nuecho.com> - Improvements and bug fixes
+ *    Mickael Istria <mickael.istria@bonitasoft.com> - Improvements and bug fixes
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.gef.finder.widgets;
 
@@ -350,7 +352,7 @@ public class SWTBotGefEditor extends SWTBotEditor {
 	 * @param editPart the edit part to click on
 	 */
 	public void click(final SWTBotGefEditPart editPart) {
-		Rectangle bounds = ((GraphicalEditPart) editPart.part()).getFigure().getBounds();
+		Rectangle bounds = getAbsoluteBounds(editPart);
 		click(bounds.x, bounds.y);
 	}
 
@@ -384,7 +386,7 @@ public class SWTBotGefEditor extends SWTBotEditor {
 	 * @param editPart the edit part to double click on
 	 */
 	public void doubleClick(final SWTBotGefEditPart editPart) {
-		Rectangle bounds = ((GraphicalEditPart) editPart.part()).getFigure().getBounds();
+		Rectangle bounds = getAbsoluteBounds(editPart);
 		/*
 		 * Note that a move is required before double clicking in order to update the mouse cursor with the target
 		 * editpart. As we can not double click on the corner, we move the double click position
@@ -425,7 +427,7 @@ public class SWTBotGefEditor extends SWTBotEditor {
 	 * @param toYPosition the y relative location
 	 */
 	public void drag(final SWTBotGefEditPart editPart, final int toXPosition, final int toYPosition) {
-		Rectangle bounds = ((GraphicalEditPart) editPart.part()).getFigure().getBounds();
+		Rectangle bounds = getAbsoluteBounds(editPart);
 		/*
 		 * We should increment drag location to avoid a resize. 7 comes from SquareHandle#DEFAULT_HANDLE_SIZE and we
 		 * divided by 2 as AbstractHandle#getAccessibleLocation do that by default
@@ -434,6 +436,19 @@ public class SWTBotGefEditor extends SWTBotEditor {
 		drag(bounds.x + offset, bounds.y + offset, toXPosition + offset, toYPosition + offset);
 	}
 
+	/**
+	 * Get absolute bounds of the edit part.
+	 * @param editPart edit part
+	 * @return the absolute bounds
+	 */
+	private Rectangle getAbsoluteBounds(final SWTBotGefEditPart editPart) {
+		IFigure figure = ((GraphicalEditPart) editPart.part()).getFigure();
+		Rectangle bounds = figure.getBounds().getCopy();
+		figure.translateToAbsolute(bounds);
+		return bounds;
+	}
+	
+	
 	/**
 	 * Drag and drop the edit part which owns the specified label to the specified location
 	 * 
