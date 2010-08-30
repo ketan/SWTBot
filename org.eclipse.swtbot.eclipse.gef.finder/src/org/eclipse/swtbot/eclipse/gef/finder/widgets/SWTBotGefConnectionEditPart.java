@@ -7,7 +7,8 @@
  * 
  * Contributors:
  *     MAKE Technologies Inc - initial API and implementation
- *     Mariot Chauvin <mariot.chauvin@obeo.fr> - refactoring
+ *     Mariot Chauvin <mariot.chauvin@obeo.fr> - Improvements and bug fixes
+ *     Pascal Gelinas <pascal.gelinas @nuecho.com> - Improvements and bug fixes
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.gef.finder.widgets;
 
@@ -31,11 +32,11 @@ public class SWTBotGefConnectionEditPart extends SWTBotGefEditPart {
 
     /**
      * Construct a new {@link SWTBotGefConnectionEditPart} instance.
-     * @param graphicalEditor the graphical editor
+     * @param viewer the viewer
      * @param part the {@link ConnectionEditPart} to wrap 
      */
-	SWTBotGefConnectionEditPart(SWTBotGefEditor graphicalEditor, org.eclipse.gef.ConnectionEditPart part) {
-		super(graphicalEditor, part);
+	SWTBotGefConnectionEditPart(SWTBotGefViewer viewer, org.eclipse.gef.ConnectionEditPart part) {
+		super(viewer, part);
 	}
 
 	/**
@@ -45,11 +46,11 @@ public class SWTBotGefConnectionEditPart extends SWTBotGefEditPart {
 	 */
 	public void createBenpoint(final int toXPosition, final int toYPosition) {
 		Point startMove = ((Connection) part().getFigure()).getPoints().getMidpoint().getCopy();
-		graphicalEditor.click(startMove.x, startMove.y);		
+		viewer.click(startMove.x, startMove.y);		
 		/* we need to wait element selection before proceed or drag will fail */
-		graphicalEditor.bot().waitUntil(new WaitForEditPartSelection(this, graphicalEditor.graphicalViewer));
+		viewer.bot().waitUntil(new WaitForEditPartSelection(this, viewer.graphicalViewer));
 		
-		graphicalEditor.drag(startMove.x, startMove.y, toXPosition, 250);
+		viewer.drag(startMove.x, startMove.y, toXPosition, 250);
 	}
 	
 	/*
@@ -69,7 +70,7 @@ public class SWTBotGefConnectionEditPart extends SWTBotGefEditPart {
 		return UIThreadRunnable.syncExec(new Result<SWTBotGefEditPart>() {
 			public SWTBotGefEditPart run() {
 				org.eclipse.gef.EditPart source = part().getSource();
-				return graphicalEditor.createEditPart(source);
+				return viewer.createEditPart(source);
 			}
 		});
 	}
@@ -82,7 +83,7 @@ public class SWTBotGefConnectionEditPart extends SWTBotGefEditPart {
 		return UIThreadRunnable.syncExec(new Result<SWTBotGefEditPart>() {
 			public SWTBotGefEditPart run() {
 				org.eclipse.gef.EditPart target = part().getTarget();
-				return graphicalEditor.createEditPart(target);
+				return viewer.createEditPart(target);
 			}
 		});
 	}

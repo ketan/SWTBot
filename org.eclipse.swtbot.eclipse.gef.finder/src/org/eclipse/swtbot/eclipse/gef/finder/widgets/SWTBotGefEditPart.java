@@ -7,18 +7,24 @@
  * 
  * Contributors:
  *     MAKE Technologies Inc - initial API and implementation
- *     Mariot Chauvin <mariot.chauvin@obeo.fr> - refactoring
+ *     Mariot Chauvin <mariot.chauvin@obeo.fr> - Improvements and bug fixes
+ *     Pascal Gelinas <pascal.gelinas @nuecho.com> - Improvements and bug fixes
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.gef.finder.widgets;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
+import org.eclipse.draw2d.ScrollBar;
+import org.eclipse.draw2d.ScrollPane;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
@@ -37,15 +43,15 @@ import org.hamcrest.Matcher;
  */
 public class SWTBotGefEditPart {
 	protected final EditPart		part;
-	protected final SWTBotGefEditor	graphicalEditor;
+	protected final SWTBotGefViewer	viewer;
 
 	/**
-	 * @param graphicalEditor
+	 * @param veiwer viewer
 	 * @param parent the parent, or null if this is the root edit part
 	 * @param part the GEF part
 	 */
-	SWTBotGefEditPart(final SWTBotGefEditor graphicalEditor, final EditPart part) {
-		this.graphicalEditor = graphicalEditor;
+	SWTBotGefEditPart(final SWTBotGefViewer viewer, final EditPart part) {
+		this.viewer = viewer;
 		this.part = part;
 	}
 
@@ -55,7 +61,7 @@ public class SWTBotGefEditPart {
 	public SWTBotGefEditPart parent() {
 		return UIThreadRunnable.syncExec(new Result<SWTBotGefEditPart>() {
 			public SWTBotGefEditPart run() {
-				return graphicalEditor.createEditPart(part.getParent());
+				return viewer.createEditPart(part.getParent());
 			}
 		});
 	}
@@ -71,7 +77,7 @@ public class SWTBotGefEditPart {
 			public List<SWTBotGefEditPart> run() {
 				List<SWTBotGefEditPart> children = new ArrayList<SWTBotGefEditPart>();
 				for (org.eclipse.gef.EditPart child : ((List<org.eclipse.gef.EditPart>) part.getChildren())) {
-					children.add(graphicalEditor.createEditPart(child));
+					children.add(viewer.createEditPart(child));
 				}
 				return children;
 			}
@@ -94,7 +100,7 @@ public class SWTBotGefEditPart {
 				while (!parts.isEmpty()) {
 					SWTBotGefEditPart part = parts.pop();
 					for (org.eclipse.gef.EditPart child : ((List<org.eclipse.gef.EditPart>) part.part.getChildren())) {
-						SWTBotGefEditPart childPart = graphicalEditor.createEditPart(child);
+						SWTBotGefEditPart childPart = viewer.createEditPart(child);
 						if (matcher.matches(child)) {
 							descendants.add(childPart);
 						}
@@ -121,7 +127,7 @@ public class SWTBotGefEditPart {
 	public void focus() {
 		UIThreadRunnable.syncExec(new VoidResult() {
 			public void run() {
-				graphicalEditor.graphicalViewer.setFocus(part);
+				viewer.graphicalViewer.setFocus(part);
 			}
 		});
 	}
@@ -130,7 +136,7 @@ public class SWTBotGefEditPart {
 	 * select this edit part as a single selection
 	 */
 	public SWTBotGefEditPart select() {
-		graphicalEditor.select(this);
+		viewer.select(this);
 		return this;
 	}
 
@@ -146,7 +152,7 @@ public class SWTBotGefEditPart {
 	 * click on the edit part at the specified location
 	 */
 	public SWTBotGefEditPart click(final Point location) {
-		graphicalEditor.getCanvas().mouseEnterLeftClickAndExit(location.x, location.y);
+		viewer.getCanvas().mouseEnterLeftClickAndExit(location.x, location.y);
 		return this;
 	}
 
@@ -155,10 +161,34 @@ public class SWTBotGefEditPart {
 	 */
 	public SWTBotGefEditPart doubleClick() {
 		final Rectangle bounds = getBounds();
-		graphicalEditor.getCanvas().mouseMoveDoubleClick(bounds.x, bounds.y);
+		viewer.getCanvas().mouseMoveDoubleClick(bounds.x, bounds.y);
 		return this;
 	}
 
+	
+	/* this method is not finished. She will become public when finished, but API is not guaranteed */
+	private void scrollUp() {
+		final IFigure figure = ((GraphicalEditPart) part).getFigure();
+		for (final Object child : figure.getChildren()) {
+			if (child instanceof ScrollPane) {
+				Collection<ScrollBar> scrollbars = getScrollBars((ScrollPane) child);
+				Point pointToClick = scrollbars.iterator().next().getBounds().getCenter();
+				viewer.getCanvas().mouseMoveLeftClick(pointToClick.x, pointToClick.y);
+			}
+		}
+	}
+	
+	/* this method is not finished. She will become public when finished, but API is not guaranteed */
+	private Collection<ScrollBar> getScrollBars(final ScrollPane scrollPane) {
+		Set<ScrollBar> scrollbars = new HashSet<ScrollBar>();
+		for (final Object child :scrollPane.getChildren()) {
+			if (child instanceof ScrollBar) {
+				scrollbars.add((ScrollBar) child);
+			}
+		}
+		return scrollbars;
+	}
+	
 	/**
 	 * Resize the current edit part from the corner orientation to the new size. The direction is specified using using
 	 * {@link PositionConstants#NORTH}, {@link PositionConstants#NORTH_EAST}, etc.
@@ -226,7 +256,7 @@ public class SWTBotGefEditPart {
 			default:
 				new IllegalArgumentException("direction given is not a valid one");
 		}
-		graphicalEditor.drag(fromX, fromY, toX, toY);
+		viewer.drag(fromX, fromY, toX, toY);
 	}
 
 	private Rectangle getBounds() {
@@ -294,7 +324,7 @@ public class SWTBotGefEditPart {
 				List<SWTBotGefConnectionEditPart> connections = new ArrayList<SWTBotGefConnectionEditPart>();
 				List<org.eclipse.gef.ConnectionEditPart> sourceConnections = ((GraphicalEditPart) part).getSourceConnections();
 				for (org.eclipse.gef.ConnectionEditPart c : sourceConnections) {
-					connections.add(graphicalEditor.createEditPart(c));
+					connections.add(viewer.createEditPart(c));
 				}
 				return connections;
 			}
@@ -308,7 +338,7 @@ public class SWTBotGefEditPart {
 				List<SWTBotGefConnectionEditPart> connections = new ArrayList<SWTBotGefConnectionEditPart>();
 				List<org.eclipse.gef.ConnectionEditPart> targetConnections = ((GraphicalEditPart) part).getTargetConnections();
 				for (org.eclipse.gef.ConnectionEditPart c : targetConnections) {
-					connections.add(graphicalEditor.createEditPart(c));
+					connections.add(viewer.createEditPart(c));
 				}
 				return connections;
 			}
