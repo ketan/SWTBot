@@ -10,7 +10,7 @@
  *    Mariot Chauvin <mariot.chauvin@obeo.fr> - Improvements and bug fixes
  *    Steve Monnier <steve.monnier@obeo.fr> - Improvements and bug fixes
  *    Nathalie Lepine <nathalie.lepine@obeo.fr> - Improvements and bug fixes
- *    Pascal Gelinas <pascal gelinas @nuecho.com> - Improvements and bug fixes
+ *    Pascal Gelinas <pascal.gelinas @nuecho.com> - Improvements and bug fixes
  *    Mickael Istria <mickael.istria@bonitasoft.com> - Improvements and bug fixes
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.gef.finder.widgets;
