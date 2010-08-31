@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Ketan Padegaonkar and others.
+ * Copyright (c) 2008, 2010 Ketan Padegaonkar and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Tree;
@@ -397,10 +398,38 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 				return widget.getBounds();
 			}
 		});
-		clickXY(cellBounds.x + (cellBounds.width / 2), cellBounds.y + (cellBounds.height / 2));
+		Point center = getCenter(cellBounds);
+		clickXY(center.x, center.y);
 		return this;
 	}
 
+	/**
+	 * Clicks on this node at the given column index.
+	 * 
+	 * @return the current node.
+	 * @since 2.0
+	 */
+	public SWTBotTreeItem click(final int column) {
+		assertEnabled();
+		Rectangle cellBounds = syncExec(new Result<Rectangle>() {
+			public Rectangle run() {
+				return widget.getBounds(column);
+			}
+		});
+		Point center = getCenter(cellBounds);
+		clickXY(center.x, center.y);
+		return this;
+	}
+	
+	/**
+	 * Get the center of the given rectangle.
+	 * @param bounds the rectangle
+	 * @return the center.
+	 */
+	private Point getCenter(Rectangle bounds) {
+		return new Point (bounds.x + (bounds.width / 2), bounds.y + (bounds.height / 2));
+	}
+	
 	/**
 	 * Double clicks on this node.
 	 * 
