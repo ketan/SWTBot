@@ -11,8 +11,6 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
-import org.eclipse.swt.browser.AuthenticationEvent;
-import org.eclipse.swt.browser.AuthenticationListener;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.ProgressEvent;
 import org.eclipse.swt.browser.ProgressListener;
@@ -61,11 +59,7 @@ public class SWTBotBrowser extends AbstractSWTBotControl<Browser> {
 	public SWTBotBrowser(Browser browser, SelfDescribing description) {
 		super(browser, description);
 		progressListener = new InternalProgressListener(this);
-		UIThreadRunnable.syncExec(new VoidResult() {
-			public void run() {
-				widget.addAuthenticationListener(authListener);
-			}
-		});
+		authListener.init(widget);
 	}
 
 	/**
@@ -270,29 +264,6 @@ public class SWTBotBrowser extends AbstractSWTBotControl<Browser> {
 		public void completed(ProgressEvent event) {
 			setDone(true);
 			browser.widget.removeProgressListener(this);
-		}
-
-	}
-
-	private static final class BrowserAuthenticationListener implements AuthenticationListener {
-		private Credentials	credentials;
-
-		public void setCredentials(Credentials credentials) {
-			this.credentials = credentials;
-		}
-
-		public Credentials getCredentials() {
-			return this.credentials;
-		}
-
-		public void authenticate(AuthenticationEvent event) {
-			if (credentials == null) {
-				event.doit = false;
-				return;
-			}
-			event.doit = true;
-			event.user = credentials.username();
-			event.password = credentials.password();
 		}
 
 	}
