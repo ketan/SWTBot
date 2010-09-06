@@ -34,8 +34,8 @@ import org.hamcrest.SelfDescribing;
 @SWTBotWidget(clasz = Browser.class, preferredName = "browser", referenceBy = { ReferenceBy.LABEL })
 public class SWTBotBrowser extends AbstractSWTBotControl<Browser> {
 
-	private final InternalProgressListener				progressListener;
-	private final static BrowserAuthenticationListener	authListener	= new BrowserAuthenticationListener();
+	private final InternalProgressListener						progressListener;
+	private final static BrowserAuthenticationListenerDelegate	authListener	= new BrowserAuthenticationListenerDelegate();
 
 	/**
 	 * Constructs an instance of this object with the given browser

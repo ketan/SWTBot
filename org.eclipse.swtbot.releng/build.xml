@@ -229,7 +229,12 @@
 		<mkdir dir="${buildDirectory}/features" />
 	</target>
 
-	<target name="pde-build" depends="copy-all" description="runs the pde build">
+	<target name="delete-3.4-classes" if="isJunit4.3">
+		<delete file="${buildDirectory}/plugins/org.eclipse.swtbot.swt.finder/src/org/eclipse/swtbot/swt/finder/widgets/BrowserAuthenticationListener.java" />
+	</target>
+	
+	<target name="pde-build" depends="copy-all, delete-3.4-classes" description="runs the pde build">
+
 		<java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true" dir="${basedir}">
 			<arg value="-application" />
 			<arg value="org.eclipse.ant.core.antRunner" />
