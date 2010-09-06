@@ -30,7 +30,7 @@ final class BrowserAuthenticationListener implements AuthenticationListener {
 	public void init(final Browser widget) {
 		UIThreadRunnable.syncExec(new VoidResult() {
 			public void run() {
-				widget.addAuthenticationListener(this);
+				widget.addAuthenticationListener(BrowserAuthenticationListener.this);
 			}
 		});
 	}
