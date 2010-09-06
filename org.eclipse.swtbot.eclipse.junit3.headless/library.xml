@@ -9,7 +9,7 @@ this has been copied from o.e.test plugin with some targets for SWTBot
 
 -->
 
-<project name="Library" default="usage" basedir=".">
+<project name="swtbot-library-headless-junit3" default="usage" basedir=".">
 
 	<target name="usage">
 		<echo message="Please refer to the testframework.html in org.eclipse.test for instructions on usage." />
@@ -164,7 +164,9 @@ this has been copied from o.e.test plugin with some targets for SWTBot
 			</fileset>
 		</junitreport>
 
-		<style style="${eclipse-home}/plugins/org.eclipse.test/JUNIT.XSL" basedir="${junit-report-output}" includes="${classname}.result.xml" destdir="${junit-report-output}" />
+	    <dirname property="swtbot.junit3.headless.dir" file="${ant.file.swtbot-library-headless-junit3}"/>
+
+		<style style="${swtbot.junit3.headless.dir}/JUNIT.XSL" basedir="${junit-report-output}" includes="${classname}.xml" destdir="${junit-report-output}" />
 
 		<!--save .log content and *.log content from configuration directory-->
 		<concat destfile="${junit-report-output}/${classname}.log">
