@@ -25,6 +25,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.alltests.Controls;
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
@@ -137,6 +138,20 @@ public abstract class AbstractSWTTestCase {
 				}
 				shell.layout(true);
 				return table;
+			}
+		});
+	}
+
+	protected Tree createTree(final Shell shell) {
+		return UIThreadRunnable.syncExec(new WidgetResult<Tree>() {
+			public Tree run() {
+				Tree tree = new Tree(shell, SWT.SINGLE);
+				tree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+				tree.setLinesVisible(true);
+				tree.setHeaderVisible(true);
+
+				shell.layout(true);
+				return tree;
 			}
 		});
 	}

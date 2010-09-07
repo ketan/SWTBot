@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Ketan Padegaonkar and others.
+ * Copyright (c) 2008,2010 Ketan Padegaonkar and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,6 +8,7 @@
  * Contributors:
  *     Ketan Padegaonkar - initial API and implementation
  *     Ketan Patel - https://bugs.eclipse.org/bugs/show_bug.cgi?id=259837
+ *     Jesper S Møller - https://bugs.eclipse.org/bugs/show_bug.cgi?id=322668
  *******************************************************************************/
 
 package org.eclipse.swtbot.swt.finder.waits;
@@ -18,6 +19,7 @@ import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBot;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.hamcrest.Matcher;
 
 /**
@@ -41,6 +43,21 @@ public abstract class Conditions {
 	 */
 	public static ICondition tableHasRows(SWTBotTable table, int rowCount) {
 		return new TableHasRows(table, rowCount);
+	}
+
+	/**
+	 * Gets the condition for checking trees have the proper number of rows. Useful in cases where the tree is populated
+	 * continuously from a non UI thread.
+	 * 
+	 * @param tree the tree
+	 * @param rowCount the number of rows that the tree must have, in order for {@link ICondition#test()} to evaluate to
+	 *            <code>true</code>.
+	 * @return <code>true</code> if the tree has the number of rows specified. Otherwise <code>false</code>.
+	 * @throws IllegalArgumentException Thrown if the row count is less then 1.
+	 * @since 2.0
+	 */
+	public static ICondition treeHasRows(SWTBotTree tree, int rowCount) {
+		return new TreeHasRows(tree, rowCount);
 	}
 
 	/**
