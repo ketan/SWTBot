@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Ketan Padegaonkar and others.
+ * Copyright (c) 2008,2010 Ketan Padegaonkar and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -145,6 +145,17 @@ public class SWTBotStyledTextTest extends AbstractSWTTestCase {
 	}
 
 	@Test
+	public void getsTabs() {
+		assertEquals(4, styledText.getTabs());
+		try {
+			setTabs(15);
+			assertEquals(15, styledText.getTabs());
+		} finally {
+			setTabs(4);
+		}
+	}
+
+	@Test
 	public void getsBullet() throws Exception {
 
 		styledText.setText("hello world\n" + "it is a very good day today\n" + "good bye world\n" + "it was nice to meet you");
@@ -176,4 +187,14 @@ public class SWTBotStyledTextTest extends AbstractSWTTestCase {
 	protected Shell getFocusShell() {
 		return customControlShell;
 	}
+
+	private void setTabs(final int tabSize) {
+		display.syncExec(new Runnable() {
+			public void run() {
+				StyledText t = styledText.widget;
+				t.setTabs(tabSize);
+			}
+		});
+	}
+
 }

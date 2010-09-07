@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Ketan Padegaonkar and others.
+ * Copyright (c) 2008,2010 Ketan Padegaonkar and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -442,4 +442,18 @@ public class SWTBotStyledText extends AbstractSWTBot<StyledText> {
 			}
 		});
 	}
+
+	/**
+	 * Gets the tab width of the {@link StyledText} measured in characters.
+	 * 
+	 * @return the tab width of the {@link StyledText} measured in characters.
+	 */
+	public int getTabs() {
+		return syncExec(new IntResult() {
+			public Integer run() {
+				return widget.getTabs();
+			}
+		});
+	}
+
 }
