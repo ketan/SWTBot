@@ -84,7 +84,7 @@ public class MethodGenerator {
 		String string = ""; //$NON-NLS-1$
 		string += params();
 		string += returnStatement();
-		string += ".\n"; //$NON-NLS-1$
+		string += throwsStatement();
 		return comment(string);
 	}
 
@@ -93,8 +93,13 @@ public class MethodGenerator {
 		string += params();
 		string += "@param index the index of the widget.\n"; //$NON-NLS-1$
 		string += returnStatement();
-		string += ".\n"; //$NON-NLS-1$
+		string += throwsStatement();
+		string += "\n"; //$NON-NLS-1$
 		return comment(string);
+	}
+
+	private String throwsStatement() {
+		return "@throws WidgetNotFoundException if the widget is not found or is disposed.\n";
 	}
 
 	private String returnStatement() {
@@ -102,7 +107,7 @@ public class MethodGenerator {
 		for (ReferenceBy ref : list) {
 			string += " " + ref.describeJavaDoc(); //$NON-NLS-1$
 		}
-		return string;
+		return string + ".\n";
 	}
 
 	private String params() {

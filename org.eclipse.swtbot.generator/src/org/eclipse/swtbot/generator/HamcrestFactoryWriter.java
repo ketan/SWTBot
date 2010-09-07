@@ -107,6 +107,7 @@ public class HamcrestFactoryWriter implements HamcrestWriter {
 
 		imports.add("import org.eclipse.swt.SWT"); //$NON-NLS-1$
 
+		imports.add("import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException"); //$NON-NLS-1$
 		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMnemonic"); //$NON-NLS-1$
 		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withText"); //$NON-NLS-1$
 		imports.add("import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withId"); //$NON-NLS-1$
