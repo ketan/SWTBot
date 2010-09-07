@@ -380,7 +380,10 @@ public abstract class SWTUtils {
 	private static boolean captureScreenshotInternal(final String fileName, Rectangle bounds) {
 		GC gc = new GC(display);
 		Image image = null;
-		new File(fileName).getParentFile().mkdirs();
+		File file = new File(fileName);
+		File parentDir = file.getParentFile();
+		if (parentDir != null)
+			parentDir.mkdirs();
 		try {
 			log.debug(MessageFormat.format("Capturing screenshot ''{0}''", fileName)); //$NON-NLS-1$
 
@@ -392,7 +395,7 @@ public abstract class SWTUtils {
 			return true;
 		} catch (Exception e) {
 			log.warn("Could not capture screenshot: " + fileName + "'", e); //$NON-NLS-1$ //$NON-NLS-2$
-			File brokenImage = new File(fileName).getAbsoluteFile();
+			File brokenImage = file.getAbsoluteFile();
 			if (brokenImage.exists()) {
 				try {
 					log.trace(MessageFormat.format("Broken screenshot set to be deleted on exit: {0}", fileName)); //$NON-NLS-1$
