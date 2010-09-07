@@ -163,7 +163,8 @@ public class Setup {
 			controls.dndExample.open(controls.dndShell);
 		}
 		if ((controls.browserExample == null)) {
-			controls.browserExample = new BrowserExample(controls.browserShell,false);
+			if (!isMac())
+				controls.browserExample = new BrowserExample(controls.browserShell,false);
 			controls.dndExample.open(controls.dndShell);
 		}
 
@@ -178,4 +179,8 @@ public class Setup {
 		setUp();
 	}
 
+	protected static boolean isMac() {
+		String swtPlatform = SWT.getPlatform();
+		return ("carbon".equals(swtPlatform) || "cocoa".equals(swtPlatform));
+	}
 }

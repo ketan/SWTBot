@@ -85,7 +85,7 @@ public class SWTBotTest extends AbstractMenuExampleTest {
 
 	@Test
 	public void getsAllShells() throws Exception {
-		assertEquals(7, bot.shells().length);
+		assertEquals(8, bot.shells().length);
 	}
 
 	@Test

@@ -178,4 +178,8 @@ public abstract class AbstractSWTTestCase {
 		});
 	}
 
+	protected static boolean isMac() {
+		String swtPlatform = SWT.getPlatform();
+		return ("carbon".equals(swtPlatform) || "cocoa".equals(swtPlatform));
+	}
 }

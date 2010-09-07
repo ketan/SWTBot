@@ -347,11 +347,6 @@ public abstract class AbstractKeyboardTest extends AbstractSWTTestCase {
 		return customControlShell;
 	}
 
-	private static boolean isMac() {
-		String swtPlatform = SWT.getPlatform();
-		return ("carbon".equals(swtPlatform) || "cocoa".equals(swtPlatform));
-	}
-
 	private static boolean isWin32() {
 		String swtPlatform = SWT.getPlatform();
 		return ("win32".equals(swtPlatform));
