@@ -17,6 +17,7 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Widget;
+import org.eclipse.swtbot.swt.finder.utils.TreePath;
 import org.hamcrest.Matcher;
 
 /**
@@ -222,6 +223,19 @@ public class Finder {
 	 */
 	public Display getDisplay() {
 		return display;
+	}
+
+
+	/**
+	 * Gets the path to the widget. The path is the list of all parent containers of the widget.
+	 *
+	 * @param w the widget.
+	 * @return the path to the widget w.
+	 * @since 2.0
+	 * @see ControlFinder#getPath(Widget)
+	 */
+	public TreePath getPath(Widget w) {
+		return controlFinder.getPath(w);
 	}
 
 }
