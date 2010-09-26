@@ -30,7 +30,7 @@ public final class TreePath {
 	 * 
 	 * @param segments path of elements to a leaf node in a tree, starting with the root element
 	 */
-	public TreePath(Object[] segments) {
+	public TreePath(Object... segments) {
 		Assert.isNotNull(segments);
 		for (int i = 0; i < segments.length; i++) {
 			Assert.isNotNull(segments[i]);
@@ -59,7 +59,7 @@ public final class TreePath {
 
 	/**
 	 * Returns the last element in this path, or <code>null</code> if this path has no segments.
-	 *
+	 * 
 	 * @return the last element in this path
 	 */
 	public Object getLastSegment() {
@@ -110,4 +110,21 @@ public final class TreePath {
 		return new TreePath(parentSegments);
 	}
 
+	/**
+	 * Removes the last path component from the tree and returns it.
+	 * 
+	 * @return the last path component after removing it from the tree.
+	 */
+	public Object pop() {
+		int segmentCount = getSegmentCount();
+		if (segmentCount == 0) {
+			return null;
+		}
+		Object lastSegment = getLastSegment();
+
+		Object[] parentSegments = new Object[segmentCount - 1];
+		System.arraycopy(segments, 0, parentSegments, 0, segmentCount - 1);
+		segments = parentSegments;
+		return lastSegment;
+	}
 }
