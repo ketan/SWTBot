@@ -44,7 +44,7 @@ public class UITestApplication implements IApplication, ITestHarness {
 		String[] args = (String[]) context.getArguments().get(IApplicationContext.APPLICATION_ARGS);
 		Object app = getApplication(args);
 
-		Assert.isNotNull(app);
+		Assert.isNotNull(app, "The application " + getApplicationToRun(args) + " could not be found. Please see the SWTBot troubleshooting guide: http://wiki.eclipse.org/SWTBot/Troubleshooting");
 
 		fTestableObject = PlatformUI.getTestableObject();
 		fTestableObject.setTestHarness(this);
@@ -71,10 +71,12 @@ public class UITestApplication implements IApplication, ITestHarness {
 		// Find the name of the application as specified by the PDE JUnit launcher.
 		// If no application is specified, the 3.0 default workbench application
 		// is returned.
-		IExtension extension = Platform.getExtensionRegistry().getExtension(Platform.PI_RUNTIME, Platform.PT_APPLICATIONS,
-				getApplicationToRun(args));
+		String applicationToRun = getApplicationToRun(args);
 
-		Assert.isNotNull(extension);
+		IExtension extension = Platform.getExtensionRegistry().getExtension(Platform.PI_RUNTIME, Platform.PT_APPLICATIONS,
+				applicationToRun);
+
+		Assert.isNotNull(extension, "Could not find IExtension for application: " + applicationToRun);
 
 		// If the extension does not have the correct grammar, return null.
 		// Otherwise, return the application object.

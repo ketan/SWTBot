@@ -45,7 +45,7 @@ public class UITestApplication implements IApplication, ITestHarness {
 		String[] args = (String[]) context.getArguments().get(IApplicationContext.APPLICATION_ARGS);
 		Object app = getApplication(args);
 
-		Assert.isNotNull(app);
+		Assert.isNotNull(app, "The application " + getApplicationToRun(args) + " could not be found. Please see the SWTBot troubleshooting guide: http://wiki.eclipse.org/SWTBot/Troubleshooting");
 
 		fTestableObject = PlatformUI.getTestableObject();
 		fTestableObject.setTestHarness(this);
