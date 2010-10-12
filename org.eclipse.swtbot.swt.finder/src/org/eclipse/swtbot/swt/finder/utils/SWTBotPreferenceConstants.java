@@ -22,7 +22,10 @@ public interface SWTBotPreferenceConstants {
 	public static final String	KEY_DEFAULT_KEY					= "org.eclipse.swtbot.search.defaultKey";
 	/** @see SWTBotPreferences#TIMEOUT */
 	public static final String	KEY_TIMEOUT						= "org.eclipse.swtbot.search.timeout";
-	/** @see SWTBotPreferences#RECORDER_FILE_NAME */
+	/**
+	 * @see SWTBotPreferences#RECORDER_FILE_NAME
+	 * @deprecated - this will be removed in future versions of swtbot.
+	 */
 	public static final String	KEY_RECORER_FILE_NAME			= "org.eclipse.swtbot.recorder.file.name";
 
 	/** @see SWTBotPreferences#PLAYBACK_DELAY */

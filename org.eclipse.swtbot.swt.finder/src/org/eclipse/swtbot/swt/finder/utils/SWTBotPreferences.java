@@ -46,6 +46,8 @@ public class SWTBotPreferences implements SWTBotPreferenceConstants {
 	/**
 	 * The name of the file in which the recorder records. Defaults to "swtbot.record.txt". To set another default, use
 	 * the system property {@value org.eclipse.swtbot.swt.finder.utils.SWTBotPreferenceConstants#KEY_RECORER_FILE_NAME}.
+	 * 
+	 * @deprecated - this will be removed in future versions
 	 */
 	public static String		RECORDER_FILE_NAME			= System.getProperty(KEY_RECORER_FILE_NAME, "swtbot.record.txt");
 
