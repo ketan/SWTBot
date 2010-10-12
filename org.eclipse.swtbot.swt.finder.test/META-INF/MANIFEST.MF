@@ -7,7 +7,7 @@ Require-Bundle: org.eclipse.swt,
  org.eclipse.jface,
  org.eclipse.swt.examples,
  org.eclipse.swtbot.swt.finder,
- org.apache.log4j;version="1.2.13",
+ org.apache.log4j;version="[1.2.13,1.3.0)",
  org.junit4,
  org.hamcrest,
  org.eclipse.swtbot.junit4_x
