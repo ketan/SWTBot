@@ -17,7 +17,10 @@ import java.util.ListIterator;
 import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Widget;
+import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
 import org.eclipse.swtbot.swt.finder.finders.Finder;
+import org.eclipse.swtbot.swt.finder.finders.MenuFinder;
+import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
@@ -49,6 +52,8 @@ public class WithLabel<T extends Widget> extends AbstractMatcher<T> {
 	 * @param finder finder for locating widgets
 	 */
 	WithLabel(String labelText, Finder finder) {
+		Assert.isNotNull(labelText, "The parameter labelText was null.");
+		Assert.isNotNull(finder, "The parameter finder was null.");
 		mnemonicTextMatcher = new WithMnemonic<Widget>(labelText);
 		this.finder = finder;
 	}
@@ -86,7 +91,7 @@ public class WithLabel<T extends Widget> extends AbstractMatcher<T> {
 	 */
 	@Factory
 	public static <T extends Widget> Matcher<T> withLabel(String labelText) {
-		return new WithLabel<T>(labelText, null);
+		return new WithLabel<T>(labelText, new Finder(new ControlFinder(), new MenuFinder()));
 	}
 
 	/**
