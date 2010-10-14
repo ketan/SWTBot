@@ -15,7 +15,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
-import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
 import org.junit.Test;
 
 /**
@@ -26,7 +25,7 @@ public class TextLabelMatcherTest extends AbstractSWTTestCase {
 
 	@Test
 	public void getsToString() throws Exception {
-		assertEquals("with label (with mnemonic 'SomeLabel')", withLabel("SomeLabel", new ControlFinder()).toString());
+		assertEquals("with label (with mnemonic 'SomeLabel')", withLabel("SomeLabel").toString());
 	}
 
 	public void setUp() throws Exception {
