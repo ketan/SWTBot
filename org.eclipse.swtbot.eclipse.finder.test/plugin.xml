@@ -15,6 +15,18 @@
             id="org.eclipse.swtbot.eclipse.finder.test.ui.views.SWTBotTestView"
             name="SWTBot Test View">
       </view>
+      <view
+            class="org.eclipse.swtbot.eclipse.finder.test.ui.views.SWTBotFormView"
+            id="org.eclipse.swtbot.eclipse.finder.test.ui.views.SWTBotFormView1"
+            name="Form 1"
+            restorable="true">
+      </view>
+      <view
+            class="org.eclipse.swtbot.eclipse.finder.test.ui.views.SWTBotFormView"
+            id="org.eclipse.swtbot.eclipse.finder.test.ui.views.SWTBotFormView2"
+            name="Form 2"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -67,6 +79,14 @@
             id="org.eclipse.swtbot.eclipse.finder.test.ui.editors.MultiPageEditor"
             name="Sample Multi-page Editor">
       </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.eclipse.swtbot.eclipse.finder.test.ui.perspectives.FormPerspective"
+            id="org.eclipse.swtbot.eclipse.finder.test.ui.perspectives.FormPerspective"
+            name="name">
+      </perspective>
    </extension>
 
 </plugin>

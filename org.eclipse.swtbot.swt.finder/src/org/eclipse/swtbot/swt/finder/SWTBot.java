@@ -27,6 +27,7 @@ import org.eclipse.swtbot.swt.finder.finders.ChildrenControlFinder;
 import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
 import org.eclipse.swtbot.swt.finder.finders.Finder;
 import org.eclipse.swtbot.swt.finder.finders.MenuFinder;
+import org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotBrowser;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotCCombo;
@@ -57,7 +58,6 @@ import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.allOf;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.inGroup;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widgetOfType;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withId;
-import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withLabel;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMessage;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMnemonic;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withStyle;
@@ -4151,6 +4151,10 @@ public class SWTBot extends SWTBotFactory {
 	public SWTBotBrowser browserWithLabelInGroup(String label, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Browser.class), withLabel(label), inGroup(inGroup));
 		return new SWTBotBrowser((Browser) widget(matcher, index), matcher);
+	}
+
+	private Matcher<? extends List> withLabel(String label) {
+		return WidgetMatcherFactory.withLabel(label, finder);
 	}
 
 }

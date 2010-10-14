@@ -16,9 +16,11 @@ import static org.junit.Assert.fail;
 
 import java.util.List;
 
+import org.eclipse.swtbot.eclipse.finder.FinderTestIds;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
+import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarDropDownButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarRadioButton;
@@ -169,4 +171,33 @@ public class SWTBotViewTest {
 			// This is expected.
 		}
 	}
+
+	@Test
+	public void viewBotWidgetScope() {
+		try {
+			SWTBotPreferences.TIMEOUT = 0;
+			bot.perspectiveById(FinderTestIds.PERSPECTIVE_ID_FORM).activate();
+			SWTBotView form1 = bot.viewByTitle("Form 1");
+			try {
+				form1.bot().textWithLabel("Form 2");
+				fail("Form 2 text with label should not be reachable in form 1");
+			} catch (WidgetNotFoundException e) {
+				// expected
+			}
+			assertEquals("Form 1", form1.bot().textWithLabel("Form 1").getText());
+
+			SWTBotView form2 = bot.viewByTitle("Form 2");
+			try {
+				form2.bot().textWithLabel("Form 1");
+				fail("Form 1 text with label should not be reachable in form 2");
+			} catch (WidgetNotFoundException e) {
+				// expected
+			}
+			assertEquals("Form 2", form2.bot().textWithLabel("Form 2").getText());
+		} finally {
+			SWTBotPreferences.TIMEOUT = 5000;
+			bot.resetWorkbench();
+		}
+	}
+
 }

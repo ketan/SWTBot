@@ -15,11 +15,9 @@ import java.util.List;
 import java.util.ListIterator;
 
 import org.eclipse.swt.custom.CLabel;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Widget;
-import org.eclipse.swtbot.swt.finder.SWTBot;
+import org.eclipse.swtbot.swt.finder.finders.Finder;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
@@ -42,21 +40,21 @@ public class WithLabel<T extends Widget> extends AbstractMatcher<T> {
 	 * The mnemonic text matcher instance to use.
 	 */
 	private final WithMnemonic<Widget>	mnemonicTextMatcher;
-	private final Composite				parent;
+	private final Finder			finder;
 
 	/**
 	 * Matches a widget that has the specified Label.
 	 * 
 	 * @param labelText the label.
-	 * @param parent
+	 * @param finder finder for locating widgets
 	 */
-	WithLabel(String labelText, Composite parent) {
+	WithLabel(String labelText, Finder finder) {
 		mnemonicTextMatcher = new WithMnemonic<Widget>(labelText);
-		this.parent = parent;
+		this.finder = finder;
 	}
 
 	protected boolean doMatch(Object obj) {
-		List<? extends Widget> allWidgets = new SWTBot().widgets(Matchers.<Widget>anything(), parent(obj));
+		List<? extends Widget> allWidgets = finder.findControls(Matchers.<Widget> anything());
 
 		int widgetIndex = allWidgets.indexOf(obj);
 
@@ -69,10 +67,6 @@ public class WithLabel<T extends Widget> extends AbstractMatcher<T> {
 		}
 
 		return false;
-	}
-
-	private Composite parent(Object obj) {
-		return parent != null ? parent : ((Control) obj).getShell();
 	}
 
 	private boolean isLabel(Widget widget) {
@@ -99,13 +93,13 @@ public class WithLabel<T extends Widget> extends AbstractMatcher<T> {
 	 * Matches a widget that has the specified labelText within the given parent.
 	 * 
 	 * @param labelText the label.
-	 * @param parent the parent widget to which the matcher is scoped.
+	 * @param finder finder for locating widgets
 	 * @return a matcher.
 	 * @since 2.0
 	 */
 	@Factory
-	public static <T extends Widget> Matcher<T> withLabel(String labelText, Composite parent) {
-		return new WithLabel<T>(labelText, parent);
+	public static <T extends Widget> Matcher<T> withLabel(String labelText, Finder finder) {
+		return new WithLabel<T>(labelText, finder);
 	}
 
 }

@@ -31,6 +31,8 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
+import org.eclipse.swtbot.swt.finder.finders.Finder;
+import org.eclipse.swtbot.swt.finder.finders.MenuFinder;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.junit.Test;
@@ -41,38 +43,38 @@ import org.junit.Test;
  */
 public class WidgetMatcherFactoryTest extends AbstractSWTTestCase {
 
-	private ControlFinder	controlFinder;
+	private Finder	finder;
 
 	@Test
 	public void matchesControlsWithLabel() throws Exception {
-		List findControls = controlFinder.findControls(withLabel("TextTransfer:"));
+		List findControls = finder.findControls(withLabel("TextTransfer:", finder));
 		assertText("some\n" + "plain\n" + "text", (Widget) findControls.get(0));
 		assertText("Copy", (Widget) findControls.get(1));
 	}
 
 	@Test
 	public void matchesControlsWithRegex() throws Exception {
-		List findControls = controlFinder.findControls(withRegex(".*Transfer.*"));
+		List findControls = finder.findControls(withRegex(".*Transfer.*"));
 		assertThat(findControls.size(), is(8));
 	}
 
 	@Test
 	public void matchesControlsWithText() throws Exception {
-		List findControls = controlFinder.findControls(withText("some\n" + "plain\n" + "text"));
+		List findControls = finder.findControls(withText("some\n" + "plain\n" + "text"));
 		assertThat(findControls.size(), is(1));
 		assertThat(findControls.get(0), is(Text.class));
 	}
 
 	@Test
 	public void matchesControlsWithTextIgnoringCase() throws Exception {
-		List findControls = controlFinder.findControls(withTextIgnoringCase("SOME\n" + "plain\n" + "TeXt"));
+		List findControls = finder.findControls(withTextIgnoringCase("SOME\n" + "plain\n" + "TeXt"));
 		assertThat(findControls.size(), is(1));
 		assertThat(findControls.get(0), is(Text.class));
 	}
 
 	@Test
 	public void matchesControlsInGroup() throws Exception {
-		List findControls = controlFinder.findControls(inGroup("Paste To:"));
+		List findControls = finder.findControls(inGroup("Paste To:"));
 		assertThat(findControls.size(), is(12));
 		assertThat(findControls.get(0), is(Label.class));
 		assertThat(findControls.get(1), is(Text.class));
@@ -82,7 +84,7 @@ public class WidgetMatcherFactoryTest extends AbstractSWTTestCase {
 
 	@Test
 	public void findsControlsById() throws Exception {
-		final Text text = (Text) bot.widget(allOf(withLabel("TextTransfer:"), inGroup("Copy From:")));
+		final Text text = (Text) bot.widget(allOf(withLabel("TextTransfer:", finder), inGroup("Copy From:")));
 		UIThreadRunnable.syncExec(new VoidResult() {
 			public void run() {
 				text.setData("foo-text", "bar");
@@ -93,7 +95,7 @@ public class WidgetMatcherFactoryTest extends AbstractSWTTestCase {
 
 	public void setUp() throws Exception {
 		super.setUp();
-		controlFinder = new ControlFinder();
+		finder = new Finder(new ControlFinder(), new MenuFinder());
 	}
 
 	protected Shell getFocusShell() {
