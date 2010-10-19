@@ -15,7 +15,7 @@ puts "<tr><td>Name</td><td>Size</td></tr>"
 Dir.foreach(".") do |file|
   if File.directory?(file)
     puts "<tr><td><a href=\'#{file}\'>#{file}</a></td><td>-</td></tr>"
-  else
+  elsif (file != 'index.html')
     puts "<tr><td><a href=\'#{file}\'>#{file}</a></td><td>#{File.size(file)}</td></tr>"
   end
   # puts "<tr><td><a href=#{file}>#{file}</a></td><td>#{File.size(file)}</td></tr>" if !File.directory(file)?
@@ -23,3 +23,5 @@ end
 
 puts "</table>"
 puts "</html>"
+
+

@@ -1,0 +1,35 @@
+How to publish builds:
+
+h2. Run a build locally
+
+$ cd org.eclipse.swtbot.releng
+$ ./make-release
+
+* Get some coffee while the build runs. This usually takes about 30 minutes to compile and run tests on 3 versions of eclipse
+
+h2. Transfer build files to eclipse.org
+
+If all the tests pass, rsync all the upload dir to your home dir at eclipse.org
+
+$ rsync --delete --compress --partial --progress --archive  to-upload build.eclipse.org:
+
+h3. Login to the build server
+
+$ ssh username@build.eclipse.org
+
+Once on the build server:
+
+[build.eclipse.org] $ git clone git://git.eclipse.org/gitroot/swtbot/org.eclipse.swtbot.git swtbot
+
+[build.eclipse.org] $ cd swtbot/tools
+
+[build.eclipse.org] $ ./create-all-index.sh   # create index.html files to enable dirlisting
+
+[build.eclipse.org] $ ./sign-swtbot.sh        # queue up all artifacts for signing
+
+[build.eclipse.org] $ ./monitor.sh            # run this once every couple of minutes to monitor signing queue
+                                              # it might be a couple of minutes on a good day or a few hours near a release date.
+
+[build.eclipse.org] $ ./publish-build.sh      # run this to push the build to the download servers
+                                              # this will archive old builds and publish the new signed jars and
+                                              # release notes to the build servers
