@@ -16,10 +16,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swtbot.swt.finder.SWTBot;
-import org.eclipse.swtbot.swt.finder.alltests.Controls;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.eclipse.swtbot.swt.finder.test.BaseBrowserExampleTest;
 import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -28,13 +25,7 @@ import org.junit.Test;
  * @author Libor Zoubek &lt;lzoubek [at] redhat [dot] com&gt;
  */
 @Ignore
-public class SWTBotBrowserTest extends AbstractSWTTestCase {
-	private SWTBot	bot;
-
-	@Override
-	protected Shell getFocusShell() {
-		return Controls.getInstance().browserShell;
-	}
+public class SWTBotBrowserTest extends BaseBrowserExampleTest {
 
 	@Test
 	public void findBrowser() throws Exception {
@@ -84,8 +75,4 @@ public class SWTBotBrowserTest extends AbstractSWTTestCase {
 		assertContains("JavaScript works", browser.getText());
 	}
 
-	public void setUp() throws Exception {
-		super.setUp();
-		bot = new SWTBot();
-	}
 }

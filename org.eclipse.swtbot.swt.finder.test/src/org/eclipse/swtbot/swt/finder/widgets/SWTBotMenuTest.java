@@ -18,17 +18,14 @@ import java.util.List;
 
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.swtbot.swt.finder.AbstractMenuExampleTest;
-import org.eclipse.swtbot.swt.finder.SWTBot;
+import org.eclipse.swtbot.swt.finder.test.BaseMenuExampleTest;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotMenuTest extends AbstractMenuExampleTest {
-
-	private SWTBot	bot;
+public class SWTBotMenuTest extends BaseMenuExampleTest {
 
 	@Test
 	public void findsMenus() throws Exception {
@@ -45,11 +42,11 @@ public class SWTBotMenuTest extends AbstractMenuExampleTest {
 	public void clicksSubMenus() throws Exception {
 		display.syncExec(new Runnable() {
 			public void run() {
-				menuExample
+				addressBook
 						.addAddressBook(new String[] { "last2", "first", "business phone", "home phone", "email@addres.ss", "fax number" });
-				menuExample
+				addressBook
 						.addAddressBook(new String[] { "last6", "first", "business phone", "home phone", "email@addres.ss", "fax number" });
-				menuExample
+				addressBook
 						.addAddressBook(new String[] { "last4", "first", "business phone", "home phone", "email@addres.ss", "fax number" });
 			}
 		});
@@ -63,7 +60,7 @@ public class SWTBotMenuTest extends AbstractMenuExampleTest {
 		final TableItem[][] treeItems = new TableItem[][] { null };
 		display.syncExec(new Runnable() {
 			public void run() {
-				treeItems[0] = menuExample.getTreeItems();
+				treeItems[0] = addressBook.getTreeItems();
 			}
 		});
 		TableItem[] tableItems = treeItems[0];
@@ -76,7 +73,7 @@ public class SWTBotMenuTest extends AbstractMenuExampleTest {
 
 		display.syncExec(new Runnable() {
 			public void run() {
-				treeItems[0] = menuExample.getTreeItems();
+				treeItems[0] = addressBook.getTreeItems();
 			}
 		});
 
@@ -86,8 +83,4 @@ public class SWTBotMenuTest extends AbstractMenuExampleTest {
 		assertText("last2", tableItems[2]);
 	}
 
-	public void setUp() throws Exception {
-		super.setUp();
-		bot = new SWTBot();
-	}
 }

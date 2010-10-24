@@ -13,8 +13,7 @@ package org.eclipse.swtbot.swt.finder.widgets;
 import static org.eclipse.swtbot.swt.finder.SWTBotAssert.pass;
 import static org.junit.Assert.fail;
 
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.eclipse.swtbot.swt.finder.test.BaseCustomControlExampleTest;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,11 +21,10 @@ import org.junit.Test;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotCTabItemTest extends AbstractSWTTestCase {
+public class SWTBotCTabItemTest extends BaseCustomControlExampleTest {
 
 	@Before
-	public void setUp() throws Exception {
-		super.setUp();
+	public void prepareExample() throws Exception {
 		bot.tabItem("CTabFolder").activate();
 		bot.checkBox("SWT.CLOSE").deselect();
 		bot.checkBox("SWT.CLOSE").select();
@@ -49,10 +47,6 @@ public class SWTBotCTabItemTest extends AbstractSWTTestCase {
 		}catch (Exception e) {
 			pass();
 		}
-	}
-
-	protected Shell getFocusShell() {
-		return customControlShell;
 	}
 
 }

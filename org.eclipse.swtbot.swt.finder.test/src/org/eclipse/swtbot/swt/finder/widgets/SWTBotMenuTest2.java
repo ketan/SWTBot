@@ -14,14 +14,17 @@ import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.eclipse.swtbot.swt.finder.test.BaseControlExampleTest;
+import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
-public class SWTBotMenuTest2 extends AbstractSWTTestCase {
+public class SWTBotMenuTest2 extends BaseControlExampleTest {
 
 	private SWTBotText	listeners;
 
 	@Test
+	@Ignore("Broken on cocoa")
 	public void clicksCheckMenus() throws Exception {
 		SWTBotMenu menu = bot.menu("Cascade").menu("Check");
 		assertFalse(menu.isChecked());
@@ -30,8 +33,8 @@ public class SWTBotMenuTest2 extends AbstractSWTTestCase {
 		assertTextContains("Selection [13]: SelectionEvent{MenuItem {&Check	Ctrl+Shift+C}", listeners);
 	}
 
-	public void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void prepareExample() throws Exception {
 		bot.tabItem("Menu").activate();
 		listeners = bot.textInGroup("Listeners");
 
@@ -56,25 +59,4 @@ public class SWTBotMenuTest2 extends AbstractSWTTestCase {
 		bot.shell("Title:0").activate();
 	}
 
-	public void tearDown() throws Exception {
-		bot.shell("SWT Controls").activate();
-		bot.button("Close All Shells").click();
-
-		bot.checkBox("SWT.BAR").deselect();
-		bot.checkBox("SWT.DROP_DOWN").deselect();
-
-		bot.checkBox("SWT.CASCADE").deselect();
-		bot.checkBox("SWT.CHECK").deselect();
-		bot.checkBox("SWT.PUSH").deselect();
-		bot.checkBox("SWT.RADIO").deselect();
-		bot.checkBox("SWT.SEPARATOR").deselect();
-
-		bot.checkBox("Images").deselect();
-		bot.checkBox("Accelerators").deselect();
-		bot.checkBox("Mnemonics").deselect();
-		bot.checkBox("Sub-Sub-Menu").deselect();
-		bot.checkBox("Sub-Menu").deselect();
-
-		super.tearDown();
-	}
 }

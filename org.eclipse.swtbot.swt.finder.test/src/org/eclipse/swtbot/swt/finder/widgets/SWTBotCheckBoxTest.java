@@ -21,19 +21,17 @@ import static org.junit.Assert.fail;
 import java.util.List;
 
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
+import org.eclipse.swtbot.swt.finder.test.BaseControlExampleTest;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotCheckBoxTest extends AbstractSWTTestCase {
-
-	private SWTBot	bot;
+public class SWTBotCheckBoxTest extends BaseControlExampleTest {
 
 	@Test
 	public void clicksCheckBox() throws Exception {
@@ -84,10 +82,9 @@ public class SWTBotCheckBoxTest extends AbstractSWTTestCase {
 			pass();
 		}
 	}
-
-	public void setUp() throws Exception {
-		super.setUp();
-		bot = new SWTBot();
+	
+	@Before
+	public void prepareExample() throws Exception {
 		bot.tabItem("Button").activate();
 	}
 }

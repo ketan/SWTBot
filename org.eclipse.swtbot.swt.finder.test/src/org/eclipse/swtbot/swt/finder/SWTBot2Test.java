@@ -23,20 +23,19 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.eclipse.swtbot.swt.finder.test.BaseControlExampleTest;
 import org.eclipse.swtbot.swt.finder.utils.Traverse;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotText;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBot2Test extends AbstractSWTTestCase {
-
-	private SWTBot	bot;
+public class SWTBot2Test extends BaseControlExampleTest {
 
 	@Test
 	public void findsTextBox() throws Exception {
@@ -105,16 +104,9 @@ public class SWTBot2Test extends AbstractSWTTestCase {
 		assertTrue(bot.button("Two").isActive());
 	}
 
-	public void setUp() throws Exception {
-		super.setUp();
-		bot = new SWTBot();
+	@Before
+	public void prepareExample() throws Exception {
 		bot.tabItem("Button").activate();
-	}
-
-	public void tearDown() throws Exception {
-		super.tearDown();
-		bot.checkBox("Listen").deselect();
-		bot.button("Clear").click();
 	}
 
 }
