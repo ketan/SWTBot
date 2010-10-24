@@ -6,7 +6,7 @@ Changes in code:
 1. Change the property "Bundle-Version" in all MANIFEST.MF files. This property should be of the form X.Y.Z.qualifier
 2. Change the version in feature.xml
 3. Change the property "plugin.version.primary" to X.Y.Z in org.eclipse.swtbot.releng/build.xml
-4. Change the property "plugin.suffix" to ${svn.version}-SUFFIX (suffix can be alpha, beta, or none at all)
+4. Change the property "plugin.suffix" to ${git.version}-SUFFIX (suffix can be alpha, beta, or none at all)
 5. Check in the code
 
 Tag/switch the release:
