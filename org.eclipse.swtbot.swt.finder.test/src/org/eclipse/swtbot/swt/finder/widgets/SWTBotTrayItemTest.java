@@ -14,32 +14,40 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Tray;
 import org.eclipse.swt.widgets.TrayItem;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.results.WidgetResult;
+import org.eclipse.swtbot.swt.finder.test.BaseSWTShellTest;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
-public class SWTBotTrayItemTest extends AbstractSWTTestCase {
+public class SWTBotTrayItemTest extends BaseSWTShellTest {
 
 	private Menu	tray_item_menu;
 	private Tray	tray;
 
+	@Override
+	protected void createUI(Composite parent) {
+	}
+
+	@Before
 	public void setUp() throws Exception {
-		super.setUp();
 		tray = getSystemTray();
 		createTrayItems();
 	}
 
+	@After
 	public void tearDown() throws Exception {
 		destroyTrayItems();
-		super.tearDown();
 	}
 
 	@Test
@@ -66,6 +74,7 @@ public class SWTBotTrayItemTest extends AbstractSWTTestCase {
 	}
 
 	@Test
+	@Ignore
 	public void menuCanBeAccessedOnTrayItem() {
 		bot.trayItem(2).menu("Menu").click();
 		assertTrue(menuSelected);
@@ -79,7 +88,7 @@ public class SWTBotTrayItemTest extends AbstractSWTTestCase {
 
 	private final Listener	popupMenu				= new Listener() {
 														public void handleEvent(Event event) {
-															tray_item_menu = new Menu(controlShell, SWT.POP_UP);
+															tray_item_menu = new Menu(shell, SWT.POP_UP);
 															MenuItem item = new MenuItem(tray_item_menu, SWT.PUSH);
 															item.setText("Menu");
 															item.addListener(SWT.Selection, menuSelectedListener);
@@ -136,4 +145,5 @@ public class SWTBotTrayItemTest extends AbstractSWTTestCase {
 	public class SystemTrayNotSupportedException extends RuntimeException {
 		private static final long	serialVersionUID	= 1053812131263043591L;
 	}
+
 }

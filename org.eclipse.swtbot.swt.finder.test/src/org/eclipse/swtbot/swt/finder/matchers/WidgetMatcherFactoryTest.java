@@ -26,24 +26,18 @@ import java.util.List;
 
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
-import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
-import org.eclipse.swtbot.swt.finder.finders.Finder;
-import org.eclipse.swtbot.swt.finder.finders.MenuFinder;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.eclipse.swtbot.swt.finder.test.BaseClipboardExampleTest;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class WidgetMatcherFactoryTest extends AbstractSWTTestCase {
-
-	private Finder	finder;
+public class WidgetMatcherFactoryTest extends BaseClipboardExampleTest {
 
 	@Test
 	public void matchesControlsWithLabel() throws Exception {
@@ -91,15 +85,6 @@ public class WidgetMatcherFactoryTest extends AbstractSWTTestCase {
 			}
 		});
 		assertSameWidget(text, bot.widget(withId("foo-text", "bar")));
-	}
-
-	public void setUp() throws Exception {
-		super.setUp();
-		finder = new Finder(new ControlFinder(), new MenuFinder());
-	}
-
-	protected Shell getFocusShell() {
-		return clipboardExampleShell;
 	}
 
 }

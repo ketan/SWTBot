@@ -10,14 +10,15 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.eclipse.swtbot.swt.finder.test.BaseControlExampleTest;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotLinkTest extends AbstractSWTTestCase {
+public class SWTBotLinkTest extends BaseControlExampleTest {
 
 	private SWTBotText	listeners;
 
@@ -47,8 +48,8 @@ public class SWTBotLinkTest extends AbstractSWTTestCase {
 		assertEventMatches(listeners, "MouseUp [4]: MouseEvent{Link {Visit the <A HREF=\"www.eclipse.org\">Eclipse.org</A> project and the <A HREF=\"www.eclipse.org\\swt\">SWT</A> homepage or <a>Foo</a>.} time=1561910872 data=null button=1 stateMask=524288 x=234 y=10 count=1}");
 	}
 
-	public void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void prepareExample() throws Exception {
 		bot.tabItem("Link").activate();
 		bot.checkBox("Listen").select();
 		bot.button("Clear").click();

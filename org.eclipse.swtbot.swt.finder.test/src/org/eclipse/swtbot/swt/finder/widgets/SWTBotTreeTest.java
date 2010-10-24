@@ -23,18 +23,19 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.AssertionFailedException;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.Result;
+import org.eclipse.swtbot.swt.finder.test.BaseControlExampleTest;
 import org.eclipse.swtbot.swt.finder.utils.TableCollection;
 import org.eclipse.swtbot.swt.finder.utils.TableRow;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotTreeTest extends AbstractSWTTestCase {
+public class SWTBotTreeTest extends BaseControlExampleTest {
 
 	private SWTBot		bot;
 	private SWTBotTree	tree;
@@ -258,9 +259,9 @@ public class SWTBotTreeTest extends AbstractSWTTestCase {
 	public void expandEmptyPath() throws Exception {
 		bot.tree().expandNode();
 	}
-
+	
+	@Before
 	public void setUp() throws Exception {
-		super.setUp();
 		bot = new SWTBot();
 		bot.tabItem("Tree").activate();
 		bot.checkBox("Listen").deselect();

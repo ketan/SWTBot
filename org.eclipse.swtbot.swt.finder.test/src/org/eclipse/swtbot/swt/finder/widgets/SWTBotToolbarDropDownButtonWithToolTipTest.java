@@ -16,18 +16,17 @@ import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.pass;
 import static org.junit.Assert.fail;
 
-import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.eclipse.swtbot.swt.finder.test.BaseControlExampleTest;
+import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotToolbarDropDownButtonWithToolTipTest extends AbstractSWTTestCase {
-
-	private SWTBot	bot;
+public class SWTBotToolbarDropDownButtonWithToolTipTest extends BaseControlExampleTest {
 
 	@Test
 	public void findsToolBarButtonWithIndex() throws Exception {
@@ -49,6 +48,7 @@ public class SWTBotToolbarDropDownButtonWithToolTipTest extends AbstractSWTTestC
 	}
 
 	@Test
+	@Ignore
 	public void clicksADropDownMenuItem() throws Exception {
 		SWTBotToolbarDropDownButton button = bot.toolbarDropDownButtonWithTooltip("SWT.DROP_DOWN");
 		try {
@@ -61,9 +61,8 @@ public class SWTBotToolbarDropDownButtonWithToolTipTest extends AbstractSWTTestC
 		button.menuItem("Kiwi").click();
 	}
 
-	public void setUp() throws Exception {
-		super.setUp();
-		bot = new SWTBot();
+	@Before
+	public void prepareExample() throws Exception {
 		bot.tabItem("ToolBar").activate();
 	}
 }

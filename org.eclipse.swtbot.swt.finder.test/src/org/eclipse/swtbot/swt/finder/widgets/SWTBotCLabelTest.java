@@ -14,18 +14,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swtbot.swt.finder.SWTBot;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.eclipse.swtbot.swt.finder.test.BaseCustomControlExampleTest;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotCLabelTest extends AbstractSWTTestCase {
-
-	private SWTBot	bot;
+public class SWTBotCLabelTest extends BaseCustomControlExampleTest {
 
 	@Test
 	public void findsCLabel() throws Exception {
@@ -51,14 +48,9 @@ public class SWTBotCLabelTest extends AbstractSWTTestCase {
 		assertNotNull(bot.clabel("One").image());
 	}
 
+	@Before
 	public void setUp() throws Exception {
-		super.setUp();
-		bot = new SWTBot();
 		bot.tabItem("CLabel").activate();
-	}
-
-	protected Shell getFocusShell() {
-		return customControlShell;
 	}
 
 }

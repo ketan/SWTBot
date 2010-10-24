@@ -21,14 +21,14 @@ import java.util.List;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTException;
 import org.eclipse.swt.widgets.MenuItem;
-import org.eclipse.swtbot.swt.finder.AbstractMenuExampleTest;
+import org.eclipse.swtbot.swt.finder.test.BaseMenuExampleTest;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class MenuFinderTest extends AbstractMenuExampleTest {
+public class MenuFinderTest extends BaseMenuExampleTest {
 
 	@Test
 	public void clicksMenuItem() throws Exception {

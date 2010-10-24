@@ -18,10 +18,10 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 
 import org.eclipse.swt.custom.CTabItem;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.eclipse.swtbot.swt.finder.test.BaseCustomControlExampleTest;
 import org.eclipse.swtbot.swt.finder.utils.TreePath;
 import org.hamcrest.Matcher;
 import org.junit.Test;
@@ -30,14 +30,12 @@ import org.junit.Test;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class ControlFinder2Test extends AbstractSWTTestCase {
-
-	private ControlFinder	finder;
+public class ControlFinder2Test extends BaseCustomControlExampleTest {
 
 	@Test
 	public void findsAllTabItem() throws Exception {
 		selectCTabFolder();
-		List<CTabItem> tabItems = finder.findControls(widgetOfType(CTabItem.class));
+		List<CTabItem> tabItems = controlFinder.findControls(widgetOfType(CTabItem.class));
 		assertEquals(3, tabItems.size());
 	}
 
@@ -47,28 +45,19 @@ public class ControlFinder2Test extends AbstractSWTTestCase {
 	public void getsControlPath() throws Exception {
 		selectCTabFolder();
 		Matcher<CTabItem> withText = withText("CTabItem 1");
-		List<CTabItem> labels = finder.findControls(allOf(widgetOfType(CTabItem.class), withText));
+		List<CTabItem> labels = controlFinder.findControls(allOf(widgetOfType(CTabItem.class), withText));
 		Widget w = labels.get(0);
-		TreePath path = finder.getPath(w);
+		TreePath path = controlFinder.getPath(w);
 		assertEquals(8, path.getSegmentCount());
 	}
 
 	private void selectCTabFolder() {
 		UIThreadRunnable.syncExec(display, new VoidResult() {
 			public void run() {
-				List<TabFolder> findControls = finder.findControls(widgetOfType(TabFolder.class));
+				List<TabFolder> findControls = controlFinder.findControls(widgetOfType(TabFolder.class));
 				TabFolder folder = findControls.get(0);
 				folder.setSelection(2);
 			}
 		});
-	}
-
-	public void setUp() throws Exception {
-		super.setUp();
-		finder = new ControlFinder();
-	}
-
-	protected Shell getFocusShell() {
-		return customControlShell;
 	}
 }

@@ -13,8 +13,8 @@ package org.eclipse.swtbot.swt.finder.widgets;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertNotSameWidget;
 import static org.junit.Assert.assertTrue;
 
-import org.eclipse.swtbot.swt.finder.SWTBot;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.eclipse.swtbot.swt.finder.test.BaseControlExampleTest;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -22,9 +22,7 @@ import org.junit.Test;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotToolbarRadioButtonTest extends AbstractSWTTestCase {
-
-	private SWTBot	bot;
+public class SWTBotToolbarRadioButtonTest extends BaseControlExampleTest {
 
 	@Test
 	public void findsToolBarButtonWithIndex() throws Exception {
@@ -73,17 +71,10 @@ public class SWTBotToolbarRadioButtonTest extends AbstractSWTTestCase {
 		assertTrue(checked != button.isChecked());
 	}
 
+	@Before
 	public void setUp() throws Exception {
-		super.setUp();
-		bot = new SWTBot();
 		bot.tabItem("ToolBar").activate();
 		bot.checkBox("Listen").select();
-	}
-
-	public void tearDown() throws Exception {
-		super.tearDown();
-		bot.radio("SWT.HORIZONTAL").click(); // reset the ui
-		bot.checkBox("Listen").deselect();
 	}
 
 }

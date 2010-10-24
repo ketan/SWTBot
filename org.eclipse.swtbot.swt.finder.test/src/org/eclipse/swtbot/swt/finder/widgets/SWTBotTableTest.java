@@ -17,19 +17,18 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 
 import org.eclipse.swt.widgets.Table;
-import org.eclipse.swtbot.swt.finder.SWTBot;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.eclipse.swtbot.swt.finder.test.BaseControlExampleTest;
 import org.eclipse.swtbot.swt.finder.utils.TableCollection;
 import org.eclipse.swtbot.swt.finder.utils.TableRow;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotTableTest extends AbstractSWTTestCase {
+public class SWTBotTableTest extends BaseControlExampleTest {
 
-	private SWTBot		bot;
 	private SWTBotTable	table;
 
 	@Test
@@ -255,9 +254,8 @@ public class SWTBotTableTest extends AbstractSWTTestCase {
 		assertEquals("Index:3", tableItem.getText());
 	}
 
-	public void setUp() throws Exception {
-		super.setUp();
-		bot = new SWTBot();
+	@Before
+	public void prepareExample() throws Exception {
 		bot.tabItem("Table").activate();
 		table = bot.tableInGroup("Table");
 	}
