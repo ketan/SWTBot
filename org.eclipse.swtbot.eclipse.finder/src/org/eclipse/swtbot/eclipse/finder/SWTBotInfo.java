@@ -20,7 +20,7 @@ import org.eclipse.swt.SWT;
  */
 public class SWTBotInfo {
 
-	private static final String	VERSION	= "@svn.version@";
+	private static final String	VERSION	= "@git.version@";
 
 	/**
 	 * Prints out some platform specific information useful for diagnosis.

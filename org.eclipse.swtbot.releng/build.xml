@@ -29,9 +29,9 @@
 
 	<property name="plugin.version.primary" value="2.0.0" />
 
-	<!-- automagically generate build numbers from svn -->
-	<property name="svn.version" value="1" />
-	<property name="plugin.suffix" value="${svn.version}-dev-${eclipse.qualifier}" />
+	<!-- automagically generate build numbers from git -->
+	<property name="git.version" value="1" />
+	<property name="plugin.suffix" value="${git.version}-dev-${eclipse.qualifier}" />
 	<property name="buildId" value="${plugin.suffix}" />
 	<property name="eclipse-target" value="${basedir}/../eclipse" />
 
@@ -67,13 +67,13 @@
 	<target name="create-version-files" description="create a java file containing the version number of swtbot and other information">
 		<copy filtering="true" overwrite="true" file="../org.eclipse.swtbot.swt.finder/src/org/eclipse/swtbot/swt/finder/SWTBotInfo.java" tofile="target/plugins/org.eclipse.swtbot.swt.finder/src/org/eclipse/swtbot/swt/finder/SWTBotInfo.java">
 			<filterset>
-				<filter token="svn.version" value="${all.buildId}"/>
+				<filter token="git.version" value="${all.buildId}"/>
 			</filterset>
 		</copy>
 
 		<copy filtering="true" overwrite="true" file="../org.eclipse.swtbot.eclipse.finder/src/org/eclipse/swtbot/eclipse/finder/SWTBotInfo.java"  tofile="target/plugins/org.eclipse.swtbot.eclipse.finder/src/org/eclipse/swtbot/eclipse/finder/SWTBotInfo.java">
 			<filterset>
-				<filter token="svn.version" value="${all.buildId}"/>
+				<filter token="git.version" value="${all.buildId}"/>
 			</filterset>
 		</copy>
 	</target>
