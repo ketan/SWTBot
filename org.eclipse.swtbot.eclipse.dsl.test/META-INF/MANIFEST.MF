@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SWTBot Dsl for Eclipse IDE (incubation)
 Bundle-SymbolicName: org.eclipse.swtbot.eclipse.dsl.test
-Bundle-Version: 2.0.0.qualifier
+Bundle-Version: 2.0.1.qualifier
 Bundle-Vendor: Eclipse.org - SWTBot
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
