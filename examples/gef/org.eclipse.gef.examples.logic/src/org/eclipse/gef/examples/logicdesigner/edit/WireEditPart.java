@@ -22,7 +22,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.draw2d.Connection;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.ManhattanConnectionRouter;
-import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.draw2d.RelativeBendpoint;
 
 import org.eclipse.gef.AccessibleEditPart;
