@@ -57,7 +57,7 @@
             <property name="testApplication" value="org.eclipse.ui.ide.workbench" />
             <property name="plugin-name" value="${plugin-name}" />
             <property name="classname" value="org.eclipse.swtbot.eclipse.finder.AllTests" />
-            <property name="vmargs" value=" -Xms128M -Xmx368M -XX:MaxPermSize=256M ${jvmOption}" />
+            <property name="vmargs" value=" -Xms128M -Xmx368M -XX:MaxPermSize=256M ${jvmOption} ${extra.jvm.options}" />
         </ant>
     </target>
 

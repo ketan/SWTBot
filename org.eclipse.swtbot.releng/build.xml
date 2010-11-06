@@ -40,7 +40,7 @@
 	<property name="plugin.prefix" value="org.eclipse.swtbot" />
 	<property name="feature.id" value="${plugin.prefix}" />
 	<property name="feature.id.test" value="${feature.id}.test" />
-
+	<property name="extra.jvm.options" value="-server" />
 
 	<property name="test-sandbox" value="${basedir}/test-sandbox" />
 
@@ -311,6 +311,7 @@
 			<arg value="-Dos=${os}" />
 			<arg value="-Dws=${ws}" />
 			<arg value="-Darch=${arch}" />
+			<arg value="-Dextra.jvm.options=${extra.jvm.options}" />
 
 			<!-- one each for each feature that is built -->
 			<arg value="-Dfeature.id=${feature.id}" />

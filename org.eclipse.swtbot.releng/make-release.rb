@@ -22,10 +22,10 @@ class Release
     puts "Generating revision log since  #{@available_revision} to HEAD(#{@current_head})"
 
     @revision_log = `git log --pretty='%h - by %cn on %cd%n%s%n%b%n' --date=short #{@available_revision}..#{@current_head}`
-    
+
     @revision_log.gsub!(/.*git-svn-id:.*@(\d+).*/, '  svn-revision: \1')
     @revision_log = @revision_log.gsub(/\t/,"     ").gsub(/.{1,72}(?:\s|\Z)/){($& + 5.chr).gsub(/\n\005/,"\n  ").gsub(/\005/,"\n  ")}
-    
+
     @revision_log += "\n\n"
     @revision_log += open(uri).read
 
@@ -62,7 +62,8 @@ class Release
     release_notes("to-upload/#{code_name}/dev-build")
 
     sh("ant materialize-workspace -Declipse.version=#{version} -Dhas.archives=true")
-    sh("ant cruise -Declipse.version=#{version} -Dhas.archives=true")
+    extra_jvm_opts = "-Dextra.jvm.options=#{ENV['JAVA_OPTS']}" if ENV['JAVA_OPTS']
+    sh("ant cruise -Declipse.version=#{version} -Dhas.archives=true #{extra_jvm_opts}")
     FileUtils.rm_rf("to-upload/#{code_name}")
     FileUtils.mkdir_p("to-upload/#{code_name}")
     FileUtils.mv("artifacts/to-upload", "to-upload/#{code_name}/dev-build")
