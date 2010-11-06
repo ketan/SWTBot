@@ -25,6 +25,9 @@ import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
+import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -34,6 +37,18 @@ import org.junit.Test;
 public class SWTBotCheckBoxTest extends AbstractSWTTestCase {
 
 	private SWTBot	bot;
+	private long	oldTimeout;
+
+	@Before
+	public void lowerTimeout() {
+		this.oldTimeout = SWTBotPreferences.TIMEOUT;
+		SWTBotPreferences.TIMEOUT = 2000;
+	}
+
+	@After
+	public void resetTimeout() {
+		SWTBotPreferences.TIMEOUT = oldTimeout;
+	}
 
 	@Test
 	public void clicksCheckBox() throws Exception {
