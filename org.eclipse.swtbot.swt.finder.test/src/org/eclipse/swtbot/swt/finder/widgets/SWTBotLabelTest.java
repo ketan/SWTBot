@@ -14,15 +14,17 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swtbot.swt.finder.test.BaseControlExampleTest;
-import org.junit.Before;
+import org.eclipse.swtbot.swt.finder.SWTBot;
+import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotLabelTest extends BaseControlExampleTest {
+public class SWTBotLabelTest extends AbstractSWTTestCase {
+
+	private SWTBot	bot;
 
 	@Test
 	public void findsLabel() throws Exception {
@@ -43,8 +45,9 @@ public class SWTBotLabelTest extends BaseControlExampleTest {
 		assertNotNull(bot.label("").image());
 	}
 
-	@Before
-	public void prepareExample() throws Exception {
+	public void setUp() throws Exception {
+		super.setUp();
+		bot = new SWTBot();
 		bot.tabItem("Label").activate();
 		bot.checkBox("Horizontal Fill").select();
 	}

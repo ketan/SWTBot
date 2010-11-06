@@ -16,16 +16,17 @@ import static org.junit.Assert.assertEquals;
 
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.swtbot.swt.finder.test.BaseControlExampleTest;
-import org.junit.Before;
+import org.eclipse.swtbot.swt.finder.SWTBot;
+import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotTableColumnTest extends BaseControlExampleTest {
+public class SWTBotTableColumnTest extends AbstractSWTTestCase {
 
+	private SWTBot		bot;
 	private SWTBotTable	table;
 
 	@Test
@@ -47,13 +48,19 @@ public class SWTBotTableColumnTest extends BaseControlExampleTest {
 		assertTextContains("data=null button=1 stateMask=524288 x=0 y=0 count=1}", text);
 	}
 
-	@Before
-	public void prepareExample() throws Exception {
+	public void setUp() throws Exception {
+		super.setUp();
+		bot = new SWTBot();
 		bot.tabItem("Table").activate();
 		bot.radio("SWT.MULTI").click();
 		bot.checkBox("Header Visible").select();
 		bot.checkBox("Listen").select();
 		bot.button("Clear").click();
 		table = bot.tableInGroup("Table");
+	}
+
+	public void tearDown() throws Exception {
+		bot.checkBox("Listen").deselect();
+		super.tearDown();
 	}
 }

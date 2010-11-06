@@ -10,9 +10,9 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.utils;
 
-import junit.framework.TestCase;
-
 import org.junit.Test;
+
+import junit.framework.TestCase;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;

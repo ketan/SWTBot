@@ -15,9 +15,9 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.lessThan;
 
-import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.SWTBot;
-import org.eclipse.swtbot.swt.finder.test.BaseSWTShellTest;
+import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.junit.Test;
 
@@ -25,7 +25,10 @@ import org.junit.Test;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class ShellClosesTest extends BaseSWTShellTest {
+public class ShellClosesTest extends AbstractSWTTestCase {
+
+	private static final String	TEXT	= "this should close in a while" + ShellClosesTest.class.getSimpleName();
+	private Shell				shell;
 
 	@SuppressWarnings("unchecked")
 	@Test
@@ -39,8 +42,10 @@ public class ShellClosesTest extends BaseSWTShellTest {
 		assertThat(time, allOf(lessThan(5000), greaterThan(200)));
 	}
 
-	@Override
-	protected void createUI(Composite parent) {
+	public void setUp() throws Exception {
+		super.setUp();
+		shell = createShell(TEXT);
+
 		new Thread(new Runnable() {
 			public void run() {
 				try {

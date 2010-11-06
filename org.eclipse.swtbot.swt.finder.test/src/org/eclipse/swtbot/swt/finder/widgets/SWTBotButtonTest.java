@@ -13,15 +13,17 @@ package org.eclipse.swtbot.swt.finder.widgets;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.eclipse.swtbot.swt.finder.test.BaseControlExampleTest;
-import org.junit.Before;
+import org.eclipse.swtbot.swt.finder.SWTBot;
+import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotButtonTest extends BaseControlExampleTest {
+public class SWTBotButtonTest extends AbstractSWTTestCase {
+
+	private SWTBot	bot;
 
 	@Test
 	public void findsButtons() throws Exception {
@@ -54,8 +56,9 @@ public class SWTBotButtonTest extends BaseControlExampleTest {
 		assertNotNull(bot.button("One").foregroundColor());
 	}
 
-	@Before
 	public void setUp() throws Exception {
+		super.setUp();
+		bot = new SWTBot();
 		bot.tabItem("Button").activate();
 	}
 

@@ -17,19 +17,18 @@ import static org.junit.Assert.assertTrue;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swtbot.swt.finder.test.BaseControlExampleTest;
-import org.junit.Before;
+import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTUtilsTest extends BaseControlExampleTest {
+public class SWTUtilsTest extends AbstractSWTTestCase {
 
 	@Test
 	public void findsRightIndexOfControlInParentWithNoParent() throws Exception {
-		assertEquals(-1, SWTUtils.widgetIndex(shell));
+		assertEquals(-1, SWTUtils.widgetIndex(controlShell));
 	}
 
 	@Test
@@ -70,8 +69,9 @@ public class SWTUtilsTest extends BaseControlExampleTest {
 		assertSame(null, SWTUtils.previousWidget(getChildren()[0]));
 	}
 
-	@Before
-	public void prepareExample() throws Exception {
+	@Override
+	public void setUp() throws Exception {
+		super.setUp();
 		bot.tabItem("Button").activate();
 	}
 

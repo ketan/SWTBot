@@ -19,15 +19,17 @@ import static org.junit.Assert.fail;
 import java.util.Arrays;
 import java.util.List;
 
-import org.eclipse.swtbot.swt.finder.test.BaseControlExampleTest;
-import org.junit.Before;
+import org.eclipse.swtbot.swt.finder.SWTBot;
+import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotComboTest extends BaseControlExampleTest {
+public class SWTBotComboTest extends AbstractSWTTestCase {
+
+	private SWTBot	bot;
 
 	@Test
 	public void findsCombo() throws Exception {
@@ -105,13 +107,11 @@ public class SWTBotComboTest extends BaseControlExampleTest {
 		comboBox.typeText("New typed Text");
 		assertEquals("New typed Text", comboBox.getText());
 
-		if (!isCocoa())
-			assertEventMatches(bot.textInGroup("Listeners"), "KeyDown [1]: KeyEvent{Combo {} time=490981104 data=null character='\\0' keyCode=131072 stateMask=0 doit=true}");
+		assertEventMatches(bot.textInGroup("Listeners"), "KeyDown [1]: KeyEvent{Combo {} time=490981104 data=null character='\\0' keyCode=131072 stateMask=0 doit=true}");
 		assertEventMatches(bot.textInGroup("Listeners"), "KeyDown [1]: KeyEvent{Combo {} time=490981272 data=null character='N' keyCode=110 stateMask=131072 doit=true}");
 		assertEventMatches(bot.textInGroup("Listeners"), "Verify [25]: VerifyEvent{Combo {} time=490981272 data=null character='N' keyCode=110 stateMask=131072 doit=true start=0 end=0 text=N}");
 		assertEventMatches(bot.textInGroup("Listeners"), "KeyUp [2]: KeyEvent{Combo {N} time=490981352 data=null character='N' keyCode=110 stateMask=131072 doit=true}");
-		if (!isCocoa())
-			assertEventMatches(bot.textInGroup("Listeners"), "KeyUp [2]: KeyEvent{Combo {N} time=490981457 data=null character='\\0' keyCode=131072 stateMask=131072 doit=true}");
+		assertEventMatches(bot.textInGroup("Listeners"), "KeyUp [2]: KeyEvent{Combo {N} time=490981457 data=null character='\\0' keyCode=131072 stateMask=131072 doit=true}");
 	}
 
 	@Test
@@ -128,8 +128,9 @@ public class SWTBotComboTest extends BaseControlExampleTest {
 		}
 	}
 
-	@Before
-	public void prepareExample() throws Exception {
+	public void setUp() throws Exception {
+		super.setUp();
+		bot = new SWTBot();
 		bot.tabItem("Combo").activate();
 	}
 

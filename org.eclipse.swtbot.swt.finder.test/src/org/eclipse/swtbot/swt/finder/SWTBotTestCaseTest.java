@@ -28,7 +28,6 @@ import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBotTest;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
-import org.junit.Before;
 import org.junit.Test;
 
 public class SWTBotTestCaseTest extends AbstractSWTBotTest {
@@ -137,8 +136,8 @@ public class SWTBotTestCaseTest extends AbstractSWTBotTest {
 		assertMatchesRegex("n", bot.button("One"));
 	}
 
-	@Before
-	public void prepareExample() throws Exception {
+	public void setUp() throws Exception {
+		super.setUp();
 		bot.tabItem("Button").activate();
 	}
 }

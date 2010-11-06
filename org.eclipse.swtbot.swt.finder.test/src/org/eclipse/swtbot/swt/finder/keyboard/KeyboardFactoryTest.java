@@ -12,15 +12,14 @@ package org.eclipse.swtbot.swt.finder.keyboard;
 
 import static org.junit.Assert.assertEquals;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swtbot.swt.finder.test.BaseSWTShellTest;
+import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class KeyboardFactoryTest extends BaseSWTShellTest {
+public class KeyboardFactoryTest extends AbstractSWTTestCase {
 
 	@Test
 	public void createsKeyboardForAWTKeyboardStrategy() throws Exception {
@@ -35,11 +34,6 @@ public class KeyboardFactoryTest extends BaseSWTShellTest {
 	@Test
 	public void createsKeyboardForMockKeyboardStrategy() throws Exception {
 		assertEquals(MockKeyboardStrategy.class, new KeyboardFactory(MockKeyboardStrategy.class.getName()).strategyClass);
-	}
-
-	@Override
-	protected void createUI(Composite parent) {
-		
 	}
 
 }

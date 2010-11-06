@@ -17,15 +17,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import org.eclipse.swtbot.swt.finder.test.BaseControlExampleTest;
-import org.junit.Before;
+import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.junit.Test;
 
 /**
  * @author Vincent MAHE &lt;vmahe [at] free [dot]fr&gt;
  * @version $Id$
  */
-public class SWTBotTableItemTest extends BaseControlExampleTest {
+public class SWTBotTableItemTest extends AbstractSWTTestCase {
 
 	private SWTBotTable	table;
 	private SWTBotText	listeners;
@@ -119,8 +118,8 @@ public class SWTBotTableItemTest extends BaseControlExampleTest {
 		assertTextContains("Selection [13]: SelectionEvent{Table {} ", listeners);
 	}
 
-	@Before
-	public void prepareExample() throws Exception {
+	public void setUp() throws Exception {
+		super.setUp();
 		bot.tabItem("Table").activate();
 		bot.checkBox("Horizontal Fill").select();
 		bot.checkBox("Vertical Fill").select();

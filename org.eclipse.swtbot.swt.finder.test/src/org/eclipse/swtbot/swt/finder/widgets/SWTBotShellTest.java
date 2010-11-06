@@ -12,51 +12,31 @@ package org.eclipse.swtbot.swt.finder.widgets;
 
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertSameWidget;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.pass;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
+import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
-import org.eclipse.swtbot.swt.finder.test.BaseSWTShellTest;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotShellTest extends BaseSWTShellTest {
+public class SWTBotShellTest extends AbstractSWTTestCase {
 
-	private static final String TITLE = "Address Book - Untitled";
+	private SWTBot	bot;
 	private Shell	shell3;
 	private Shell	shell2;
 	private Shell	shell4;
 
-	@Override
-	protected void createUI(Composite parent) {
-		shell.setText(TITLE);
-
-		shell4 = new Shell(display);
-		shell4.setText("shell4");
-		shell4.open();
-
-		shell2 = new Shell(shell4);
-		shell2.setText("shell2");
-		shell2.open();
-
-		shell3 = new Shell(display);
-		shell3.setText("shell3");
-		shell3.open();
-	}
-
 	@Test
 	public void findsShell() throws Exception {
-		assertSameWidget(shell, bot.shell(TITLE).widget);
+		assertSameWidget(menuShell, bot.shell("Address Book - Untitled").widget);
 	}
 
 	@Test
@@ -81,9 +61,9 @@ public class SWTBotShellTest extends BaseSWTShellTest {
 	public void closesShell() throws Exception {
 		UIThreadRunnable.asyncExec(display, new VoidResult() {
 			public void run() {
-				Shell someShell = new Shell(shell);
-				someShell.setText("some shell");
-				someShell.open();
+				Shell shell = new Shell(controlShell);
+				shell.setText("some shell");
+				shell.open();
 			}
 		});
 		bot.shell("some shell").activate();
@@ -105,20 +85,38 @@ public class SWTBotShellTest extends BaseSWTShellTest {
 		assertSameWidget(shell2.widget, activeShell.widget);
 	}
 
-	@Test
-	public void getsAllShells() throws Exception {
-		assertEquals(4, bot.shells().length);
-	}
-
-	@Test
-	public void findsShellsById() throws Exception {
-		UIThreadRunnable.syncExec(new VoidResult() {
+	public void setUp() throws Exception {
+		super.setUp();
+		bot = new SWTBot();
+		UIThreadRunnable.asyncExec(display, new VoidResult() {
 			public void run() {
-				shell.setData("foo-shell", "bar");
+				shell4 = new Shell(display);
+				shell4.setText("shell4");
+				shell4.open();
+
+				shell2 = new Shell(shell4);
+				shell2.setText("shell2");
+				shell2.open();
+
+				shell3 = new Shell(display);
+				shell3.setText("shell3");
+				shell3.open();
 			}
 		});
+	}
 
-		assertSame(shell, bot.shellWithId("foo-shell", "bar").widget);
+	public void tearDown() throws Exception {
+		new SWTBotShell(shell2).close();
+		new SWTBotShell(shell3).close();
+		new SWTBotShell(shell4).close();
+		UIThreadRunnable.syncExec(display, new VoidResult() {
+			public void run() {
+				shell2.dispose();
+				shell3.dispose();
+				shell4.dispose();
+			}
+		});
+		super.tearDown();
 	}
 
 }

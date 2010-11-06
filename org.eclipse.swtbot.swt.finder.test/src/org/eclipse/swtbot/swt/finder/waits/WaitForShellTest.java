@@ -16,13 +16,9 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThan;
 
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.SWTBot;
-import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
-import org.eclipse.swtbot.swt.finder.results.WidgetResult;
-import org.eclipse.swtbot.swt.finder.test.BaseSWTTest;
+import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.hamcrest.Matcher;
 import org.junit.Test;
 
@@ -30,19 +26,17 @@ import org.junit.Test;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class WaitForShellTest extends BaseSWTTest {
+public class WaitForShellTest extends AbstractSWTTestCase {
 
-	private static final String	TEXT	= "Test shell";
+	private static final String	TEXT	= "this should close in a while - " + WaitForShellTest.class.getSimpleName();
 
-	@Override
-	public void runUIThread() {
-		new Display();
-	}
-	
 	@SuppressWarnings("unchecked")
 	@Test
 	public void waitsForShellToAppear() throws Exception {
 		createShellAfter(100);
+
+		destroyShellAfter(600);
+
 		long start = System.currentTimeMillis();
 		Matcher<Shell> withText = withText(TEXT);
 		new SWTBot().waitUntil(Conditions.waitForShell(withText));
@@ -52,18 +46,18 @@ public class WaitForShellTest extends BaseSWTTest {
 		assertThat(time, allOf(lessThan(800), greaterThanOrEqualTo(450)));
 	}
 
+	private void destroyShellAfter(int delay) {
+		new Thread(new DelayedExecutionRunnable(new Runnable() {
+			public void run() {
+				new SWTBot().shell(TEXT).close();
+			}
+		}, delay)).start();
+	}
+
 	private void createShellAfter(int delay) {
 		new Thread(new DelayedExecutionRunnable(new Runnable() {
 			public void run() {
-				UIThreadRunnable.syncExec(new WidgetResult<Shell>() {
-					public Shell run() {
-						Shell shell = new Shell(Display.getDefault());
-						shell.setText(TEXT);
-						shell.setLayout(new GridLayout(1, false));
-						shell.open();
-						return shell;
-					}
-				});
+				createShell(TEXT);
 			}
 		}, delay)).start();
 	}

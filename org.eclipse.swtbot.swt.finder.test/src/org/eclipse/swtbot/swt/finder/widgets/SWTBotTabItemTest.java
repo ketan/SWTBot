@@ -19,8 +19,9 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 
 import org.eclipse.swt.widgets.TabItem;
+import org.eclipse.swtbot.swt.finder.SWTBot;
+import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
-import org.eclipse.swtbot.swt.finder.test.BaseControlExampleTest;
 import org.hamcrest.Matcher;
 import org.junit.Test;
 
@@ -28,7 +29,8 @@ import org.junit.Test;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotTabItemTest extends BaseControlExampleTest {
+public class SWTBotTabItemTest extends AbstractSWTTestCase {
+	final SWTBot	bot	= new SWTBot();
 
 	@Test
 	public void findsTabs() throws Exception {

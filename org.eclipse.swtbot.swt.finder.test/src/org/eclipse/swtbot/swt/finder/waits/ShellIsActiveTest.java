@@ -15,31 +15,45 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThan;
 
-import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.SWTBot;
-import org.eclipse.swtbot.swt.finder.test.BaseSWTShellTest;
+import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class ShellIsActiveTest extends BaseSWTShellTest {
+public class ShellIsActiveTest extends AbstractSWTTestCase {
+
+	private static final String	TEXT	= "this should close in a while" + ShellIsActiveTest.class.getSimpleName();
+	private Shell				shell;
 
 	@SuppressWarnings("unchecked")
 	@Test
 	public void waitsForShellToBecomeActive() throws Exception {
 
 		long start = System.currentTimeMillis();
-		new SWTBot().waitUntil(Conditions.shellIsActive(SHELL_TEXT));
+		new SWTBot().waitUntil(Conditions.shellIsActive(TEXT));
 		long end = System.currentTimeMillis();
 
 		int time = (int) (end - start);
 		assertThat(time, allOf(lessThan(200), greaterThanOrEqualTo(0)));
 	}
 
-	@Override
-	protected void createUI(Composite parent) {
+	public void setUp() throws Exception {
+		super.setUp();
+		shell = createShell(TEXT);
+
+		new Thread(new Runnable() {
+			public void run() {
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException niceTry) {
+				}
+				new SWTBotShell(shell).close();
+			}
+		}).start();
 	}
-	
 }

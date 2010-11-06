@@ -17,17 +17,19 @@ import static org.junit.Assert.assertEquals;
 
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swtbot.swt.finder.SWTBot;
+import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
-import org.eclipse.swtbot.swt.finder.test.BaseControlExampleTest;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotTextTest extends BaseControlExampleTest {
+public class SWTBotTextTest extends AbstractSWTTestCase {
+
+	SWTBot	bot	= new SWTBot();
 
 	@Test
 	public void findsTextBoxInGroup() throws Exception {
@@ -80,8 +82,8 @@ public class SWTBotTextTest extends BaseControlExampleTest {
 
 	}
 
-	@Before
-	public void prepareExample() throws Exception {
+	public void setUp() throws Exception {
+		super.setUp();
 		bot.tabItem("Text").activate();
 	}
 

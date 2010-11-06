@@ -18,7 +18,6 @@ import static org.junit.Assert.fail;
 
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
-import org.eclipse.swtbot.swt.finder.test.BaseMenuExampleTest;
 import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.swtbot.swt.finder.widgets.TimeoutException;
@@ -29,7 +28,7 @@ import org.junit.Test;
  * @author Vincent Mahe &lt;vmahe [at] irisa [dot] fr&gt;
  * @version $Id$
  */
-public class SWTBotTest extends BaseMenuExampleTest {
+public class SWTBotTest extends AbstractMenuExampleTest {
 
 	private SWTBot	bot;
 
@@ -86,12 +85,12 @@ public class SWTBotTest extends BaseMenuExampleTest {
 
 	@Test
 	public void getsAllShells() throws Exception {
-		assertEquals(2, bot.shells().length);
+		assertEquals(8, bot.shells().length);
 	}
 
 	@Test
 	public void findsShellsById() throws Exception {
-		final SWTBotShell shell = bot.shell("Address Book - Untitled");
+		final SWTBotShell shell = bot.shell("SWT Clipboard");
 		UIThreadRunnable.syncExec(new VoidResult() {
 			public void run() {
 				shell.widget.setData("foo-shell", "bar");

@@ -13,17 +13,18 @@ package org.eclipse.swtbot.swt.finder.widgets;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertText;
 import static org.junit.Assert.assertEquals;
 
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.SWTBot;
-import org.eclipse.swtbot.swt.finder.test.BaseMenuExampleTest;
+import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotTableTest2 extends BaseMenuExampleTest {
+public class SWTBotTableTest2 extends AbstractSWTTestCase {
 
 	private static final String	FIRST_NAME	= "First Name";
 	private static final String	LAST_NAME	= "Last Name";
@@ -67,13 +68,17 @@ public class SWTBotTableTest2 extends BaseMenuExampleTest {
 		table = bot.table();
 	}
 
+	protected Shell getFocusShell() {
+		return menuShell;
+	}
+
 	private void populateData() {
 		display.syncExec(new Runnable() {
 			public void run() {
-				addressBook.clearAddressbook();
-				addressBook.addAddressBook(row1());
-				addressBook.addAddressBook(row2());
-				addressBook.addAddressBook(row3());
+				menuExample.clearAddressbook();
+				menuExample.addAddressBook(row1());
+				menuExample.addAddressBook(row2());
+				menuExample.addAddressBook(row3());
 			}
 		});
 	}

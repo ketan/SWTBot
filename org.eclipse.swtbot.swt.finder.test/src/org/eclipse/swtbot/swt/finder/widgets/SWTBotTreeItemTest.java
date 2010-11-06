@@ -14,14 +14,14 @@ package org.eclipse.swtbot.swt.finder.widgets;
 import static junit.framework.Assert.assertEquals;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertText;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.eclipse.swtbot.swt.finder.exceptions.AssertionFailedException;
-import org.eclipse.swtbot.swt.finder.test.BaseControlExampleTest;
+import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.utils.TableRow;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -29,7 +29,7 @@ import org.junit.Test;
  * @author Ketan Patel
  * @version $Id$
  */
-public class SWTBotTreeItemTest extends BaseControlExampleTest {
+public class SWTBotTreeItemTest extends AbstractSWTTestCase {
 
 	private SWTBotTree	tree;
 	private SWTBotText	listeners;
@@ -244,8 +244,8 @@ public class SWTBotTreeItemTest extends BaseControlExampleTest {
 		assertEquals(7, tree.visibleRowCount());
 	}
 
-	@Before
-	public void prepareExample() throws Exception {
+	public void setUp() throws Exception {
+		super.setUp();
 		bot.tabItem("Tree").activate();
 		bot.checkBox("Horizontal Fill").select();
 		bot.checkBox("Vertical Fill").select();

@@ -12,11 +12,13 @@ package org.eclipse.swtbot.swt.finder.widgets;
 
 import static org.junit.Assert.assertEquals;
 
-import org.eclipse.swtbot.swt.finder.test.BaseControlExampleTest;
-import org.junit.Before;
+import org.eclipse.swtbot.swt.finder.SWTBot;
+import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.junit.Test;
 
-public class SWTBotToolbarPushButtonWithToolTipTest extends BaseControlExampleTest {
+public class SWTBotToolbarPushButtonWithToolTipTest extends AbstractSWTTestCase {
+
+	private SWTBot	bot;
 
 	@Test
 	public void findsToolBarButtonWithToolTipBasedOnIndex() throws Exception {
@@ -54,8 +56,9 @@ public class SWTBotToolbarPushButtonWithToolTipTest extends BaseControlExampleTe
 		assertEquals("SWT.RADIO", toolTipText);
 	}
 
-	@Before
-	public void prepareExample() throws Exception {
+	public void setUp() throws Exception {
+		super.setUp();
+		bot = new SWTBot();
 		bot.tabItem("ToolBar").activate();
 	}
 

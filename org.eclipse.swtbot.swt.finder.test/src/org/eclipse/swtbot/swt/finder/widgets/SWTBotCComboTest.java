@@ -16,15 +16,18 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swtbot.swt.finder.test.BaseCustomControlExampleTest;
-import org.junit.Before;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swtbot.swt.finder.SWTBot;
+import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.junit.Test;
 
 /**
  * @author Cedric Chabanois &lt;cchabanois [at] no-log [dot] org&gt;
  * @version $Id$
  */
-public class SWTBotCComboTest extends BaseCustomControlExampleTest {
+public class SWTBotCComboTest extends AbstractSWTTestCase {
+
+	private SWTBot	bot;
 
 	@Test
 	public void findCCombo() throws Exception {
@@ -105,11 +108,16 @@ public class SWTBotCComboTest extends BaseCustomControlExampleTest {
 		assertEquals(Combo.LIMIT, ccombo.textLimit());
 	}
 
-	@Before
-	public void prepareExample() throws Exception {
+	public void setUp() throws Exception {
+		super.setUp();
+		bot = new SWTBot();
 		bot.tabItem("CCombo").activate();
 		bot.checkBox("SWT.FLAT").deselect();
 		bot.checkBox("SWT.READ_ONLY").deselect();
+	}
+
+	protected Shell getFocusShell() {
+		return customControlShell;
 	}
 
 }

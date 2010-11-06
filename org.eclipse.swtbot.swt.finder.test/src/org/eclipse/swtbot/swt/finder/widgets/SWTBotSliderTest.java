@@ -13,15 +13,14 @@ package org.eclipse.swtbot.swt.finder.widgets;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.eclipse.swtbot.swt.finder.test.BaseControlExampleTest;
-import org.junit.Before;
+import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.junit.Test;
 
 /**
  * @author Yann N. Dauphin
  * @version $Id$
  */
-public class SWTBotSliderTest extends BaseControlExampleTest {
+public class SWTBotSliderTest extends AbstractSWTTestCase {
 
 	@Test
 	public void findsSlider() throws Exception {
@@ -39,8 +38,8 @@ public class SWTBotSliderTest extends BaseControlExampleTest {
 		assertEquals(11, bot.sliderInGroup("Slider").getSelection());
 	}
 
-	@Before
-	public void prepareExample() throws Exception {
+	public void setUp() throws Exception {
+		super.setUp();
 		bot.tabItem("Slider").activate();
 	}
 
