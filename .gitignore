@@ -1,6 +1,5 @@
 /eclipse/
 /.metadata/
-.svn/
 /swtbot/
 .DS_Store
 /*/bin
@@ -10,8 +9,7 @@ examples/gef/*/bin/
 
 /*/screenshots
 
-org.eclipse.swtbot.releng/.git.svn.properties
-org.eclipse.swtbot.releng/.svn.properties
+org.eclipse.swtbot.releng/.git.properties
 
 org.eclipse.swtbot.releng/externals/eclipse-SDK-*
 org.eclipse.swtbot.releng/externals/libs
