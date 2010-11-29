@@ -158,7 +158,7 @@ public class NewPluginProjectWizardPage extends WizardPage implements WizardPage
 		productId = new Combo(group, SWT.DROP_DOWN);
 		productId.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 		productId.setItems(TargetPlatform.getProducts());
-		productId.setText(TargetPlatform.getDefaultProduct());
+		productId.setText(TargetPlatform.getDefaultProduct() == null ? "" : TargetPlatform.getDefaultProduct());
 
 		applicationIdButton = new Button(group, SWT.RADIO);
 		applicationIdButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
