@@ -24,12 +24,15 @@ import org.eclipse.gef.AutoexposeHelper;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.ExposeHelper;
 import org.eclipse.gef.MouseWheelHelper;
+import org.eclipse.gef.Request;
+import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.editparts.ViewportAutoexposeHelper;
 import org.eclipse.gef.editparts.ViewportExposeHelper;
 import org.eclipse.gef.editparts.ViewportMouseWheelHelper;
 
 import org.eclipse.gef.examples.logicdesigner.figures.CircuitFigure;
 import org.eclipse.gef.examples.logicdesigner.figures.FigureFactory;
+import org.eclipse.gef.examples.logicdesigner.model.Circuit;
 
 /**
  * Holds a circuit, which is a container capable of 
@@ -93,6 +96,13 @@ protected CircuitFigure getCircuitBoardFigure() {
 
 public IFigure getContentPane() {
 	return getCircuitBoardFigure().getContentsPane();
+}
+
+public void performRequest(Request request){
+	if (request.getType() == RequestConstants.REQ_OPEN) {
+		Circuit circuit = (Circuit) this.getModel();
+		circuit.setName("doubleClicked");
+	}
 }
 
 }

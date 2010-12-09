@@ -19,6 +19,9 @@ public class Circuit
 static final long serialVersionUID = 1;
 
 private static int count;
+
+private static String name = "NoName";
+
 public static String TERMINALS_OUT [] = 
 	new String [] {	"1","2","3","4", //$NON-NLS-4$//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
 				"5","6","7","8"};//$NON-NLS-4$//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
@@ -38,6 +41,14 @@ public String toString() {
 public void update() {
 	for (int i=0; i<8;i++)
 		setOutput(TERMINALS_OUT[i],getInput(TERMINALS_IN[i]));
+}
+
+public void setName(String name) {
+		this.name = name;
+}
+
+public String getName() {
+		return this.name;
 }
 
 }
