@@ -24,6 +24,7 @@ import org.eclipse.gef.examples.logic.test.CreateLogicDiagram;
 import org.eclipse.gef.examples.logic.test.NewEmptyEmfProject;
 import org.eclipse.gef.examples.logicdesigner.edit.CircuitEditPart;
 import org.eclipse.gef.examples.logicdesigner.edit.LogicLabelEditPart;
+import org.eclipse.gef.examples.logicdesigner.model.Circuit;
 import org.eclipse.gef.examples.logicdesigner.model.Wire;
 import org.eclipse.swtbot.eclipse.gef.finder.SWTBotGefTestCase;
 import org.eclipse.swtbot.eclipse.gef.finder.SWTGefBot;
@@ -103,6 +104,25 @@ public class AllTests extends SWTBotGefTestCase implements LogicModeler {
 		return editor.getActiveTool().getLabel();
 	}
 
+	@Test
+	public void doubleClick() throws Exception {
+		editor.activateTool(TOOL_CIRCUIT);
+		editor.click(10, 10);
+
+		SWTBotGefEditPart circuitEditPart = editor.editParts(instanceOf(CircuitEditPart.class)).get(0);
+		Circuit circuit = (Circuit) circuitEditPart.part().getModel();
+		final String nameBeforeDoubleClick = circuit.getName();
+		editor.select(circuitEditPart).doubleClick(15, 15);		
+		
+		/* we need to wait that double click  have been executed */
+		syncWithUIThread();
+		
+		final String nameAfterDoubleClick = circuit.getName();
+		assertFalse("circuit name was not modified by double click", nameBeforeDoubleClick.equals(nameAfterDoubleClick));
+	}
+	
+	
+	
 	@Test
 	public void getEditPartWithLabelOnCanvas() throws Exception {
 		editor.activateTool(TOOL_LABEL);

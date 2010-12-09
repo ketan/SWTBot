@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 Obeo and others
+ * Copyright (c) 2009, 2010 Obeo and others
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -61,16 +61,17 @@ public class SWTBotGefFigureCanvas extends AbstractSWTBotControl<Canvas>{
     		public void run() {
     	        org.eclipse.swt.events.MouseEvent meMove = wrapMouseEvent(xPosition, yPosition, 0, 0, 0);
     	        eventDispatcher.dispatchMouseMoved(meMove);
-    	        org.eclipse.swt.events.MouseEvent meDown = wrapMouseEvent(xPosition, yPosition, 1, SWT.BUTTON1, 1);
+    	        org.eclipse.swt.events.MouseEvent meDown = wrapMouseEvent(xPosition, yPosition, 1, SWT.None, 1);
     	        eventDispatcher.dispatchMousePressed(meDown);
     	        org.eclipse.swt.events.MouseEvent meUp = wrapMouseEvent(xPosition, yPosition, 1 , SWT.BUTTON1, 1);
     	        eventDispatcher.dispatchMouseReleased(meUp);
-    	        org.eclipse.swt.events.MouseEvent meDown2 = wrapMouseEvent(xPosition, yPosition, 1, SWT.BUTTON1, 2);
+    	        org.eclipse.swt.events.MouseEvent meDown2 = wrapMouseEvent(xPosition, yPosition, 1, SWT.None, 2);
     	        eventDispatcher.dispatchMousePressed(meDown2);
-    	        org.eclipse.swt.events.MouseEvent meDoubleClick = wrapMouseEvent(xPosition, yPosition, 1, SWT.BUTTON1, 2);
+    	        org.eclipse.swt.events.MouseEvent meDoubleClick = wrapMouseEvent(xPosition, yPosition, 1, SWT.None, 2);
+    	        meDoubleClick.time = meDown2.time;
     	        eventDispatcher.dispatchMouseDoubleClicked(meDoubleClick);
     	        org.eclipse.swt.events.MouseEvent meUp2 = wrapMouseEvent(xPosition, yPosition, 1 , SWT.BUTTON1, 2);
-    	        eventDispatcher.dispatchMouseReleased(meUp2);
+    	        eventDispatcher.dispatchMouseReleased(meUp2); 
     		}
     	});
     }
