@@ -35,7 +35,8 @@ public class HamcrestFactoryWriter implements HamcrestWriter {
 	}
 
 	public void writeHeader(Set<String> imports) {
-		output.append("// Generated source.").append(newLine); //$NON-NLS-1$
+		output.append("// Generated source. DO NOT MODIFY.").append(newLine); //$NON-NLS-1$
+		output.append("// To add new widgets, please see README file in the generator plugin.").append(newLine); //$NON-NLS-1$
 		output.append("package ").append(packageName).append(';').append(newLine); //$NON-NLS-1$
 		output.append(newLine);
 		output.append(newLine);
