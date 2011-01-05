@@ -34,6 +34,7 @@ import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.keyboard.Keyboard;
 import org.eclipse.swtbot.swt.finder.keyboard.KeyboardFactory;
 import org.eclipse.swtbot.swt.finder.keyboard.Keystrokes;
+import org.eclipse.swtbot.swt.finder.matchers.WithId;
 import org.eclipse.swtbot.swt.finder.results.ArrayResult;
 import org.eclipse.swtbot.swt.finder.results.BoolResult;
 import org.eclipse.swtbot.swt.finder.results.IntResult;
@@ -364,6 +365,21 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 */
 	public String getText() {
 		return SWTUtils.getText(widget);
+	}
+
+	/**
+	 * Gets the value of {@link Widget#getData(String))} for the key {@link SWTBotPreferences#DEFAULT_KEY} of this
+	 * object's widget.
+	 * 
+	 * @return the id that SWTBot may use to search this widget.
+	 * @see WithId
+	 */
+	public String getId() {
+		return syncExec(new StringResult() {
+			public String run() {
+				return (String) widget.getData(SWTBotPreferences.DEFAULT_KEY);
+			}
+		});
 	}
 
 	/**
