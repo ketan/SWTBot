@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.swtbot"
       label="SWTBot for SWT Testing (incubation)"
-      version="2.0.1.qualifier"
+      version="2.0.2.qualifier"
       provider-name="Eclipse.org"
       plugin="org.eclipse.swtbot.eclipse.ui">
 
