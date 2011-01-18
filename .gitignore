@@ -21,7 +21,6 @@ org.eclipse.swtbot.releng/build.developer.properties
 org.eclipse.swtbot.releng/build.properties
 org.eclipse.swtbot.releng/artifacts/
 org.eclipse.swtbot.releng/to-upload/
-org.eclipse.swtbot.releng/javadoc
 
 org.eclipse.swtbot.releng/test-sandbox/results/
 org.eclipse.swtbot.releng/test-sandbox/screenshots/
