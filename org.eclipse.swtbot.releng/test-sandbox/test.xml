@@ -225,7 +225,19 @@
 		<available file="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit3.headless_${all.buildId}/JUNIT.XSL" property="junit.xsl" value="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit3.headless_${all.buildId}/JUNIT.XSL" />
 		<available file="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit4.headless_${all.buildId}/JUNIT.XSL" property="junit.xsl" value="${eclipse-home}/plugins/org.eclipse.swtbot.eclipse.junit4.headless_${all.buildId}/JUNIT.XSL" />
 		
-		<style style="${junit.xsl}" in="${junit.reports.xml.dir}/index.xml" out="${junit.reports.html.dir}/index.html" />
+		<mkdir dir="${junit.reports.html.dir}/screenshots" />
+		<move todir="${junit.reports.html.dir}/screenshots" failonerror="false">
+			<fileset dir="${junit-report-output}/screenshots" includes="*.*" />
+		</move>
+
+		<xslt style="${junit.xsl}" in="${junit.reports.xml.dir}/index.xml" out="${junit.reports.html.dir}/index.html">
+			<param name="screenshot_dir" expression="screenshots"/>
+			<!--
+			Only use this if you've set SWTBotPreferences#SCREENSHOT_FORMAT preference
+			Optional: possible values are bmp, gif, ico, jpeg, jpg, png or tiff
+			<param name="screenshot_format" expression="jpeg"/>
+			-->
+		</xslt>
 		
 		<xslt in="${junit.reports.xml.dir}/index.xml" out="./passFail.txt" style="passFail.xsl" />
 		<property file="passFail.txt" />
