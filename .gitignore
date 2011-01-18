@@ -39,6 +39,8 @@ org.eclipse.swtbot.junit4_x/build.properties
 org.eclipse.swtbot.eclipse.ui/META-INF/MANIFEST.MF
 
 org.eclipse.swtbot.releng/test-sandbox/passFail.txt
+org.eclipse.swtbot.releng/test-sandbox/org.eclipse.swtbot.eclipse.ui.test.ser
+
 org.eclipse.swtbot.swt.finder.test/keyboard.layout
 org.eclipse.swtbot.swt.finder.test/keyboard.layout.filtered
 org.eclipse.swtbot.eclipse.ui/.classpath
