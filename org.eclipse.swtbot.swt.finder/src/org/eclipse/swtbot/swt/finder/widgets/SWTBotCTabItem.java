@@ -175,7 +175,7 @@ public class SWTBotCTabItem extends AbstractSWTBot<CTabItem> {
 		notifyParent(SWT.MouseMove);
 		notifyParent(SWT.Activate);
 		notifyParent(SWT.FocusIn);
-		notifyParent(SWT.MouseDown, createMouseEvent(x, y, 1, SWT.BUTTON1, 1));
+		notifyParent(SWT.MouseDown, createMouseEvent(x, y, 1, SWT.NONE, 1));
 		// this event being button 1 is what allows CTabItem to close
 		notifyParent(SWT.MouseUp, createMouseEvent(x, y, 1, SWT.BUTTON1, 1));
 		notifyParent(SWT.Selection);

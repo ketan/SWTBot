@@ -374,9 +374,9 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 		notifyTree(SWT.MouseMove);
 		notifyTree(SWT.Activate);
 		notifyTree(SWT.FocusIn);
-		notifyTree(SWT.MouseDown, createMouseEvent(x, y, 1, SWT.BUTTON1, 1));
-		notifyTree(SWT.MouseUp);
-		notifyTree(SWT.Selection, createEvent());
+		notifyTree(SWT.MouseDown, createMouseEvent(x, y, 1, SWT.NONE, 1));
+		notifyTree(SWT.MouseUp, createMouseEvent(x, y, 1, SWT.BUTTON1, 1));
+		notifyTree(SWT.Selection, createSelectionEvent(SWT.BUTTON1));
 		notifyTree(SWT.MouseHover);
 		notifyTree(SWT.MouseMove);
 		notifyTree(SWT.MouseExit);
@@ -443,7 +443,7 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 				tree.setSelection(widget);
 			}
 		});
-		notifyTree(SWT.Selection);
+		notifyTree(SWT.Selection, createSelectionEvent(SWT.BUTTON1));
 		notifyTree(SWT.MouseDown);
 		notifyTree(SWT.MouseUp);
 		notifyTree(SWT.MouseDown);
@@ -522,6 +522,8 @@ public class SWTBotTreeItem extends AbstractSWTBot<TreeItem> {
 	public SWTBotMenu contextMenu(String text) {
 		new SWTBotTree(tree).waitForEnabled();
 		select();
+		notifyTree(SWT.MouseDown, createMouseEvent(0, 0, 3, 0, 1));
+		notifyTree(SWT.MouseUp, createMouseEvent(0, 0, 3, 0, 1));
 		notifyTree(SWT.MenuDetect);
 		return super.contextMenu(tree, text);
 	}

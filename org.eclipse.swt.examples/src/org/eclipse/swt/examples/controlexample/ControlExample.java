@@ -29,6 +29,12 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
 public class ControlExample {
+
+	static {
+		// System.setProperty(LogFactory.DIAGNOSTICS_DEST_PROPERTY, "STDOUT");
+		System.setProperty("org.eclipse.swt.internal.carbon.smallFonts", "");
+	}
+
 	private static ResourceBundle	resourceBundle	= ResourceBundle.getBundle("examples_control");			//$NON-NLS-1$
 	static final int				ciClosedFolder	= 0, ciOpenFolder = 1, ciTarget = 2, ciBackground = 3,
 			ciParentBackground = 4;
