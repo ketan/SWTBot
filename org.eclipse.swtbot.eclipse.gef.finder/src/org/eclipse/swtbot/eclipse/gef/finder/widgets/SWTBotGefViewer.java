@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2010 MAKE Technologies Inc and others
+ * Copyright (c) 2004, 2011 MAKE Technologies Inc and others
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,6 +12,7 @@
  *    Nathalie Lepine <nathalie.lepine@obeo.fr> - Improvements and bug fixes
  *    Pascal Gelinas <pascal.gelinas @nuecho.com> - Improvements and bug fixes
  *    Mickael Istria <mickael.istria@bonitasoft.com> - Improvements and bug fixes
+ *    Tim Kaiser <tim.kaiser@sap.com> - Improvements and bug fixes
  *******************************************************************************/
 package org.eclipse.swtbot.eclipse.gef.finder.widgets;
 
@@ -25,9 +26,11 @@ import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.regex.Pattern;
 
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.draw2d.FigureCanvas;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
+import org.eclipse.draw2d.LightweightSystem;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.text.TextFlow;
 import org.eclipse.gef.ConnectionEditPart;
@@ -38,6 +41,7 @@ import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.palette.PaletteEntry;
 import org.eclipse.gef.palette.ToolEntry;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swtbot.eclipse.gef.finder.finders.PaletteFinder;
@@ -95,7 +99,15 @@ public class SWTBotGefViewer {
 				final Control control = graphicalViewer.getControl();
 				if (control instanceof FigureCanvas) {
 					canvas = new SWTBotGefFigureCanvas((FigureCanvas) control);
-				}
+				}  else if (control instanceof Canvas) {
+					if (control instanceof IAdaptable) {
+						IAdaptable adaptable = (IAdaptable) control;
+						Object adapter = adaptable.getAdapter(LightweightSystem.class);
+						if (adapter instanceof LightweightSystem) {
+							canvas = new SWTBotGefFigureCanvas((Canvas) control, (LightweightSystem) adapter);
+						}
+					}
+                }	
 				editDomain = graphicalViewer.getEditDomain();
 			}
 		});
