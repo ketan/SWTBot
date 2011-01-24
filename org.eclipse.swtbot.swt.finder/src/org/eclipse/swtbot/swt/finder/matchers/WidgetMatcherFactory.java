@@ -1,4 +1,6 @@
-// Generated source.
+// Generated source. DO NOT MODIFY.
+// To add new new methods, please see README file in the generator plugin.
+
 package org.eclipse.swtbot.swt.finder.matchers;
 
 public abstract class WidgetMatcherFactory {

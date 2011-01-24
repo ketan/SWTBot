@@ -34,6 +34,7 @@ import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.keyboard.Keyboard;
 import org.eclipse.swtbot.swt.finder.keyboard.KeyboardFactory;
 import org.eclipse.swtbot.swt.finder.keyboard.Keystrokes;
+import org.eclipse.swtbot.swt.finder.matchers.WithId;
 import org.eclipse.swtbot.swt.finder.results.ArrayResult;
 import org.eclipse.swtbot.swt.finder.results.BoolResult;
 import org.eclipse.swtbot.swt.finder.results.IntResult;
@@ -219,6 +220,17 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	}
 
 	/**
+	 * Create a selection event with a particular state mask
+	 * 
+	 * @param stateMask the state of the keyboard modifier keys.
+	 */
+	protected Event createSelectionEvent(int stateMask) {
+		Event event = createEvent();
+		event.stateMask = stateMask;
+		return event;
+	}
+
+	/**
 	 * Create a key event
 	 * 
 	 * @param keyCode the key code of the key pressed
@@ -245,9 +257,9 @@ public abstract class AbstractSWTBot<T extends Widget> {
 		notify(SWT.MouseMove);
 		notify(SWT.Activate);
 		notify(SWT.FocusIn);
-		notify(SWT.MouseDown, createMouseEvent(x, y, 1, SWT.BUTTON1, 1));
-		notify(SWT.MouseUp);
-		notify(SWT.Selection);
+		notify(SWT.MouseDown, createMouseEvent(x, y, 1, SWT.NONE, 1));
+		notify(SWT.MouseUp, createMouseEvent(x, y, 1, SWT.BUTTON1, 1));
+		notify(SWT.Selection, createSelectionEvent(SWT.BUTTON1));
 		notify(SWT.MouseHover);
 		notify(SWT.MouseMove);
 		notify(SWT.MouseExit);
@@ -271,7 +283,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 		notify(SWT.FocusIn);
 		notify(SWT.MouseDown, createMouseEvent(x, y, 1, SWT.BUTTON3, 1));
 		notify(SWT.MouseUp);
-		notify(SWT.Selection);
+		notify(SWT.Selection, createSelectionEvent(SWT.BUTTON3));		
 		notify(SWT.MouseHover);
 		notify(SWT.MouseMove);
 		notify(SWT.MouseExit);
@@ -293,9 +305,9 @@ public abstract class AbstractSWTBot<T extends Widget> {
 		notify(SWT.MouseMove);
 		notify(SWT.Activate);
 		notify(SWT.FocusIn);
-		notify(SWT.MouseDown, createMouseEvent(x, y, 1, SWT.BUTTON1, 1));
-		notify(SWT.MouseUp);
-		notify(SWT.Selection);
+		notify(SWT.MouseDown, createMouseEvent(x, y, 1, SWT.NONE, 1));
+		notify(SWT.MouseUp, createMouseEvent(x, y, 1, SWT.BUTTON1, 1));
+		notify(SWT.Selection, createSelectionEvent(SWT.BUTTON1));
 		notify(SWT.MouseDoubleClick, createMouseEvent(x, y, 1, SWT.BUTTON1, 2));
 		notify(SWT.MouseHover);
 		notify(SWT.MouseMove);
@@ -364,6 +376,21 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 */
 	public String getText() {
 		return SWTUtils.getText(widget);
+	}
+
+	/**
+	 * Gets the value of {@link Widget#getData(String))} for the key {@link SWTBotPreferences#DEFAULT_KEY} of this
+	 * object's widget.
+	 * 
+	 * @return the id that SWTBot may use to search this widget.
+	 * @see WithId
+	 */
+	public String getId() {
+		return syncExec(new StringResult() {
+			public String run() {
+				return (String) widget.getData(SWTBotPreferences.DEFAULT_KEY);
+			}
+		});
 	}
 
 	/**

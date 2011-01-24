@@ -24,6 +24,8 @@ import java.io.IOException;
  */
 public class MatcherGeneratorMain {
 
+	private static final String		newLine	= "\n"; //$NON-NLS-1$
+
 	public static void main(String[] args) {
 		try {
 			org.hamcrest.generator.config.XmlConfigurator.main(new String[] { "swtbot-matchers.xml", "../org.eclipse.swtbot.swt.finder/src", //$NON-NLS-1$ //$NON-NLS-2$
@@ -51,8 +53,12 @@ public class MatcherGeneratorMain {
 
 		BufferedWriter writer = new BufferedWriter(new FileWriter(
 						"../org.eclipse.swtbot.eclipse.finder/src/org/eclipse/swtbot/eclipse/finder/matchers/WidgetMatcherFactory.java")); //$NON-NLS-1$
+		writer.append("// Generated source. DO NOT MODIFY.").append(newLine); //$NON-NLS-1$
+		writer.append("// To add new new methods, please see README file in the generator plugin.").append(newLine); //$NON-NLS-1$
+
 		while (reader.ready()) {
 			String line = reader.readLine();
+			line = line.replaceAll("^// Generated source.$", "");
 			line = line.replaceAll("public class WidgetMatcherFactory_Original \\{", //$NON-NLS-1$
 					"public abstract class WidgetMatcherFactory extends org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory {"); //$NON-NLS-1$
 			writer.write(line);
@@ -73,8 +79,12 @@ public class MatcherGeneratorMain {
 
 		BufferedWriter writer = new BufferedWriter(new FileWriter(
 				"../org.eclipse.swtbot.swt.finder/src/org/eclipse/swtbot/swt/finder/matchers/WidgetMatcherFactory.java")); //$NON-NLS-1$
+		writer.append("// Generated source. DO NOT MODIFY.").append(newLine); //$NON-NLS-1$
+		writer.append("// To add new new methods, please see README file in the generator plugin.").append(newLine); //$NON-NLS-1$
+
 		while (reader.ready()) {
 			String line = reader.readLine();
+			line = line.replaceAll("^// Generated source.$", "");
 			line = line.replaceAll("public class WidgetMatcherFactory_Original \\{", "public abstract class WidgetMatcherFactory {"); //$NON-NLS-1$ //$NON-NLS-2$
 			writer.write(line);
 			writer.write("\n"); //$NON-NLS-1$

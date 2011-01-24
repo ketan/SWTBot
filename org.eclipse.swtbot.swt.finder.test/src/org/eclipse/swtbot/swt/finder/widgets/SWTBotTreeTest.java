@@ -223,10 +223,9 @@ public class SWTBotTreeTest extends AbstractSWTTestCase {
 		bot.button("Clear").click();
 		node.click();
 		SWTBotText listener = bot.textInGroup("Listeners");
-		assertTextContains("MouseDown [3]: MouseEvent{Tree {}", listener);
-		assertTextContains("Selection [13]: SelectionEvent{Tree {}", listener);
-		assertTextContains("item=TreeItem {Node 3.1}", listener);
-		assertTextContains("MouseUp [4]: MouseEvent{Tree {}", listener);
+		assertEventMatches(listener, "MouseDown [3]: MouseEvent{Tree {} time=174577490 data=null button=1 stateMask=0 x=104 y=54 count=1}");
+		assertEventMatches(listener, "Selection [13]: SelectionEvent{Tree {} time=174577490 data=null item=TreeItem {Node 3.1} detail=0 x=0 y=0 width=0 height=0 stateMask=524288 text=null doit=true}");
+		assertEventMatches(listener, "MouseUp [4]: MouseEvent{Tree {} time=174577490 data=null button=1 stateMask=524288 x=104 y=54 count=1}");
 	}
 	
 

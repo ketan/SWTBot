@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="javadoc">
 
-	<target name="check-package-list">
-		<available file="javadoc/eclipse-package-list/package-list" property="package-list-available" />
-		<available file="javadoc/java-package-list/package-list" property="package-list-available" />
-	</target>
-
-	<target name="fetch-package-list" unless="package-list-available">
-		<delete dir="javadoc" />
-		<mkdir dir="javadoc/eclipse-package-list" />
-		<mkdir dir="javadoc/java-package-list" />
-		<get dest="javadoc/eclipse-package-list/package-list" src="http://help.eclipse.org/help33/topic/org.eclipse.platform.doc.isv/reference/api/package-list" />
-		<get dest="javadoc/java-package-list/package-list" src="http://java.sun.com/j2se/1.5.0/docs/api/package-list" />
-	</target>
-
-	<target name="javadoc" depends="check-package-list,fetch-package-list">
+	<target name="javadoc">
 		<condition property="junit.dir" value="junit4_3">
 			<isset property="isJunit4.3" />
 		</condition>
@@ -73,8 +60,9 @@
 					<include name="**/org.eclipse.gef*.jar" />
 				</fileset>
 			</classpath>
-			<link href="http://help.eclipse.org/help33/topic/org.eclipse.platform.doc.isv/reference/api" offline="true" packagelistloc="javadoc/eclipse-package-list" />
+			<link href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api" offline="true" packagelistloc="javadoc/eclipse-package-list" />
 			<link href="http://java.sun.com/j2se/1.5.0/docs/api/" offline="true" packagelistloc="javadoc/java-package-list" />
+			<link href="http://kentbeck.github.com/junit/javadoc/latest/" offline="true" packagelistloc="javadoc/junit-package-list" />
 		</javadoc>
 	</target>
 </project>

@@ -1,4 +1,6 @@
 <xsl:stylesheet	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:param name="screenshot_dir">.</xsl:param>
+<xsl:param name="screenshot_format">jpeg</xsl:param>
 <xsl:output method="html" indent="yes"/>
 <xsl:decimal-format decimal-separator="." grouping-separator="," />
 
@@ -395,6 +397,14 @@
 			<xsl:with-param name="word" select="."/>
 		</xsl:call-template>
 	</code>
+	<p><br/><br/>Screenshot:</p>
+	<p>
+  	<img>
+  	  <xsl:attribute name="src">
+  	    <xsl:value-of select="concat($screenshot_dir, '/', ../@name, '(', ../@classname, ').', $screenshot_format)"/>
+      </xsl:attribute>
+    </img>
+  </p>
 	<!-- the later is better but might be problematic for non-21" monitors... -->
 	<!--pre><xsl:value-of select="."/></pre-->
 </xsl:template>

@@ -166,7 +166,19 @@ this has been copied from o.e.test plugin with some targets for SWTBot
 
 	    <dirname property="swtbot.junit3.headless.dir" file="${ant.file.swtbot-library-headless-junit3}"/>
 
-		<style style="${swtbot.junit3.headless.dir}/JUNIT.XSL" basedir="${junit-report-output}" includes="${classname}.xml" destdir="${junit-report-output}" />
+		<mkdir dir="${junit-report-output}/screenshots" />
+		<move todir="${junit-report-output}/screenshots" failonerror="false">
+			<fileset dir="${eclipse-home}/screenshots" includes="*.*" />
+		</move>
+
+		<xslt style="${swtbot.junit3.headless.dir}/JUNIT.XSL" basedir="${junit-report-output}" includes="${classname}.xml" destdir="${junit-report-output}">
+			<param name="screenshot_dir" expression="screenshots"/>
+			<!--
+			Only use this if you've set SWTBotPreferences#SCREENSHOT_FORMAT preference
+			Optional: possible values are bmp, gif, ico, jpeg, jpg, png or tiff
+			<param name="screenshot_format" expression="jpeg"/>
+			-->
+		</xslt>
 
 		<!--save .log content and *.log content from configuration directory-->
 		<concat destfile="${junit-report-output}/${classname}.log">

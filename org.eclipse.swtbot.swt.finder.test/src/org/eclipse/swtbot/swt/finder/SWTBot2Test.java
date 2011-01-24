@@ -13,8 +13,10 @@ package org.eclipse.swtbot.swt.finder;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertEnabled;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertNotEnabled;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertSameWidget;
+import static org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable.syncExec;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.eclipse.swt.SWT;
@@ -26,7 +28,9 @@ import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.eclipse.swtbot.swt.finder.utils.Traverse;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotText;
 import org.junit.Test;
 
@@ -103,6 +107,18 @@ public class SWTBot2Test extends AbstractSWTTestCase {
 		assertEventMatches(textInGroup, "FocusOut [16]: FocusEvent{Button {One} time=60232779 data=null}");
 		assertEventMatches(textInGroup, "FocusIn [15]: FocusEvent{Button {Two} time=60232779 data=null}");
 		assertTrue(bot.button("Two").isActive());
+	}
+
+	@Test
+	public void findsGetsIdOfAControl() throws Exception {
+		final SWTBotButton button = bot.button("Two");
+		assertNull(button.getId());
+		syncExec(new VoidResult() {
+			public void run() {
+				button.widget.setData(SWTBotPreferences.DEFAULT_KEY, "foo");
+			}
+		});
+		assertEquals("foo", button.getId());
 	}
 
 	public void setUp() throws Exception {
