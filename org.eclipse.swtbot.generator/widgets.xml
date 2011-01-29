@@ -24,6 +24,7 @@
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotSpinner" />
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotSlider" />
 	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotBrowser" />
+	<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotScale" />
 	<!--
 		<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotExpandBar" />
 		<widget class="org.eclipse.swtbot.swt.finder.widgets.SWTBotShell" />

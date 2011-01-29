@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.Scale;
 import org.eclipse.swt.widgets.Slider;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.TabItem;
@@ -41,6 +42,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotLabel;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotLink;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotList;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotRadio;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotScale;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotSlider;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotSpinner;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotStyledText;
@@ -4152,6 +4154,222 @@ public class SWTBot extends SWTBotFactory {
 	public SWTBotBrowser browserWithLabelInGroup(String label, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Browser.class), withLabel(label), inGroup(inGroup));
 		return new SWTBotBrowser((Browser) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @return a {@link SWTBotScale} with the specified <code>label</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotScale scaleWithLabel(String label) {
+		return scaleWithLabel(label, 0);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotScale} with the specified <code>label</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotScale scaleWithLabel(String label, int index) {
+		Matcher matcher = allOf(widgetOfType(Scale.class), withLabel(label));
+		return new SWTBotScale((Scale) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param text the text on the widget.
+	 * @return a {@link SWTBotScale} with the specified <code>text</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotScale scale(String text) {
+		return scale(text, 0);
+	}
+
+	/**
+	 * @param text the text on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotScale} with the specified <code>text</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotScale scale(String text, int index) {
+		Matcher matcher = allOf(widgetOfType(Scale.class), withText(text));
+		return new SWTBotScale((Scale) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @return a {@link SWTBotScale} with the specified <code>tooltip</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotScale scaleWithTooltip(String tooltip) {
+		return scaleWithTooltip(tooltip, 0);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotScale} with the specified <code>tooltip</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotScale scaleWithTooltip(String tooltip, int index) {
+		Matcher matcher = allOf(widgetOfType(Scale.class), withTooltip(tooltip));
+		return new SWTBotScale((Scale) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param key the key set on the widget.
+	 * @param value the value for the key.
+	 * @return a {@link SWTBotScale} with the specified <code>key/value</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotScale scaleWithId(String key, String value) {
+		return scaleWithId(key, value, 0);
+	}
+
+	/**
+	 * @param key the key set on the widget.
+	 * @param value the value for the key.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotScale} with the specified <code>key/value</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotScale scaleWithId(String key, String value, int index) {
+		Matcher matcher = allOf(widgetOfType(Scale.class), withId(key, value));
+		return new SWTBotScale((Scale) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @return a {@link SWTBotScale} with the specified <code>value</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotScale scaleWithId(String value) {
+		return scaleWithId(value, 0);
+	}
+
+	/**
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotScale} with the specified <code>value</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotScale scaleWithId(String value, int index) {
+		Matcher matcher = allOf(widgetOfType(Scale.class), withId(value));
+		return new SWTBotScale((Scale) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotScale} with the specified <code>inGroup</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotScale scaleInGroup(String inGroup) {
+		return scaleInGroup(inGroup, 0);
+	}
+
+	/**
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotScale} with the specified <code>inGroup</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotScale scaleInGroup(String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Scale.class), inGroup(inGroup));
+		return new SWTBotScale((Scale) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @return a {@link SWTBotScale} with the specified <code>none</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotScale scale() {
+		return scale(0);
+	}
+
+	/**
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotScale} with the specified <code>none</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotScale scale(int index) {
+		Matcher matcher = allOf(widgetOfType(Scale.class));
+		return new SWTBotScale((Scale) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotScale} with the specified <code>label</code> with the specified <code>inGroup</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotScale scaleWithLabelInGroup(String label, String inGroup) {
+		return scaleWithLabelInGroup(label, inGroup, 0);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotScale} with the specified <code>label</code> with the specified <code>inGroup</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotScale scaleWithLabelInGroup(String label, String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Scale.class), withLabel(label), inGroup(inGroup));
+		return new SWTBotScale((Scale) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param text the text on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotScale} with the specified <code>text</code> with the specified <code>inGroup</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotScale scaleInGroup(String text, String inGroup) {
+		return scaleInGroup(text, inGroup, 0);
+	}
+
+	/**
+	 * @param text the text on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotScale} with the specified <code>text</code> with the specified <code>inGroup</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotScale scaleInGroup(String text, String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Scale.class), withText(text), inGroup(inGroup));
+		return new SWTBotScale((Scale) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotScale} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotScale scaleWithTooltipInGroup(String tooltip, String inGroup) {
+		return scaleWithTooltipInGroup(tooltip, inGroup, 0);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotScale} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotScale scaleWithTooltipInGroup(String tooltip, String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Scale.class), withTooltip(tooltip), inGroup(inGroup));
+		return new SWTBotScale((Scale) widget(matcher, index), matcher);
 	}
 
 	private Matcher<? extends List> withLabel(String label) {
