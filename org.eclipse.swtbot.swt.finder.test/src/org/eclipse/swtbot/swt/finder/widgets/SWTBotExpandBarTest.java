@@ -10,10 +10,15 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withText;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
+import java.util.List;
+
+import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.junit.Before;
 import org.junit.Test;
@@ -63,6 +68,26 @@ public class SWTBotExpandBarTest extends AbstractSWTTestCase {
 
 		assertTrue(item1.isCollapsed());
 		assertTrue(item2.isCollapsed());
+	}
+
+	@Test
+	public void shouldGetAllExpandBarItems() throws Exception {
+		List<SWTBotExpandItem> items = bot.expandBar().getAllItems();
+		assertEquals(2, items.size());
+		assertEquals("What is your favorite button?", items.get(0).getText());
+		assertEquals("What is your favorite icon?", items.get(1).getText());
+	}
+
+	@Test
+	public void shouldThrowExceptionWhenItemIsNotFound() throws Exception {
+		try {
+			bot.expandBar().getExpandItem(withText("some text"));
+			fail("Expected WNFE");
+		} catch (WidgetNotFoundException e) {
+			assertEquals("Could not find widget.", e.getMessage());
+			assertEquals("Timeout after: 5000 ms.: Could not find widget matching: (of type 'ExpandItem' and with text 'some text')", e
+					.getCause().getMessage());
+		}
 	}
 
 	@Before

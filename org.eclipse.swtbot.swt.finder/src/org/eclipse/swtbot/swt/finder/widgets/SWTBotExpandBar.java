@@ -107,7 +107,7 @@ public class SWTBotExpandBar extends AbstractSWTBot<ExpandBar> {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotExpandItem expandItem(final String itemText) {
-		return expandItem(allOf(widgetOfType(ExpandItem.class), withText(itemText)));
+		return expandItem(withText(itemText));
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class SWTBotExpandBar extends AbstractSWTBot<ExpandBar> {
 	 */
 	@SuppressWarnings("unchecked")
 	public SWTBotExpandItem collapseItem(final String itemText) {
-		return collapseItem(allOf(widgetOfType(ExpandItem.class), withText(itemText)));
+		return collapseItem(withText(itemText));
 	}
 
 	/**
@@ -149,8 +149,9 @@ public class SWTBotExpandBar extends AbstractSWTBot<ExpandBar> {
 	 * @param matcher the matcher.
 	 * @return the {@link SWTBotExpandItem} with the specified text.
 	 */
-	public SWTBotExpandItem getExpandItem(final Matcher<Widget> matcher) {
+	public SWTBotExpandItem getExpandItem(Matcher<Widget> matcher) {
 		try {
+			matcher = allOf(widgetOfType(ExpandItem.class), matcher);
 			WaitForObjectCondition<? extends Widget> waitForWidget = waitForWidget(matcher, widget);
 			new SWTBot().waitUntilWidgetAppears(waitForWidget);
 			return new SWTBotExpandItem((ExpandItem) waitForWidget.get(0), matcher);
