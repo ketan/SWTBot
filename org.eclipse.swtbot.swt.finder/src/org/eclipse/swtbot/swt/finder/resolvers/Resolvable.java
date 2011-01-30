@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Ketan Padegaonkar and others.
+ * Copyright (c) 2008,2011 Ketan Padegaonkar and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -28,6 +28,8 @@ public class Resolvable implements IResolvable {
 	 */
 	public Resolvable() {
 		this(new Resolver());
+		resolver.addResolver(new ExpandBarResolver());
+		resolver.addResolver(new ExpandItemResolver());
 		resolver.addResolver(new CTabFolderResolver());
 		resolver.addResolver(new TabFolderResolver());
 		resolver.addResolver(new CTabItemResolver());

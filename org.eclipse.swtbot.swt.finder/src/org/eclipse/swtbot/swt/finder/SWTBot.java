@@ -12,6 +12,7 @@ import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.DateTime;
+import org.eclipse.swt.widgets.ExpandBar;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.List;
@@ -38,6 +39,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotCTabItem;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotCheckBox;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotCombo;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotDateTime;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotExpandBar;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotLabel;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotLink;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotList;
@@ -4370,6 +4372,134 @@ public class SWTBot extends SWTBotFactory {
 	public SWTBotScale scaleWithTooltipInGroup(String tooltip, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Scale.class), withTooltip(tooltip), inGroup(inGroup));
 		return new SWTBotScale((Scale) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @return a {@link SWTBotExpandBar} with the specified <code>label</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotExpandBar expandBarWithLabel(String label) {
+		return expandBarWithLabel(label, 0);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotExpandBar} with the specified <code>label</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotExpandBar expandBarWithLabel(String label, int index) {
+		Matcher matcher = allOf(widgetOfType(ExpandBar.class), withLabel(label));
+		return new SWTBotExpandBar((ExpandBar) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param key the key set on the widget.
+	 * @param value the value for the key.
+	 * @return a {@link SWTBotExpandBar} with the specified <code>key/value</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotExpandBar expandBarWithId(String key, String value) {
+		return expandBarWithId(key, value, 0);
+	}
+
+	/**
+	 * @param key the key set on the widget.
+	 * @param value the value for the key.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotExpandBar} with the specified <code>key/value</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotExpandBar expandBarWithId(String key, String value, int index) {
+		Matcher matcher = allOf(widgetOfType(ExpandBar.class), withId(key, value));
+		return new SWTBotExpandBar((ExpandBar) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @return a {@link SWTBotExpandBar} with the specified <code>value</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotExpandBar expandBarWithId(String value) {
+		return expandBarWithId(value, 0);
+	}
+
+	/**
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotExpandBar} with the specified <code>value</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotExpandBar expandBarWithId(String value, int index) {
+		Matcher matcher = allOf(widgetOfType(ExpandBar.class), withId(value));
+		return new SWTBotExpandBar((ExpandBar) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotExpandBar} with the specified <code>inGroup</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotExpandBar expandBarInGroup(String inGroup) {
+		return expandBarInGroup(inGroup, 0);
+	}
+
+	/**
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotExpandBar} with the specified <code>inGroup</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotExpandBar expandBarInGroup(String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(ExpandBar.class), inGroup(inGroup));
+		return new SWTBotExpandBar((ExpandBar) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @return a {@link SWTBotExpandBar} with the specified <code>none</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotExpandBar expandBar() {
+		return expandBar(0);
+	}
+
+	/**
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotExpandBar} with the specified <code>none</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotExpandBar expandBar(int index) {
+		Matcher matcher = allOf(widgetOfType(ExpandBar.class));
+		return new SWTBotExpandBar((ExpandBar) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotExpandBar} with the specified <code>label</code> with the specified <code>inGroup</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotExpandBar expandBarWithLabelInGroup(String label, String inGroup) {
+		return expandBarWithLabelInGroup(label, inGroup, 0);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotExpandBar} with the specified <code>label</code> with the specified <code>inGroup</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotExpandBar expandBarWithLabelInGroup(String label, String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(ExpandBar.class), withLabel(label), inGroup(inGroup));
+		return new SWTBotExpandBar((ExpandBar) widget(matcher, index), matcher);
 	}
 
 	private Matcher<? extends List> withLabel(String label) {
