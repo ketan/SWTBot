@@ -62,8 +62,8 @@ public class SWTBotDateTime extends AbstractSWTBotControl<DateTime> {
 		return syncExec(new Result<Date>() {
 			public Date run() {
 				int year = widget.getYear();
-				int month = widget.getMonth();
 				int day = widget.getDay();
+				int month = widget.getMonth();
 
 				int hours = widget.getHours();
 				int minutes = widget.getMinutes();
