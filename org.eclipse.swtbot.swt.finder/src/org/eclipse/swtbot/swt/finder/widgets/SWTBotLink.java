@@ -68,9 +68,10 @@ public class SWTBotLink extends AbstractSWTBotControl<Link> {
 		Assert.isLegal(isText, "Link does not contain text (" + hyperlinkText + "). It contains (" + text + ")");
 
 		hyperlinkText = extractHyperlinkTextOrHREF(hyperlinkText, text);
+		notify(SWT.MouseDown, createMouseEvent(0, 0, 1, SWT.NONE, 1));
 		notify(SWT.Selection, createHyperlinkEvent(hyperlinkText));
-
-		return click(true);
+		notify(SWT.MouseUp, createMouseEvent(0, 0, 1, SWT.BUTTON1, 1));
+		return this;
 	}
 
 	private String extractHyperlinkTextOrHREF(String hyperlinkText, String text) {
