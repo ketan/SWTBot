@@ -27,15 +27,15 @@
          version="0.0.0"/>
 
    <requires>
-      <import plugin="org.junit" version="3.7.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.resources" version="3.3.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.runtime" version="3.3.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.swt" version="3.3.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui" version="3.3.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui.ide" version="3.3.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.swtbot.swt.finder" version="2.0.2" match="greaterOrEqual"/>
-      <import plugin="org.hamcrest" version="1.1.0" match="greaterOrEqual"/>
-      <import plugin="org.apache.log4j" version="1.2.13" match="greaterOrEqual"/>
+      <import plugin="org.junit"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.swt"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.swtbot.swt.finder"/>
+      <import plugin="org.hamcrest"/>
+      <import plugin="org.apache.log4j"/>
    </requires>
 
    <plugin
