@@ -271,10 +271,11 @@ public class SWTBotGefViewer {
 		/*
 		 * we use 'bot()' and not 'bot' to scope the widget search to the editor. Otherwise if another widget of the
 		 * same type is present in the workspace and is found first, the code after will fail.
+		 * We specify the parent widget, to narrow the search to the supplied canvas.
 		 */
 
-		/* by using SWTBot#widgets() we get the added benefit of an implicit wait condition. */
-		List<? extends Text> controls = bot().widgets(widgetOfType(Text.class));
+		/* by using SWTBot#widgets() we get the added benefit of an implicit wait condition */
+		List<? extends Text> controls = bot().widgets(widgetOfType(Text.class), canvas.widget);
 		if (controls.size() == 1) {
 			final Text textControl = controls.get(0);
 			canvas.typeText(textControl, text);
