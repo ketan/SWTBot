@@ -10,21 +10,15 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.widgets;
 
-import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.pass;
-import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widgetOfType;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.List;
-
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
-import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
 import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.junit.After;
 import org.junit.Before;
@@ -38,6 +32,7 @@ public class SWTBotRadioTest extends AbstractSWTTestCase {
 
 	private SWTBot	bot;
 	private long	oldTimeout;
+	private SWTBotText	listeners;
 
 	@Before
 	public void lowerTimeout() {
@@ -51,31 +46,40 @@ public class SWTBotRadioTest extends AbstractSWTTestCase {
 	}
 
 	@Test
-	public void clicksCheckBox() throws Exception {
-		try {
-			List<Text> findControls = new ControlFinder().findControls(widgetOfType(Text.class));
-			SWTBotText text = new SWTBotText(findControls.get(0));
-			text.setText("");
+	public void clicksRadioButton() throws Exception {
+		bot.radio("Three").click();
+		listeners.setText("");
 
-			bot.checkBox("Listen").click();
-			bot.button("One").click();
-			assertTextContains("Selection [13]: SelectionEvent{Button {One}", text);
-		} finally {
-			bot.checkBox("Listen").click();
-			bot.button("Clear").click();
-		}
+		bot.radio("One").click();
+		assertEventMatches(listeners, "Activate [26]: ShellEvent{Button {One} time=557343275 data=null doit=true}");
+		assertEventMatches(listeners, "MouseDown [3]: MouseEvent{Button {One} time=557343275 data=null button=1 stateMask=0 x=31 y=13 count=1}");
+		assertEventMatches(listeners, "MouseUp [4]: MouseEvent{Button {One} time=557343275 data=null button=1 stateMask=524288 x=31 y=12 count=1}");
+		assertEventMatches(listeners, "Selection [13]: SelectionEvent{Button {One} time=557343275 data=null item=null detail=0 x=0 y=0 width=0 height=0 stateMask=0 text=null doit=true}");
 	}
 
 	@Test
-	public void doesNotMatchRadioButtons() throws Exception {
+	public void clickingOneRadioDeselectsOthers() throws Exception {
+		bot.radio("One").click();
+		listeners.setText("");
+		bot.radio("Two").click();
+		assertEventMatches(listeners, "Deactivate [27]: ShellEvent{Button {One} time=557347515 data=null doit=true}");
+		assertEventMatches(listeners, "Activate [26]: ShellEvent{Button {Two} time=557347515 data=null doit=true}");
+		assertEventMatches(listeners, "MouseDown [3]: MouseEvent{Button {Two} time=557347515 data=null button=1 stateMask=0 x=16 y=13 count=1}");
+		assertEventMatches(listeners, "MouseUp [4]: MouseEvent{Button {Two} time=557347515 data=null button=1 stateMask=524288 x=16 y=13 count=1}");
+		assertEventMatches(listeners, "Selection [13]: SelectionEvent{Button {One} time=557347515 data=null item=null detail=0 x=0 y=0 width=0 height=0 stateMask=0 text=null doit=true}");
+		assertEventMatches(listeners, "Selection [13]: SelectionEvent{Button {Two} time=557347515 data=null item=null detail=0 x=0 y=0 width=0 height=0 stateMask=0 text=null doit=true}");
+	}
+
+	@Test
+	public void doesNotMatchCheckboxButtons() throws Exception {
 		try {
-			assertNull(bot.checkBox("SWT.PUSH").widget);
+			assertNull(bot.radio("SWT.FLAT").widget);
 			fail("Expecting WidgetNotFoundException");
 		} catch (WidgetNotFoundException e) {
 			pass();
 		}
 		try {
-			assertNull(bot.checkBox("Preferred").widget);
+			assertNull(bot.radio("Horizontal Fill").widget);
 			fail("Expecting WidgetNotFoundException");
 		} catch (WidgetNotFoundException e) {
 			pass();
@@ -85,13 +89,13 @@ public class SWTBotRadioTest extends AbstractSWTTestCase {
 	@Test
 	public void doesNotMatchRegularButtons() throws Exception {
 		try {
-			assertNull(bot.checkBox("One").widget);
+			assertNull(bot.radio("Clear").widget);
 			fail("Expecting WidgetNotFoundException");
 		} catch (WidgetNotFoundException e) {
 			pass();
 		}
 		try {
-			assertNull(bot.checkBox("Change").widget);
+			assertNull(bot.radio("Select Listeners").widget);
 			fail("Expecting WidgetNotFoundException");
 		} catch (WidgetNotFoundException e) {
 			pass();
@@ -120,6 +124,10 @@ public class SWTBotRadioTest extends AbstractSWTTestCase {
 		super.setUp();
 		bot = new SWTBot();
 		bot.tabItem("Button").activate();
+		bot.radio("SWT.RADIO").click();
+		listeners = bot.textInGroup("Listeners");
+		bot.checkBox("Listen").select();
+		bot.button("Clear").click();
 	}
 
 }
