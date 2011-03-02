@@ -12,11 +12,10 @@ package org.eclipse.swtbot.forms.finder.test.widgets;
 
 import static org.junit.Assert.assertNotNull;
 
-import org.eclipse.swtbot.forms.finder.test.AbstractSWTBotFormsTestCase;
 import org.eclipse.swtbot.forms.finder.widgets.SWTBotScrolledFormText;
 import org.junit.Test;
 
-public class SWTBotScrolledFormTextTest extends AbstractSWTBotFormsTestCase {
+public class SWTBotScrolledFormTextTest extends AbstractSWTBotFormsTest {
 
 	@Test
 	public void findsScrolledFormText() throws Exception {

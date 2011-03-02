@@ -13,11 +13,10 @@ package org.eclipse.swtbot.forms.finder.test.widgets;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.eclipse.swtbot.forms.finder.test.AbstractSWTBotFormsTestCase;
 import org.eclipse.swtbot.forms.finder.widgets.SWTBotHyperlink;
 import org.junit.Test;
 
-public class SWTBotHyperlinkTest extends AbstractSWTBotFormsTestCase {
+public class SWTBotHyperlinkTest extends AbstractSWTBotFormsTest {
 
 	@Test
 	public void findHyperlink() throws Exception {

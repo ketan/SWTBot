@@ -13,11 +13,10 @@ package org.eclipse.swtbot.forms.finder.test.widgets;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.eclipse.swtbot.forms.finder.test.AbstractSWTBotFormsTestCase;
 import org.eclipse.swtbot.forms.finder.widgets.SWTBotSection;
 import org.junit.Test;
 
-public class SWTBotSectionTest extends AbstractSWTBotFormsTestCase {
+public class SWTBotSectionTest extends AbstractSWTBotFormsTest {
 
 	@Test
 	public void findSection() throws Exception {

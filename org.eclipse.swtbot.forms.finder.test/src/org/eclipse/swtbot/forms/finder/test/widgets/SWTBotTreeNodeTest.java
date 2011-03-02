@@ -12,11 +12,10 @@ package org.eclipse.swtbot.forms.finder.test.widgets;
 
 import static org.junit.Assert.assertNotNull;
 
-import org.eclipse.swtbot.forms.finder.test.AbstractSWTBotFormsTestCase;
 import org.eclipse.swtbot.forms.finder.widgets.SWTBotTreeNode;
 import org.junit.Test;
 
-public class SWTBotTreeNodeTest extends AbstractSWTBotFormsTestCase {
+public class SWTBotTreeNodeTest extends AbstractSWTBotFormsTest {
 
 	@Test
 	public void findTreeNode() throws Exception {

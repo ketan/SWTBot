@@ -12,11 +12,10 @@ package org.eclipse.swtbot.forms.finder.test.widgets;
 
 import static org.junit.Assert.assertNotNull;
 
-import org.eclipse.swtbot.forms.finder.test.AbstractSWTBotFormsTestCase;
 import org.eclipse.swtbot.forms.finder.widgets.SWTBotTwistie;
 import org.junit.Test;
 
-public class SWTBotTwistieTest extends AbstractSWTBotFormsTestCase {
+public class SWTBotTwistieTest extends AbstractSWTBotFormsTest {
 
 	@Test
 	public void findTwistie() throws Exception {
