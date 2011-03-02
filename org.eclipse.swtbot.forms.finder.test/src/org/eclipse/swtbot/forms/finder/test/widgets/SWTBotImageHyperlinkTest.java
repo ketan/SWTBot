@@ -10,19 +10,52 @@
  *******************************************************************************/
 package org.eclipse.swtbot.forms.finder.test.widgets;
 
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withRegex;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.eclipse.swtbot.forms.finder.widgets.SWTBotImageHyperlink;
+import org.eclipse.ui.forms.widgets.ImageHyperlink;
 import org.junit.Test;
 
 public class SWTBotImageHyperlinkTest extends AbstractSWTBotFormsTest {
 
 	@Test
-	public void findImageHyperlink() throws Exception {
-		SWTBotImageHyperlink link = bot.imageHyperlink("Image link with no image");
+	public void findImageHyperlinkWithNoImage() throws Exception {
+		String text = "Image link with no image";
+		SWTBotImageHyperlink link = bot.imageHyperlink(text);
 		assertNotNull(link);
-		assertEquals("Image link with no image", link.getText());
+		assertEquals(text, link.getText());
+		assertEquals(ImageHyperlink.class, link.widget.getClass());
 	}
 	
+	@Test
+	public void canFindImageHyperlinkWithNoImageByRegex() throws Exception {
+		String text = "link with no";
+		SWTBotImageHyperlink link = new SWTBotImageHyperlink((ImageHyperlink) bot.widget(withRegex(text)));
+
+		assertNotNull(link);
+		assertEquals("Image link with no image", link.getText());
+		assertEquals(ImageHyperlink.class, link.widget.getClass());
+	}
+	
+	
+	@Test
+	public void findImageHyperlinkWithImage() throws Exception {
+		String text = "Link with image and text";
+		SWTBotImageHyperlink link = bot.imageHyperlink(text);
+		assertNotNull(link);
+		assertEquals(text, link.getText());
+		assertEquals(ImageHyperlink.class, link.widget.getClass());
+	}
+	
+	@Test
+	public void canFindImageHyperlinkWithImageByRegex() throws Exception {
+		String text = "with image";
+		SWTBotImageHyperlink link = new SWTBotImageHyperlink((ImageHyperlink) bot.widget(withRegex(text)));
+
+		assertNotNull(link);
+		assertEquals("Link with image and text", link.getText());
+		assertEquals(ImageHyperlink.class, link.widget.getClass());
+	}
 }

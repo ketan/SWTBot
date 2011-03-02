@@ -10,12 +10,21 @@
  *******************************************************************************/
 package org.eclipse.swtbot.forms.finder.test.widgets;
 
+import static org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable.syncExec;
+
 import java.util.List;
 
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
+import org.eclipse.swtbot.eclipse.finder.finders.WorkbenchContentsFinder;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEditor;
+import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotView;
 import org.eclipse.swtbot.forms.finder.finders.SWTFormsBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
+import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.actions.ActionFactory;
 import org.junit.After;
 import org.junit.BeforeClass;
 
@@ -27,16 +36,40 @@ public abstract class AbstractSWTBotFormsTest {
 	@BeforeClass
 	public static void beforeClass() {
 		closeWelcomePage();
+		closeAllViews();
+		showFormsView();
+	}
+
+	private static void showFormsView() {
+		syncExec(new VoidResult() {
+			public void run() {
+				IWorkbenchWindow window = new WorkbenchContentsFinder().activeWorkbenchWindow();
+				try {
+					window.getActivePage().showView("org.eclipse.ui.forms.examples.views.FormView");
+					ActionFactory.MAXIMIZE.create(window).run();
+				} catch (PartInitException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		});
+	}
+
+	private static void closeAllViews() {
+		List<SWTBotView> views = workbench.views();
+		for (SWTBotView view : views) {
+			view.close();
+		}
 	}
 
 	private static void closeWelcomePage() {
 		try {
+			SWTBotPreferences.TIMEOUT = 0;
 			System.setProperty("org.eclipse.swtbot.search.timeout", "0");
 			workbench.viewByTitle("Welcome").close();
 		} catch (WidgetNotFoundException e) {
 			// do nothing
 		} finally {
-			System.setProperty("org.eclipse.swtbot.search.timeout", "5000");
+			SWTBotPreferences.TIMEOUT = 5000;
 		}
 	}
 

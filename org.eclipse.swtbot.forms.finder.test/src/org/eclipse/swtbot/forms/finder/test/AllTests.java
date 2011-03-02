@@ -24,7 +24,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	SWTBotFormTextTest.class,
 	SWTBotHyperlinkTest.class,
 	SWTBotImageHyperlinkTest.class,
-	SWTBotScrolledFormTextTest.class,
+	SWTBotScrolledFormTest.class,
 	SWTBotSectionTest.class,
 	SWTBotTreeNodeTest.class,
 	SWTBotTwistieTest.class

@@ -15,6 +15,7 @@ import static org.junit.Assert.assertNotNull;
 
 import org.eclipse.swtbot.forms.finder.widgets.SWTBotExpandableComposite;
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
+import org.eclipse.ui.forms.widgets.ExpandableComposite;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -27,6 +28,7 @@ public class SWTBotExpandableCompositeTest extends AbstractSWTBotFormsTest {
 		SWTBotExpandableComposite composite = bot.expandableComposite(title);
 		assertNotNull(composite);
 		assertEquals(title, composite.getText());
+		assertEquals(ExpandableComposite.class, composite.widget.getClass());
 	}
 	
 }

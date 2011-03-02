@@ -20,7 +20,7 @@ import org.eclipse.swtbot.forms.finder.widgets.SWTBotExpandableComposite;
 import org.eclipse.swtbot.forms.finder.widgets.SWTBotFormText;
 import org.eclipse.swtbot.forms.finder.widgets.SWTBotHyperlink;
 import org.eclipse.swtbot.forms.finder.widgets.SWTBotImageHyperlink;
-import org.eclipse.swtbot.forms.finder.widgets.SWTBotScrolledFormText;
+import org.eclipse.swtbot.forms.finder.widgets.SWTBotScrolledForm;
 import org.eclipse.swtbot.forms.finder.widgets.SWTBotSection;
 import org.eclipse.swtbot.forms.finder.widgets.SWTBotTreeNode;
 import org.eclipse.swtbot.forms.finder.widgets.SWTBotTwistie;
@@ -32,7 +32,7 @@ import org.eclipse.ui.forms.widgets.ExpandableComposite;
 import org.eclipse.ui.forms.widgets.FormText;
 import org.eclipse.ui.forms.widgets.Hyperlink;
 import org.eclipse.ui.forms.widgets.ImageHyperlink;
-import org.eclipse.ui.forms.widgets.ScrolledFormText;
+import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.ui.forms.widgets.TreeNode;
 import org.eclipse.ui.forms.widgets.Twistie;
@@ -380,51 +380,51 @@ public class SWTFormsBot extends SWTBot {
 	}
 	
 	/**
-	 * @return a {@link SWTBotScrolledFormText}.
+	 * @return a {@link SWTBotScrolledForm}.
 	 */
-	public SWTBotScrolledFormText scrolledFormText() {
-		Matcher matcher = allOf(widgetOfType(ScrolledFormText.class));
-		return new SWTBotScrolledFormText((ScrolledFormText) widget(matcher, 0), matcher);
+	public SWTBotScrolledForm scrolledForm() {
+		Matcher matcher = allOf(widgetOfType(ScrolledForm.class));
+		return new SWTBotScrolledForm((ScrolledForm) widget(matcher, 0), matcher);
 	}
 	
 	/**
 	 * @param key the key set on the widget.
 	 * @param value the value for the key.
-	 * @return a {@link SWTBotScrolledFormText} with the specified <code>key/value</code>.
+	 * @return a {@link SWTBotScrolledForm} with the specified <code>key/value</code>.
 	 */
-	public SWTBotScrolledFormText scrolledFormTextWithId(String key, String value) {
-		return scrolledFormTextWithId(key, value, 0);
+	public SWTBotScrolledForm scrolledFormWithId(String key, String value) {
+		return scrolledFormWithId(key, value, 0);
 	}
 
 	/**
 	 * @param key the key set on the widget.
 	 * @param value the value for the key.
 	 * @param index the index of the widget.
-	 * @return a {@link SWTBotScrolledFormText} with the specified <code>key/value</code>.
+	 * @return a {@link SWTBotScrolledForm} with the specified <code>key/value</code>.
 	 */
 	@SuppressWarnings("unchecked")
-	public SWTBotScrolledFormText scrolledFormTextWithId(String key, String value, int index) {
-		Matcher matcher = allOf(widgetOfType(ScrolledFormText.class), withId(key, value));
-		return new SWTBotScrolledFormText((ScrolledFormText) widget(matcher, index), matcher);
+	public SWTBotScrolledForm scrolledFormWithId(String key, String value, int index) {
+		Matcher matcher = allOf(widgetOfType(ScrolledForm.class), withId(key, value));
+		return new SWTBotScrolledForm((ScrolledForm) widget(matcher, index), matcher);
 	}
 
 	/**
 	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
-	 * @return a {@link SWTBotScrolledFormText} with the specified <code>value</code>.
+	 * @return a {@link SWTBotScrolledForm} with the specified <code>value</code>.
 	 */
-	public SWTBotScrolledFormText scrolledFormTextWithId(String value) {
-		return scrolledFormTextWithId(value, 0);
+	public SWTBotScrolledForm scrolledFormWithId(String value) {
+		return scrolledFormWithId(value, 0);
 	}
 
 	/**
 	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
 	 * @param index the index of the widget.
-	 * @return a {@link SWTBotScrolledFormText} with the specified <code>value</code>.
+	 * @return a {@link SWTBotScrolledForm} with the specified <code>value</code>.
 	 */
 	@SuppressWarnings("unchecked")
-	public SWTBotScrolledFormText scrolledFormTextWithId(String value, int index) {
-		Matcher matcher = allOf(widgetOfType(ScrolledFormText.class), withId(value));
-		return new SWTBotScrolledFormText((ScrolledFormText) widget(matcher, index), matcher);
+	public SWTBotScrolledForm scrolledFormWithId(String value, int index) {
+		Matcher matcher = allOf(widgetOfType(ScrolledForm.class), withId(value));
+		return new SWTBotScrolledForm((ScrolledForm) widget(matcher, index), matcher);
 	}
 	
 	/**

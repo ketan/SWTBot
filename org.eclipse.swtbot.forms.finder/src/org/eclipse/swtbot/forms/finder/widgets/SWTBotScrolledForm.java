@@ -13,20 +13,18 @@ package org.eclipse.swtbot.forms.finder.widgets;
 import org.eclipse.swtbot.swt.finder.ReferenceBy;
 import org.eclipse.swtbot.swt.finder.SWTBotWidget;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
-import org.eclipse.swtbot.swt.finder.results.StringResult;
-import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBotControl;
-import org.eclipse.ui.forms.widgets.ScrolledFormText;
+import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.hamcrest.SelfDescribing;
 
 /**
- * This represents a {@link ScrolledFormText} widget.
+ * This represents a {@link ScrolledForm} widget.
  * 
  * @author Chris Aniszczyk &lt;caniszczyk [at] gmail [dot] com&gt;
  * @version $Id$
  */
-@SWTBotWidget(clasz = ScrolledFormText.class, preferredName = "scrolledFormText", referenceBy = { ReferenceBy.TEXT })
-public class SWTBotScrolledFormText extends AbstractSWTBotControl<ScrolledFormText> {
+@SWTBotWidget(clasz = ScrolledForm.class, preferredName = "scrolledFormText", referenceBy = { ReferenceBy.TEXT })
+public class SWTBotScrolledForm extends AbstractSWTBotControl<ScrolledForm> {
 
 	/**
 	 * Constructs a new instance with the given widget.
@@ -34,7 +32,7 @@ public class SWTBotScrolledFormText extends AbstractSWTBotControl<ScrolledFormTe
 	 * @param w the widget.
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 */
-	public SWTBotScrolledFormText(ScrolledFormText w) throws WidgetNotFoundException {
+	public SWTBotScrolledForm(ScrolledForm w) throws WidgetNotFoundException {
 		super(w);
 	}
 
@@ -45,32 +43,8 @@ public class SWTBotScrolledFormText extends AbstractSWTBotControl<ScrolledFormTe
 	 * @param description the description of the widget, this will be reported by {@link #toString()}
 	 * @throws WidgetNotFoundException if the widget is <code>null</code> or widget has been disposed.
 	 */
-	public SWTBotScrolledFormText(ScrolledFormText w, SelfDescribing description) throws WidgetNotFoundException {
+	public SWTBotScrolledForm(ScrolledForm w, SelfDescribing description) throws WidgetNotFoundException {
 		super(w, description);
-	}
-	
-	public String selectionText() {
-		return syncExec(new StringResult() {
-			public String run() {
-				return widget.getFormText().getSelectionText();
-			}
-		});
-	}
-	
-	public String selectedLinkText() {
-		return syncExec(new StringResult() {
-			public String run() {
-				return widget.getFormText().getSelectedLinkText();
-			}
-		});
-	}
-	
-	public void setText(final String text, final boolean parseTags, final boolean expandURLs) {
-		syncExec(new VoidResult() {
-			public void run() {
-				widget.getFormText().setText(text, parseTags, expandURLs);
-			}
-		});
 	}
 
 }
