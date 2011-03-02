@@ -279,11 +279,15 @@
 		<runTests testPlugin="org.eclipse.swtbot.eclipse.finder.test" />
 	</target>
 
+	<target name="test-forms">
+		<runTests testPlugin="org.eclipse.swtbot.forms.finder.test" />
+	</target>
+
 	<target name="test-eclipse-ui">
 		<runTests testPlugin="org.eclipse.swtbot.eclipse.ui.test" />
 	</target>
 
-	<target name="all" depends="test-finder, test-generator, test-eclipse-finder, test-eclipse-ui" />
+	<target name="all" depends="test-finder, test-forms, test-eclipse-finder, test-eclipse-ui, test-generator" />
 
 </project>
 
