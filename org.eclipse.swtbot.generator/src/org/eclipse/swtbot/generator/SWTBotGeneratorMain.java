@@ -21,7 +21,7 @@ public class SWTBotGeneratorMain {
 	public static void main(String[] args) {
 		try {
 			XmlConfigurator.main("widgets.xml", "org.eclipse.swtbot.swt.finder.SWTBot", "SWTBotFactory", new File("../org.eclipse.swtbot.swt.finder/src" ));
-			XmlConfigurator.main("widgets-forms.xml", "org.eclipse.swtbot.forms.finder.finders.SWTFormsBot", "SWTBot", new File("../org.eclipse.swtbot.forms.finder/src" ));
+			XmlConfigurator.main("widgets-forms.xml", "org.eclipse.swtbot.forms.finder.SWTFormsBot", "SWTBot", new File("../org.eclipse.swtbot.forms.finder/src" ));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

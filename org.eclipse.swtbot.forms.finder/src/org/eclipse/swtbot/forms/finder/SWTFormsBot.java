@@ -1,6 +1,6 @@
 // Generated source. DO NOT MODIFY.
 // To add new widgets, please see README file in the generator plugin.
-package org.eclipse.swtbot.forms.finder.finders;
+package org.eclipse.swtbot.forms.finder;
 
 
 import org.eclipse.swt.widgets.Widget;
