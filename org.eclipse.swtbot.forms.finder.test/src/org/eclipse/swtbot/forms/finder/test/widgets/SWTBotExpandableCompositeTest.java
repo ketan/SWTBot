@@ -13,11 +13,14 @@ package org.eclipse.swtbot.forms.finder.test.widgets;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.eclipse.swtbot.forms.finder.test.AbstractSWTBotFormsTestCase;
 import org.eclipse.swtbot.forms.finder.widgets.SWTBotExpandableComposite;
+import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
+import org.eclipse.ui.forms.widgets.ExpandableComposite;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-public class SWTBotExpandableCompositeTest extends AbstractSWTBotFormsTestCase {
+@RunWith(SWTBotJunit4ClassRunner.class)
+public class SWTBotExpandableCompositeTest extends AbstractSWTBotFormsTest {
 
 	@Test
 	public void findExpandableComposite() throws Exception {
@@ -25,6 +28,7 @@ public class SWTBotExpandableCompositeTest extends AbstractSWTBotFormsTestCase {
 		SWTBotExpandableComposite composite = bot.expandableComposite(title);
 		assertNotNull(composite);
 		assertEquals(title, composite.getText());
+		assertEquals(ExpandableComposite.class, composite.widget.getClass());
 	}
 	
 }

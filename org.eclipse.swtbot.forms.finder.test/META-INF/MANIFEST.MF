@@ -17,5 +17,4 @@ Require-Bundle: org.eclipse.swt,
  org.eclipse.core.runtime,
  org.eclipse.ui,
  org.eclipse.swtbot.eclipse.finder
-Import-Package: com.ibm.icu.text
 Bundle-Vendor: Eclipse SWTBot

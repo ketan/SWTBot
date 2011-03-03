@@ -41,6 +41,10 @@
          id="org.eclipse.swtbot.ide"
          version="0.0.0"/>
 
+   <includes
+         id="org.eclipse.swtbot.forms"
+         version="0.0.0"/>
+
    <requires>
       <import plugin="org.eclipse.swt"/>
       <import plugin="org.eclipse.swtbot.swt.finder"/>
@@ -136,5 +140,18 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+
+   <plugin
+         id="org.eclipse.ui.forms.examples"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.swtbot.forms.finder.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
 
 </feature>

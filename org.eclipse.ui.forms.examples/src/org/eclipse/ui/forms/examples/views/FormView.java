@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2007 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,12 +7,8 @@
  *
  * Contributors:
  *     IBM Corporation - initial API and implementation
- *     Chris Aniszczyk <caniszczyk@gmail.com> - modified for SWTBot tests
  *******************************************************************************/
-
-package org.eclipse.swtbot.forms.finder.test;
-
-import org.eclipse.jface.dialogs.Dialog;
+package org.eclipse.ui.forms.examples.views;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
@@ -26,6 +22,7 @@ import org.eclipse.ui.forms.events.ExpansionAdapter;
 import org.eclipse.ui.forms.events.ExpansionEvent;
 import org.eclipse.ui.forms.events.HyperlinkAdapter;
 import org.eclipse.ui.forms.events.HyperlinkEvent;
+import org.eclipse.ui.forms.examples.internal.ExamplesPlugin;
 import org.eclipse.ui.forms.widgets.ExpandableComposite;
 import org.eclipse.ui.forms.widgets.FormText;
 import org.eclipse.ui.forms.widgets.FormToolkit;
@@ -35,20 +32,15 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.ui.forms.widgets.TableWrapData;
 import org.eclipse.ui.forms.widgets.TableWrapLayout;
+import org.eclipse.ui.part.ViewPart;
 
-// taken from the org.eclipse.ui.forms.examples plug-in
-public class FormView {
-	
-	private Composite fComposite;
+public class FormView extends ViewPart {
 	private FormToolkit toolkit;
 	private ScrolledForm form;
-	
 	/**
 	 * The constructor.
 	 */
-	public FormView(Composite composite) {
-		fComposite = composite;
-		createPartControl(fComposite);
+	public FormView() {
 	}
 	/**
 	 * This is a callback that will allow us to create the viewer and
@@ -86,12 +78,12 @@ public class FormView {
 		ImageHyperlink ih = toolkit.createImageHyperlink(form.getBody(), SWT.NULL);
 		ih.setText("Image link with no image");
 		ih = toolkit.createImageHyperlink(form.getBody(), SWT.NULL);
-		ih.setImage(JFaceResources.getImageRegistry().get(Dialog.DLG_IMG_MESSAGE_ERROR));
+		ih.setImage(ExamplesPlugin.getDefault().getImageRegistry().get(ExamplesPlugin.IMG_SAMPLE));
 		ih.setText("Link with image and text");
 		
 		ExpandableComposite ec = toolkit.createExpandableComposite(form.getBody(), ExpandableComposite.TREE_NODE|ExpandableComposite.CLIENT_INDENT);
 		ImageHyperlink eci = toolkit.createImageHyperlink(ec, SWT.NULL);
-		eci.setImage(JFaceResources.getImageRegistry().get(Dialog.DLG_IMG_MESSAGE_ERROR));
+		eci.setImage(ExamplesPlugin.getDefault().getImageRegistry().get(ExamplesPlugin.IMG_SAMPLE));
 		ec.setTextClient(eci);
 		ec.setText("Expandable Composite title");
 		String ctext = "We will now create a somewhat long text so that "+
@@ -152,7 +144,7 @@ public class FormView {
 		td = new TableWrapData(TableWrapData.FILL);
 		td.colspan = 2;
 		rtext.setLayoutData(td);
-		rtext.setImage("image", JFaceResources.getImageRegistry().get(Dialog.DLG_IMG_MESSAGE_ERROR));
+		rtext.setImage("image", ExamplesPlugin.getDefault().getImageRegistry().get(ExamplesPlugin.IMG_SAMPLE));
 		rtext.setColor("header", toolkit.getColors().getColor(IFormColors.TITLE));
 		rtext.setFont("header", JFaceResources.getHeaderFont());
 		rtext.setFont("code", JFaceResources.getTextFont());
@@ -209,5 +201,6 @@ public class FormView {
 	 */
 	public void dispose() {
 		toolkit.dispose();
+		super.dispose();
 	}
 }
