@@ -1,0 +1,35 @@
+/**
+ * This class contains convenience API to find widgets in SWTBot.
+ * Most users would start off as follows: 
+ * 
+ * <pre>
+ *    SWTBot bot = new SWTBot();
+ *    
+ *    bot.button(&quot;hello world&quot;).click();
+ *    
+ *    // in case you have two edit buttons in two different groups
+ *    // say an edit button in the &quot;Address&quot; section,
+ *    // and another in &quot;Bank Account&quot; section, you can do the following
+ *    // to click on the &quot;Edit&quot; button on the &quot;Bank Account&quot; section.
+ *    // This is the recommended way to use SWTBot, instead of finding widgets based on its index.
+ *    bot.buttonInGroup(&quot;Edit&quot;, &quot;Bank Account&quot;).click();
+ * </pre>
+ * 
+ * For finding widgets using custom matchers:
+ * 
+ * <pre>
+ *    SWTBot bot = new SWTBot();
+ *    //
+ *    // find a button within the currently active shell:
+ *    //
+ *    SWTBotButton button = new SWTBotButton((Button) bot.widget(aMatcher)); // or
+ *    SWTBotButton button = new SWTBotButton((Button)bot.widget(aMatcher, 3)); // for the 4th widget
+ *    //
+ *    // to find a button within a particular parent composite:
+ *    //
+ *    SWTBotButton button = new SWTBotButton((Button) bot.widget(aMatcher, parentComposite)); //or
+ *    SWTBotButton button = new SWTBotButton((Button) bot.widget(aMatcher, parentComposite, 3)); //for the 4th widget
+ * </pre>
+ *
+ * @version $Id$
+ */

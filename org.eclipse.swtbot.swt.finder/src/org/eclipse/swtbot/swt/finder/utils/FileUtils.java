@@ -10,18 +10,11 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.utils;
 
-import java.io.BufferedWriter;
-import java.io.Closeable;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Provides utilities to read and write to files.
@@ -87,6 +80,34 @@ public class FileUtils {
 			close(in);
 		}
 		return buffer.toString();
+	}
+
+	public static List<String> readlines(String file) {
+		try {
+			return readlines(new FileInputStream(file));
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private static List<String> readlines(InputStream in) {
+		return readlines(new InputStreamReader(in, Charset.forName("UTF-8")));
+	}
+
+	private static List<String> readlines(Reader in) {
+		BufferedReader reader = new BufferedReader(in);
+		ArrayList<String> lines = new ArrayList<String>();
+
+		try {
+			while (reader.ready()) {
+				lines.add(reader.readLine());
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} finally {
+			close(in);
+		}
+		return lines;
 	}
 
 	/**

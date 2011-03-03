@@ -4502,7 +4502,8 @@ public class SWTBot extends SWTBotFactory {
 		return new SWTBotExpandBar((ExpandBar) widget(matcher, index), matcher);
 	}
 
-	private Matcher<? extends List> withLabel(String label) {
+
+	private Matcher<? extends Widget> withLabel(String label) {
 		return WidgetMatcherFactory.withLabel(label, finder);
 	}
 

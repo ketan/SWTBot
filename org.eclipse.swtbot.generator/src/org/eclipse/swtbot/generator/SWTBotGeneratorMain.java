@@ -20,7 +20,7 @@ public class SWTBotGeneratorMain {
 
 	public static void main(String[] args) {
 		try {
-			XmlConfigurator.main("widgets.xml", "org.eclipse.swtbot.swt.finder.SWTBot", new File("../org.eclipse.swtbot.swt.finder/src" ));
+			XmlConfigurator.main("widgets.xml", "org.eclipse.swtbot.swt.finder.SWTBot", "SWTBotFactory", new File("../org.eclipse.swtbot.swt.finder/src" ));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

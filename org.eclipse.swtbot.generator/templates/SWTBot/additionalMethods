@@ -1,0 +1,3 @@
+	private Matcher<? extends Widget> withLabel(String label) {
+		return WidgetMatcherFactory.withLabel(label, finder);
+	}

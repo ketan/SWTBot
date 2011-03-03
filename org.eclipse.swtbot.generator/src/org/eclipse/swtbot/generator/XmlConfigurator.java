@@ -59,7 +59,7 @@ public class XmlConfigurator {
 		sugarConfiguration.addImports(new SWTBotGeneratorFactoryReader(className));
 	}
 
-	public static void main(String configFile, String fullClassName, File outputDir) throws Exception {
+	public static void main(String configFile, String fullClassName, String superClass, File outputDir) throws Exception {
 
 		String fileName = fullClassName.replace('.', File.separatorChar) + ".java"; //$NON-NLS-1$
 		int dotIndex = fullClassName.lastIndexOf("."); //$NON-NLS-1$
@@ -76,7 +76,7 @@ public class XmlConfigurator {
 
 		SugarGenerator sugarGenerator = new SugarGenerator();
 		try {
-			sugarGenerator.addWriter(new HamcrestFactoryWriter(packageName, shortClassName, new FileWriter(outputFile)));
+			sugarGenerator.addWriter(new HamcrestFactoryWriter(packageName, shortClassName, superClass, new FileWriter(outputFile)));
 			sugarGenerator.addWriter(new QuickReferenceWriter(System.out));
 
 			XmlConfigurator xmlConfigurator = new XmlConfigurator(sugarGenerator, XmlConfigurator.class.getClassLoader());

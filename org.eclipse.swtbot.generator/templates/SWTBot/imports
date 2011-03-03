@@ -1,0 +1,19 @@
+import org.eclipse.swt.SWT
+import org.eclipse.swt.widgets.Widget
+import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException
+import org.eclipse.swtbot.swt.finder.finders.ChildrenControlFinder
+import org.eclipse.swtbot.swt.finder.finders.ControlFinder
+import org.eclipse.swtbot.swt.finder.finders.Finder
+import org.eclipse.swtbot.swt.finder.finders.MenuFinder
+import org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarButton
+import org.hamcrest.Matcher
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.allOf
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.inGroup
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widgetOfType
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withId
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMessage
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withMnemonic
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withStyle
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withText
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withTooltip
