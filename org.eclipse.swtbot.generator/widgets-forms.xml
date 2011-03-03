@@ -1,0 +1,4 @@
+<widgets>
+	<widget class="org.eclipse.swtbot.forms.finder.widgets.SWTBotHyperlink" />
+	<widget class="org.eclipse.swtbot.forms.finder.widgets.SWTBotImageHyperlink" />
+</widgets>
