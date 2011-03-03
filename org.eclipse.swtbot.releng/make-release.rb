@@ -14,7 +14,7 @@ class Release
       exit(-1)
     end
     
-    @now = Time.now.utc
+    @now = Time.at(`git log -1 --format='%ct'`.to_i).utc
     @version = args.first
     puts "Fetching revision available on the download site..."
     uri = URI.parse("http://download.eclipse.org/technology/swtbot/ganymede/dev-build/RELEASE_NOTES.txt")
@@ -35,9 +35,9 @@ class Release
     FileUtils.rm_rf('to-upload')
     FileUtils.rm_rf('target')
     
-    build_swtbot(34, 'ganymede')
     build_swtbot(35, 'galileo')
     build_swtbot(36, 'helios')
+    build_swtbot(37, 'indigo')
   end
 
   def self.release_notes(dir)
