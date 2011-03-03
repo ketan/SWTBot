@@ -1,0 +1,5 @@
+/**
+ * SWTFormsBot is a {@link SWTBot} with capabilities for testing eclipse forms.
+ *
+ * @see {@link SWTBot} - SWTBot for usage examples.
+ */
