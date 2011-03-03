@@ -396,6 +396,7 @@
 		<copy todir="artifacts/to-upload" includeemptydirs="false">
 			<fileset dir="artifacts">
 				<include name="org.eclipse.swtbot-${all.buildId}.zip" />
+				<include name="org.eclipse.swtbot.forms-${all.buildId}.zip" />
 				<include name="org.eclipse.swtbot.eclipse-${all.buildId}.zip" />
 				<include name="org.eclipse.swtbot.eclipse.test.junit3-${all.buildId}.zip" />
 				<include name="org.eclipse.swtbot.eclipse.test.junit4-${all.buildId}.zip" />
@@ -421,6 +422,7 @@
 		</zip>
 
 		<copy-test-reports plugin.id="org.eclipse.swtbot.swt.finder.test" />
+		<copy-test-reports plugin.id="org.eclipse.swtbot.forms.finder.test" />
 		<copy-test-reports plugin.id="org.eclipse.swtbot.generator.test" />
 		<copy-test-reports plugin.id="org.eclipse.swtbot.eclipse.finder.test" />
 

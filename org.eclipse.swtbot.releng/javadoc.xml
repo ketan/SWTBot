@@ -16,6 +16,9 @@
 				org.eclipse.swtbot.eclipse.gef.finder.matchers,
 				org.eclipse.swtbot.eclipse.gef.finder.widgets,
 
+				org.eclipse.swtbot.forms.finder,
+				org.eclipse.swtbot.forms.finder.widgets,
+
 				org.eclipse.swtbot.eclipse.finder,
 			 	org.eclipse.swtbot.eclipse.finder.exceptions,
 			 	org.eclipse.swtbot.eclipse.finder.finders,
@@ -36,6 +39,7 @@
 				org.eclipse.swtbot.swt.finder.widgets">
 			<sourcepath>
 				<dirset dir="../">
+					<include name="org.eclipse.swtbot.forms.finder/src" />
 					<include name="org.eclipse.swtbot.swt.finder/src" />
 					<include name="org.eclipse.swtbot.eclipse.finder/src" />
 					<include name="org.eclipse.swtbot.eclipse.gef.finder/src" />
