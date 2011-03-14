@@ -27,7 +27,7 @@
 	<property file="build.default.properties" />
 	<import file="check-prerequisites.xml" />
 
-	<property name="plugin.version.primary" value="2.0.4" />
+	<property name="plugin.version.primary" value="2.0.5" />
 
 	<!-- automagically generate build numbers from git -->
 	<property name="git.version" value="1" />
