@@ -8,8 +8,7 @@
 # Contributors:
 #     Ketan Padegaonkar - initial API and implementation
 ###############################################################################
-source.. = src/,\
-           src_eclipse_3.5/
+source.. = src
 output.. = bin/
 bin.includes = META-INF/,\
                .,\
@@ -21,8 +20,7 @@ bin.includes = META-INF/,\
                intro/,\
                about.ini,\
                about.properties,\
-               icons/,\
-               src_eclipse_3.5/
+               icons/
 jars.compile.order = .
 src.includes = LICENSE.EPL,\
                about.html,\

@@ -2,9 +2,6 @@
 <project default="javadoc">
 
 	<target name="javadoc">
-		<condition property="junit.dir" value="junit4_3">
-			<isset property="isJunit4.3" />
-		</condition>
 		<property name="junit.dir" value="junit4_5"/>
 		
 		<delete dir="artifacts/apidocs" />
