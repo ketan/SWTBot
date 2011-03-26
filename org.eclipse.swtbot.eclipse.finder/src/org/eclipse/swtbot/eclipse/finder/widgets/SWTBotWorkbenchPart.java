@@ -32,6 +32,7 @@ import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
+import org.eclipse.swtbot.swt.finder.widgets.CloseableWidget;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarDropDownButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarPushButton;
@@ -54,7 +55,7 @@ import org.hamcrest.SelfDescribing;
  * @version $Id$
  * @since 2.0
  */
-public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> {
+public abstract class SWTBotWorkbenchPart<T extends IWorkbenchPartReference> implements CloseableWidget {
 
 	/** The IWorkbenchPartReference reference that this part encapsulates. */
 	protected final T				partReference;
