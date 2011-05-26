@@ -62,6 +62,7 @@ public class SWTBotToggleButton extends AbstractSWTBot<Button> {
 	/**
 	 * Click on the toggle button, toggle it.
 	 */
+	@Override
 	public SWTBotToggleButton click() {
 		log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
 		toggle();

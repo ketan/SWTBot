@@ -69,6 +69,7 @@ public class SWTBotToolbarRadioButton extends SWTBotToolbarButton {
 		return this;
 	}
 
+	@Override
 	public SWTBotToolbarRadioButton click() {
 		return toggle();
 	}

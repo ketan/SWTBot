@@ -43,13 +43,6 @@ public abstract class SWTBotToolbarButton extends AbstractSWTBot<ToolItem> {
 		super(w, description);
 	}
 
-	/**
-	 * Click on the tool item.
-	 *
-	 * @since 1.0
-	 */
-	public abstract SWTBotToolbarButton click();
-
 	protected void sendNotifications() {
 		notify(SWT.MouseEnter);
 		notify(SWT.MouseMove);
