@@ -69,6 +69,7 @@ public class SWTBotToolbarToggleButton extends SWTBotToolbarButton {
 		return this;
 	}
 
+	@Override
 	public SWTBotToolbarToggleButton click() {
 		return toggle();
 	}

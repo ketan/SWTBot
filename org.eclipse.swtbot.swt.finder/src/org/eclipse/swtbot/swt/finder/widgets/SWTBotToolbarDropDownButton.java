@@ -135,6 +135,7 @@ public class SWTBotToolbarDropDownButton extends SWTBotToolbarButton {
 	 *
 	 * @since 1.0
 	 */
+	@Override
 	public SWTBotToolbarDropDownButton click() {
 		log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
 		waitForEnabled();

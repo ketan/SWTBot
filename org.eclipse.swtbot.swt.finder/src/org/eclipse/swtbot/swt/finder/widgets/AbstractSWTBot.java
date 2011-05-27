@@ -714,7 +714,7 @@ public abstract class AbstractSWTBot<T extends Widget> {
 	 * 
 	 * @return itself.
 	 */
-	protected AbstractSWTBot<T> click() {
+	public AbstractSWTBot<T> click() {
 		throw new UnsupportedOperationException("This operation is not supported by this widget.");
 	}
 
