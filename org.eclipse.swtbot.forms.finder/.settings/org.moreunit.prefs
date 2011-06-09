@@ -1,0 +1,6 @@
+#Tue Mar 01 21:55:27 PST 2011
+eclipse.preferences.version=1
+org.moreunit.prefixes=
+org.moreunit.test_type=junit4
+org.moreunit.unitsourcefolder=org.eclipse.swtbot.forms.finder\:src\:org.eclipse.swtbot.forms.finder.test\:src
+org.moreunit.useprojectsettings=true

@@ -34,7 +34,7 @@ import org.hamcrest.SelfDescribing;
  * @author Chris Aniszczyk &lt;caniszczyk [at] gmail [dot] com&gt;
  * @version $Id$
  */
-@SWTBotWidget(clasz = ImageHyperlink.class, preferredName = "imagehyperlink", referenceBy = { ReferenceBy.MNEMONIC })
+@SWTBotWidget(clasz = ImageHyperlink.class, preferredName = "imageHyperlink", referenceBy = { ReferenceBy.MNEMONIC })
 public class SWTBotImageHyperlink extends AbstractSWTBotControl<ImageHyperlink> {
 
 	/**

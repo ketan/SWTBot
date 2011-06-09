@@ -3,7 +3,6 @@
 	<taskdef name="purge" classname="com.dallaway.ant.Purge" classpath="../org.eclipse.swtbot.releng/externals/libs/purge.jar" />
 
 	<taskdef resource="net/sf/antcontrib/antlib.xml" />
-	<property name="num.previous.revisions" value="1" />
 	<property name="target" value="${basedir}/target" />
 	<taskdef resource="net/sf/antcontrib/antlib.xml" classpath="../org.eclipse.swtbot.releng/externals/libs/ant-contrib-1.0b3.jar" />
 
@@ -12,141 +11,7 @@
 	</condition>
 
 	<echo>${should.generate.archives}: ${has.archives}</echo>
-
-	<target name="purge_old_files">
-		<echo>Purging feaures</echo>
-		<purge keep="${num.previous.revisions}">
-			<fileset dir="${target}/features">
-				<include name="org.eclipse.swtbot_*.jar" />
-			</fileset>
-			<fileset dir="${target}/features">
-				<include name="org.eclipse.swtbot.eclipse_*.jar" />
-			</fileset>
-			<fileset dir="${target}/features">
-				<include name="org.eclipse.swtbot.eclipse.gef_*.jar" />
-			</fileset>
-			<fileset dir="${target}/features">
-				<include name="org.eclipse.swtbot.eclipse.test.junit3_*.jar" />
-			</fileset>
-			<fileset dir="${target}/features">
-				<include name="org.eclipse.swtbot.eclipse.test.junit4_*.jar" />
-			</fileset>
-			<fileset dir="${target}/features">
-				<include name="org.eclipse.swtbot.ide_*.jar" />
-			</fileset>
-		</purge>
-
-		<echo>Purging plugins</echo>
-		<purge keep="${num.previous.revisions}">
-
-			<!-- demo -->
-			<fileset dir="${target}/plugins">
-				<include name="org.eclipse.swtbot.swt.demo_*.jar" />
-			</fileset>
-
-			<!-- gef finder -->
-			<fileset dir="${target}/plugins">
-				<include name="org.eclipse.swtbot.eclipse.gef.finder_*.jar" />
-			</fileset>
-
-			<!-- eclipse finder -->
-			<fileset dir="${target}/plugins">
-				<include name="org.eclipse.swtbot.eclipse.finder_*.jar" />
-			</fileset>
-
-			<!-- finder -->
-			<fileset dir="${target}/plugins">
-				<include name="org.eclipse.swtbot.swt.finder_*.jar" />
-			</fileset>
-
-			<!-- eclipse ui and core-->
-			<fileset dir="${target}/plugins">
-				<include name="org.eclipse.swtbot.eclipse.ui_*.jar" />
-			</fileset>
-			<fileset dir="${target}/plugins">
-				<include name="org.eclipse.swtbot.eclipse.core_*.jar" />
-			</fileset>
-
-			<!-- spy -->
-			<fileset dir="${target}/plugins">
-				<include name="org.eclipse.swtbot.eclipse.spy_*.jar" />
-			</fileset>
-
-			<!-- recorder -->
-			<fileset dir="${target}/plugins">
-				<include name="org.eclipse.swtbot.swt.recorder_*.jar" />
-			</fileset>
-
-			<!-- recorder ui -->
-			<fileset dir="${target}/plugins">
-				<include name="org.eclipse.swtbot.swt.recorder.ui_*.jar" />
-			</fileset>
-
-			<!-- junit comptibility -->
-			<fileset dir="${target}/plugins">
-				<include name="org.eclipse.swtbot.junit4_x*.jar" />
-			</fileset>
-
-			<!-- apache jars -->
-			<fileset dir="${target}/plugins">
-				<include name="org.apache.log4j_*.jar" />
-			</fileset>
-
-			<!-- hamcrest jars -->
-			<fileset dir="${target}/plugins">
-				<include name="org.hamcrest_*.jar" />
-			</fileset>
-			<fileset dir="${target}/plugins">
-				<include name="org.hamcrest.core_*.jar" />
-			</fileset>
-			<fileset dir="${target}/plugins">
-				<include name="org.hamcrest.core.source*.jar" />
-			</fileset>
-			<fileset dir="${target}/plugins">
-				<include name="org.hamcrest.integration_*.jar" />
-			</fileset>
-			<fileset dir="${target}/plugins">
-				<include name="org.hamcrest.integration.source_*.jar" />
-			</fileset>
-			<fileset dir="${target}/plugins">
-				<include name="org.hamcrest.library_*.jar" />
-			</fileset>
-			<fileset dir="${target}/plugins">
-				<include name="org.hamcrest.library.source_*.jar" />
-			</fileset>
-			<fileset dir="${target}/plugins">
-				<include name="org.hamcrest.text_*.jar" />
-			</fileset>
-			<fileset dir="${target}/plugins">
-				<include name="org.hamcrest.text.source_*.jar" />
-			</fileset>
-
-			<!-- swt examples -->
-			<fileset dir="${target}/plugins">
-				<include name="org.eclipse.swt.examples_*.jar" />
-			</fileset>
-
-			<!-- headless jars -->
-			<fileset dir="${target}/plugins">
-				<include name="org.eclipse.swtbot.ant.optional.junit4_*.jar" />
-			</fileset>
-			<fileset dir="${target}/plugins">
-				<include name="org.eclipse.swtbot.ant.optional.junit3_*.jar" />
-			</fileset>
-			<fileset dir="${target}/plugins">
-				<include name="org.eclipse.swtbot.eclipse.junit4.headless_*.jar" />
-			</fileset>
-			<fileset dir="${target}/plugins">
-				<include name="org.eclipse.swtbot.eclipse.junit3.headless_*.jar" />
-			</fileset>
-
-			<!-- convenience plugin -->
-			<fileset dir="${target}/plugins">
-				<include name="org.eclipse.swtbot.go_*.jar" />
-			</fileset>
-		</purge>
-	</target>
-
+	
 	<target name="-create.features.template">
 		<basename file="${file}" property="file.name" />
 		<propertyregex property="all.buildId" input="${file.name}" regexp="${featureId}_(.*).jar" select="\1" />
@@ -159,7 +24,7 @@
 		</concat>
 	</target>
 
-	<target name="create_features_list" depends="purge_old_files">
+	<target name="create_features_list">
 		<for param="file">
 			<path>
 				<fileset dir="${target}/features" includes="org.eclipse.swtbot_*.jar" />
@@ -226,7 +91,7 @@
 		<delete dir="build" />
 		<delete dir="eclipse" />
 		<mkdir dir="build" />
-		<delete dir="${target}" includes="artifacts*.*, content*.*" />
+		<delete dir="${target}" />
 	</target>
 
 	<target name="-create.jars">
@@ -296,5 +161,5 @@
 		</java>
 	</target>
 
-	<target name="all" depends="clean, init, purge_old_files, create_features_list, create_plugins_archive_list, create_site_xml, create-p2-site, copy-to-update-site" />
+	<target name="all" depends="clean, init, create_features_list, create_plugins_archive_list, create_site_xml, create-p2-site, copy-to-update-site" />
 </project>

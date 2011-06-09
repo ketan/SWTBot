@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Ketan Padegaonkar and others.
+ * Copyright (c) 2008,2010 Ketan Padegaonkar and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -19,6 +19,7 @@ import org.eclipse.swtbot.swt.finder.Style;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.results.BoolResult;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.eclipse.swtbot.swt.finder.results.WidgetResult;
 import org.eclipse.swtbot.swt.finder.utils.MessageFormat;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
@@ -67,41 +68,54 @@ public class SWTBotRadio extends AbstractSWTBotControl<Button> {
 			return this;
 		}
 		waitForEnabled();
+
 		log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
+
+		final SWTBotRadio otherSelectedButton = otherSelectedButton();
+
+		if (otherSelectedButton != null) {
+			otherSelectedButton.notify(SWT.Deactivate);
+			asyncExec(new VoidResult() {
+				public void run() {
+					otherSelectedButton.widget.setSelection(false);
+				}
+			});
+		}
+
+		notify(SWT.Activate);
+		notify(SWT.MouseDown, createMouseEvent(0, 0, 1, 0, 1));
+		notify(SWT.MouseUp, createMouseEvent(0, 0, 1, SWT.BUTTON1, 1));
 		asyncExec(new VoidResult() {
 			public void run() {
-				deselectOtherRadioButtons();
-				log.debug(MessageFormat.format("Clicking on {0}", this)); //$NON-NLS-1$
 				widget.setSelection(true);
 			}
+		});
+		notify(SWT.Selection);
+		if (otherSelectedButton != null) {
+			otherSelectedButton.notify(SWT.Selection);
+		}
+		log.debug(MessageFormat.format("Clicked on {0}", this)); //$NON-NLS-1$
+		return this;
+	}
 
-			/**
-			 * @see "http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.swt.snippets/src/org/eclipse/swt/snippets/Snippet224.java?view=co"
-			 */
-			private void deselectOtherRadioButtons() {
+	private SWTBotRadio otherSelectedButton() {
+		Button button = syncExec(new WidgetResult<Button>() {
+			public Button run() {
 				if (hasStyle(widget.getParent(), SWT.NO_RADIO_GROUP))
-					return;
+					return null;
 				Widget[] siblings = SWTUtils.siblings(widget);
 				for (Widget widget : siblings) {
 					if ((widget instanceof Button) && hasStyle(widget, SWT.RADIO))
-						((Button) widget).setSelection(false);
+						if (((Button) widget).getSelection())
+							return (Button) widget;
 				}
+				return null;
 			}
 		});
-		notify(SWT.MouseEnter);
-		notify(SWT.MouseMove);
-		notify(SWT.Activate);
-		notify(SWT.FocusIn);
-		notify(SWT.MouseDown);
-		notify(SWT.MouseUp);
-		notify(SWT.Selection);
-		notify(SWT.MouseHover);
-		notify(SWT.MouseMove);
-		notify(SWT.MouseExit);
-		notify(SWT.Deactivate);
-		notify(SWT.FocusOut);
-		log.debug(MessageFormat.format("Clicked on {0}", this)); //$NON-NLS-1$
-		return this;
+
+		if (button != null)
+			return new SWTBotRadio(button);
+		return null;
 	}
 
 	/**

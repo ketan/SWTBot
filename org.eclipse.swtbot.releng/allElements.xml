@@ -41,6 +41,11 @@
 
 		<ant antfile="${genericTargets}" target="${target}">
 			<property name="type" value="feature" />
+			<property name="id" value="org.eclipse.swtbot.forms" />
+		</ant>
+
+		<ant antfile="${genericTargets}" target="${target}">
+			<property name="type" value="feature" />
 			<property name="id" value="org.eclipse.swtbot.test" />
 		</ant>
 
@@ -78,6 +83,10 @@
 	</target>
 
 	<target name="assemble.org.eclipse.swtbot.ide">
+		<ant antfile="${assembleScriptName}" dir="${buildDirectory}" />
+	</target>
+
+	<target name="assemble.org.eclipse.swtbot.forms">
 		<ant antfile="${assembleScriptName}" dir="${buildDirectory}" />
 	</target>
 </project>

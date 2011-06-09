@@ -95,7 +95,7 @@ import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withTo
  *    // find a button within the currently active shell:
  *    //
  *    SWTBotButton button = new SWTBotButton((Button) bot.widget(aMatcher)); // or
- *    SWTBotButton button = new SWTBotButton((Button)bot.widget(aMatcher, 3)); // for the 4th widget
+ *    SWTBotButton button = new SWTBotButton((Button) bot.widget(aMatcher, 3)); // for the 4th widget
  *    //
  *    // to find a button within a particular parent composite:
  *    //
@@ -4502,7 +4502,8 @@ public class SWTBot extends SWTBotFactory {
 		return new SWTBotExpandBar((ExpandBar) widget(matcher, index), matcher);
 	}
 
-	private Matcher<? extends List> withLabel(String label) {
+
+	private Matcher<? extends Widget> withLabel(String label) {
 		return WidgetMatcherFactory.withLabel(label, finder);
 	}
 

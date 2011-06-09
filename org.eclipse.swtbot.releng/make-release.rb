@@ -14,10 +14,10 @@ class Release
       exit(-1)
     end
     
-    @now = Time.now.utc
+    @now = Time.at(`git log -1 --format='%ct'`.to_i).utc
     @version = args.first
     puts "Fetching revision available on the download site..."
-    uri = URI.parse("http://download.eclipse.org/technology/swtbot/ganymede/dev-build/RELEASE_NOTES.txt")
+    uri = URI.parse("http://download.eclipse.org/technology/swtbot/helios/dev-build/RELEASE_NOTES.txt")
     puts "Reading #{uri}"
 
     @available_revision = open(uri).readlines.grep(/ rev\(.*\) /).first.gsub(/RELEASE NOTES v(.*) rev\((.*)\) \(.*\)/, '\2').strip
@@ -35,9 +35,9 @@ class Release
     FileUtils.rm_rf('to-upload')
     FileUtils.rm_rf('target')
     
-    build_swtbot(34, 'ganymede')
     build_swtbot(35, 'galileo')
     build_swtbot(36, 'helios')
+    build_swtbot(37, 'indigo')
   end
 
   def self.release_notes(dir)
@@ -60,7 +60,7 @@ class Release
     release_notes("to-upload/#{code_name}/dev-build")
 
     sh("ant materialize-workspace -Declipse.version=#{version} -Dhas.archives=true")
-    extra_jvm_opts = "-Dextra.jvm.options=#{ENV['JAVA_OPTS']}" if ENV['JAVA_OPTS']
+    extra_jvm_opts = "-Dextra.jvm.options='#{ENV['JAVA_OPTS']}'" if ENV['JAVA_OPTS']
     sh("ant cruise -Declipse.version=#{version} -Dhas.archives=true #{extra_jvm_opts} -Dnow.now=#{@now.strftime('%Y%m%d_%H%M')}")
     FileUtils.rm_rf("to-upload/#{code_name}")
     FileUtils.mkdir_p("to-upload/#{code_name}")

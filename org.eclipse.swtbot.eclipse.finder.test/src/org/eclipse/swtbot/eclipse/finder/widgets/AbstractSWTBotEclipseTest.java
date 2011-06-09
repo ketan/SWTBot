@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
+import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.junit.After;
 import org.junit.BeforeClass;
 
@@ -28,12 +29,12 @@ public abstract class AbstractSWTBotEclipseTest {
 
 	private static void closeWelcomePage() {
 		try {
-			System.setProperty("org.eclipse.swtbot.search.timeout", "0");
+			SWTBotPreferences.TIMEOUT = 0;
 			bot.viewByTitle("Welcome").close();
 		} catch (WidgetNotFoundException e) {
 			// do nothing
 		} finally {
-			System.setProperty("org.eclipse.swtbot.search.timeout", "5000");
+			SWTBotPreferences.TIMEOUT = 5000;
 		}
 	}
 

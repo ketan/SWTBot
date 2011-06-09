@@ -55,16 +55,15 @@ public class SWTBotToggleButtonTest extends AbstractSWTTestCase {
 		try {
 			List<Text> findControls = new ControlFinder().findControls(widgetOfType(Text.class));
 			SWTBotText text = new SWTBotText(findControls.get(0));
+			bot.checkBox("Listen").select();
 			text.setText("");
-			assertFalse(bot.checkBox("Listen").isChecked());
-			bot.checkBox("Listen").click();
 
 			assertFalse(bot.toggleButton("One").isPressed());
 			bot.toggleButton("One").click();
 			assertTrue(bot.toggleButton("One").isPressed());
 			assertTextContains("Selection [13]: SelectionEvent{Button {One}", text);
 		} finally {
-			bot.checkBox("Listen").click();
+			bot.checkBox("Listen").deselect();
 			bot.button("Clear").click();
 		}
 	}

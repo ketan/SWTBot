@@ -4,7 +4,7 @@
 	<exec executable="hostname" outputproperty="hostname" />
 	<property file="host-conf/build.${hostname}.properties" />
 
-  <!-- in case users provide an eclipse.version, load it before anything else! -->
+  	<!-- in case users provide an eclipse.version, load it before anything else! -->
 	<property file="build-conf/e${eclipse.version}.properties" />
 	<!-- Load up the basic properties -->
 	<property file="build.developer.properties" />
@@ -27,7 +27,7 @@
 	<property file="build.default.properties" />
 	<import file="check-prerequisites.xml" />
 
-	<property name="plugin.version.primary" value="2.0.3" />
+	<property name="plugin.version.primary" value="2.0.5" />
 
 	<!-- automagically generate build numbers from git -->
 	<property name="git.version" value="1" />
@@ -95,6 +95,7 @@
 				<!-- list all your features here -->
 				<include name="${feature.id}/**" />
 				<include name="${feature.id.test}/**" />
+				<include name="org.eclipse.swtbot.forms/**" />
 				<include name="org.eclipse.swtbot.eclipse/**" />
 				<include name="org.eclipse.swtbot.eclipse.test.junit3/**" />
 				<include name="org.eclipse.swtbot.eclipse.test.junit4/**" />
@@ -114,11 +115,13 @@
 				<!-- include plugins here -->
 				<include name="${plugin.prefix}*/**" />
 				<include name="org.eclipse.swt.examples/**" />
+				<include name="org.eclipse.ui.forms.examples/**" />
 				<include name="org.apache.*/**" />
 				<!-- remember to exclude features in case you are using wildcards -->
 				<exclude name="org.eclipse.swtbot.releng/**" />
 				<exclude name="${feature.id}/**" />
 				<exclude name="${feature.id.test}/**" />
+				<exclude name="org.eclipse.swtbot.forms/**" />
 				<exclude name="org.eclipse.swtbot.eclipse/**" />
 				<exclude name="org.eclipse.swtbot.eclipse.gef/**" />
 				<exclude name="org.eclipse.swtbot.eclipse.test.junit3/**" />
@@ -158,21 +161,7 @@
 		<copy file="../org.eclipse.swtbot.junit4_x/_classpath.junit4_5" tofile="../org.eclipse.swtbot.junit4_x/.classpath" overwrite="true" />
 	</target>
 
-	<target name="make-substitutions-4.3" if="isJunit4.3">
-		<!-- make substitutions in the eclipse-ui plugin. See https://bugs.eclipse.org/bugs/show_bug.cgi?id=274083#c5 -->
-		<copy file="../org.eclipse.swtbot.eclipse.ui/_build.properties.eclipse_3_4" tofile="../org.eclipse.swtbot.eclipse.ui/build.properties" overwrite="true" />
-		<copy file="../org.eclipse.swtbot.eclipse.ui/META-INF/_MANIFEST.MF_eclipse_3_4" tofile="../org.eclipse.swtbot.eclipse.ui/META-INF/MANIFEST.MF" overwrite="true" />
-		<copy file="../org.eclipse.swtbot.eclipse.ui/_classpath.eclipse_3_4" tofile="../org.eclipse.swtbot.eclipse.ui/.classpath" overwrite="true" />
-
-		<!-- make substitutions in the junit plugin -->
-		<copy file="../org.eclipse.swtbot.junit4_x/META-INF/MANIFEST.MF_junit4_3" tofile="../org.eclipse.swtbot.junit4_x/META-INF/MANIFEST.MF" overwrite="true" />
-		<copy file="../org.eclipse.swtbot.junit4_x/_build.properties.junit4_3" tofile="../org.eclipse.swtbot.junit4_x/build.properties" overwrite="true" />
-		<copy file="../org.eclipse.swtbot.junit4_x/_classpath.junit4_3" tofile="../org.eclipse.swtbot.junit4_x/.classpath" overwrite="true" />
-	</target>
-	
-	
-
-	<target name="make-substitutions" depends="guess-junit-version, make-substitutions-4.5, make-substitutions-4.8, make-substitutions-4.3" />
+	<target name="make-substitutions" depends="guess-junit-version, make-substitutions-4.5, make-substitutions-4.8" />
 
 	<target name="extract-eclipse">
 		<condition property="setupTarget" value="setup-zip">
@@ -229,11 +218,7 @@
 		<mkdir dir="${buildDirectory}/features" />
 	</target>
 
-	<target name="delete-3.4-classes" if="isJunit4.3">
-		<delete file="${buildDirectory}/plugins/org.eclipse.swtbot.swt.finder/src/org/eclipse/swtbot/swt/finder/widgets/BrowserAuthenticationListener.java" />
-	</target>
-	
-	<target name="pde-build" depends="copy-all, delete-3.4-classes" description="runs the pde build">
+	<target name="pde-build" depends="copy-all" description="runs the pde build">
 
 		<java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true" dir="${basedir}">
 			<arg value="-application" />
@@ -393,6 +378,7 @@
 		<copy todir="artifacts/to-upload" includeemptydirs="false">
 			<fileset dir="artifacts">
 				<include name="org.eclipse.swtbot-${all.buildId}.zip" />
+				<include name="org.eclipse.swtbot.forms-${all.buildId}.zip" />
 				<include name="org.eclipse.swtbot.eclipse-${all.buildId}.zip" />
 				<include name="org.eclipse.swtbot.eclipse.test.junit3-${all.buildId}.zip" />
 				<include name="org.eclipse.swtbot.eclipse.test.junit4-${all.buildId}.zip" />
@@ -418,6 +404,7 @@
 		</zip>
 
 		<copy-test-reports plugin.id="org.eclipse.swtbot.swt.finder.test" />
+		<copy-test-reports plugin.id="org.eclipse.swtbot.forms.finder.test" />
 		<copy-test-reports plugin.id="org.eclipse.swtbot.generator.test" />
 		<copy-test-reports plugin.id="org.eclipse.swtbot.eclipse.finder.test" />
 

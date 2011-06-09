@@ -118,8 +118,8 @@ flattenDependencies = true
 
 #Parallel compilation, requires flattenedDependencies=true
 parallelCompilation = true
-parallelThreadCount = 
-parallelThreadsPerProcessor = 
+parallelThreadCount = 3
+parallelThreadsPerProcessor = 2
 
 #Set to true if you want the output to be ready for an update jar (no site.xml generated)
 #outputUpdateJars = false

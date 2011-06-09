@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.swtbot.forms"
       label="SWTBot for Eclipse Forms Testing (incubation)"
-      version="2.0.3.qualifier"
+      version="2.0.5.qualifier"
       provider-name="Eclipse.org"
       plugin="org.eclipse.swtbot.eclipse.ui">
 
@@ -23,7 +23,7 @@
    </url>
 
    <includes
-         id="org.eclipse.swtbot.eclipse"
+         id="org.eclipse.swtbot"
          version="0.0.0"/>
 
    <requires>

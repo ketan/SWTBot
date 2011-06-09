@@ -63,7 +63,7 @@
 	<target name="test">
 		<mkdir dir="${junit.reports.xml.dir}" />
 
-		<condition property="jvmOption" value="-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts">
+		<condition property="jvmOption" value="-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts ${extra.jvm.options}">
 			<os family="mac" />
 		</condition>
 

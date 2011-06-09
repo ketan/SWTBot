@@ -8,12 +8,10 @@
 # Contributors:
 #     Ketan Padegaonkar - initial API and implementation
 ###############################################################################
-source.. = junit4_5/,\
-           src/
+source.. = src/
 output.. = bin/
 bin.includes = META-INF/MANIFEST.MF,\
                .,\
-               junit4_5/,\
                src/,\
                about.html,\
                LICENSE.EPL
