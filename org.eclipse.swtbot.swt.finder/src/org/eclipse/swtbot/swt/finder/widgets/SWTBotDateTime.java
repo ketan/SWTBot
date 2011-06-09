@@ -88,10 +88,7 @@ public class SWTBotDateTime extends AbstractSWTBotControl<DateTime> {
 		syncExec(new VoidResult() {
 			@SuppressWarnings("deprecation")
 			public void run() {
-				widget.setYear(toSet.getYear() + 1900);
-				widget.setMonth(toSet.getMonth());
-				widget.setDay(toSet.getDate());
-
+				widget.setDate(toSet.getYear() + 1900, toSet.getMonth(), toSet.getDate());
 				widget.setHours(toSet.getHours());
 				widget.setMinutes(toSet.getMinutes());
 				widget.setSeconds(toSet.getSeconds());

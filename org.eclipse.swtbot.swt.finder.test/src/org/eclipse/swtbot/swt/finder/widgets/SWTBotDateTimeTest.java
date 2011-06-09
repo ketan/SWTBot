@@ -67,6 +67,23 @@ public class SWTBotDateTimeTest extends AbstractSWTTestCase {
 	}
 
 	@Test
+	public void bug347824() throws Exception {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(0);
+		calendar.set(2011, Calendar.MAY, 31, 0, 0, 0);
+		Date expected = calendar.getTime();
+		assertFalse(expected.equals(dateTime.getDate()));
+		dateTime.setDate(expected);
+		assertEquals(expected, dateTime.getDate());
+		
+		calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(0);
+		calendar.set(2010, Calendar.SEPTEMBER, 28, 0, 0, 0);
+		dateTime.setDate(calendar.getTime());
+		assertEquals(calendar.getTime(), dateTime.getDate());
+	}
+	
+	@Test
 	public void sendsNotification() throws Exception {
 		bot.checkBox("Listen").click();
 		SWTBotDateTime dateTime = bot.dateTimeInGroup("DateTime");
