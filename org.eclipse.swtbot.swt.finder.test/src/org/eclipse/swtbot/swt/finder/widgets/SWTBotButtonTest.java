@@ -60,6 +60,7 @@ public class SWTBotButtonTest extends AbstractSWTTestCase {
 		super.setUp();
 		bot = new SWTBot();
 		bot.tabItem("Button").activate();
+		bot.radio("SWT.PUSH").click();
 	}
 
 }

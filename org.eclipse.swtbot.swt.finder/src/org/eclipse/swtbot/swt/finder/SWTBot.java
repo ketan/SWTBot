@@ -31,6 +31,7 @@ import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
 import org.eclipse.swtbot.swt.finder.finders.Finder;
 import org.eclipse.swtbot.swt.finder.finders.MenuFinder;
 import org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotArrowButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotBrowser;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotCCombo;
@@ -355,6 +356,178 @@ public class SWTBot extends SWTBotFactory {
 	public SWTBotButton buttonWithTooltipInGroup(String tooltip, String inGroup, int index) {
 		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.PUSH, "SWT.PUSH"));
 		return new SWTBotButton((Button) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @return a {@link SWTBotArrowButton} with the specified <code>label</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotArrowButton arrowButtonWithLabel(String label) {
+		return arrowButtonWithLabel(label, 0);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotArrowButton} with the specified <code>label</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotArrowButton arrowButtonWithLabel(String label, int index) {
+		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), withStyle(SWT.ARROW, "SWT.ARROW"));
+		return new SWTBotArrowButton((Button) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @return a {@link SWTBotArrowButton} with the specified <code>tooltip</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotArrowButton arrowButtonWithTooltip(String tooltip) {
+		return arrowButtonWithTooltip(tooltip, 0);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotArrowButton} with the specified <code>tooltip</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotArrowButton arrowButtonWithTooltip(String tooltip, int index) {
+		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), withStyle(SWT.ARROW, "SWT.ARROW"));
+		return new SWTBotArrowButton((Button) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param key the key set on the widget.
+	 * @param value the value for the key.
+	 * @return a {@link SWTBotArrowButton} with the specified <code>key/value</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotArrowButton arrowButtonWithId(String key, String value) {
+		return arrowButtonWithId(key, value, 0);
+	}
+
+	/**
+	 * @param key the key set on the widget.
+	 * @param value the value for the key.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotArrowButton} with the specified <code>key/value</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotArrowButton arrowButtonWithId(String key, String value, int index) {
+		Matcher matcher = allOf(widgetOfType(Button.class), withId(key, value), withStyle(SWT.ARROW, "SWT.ARROW"));
+		return new SWTBotArrowButton((Button) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @return a {@link SWTBotArrowButton} with the specified <code>value</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotArrowButton arrowButtonWithId(String value) {
+		return arrowButtonWithId(value, 0);
+	}
+
+	/**
+	 * @param value the value for the key {@link org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences#DEFAULT_KEY}.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotArrowButton} with the specified <code>value</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotArrowButton arrowButtonWithId(String value, int index) {
+		Matcher matcher = allOf(widgetOfType(Button.class), withId(value), withStyle(SWT.ARROW, "SWT.ARROW"));
+		return new SWTBotArrowButton((Button) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotArrowButton} with the specified <code>inGroup</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotArrowButton arrowButtonInGroup(String inGroup) {
+		return arrowButtonInGroup(inGroup, 0);
+	}
+
+	/**
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotArrowButton} with the specified <code>inGroup</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotArrowButton arrowButtonInGroup(String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Button.class), inGroup(inGroup), withStyle(SWT.ARROW, "SWT.ARROW"));
+		return new SWTBotArrowButton((Button) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @return a {@link SWTBotArrowButton} with the specified <code>none</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotArrowButton arrowButton() {
+		return arrowButton(0);
+	}
+
+	/**
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotArrowButton} with the specified <code>none</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotArrowButton arrowButton(int index) {
+		Matcher matcher = allOf(widgetOfType(Button.class), withStyle(SWT.ARROW, "SWT.ARROW"));
+		return new SWTBotArrowButton((Button) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotArrowButton} with the specified <code>label</code> with the specified <code>inGroup</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotArrowButton arrowButtonWithLabelInGroup(String label, String inGroup) {
+		return arrowButtonWithLabelInGroup(label, inGroup, 0);
+	}
+
+	/**
+	 * @param label the label on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotArrowButton} with the specified <code>label</code> with the specified <code>inGroup</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotArrowButton arrowButtonWithLabelInGroup(String label, String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Button.class), withLabel(label), inGroup(inGroup), withStyle(SWT.ARROW, "SWT.ARROW"));
+		return new SWTBotArrowButton((Button) widget(matcher, index), matcher);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @return a {@link SWTBotArrowButton} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	public SWTBotArrowButton arrowButtonWithTooltipInGroup(String tooltip, String inGroup) {
+		return arrowButtonWithTooltipInGroup(tooltip, inGroup, 0);
+	}
+
+	/**
+	 * @param tooltip the tooltip on the widget.
+	 * @param inGroup the inGroup on the widget.
+	 * @param index the index of the widget.
+	 * @return a {@link SWTBotArrowButton} with the specified <code>tooltip</code> with the specified <code>inGroup</code>.
+	 * @throws WidgetNotFoundException if the widget is not found or is disposed.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public SWTBotArrowButton arrowButtonWithTooltipInGroup(String tooltip, String inGroup, int index) {
+		Matcher matcher = allOf(widgetOfType(Button.class), withTooltip(tooltip), inGroup(inGroup), withStyle(SWT.ARROW, "SWT.ARROW"));
+		return new SWTBotArrowButton((Button) widget(matcher, index), matcher);
 	}
 
 	/**
