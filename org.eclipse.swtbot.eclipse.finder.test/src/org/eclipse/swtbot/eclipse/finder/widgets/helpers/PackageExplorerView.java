@@ -12,14 +12,12 @@ package org.eclipse.swtbot.eclipse.finder.widgets.helpers;
 
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.widgetOfType;
 
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotView;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.waits.Conditions;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotCheckBox;
-import org.eclipse.swtbot.swt.finder.widgets.SWTBotRadio;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 
@@ -38,23 +36,12 @@ public class PackageExplorerView {
 		tree.setFocus();
 		tree.select(projectName);
 		bot.menu("Edit").menu("Delete").click();
-		String version = Platform.getBundle("org.eclipse.core.runtime").getHeaders().get("Bundle-Version");
-		if (version.startsWith("3.3")) {
-			SWTBotShell shell = bot.shell("Confirm Project Delete");
-			shell.activate();
-			Button button = bot.widget(widgetOfType(Button.class), shell.widget);
-			new SWTBotRadio(button).click();
-			bot.button("Yes").click();
-			bot.waitUntil(Conditions.shellCloses(shell));
-		}
-		if (version.startsWith("3.4") || version.startsWith("3.5") || version.startsWith("3.6")) {
-			SWTBotShell shell = bot.shell("Delete Resources");
-			shell.activate();
-			Button button = bot.widget(widgetOfType(Button.class), shell.widget);
-			new SWTBotCheckBox(button).select();
-			bot.button("OK").click();
-			bot.waitUntil(Conditions.shellCloses(shell));
-		}
+		SWTBotShell shell = bot.shell("Delete Resources");
+		shell.activate();
+		Button button = bot.widget(widgetOfType(Button.class), shell.widget);
+		new SWTBotCheckBox(button).select();
+		bot.button("OK").click();
+		bot.waitUntil(Conditions.shellCloses(shell));
 	}
 
 	/**

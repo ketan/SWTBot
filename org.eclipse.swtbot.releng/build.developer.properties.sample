@@ -4,5 +4,5 @@ os = macosx
 ws = cocoa
 arch = x86_64
 
-# provide 34, 35 or 36
+# provide 35, 36 or 37
 eclipse.version = 37
