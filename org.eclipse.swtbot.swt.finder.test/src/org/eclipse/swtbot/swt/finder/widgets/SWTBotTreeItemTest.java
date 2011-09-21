@@ -235,6 +235,7 @@ public class SWTBotTreeItemTest extends AbstractSWTTestCase {
 		assertTextContains("MouseDoubleClick [8]: MouseEvent{Tree {} ", listeners);
 		assertTextContains("DefaultSelection [14]: SelectionEvent{Tree {} ", listeners);
 		assertTextContains("MouseUp [4]: MouseEvent{Tree {} ", listeners);
+		assertTextContains("button=1", listeners);
 	}
 	
 	@Test
