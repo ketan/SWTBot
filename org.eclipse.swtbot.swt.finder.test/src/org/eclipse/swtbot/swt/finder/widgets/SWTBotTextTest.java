@@ -13,18 +13,21 @@ package org.eclipse.swtbot.swt.finder.widgets;
 
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertText;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
+import static org.junit.Assert.assertEquals;
 
-import org.eclipse.swtbot.swt.finder.SWTBot;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
+import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.eclipse.swtbot.swt.finder.test.AbstractControlExampleTest;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotTextTest extends AbstractSWTTestCase {
-
-	SWTBot	bot	= new SWTBot();
+public class SWTBotTextTest extends AbstractControlExampleTest {
 
 	@Test
 	public void findsTextBoxInGroup() throws Exception {
@@ -53,12 +56,32 @@ public class SWTBotTextTest extends AbstractSWTTestCase {
 		final SWTBotText text = bot.textInGroup("Text");
 		final StringBuffer buffer = new StringBuffer();
 		text.setText("");
+
+		final KeyListener listener = new KeyListener() {
+			public void keyReleased(KeyEvent e) {
+			}
+
+			public void keyPressed(KeyEvent e) {
+				if (e.character != 0)
+					buffer.append(e.character);
+			}
+		};
+
+		UIThreadRunnable.syncExec(new VoidResult() {
+			public void run() {
+				text.widget.addKeyListener(listener);
+			}
+		});
+
 		text.typeText("Type This 123");
 		assertTextContains("Type This 123", text.widget);
+
+		assertEquals("Type This 123", buffer.toString());
+
 	}
 
-	public void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void prepareExample() throws Exception {
 		bot.tabItem("Text").activate();
 	}
 

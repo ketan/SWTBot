@@ -21,18 +21,17 @@ import static org.junit.Assert.fail;
 import java.util.List;
 
 import org.eclipse.swt.widgets.MenuItem;
-import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.eclipse.swtbot.swt.finder.test.AbstractControlExampleTest;
+import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotToolbarDropDownButtonTest extends AbstractSWTTestCase {
-
-	private SWTBot	bot;
+public class SWTBotToolbarDropDownButtonTest extends AbstractControlExampleTest {
 
 	@Test
 	public void findsToolBarButtonWithIndex() throws Exception {
@@ -54,6 +53,7 @@ public class SWTBotToolbarDropDownButtonTest extends AbstractSWTTestCase {
 	}
 
 	@Test
+	@Ignore("Broken on cocoa")
 	public void getsAllMenuItems() throws Exception {
 		List<? extends SWTBotMenu> menuItems = bot.toolbarDropDownButton("Drop Down").menuItems(any(MenuItem.class));
 		menuItems.get(0).click();
@@ -61,6 +61,7 @@ public class SWTBotToolbarDropDownButtonTest extends AbstractSWTTestCase {
 	}
 
 	@Test
+	@Ignore
 	public void clicksADropDownMenuItem() throws Exception {
 		SWTBotToolbarDropDownButton button = bot.toolbarDropDownButton("Drop Down");
 		try {
@@ -73,9 +74,8 @@ public class SWTBotToolbarDropDownButtonTest extends AbstractSWTTestCase {
 		button.menuItem("Kiwi").click();
 	}
 
-	public void setUp() throws Exception {
-		super.setUp();
-		bot = new SWTBot();
+	@Before
+	public void prepareExample() throws Exception {
 		bot.tabItem("ToolBar").activate();
 	}
 }

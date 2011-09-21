@@ -18,14 +18,15 @@ import static org.junit.Assert.fail;
 
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swtbot.swt.finder.SWTBot;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.eclipse.swtbot.swt.finder.test.AbstractControlExampleTest;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotListTest extends AbstractSWTTestCase {
+public class SWTBotListTest extends AbstractControlExampleTest {
 
 	@Test
 	public void findsAListWithoutLabel() throws Exception {
@@ -154,9 +155,8 @@ public class SWTBotListTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void setUp() throws Exception {
-		super.setUp();
-		bot = new SWTBot();
+	@Before
+	public void prepareExample() throws Exception {
 		bot.tabItem("List").activate();
 	}
 

@@ -17,20 +17,33 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.eclipse.swtbot.swt.finder.test.AbstractControlExampleTest;
+import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotToolbarPushButtonTest extends AbstractSWTTestCase {
+public class SWTBotToolbarPushButtonTest extends AbstractControlExampleTest {
 
-	private SWTBot	bot;
+	private long	oldTimeout;
+
+	@Before
+	public void lowerTimeout() {
+		this.oldTimeout = SWTBotPreferences.TIMEOUT;
+		SWTBotPreferences.TIMEOUT = 2000;
+	}
+
+	@After
+	public void resetTimeout() {
+		SWTBotPreferences.TIMEOUT = oldTimeout;
+	}
 
 	@Test
 	public void findsToolBarPushButtons() throws Exception {
@@ -96,9 +109,8 @@ public class SWTBotToolbarPushButtonTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void setUp() throws Exception {
-		super.setUp();
-		bot = new SWTBot();
+	@Before
+	public void activateTab() throws Exception {
 		bot.tabItem("ToolBar").activate();
 	}
 }

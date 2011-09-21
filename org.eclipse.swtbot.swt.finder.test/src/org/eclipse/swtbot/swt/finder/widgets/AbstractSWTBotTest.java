@@ -15,9 +15,9 @@ import static org.junit.Assert.fail;
 
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.WidgetResult;
+import org.eclipse.swtbot.swt.finder.test.AbstractControlExampleTest;
 import org.junit.Test;
 
 /**
@@ -25,7 +25,7 @@ import org.junit.Test;
  * @version $Id$
  */
 @SuppressWarnings("all")
-public class AbstractSWTBotTest extends AbstractSWTTestCase {
+public class AbstractSWTBotTest extends AbstractControlExampleTest {
 
 	@Test
 	public void throwsExceptionOnNullObjectPassedIntoConstructor() throws Exception {

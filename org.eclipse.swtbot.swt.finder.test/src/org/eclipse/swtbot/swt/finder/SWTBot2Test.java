@@ -25,9 +25,9 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.eclipse.swtbot.swt.finder.test.AbstractControlExampleTest;
 import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.eclipse.swtbot.swt.finder.utils.Traverse;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
@@ -38,9 +38,7 @@ import org.junit.Test;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBot2Test extends AbstractSWTTestCase {
-
-	private SWTBot	bot;
+public class SWTBot2Test extends AbstractControlExampleTest {
 
 	@Test
 	public void findsTextBox() throws Exception {
@@ -121,16 +119,8 @@ public class SWTBot2Test extends AbstractSWTTestCase {
 		assertEquals("foo", button.getId());
 	}
 
-	public void setUp() throws Exception {
-		super.setUp();
-		bot = new SWTBot();
+	public void prepareExample() throws Exception {
 		bot.tabItem("Button").activate();
-	}
-
-	public void tearDown() throws Exception {
-		super.tearDown();
-		bot.checkBox("Listen").deselect();
-		bot.button("Clear").click();
 	}
 
 }

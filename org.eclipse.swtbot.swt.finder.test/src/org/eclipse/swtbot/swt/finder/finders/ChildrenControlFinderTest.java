@@ -25,14 +25,16 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.results.Result;
+import org.eclipse.swtbot.swt.finder.test.AbstractControlExampleTest;
 import org.hamcrest.Matcher;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Cedric Chabanois &lt;cchabanois [at] no-log [dot] org&gt;
  * @version $Id$
  */
-public class ChildrenControlFinderTest extends AbstractSWTTestCase {
+public class ChildrenControlFinderTest extends AbstractControlExampleTest {
 
 	@SuppressWarnings("unchecked")
 	// varargs and generics doesn't mix well!
@@ -85,8 +87,8 @@ public class ChildrenControlFinderTest extends AbstractSWTTestCase {
 		});
 	}
 
-	public void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void prepareExample() throws Exception {
 		new SWTBot().tabItem("Button").activate();
 	}
 

@@ -19,16 +19,17 @@ import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertNotNull;
 
 import org.eclipse.swtbot.swt.finder.SWTBot;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.eclipse.swtbot.swt.finder.test.AbstractControlExampleTest;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotPopupMenuTest extends AbstractSWTTestCase {
+public class SWTBotPopupMenuTest extends AbstractControlExampleTest {
 
-	private SWTBot		bot;
 	private SWTBotShell	popupShell;
 	private SWTBotShell	activeShell;
 
@@ -62,8 +63,8 @@ public class SWTBotPopupMenuTest extends AbstractSWTTestCase {
 		assertTextContains("Selection [13]: SelectionEvent{MenuItem {Push} time=", bot.textInGroup("Listeners").widget);
 	}
 
+	@Before
 	public void setUp() throws Exception {
-		super.setUp();
 		bot = new SWTBot();
 		activeShell = bot.activeShell();
 		bot.tabItem("Menu").activate();
@@ -85,6 +86,7 @@ public class SWTBotPopupMenuTest extends AbstractSWTTestCase {
 		popupShell.activate();
 	}
 
+	@After
 	public void tearDown() throws Exception {
 		popupShell.close();
 		bot.button("Close All Shells").click();
@@ -101,7 +103,5 @@ public class SWTBotPopupMenuTest extends AbstractSWTTestCase {
 		bot.checkBox("Sub-Sub-Menu").deselect();
 		bot.checkBox("Sub-Menu").deselect();
 		bot.checkBox("SWT.BAR").deselect();
-
-		super.tearDown();
 	}
 }
