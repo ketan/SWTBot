@@ -32,19 +32,11 @@ org.eclipse.swtbot.updatesite/build/
 
 /swtbot/
 
-org.eclipse.swtbot.junit4_x/.classpath
-org.eclipse.swtbot.junit4_x/META-INF/MANIFEST.MF
-org.eclipse.swtbot.junit4_x/build.properties
-
-org.eclipse.swtbot.eclipse.ui/META-INF/MANIFEST.MF
-
 org.eclipse.swtbot.releng/test-sandbox/passFail.txt
 org.eclipse.swtbot.releng/test-sandbox/org.eclipse.swtbot.eclipse.ui.test.ser
 
 org.eclipse.swtbot.swt.finder.test/keyboard.layout
 org.eclipse.swtbot.swt.finder.test/keyboard.layout.filtered
-org.eclipse.swtbot.eclipse.ui/.classpath
-org.eclipse.swtbot.eclipse.ui/build.properties
 /eclipse-3.4/
 /eclipse-3.5/
 /eclipse/

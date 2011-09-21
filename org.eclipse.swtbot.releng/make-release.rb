@@ -35,7 +35,6 @@ class Release
     FileUtils.rm_rf('to-upload')
     FileUtils.rm_rf('target')
     
-    build_swtbot(35, 'galileo')
     build_swtbot(36, 'helios')
     build_swtbot(37, 'indigo')
   end
