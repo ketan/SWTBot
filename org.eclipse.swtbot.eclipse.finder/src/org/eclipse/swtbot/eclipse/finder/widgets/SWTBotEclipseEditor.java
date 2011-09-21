@@ -535,6 +535,8 @@ public class SWTBotEclipseEditor extends SWTBotEditor {
 	}
 
 	/**
+	 * Get the text displayed at the line number  given as parameter. 
+	 *  Note that in eclipse editors, folding has no incidence on line numbers.  
 	 * @param line the line number, 0 based.
 	 * @return the text on the given line number, without the line delimiters.
 	 * @see SWTBotStyledText#getTextOnLine(int)
