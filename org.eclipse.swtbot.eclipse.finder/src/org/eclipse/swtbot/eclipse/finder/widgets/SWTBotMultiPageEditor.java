@@ -80,7 +80,7 @@ public class SWTBotMultiPageEditor extends SWTBotEditor {
 	 */
 	public SWTBotMultiPageEditor(IEditorReference editorReference, SWTWorkbenchBot bot) {
 		super(editorReference, bot);
-		tabFolder = (CTabFolder) findWidget(widgetOfType(CTabFolder.class));
+		tabFolder = findWidget(widgetOfType(CTabFolder.class));
 	}
 
 	/**

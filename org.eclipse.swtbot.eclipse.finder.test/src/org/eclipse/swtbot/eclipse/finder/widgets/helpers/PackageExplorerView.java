@@ -38,7 +38,7 @@ public class PackageExplorerView {
 		tree.setFocus();
 		tree.select(projectName);
 		bot.menu("Edit").menu("Delete").click();
-		String version = (String) Platform.getBundle("org.eclipse.core.runtime").getHeaders().get("Bundle-Version");
+		String version = Platform.getBundle("org.eclipse.core.runtime").getHeaders().get("Bundle-Version");
 		if (version.startsWith("3.3")) {
 			SWTBotShell shell = bot.shell("Confirm Project Delete");
 			shell.activate();
