@@ -34,6 +34,10 @@
             class="org.eclipse.swtbot.eclipse.finder.test.ui.handler.SampleHandler"
             commandId="org.eclipse.swtbot.eclipse.finder.test.ui.commands.ContributionItemCommand">
       </handler>
+      <handler
+            class="org.eclipse.swtbot.eclipse.finder.test.ui.handler.SampleParameterizedHandler"
+            commandId="org.eclipse.swtbot.eclipse.finder.test.ui.commands.ParameterizedContributionItemCommand">
+      </handler>
    </extension>
    <extension
          point="org.eclipse.ui.bindings">
@@ -55,6 +59,26 @@
                mnemonic="C"
                style="toggle">
          </command>
+         <command
+               commandId="org.eclipse.swtbot.eclipse.finder.test.ui.commands.ParameterizedContributionItemCommand"
+               id="org.eclipse.swtbot.eclipse.finder.test.ui.view.menu.ParameterizedContributionItemCommand"
+               label="Try the Strawberry"
+               mnemonic="S">
+               <parameter
+                     name="org.eclipse.swtbot.eclipse.finder.test.flavor"
+                     value="Strawberry">
+               </parameter>
+         </command>
+         <command
+               commandId="org.eclipse.swtbot.eclipse.finder.test.ui.commands.ParameterizedContributionItemCommand"
+               id="org.eclipse.swtbot.eclipse.finder.test.ui.view.menu.ParameterizedContributionItemCommand"
+               label="Try the Banana"
+               mnemonic="B">
+               <parameter
+                     name="org.eclipse.swtbot.eclipse.finder.test.flavor"
+                     value="Banana">
+               </parameter>
+         </command>
       </menuContribution>
    </extension>
    <extension
@@ -67,6 +91,16 @@
             categoryId="org.eclipse.swtbot.eclipse.finder.test.ui.commands.category"
             id="org.eclipse.swtbot.eclipse.finder.test.ui.commands.ContributionItemCommand"
             name="Contribution Item Command">
+      </command>
+      <command
+            categoryId="org.eclipse.swtbot.eclipse.finder.test.ui.commands.category"
+            id="org.eclipse.swtbot.eclipse.finder.test.ui.commands.ParameterizedContributionItemCommand"
+            name="Parameterized Contribution Item Command">
+            <commandParameter
+                  id="org.eclipse.swtbot.eclipse.finder.test.flavor"
+                  name="Flavor"
+                  optional="true">
+            </commandParameter>
       </command>
    </extension>
    <extension

@@ -106,8 +106,17 @@ public class SWTBotViewTest {
 		cICMenu.click();
 		bot.button("OK").click();
 //		assertTrue(cICMenu.isChecked());
-	}
 
+		// Runs an action that has a contribution ID instead of the action.
+		List<SWTBotViewMenu> menus = view.menus();
+		System.out.println(menus);
+
+		// Runs an action that has a contribution ID instead of the action.
+		SWTBotViewMenu pCICMenu = view.menu("Try the Banana");
+		pCICMenu.click();
+		bot.button("OK").click();
+}
+	
 	@Test
 	public void getToolbarButtons() throws Exception {
 		SWTBotView view = bot.viewByTitle("SWTBot Test View");
