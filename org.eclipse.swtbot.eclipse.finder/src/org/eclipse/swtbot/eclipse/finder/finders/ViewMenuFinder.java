@@ -22,9 +22,11 @@ import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotViewMenu;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.ListResult;
+import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.internal.ViewPane;
 import org.eclipse.ui.internal.WorkbenchPartReference;
+import org.eclipse.ui.menus.CommandContributionItem;
 import org.hamcrest.Matcher;
 
 /**
@@ -103,10 +105,34 @@ public class ViewMenuFinder {
 		if (item instanceof ActionContributionItem) {
 			ActionContributionItem actionContribution = (ActionContributionItem) item;
 			if (matcher.matches(actionContribution.getAction()))
-				menu = (new SWTBotViewMenu(actionContribution));
+				menu = new SWTBotViewMenu(actionContribution);
 		} else if (item instanceof SubContributionItem ) {
-			return getMenuItem(((SubContributionItem) item).getInnerItem(), matcher);
+			    menu = getMenuItem(((SubContributionItem) item).getInnerItem(), matcher);
+		} else if (item instanceof CommandContributionItem) {
+			CommandContributionItem cmdContribution = (CommandContributionItem) item;
+			if (matcher.matches(new CommandItemWithTextMatcherWrapper(cmdContribution)))
+				menu = new SWTBotViewMenu(cmdContribution.getCommand());
 		}
 		return menu;
+	}
+	
+	/* This class should be public at it will be accessed outside of its parent class*/
+	public static class CommandItemWithTextMatcherWrapper {
+		
+		private CommandContributionItem wrappedCommandItem;
+		
+		public CommandItemWithTextMatcherWrapper(CommandContributionItem item) {
+			this.wrappedCommandItem = item;
+		}
+		
+		/*
+		 * This method will be called reflectively by a matcher.
+		 */
+		@SuppressWarnings("unused")
+		public String getText() throws Exception {
+				/* label attribute of command contribution item is not available */
+				String label = (String) SWTUtils.getAttribute(wrappedCommandItem, "label"); ////$NON-NLS-1$
+				return label != null ? label:""; ////$NON-NLS-1$
+		}
 	}
 }
