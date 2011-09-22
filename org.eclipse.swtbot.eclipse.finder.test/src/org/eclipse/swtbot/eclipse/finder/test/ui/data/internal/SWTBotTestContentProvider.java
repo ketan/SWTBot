@@ -68,7 +68,8 @@ public class SWTBotTestContentProvider implements IStructuredContentProvider {
 	}
 
 	public void dispose() {
-		data.clear();
+		if (data != null)
+			data.clear();
 		data = null;
 		viewer.getTable().dispose();
 		viewer = null;
