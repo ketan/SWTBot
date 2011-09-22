@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Ketan Padegaonkar and others.
+ * Copyright (c) 2008, 2011 Ketan Padegaonkar and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.SubContributionItem;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotViewMenu;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
@@ -84,12 +85,10 @@ public class ViewMenuFinder {
 					MenuManager menuManager = (MenuManager) item;
 
 					l.addAll(getMenuItemsInternal(menuManager.getItems(), matcher, recursive));
-				} else if (item instanceof ActionContributionItem) {
-					// Menus
-					ActionContributionItem actionContribution = (ActionContributionItem) item;
-
-					if (matcher.matches(actionContribution.getAction()))
-						l.add(new SWTBotViewMenu(actionContribution));
+				} else {
+					SWTBotViewMenu menu = getMenuItem(item, matcher);
+					if (menu != null)
+						l.add(menu);
 				}
 			} catch (WidgetNotFoundException e) {
 				log.warn(e);
@@ -97,5 +96,17 @@ public class ViewMenuFinder {
 		}
 
 		return l;
+	}
+	
+	private SWTBotViewMenu  getMenuItem(IContributionItem item, Matcher<?> matcher) {
+		SWTBotViewMenu menu = null;
+		if (item instanceof ActionContributionItem) {
+			ActionContributionItem actionContribution = (ActionContributionItem) item;
+			if (matcher.matches(actionContribution.getAction()))
+				menu = (new SWTBotViewMenu(actionContribution));
+		} else if (item instanceof SubContributionItem ) {
+			return getMenuItem(((SubContributionItem) item).getInnerItem(), matcher);
+		}
+		return menu;
 	}
 }
