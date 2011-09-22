@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Ketan Padegaonkar and others.
+ * Copyright (c) 2008, 2011 Ketan Padegaonkar and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,6 +12,7 @@
 package org.eclipse.swtbot.swt.finder.utils;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.MessageFormat;
@@ -298,6 +299,22 @@ public abstract class SWTUtils {
 		return result;
 	}
 
+	/**
+	 * Get the value of an attribute on the object even if the attribute is not accessible. 
+	 * @param object the object
+	 * @param attributeName the attribute name
+	 * @return the value the attribute value
+	 * @throws SecurityException if the attribute accessibility may not be changed.
+	 * @throws NoSuchFieldException if the attribute attributeName does not exist.
+	 * @throws IllegalAccessException if the java access control does not allow access.
+	 */
+	public static Object getAttribute(final Object object, final String attributeName) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+		Field field = object.getClass().getDeclaredField(attributeName);
+		if (!field.isAccessible())
+			field.setAccessible(true);
+		return field.get(object);
+	}
+	
 	/**
 	 * This captures a screen shot and saves it to the given file.
 	 * 
