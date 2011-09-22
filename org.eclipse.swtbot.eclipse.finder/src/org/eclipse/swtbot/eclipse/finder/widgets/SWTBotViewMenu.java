@@ -11,6 +11,7 @@
 package org.eclipse.swtbot.eclipse.finder.widgets;
 
 import org.eclipse.core.commands.Command;
+import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.commands.common.NotDefinedException;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.AssertionFailedException;
@@ -42,6 +43,10 @@ public class SWTBotViewMenu {
 	 */
 	protected Command				cmdItem			= null;
 	/**
+	 * Holds parameterized command if setup.
+	 */
+	protected ParameterizedCommand				paraCmdItem			= null;
+	/**
 	 * Holds the id of the command if one exists.
 	 */
 	protected String				commandID		= null;
@@ -59,6 +64,24 @@ public class SWTBotViewMenu {
 		commandID = cmdItem.getId();
 		try {
 			text = cmdItem.getName();
+		} catch (NotDefinedException e) {
+			text = ""; //$NON-NLS-1$
+		}
+	}
+	
+	/**
+	 * Constructs a SWTBot View Menu item.
+	 *
+	 * @param commandItem The parameterized command contribution item.
+	 * @throws WidgetNotFoundException Thrown if both values are <code>null</code>.
+	 * @throws AssertionFailedException If the contribution item is <code>null</code>.
+	 */
+	public SWTBotViewMenu(ParameterizedCommand commandItem) throws WidgetNotFoundException {
+		paraCmdItem = commandItem;
+
+		commandID = paraCmdItem.getId();
+		try {
+			text = paraCmdItem.getName();
 		} catch (NotDefinedException e) {
 			text = ""; //$NON-NLS-1$
 		}
