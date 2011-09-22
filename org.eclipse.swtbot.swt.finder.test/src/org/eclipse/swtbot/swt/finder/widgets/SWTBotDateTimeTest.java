@@ -20,17 +20,16 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.eclipse.swt.widgets.DateTime;
-import org.eclipse.swtbot.swt.finder.SWTBot;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.eclipse.swtbot.swt.finder.test.AbstractControlExampleTest;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotDateTimeTest extends AbstractSWTTestCase {
+public class SWTBotDateTimeTest extends AbstractControlExampleTest {
 
-	private SWTBot			bot;
 	private SWTBotDateTime	dateTime;
 
 	@Test
@@ -97,9 +96,8 @@ public class SWTBotDateTimeTest extends AbstractSWTTestCase {
 		assertThat(text, containsString(" data=null item=null detail=0 x=0 y=0 width=0 height=0 stateMask=0 text=null doit=true}"));
 	}
 
-	public void setUp() throws Exception {
-		super.setUp();
-		bot = new SWTBot();
+	@Before
+	public void prepareExample() throws Exception {
 		bot.tabItem("DateTime").activate();
 		dateTime = bot.dateTimeInGroup("DateTime");
 	}

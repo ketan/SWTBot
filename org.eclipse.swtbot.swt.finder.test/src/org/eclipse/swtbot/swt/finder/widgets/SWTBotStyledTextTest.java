@@ -22,20 +22,18 @@ import org.eclipse.swt.custom.Bullet;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.GlyphMetrics;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.eclipse.swtbot.swt.finder.test.AbstractCustomControlExampleTest;
 import org.eclipse.swtbot.swt.finder.utils.Position;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotStyledTextTest extends AbstractSWTTestCase {
+public class SWTBotStyledTextTest extends AbstractCustomControlExampleTest {
 
-	private SWTBot				bot;
 	private SWTBotStyledText	styledText;
 
 	@Test
@@ -174,18 +172,13 @@ public class SWTBotStyledTextTest extends AbstractSWTTestCase {
 		assertTrue(styledText.hasBulletOnCurrentLine());
 	}
 
-	public void setUp() throws Exception {
-		super.setUp();
-		bot = new SWTBot();
+	@Before
+	public void prepareExample() throws Exception {
 		bot.shell("SWT Custom Controls").activate();
 		bot.tabItem("StyledText").activate();
 		styledText = bot.styledTextInGroup("StyledText");
 		bot.checkBox("Horizontal Fill").select();
 		bot.checkBox("Vertical Fill").select();
-	}
-
-	protected Shell getFocusShell() {
-		return customControlShell;
 	}
 
 	private void setTabs(final int tabSize) {

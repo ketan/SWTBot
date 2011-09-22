@@ -22,8 +22,8 @@ import java.util.List;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.ControlFinder;
+import org.eclipse.swtbot.swt.finder.test.AbstractControlExampleTest;
 import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.junit.After;
 import org.junit.Before;
@@ -33,7 +33,7 @@ import org.junit.Test;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotArrowButtonTest extends AbstractSWTTestCase {
+public class SWTBotArrowButtonTest extends AbstractControlExampleTest {
 
 	private long	oldTimeout;
 
@@ -47,7 +47,7 @@ public class SWTBotArrowButtonTest extends AbstractSWTTestCase {
 	public void resetTimeout() {
 		SWTBotPreferences.TIMEOUT = oldTimeout;
 	}
-	
+
 	@Test
 	public void findsArrowButtons() throws Exception {
 		assertEquals(Button.class, bot.arrowButton(0).widget.getClass());
@@ -71,8 +71,8 @@ public class SWTBotArrowButtonTest extends AbstractSWTTestCase {
 		}
 	}
 
-	public void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void prepareExample() throws Exception {
 		bot.tabItem("Button").activate();
 		bot.radio("SWT.ARROW").click();
 	}

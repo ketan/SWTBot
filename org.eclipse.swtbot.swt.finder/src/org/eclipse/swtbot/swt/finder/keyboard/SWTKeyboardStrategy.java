@@ -17,8 +17,10 @@ import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
 import org.eclipse.swtbot.swt.finder.utils.internal.Assert;
+import org.hamcrest.SelfDescribing;
 
 /**
  * Sends keyboard notifications using {@link Display#post(Event)}.
@@ -31,12 +33,19 @@ class SWTKeyboardStrategy extends AbstractKeyboardStrategy {
 
 	private final Display				display;
 
+	private Widget	widget;
+
 	private static final Set<Integer>	specialKeys	= new HashSet<Integer>();
 
 	SWTKeyboardStrategy() {
 		this.display = SWTUtils.display();
 	}
 
+	@Override
+	public void init(Widget widget, SelfDescribing description) {
+		this.widget = widget;
+	}
+	
 	public void pressKey(KeyStroke key) {
 		Assert.isTrue(display.post(keyEvent(key, SWT.KeyDown)), "Could not post keyevent.");
 		display.wake();
@@ -52,6 +61,7 @@ class SWTKeyboardStrategy extends AbstractKeyboardStrategy {
 		e.type = type;
 		e.keyCode = keycode(key);
 		e.character = character(key);
+		e.widget = widget;
 		return e;
 	}
 

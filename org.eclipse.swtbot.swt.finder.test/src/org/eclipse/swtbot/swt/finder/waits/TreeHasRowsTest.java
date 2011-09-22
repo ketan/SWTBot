@@ -14,39 +14,29 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
-import org.eclipse.swtbot.swt.finder.SWTBot;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.eclipse.swtbot.swt.finder.test.AbstractSWTShellTest;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.junit.Test;
 
 /**
  * @author Jesper Steen Moeller &lt;jesper [at] selskabet [dot] org&gt;
  */
-public class TreeHasRowsTest extends AbstractSWTTestCase {
+public class TreeHasRowsTest extends AbstractSWTShellTest {
 
 	private static final String	TEXT	= "this should close in a while - " + TreeHasRowsTest.class.getSimpleName();
-	private Tree				Tree;
+	private Tree				tree;
 
 	@Test
 	public void waitsForTreeToContainRows() throws Exception {
-		keepAddingRowsInTree(Tree, 49);
-		assertFalse(Conditions.treeHasRows(new SWTBotTree(Tree), 50).test());
-		keepAddingRowsInTree(Tree, 1);
-		assertTrue(Conditions.treeHasRows(new SWTBotTree(Tree), 50).test());
-	}
-
-	public void setUp() throws Exception {
-		super.setUp();
-		Tree = createTree(createShell(TEXT));
-	}
-
-	public void tearDown() throws Exception {
-		super.tearDown();
-		new SWTBot().shell(TEXT).close();
+		keepAddingRowsInTree(tree, 49);
+		assertFalse(Conditions.treeHasRows(new SWTBotTree(tree), 50).test());
+		keepAddingRowsInTree(tree, 1);
+		assertTrue(Conditions.treeHasRows(new SWTBotTree(tree), 50).test());
 	}
 
 	private void keepAddingRowsInTree(final Tree Tree, final int rows) {
@@ -57,6 +47,11 @@ public class TreeHasRowsTest extends AbstractSWTTestCase {
 				}
 			}
 		});
+	}
+
+	@Override
+	protected void createUI(Composite parent) {
+		tree = createTree(createShell(TEXT));
 	}
 
 }

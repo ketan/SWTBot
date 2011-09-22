@@ -16,9 +16,8 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.eclipse.swtbot.swt.finder.test.AbstractControlExampleTest;
 import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.junit.After;
 import org.junit.Before;
@@ -28,9 +27,8 @@ import org.junit.Test;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotRadioTest extends AbstractSWTTestCase {
+public class SWTBotRadioTest extends AbstractControlExampleTest {
 
-	private SWTBot	bot;
 	private long	oldTimeout;
 	private SWTBotText	listeners;
 
@@ -46,7 +44,7 @@ public class SWTBotRadioTest extends AbstractSWTTestCase {
 	}
 
 	@Test
-	public void clicksRadioButton() throws Exception {
+	public void clicksCheckBox() throws Exception {
 		bot.radio("Three").click();
 		listeners.setText("");
 
@@ -120,9 +118,8 @@ public class SWTBotRadioTest extends AbstractSWTTestCase {
 		assertFalse(bot.radio("SWT.CHECK").isSelected());
 	}
 
-	public void setUp() throws Exception {
-		super.setUp();
-		bot = new SWTBot();
+	@Before
+	public void prepareExample() throws Exception {
 		bot.tabItem("Button").activate();
 		bot.radio("SWT.RADIO").click();
 		listeners = bot.textInGroup("Listeners");

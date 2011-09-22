@@ -35,7 +35,6 @@ class Release
     FileUtils.rm_rf('to-upload')
     FileUtils.rm_rf('target')
     
-    build_swtbot(35, 'galileo')
     build_swtbot(36, 'helios')
     build_swtbot(37, 'indigo')
   end
@@ -50,9 +49,9 @@ class Release
     end
   end
 
-  #version=34, code_name=ganymede
   #version=35, code_name=galileo
   #version=36, code_name=helios
+  #version=37, code_name=indigo
   def self.build_swtbot(version, code_name)
 
     FileUtils.rm_rf("to-upload/#{code_name}")

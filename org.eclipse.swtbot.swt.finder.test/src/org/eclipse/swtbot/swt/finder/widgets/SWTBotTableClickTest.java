@@ -13,13 +13,8 @@ package org.eclipse.swtbot.swt.finder.widgets;
 import static org.junit.Assert.assertEquals;
 
 import org.eclipse.jface.snippets.viewers.Snippet009CellEditors;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swtbot.swt.finder.SWTBot;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
-import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
-import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.eclipse.swtbot.swt.finder.UIThread;
+import org.eclipse.swtbot.swt.finder.test.AbstractSWTTest;
 import org.junit.Test;
 
 /**
@@ -27,14 +22,11 @@ import org.junit.Test;
  * @version $Id$
  * @since 1.2
  */
-public class SWTBotTableClickTest extends AbstractSWTTestCase {
-
-	private SWTBot		bot;
-	private SWTBotTable	table;
-	private Shell		snippetCellEditorShell;
+public class SWTBotTableClickTest extends AbstractSWTTest {
 
 	@Test
 	public void clickOnCell() throws Exception {
+		SWTBotTable table = bot.table();
 		table.click(0, 0);
 		bot.sleep(1000);
 		bot.text("0", 0).setText("101");
@@ -43,33 +35,10 @@ public class SWTBotTableClickTest extends AbstractSWTTestCase {
 		bot.sleep(1000);
 		assertEquals("Item 101", table.cell(0, 0));
 	}
-
-	protected Shell getFocusShell() {
-		return snippetCellEditorShell;
-	}
-
-	public void setUp() throws Exception {
-		UIThreadRunnable.syncExec(new VoidResult() {
-			public void run() {
-				snippetCellEditorShell = new Shell(display, SWT.SHELL_TRIM);
-				snippetCellEditorShell.setLayout(new FillLayout());
-				snippetCellEditorShell.setText("Snippet cell editor");
-				new Snippet009CellEditors(snippetCellEditorShell);
-				snippetCellEditorShell.open();
-			}
-		});
-		super.setUp();
-		bot = new SWTBot();
-		table = bot.table();
-	}
-
-	public void tearDown() throws Exception {
-		UIThreadRunnable.syncExec(new VoidResult() {
-			public void run() {
-				snippetCellEditorShell.close();
-			}
-		});
-		super.tearDown();
+	
+	@UIThread
+	public void runUIThread() {
+		Snippet009CellEditors.main(new String[0]);
 	}
 
 }

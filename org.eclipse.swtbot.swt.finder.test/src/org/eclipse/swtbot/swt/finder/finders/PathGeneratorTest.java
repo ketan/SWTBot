@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Widget;
+import org.eclipse.swtbot.swt.finder.test.AbstractControlExampleTest;
 import org.eclipse.swtbot.swt.finder.utils.TreePath;
 import org.hamcrest.Matcher;
 import org.junit.Test;
@@ -27,16 +28,13 @@ import org.junit.Test;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class PathGeneratorTest extends AbstractSWTTestCase {
+public class PathGeneratorTest extends AbstractControlExampleTest {
 
-	private ControlFinder	finder;
-
-	@SuppressWarnings("unchecked")
-	// varargs and generics doesn't mix well!
 	@Test
+	@SuppressWarnings("unchecked")
 	public void generatesStringFromPath() throws Exception {
 		Matcher<TabItem> withText = withText("Dialog");
-		List<TabItem> tabItems = finder.findControls(allOf(widgetOfType(TabItem.class), withText));
+		List<TabItem> tabItems = controlFinder.findControls(allOf(widgetOfType(TabItem.class), withText));
 		Widget widget = tabItems.get(0);
 		String string = new PathGenerator().getPathAsString(widget);
 		assertEquals("//Shell/-1//TabFolder/0//TabItem/5", string);
@@ -48,20 +46,15 @@ public class PathGeneratorTest extends AbstractSWTTestCase {
 		assertEquals(null, path);
 	}
 
-	@SuppressWarnings("unchecked")
-	// varargs and generics doesn't mix well!
 	@Test
+	@SuppressWarnings("unchecked")
 	public void getsPathFromString() throws Exception {
 		TreePath path = new PathGenerator().getPathFromString("//Shell/0//TabFolder/0//TabItem/5", display);
 		Matcher<TabItem> withText = withText("Dialog");
-		List<TabItem> tabItems = finder.findControls(allOf(widgetOfType(TabItem.class), withText));
-		TreePath expected = finder.getPath(tabItems.get(0));
+		List<TabItem> tabItems = controlFinder.findControls(allOf(widgetOfType(TabItem.class), withText));
+		TreePath expected = controlFinder.getPath(tabItems.get(0));
 
 		assertEquals(expected, path);
 	}
 
-	public void setUp() throws Exception {
-		super.setUp();
-		finder = new ControlFinder();
-	}
 }

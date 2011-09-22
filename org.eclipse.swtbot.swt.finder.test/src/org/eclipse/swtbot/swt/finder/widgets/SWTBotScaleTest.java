@@ -13,10 +13,11 @@ package org.eclipse.swtbot.swt.finder.widgets;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.eclipse.swtbot.swt.finder.test.AbstractControlExampleTest;
+import org.junit.Before;
 import org.junit.Test;
 
-public class SWTBotScaleTest extends AbstractSWTTestCase {
+public class SWTBotScaleTest extends AbstractControlExampleTest {
 
 	@Test
 	public void findsScale() throws Exception {
@@ -58,15 +59,13 @@ public class SWTBotScaleTest extends AbstractSWTTestCase {
 		assertEquals(15, bot.scaleInGroup("Scale").getPageIncrement());
 	}
 
-	public void setUp() throws Exception {
-		super.setUp();
+
+	@Before
+	public void prepareExample() throws Exception {
 		bot.tabItem("Scale").activate();
 		bot.spinnerInGroup("Selection").setSelection(0);
 		bot.spinnerInGroup("Minimum").setSelection(0);
 		bot.spinnerInGroup("Maximum").setSelection(100);
-
-		bot.spinnerInGroup("Increment").setSelection(1);
-		bot.spinnerInGroup("Page Increment").setSelection(10);
 	}
 
 }

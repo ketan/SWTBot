@@ -21,7 +21,7 @@ import java.util.List;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTException;
 import org.eclipse.swt.widgets.MenuItem;
-import org.eclipse.swtbot.swt.finder.AbstractMenuExampleTest;
+import org.eclipse.swtbot.swt.finder.test.AbstractMenuExampleTest;
 import org.junit.Test;
 
 /**

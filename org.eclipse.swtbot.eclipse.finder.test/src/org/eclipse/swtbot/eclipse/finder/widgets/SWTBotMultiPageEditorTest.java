@@ -125,7 +125,7 @@ public class SWTBotMultiPageEditorTest extends AbstractSWTBotEclipseTest {
 		}
 
 		public SWTBotStyledText getText() {
-			return new SWTBotStyledText((StyledText) findWidget(widgetOfType(StyledText.class)));
+			return new SWTBotStyledText(findWidget(widgetOfType(StyledText.class)));
 		}
 	}
 }

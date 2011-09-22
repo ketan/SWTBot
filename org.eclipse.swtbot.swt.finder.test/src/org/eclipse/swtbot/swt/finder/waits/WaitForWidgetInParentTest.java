@@ -17,7 +17,7 @@ import static org.hamcrest.Matchers.lessThan;
 import static org.junit.Assert.assertFalse;
 
 import org.eclipse.swtbot.swt.finder.SWTBot;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.eclipse.swtbot.swt.finder.test.AbstractControlExampleTest;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.junit.Test;
@@ -26,13 +26,13 @@ import org.junit.Test;
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class WaitForWidgetInParentTest extends AbstractSWTTestCase {
+public class WaitForWidgetInParentTest extends AbstractControlExampleTest {
 
 	@Test
 	public void waitsForWidgetToAppearInParent() throws Exception {
 		long start = System.currentTimeMillis();
 
-		WaitForObjectCondition condition = Conditions.waitForWidget(new EvaluateTrueAfterAWhile(500), getFocusShell());
+		WaitForObjectCondition condition = Conditions.waitForWidget(new EvaluateTrueAfterAWhile(500), shell);
 		new SWTBot().waitUntil(condition);
 		long end = System.currentTimeMillis();
 

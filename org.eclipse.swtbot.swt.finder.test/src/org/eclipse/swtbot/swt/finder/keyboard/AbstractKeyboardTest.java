@@ -11,18 +11,17 @@
 package org.eclipse.swtbot.swt.finder.keyboard;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swtbot.swt.finder.SWTBot;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.eclipse.swtbot.swt.finder.test.AbstractCustomControlExampleTest;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotStyledText;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotText;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public abstract class AbstractKeyboardTest extends AbstractSWTTestCase {
+public abstract class AbstractKeyboardTest extends AbstractCustomControlExampleTest {
 
 	private SWTBotStyledText styledText;
 	private SWTBotText listeners;
@@ -328,9 +327,8 @@ public abstract class AbstractKeyboardTest extends AbstractSWTTestCase {
 		assertEventMatches(listeners, "KeyUp [2]: KeyEvent{StyledText {} time=17901071 data=null character='\\0' keyCode=65536 stateMask=65536 doit=true}");
 	}
 
-	public void setUp() throws Exception {
-		super.setUp();
-		bot = new SWTBot();
+	@Before
+	public void prepareExample() throws Exception {
 		keyboard = new Keyboard();
 		bot.tabItem("StyledText").activate();
 		bot.checkBox("Horizontal Fill").select();
@@ -341,10 +339,6 @@ public abstract class AbstractKeyboardTest extends AbstractSWTTestCase {
 		styledText.setText("");
 		bot.button("Clear").click();
 		listeners = bot.textInGroup("Listeners");
-	}
-
-	protected Shell getFocusShell() {
-		return customControlShell;
 	}
 
 	private static boolean isWin32() {

@@ -14,17 +14,15 @@ package org.eclipse.swtbot.swt.finder.widgets;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertText;
 import static org.eclipse.swtbot.swt.finder.SWTBotTestCase.assertTextContains;
 
-import org.eclipse.swtbot.swt.finder.SWTBot;
-import org.eclipse.swtbot.swt.finder.finders.AbstractSWTTestCase;
+import org.eclipse.swtbot.swt.finder.test.AbstractControlExampleTest;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Ketan Padegaonkar &lt;KetanPadegaonkar [at] gmail [dot] com&gt;
  * @version $Id$
  */
-public class SWTBotTextTest extends AbstractSWTTestCase {
-
-	SWTBot	bot	= new SWTBot();
+public class SWTBotTextTest extends AbstractControlExampleTest {
 
 	@Test
 	public void findsTextBoxInGroup() throws Exception {
@@ -51,14 +49,14 @@ public class SWTBotTextTest extends AbstractSWTTestCase {
 	@Test
 	public void typesText() throws Exception {
 		final SWTBotText text = bot.textInGroup("Text");
-		final StringBuffer buffer = new StringBuffer();
 		text.setText("");
+
 		text.typeText("Type This 123");
 		assertTextContains("Type This 123", text.widget);
 	}
 
-	public void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void prepareExample() throws Exception {
 		bot.tabItem("Text").activate();
 	}
 
