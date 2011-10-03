@@ -495,4 +495,27 @@ public abstract class SWTUtils {
 	public static boolean isUIThread() {
 		return isUIThread(display);
 	}
+
+
+	/**
+	 * @return <code>true</code> if the current OS is macosx.
+	 */
+	public static boolean isMac(){
+		return isCocoa() || isCarbon();
+	}
+
+	/**
+	 * @return <code>true</code> if the current platform is {@code cocoa}
+	 */
+	public static boolean isCocoa(){
+		return SWT.getPlatform().equals("cocoa");
+	}
+
+	/**
+	 * @return <code>true</code> if the current platform is {@code carbon}
+	 */
+	public static boolean isCarbon(){
+		return SWT.getPlatform().equals("carbon");
+	}
+
 }

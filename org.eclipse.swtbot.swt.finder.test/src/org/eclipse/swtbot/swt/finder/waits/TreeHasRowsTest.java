@@ -14,11 +14,16 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.eclipse.swtbot.swt.finder.results.WidgetResult;
 import org.eclipse.swtbot.swt.finder.test.AbstractSWTShellTest;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.junit.Test;
@@ -53,5 +58,44 @@ public class TreeHasRowsTest extends AbstractSWTShellTest {
 	protected void createUI(Composite parent) {
 		tree = createTree(createShell(TEXT));
 	}
+
+	protected static boolean isMac() {
+		return (isCarbon() || isCocoa());
+	}
+
+	private static boolean isCarbon() {
+		return "carbon".equals(SWT.getPlatform());
+	}
+
+	protected static boolean isCocoa() {
+		return SWT.getPlatform().equals("cocoa");
+	}
+
+	private Shell createShell(final String text) {
+		return UIThreadRunnable.syncExec(new WidgetResult<Shell>() {
+			public Shell run() {
+				Shell shell = new Shell(Display.getCurrent());
+				shell.setText(text);
+				shell.setLayout(new GridLayout(1, false));
+				shell.open();
+				return shell;
+			}
+		});
+	}
+
+	private Tree createTree(final Shell shell) {
+		return UIThreadRunnable.syncExec(new WidgetResult<Tree>() {
+			public Tree run() {
+				Tree tree = new Tree(shell, SWT.SINGLE);
+				tree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+				tree.setLinesVisible(true);
+				tree.setHeaderVisible(true);
+
+				shell.layout(true);
+				return tree;
+			}
+		});
+	}
+
 
 }

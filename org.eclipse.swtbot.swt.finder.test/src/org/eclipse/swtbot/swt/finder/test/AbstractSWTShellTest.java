@@ -70,9 +70,6 @@ public abstract class AbstractSWTShellTest extends AbstractSWTTest {
 			}
 		});
 	}
-	
-	protected boolean isCocoa() {
-		return SWT.getPlatform().equals("cocoa");
-	}
-	
+
+
 }

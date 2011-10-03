@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.swtbot.swt.finder.keyboard;
 
+import static org.eclipse.swtbot.swt.finder.utils.SWTUtils.isMac;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swtbot.swt.finder.test.AbstractCustomControlExampleTest;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotStyledText;
