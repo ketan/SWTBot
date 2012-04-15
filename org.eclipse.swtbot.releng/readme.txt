@@ -1,6 +1,6 @@
 To build/run/test SWTBot from source and command-line you need to do the following:
 
-Install Subversion Command-Line Client, Ant and Info-ZIP. Add them into your environment's command execution path.
+Install Git, Ant and Info-ZIP. Add them into your environment's command execution path.
 Verify that you can execute these commands on your command-line: git, ant, unzip.
 
 Checkout code:
